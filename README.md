@@ -33,7 +33,6 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 ## References
 * [VueJs 3](https://vuejs.org/)
 * [VuetifyJs 3](https://vuetifyjs.com/en/)
-* [NuxtJS](https://nuxtjs.org/)
 * [TypeScript](https://www.typescriptlang.org/docs/)
 * [Jest](https://jestjs.io/)
 * [npm](https://docs.npmjs.com/)
@@ -76,7 +75,7 @@ The course work will be cross-platform. However, in class the instructors will b
 ### VS Code Extensions used in class ###
 - [JEST](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) Unit testing extension
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) code formatting extension
-- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) Vue tooling
+- [Volar](https://marketplace.visualstudio.com/items?itemName=vue.volar) Vue tooling
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 ### Optional ###
