@@ -16,7 +16,7 @@ import HelloWorld from './components/HelloWorld.vue'
       </v-card>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/wordle">Wordle</RouterLink>
       </nav>
     </div>
   </header>
