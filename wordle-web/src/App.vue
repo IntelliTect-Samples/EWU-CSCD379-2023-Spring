@@ -9,14 +9,10 @@ import HelloWorld from './components/HelloWorld.vue'
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <v-card title="Card title" subtitle="Subtitle" text="..." width="500">
-        <v-card-actions>
-          <v-btn>Click me <v-icon icon="mdi-abacus" /></v-btn>
-        </v-card-actions>
-      </v-card>
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/wordle">Wordle</RouterLink>
+        <RouterLink to="/wordle2">Wordle2</RouterLink>
       </nav>
     </div>
   </header>
