@@ -11,10 +11,9 @@ The purpose of this assignment is to solidify your learning of:
 
 ## Instructions
 
-1. Create a Nuxt app ❌✅
+1. Create a Vue app ❌✅
    - Uses TypeScript ❌✅
-   - Update Vue components to TypeScript ❌✅
-   - Uses Vuetify ❌✅
+   - Add Vuetify ❌✅
    - Uses Jest ❌✅
 
 3. Create a simple page called game.vue ❌✅
