@@ -82,7 +82,9 @@
 - Starting an ASP.NET API Project
 - Creating a simple API
 - Unit Testing the API
-- Deployment
+- Program.cs
+- Controllers
+- Services (DI)
 
 
 ## Week 4
@@ -90,7 +92,7 @@
 - Creating a context
 - Creating models
 - Migrations
-- Deployment
+- Deployment (Site and Database)
 
 
 ### Lecture 8. 4/27: 
