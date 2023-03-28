@@ -4,74 +4,152 @@
 
 ## Tentative Lecture Schedule
 
-### Lecture 1: 4/4: 
+## Week 1
+### Lecture 1: 4/4: Build the App (Assignment 1)
 - Syllabus & expectations
+- Wordle Requirements
 - Set up front end and build out basic application. 
-- Initial look at NPM, Vue, Vuetify
+- Initial look at 
+  - NPM
+  - Vue
+  - Vuetify
+- Basic unit testing with Jest
 
 
-### Lecture 2: 4/6
+### Lecture 2: 4/6: Deployment (Assignment 1)
 - Complete application 
-- Build deployment for front-end in Azure. 
+- Build deployment for front-end in Azure.
 - Azure DevOps
 - YAML
 - Azure AppService
 - Vue Build
 
+## Week 2
+### Lecture 3: 4/11: Vue (Assignment 2)
+- Why Vue? What problem does is solve?
+- What is Vue for and how does it work? Stop messing with the DOM
+- {{ Interpolation }}
+- Data Binding and Observables: https://vuejs.org/guide/essentials/template-syntax.html
+  - Proxies
+  - Attributes
+  - Class and Style https://vuejs.org/guide/essentials/class-and-style.html
+  - Functions
+  - Conditional Rendering: https://vuejs.org/guide/essentials/conditional.html
+  - Lists (For loops): https://vuejs.org/guide/essentials/list.html
+  - Events: https://vuejs.org/guide/essentials/event-handling.html
+  - Input: https://vuejs.org/guide/essentials/forms.html
+- Computed properties https://vuejs.org/guide/essentials/computed.html
+- Pages
+- Routing https://vuejs.org/guide/scaling-up/routing.html
+- Lifecycle: https://vuejs.org/guide/essentials/lifecycle.html
 
-### Lecture 3: 4/11
+
+### Lecture 4. 4/13: Vuetify (Assignment 2)
+- Why CSS is the devil
+- Grid System
+- Display and sizing
+- Icons
+- Theming
+- Elevation
+- Height and width (h- & w-"
+- Spacing (padding and margins) (CSS Box Model)
+- Components: Containment
+  - Buttons
+  - Cards
+  - Chips
+  - Lists
+- Components: Tables
+- Components: Form Inputs
+  - Selects
+  - Switches
+  - Text: Fields and Areas
+  - Combos
 
 
-### Lecture 4. 4/13: 
+## Week 3
+### Lecture 5. 4/18: Vue Components (Assignment 2)
+- Components: https://vuejs.org/guide/components/registration.html
+  - Props https://vuejs.org/guide/components/props.html
+  - Events https://vuejs.org/guide/components/events.html
+  - v-model https://vuejs.org/guide/components/v-model.html
+  - Slots https://vuejs.org/guide/components/slots.html
+- Watchers: https://vuejs.org/guide/essentials/watchers.html
+- Transitions: https://vuejs.org/guide/built-ins/transition.html
 
 
-### Lecture 5. 4/18: 
+### Lecture 6. 4/20: ASP.NET Intro
+- Starting an ASP.NET API Project
+- Creating a simple API
+- Unit Testing the API
+- Deployment
 
 
-### Lecture 6. 4/20: 
-
-
-### Lecture 7. 4/25: 
+## Week 4
+### Lecture 7. 4/25: Entity Framework Intro
+- Creating a context
+- Creating models
+- Migrations
+- Deployment
 
 
 ### Lecture 8. 4/27: 
+- More ASP.NET and EF
 
 
+## Week 5
 ### Lecture 9. 5/2: 
 
 
 ### Lecture 10. 5/4: 
 
 
+## Week 6
 ### Lecture 11. 5/9: 
 
 
 ### Lecture 12. 5/11: 
 
 
+## Week 7
 ### Lecture 13. 5/16: 
 
 
 ### Lecture 14. 5/18: 
 
 
+## Week 8
 ### Lecture 15. 5/23: 
 
 
 ### Lecture 16. 5/25: 
 
 
+## Week 9
 ### Lecture 17. 5/30: 
 
 
 ### Lecture 18. 6/1: 
 
 
+## Week 10 
 ### Lecture 19. 6/6: 
 
 
 ### Lecture 20. 6/8: 
 
+Other Topics
+  - Vuetify
+    - Flex
+    - Float
+    - Dialogs
+    - Menus
+    - Tooltips
+    - 
+
+## Finals Week
+
+
+# Other Notes from last year's class
 ## Lectures
 ### Lecture 8 (4/28/22)
 - Finish covering EF
