@@ -4,7 +4,7 @@
 
 The purpose of this assignment is to solidify your learning of:
 
-- Building a Nuxt, Vue, Vuetify, TypeScript App
+- Building a Vue 3, Vuetify, TypeScript App
 - Unit testing infrastructure using Jest
 - Creating a CI/CD pipeline with GitHub Actions
 - Deploying the site to Azure
