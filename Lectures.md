@@ -40,6 +40,7 @@
   - Input: https://vuejs.org/guide/essentials/forms.html
 - Computed properties https://vuejs.org/guide/essentials/computed.html
 - Pages
+- Component Basics
 - Routing https://vuejs.org/guide/scaling-up/routing.html
 - Lifecycle: https://vuejs.org/guide/essentials/lifecycle.html
 
