@@ -1,4 +1,4 @@
-# EWU-CSCD378-2022-Spring
+# EWU-CSCD378-2023-Spring
 
 ## Assignment 1
 
@@ -31,8 +31,8 @@ The purpose of this assignment is to solidify your learning of:
 6. Update the CI/CD pipeline ❌✅
    - Pipeline runs on each check in
    - Jest tests run and pass ❌✅
-   - Nuxt app builds ❌✅
-   - Nuxt app deploys to Azure ❌✅
+   - Vue app builds ❌✅
+   - Vue app deploys to Azure ❌✅
 
 7. Azure site works ❌✅
    - Post your Azure URL in your readme.md file. Replace the URL in the readme with your URL. ❌✅
