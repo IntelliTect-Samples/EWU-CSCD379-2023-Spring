@@ -7,7 +7,7 @@ You can also send an e-mail to: [EWU-Instructors@IntelliTect.com](EWU-Instructor
 We will be using GitHub for all class lectures and assignments. All work will be submitted via GitHub pull requests.
 * Please sign up for a GitHub if you do not already have one. 
 * You can get added benefits for signing up for a free [GitHub Student Developer Pack](https://education.github.com/pack).  
-* **IMPORTANT** : Please fill out this **[form](https://forms.office.com/r/2rrvn2v7av)** with your GitHub information. This is used by us so we can appropriately grade assignments.
+* **IMPORTANT** : Please fill out this **[form](https://docs.google.com/forms/d/e/1FAIpQLSdlpBMhof2gxL64vrqLg9o0Uc4di5lYejpo10XUBiMoyb-Xxg/viewform?usp=sf_link)** with your GitHub information. This is used by us so we can appropriately grade assignments.
 
 ## Prerequisites
 This class will build on CSCD-371. It will be very difficult if you have not taken the CSCD-371 that was offered in Winter. We will be building on much of what was presented in that class. Here are the things the instructors will assume you already know in addition to all standard classes taken by juniors and seniors in the CS program as of Winter.
