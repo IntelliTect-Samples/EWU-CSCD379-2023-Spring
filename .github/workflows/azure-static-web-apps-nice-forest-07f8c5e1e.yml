@@ -1,9 +1,12 @@
 name: Azure Static Web Apps CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - wordle-web/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -15,6 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+        name: Build NPM Project
+      - run: npm ci
+        name: Run Unit Tests
+      - run: npm test:unit
+      
       - uses: actions/checkout@v2
         with:
           submodules: true
@@ -33,7 +45,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' || github.event.action == 'workflow_dispatch'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
