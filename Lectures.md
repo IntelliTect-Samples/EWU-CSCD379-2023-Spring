@@ -1,5 +1,5 @@
 # Lectures
-- [Recording Links](https://intellitectsp.sharepoint.com/:f:/s/EWU-CSCD379-2022-Spring/EvQdR7Ht30tKr3TZn5B6qJYBmdO0FTfx1mTHoibSh2wvdA?e=qH6mSn)
+- [Recording Links](https://intellitectsp.sharepoint.com/sites/EWU-CSCD371-2022-Wintercopy/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=wbeai0&OR=Teams%2DHL&CT=1680808390127&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMzAzMTkwMTIwNSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D&cid=e6df8c39%2D2735%2D4cbc%2D8a39%2De65538a4d3db&RootFolder=%2Fsites%2FEWU%2DCSCD371%2D2022%2DWintercopy%2FShared%20Documents%2FGeneral%2FRecordings%20%2D%20CSCD379%2D2023&FolderCTID=0x012000642BD05B2BBEA5439FF48197E4F66A52)
 - This is an MS Teams link and everyone in the class should have access. If not, please contact an instructor.
 
 ## Tentative Lecture Schedule
