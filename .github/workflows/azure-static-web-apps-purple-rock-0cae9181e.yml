@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
         name: npm ci
       - run: npm test:unit
-        working-directory: ./wordle-web
+        working-directory: ./assignment1
         name: Run Vitest Unit Tests
         
       - uses: actions/checkout@v2
