@@ -6,7 +6,6 @@
   
         <v-card-text>
           Be the last bear in your area in an arena of 3 bears. 
-          <v-icon icon="mdi:mdi-abacus" />
         </v-card-text>
   
         <v-card-actions>
