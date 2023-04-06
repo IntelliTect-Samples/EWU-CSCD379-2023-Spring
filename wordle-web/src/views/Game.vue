@@ -1,11 +1,11 @@
 <template>
     <div class="game">
       <v-card>
-        <v-card-title> Game card </v-card-title>
-        <v-card-subtitle> (College Class) </v-card-subtitle>
+        <v-card-title> Welcome to bear royal! </v-card-title>
+        <v-card-subtitle> (game idea) </v-card-subtitle>
   
         <v-card-text>
-          Lorem ipsum dolor sit amet blah blah blah
+          Be the last bear in your area in an arena of 3 bears. 
           <v-icon icon="mdi:mdi-abacus" />
         </v-card-text>
   
