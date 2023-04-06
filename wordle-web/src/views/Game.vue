@@ -1,7 +1,7 @@
 <template>
     <div class="game">
       <v-card>
-        <v-card-title> Welcome to bear royal! </v-card-title>
+        <v-card-title> Welcome to bear royale! </v-card-title>
         <v-card-subtitle> (game idea) </v-card-subtitle>
   
         <v-card-text>
