@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
         working-directory: ./app
         name: npm ci
-      - run: npm test:unit
+      - run: npm run test:unit
         name: Run Test
       - uses: actions/checkout@v2
         with:
