@@ -30,7 +30,7 @@ The purpose of this assignment is to solidify your learning of:
 
 6. Update the CI/CD pipeline ❌✅
    - Pipeline runs on each check in
-   - Jest tests run and pass ❌✅
+   - Vitest run and pass ❌✅
    - Vue app builds ❌✅
    - Vue app deploys to Azure ❌✅
 
