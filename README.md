@@ -1,5 +1,5 @@
 ## Azure Website ##
-By Alan Rose adn Neriah Graham
+By Alan Rose and Neriah Graham
 https://red-pebble-003ab421e.3.azurestaticapps.net/
 
 ## Instructors ##
