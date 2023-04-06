@@ -23,7 +23,7 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 ### Front End
 * [VueJs 3](https://vuejs.org/)
 * [VuetifyJs 3](https://vuetifyjs.com/en/)
-* [TypeScript](https://www.typescriptlang.org/docs/)
+* [TypeScript](https://www.typescriptlang.org/docs/) [Style Guide](https://google.github.io/styleguide/tsguide.html)
 * [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
 
