@@ -1,5 +1,5 @@
 {
-  "name": "wordle-web",
+  "name": "assignment1",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,16 +14,13 @@
   },
   "dependencies": {
     "vue": "^3.2.47",
-    "vue-router": "^4.1.6",
-    "vuetify": "^3.1.13"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
-    "@mdi/font": "^7.2.96",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",
-    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/test-utils": "^2.3.0",
