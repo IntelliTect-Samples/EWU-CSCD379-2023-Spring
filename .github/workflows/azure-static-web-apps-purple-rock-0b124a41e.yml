@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
         working-directory: ./wordle-web
         name: npm ci
-      - run: npm test:unit
+      - run: npm run test:unit
         working-directory: ./wordle-web
         name: Run Vitest Unit Tests
         
