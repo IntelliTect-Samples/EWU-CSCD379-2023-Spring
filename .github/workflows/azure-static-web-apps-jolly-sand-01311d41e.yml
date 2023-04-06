@@ -1,9 +1,12 @@
 name: Azure Static Web Apps CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - wordle-web/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -15,6 +18,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      - uses: actions/checkout@v3
+        name: Checkout Code
+      - uses: actions/setup-node@v3
+        name: Setup Node
+        with:
+          node-version: 18
+      - run: npm ci
+        name: npm ci
+      - run: npm test:unit
+        name: Run Test
       - uses: actions/checkout@v2
         with:
           submodules: true
