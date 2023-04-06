@@ -69,7 +69,7 @@ The course work will be cross-platform. However, in class the instructors will b
 - [Vitest](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer) Unit testing extension
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) code formatting extension
 - [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) Vue tooling
-- [TypeScript vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
+- [TypeScript vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) Vue TypeScript Tooling
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
 ### Troubleshooting issues in VS Code
