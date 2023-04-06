@@ -23,13 +23,13 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 ### Front End
 * [VueJs 3](https://vuejs.org/)
 * [VuetifyJs 3](https://vuetifyjs.com/en/)
-* [TypeScript](https://www.typescriptlang.org/docs/) [Style Guide](https://google.github.io/styleguide/tsguide.html)
+* [TypeScript](https://www.typescriptlang.org/docs/) ([Style Guide](https://google.github.io/styleguide/tsguide.html))
 * [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
 
 ### Back End
 * [.NET](https://dotnet.microsoft.com/en-us/)
-* [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) [Essential C#](https://essentialcsharp.com/home)1
+* [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) ([Essential C# Web Site](https://essentialcsharp.com/home))
 * [ASP.NET 7.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0)
 * [Entity Framework 7](https://learn.microsoft.com/en-us/ef)
 * [ASP.NET Core Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio)
