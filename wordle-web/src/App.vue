@@ -1,14 +1,13 @@
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="EWU logo" class="logo" src="@/assets/ewuLogo.svg" width="250" height="250" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="CSCD 379 .NET" />
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">Class</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/game">WordleGame</RouterLink>
       </nav>
     </div>
   </header>
