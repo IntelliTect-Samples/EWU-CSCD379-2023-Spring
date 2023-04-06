@@ -14,7 +14,7 @@ The purpose of this assignment is to solidify your learning of:
 1. Create a Vue app ❌✅
    - Uses TypeScript ❌✅
    - Add Vuetify ❌✅
-   - Uses Jest ❌✅
+   - Uses Vitest ❌✅
 
 3. Create a simple page called game.vue ❌✅
    - Page should have a card with a heading that with a clever name for the game ❌✅
