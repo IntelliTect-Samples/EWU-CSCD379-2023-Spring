@@ -14,12 +14,13 @@
         <v-card-actions>  
 
             <v-spacer />
-            
+
             <v-btn
                 varient="tonal"
                 rounded="xl"
                 color="#5865f2"
                 elevation="24"
+                to="/"
             >
              Home 
             </v-btn>
