@@ -1,5 +1,5 @@
 {
-  "name": "wordle-web",
+  "name": "assignment1",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -18,7 +18,6 @@
     "vuetify": "^3.1.13"
   },
   "devDependencies": {
-    "@mdi/font": "^7.2.96",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.14.2",
