@@ -1,6 +1,41 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <v-card
+        theme="dark"
+      >
+        <v-card-title> About Page </v-card-title>
+
+        <v-card-text> 
+            This is an about page. 
+        </v-card-text>
+
+        <v-card-actions>  
+
+            <v-spacer />
+
+            <v-btn
+                varient="tonal"
+                rounded="xl"
+                color="#5865f2"
+                elevation="24"
+                to="/"
+            >
+             Home 
+            </v-btn>
+
+            <v-btn
+                varient="tonal"
+                rounded="xl"
+                color="#5865f2"
+                elevation="24"
+                to="/Game"
+            >
+             Game 
+            </v-btn>
+
+        </v-card-actions>
+
+      </v-card>
   </div>
 </template>
 

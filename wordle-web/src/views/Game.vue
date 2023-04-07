@@ -25,6 +25,16 @@
              Home 
             </v-btn>
 
+            <v-btn
+                varient="tonal"
+                rounded="xl"
+                color="#5865f2"
+                elevation="24"
+                to="/about"
+            >
+             About 
+            </v-btn>
+
         </v-card-actions>
 
       </v-card>
