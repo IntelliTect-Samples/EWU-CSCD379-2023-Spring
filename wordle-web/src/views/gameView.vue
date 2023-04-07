@@ -1,7 +1,6 @@
 <template>
     <div class="game">
         <h1> This is the game page </h1>
-    </div>
     <v-card 
     class="mx-auto"
     max-width="344"
@@ -17,4 +16,5 @@
         <V-btn text color="primary">IT WORKED</V-btn>
       </v-card-actions>
     </v-card>
+    </div>
 </template>
