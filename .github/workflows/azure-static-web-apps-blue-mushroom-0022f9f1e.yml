@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
+        working-directory: ./game
         name: npm ci
       - run: npm test:unit
         name: Run Vitest Unit Tests
