@@ -5,14 +5,8 @@ on:
   push:
     branches:
       - main
-<<<<<<< HEAD:.github/workflows/azure-static-web-apps-salmon-bush-0f92b6d1e.yml
-    paths:
-      - world-web/**
-||||||| Update Assignment1.md
-=======
     paths: 
       - wordle-web/**
->>>>>>> main:.github/workflows/azure-static-web-apps-purple-rock-0b124a41e.yml
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
