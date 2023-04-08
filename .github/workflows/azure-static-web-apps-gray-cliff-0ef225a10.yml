@@ -25,8 +25,10 @@ jobs:
         with: 
           node-version: 18
       - run: npm ci
+        working-directory: ./wordle-web
         name: Install Node Packages
       - run: npm test:union
+        working-directory: ./wordle-web
         name: Run ViTest
     
       - uses: actions/checkout@v2
