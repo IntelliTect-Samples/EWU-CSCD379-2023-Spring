@@ -1,3 +1,6 @@
+# Link to running webpage
+* https://gray-cliff-0ef225a10.3.azurestaticapps.net
+
 # wordle-web
 
 This template should help get you started developing with Vue 3 in Vite.
