@@ -1,3 +1,4 @@
+<!--Game-->
 <template>
   <v-card variant="tonal"
     ><v-card-title>Tic Tac Toe</v-card-title><v-card-text>placeholder</v-card-text
