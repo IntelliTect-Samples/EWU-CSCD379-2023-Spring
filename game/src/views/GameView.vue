@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MyGame from '../components/MyGame.vue'
+import TicTacToe from '../components/TicTacToe.vue'
 </script>
 
 <template>
   <main>
-    <MyGame />
+    <TicTacToe />
   </main>
 </template>
