@@ -11,9 +11,16 @@ import HelloWorld from './components/HelloWorld.vue'
       <HelloWorld msg="US States Trivia" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">
+          <v-btn>Home</v-btn>
+        </RouterLink>
+        <RouterLink to="/about">
+          <v-btn>About</v-btn>
+        </RouterLink>
       </nav>
+      <v-btn href="https://github.com/IntelliTect-Samples/EWU-CSCD379-2023-Spring/blob/Assignment-1/Assignment1.md" target="_blank">
+          CSCD 379 Github
+      </v-btn>
     </div>
   </header>
 

@@ -1,12 +1,17 @@
 <template>
   <div class="about">
-    <h1>Bruh, you gotta make a game bb</h1>
     <v-card> 
       <v-card-title>
-        <h2>Game</h2>
+        <h2>We are learning Vue and Vuetify!</h2>
       </v-card-title>
+      <v-card-subtitle>
+        <h3>And we're having fun!</h3>
+      </v-card-subtitle>
       <v-card-text>
-        <p>Game is a game.</p>
+        <p>This is a sample site of what a trivia game could look like.
+        We're still learning, so we didn't add any functionality. 
+        But perhaps in the future we will!
+        </p>
       </v-card-text>
     </v-card>
   </div>
@@ -19,5 +24,6 @@
     display: flex;
     align-items: center;
   }
+  
 }
 </style>

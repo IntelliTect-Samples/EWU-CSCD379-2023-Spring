@@ -28,6 +28,10 @@
             <v-btn color="primary">Western Meadowlark</v-btn>
           </v-col>
         </v-row>
+      <v-card-text>
+        <p>This is a sample of what the US States Trivia game would look like. No further functionality was added, because we're still learning. Lol.</p>  
+      </v-card-text>
+
       </v-container>
     </v-card>
   </div>
