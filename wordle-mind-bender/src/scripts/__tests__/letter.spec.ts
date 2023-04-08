@@ -13,4 +13,10 @@ describe('Letter', () => {
         letter.status = LetterStatus.Misplaced
         expect(letter.color).toBe('orange')
     })
+
+    it('Gets Wrong Color', () => {
+        const letter = new Letter('a')
+        letter.status = LetterStatus.Wrong
+        expect(letter.color).toBe('red')
+    })
 })
