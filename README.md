@@ -1,4 +1,4 @@
-## Our Site: [https://blue-mushroom-0022f9f1e.3.azurestaticapps.net](https://blue-mushroom-0022f9f1e.3.azurestaticapps.net) ##
+## Our Site: <a href="https://blue-mushroom-0022f9f1e.3.azurestaticapps.net" target="_blank">https://blue-mushroom-0022f9f1e.3.azurestaticapps.net</a> ##
 
 
 ## Instructors ##
