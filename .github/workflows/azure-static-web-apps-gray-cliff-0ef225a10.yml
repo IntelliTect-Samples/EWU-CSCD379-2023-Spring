@@ -23,10 +23,12 @@ jobs:
       - uses: actions/setup-node@v3
         name: Setup Node
         with: 
-          node-version: 16
+          node-version: 18
       - run: npm ci
+        working-directory: ./wordle-web
         name: Install Node Packages
       - run: npm test:union
+        working-directory: ./wordle-web
         name: Run ViTest
     
       - uses: actions/checkout@v2
