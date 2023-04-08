@@ -1,4 +1,4 @@
-# EWU-CSCD378-2022-Spring
+# EWU-CSCD379-2022-Spring
 
 ## Assignment 2
 
