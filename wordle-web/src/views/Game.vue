@@ -5,7 +5,7 @@
   <main>
     <v-card class="mx-auto">
       <v-card-item>
-        <v-card-title>This is a title</v-card-title>
+        <v-card-title>The Word Game</v-card-title>
       </v-card-item>
 
       <v-card-text>
