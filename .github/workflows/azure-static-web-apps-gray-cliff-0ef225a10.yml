@@ -27,7 +27,7 @@ jobs:
       - run: npm ci
         working-directory: ./wordle-web
         name: Install Node Packages
-      - run: npm test:union
+      - run: npm run test:union
         working-directory: ./wordle-web
         name: Run ViTest
     
