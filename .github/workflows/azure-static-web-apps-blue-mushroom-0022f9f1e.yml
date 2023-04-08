@@ -28,6 +28,7 @@ jobs:
         working-directory: ./game
         name: npm ci
       - run: npm run test:unit
+        working-directory: ./game
         name: Run Vitest Unit Tests
         
       - uses: actions/checkout@v2
