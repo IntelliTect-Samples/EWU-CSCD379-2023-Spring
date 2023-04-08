@@ -10,9 +10,9 @@
     <v-card-actions>
       <v-spacer />
 
-      <v-btn varient="tonal" rounded="xl" color="#5865f2" elevation="24" to="/Game"> Game </v-btn>
+      <v-btn varient="outlined" rounded="xl" color="#5865f2" elevation="24" to="/Game"> Game </v-btn>
 
-      <v-btn varient="tonal" rounded="xl" color="#5865f2" elevation="24" to="/about"> About </v-btn>
+      <v-btn varient="outlined" rounded="xl" color="#5865f2" elevation="24" to="/about"> About </v-btn>
     </v-card-actions>
   </v-card>
 </template>
