@@ -1,6 +1,14 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>Bruh, you gotta make a game bb</h1>
+    <v-card> 
+      <v-card-title>
+        <h2>Game</h2>
+      </v-card-title>
+      <v-card-text>
+        <p>Game is a game.</p>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
