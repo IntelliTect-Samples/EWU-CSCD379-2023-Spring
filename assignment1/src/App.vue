@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
   <header>
     <nav>
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/game">Game(s)?</RouterLink>
+      <RouterLink to="/game">Game(s)</RouterLink>
     </nav>
   </header>
 
@@ -15,14 +14,28 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-    header {
-      display: flex;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      align-items: center;
-    }
     nav {
+      width: 100%;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    nav a.router-link-exact-active {
       color: orangered;
+    }
+    nav a.router-link-exact-active:hover {
+      background-color: black;
+    }
+    nav a:hover {
+      background-color: black;
+    }
+    nav a {
+      color: orangered;
+      display: inline-block;
+      padding: 0 1rem;
+      border-left: 1px solid var(--color-border);
+    }
+    nav a:first-of-type {
+      border: 0;
     }
 </style>
