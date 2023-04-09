@@ -58,7 +58,7 @@ const meadowlarkColor = computed(() => (showMessageWrong_3.value ? 'error' : 'pr
           <v-col cols="6">
             <img class="game-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Western_Meadowlark.jpg/1200px-Western_Meadowlark.jpg" alt="Western Meadowlark" />
             <v-btn :color="meadowlarkColor" @click="handleButtonClickWrong_3" ref="Western Meadowlark">Western Meadowlark</v-btn>
-            <p v-if="showMessageWrong_3"> Squawk. Squawk. If this was Oregon. It's not, Oregon Sucks. Try again.</p>
+            <p v-if="showMessageWrong_3"> If this was Oregon, you'd be correct! But it's not. WA is better baby. Try again.</p>
           </v-col>
         </v-row>
       <v-card-text>
