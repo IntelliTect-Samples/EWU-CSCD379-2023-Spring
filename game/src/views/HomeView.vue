@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue'; 
+
+const showMessage = ref(false);
+
+const handleButtonClick = () => {
+  showMessage.value = true;
+};
+
 </script>
 
 <template>
@@ -11,7 +19,8 @@
         <v-row>
           <v-col cols="6">
             <img class="game-image" src="https://www.allaboutbirds.org/guide/assets/photo/67471191-480px.jpg" alt="Mountain Bluebird" />
-            <v-btn color="primary">Mountain Bluebird</v-btn>
+            <v-btn color="primary" @click="handleButtonClick" ref="mountainBlueBirdBtn">Mountain Bluebird</v-btn>
+            <p v-if="showMessage"> You dun' got it right scoob!</p>
           </v-col>
           <v-col cols="6">
             <img class="game-image" src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/306710541/1800" alt="American Goldfinch" />
