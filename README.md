@@ -1,4 +1,4 @@
-## Assignment 1##
+## Assignment 1
 https://icy-desert-0d4f2cf1e.3.azurestaticapps.net
 
 added GameView.vue <br/>
