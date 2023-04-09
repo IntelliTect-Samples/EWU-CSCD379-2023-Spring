@@ -8,12 +8,16 @@
       <nav>
           <RouterLink to="/">Home</RouterLink>
           <RouterLink to="/about">Class</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
+          <RouterLink to="/game">Game</RouterLink>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <RouterView v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+          <component :is="Component" />
+      </transition>
+  </RouterView>
 </template>
 
 <script setup lang="ts">
@@ -22,6 +26,17 @@
 </script>
 
 <style scoped>
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
 header {
   line-height: 1.5;
   max-height: 100vh;
