@@ -11,3 +11,4 @@ Some features to potentially be added:
 ## Some Questions: ##
 * What is with the layout and why does it suck? (Seriously I can't figure out how to change this side-by-side nonsense and I hate it.)
 * Are you _really_ gonna mark me down 10pts for not working with somebody else?
+* Can we change the page title from "Vite App" or is it just... stuck that way?
