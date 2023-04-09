@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Letter, LetterStatus } from '../letter.ts'
+import { Letter, LetterStatus } from '../letter.js'
 
 describe('Letter', () => {
   it('Gets Correct Color', () => {
