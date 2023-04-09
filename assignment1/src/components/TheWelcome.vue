@@ -4,7 +4,7 @@ import WelcomeItem from './WelcomeItem.vue'
 
 <template>
   <WelcomeItem>
-    <template #heading>Documentation</template>
+    <template #heading>Welcome!</template>
     Hello and welcome to our bootleg Wordle game!! Unlike the much more successful counterpart, here you can easily 
     play as many games as you want! No more being limited to one a day.
   </WelcomeItem>
