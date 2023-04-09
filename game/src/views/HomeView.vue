@@ -2,10 +2,26 @@
 import { ref } from 'vue'; 
 
 const showMessage = ref(false);
+const showMessageWrong = ref(false);
+const showMessageWrong_2 = ref(false);
+const showMessageWrong_3 = ref(false);
 
 const handleButtonClick = () => {
   showMessage.value = true;
 };
+
+const handleButtonClickWrong_1 = () => {
+  showMessageWrong.value = true;
+};
+
+const handleButtonClickWrong_2 = () => {
+  showMessageWrong_2.value = true;
+};
+
+const handleButtonClickWrong_3 = () => {
+  showMessageWrong_3.value = true;
+};
+
 
 </script>
 
@@ -24,17 +40,20 @@ const handleButtonClick = () => {
           </v-col>
           <v-col cols="6">
             <img class="game-image" src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/306710541/1800" alt="American Goldfinch" />
-            <v-btn color="primary">American Goldfinch</v-btn>
+            <v-btn color="primary" @click="handleButtonClickWrong_1" ref="American Goldfinch">American Goldfinch</v-btn>
+            <p v-if="showMessageWrong"> Shucks, wrong answer bud. Try again.</p>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="6">
             <img class="game-image" src="https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcSpaRjpF6r4vh9V0aDefVfLy2orf0X5jRBT9cwJ60PqgSa2wdUZ7GYYveThPF32iPz1ASO16XyDmMmg-QQ" alt="Pine Siskin" />
-            <v-btn color="primary">Pine Siskin</v-btn>
+            <v-btn color="primary" @click="handleButtonClickWrong_2" ref="Pine Siskin">Pine Siskin</v-btn>
+            <p v-if="showMessageWrong_2"> You sure, this is even a bird? Wrong.</p>
           </v-col>
           <v-col cols="6">
             <img class="game-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Western_Meadowlark.jpg/1200px-Western_Meadowlark.jpg" alt="Western Meadowlark" />
-            <v-btn color="primary">Western Meadowlark</v-btn>
+            <v-btn color="primary" @click="handleButtonClickWrong_3" ref="Western Meadowlark">Western Meadowlark</v-btn>
+            <p v-if="showMessageWrong_3"> Squawk. Squawk. Wrong. Try again.</p>
           </v-col>
         </v-row>
       <v-card-text>
