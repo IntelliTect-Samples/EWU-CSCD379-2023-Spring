@@ -41,7 +41,7 @@ const meadowlarkColor = computed(() => (showMessageWrong_3.value ? 'error' : 'pr
           <v-col cols="6">
             <img class="game-image" src="https://www.allaboutbirds.org/guide/assets/photo/67471191-480px.jpg" alt="Mountain Bluebird" />
             <v-btn :color="bluebirdColor" @click="handleButtonClick" ref="mountainBlueBirdBtn">Mountain Bluebird</v-btn>
-            <p v-if="showMessage"> You dun' got it right scoob!</p>
+            <p v-if="showMessage"> You dun' got it right, buddy ol' pal!</p>
           </v-col>
           <v-col cols="6">
             <img class="game-image" src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/306710541/1800" alt="American Goldfinch" />
@@ -58,7 +58,7 @@ const meadowlarkColor = computed(() => (showMessageWrong_3.value ? 'error' : 'pr
           <v-col cols="6">
             <img class="game-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Western_Meadowlark.jpg/1200px-Western_Meadowlark.jpg" alt="Western Meadowlark" />
             <v-btn :color="meadowlarkColor" @click="handleButtonClickWrong_3" ref="Western Meadowlark">Western Meadowlark</v-btn>
-            <p v-if="showMessageWrong_3"> Squawk. Squawk. Wrong. Try again.</p>
+            <p v-if="showMessageWrong_3"> Squawk. Squawk. If this was Oregon. It's not, Oregon Sucks. Try again.</p>
           </v-col>
         </v-row>
       <v-card-text>
