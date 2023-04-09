@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - azure-assignment
+      - assignment-1
     paths: 
       - wordle-web/**
   pull_request:
