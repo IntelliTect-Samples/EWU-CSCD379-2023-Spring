@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
+        working-directory: ./assignment1
         name: npm ci
       - run: npm run test:unit
         working-directory: ./assignment1
