@@ -4,7 +4,7 @@ import { RouterView } from 'vue-router'
 
 <template>
   <header class="text-center mb-4">
-    <h1>Website</h1>
+    <h1>Wordle</h1>
   </header>
   <RouterView />
 
