@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { letter, LetterStatus } from '@/scripts/letter'
+import { letter, LetterStatus } from '@/scripts/letter.ts'
 
 describe('Letter', () => {
     it('Gets Correct Color', () => {
