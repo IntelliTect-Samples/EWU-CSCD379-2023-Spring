@@ -1,7 +1,6 @@
 <template>
-  <!-- TODO: Export help menu and leaderboard from nav to componets! -->
-
-  <Navbar></Navbar>
+  
+<Navbar></Navbar>
 
 <v-card>
   <!-- Game Board -->
@@ -24,8 +23,8 @@
 
 <script lang="ts">
 import GameBoard from "@/components/GameBoard.vue";
-import Keyboard from "@/components/Keyboard.vue";
-import Navbar from "@/components/Navbar.vue";
+import Keyboard from "@/components/Keyboard-item.vue";
+import Navbar from "@/components/Navbar-item.vue";
 
 import { defineComponent } from "vue";
 

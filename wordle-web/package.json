@@ -13,7 +13,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
-    "simple-keyboard": "^3.5.45",
+    "vitest": "^0.30.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
     "vuetify": "^3.1.13"
@@ -22,10 +22,9 @@
     "@mdi/font": "^7.2.96",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
-    "@types/node": "^18.15.11",
+    "@types/node": "^18.14.2",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
-    "@volar-plugins/vetur": "^0.1.0",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.2",
     "@vue/test-utils": "^2.3.0",
@@ -35,9 +34,10 @@
     "jsdom": "^21.1.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.8.4",
+    "ts-node": "^10.9.1",
     "typescript": "~4.8.4",
     "vite": "^4.1.4",
-    "vitest": "^0.29.1",
+    "vitest": "^0.30.0",
     "vue-tsc": "^1.2.0"
   }
 }

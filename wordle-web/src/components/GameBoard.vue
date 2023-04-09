@@ -19,6 +19,7 @@
       VCol,
       VChip,
     },
+    
     methods: {
     handleKeyPress(key: string) {
       console.log("Key pressed:", key);
@@ -26,6 +27,7 @@
   },
   });
   </script>
+
   
   <style scoped>
   .square {

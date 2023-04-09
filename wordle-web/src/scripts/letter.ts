@@ -19,7 +19,7 @@ export class Letter {
             case LetterStatus.Correct:
                 return "green";
             case LetterStatus.Misplaced:
-                return "yellow";
+                return "orange";
             case LetterStatus.Incorrect:
                 return "red";
             default:

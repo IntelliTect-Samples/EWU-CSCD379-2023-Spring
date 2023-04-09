@@ -1,3 +1,1 @@
-module.exports = {
-  veturPlugin: '@volar-plugins/vetur',
-};
+export const veturPlugin = '@volar-plugins/vetur';
