@@ -1,9 +1,28 @@
 import { describe, it, expect } from 'vitest'
-import { letter } from '../letter'
+import { Letter, LetterStatus } from '@/scripts/letter'
 
-describe('HelloWorld', () => {
-  it('renders properly', () => {
-    const wrapper = mount(HelloWorld, { props: { msg: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
+describe('Letter', () => {
+    it('Gets Correct Color', () => {
+        const letter = new Letter('a')
+        letter.status = LetterStatus.Correct
+        expect(letter.color).toBe('green')
+    })
+
+    it('Gets Misplaced Color', () => {
+        const letter = new Letter('a')
+        letter.status = LetterStatus.Misplaced
+        expect(letter.color).toBe('gold')
+    })
+
+    it('Gets Wrong Color', () => {
+      const letter = new Letter('a')
+      letter.status = LetterStatus.Wrong
+      expect(letter.color).toBe('black')
   })
+
+  it('Gets Unknown Color', () => {
+    const letter = new Letter('a')
+    letter.status = LetterStatus.Unknown
+    expect(letter.color).toBe('grey')
+})
 })
