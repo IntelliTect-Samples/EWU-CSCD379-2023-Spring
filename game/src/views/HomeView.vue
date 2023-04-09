@@ -22,8 +22,8 @@ const handleButtonClickWrong_3 = () => {
   showMessageWrong_3.value = true;
 };
 
-const bluebirdColor = computed(() => (showMessage.value ? 'success' : 'primary'));
-const goldfinchColor = computed(() => (showMessageWrong.value ? 'error' : 'primary'));
+const goldfinchColor = computed(() => (showMessage.value ? 'success' : 'primary'));
+const bluebirdColor = computed(() => (showMessageWrong.value ? 'error' : 'primary'));
 const siskinColor = computed(() => (showMessageWrong_2.value ? 'error' : 'primary'));
 const meadowlarkColor = computed(() => (showMessageWrong_3.value ? 'error' : 'primary'));
 
@@ -40,13 +40,13 @@ const meadowlarkColor = computed(() => (showMessageWrong_3.value ? 'error' : 'pr
         <v-row>
           <v-col cols="6">
             <img class="game-image" src="https://www.allaboutbirds.org/guide/assets/photo/67471191-480px.jpg" alt="Mountain Bluebird" />
-            <v-btn :color="bluebirdColor" @click="handleButtonClick" ref="mountainBlueBirdBtn">Mountain Bluebird</v-btn>
-            <p v-if="showMessage"> You dun' got it right, buddy ol' pal!</p>
+            <v-btn :color="bluebirdColor" @click="handleButtonClickWrong_1" ref="mountainBlueBirdBtn">Mountain Bluebird</v-btn>
+            <p v-if="showMessageWrong"> Shucks, wrong answer bud. Try again.</p>
           </v-col>
           <v-col cols="6">
             <img class="game-image" src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/306710541/1800" alt="American Goldfinch" />
-            <v-btn :color="goldfinchColor" @click="handleButtonClickWrong_1" ref="American Goldfinch">American Goldfinch</v-btn>
-            <p v-if="showMessageWrong"> Shucks, wrong answer bud. Try again.</p>
+            <v-btn :color="goldfinchColor" @click="handleButtonClick" ref="American Goldfinch">American Goldfinch</v-btn>
+            <p v-if="showMessage"> You dun' got it right, buddy ol' pal!</p>
           </v-col>
         </v-row>
         <v-row>
