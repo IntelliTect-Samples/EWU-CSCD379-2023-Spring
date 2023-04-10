@@ -16,6 +16,7 @@
 .item {
   margin-top: 2rem;
   display: flex;
+  text-align: justify;
 }
 
 .details {
