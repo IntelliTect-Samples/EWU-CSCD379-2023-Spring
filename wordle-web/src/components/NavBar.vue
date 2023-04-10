@@ -65,7 +65,7 @@
 
         transform: perspective(1em) rotateX(40deg);
         filter: blur(1em);
-        opacity: 0.7;
+        opacity: 0.4;
     }
 
     .neon-button::after {
@@ -75,7 +75,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        box-shadow: 0 0 1em 1em hsl(317, 100%, 55%);
+        box-shadow: 0 0 1em .5em hsl(317, 100%, 55%);
     }
 
     .neon-button:hover, 
@@ -84,7 +84,7 @@
         background: hsl(317, 100%, 55%);
         border-color: black;
 
-        box-shadow: 0 0 2em .2em hsl(317, 100%, 55%);
+        box-shadow: 0 0 1.75em .2em hsl(317, 100%, 55%);
         text-shadow: none;
     }
 
