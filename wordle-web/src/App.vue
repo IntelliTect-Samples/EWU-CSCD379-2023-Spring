@@ -31,7 +31,7 @@ import NavBar from '@/components/NavBar.vue'
 .content {
   align-self: center;
   padding: 3rem 3rem;
-  max-width: 80vw;
+  max-width: 70vw;
   min-width: 600px;
 }
 
