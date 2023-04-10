@@ -1,4 +1,7 @@
 # wordle-web
+# Below is the link to our website:
+https://zealous-ocean-0c8cb131e.3.azurestaticapps.net
+
 
 This template should help get you started developing with Vue 3 in Vite.
 
