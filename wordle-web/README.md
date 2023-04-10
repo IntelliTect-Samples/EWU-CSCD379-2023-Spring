@@ -14,6 +14,13 @@ While this is a work in progress, feel free to take a peek at what I have so far
 Take a look at the live project here -> [wordle.jakebrunner.com](https://wordle.jakebrunner.com/)
 
 
+# Assignment-1 Extra-Credit Ideas
+
+### A few ideas for giving the orginal Wordle game a little more... ✨pizzaz ✨
+
+1. "Hot-Wordle" - a firey wordle experience where the user has a certain time limit to guess the correct word. The clock would have 3 minutes total. every 30 seconds, the game board heats up and the lower row of squares sizzles away, leaving you with 5 total attempts. If you run out of time, or run out of rows. You're ROASTED 🔥
+
+
 <!-- TABLE OF CONTENTS -->
   #### Table of contents
 + [Prerequisites](#prerequisites)
