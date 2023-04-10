@@ -11,7 +11,9 @@
   
         <v-card-actions>
           <v-spacer />
-          <v-btn text>Return Home</v-btn>
+          <v-btn>
+            <RouterLink to="/">Return Home</RouterLink>
+          </v-btn>
         </v-card-actions>
       </v-card>
     </div>
