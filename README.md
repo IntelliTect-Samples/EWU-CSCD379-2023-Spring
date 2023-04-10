@@ -1,6 +1,11 @@
+## My Wordle Link ##
+https://blue-mud-01e19741e.3.azurestaticapps.net
+
 ## Wordle Ideas ##
 * Scramble feature that allows you to randomly place available letters into the guess prompt.
-* 
+* A point system that awards points at completion based on guess count and time to complete.
+* A leaderboard that shows everyones score(possibly a random name generator to avoid trolls).
+
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
 For general questions, we suggest asking in Teams so that others can help as well. We encourage people to work together and collaborate. Please feel free to help your fellow students out. Though it is possible to privately message people directly, as much as possible, we encourage open discussion on the main chat so that others can benefit as well.
