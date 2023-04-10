@@ -1,4 +1,4 @@
-## Link: https://polite-forest-0abe4e51e.3.azurestaticapps.net/game ##
+## Link: https://polite-forest-0abe4e51e.3.azurestaticapps.net ##
 
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
