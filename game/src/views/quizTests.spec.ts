@@ -1,10 +1,10 @@
 import {describe, it, expect} from 'vitest'
-import HomeView from '@/views/HomeView.vue'
+import game from '@/views/game.vue'
 import { mount } from '@vue/test-utils';
 
 describe('MyComponent', () => {
     it('checks to see if correct question is displayed',  () => {
-      const wrapper = mount(HomeView);
+      const wrapper = mount(game);
   
       const question = wrapper.find('h2').text();
     
