@@ -1,18 +1,12 @@
 <template>
   <div class="about">
-    <v-card>
-      <v-card-title> This is a vue/vuetify class! </v-card-title>
-      <v-card-subtitle> (College Class) </v-card-subtitle>
-
+    <v-card class="mx-auto" max-width="400">
+      <v-card-title>Word Scramble game</v-card-title>
       <v-card-text>
-        Lorem ipsum dolor sit amet blah blah blah
-        <v-icon icon="mdi:mdi-abacus" />
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt odio eget tellus euismod efficitur.</p>
       </v-card-text>
-
       <v-card-actions>
-        <v-spacer />
-        <v-btn text color="warning">Cancel</v-btn>
-        <v-btn text color="primary">OK</v-btn>
+        <v-btn @click="$router.push('/')">Go back to Home</v-btn>
       </v-card-actions>
     </v-card>
   </div>
