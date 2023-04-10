@@ -7,7 +7,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer />
-                <v-btn variant="tonal" text color="primary"> Home </v-btn>
+                <v-btn variant="tonal" to="/" color="primary"> Home </v-btn>
             </v-card-actions>
         </v-card>
     </div>
