@@ -4,22 +4,22 @@ import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
-  <div class="main">
+  <v-app>
     
     <NavBar />
-
-    <div class="content">
+    
+    <v-main>
       <RouterView />
-    </div>
-
-  </div>
+    </v-main>
+    
+  </v-app>
 
 </template>
 
 <style scoped>
 
   
-.main {
+.v-app {
   display: flex;
   flex-direction: column;
 
@@ -28,7 +28,7 @@ import NavBar from '@/components/NavBar.vue'
   text-align: center;
 }
 
-.content {
+.v-main {
   align-self: center;
   padding: 3rem 3rem;
   max-width: 70vw;
