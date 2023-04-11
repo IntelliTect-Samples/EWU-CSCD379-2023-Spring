@@ -17,8 +17,6 @@ export class Letter {
 
   public get color() {
     switch (this.status) {
-      case LetterStatus.NotGuessed:
-        return 'grey'
       case LetterStatus.Correct:
         return 'green'
       case LetterStatus.Misplaced:
