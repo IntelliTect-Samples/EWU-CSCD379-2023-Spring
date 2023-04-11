@@ -1,22 +1,36 @@
 
-import { VSpacer } from 'vuetify/lib/components';
 
 <template>
   <div class="game">
     <VCard variant="tonal">
-        <VCardTitle>
-          WordleCopy
-        </VCardTitle>
-        <VCardSubtitle>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, fuga consectetur.
-        </VCardSubtitle>
-          <v-divider :thickness="5"></v-divider>
+      <VCardTitle>
+        WordleCopy
+      </VCardTitle>
+      <VCardSubtitle>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, fuga consectetur.
+      </VCardSubtitle>
+      <v-divider :thickness="5"></v-divider>
+      <v-container>
+        <v-row justify="space-evenly" v-for="i in 6" :key="i">
+          <v-col v-for="j in 5" :key="`${i}-${j}`" cols="auto">
+            <v-card
+              height="50"
+              width="50"
+              :class="['d-flex justify-center align-center', ]"
+            >
+              <div>{{  }}</div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+
+      <v-combobox
+      
+        label="WordGuess"
+        clearable
         
-          <v-combobox
-          label="WordGuess"
-          clearable
-          :items="['should be dictionary']"
-        ></v-combobox>
+      ></v-combobox>
+
       <VCardActions>
         <VSpacer></VSpacer>
         <v-btn variant="tonal">
@@ -25,7 +39,10 @@ import { VSpacer } from 'vuetify/lib/components';
       </VCardActions>
     </VCard>
   </div>
-  </template>
+</template>
+
+
+
   
   <style>
     @media (min-width: 1024px) {
