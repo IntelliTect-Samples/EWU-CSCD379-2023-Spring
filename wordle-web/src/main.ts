@@ -2,9 +2,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { mdi } from 'vuetify/iconsets/mdi'
+<<<<<<< HEAD
 
 import './assets/main.css'
 import '@mdi/font/css/materialdesignicons.css'
+=======
+import '@mdi/font/css/materialdesignicons.css'
+
+import './assets/main.css'
+>>>>>>> Assignment-1
 
 // Vuetify
 import 'vuetify/styles'

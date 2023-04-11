@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+=======
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
+</script>
+
+>>>>>>> Assignment-1
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
@@ -7,7 +15,10 @@
 
       <nav>
         <RouterLink to="/">Home</RouterLink>
+<<<<<<< HEAD
         <RouterLink to="/about">Class</RouterLink>
+=======
+>>>>>>> Assignment-1
         <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
@@ -16,11 +27,14 @@
   <RouterView />
 </template>
 
+<<<<<<< HEAD
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 </script>
 
+=======
+>>>>>>> Assignment-1
 <style scoped>
 header {
   line-height: 1.5;
