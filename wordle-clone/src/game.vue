@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
     
     <v-card>
         <v-card-title>
-            The Best Worst Game
+            Debatably Easier Hangman
         </v-card-title>
         <v-card-item>
             <div class="text-caption"> sample text sample text sample text sample text sample text sample text </div>
