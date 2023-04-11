@@ -13,7 +13,7 @@ import { RouterLink, RouterView } from 'vue-router'
         </v-card-item>
         <v-card-actions>
             <v-btn variant="outlined">
-                <RouterLink to="/">Return Home</RouterLink>
+                <RouterLink to="/">Home</RouterLink>
             </v-btn>
         </v-card-actions>
     </v-card>
