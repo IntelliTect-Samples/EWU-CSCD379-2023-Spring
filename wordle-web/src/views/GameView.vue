@@ -5,8 +5,11 @@ import { VSpacer } from 'vuetify/lib/components';
   <div class="game">
     <VCard variant="tonal">
         <VCardTitle>
-            WordleCopy
+          WordleCopy
         </VCardTitle>
+        <VCardSubtitle>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, fuga consectetur.
+        </VCardSubtitle>
           <v-divider :thickness="5"></v-divider>
         
           <v-combobox
