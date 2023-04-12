@@ -7,7 +7,7 @@
         WordleCopy
       </VCardTitle>
       <VCardSubtitle>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, fuga consectetur.
+        Sample Text. Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, fuga consectetur.
       </VCardSubtitle>
       <v-divider :thickness="5"></v-divider>
       <v-container>
