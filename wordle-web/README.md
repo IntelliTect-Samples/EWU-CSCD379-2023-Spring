@@ -1,6 +1,9 @@
 # URL
 https://nice-forest-07f8c5e1e.3.azurestaticapps.net/
 
+# Extra Credit Ideas
+Added EWU .svg Logo
+
 # wordle-web
 
 This template should help get you started developing with Vue 3 in Vite.
