@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-=======
-<script setup lang="ts">
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
-</script>
-
->>>>>>> Assignment-1
 <template>
   <WelcomeItem>
     <template #icon>
@@ -87,7 +75,7 @@ import SupportIcon from './icons/IconSupport.vue'
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
 </template>
-<<<<<<< HEAD
+
 
 <script setup lang="ts">
 import WelcomeItem from './WelcomeItem.vue'
@@ -97,5 +85,4 @@ import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
 </script>
-=======
->>>>>>> Assignment-1
+
