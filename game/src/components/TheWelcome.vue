@@ -83,4 +83,9 @@ import SupportIcon from './icons/IconSupport.vue'
     us by
     <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
   </WelcomeItem>
+  <WelcomeItem>
+    <template #icon> G </template>
+    <template #heading>To Game!</template>
+    <v-btn to="/game">Tic Tac Toe</v-btn>
+  </WelcomeItem>
 </template>
