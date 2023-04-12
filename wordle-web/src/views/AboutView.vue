@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-<<<<<<< HEAD
+
     <v-card>
       <v-card-title> This is a vue/vuetify class! </v-card-title>
       <v-card-subtitle> (College Class) </v-card-subtitle>
@@ -16,9 +16,8 @@
         <v-btn text color="primary">OK</v-btn>
       </v-card-actions>
     </v-card>
-=======
     <h1>This is an about page</h1>
->>>>>>> Assignment-1
+
   </div>
 </template>
 
