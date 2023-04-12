@@ -58,12 +58,6 @@ export default {
         color: hsl(317, 100%, 55%);
         transform: scale(1.5);
     }
-
-    .v-list{    
-        display: flex;
-        flex-direction: column;
-    }
-
     .neon-button {
         color: hsl(317, 100%, 55%);
 
@@ -72,7 +66,7 @@ export default {
 
         text-shadow: 
             0 0 0.1em white, 
-            0 0 .55em currentColor;
+            0 0 .55em black;
 
         box-shadow: 
             inset 0 0 0.5em  hsl(317, 100%, 55%);
@@ -81,7 +75,6 @@ export default {
         border-radius: .5rem;
         margin-bottom: 2rem;
         width: 8rem;
-        position: relative;
     }
     .close-icon {
         color: hsl(317, 100%, 55%);
@@ -91,13 +84,13 @@ export default {
 
     .neon-button:hover, 
     .neon-button:focus{
+        text-shadow: none;
         color: rgb(0, 178, 228);
         background: hsl(317, 100%, 55%);
         box-shadow:  0 .5em .9rem hsl(317, 100%, 55%);
-        text-shadow: none;
     }
 
     .neon-button:hover::after {
-        opacity: 1;
+        opacity: .9;
     }
 </style>
