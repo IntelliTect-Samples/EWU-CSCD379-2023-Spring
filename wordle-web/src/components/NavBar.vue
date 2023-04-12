@@ -25,7 +25,7 @@
                     </RouterLink>
                 </v-list-item>
                 <v-list-item>
-                    <RouterLink to="/game">
+                    <RouterLink to="/wordle">
                         <v-btn class="neon-button">Game</v-btn>
                     </RouterLink>
                 </v-list-item>
