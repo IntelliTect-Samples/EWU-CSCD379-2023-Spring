@@ -19,7 +19,7 @@
     //const wordList = ['apple', 'peach', 'crypt', 'zesty', 'color', 'piano', 'jelly', 'silly', 'tacos', 'chips', 'chili']
     const wordList = ['apple', 'peach', 'crypt', 'zesty', 'jello']
     const secretWord = wordList[Math.floor(Math.random() * wordList.length)]
-    const guesses = reactive(new Array<Letter>())
+    const guesses = reactive(new Array<Array<Letter>>())
     console.log(secretWord);//log secretWord
 
     /*const count = ref(1)
@@ -49,14 +49,14 @@
                 results[i].status = LetterStatus.Correct
                 guessChars[i] = '_'
                 secretChars[i] = '_'
-                console.log('Correct letter in position ${i}')
+                console.log(`Letter ${i} is correct`)
             }else{
                 isCorrect = false
-                console.log('Wrong Letter')
+                results[i].status = LetterStatus.Wrong
+                console.log(`Letter ${i} is incorrect`)
             }
         }
-        console.log(guessChars)
-        console.log(secretChars)
+        
         //check for misplaced
         for (let i = 0; i < secretWord.length; i++){
             if (guessChars[i] !== '_'){
@@ -65,12 +65,19 @@
                         results[i].status = LetterStatus.Misplaced
                         guessChars[i] = '_'
                         secretChars[j] = '_'
-                        console.log("letter misplaced")
+                        console.log(`Letter ${i} is misplaced`)
                         break
                     }
                 }
             }
         }
+
+        console.log(guessChars)
+        console.log(secretChars)
+        console.log(results)
+        console.log(isCorrect)
+        guesses.push(results)
+        console.log(guesses)
 
     }
 
