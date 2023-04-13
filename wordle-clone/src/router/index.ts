@@ -15,11 +15,6 @@ const router = createRouter({
       component: () => import('../game.vue')
     },
     {
-      path: '/wordle',
-      name: 'worlde',
-      component: () => import('../views/wordle.vue')
-    },
-    {
       path: '/about',
       name: 'about',
       // route level code-splitting
