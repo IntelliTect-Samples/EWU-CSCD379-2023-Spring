@@ -1,0 +1,4 @@
+Ideas for expanding wordle app:
+1. Add sounds to buttons or for winning
+2. Add a timer to make game have a time limit for guessing word or else it will auto restart game
+3. Make settings to customize game background, fonts, colors etc.
