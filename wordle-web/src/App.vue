@@ -5,15 +5,44 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+
+      <v-card
+    class="mx-auto"
+    max-width="500"
+    variant="outlined"
+    width="30vw"
+    height="20vh"
+  >
+    <v-card-item>
+      <div>
+        <div class="text-h6 mb-5">
+          Wordle from wish(for now)
+        </div>
+        <div class="text-caption">Are you ready to get dictionarical?</div>
+      </div>
+    </v-card-item>
+
+    <v-card-actions>
+      <v-btn variant="outlined">
+        <RouterLink to="/">Home</RouterLink>
+      </v-btn>
+      <v-btn variant="outlined">
+        <RouterLink to="/game">Game</RouterLink>
+      </v-btn>
+      <v-btn variant="outlined">
+        <RouterLink to="/about">About</RouterLink>
+      </v-btn>
+      
+    </v-card-actions>
+  </v-card>
+     
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/wordle">Wordle</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        
+
+ 
       </nav>
     </div>
   </header>
@@ -21,10 +50,7 @@ import HelloWorld from './components/HelloWorld.vue'
   <RouterView />
 </template>
 
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+
 
 <style scoped>
 header {
