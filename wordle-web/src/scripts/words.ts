@@ -1,7 +1,7 @@
 import { Letter } from "./letter";
 
 export class Word {
-    public letters = Array<Letter>();
+    public letters =  Array<Letter>();
 
     constructor (word?: string | null) {
         if (word) {

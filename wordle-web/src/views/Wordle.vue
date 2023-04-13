@@ -6,9 +6,9 @@
   <div>
     <v-row v-for="word in guesses">
       <v-col v-for="letter in word" :key="letter.letter">
-        <v-card :color="letter.color">
-          <v-card-title>{{ letter.letter }}</v-card-title>
-        </v-card>
+        <v-btn :color="letter.color">
+          {{ letter.letter }}
+        </v-btn>
       </v-col>
     </v-row>
   </div>
@@ -26,7 +26,7 @@ const guess = ref('')
 const wordList = ['apple', 'peach', 'crypt', 'zesty', 'jello']
 const secretWord = wordList[Math.floor(Math.random() * wordList.length)]
 const guesses = reactive(new Array<Word>())
-//console.log(secretWord)
+console.log(secretWord)
 
 function checkGuess() {
   console.log(guess.value)
@@ -69,14 +69,14 @@ function checkGuess() {
       }
     }
   }
-  /*
+  
   console.log(guessChars)
   console.log(secretChars)
   console.log(results)
   console.log(isCorrect)
   guesses.push(results)
   console.log(guesses)
-  */
+  
   // check if the letters are in the right place
 }
 </script>
