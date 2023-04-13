@@ -1,5 +1,5 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <h1>Wordle</h1>
   <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
 
   <v-btn @click="checkGuess">Check</v-btn>
