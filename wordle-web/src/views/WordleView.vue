@@ -1,20 +1,29 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-  <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
+  <main>
+    <br />
+    <h1>Wordle Mind Bender</h1>
+    <br />
+    <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
 
-  <v-btn @click="checkGuess">Check</v-btn>
-  <div>
-    <v-row v-for="word in guesses">
-      <v-col v-for="letter in word" :key="letter.letter">
-        <v-card :color="letter.color">
-          <v-card-title>{{ letter.letter }}</v-card-title>
-        </v-card>
-      </v-col>
-    </v-row>
-  </div>
+    <br />
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ secretWord }}</h3>
+    <v-btn @click="checkGuess">Check</v-btn>
+    <div>
+      <v-row v-for="word in guesses">
+        <v-col v-for="letter in word" :key="letter.letter">
+          <v-card :color="letter.color">
+            <v-card-title>{{ letter.letter }}</v-card-title>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    <div>
+      <br />
+      <h2>Guess: {{ guess }}</h2>
+      <br />
+      <h3>Secret Word: {{ secretWord }}</h3>
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -55,6 +64,7 @@ function checkGuess() {
     }
   }
 
+  // check if the letters are misplaced
   for (let i = 0; i < 5; i++) {
     if (guessChars[i] !== '_') {
       for (let j = 0; j < 5; j++) {
