@@ -19,12 +19,13 @@
 
 <script setup lang="ts">
 import { Letter, LetterStatus } from '@/scripts/letter'
+import { Word } from '@/scripts/words'
 import { ref, reactive } from 'vue'
 
 const guess = ref('')
 const wordList = ['apple', 'peach', 'crypt', 'zesty', 'jello']
 const secretWord = wordList[Math.floor(Math.random() * wordList.length)]
-const guesses = reactive(new Array<Array<Letter>>())
+const guesses = reactive(new Array<Word>())
 //console.log(secretWord)
 
 function checkGuess() {
@@ -37,7 +38,7 @@ function checkGuess() {
   }
 
   // check if the letters are valid
-  const results = new Array<Letter>()
+  const results = new Word()
   const guessChars = guess.value.split('')
   const secretChars = secretWord.split('')
   let isCorrect = true

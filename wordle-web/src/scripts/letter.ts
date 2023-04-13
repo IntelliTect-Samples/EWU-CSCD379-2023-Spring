@@ -9,11 +9,11 @@ export enum LetterStatus {
 
 
 export class Letter {
-    letter: string;
+    char: string;
     status: LetterStatus = LetterStatus.NotGuessed;
 
     constructor(letter: string) {
-        this.letter = letter;
+        this.char = letter;
     }
 
     get color() {
