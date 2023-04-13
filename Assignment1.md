@@ -3,6 +3,8 @@
 ## Assignment 1
 
 Link to Azure static web app: https://ambitious-grass-04916f41e.3.azurestaticapps.net/
+Extra credit ideas to improve the game: 
+1. 
 
 The purpose of this assignment is to solidify your learning of:
 
