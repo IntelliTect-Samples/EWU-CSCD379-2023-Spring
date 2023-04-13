@@ -45,5 +45,6 @@ Note: Custom CSS can only be used where specified.
 ## Extra Credit
 
 - Add an appropriate sound when the UI letter buttons are clicked (5 points)
-- Add a clever feature using watchers (5 points)
-- Get accepted as the winner (only one team for an extra-extra 10 points)
+- Add creative styling following good UI/UX practices
+  - Look at products by Google or some of the vuetify components for good UX/UI ideas
+  - https://m2.material.io/design/guidelines-overview
