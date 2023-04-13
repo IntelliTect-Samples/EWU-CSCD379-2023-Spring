@@ -24,7 +24,7 @@ The purpose of this assignment is to solidify your learning of:
 
 4. Check all the code into your repo fork ❌✅
 
-5. Create a static web app in Azure ❌✅
+5. Create a static web app in Azure ✅
    - Create the container where your GitHub repo will deploy
    - Link the site with your GitHub repo
 
@@ -32,10 +32,10 @@ The purpose of this assignment is to solidify your learning of:
    - Pipeline runs on each check in
    - Vitest run and pass ❌✅
    - Vue app builds ❌✅
-   - Vue app deploys to Azure ❌✅
+   - Vue app deploys to Azure ✅
 
 7. Azure site works ❌✅
-   - Post your Azure URL in your readme.md file. Replace the URL in the readme with your URL. ❌✅
+   - Post your Azure URL in your readme.md file. Replace the URL in the readme with your URL. ✅
 
 ## Extra Credit
 
