@@ -10,8 +10,7 @@
   
         <v-card-actions>
           <v-spacer />
-          <v-btn text color="warning">Cancel</v-btn>
-          <v-btn text color="primary">OK</v-btn>
+          <RouterLink to="/">Home<v-btn text color="primary"></v-btn> </RouterLink>
         </v-card-actions>
       </v-card>
     </div>
