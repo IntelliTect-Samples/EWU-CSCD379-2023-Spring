@@ -10,10 +10,10 @@ export class Letter {
     status: LetterStatus = 0;
 
     constructor(letter: string) {
-        this.letter = letter;
+        this.letter = letter.toUpperCase();
     }
 
-    public getColor(): string {
+    get color() {
         switch (this.status) {
             case LetterStatus.Correct:
                 return "green";
