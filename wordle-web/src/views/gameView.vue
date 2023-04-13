@@ -13,9 +13,7 @@
     
       <v-card-actions>
         <v-spacer />
-      <router-link to="/" custom v-slot="{ navigate }">
-        <V-btn @click="navigate" role="link" text color="primary"> Home Page </V-btn>
-      </router-link>
+      <V-btn to="/"> Home Page </V-btn>
       </v-card-actions>
 
     </v-card>
