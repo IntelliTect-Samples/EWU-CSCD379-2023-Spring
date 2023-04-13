@@ -1,14 +1,14 @@
 <template>
-  <h1>Wordle</h1>
+  <h1>Wordle Mind Bender</h1>
   <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
 
   <v-btn @click="checkGuess">Check</v-btn>
   <div>
     <v-row v-for="word in guesses">
       <v-col v-for="letter in word" :key="letter.letter">
-        <v-btn :color="letter.color">
-          {{ letter.letter }}
-        </v-btn>
+        <v-card :color="letter.color">
+          <v-card-title>{{ letter.letter }}</v-card-title>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -19,13 +19,12 @@
 
 <script setup lang="ts">
 import { Letter, LetterStatus } from '@/scripts/letter'
-import { Word } from '@/scripts/words'
 import { ref, reactive } from 'vue'
 
 const guess = ref('')
 const wordList = ['apple', 'peach', 'crypt', 'zesty', 'jello']
 const secretWord = wordList[Math.floor(Math.random() * wordList.length)]
-const guesses = reactive(new Array<Word>())
+const guesses = reactive(new Array<Array<Letter>>())
 console.log(secretWord)
 
 function checkGuess() {
@@ -38,7 +37,7 @@ function checkGuess() {
   }
 
   // check if the letters are valid
-  const results = new Word()
+  const results = new Array<Letter>()
   const guessChars = guess.value.split('')
   const secretChars = secretWord.split('')
   let isCorrect = true
@@ -69,14 +68,13 @@ function checkGuess() {
       }
     }
   }
-  
+
   console.log(guessChars)
   console.log(secretChars)
   console.log(results)
   console.log(isCorrect)
   guesses.push(results)
   console.log(guesses)
-  
   // check if the letters are in the right place
 }
 </script>
