@@ -25,7 +25,7 @@ const guess = ref('')
 const wordList = ['apple', 'peach', 'crypt', 'zesty', 'jello']
 const secretWord = wordList[Math.floor(Math.random() * wordList.length)]
 const guesses = reactive(new Array<Array<Letter>>())
-console.log(secretWord)
+//console.log(secretWord)
 
 function checkGuess() {
   console.log(guess.value)
@@ -68,13 +68,14 @@ function checkGuess() {
       }
     }
   }
-
+  /*
   console.log(guessChars)
   console.log(secretChars)
   console.log(results)
   console.log(isCorrect)
   guesses.push(results)
   console.log(guesses)
+  */
   // check if the letters are in the right place
 }
 </script>
