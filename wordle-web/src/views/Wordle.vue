@@ -1,8 +1,13 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <h1>Scrabble but better</h1>
+  <v-card title="Scrabble but better" text="Try to guess the five letter word! Correctly placed letters are marked green, 
+  misplaced letters are marked yellow and incorrect letters are marked red. " variant="outlined">
+  <v-card-actions>
+    <v-btn prepend-icon="mdi-vuetify" variant="outlined" @click="checkGuess">Check</v-btn>
+  </v-card-actions>
+</v-card>
   <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
 
-  <v-btn @click="checkGuess">Check</v-btn>
   <div>
     <v-row v-for="word in guesses">
       <v-col v-for="letter in word" :key="letter.letter">
