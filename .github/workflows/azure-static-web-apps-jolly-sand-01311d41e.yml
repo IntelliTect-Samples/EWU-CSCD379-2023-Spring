@@ -25,10 +25,12 @@ jobs:
         with:
           node-version: 18
       - run: npm ci
-        working-directory: ./app
+        working-directory: ./wordle-web
         name: npm ci
       - run: npm run test:unit
-        name: Run Test
+        working-directory: ./wordle-web
+        name: Run Vitest Unit Tests
+        
       - uses: actions/checkout@v2
         with:
           submodules: true
