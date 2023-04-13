@@ -79,3 +79,8 @@ The course work will be cross-platform. However, in class the instructors will b
 - Make sure all the extensions are installed
 - Restart VS Code
 - Pull the repo again and see if the unmodified version works
+
+# Assignment 1 Extra Credit:
+- Play celebratory music upon completing a puzzle
+- Create a "hint" button that automatically pulls a word from the pool of available words that only uses the characters not confirmed as unused in the hidden word
+- Togglable "Hard mode" that hides all letters' states of words submitted before the last word, and also removes any of the letters' states on the keyboard  

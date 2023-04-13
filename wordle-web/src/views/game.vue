@@ -1,8 +1,7 @@
 <template>
-    <header>
-        <h1> Pretty Much Just Wordle </h1>
-    </header>
-    <body>
-        You wouldn't steal a car.
-    </body>
+    <v-card 
+        title=" Pretty Much Just Wordle " 
+        text="You wouldn't steal a car."
+        variant="tonal">
+    </v-card>
 </template>
