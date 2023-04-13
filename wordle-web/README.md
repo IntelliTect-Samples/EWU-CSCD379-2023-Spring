@@ -1,3 +1,6 @@
+#Wordle Site Link
+https://brave-forest-08291851e.3.azurestaticapps.net 
+
 # wordle-web
 
 This template should help get you started developing with Vue 3 in Vite.
