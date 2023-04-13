@@ -12,9 +12,7 @@
       <v-card-text>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. </v-card-text>
       <v-card-actions>
         <v-spacer />
-      <router-link to="/" custom v-slot="{ navigate }">
-        <V-btn @click="navigate" role="link" text color="primary"> Home Page </V-btn>
-      </router-link>
+        <v-btn variant="tonal" to="/" color="primary"> Home Page </v-btn>
       </v-card-actions>
     </v-card>
 
