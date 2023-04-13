@@ -11,10 +11,10 @@ The purpose of this assignment is to solidify your learning of:
 
 ## Instructions
 
-1. Create a Vue app ❌✅
-   - Uses TypeScript ❌✅
-   - Add Vuetify ❌✅
-   - Uses Vitest ❌✅
+1. Create a Vue app ✅
+   - Uses TypeScript ✅
+   - Add Vuetify ✅
+   - Uses Vitest ❌✅ I don't know if we are still using this?
 
 3. Create a simple page called game.vue ❌✅
    - Page should have a card with a heading that with a clever name for the game ❌✅
