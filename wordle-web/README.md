@@ -21,6 +21,10 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
+## Azure URL
+
+https://gray-field-0cb18e91e.3.azurestaticapps.net/
+
 ## Project Setup
 
 ```sh
