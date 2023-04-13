@@ -1,3 +1,7 @@
+Extra credit ideas:
+1. A hint system where you can get help like, "use this word in a sentence".
+2. A strategy guide to the most effective words that use the most vowels/letters. (Or a link to r/Wordle)
+3. A timed mode where you get one minute to answer the most words possible. 
 # vue-project1
 
 This template should help get you started developing with Vue 3 in Vite.
