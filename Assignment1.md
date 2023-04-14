@@ -39,5 +39,5 @@ The purpose of this assignment is to solidify your learning of:
 
 ## Extra Credit
 
-- Come up with up to three unique ideas for stories we could implement as part of our project. Post these in your readme.md. ❌✅
+- Come up with up to three unique ideas for stories we could implement as part of our project. Post these in your readme.md. ✅
 - One point per idea up to three points
