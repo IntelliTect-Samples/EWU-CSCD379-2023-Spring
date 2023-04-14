@@ -1,5 +1,10 @@
 ## [Website](https://kind-stone-01ab5711e.3.azurestaticapps.net/) ##
 
+## Extra credit ideas ##
+1. Add a streak system. Instead of getting only one word a day, if you guess correctly you get a new word. You could continually rack up points for the day until you lose. This might make it fun in regards to the leaderboard aspect of the game.
+2. Spending leaderboard points for a hint towards a letter spot. You could spend whatever points you have accumulated on the leaderboard to possibly reveal a letter that will help you solve the puzzle.
+3. A rival system. Pair up similar people on the leader boards and if you can guess the word of the day before them, it burns one of their guesses away. Or, maybe only allow a certain amount of people to guess the word of the day. After it has been passed, a new word begins for a reduced amount of points.
+
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
 For general questions, we suggest asking in Teams so that others can help as well. We encourage people to work together and collaborate. Please feel free to help your fellow students out. Though it is possible to privately message people directly, as much as possible, we encourage open discussion on the main chat so that others can benefit as well.
