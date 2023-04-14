@@ -13,11 +13,10 @@ import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
   components,
-  directives,
+  directives
 })
 
-
-app.use(vuetify);
+app.use(vuetify)
 
 app.use(router)
 
