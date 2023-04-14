@@ -1,6 +1,6 @@
 <template>
   <main>
-    <p>Welcome!</p>
+    <p>Welcome to Nick Parkman's 'Wordle Redux?'!</p>
   </main>
 </template>
 

@@ -7,7 +7,6 @@
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/wordle">Wordle</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
       </nav>
     </div>
   </header>
@@ -18,6 +17,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+//<RouterLink to="/about">About</RouterLink>
 </script>
 
 <style scoped>
