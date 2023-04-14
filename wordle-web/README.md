@@ -1,6 +1,11 @@
 #Wordle Site Link
 https://brave-forest-08291851e.3.azurestaticapps.net 
 
+#EC Story Ideas
+1) Circuits, powering the lines to turn on the device to win.
+2) Jigsaw Puzzle, putting the pieces together, each correct letter is a piece.
+3) Gameshow, each correct guess grants money, incorrect guesses take away from prize money.
+
 # wordle-web
 
 This template should help get you started developing with Vue 3 in Vite.
