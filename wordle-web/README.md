@@ -1,4 +1,5 @@
 Azure link: https://ambitious-grass-04916f41e.3.azurestaticapps.net
+
 Extra credit ideas:
 1. A hint system where you can get help like, "use this word in a sentence".
 2. A strategy guide to the most effective words that use the most vowels/letters. (Or a link to r/Wordle)
