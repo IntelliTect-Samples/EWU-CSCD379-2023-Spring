@@ -9,7 +9,7 @@ import { RouterLink, RouterView } from 'vue-router'
             Debatably Easier Hangman
         </v-card-title>
         <v-card-item>
-            <div class="text-caption"> sample text sample text sample text sample text sample text sample text </div>
+            <div class="text-caption"> I mean, it's probably harder in a lot of respects, but I've never lost a game of wordle while I have lost games of hangman.  Still, I'm not sure if that says more about me or the game. </div>
         </v-card-item>
         <v-card-actions>
             <v-btn variant="outlined">
