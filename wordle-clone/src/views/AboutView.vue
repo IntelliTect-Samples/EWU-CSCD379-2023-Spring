@@ -7,11 +7,11 @@
             <div class="text-caption"> Just an about page, not much about it. </div>
         </v-card-item>
         <v-card-actions>
-            <v-btn variant="outlined">
-                <RouterLink to="/">Home</RouterLink>
+            <v-btn variant="outlined" to="/">
+                Home
             </v-btn>
-            <v-btn variant="outlined">
-                <RouterLink to="/game">Game</RouterLink>
+            <v-btn variant="outlined" to="/game">
+                Game
             </v-btn>
         </v-card-actions>
     </v-card>
