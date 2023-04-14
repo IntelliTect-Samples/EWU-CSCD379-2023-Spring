@@ -23,8 +23,8 @@ jobs:
         name: Setup Node
         with:
           node-version: 18
-      - run: npm ci
-        name: npm ci
+      - run: npm i
+        name: npm i
       - run: npm test:unit
         name: Run Vitest Unit Tests
         
