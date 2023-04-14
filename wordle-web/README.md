@@ -1,4 +1,4 @@
-# CSCD Class
+# CSCD379 Class
 
 ## Info
 The end result of this repo will be a working version of the word game Wordle.
@@ -6,6 +6,7 @@ The end result of this repo will be a working version of the word game Wordle.
 ### Updates
 - <b> 4/6/23 </b> Template Vue site deployed through Azure.
 - <b> 4/9/23 </b> gameView.vue page was added
+- <b> 4/13/23 </b> Whole page makeover and setup/design/functionality of Wordle under way
 
 ## Assignment 1
 - Site URL: https://thankful-island-092b59a1e.3.azurestaticapps.net/
