@@ -3,6 +3,8 @@
 <Navbar></Navbar>
 
 <v-card>
+  <v-card-title align="center">bird is the word..le 🐦</v-card-title>
+  <v-card-text align="center" col="6">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</v-card-text>
   <!-- Game Board -->
   <v-card-item>
     <v-container>
