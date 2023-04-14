@@ -14,6 +14,7 @@
   </div>
 
   <h2>{{ guess }}</h2>
+  
 </template>
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
