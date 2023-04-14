@@ -24,8 +24,8 @@ export class Letter {
                 return 'orange';
             case LetterStatus.Wrong:
                 return 'red';
-            case LetterStatus.NotGuessed:
-                return 'grey';
+            default:
+                return 'grey'
         }
 
     }
