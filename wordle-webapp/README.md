@@ -1,3 +1,10 @@
+# My Wordle Link
+https://blue-mud-01e19741e.3.azurestaticapps.net
+# Wordle Ideas
+- Scramble feature that allows you to randomly place available letters into the guess prompt.
+- A point system that awards points at completion based on guess count and time to complete.
+- A leaderboard that shows everyones score(possibly a random name generator to avoid trolls).
+
 # wordle-webapp
 
 This template should help get you started developing with Vue 3 in Vite.
