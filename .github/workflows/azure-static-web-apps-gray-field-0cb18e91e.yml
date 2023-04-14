@@ -23,10 +23,12 @@ jobs:
         name: Setup Node
         with:
           node-version: 18
-      - run: npm i
-        name: npm i
-      - run: npm test:unit
+      - run: npm ci
+        name: npm ci
+        working-directory: ./wordle-web
+      - run: npm run test:unit
         name: Run Vitest Unit Tests
+        working-directory: ./wordle-web
         
       - name: Build And Deploy
         id: builddeploy
