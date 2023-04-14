@@ -1,14 +1,17 @@
 <template>
-  <v-sheet color="teal-darken-4" height="150px" class="pt-10">
-    <v-card class="ma-10" rounded="xl" elevation="">
-      <v-card-title>Hello World!</v-card-title>>
+  <div>
+    <v-card>
+      <v-card-title>Scrabble But Better</v-card-title>
+      <v-card-subtitle> This is what we want to build: </v-card-subtitle>
+
+      <v-card-text>
+        We are here to make a better, more clever version of Scrabble.
+      </v-card-text>
+
+      <v-card-actions>
+        <v-spacer />
+        <RouterLink to="/">Home<v-btn></v-btn> </RouterLink>
+      </v-card-actions>
     </v-card>
-  </v-sheet>
-  <v-row dense>
-    <v-col v-for="i in 10" :key = "i" cols ="12" sm="6" md="3" lg="3">
-      <v-card class="ms-1">
-        <v-card-title>{{ i }}</v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+  </div>
 </template>
