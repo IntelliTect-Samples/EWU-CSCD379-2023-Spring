@@ -18,7 +18,7 @@ The purpose of this assignment is to solidify your learning of:
 
 3. Create a simple page called game.vue ✅ called Wordle.vue but still the same thing
    - Page should have a card with a heading that with a clever name for the game ✅
-   - some default placeholder body text ✅
+   - some default placeholder body text ✅ have our base wordle game instead of placeholder text
    - and a button to take you back to the home page ✅
    - there should be a button on the home page to access this page ✅
 
