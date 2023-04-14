@@ -1,11 +1,11 @@
 <template>
     <div class="about">
         <v-card>
-            <v-card-title>This is a vuetify class!</v-card-title>
-            <v-card-subtitle>(College Class)</v-card-subtitle>
-
-            <v-card-text>TERHTYFYG JHFGDGJCVD JKHFGIYC VKHTDIYJ</v-card-text>
+            <v-card-title>Word App 2: Electric Boogaloo</v-card-title>
+            <v-card-text>default placeholder body text</v-card-text>
         </v-card>
+
+        <RouterLink to="/">Home</RouterLink>
     </div>
 </template>
 
