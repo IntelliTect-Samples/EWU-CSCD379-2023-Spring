@@ -15,7 +15,7 @@
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
-  <ValidWordList :validWords/>
+  <ValidWordList :validWords="validWords"/>
 
 </template>
 
@@ -23,12 +23,17 @@
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
 import ValidWordList from '@/components/ValidWordList.vue'
+import { computed } from '@vue/reactivity';
+import { WordsService } from '@/scripts/wordsService';
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const validWords = ref<string[]>();
 console.log(game.secretWord)
+
 
 function checkGuess() {
   game.submitGuess(guess.value)
+  validWords.value = WordsService.validWords(game.guesses[game.guesses.length-1]);
 }
 </script>
