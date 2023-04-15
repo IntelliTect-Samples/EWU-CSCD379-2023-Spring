@@ -15,11 +15,14 @@
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+  <ValidWordList :validWords/>
+
 </template>
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
+import ValidWordList from '@/components/ValidWordList.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
