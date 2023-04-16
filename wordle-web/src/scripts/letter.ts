@@ -6,14 +6,14 @@ export enum LetterStatus {
     Wrong
 }
 export class Letter {
-    letter: string;
+    char: string;
     status: LetterStatus = 0;
 
-    constructor(letter: string) {
-        this.letter = letter;
+    constructor(char: string) {
+        this.char = char.toUpperCase();
     }
 
-    public getColor(): string {
+    get color() {
         switch (this.status) {
             case LetterStatus.Correct:
                 return "green";

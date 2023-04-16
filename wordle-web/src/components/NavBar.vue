@@ -1,13 +1,21 @@
 <template>
     <v-toolbar :elevation="4">
 
-        <template v-slot:prepend>
+        <template v-slot:append>
           <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
 
-        <v-app-bar-title> Word War 1 </v-app-bar-title>
+        <template v-slot:prepend >
+                <v-btn icon to="/">
+                    <v-icon size="x-large">mdi-earth</v-icon>
+                </v-btn>
+        </template>
+
+        <v-app-bar-title @click="$router.push('/')"> 
+            Word War 1
+        </v-app-bar-title>
         
-        <v-navigation-drawer app v-model="drawer"  rail rail-width="30px" location="left" temporary>
+        <v-navigation-drawer app v-model="drawer"  rail rail-width="30px" location="right" temporary>
             <v-list>
                 <v-list-item>
                 <template v-slot:prepend>
@@ -25,7 +33,7 @@
                     </RouterLink>
                 </v-list-item>
                 <v-list-item>
-                    <RouterLink to="/game">
+                    <RouterLink to="/wordle">
                         <v-btn class="neon-button">Game</v-btn>
                     </RouterLink>
                 </v-list-item>
@@ -58,6 +66,20 @@ export default {
         color: hsl(317, 100%, 55%);
         transform: scale(1.5);
     }
+
+    .v-app-bar-title {
+        cursor: pointer;
+        color: hsl(112, 100%, 49%);
+        font-size: 1.7rem;
+        text-decoration: underline;
+        transform: translateY(-.1rem);
+    }
+
+    .v-list{    
+        display: flex;
+        flex-direction: column;
+    }
+    
     .neon-button {
         color: hsl(317, 100%, 55%);
 
