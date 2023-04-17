@@ -9,9 +9,9 @@
     </v-row>
   </div>
 
-  <v-text-field v-model="guess" @input="guess = guess.toUpperCase()" label="Guess" variant="solo"></v-text-field>
+  <v-text-field v-model="guess" class="mt-5" @input="guess = guess.toUpperCase()" label="Guess" variant="solo"></v-text-field>
 
-  <v-btn @click="checkGuess">Submit</v-btn>
+  <v-btn color="primary" @click="checkGuess">Submit</v-btn>
 
   <h3> Your guess: [{{ guess.toUpperCase() }}]</h3>
   <h3> Secret word: [{{ game.secretWord.toUpperCase() }}]</h3>
@@ -33,9 +33,3 @@
   
 
 </script>
-
-<style scoped>
-.v-text-field {
-  margin-top: 2rem;
-}
-</style>

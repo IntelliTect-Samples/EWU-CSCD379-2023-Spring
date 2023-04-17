@@ -2,16 +2,16 @@
     <v-toolbar :elevation="4">
 
         <template v-slot:append>
-          <v-app-bar-nav-icon size="x-large" color="light-green-accent-3" @click="drawer = !drawer"></v-app-bar-nav-icon>
+          <v-app-bar-nav-icon size="x-large" color="success" @click="drawer = !drawer"></v-app-bar-nav-icon>
         </template>
 
         <template v-slot:prepend >
                 <v-btn icon to="/">
-                    <v-icon size="x-large">mdi-earth</v-icon>
+                    <v-icon color="success" size="x-large">mdi-earth</v-icon>
                 </v-btn>
         </template>
 
-        <v-app-bar-title color="light-green-accent-3" @click="$router.push('/')"> 
+        <v-app-bar-title @click="$router.push('/')"> 
             Word War 1
         </v-app-bar-title>
         
@@ -93,8 +93,8 @@ import { ref } from "vue";
 import { useTheme } from "vuetify";
 
 const theme = useTheme();
-const myThemes = ["dark", "light", "christmasSweater", "easter"];
-const selectedTheme = ref(myThemes[0])
+const myThemes = ["dark", "light", "ChristmasSweater", "Easter", "Neon"];
+const selectedTheme = ref(myThemes[4])
 
 const setTheme = () => {
   theme.global.name.value = selectedTheme.value;
@@ -122,7 +122,7 @@ const setTheme = () => {
 
     .v-app-bar-title {
         cursor: pointer;
-        color: hsl(112, 100%, 49%);
+        /* color: hsl(112, 100%, 49%); */
         font-size: 1.7rem;
         text-decoration: underline;
         transform: translateY(-.1rem);
