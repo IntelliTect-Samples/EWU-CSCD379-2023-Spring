@@ -9,10 +9,10 @@
 
     <v-btn @click="checkGuess">Check</v-btn>
     <div>
-      <v-row v-for="word in guesses">
-        <v-col v-for="letter in word" :key="letter.letter">
+      <v-row v-for="word in game.guesses" :key="word.text">
+        <v-col v-for="letter in word.letters" :key="letter.char">
           <v-card :color="letter.color">
-            <v-card-title>{{ letter.letter }}</v-card-title>
+            <v-card-title>{{ letter.char }}</v-card-title>
           </v-card>
         </v-col>
       </v-row>
@@ -21,7 +21,7 @@
       <br />
       <h2>Guess: {{ guess }}</h2>
       <br />
-      <h3>Secret Word: {{ secretWord }}</h3>
+      <h3>Secret Word: {{ game.secretWord }}</h3>
     </div>
   </main>
 </template>
