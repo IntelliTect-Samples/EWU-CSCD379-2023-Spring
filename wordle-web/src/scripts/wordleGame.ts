@@ -9,10 +9,10 @@ export class WordleGame {
   secretWord = ''
 
   // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
+    // if (this.letters.length !== secretWord.length) {
+    //   console.log('wrong length')
+    //   return
+    // }
 
   restartGame(secretWord?: string | null) {
     this.secretWord = secretWord || WordsService.getRandomWord()
@@ -23,6 +23,6 @@ export class WordleGame {
     const word = new Word(guess)
     this.guesses.push(word)
     word.check(this.secretWord)
-    WordsService.validWords(word)
+    return WordsService.validWords(word)
   }
 }

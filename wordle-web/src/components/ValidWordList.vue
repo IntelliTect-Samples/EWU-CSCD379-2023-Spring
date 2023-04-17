@@ -1,22 +1,56 @@
 <template>
-    <h3>Available Words</h3>
-    <v-list>
-        <v-list-item v-for="word in validWords" :key="word">
-            <v-list-item-content>
-                <v-list-item-title>{{ word }}</v-list-item-title>
-            </v-list-item-content>
-        </v-list-item>
-    </v-list>
+    <div>
+        <v-chip
+            label
+            class="mx-auto"
+            :clickable="true"
+            @click="showDialog = true"
+            max-width="450"
+            > {{ validWords?.length || 0 }} Valid Words
+        </v-chip>
+        <v-dialog v-model="showDialog" class="mx-auto" max-width="450">
+        <v-card>
+            <v-card-title>Valid Words  </v-card-title>
+                <v-list>
+                    <v-list-item v-for="(word, index) in validWords" :key="word">
+                        <v-btn
+                            @click="selectWord(word)"
+                            :color="selected === index ? 'primary' : 'secondary'"
+                            variant="text"
+                            >{{ word }}
+                        </v-btn>
+                    </v-list-item>
+                </v-list>
+            </v-card>
+        </v-dialog>
+    </div>
 </template>
-
+  
 <script lang="ts">
-
-// import { Word } from '@/scripts/word';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    props: {
-        validWords: Array<string>
-    }
-})
+    import { defineComponent } from 'vue';
+  
+    export default defineComponent({
+        props: {
+            validWords: Array<string>,
+        },
+        data() {
+            return { 
+                showDialog: false, 
+                selected: -1,     
+            };
+        },
+        computed: {
+            wordCount() {
+                return this.validWords.length;
+            }
+        },
+        methods: {
+            selectWord(word: string) {
+                this.selected = word;
+                this.$emit('word-selected', word);
+                this.showDialog = false;
+            }
+        }
+    },
+  );
 </script>
