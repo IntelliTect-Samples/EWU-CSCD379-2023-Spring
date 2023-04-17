@@ -41,6 +41,7 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * [GitHub Actions](https://docs.github.com/en/actions)
 * [GitHub Actions YAML](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
 * [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-7.0) (Potentially)
+* [Azure Deployment Action](https://learn.microsoft.com/en-us/azure/static-web-apps/build-configuration?tabs=github-actions#build-and-deploy)
 
 ## General Information:
 * **Office Hours**: Office hours are available before class on Tuesday's and Thursdays starting at 1 PM. To ensure that an instructor will be available, please schedule an appointment 24-hours beforehand by sending a meeting request email to EWU-Instructors@IntelliTect.com. Alternative times may be available upon request.
