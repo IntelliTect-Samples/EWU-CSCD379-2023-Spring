@@ -13,21 +13,9 @@ import NavBar from '@/components/NavBar.vue'
     </v-main>
     
   </v-app>
-
 </template>
 
 <style scoped>
-
-  
-.v-app {
-  display: flex;
-  flex-direction: column;
-
-  min-height: 100vh;
-  width: auto;
-  text-align: center;
-}
-
 .v-main {
   align-self: center;
   padding: 3rem 3rem;
