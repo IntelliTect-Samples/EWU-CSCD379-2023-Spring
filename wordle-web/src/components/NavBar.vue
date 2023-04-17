@@ -122,7 +122,7 @@ const setTheme = () => {
 
     .v-app-bar-title {
         cursor: pointer;
-        /* color: hsl(112, 100%, 49%); */
+        color: rgb(118,255,3);
         font-size: 1.7rem;
         text-decoration: underline;
         transform: translateY(-.1rem);
