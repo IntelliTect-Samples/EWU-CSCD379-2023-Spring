@@ -11,6 +11,10 @@ export abstract class WordsService {
     //Todo
     let newList = new Array<string>()
 
+    if(word == ''){
+      return newList
+    }
+
     this.#words.forEach(element => {
       if(element.startsWith(word)){
         newList.push(element)
