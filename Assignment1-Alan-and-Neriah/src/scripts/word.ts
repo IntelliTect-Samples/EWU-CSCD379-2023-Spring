@@ -3,9 +3,34 @@ import { Letter, LetterStatus } from './letter'
 export class Word {
   public letters: Array<Letter> = []
 
-  constructor(word: string) {
-    for (let i = 0; i < word.length; i++) {
-      this.letters.push(new Letter(word[i]))
+  constructor(word?: string|null, numberofLetters: number = 5) {
+    if(word){
+      for (const letter of word) {
+        this.push(letter)
+      }
+    }else{
+      for (let i = 0; i < numberofLetters; i++) {
+        const letter = new Letter()
+        this.letters.push(letter)
+      }
+    }
+  }
+
+  push(letter: string) {
+    for (let i = 0; i < this.letters.length; i++) {
+      if (this.letters[i].letter === '') {
+        this.letters[i] = new Letter(letter)
+        break
+      }
+    }
+  }
+
+  pop(){
+    for (let i = this.letters.length - 1; i >= 0; i--) {
+      if (this.letters[i].letter !== '') {
+        this.letters[i] = new Letter()
+        break
+      }
     }
   }
 

@@ -11,8 +11,12 @@ export class WordGame {
   guesses = new Array<Word>()
   secret = ''
 
-  restartGame(secret?: string | null) {
+  restartGame(secret?: string | null, numberOfGuesses: number =6) {
     this.guesses.splice(0)
+    for (let i = 0; i < numberOfGuesses; i++) {
+      const word = new Word('')
+      this.guesses.push(new Word())
+    }
     this.secret = secret || WordService.getRandomWord()
   }
 

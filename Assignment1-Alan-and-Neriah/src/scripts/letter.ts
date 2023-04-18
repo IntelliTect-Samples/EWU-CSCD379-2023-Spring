@@ -9,8 +9,9 @@ export class Letter {
   public letter: string
   public status: LetterStatus = LetterStatus.notGuessed
 
-  constructor(letter: string) {
-    this.letter = letter
+  constructor(letter?: string | undefined, status?: LetterStatus | undefined) {
+    this.letter = letter ?? ''
+    this.status = status ?? LetterStatus.notGuessed
   }
 
   get color() {
