@@ -1,6 +1,4 @@
-import { Letter, LetterStatus } from '@/scripts/letter'
 import { Word } from '@/scripts/word'
-import { ref, reactive } from 'vue'
 import { WordsService } from './wordsService'
 
 export class WordleGame {
