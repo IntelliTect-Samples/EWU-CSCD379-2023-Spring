@@ -19,14 +19,35 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
+onMounted() => {
+  window.addEventListener('keyup', keyPress)
+}
+onUnmounted() => {
+  window.removeEventListener('keyup', keyPress)
+}
+
+function keyPress(e KeyboardEvent) {
+  if (e.key.length == 1) {
+    guess.value += e.key
+  }
+
+  if(e.key === 'Enter') {
+    this.checkGuess()
+  }
+
+  if(e.key === 'Backspace') {
+    game.currentGuess.pop()
+  }
+}
+
 function checkGuess() {
-  game.submitGuess(guess.value)
+  game.submitGuess()
 }
 
 //<h3>{{ game.secretWord }}</h3>

@@ -7,6 +7,7 @@ export class WordleGame {
   constructor(secretWord?: string | null) {
     this.restartGame(secretWord)
   }
+  currentGuessIndex = 0
   guesses = new Array<Word>()
   secretWord = ''
 
@@ -19,15 +20,17 @@ export class WordleGame {
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
-    
+
     for(let i = 0; i < 6; i++){
       const word = new Word();
     }    
   }
 
-  submitGuess(guess: string) {
-    const word = new Word(guess)
-    this.guesses.push(word)
-    word.check(this.secretWord)
+  get currentGuess() {
+    return this.guesses[this.currentGuessIndex]
+  }
+
+  submitGuess() {
+    this.currentGuess.check(this.secretWord)
   }
 }
