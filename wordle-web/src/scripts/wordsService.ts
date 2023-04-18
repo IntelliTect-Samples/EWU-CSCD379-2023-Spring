@@ -9,6 +9,10 @@ export abstract class WordsService {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
 
+  static getFullList(): string[] {
+    return this.#words
+  }
+
   static validWords(guess: Word): string[] {
     const correctLetterList = this.#words.filter(listword => 
         {

@@ -21,6 +21,11 @@
         <v-app-bar-nav-icon>
           <LeaderBoard></LeaderBoard>
         </v-app-bar-nav-icon>
+
+        <!-- Settings -->
+        <v-app-bar-nav-icon>
+            <v-icon>mdi-hamburger</v-icon>
+        </v-app-bar-nav-icon>
       </v-app-bar>
     </nav>
   </template>

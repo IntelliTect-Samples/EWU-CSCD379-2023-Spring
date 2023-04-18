@@ -13,11 +13,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { VBtn } from "vuetify/components/VBtn";
+
 
 export default defineComponent({
-  components: {
-    VBtn
-  },
-});
+  components: {}});
 </script>

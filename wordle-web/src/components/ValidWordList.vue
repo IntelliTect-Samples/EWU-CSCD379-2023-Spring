@@ -1,11 +1,11 @@
 <template>
     <div>
         <v-chip
+            color="green-lighten-2"
+            append-icon="mdi-magnify"
             label
-            class="mx-auto"
             :clickable="true"
             @click="showDialog = true"
-            max-width="450"
             > {{ validWords?.length || 0 }} Valid Words
         </v-chip>
         <v-dialog v-model="showDialog" class="mx-auto" max-width="450">
@@ -41,7 +41,7 @@
         },
         computed: {
             wordCount() {
-                return this.validWords.length;
+                return this.validWords?.length;
             }
         },
         methods: {
