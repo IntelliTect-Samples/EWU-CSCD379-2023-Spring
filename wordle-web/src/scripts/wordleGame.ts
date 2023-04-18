@@ -3,6 +3,12 @@ import { Word } from '@/scripts/word'
 import { ref, reactive } from 'vue'
 import { WordsService } from './wordsService'
 
+export enum WordleGameStatus {
+  Active = 0, 
+  Won = 1, 
+  Lost = 2
+}
+
 export class WordleGame {
   constructor(secretWord?: string | null) {
     this.restartGame(secretWord)
@@ -10,6 +16,7 @@ export class WordleGame {
   currentGuessIndex = 0
   guesses = new Array<Word>()
   secretWord = ''
+  status = 
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -28,9 +35,11 @@ export class WordleGame {
 
   get currentGuess() {
     return this.guesses[this.currentGuessIndex]
+    
   }
 
   submitGuess() {
     this.currentGuess.check(this.secretWord)
+    
   }
 }
