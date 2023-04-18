@@ -1,7 +1,7 @@
 import { WordService } from '@/scripts/wordService'
 import { Word } from '@/scripts/word'
-import { Letter, LetterStatus } from '@/scripts/letter'
-import { ref, reactive } from 'vue'
+//import { Letter, LetterStatus } from '@/scripts/letter'
+//import { ref, reactive } from 'vue'
 
 export class WordGame {
   constructor(secret?: string | null) {
