@@ -3,11 +3,22 @@
     <br />
     <h1>Wordle Mind Bender</h1>
     <br />
-      <v-text-field v-model="guess" label="Guess" variant="solo" @input="getValidGuesses" bg-color="blue-grey-darken-4"></v-text-field>
+    <v-text-field
+      v-model="guess"
+      label="Guess"
+      variant="solo"
+      @input="getValidGuesses"
+      bg-color="blue-grey-darken-4"
+    ></v-text-field>
 
-      <v-select v-model="guess" :items="validGuesses" :label="'Valid Guesses: ' + validGuesses.length" bg-color="blue-grey-darken-4" >
-        <v-hover></v-hover>
-      </v-select>
+    <v-select
+      v-model="guess"
+      :items="validGuesses"
+      :label="'Valid Guesses: ' + validGuesses.length"
+      bg-color="blue-grey-darken-4"
+    >
+      <v-hover></v-hover>
+    </v-select>
     <br />
 
     <v-btn @click="checkGuess">Check</v-btn>
