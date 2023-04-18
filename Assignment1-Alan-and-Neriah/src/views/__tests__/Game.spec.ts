@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import Game from '../Game.vue'
+import Game from '../GameView.vue'
 
 describe('Game', () => {
   it('renders properly', () => {
