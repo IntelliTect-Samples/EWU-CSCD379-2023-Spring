@@ -23,16 +23,28 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * Good grasp of programming theory: OOP, data structures, etc.
 
 ## Tech Stack References
+
+### Front End
 * [VueJs 3](https://vuejs.org/)
 * [VuetifyJs 3](https://vuetifyjs.com/en/)
-* [TypeScript](https://www.typescriptlang.org/docs/)
-* [Jest](https://jestjs.io/)
+* [TypeScript](https://www.typescriptlang.org/docs/) ([Style Guide](https://google.github.io/styleguide/tsguide.html))
+* [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
+
+### Back End
+* [.NET](https://dotnet.microsoft.com/en-us/)
+* [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) ([Essential C# Web Site](https://essentialcsharp.com/home))
 * [ASP.NET 7.0](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-7.0)
-* [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-7.0) (Potentially)
+* [Entity Framework 7](https://learn.microsoft.com/en-us/ef)
+* [ASP.NET Core Identity](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=visual-studio)
+
+### DevOps
 * [Azure](https://docs.microsoft.com/en-us/azure/?product=popular)
 * [Azure AppService](https://docs.microsoft.com/en-us/azure/app-service/)
 * [Azure SQL](https://docs.microsoft.com/en-us/azure/azure-sql/)
+* [GitHub Actions](https://docs.github.com/en/actions)
+* [GitHub Actions YAML](https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions)
+* [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-7.0) (Potentially)
 
 ## General Information:
 * **Office Hours**: Office hours are available before class on Tuesday's and Thursdays starting at 1 PM. To ensure that an instructor will be available, please schedule an appointment 24-hours beforehand by sending a meeting request email to EWU-Instructors@IntelliTect.com. Alternative times may be available upon request.
@@ -58,7 +70,13 @@ The course work will be cross-platform. However, in class the instructors will b
 - [GitHub Student Developer Pack](https://education.github.com/students) Lots of great development tools and resources. The JetBrains products ReSharper (a plugin for Visual Studio), and Rider (a full C# IDE) are great tools for helping you write better code. 
 
 ### VS Code Extensions used in class ###
-- [JEST](https://marketplace.visualstudio.com/items?itemName=Orta.vscode-jest) Unit testing extension
+- [Vitest](https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer) Unit testing extension
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) code formatting extension
-- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur) Vue tooling
+- [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) Vue tooling
 - [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
+
+### Troubleshooting issues in VS Code
+- Make sure you run `npm i` or `npm ci`
+- Make sure all the extensions are installed
+- Restart VS Code
+- Pull the repo again and see if the unmodified version works
