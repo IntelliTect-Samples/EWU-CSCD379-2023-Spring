@@ -16,9 +16,13 @@ export class WordleGame {
   //     return
   //   }
 
-  restartGame(secretWord?: string | null) {
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
+    
+    for(let i = 0; i < 6; i++){
+      const word = new Word();
+    }    
   }
 
   submitGuess(guess: string) {
