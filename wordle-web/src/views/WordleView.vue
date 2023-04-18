@@ -6,6 +6,7 @@
   <div>
     <v-row v-for="word in game.guesses" :key="word.text">
       <v-col v-for="letter in word.letters" :key="letter.char">
+        <LetterButton :letter="letter"></LetterButton>
         <v-btn :color="letter.color">
           {{ letter.char }}
         </v-btn>
@@ -18,6 +19,7 @@
 </template>
 
 <script setup lang="ts">
+import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
 
