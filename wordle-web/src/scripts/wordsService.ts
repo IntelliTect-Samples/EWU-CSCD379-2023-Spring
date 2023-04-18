@@ -11,15 +11,15 @@ export abstract class WordsService {
     //Todo
     let newList = new Array<string>()
 
-    if(word == ''){
+    if (word == '') {
       return newList
     }
 
-    this.#words.forEach(element => {
-      if(element.startsWith(word)){
+    this.#words.forEach((element) => {
+      if (element.startsWith(word)) {
         newList.push(element)
       }
-    });
+    })
 
     return newList
   }
