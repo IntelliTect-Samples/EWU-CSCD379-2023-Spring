@@ -1,16 +1,50 @@
 <script setup lang="ts">
-// import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-import logo from '@/assets/Xela_Games.png'
+import { RouterLink, RouterView } from 'vue-router'
+import logo from '@/assets/Xela_Games_Logo.png'
+</script>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      drawer: false,
+      dialog: false
+    }
+  }
+}
 </script>
 
 <template>
   <header>
-    <img alt="Xela Games Logo" class="logo" :src="logo" width="200" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-<!-- 
+      <v-card>
+        <v-layout>
+          <v-app-bar color="#5439AA">
+            <RouterLink to="/"
+              ><img id="XelaLogo" alt="Xela Games Logo" class="logo" :src="logo" width="60"
+            /></RouterLink>
+            <v-app-bar-title
+              ><RouterLink color="#ffffff" to="/">Xela Games</RouterLink></v-app-bar-title
+            >
+
+            <v-btn>
+              <v-icon size="25px" icon="mdi:mdi-cog" />
+            </v-btn>
+
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+          </v-app-bar>
+
+          <v-navigation-drawer v-model="drawer" temporary location="end">
+            <v-list density="compact" nav>
+              <v-list-item title="Home" value="home" to="/"></v-list-item>
+              <v-list-item title="About" value="about" to="/about"></v-list-item>
+              <v-list-item title="Game" value="game" to="/game"></v-list-item>
+              <v-list-item title="Wordle" value="wordle" to="/wordle"></v-list-item>
+            </v-list>
+          </v-navigation-drawer>
+        </v-layout>
+      </v-card>
+      <!-- 
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
@@ -23,13 +57,14 @@ import logo from '@/assets/Xela_Games.png'
   <RouterView />
 </template>
 
-<style scoped>
+<!-- <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
 }
 
 .logo {
+  place-content: space-around start;
   display: block;
   margin: 0 auto 2rem;
 }
@@ -71,18 +106,18 @@ nav a:first-of-type {
   }
 
   header .wrapper {
-    display: flex;
+    display: fle;
     place-items: flex-start;
     flex-wrap: wrap;
   }
 
-  nav {
+  /* nav {
     text-align: left;
     margin-left: -1rem;
     font-size: 1rem;
 
     padding: 1rem 0;
     margin-top: 1rem;
-  }
+  } */
 }
-</style>
+</style> -->
