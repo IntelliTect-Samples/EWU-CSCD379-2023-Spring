@@ -26,6 +26,15 @@ jobs:
       - run: npm ci
         working-directory: ./Assignment1-Alan-and-Neriah
         name: npm ci
+      - name: Lint Code
+        working-directory: ./Assignment1-Alan-and-Neriah
+        run: npm run lint
+      - name: prettier check
+        working-directory: ./Assignment1-Alan-and-Neriah
+        run: npm run format:check
+      - name: build vue app
+        working-directory: ./Assignment1-Alan-and-Neriah
+        run: npm run build
       - run: npm run test:unit
         working-directory: ./Assignment1-Alan-and-Neriah
         name: Run Vitest Unit Tests
