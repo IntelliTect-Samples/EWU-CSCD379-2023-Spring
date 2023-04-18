@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import Para from '../components/Para.vue'
+import Para from '../components/MainPara.vue'
 </script>
 
 <template>
-  <main>
     <Para title="Games" body="From little kids to old people, it's almost universal... Everybody loves games! Play and enjoy!" />
     <v-card>
       <v-card-title>Wordle-but-a-little-to-the-left</v-card-title>
@@ -17,7 +16,6 @@ import Para from '../components/Para.vue'
         <v-btn text color="primary">Play Now!</v-btn>
       </v-card-actions>
     </v-card>
-  </main>
 </template>
 
 <style>

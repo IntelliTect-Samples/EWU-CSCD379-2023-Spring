@@ -5,6 +5,6 @@ export default {
 </script>
 
 <template>
-  <h2>{{ title }}</h2>
+  <h1>{{ title }}</h1>
   <p>{{ body }}</p>
 </template>

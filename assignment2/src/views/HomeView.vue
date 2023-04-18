@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Para from '../components/Para.vue'
+import Para from '../components/MainPara.vue'
 </script>
 
 <template>

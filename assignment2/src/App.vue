@@ -3,43 +3,34 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <header>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/game">Game(s)</RouterLink>
-    </nav>
-  </header>
+  <nav>
+    <v-btn prepend-icon="mdi-castle" variant="plain" to="/"> Wordle </v-btn>
+    <v-btn icon="mdi-menu" variant="plain" to="/game" class="right"></v-btn>
+    <v-btn icon="mdi-cog" variant="plain" to="/game" class="right"></v-btn>
+  </nav>
 
   <RouterView />
 </template>
 
 <style scoped>
-    header{
+    nav {
       position: fixed;
       top: 0;
-      width: 100%;
+      left: 9%;
+      width: 82%;
+      border-bottom: 1px solid white;
+      padding-top: 1rem;
+      padding-bottom: .25rem;
     }
-    /* nav {
-      width: 100%;
-      font-size: 12px;
-      text-align: center;
-    }
-    nav a.router-link-exact-active {
+    nav a {
+      font-size: 1.5rem;
       color: orangered;
-    }
-    nav a.router-link-exact-active:hover {
-      background-color: black;
+      /*border-radius: 10%;*/
     }
     nav a:hover {
       background-color: black;
     }
-    nav a {
-      color: orangered;
-      display: inline-block;
-      padding: 0 1rem;
-      border-left: 1px solid var(--color-border);
+    .right{
+      float: right;
     }
-    nav a:first-of-type {
-      border: 0;
-    } */
 </style>
