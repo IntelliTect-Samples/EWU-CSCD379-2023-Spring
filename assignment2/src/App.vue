@@ -14,11 +14,15 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style scoped>
-    nav {
+    header{
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+    /* nav {
       width: 100%;
       font-size: 12px;
       text-align: center;
-      margin-top: 2rem;
     }
     nav a.router-link-exact-active {
       color: orangered;
@@ -37,5 +41,5 @@ import { RouterLink, RouterView } from 'vue-router'
     }
     nav a:first-of-type {
       border: 0;
-    }
+    } */
 </style>
