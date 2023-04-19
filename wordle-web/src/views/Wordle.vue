@@ -9,27 +9,31 @@
     </v-row>
   </div>
 
-  <v-text-field v-model="guess" class="mt-5" @input="guess = guess.toUpperCase()" label="Guess" variant="solo"></v-text-field>
+  <v-text-field
+    v-model="guess"
+    class="mt-5"
+    @input="guess = guess.toUpperCase()"
+    label="Guess"
+    variant="solo"
+  ></v-text-field>
 
   <v-btn color="primary" @click="checkGuess">Submit</v-btn>
-
-  <h3> Your guess: [{{ guess.toUpperCase() }}]</h3>
-  <h3> Secret word: [{{ game.secretWord.toUpperCase() }}]</h3>
+  <v-container>
+    <div>Your guess: [{{ guess.toUpperCase() }}]</div>
+    <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-  import { WordleGame } from '@/scripts/wordleGame'
-  import { reactive } from 'vue';
-  import { ref } from 'vue';
+import { WordleGame } from '@/scripts/wordleGame'
+import { reactive, ref } from 'vue'
 
-  const guess = ref('')
-  const game = reactive(new WordleGame())
+const guess = ref('')
+const game = reactive(new WordleGame())
 
-  console.log(game.secretWord)
+console.log(game.secretWord)
 
-  function checkGuess() {
-    game.submitGuess(guess.value)
-  }
-  
-
+function checkGuess() {
+  game.submitGuess(guess.value)
+}
 </script>
