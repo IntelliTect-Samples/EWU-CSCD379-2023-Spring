@@ -3,22 +3,42 @@ import { Letter, LetterStatus } from './letter'
 export class Word {
   public letters = Array<Letter>()
 
-  constructor(word?: string | null) {
+  constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
       // add word letters to array
       for (const letter of word) {
         this.letters.push(new Letter(letter))
       }
+    } else { 
+    // add empty letters to array
+    for (let i = this.letters.length; i < numberOfLetters; i++) {
+      this.letters.push(new Letter())
     }
+  }
   }
 
   get text() {
     return this.letters.map((l) => l.char).join('')
   }
 
-  push(letter: Letter) {
-    this.letters.push(letter)
+  push(char: string) {
+    for (const letter of this.letters) {
+      if (letter.char === '') {
+        letter.char = char
+        break
+      }
+    }
   }
+    // // removes the last letter from the array, traverses array backwards
+    // pop() {
+    //   for (let i = this.letters.length - 1; i >= 0; i--) {
+    //     if (this.letters[i].char !== '') {
+    //       this.letters[i].char = ''
+    //       break
+    //     }
+    //   }
+    // }
+  
 
   check(secretWord: string): boolean {
     console.log(this.text)

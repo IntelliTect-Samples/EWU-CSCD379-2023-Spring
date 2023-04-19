@@ -1,6 +1,12 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 
+export enum WordleGameStatus {
+  Active,
+  Won,
+  Lost
+}
+
 export class WordleGame {
   constructor(secretWord?: string | null) {
     this.restartGame(secretWord)
@@ -9,14 +15,17 @@ export class WordleGame {
   secretWord = ''
 
   // // check length of guess
-    // if (this.letters.length !== secretWord.length) {
-    //   console.log('wrong length')
-    //   return
-    // }
+  // if (this.letters.length !== secretWord.length) {
+  //   console.log('wrong length')
+  //   return
+  // }
 
-  restartGame(secretWord?: string | null) {
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
+    for (let i = 0; i < 6; i++) {
+     const word = new Word(''); 
+    }
   }
 
   submitGuess(guess: string) {

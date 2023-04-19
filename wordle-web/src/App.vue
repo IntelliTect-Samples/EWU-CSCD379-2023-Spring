@@ -7,11 +7,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import router from "./router";
+import { defineComponent } from 'vue'
+import router from './router'
 
-export default defineComponent({});
+export default defineComponent({})
 </script>
-
-
-

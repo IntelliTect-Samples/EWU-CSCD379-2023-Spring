@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout Code 
-      - uses: actions/setup-node@v3
-        name: Setup Node
+      - name: Checkout Code 
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
       - run: npm ci
