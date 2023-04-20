@@ -1,0 +1,86 @@
+<template>
+    <div class = 'headerBar'>
+      <v-card>
+        <v-layout>
+          <v-app-bar elevation = '2'>
+
+            <v-btn to = '/'>
+              <v-icon>mdi-axis</v-icon>
+            </v-btn>
+            <v-app-bar-title>
+              <RouterLink to = '/'>
+                A Play on Wordle
+              </RouterLink>
+            </v-app-bar-title>
+
+            <template v-slot:append>
+              <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            </template>
+
+          </v-app-bar>
+
+          <v-navigation-drawer location = 'right' v-model = "drawer" elevation = '1'>
+            <v-list-item-group>
+                <v-list-item>
+                    <RouterLink to = '/' @click = 'drawer = false'>Home</RouterLink>
+                </v-list-item>
+                <v-list-item>
+                    <RouterLink to = '/wordle' @click = 'drawer = false'>Wordle Game</RouterLink>
+                </v-list-item>
+                <v-list-item>
+                    <RouterLink to = '/about' @click = 'drawer = false'>About</RouterLink>
+                </v-list-item>
+            </v-list-item-group>
+          </v-navigation-drawer>
+
+        </v-layout>
+      </v-card>
+    </div>
+</template>
+
+<script lang = 'ts'>
+export default {
+    data: () => ({
+        drawer: false
+    })
+}
+</script>
+
+<style scoped>
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  text-decoration: underline;
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
+}
+</style>
