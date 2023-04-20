@@ -72,18 +72,33 @@ describe('validWords', () => {
     // ---------------------------
     // ^^^^^idea seems to work^^^^^
   })
-  describe('validWords', () => {
-    it('Filters Incorrect Words From WordList test 3, double letter WordList word vs single letter guess word', () => {
-      // Arrange
-      const GuessWord = new Word('pales')//<-----validation : m m m m w
-      const secretWord = 'apple'
-      const wordList: string[] = ['apple']
-  
-      // Act
-      GuessWord.check(secretWord)
-      const newList = WordsService.validWords(GuessWord, wordList)
-      //Assert
-      expect(newList).toStrictEqual(['apple'])//<------correct
-    })
+})
+
+describe('validWords', () => {
+  it('Filters Incorrect Words From WordList test 3, double letter WordList word vs single letter guess word', () => {
+    // Arrange
+    const GuessWord = new Word('pales')//<-----validation : m m m m w
+    const secretWord = 'apple'
+    const wordList: string[] = ['apple']
+
+    // Act
+    GuessWord.check(secretWord)
+    const newList = WordsService.validWords(GuessWord, wordList)
+    //Assert
+    expect(newList).toStrictEqual(['apple'])//<------correct
+  })
+})
+describe('validWords', () => {
+  it('Filters Incorrect Words From WordList test 4, run against full wordList', () => {
+    // Arrange
+    const GuessWord = new Word('pales')//<-----validation : m m m m w
+    const secretWord = 'apple'
+    const wordList: string[] = WordsService.getWordList
+
+    // Act
+    GuessWord.check(secretWord)
+    const newList = WordsService.validWords(GuessWord, wordList)
+    //Assert
+    expect(newList).toStrictEqual(['apple'])
   })
 })
