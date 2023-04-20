@@ -1,13 +1,13 @@
 <template>
     <v-row dense v-for="(key, i) in keyboardLetters" :key="i">
-        <v-col cols="auto" v-for="char in key" :key="char">
+        <v-col cols="auto" v-for="(char, j) in key" :key="j">
             <LetterButton :letter="new Letter(char)" @click="letterClick(new Letter(char))" />
         </v-col>
     </v-row>
 </template>
 
 <script setup lang="ts">
-import type { Letter } from '@/scripts/letter';
+import { Letter } from '@/scripts/letter';
 
 
 const keyboardLetters = [
@@ -23,4 +23,5 @@ const emits = defineEmits<{
 function letterClick(letter: Letter) {
     emits('letterClick', letter)
 }
+
 </script>

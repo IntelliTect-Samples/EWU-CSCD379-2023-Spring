@@ -1,10 +1,10 @@
 // Class that represents a letter in the wordle word and status
 // of the letter in the wordle word
 export enum LetterStatus {
-  NotGuessed = 0,
-  Correct = 1,
-  Misplaced = 2,
-  Wrong = 3
+  Correct = 0,
+  Misplaced = 1,
+  Wrong = 2,
+  NotGuessed = 3
 }
 
 export class Letter {

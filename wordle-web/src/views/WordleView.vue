@@ -7,9 +7,7 @@
   </v-container>
   </div>
 
-  <v-container>
-    <KeyBoard @letterClick="addChar"/>
-  </v-container>
+  <KeyBoard @letterClick="addChar"/>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
