@@ -13,13 +13,14 @@
       </v-col>
     </v-row>
   </div>
-
+  <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -31,7 +32,7 @@ onMounted() => {
 onUnmounted() => {
   window.removeEventListener('keyup', keyPress)
 }
-
+/*
 function keyPress(e KeyboardEvent) {
   if (e.key.length == 1) {
     guess.value += e.key
@@ -49,6 +50,30 @@ function keyPress(e KeyboardEvent) {
 function checkGuess() {
   game.submitGuess()
 }
+*/
+
+function checkGuess() {
+  game.submitGuess()
+  guess.value = ''
+}
+
+function letterClick(letter: Letter, event: MouseEvent) {
+  guess.value += letter.char
+  console.log(event.altKey)
+}
+
+function keyPress(event: KeyboardEvent) {
+  console.log(event.key)
+  if (event.key === 'Enter') {
+    checkGuess()
+  } else if (event.key === 'Backspace') {
+    guess.value = guess.value.slice(0, -1)
+    game.guess.pop()
+    console.log('Back')
+  } else if (event.key.length === 1 && event.key !== ' ') {
+    guess.value += event.key.toLowerCase()
+    game.guess.push(event.key.toLowerCase())
+  }
 
 //<h3>{{ game.secretWord }}</h3>
 </script>
