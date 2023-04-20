@@ -24,20 +24,21 @@ export class Word {
   }
 
   push(char: string) {
-    for(const letter of this.letters) {
-      if(letter.char === '') {
+    // Find the first empty letter and replace it
+    for (const letter of this.letters) {
+      if (letter.char === '') {
         letter.char = char
-        break
+        return
       }
     }
   }
 
+  // Remove the last letter
   pop() {
-    //removes last letter, traverses array backwards
-    for(let i = this.letters.length - 1; i >= 0; i--){
-      if(this.letters[i].char !== '') {
+    for (let i = this.letters.length - 1; i >= 0; i--) {
+      if (this.letters[i].char !== '') {
         this.letters[i].char = ''
-        break
+        return
       }
     }
   }

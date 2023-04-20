@@ -1,9 +1,9 @@
 <template>
   <main>
-    <p>Welcome to Nick Parkman's 'Wordle Redux?'!</p>
+    <TheWelcome />
   </main>
 </template>
 
 <script setup lang="ts">
-//import TheWelcome from '../components/TheWelcome.vue'
+import TheWelcome from '../components/TheWelcome.vue'
 </script>
