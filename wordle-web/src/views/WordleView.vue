@@ -3,12 +3,12 @@
   <h1>A play on wordle</h1>
   <div>
     <v-container>
-      <GameBoard :game="game"/>
+      <GameBoard :game="game" @letterClick="addChar"/>
   </v-container>
   </div>
 
   <v-container>
-    <keyBoard></keyBoard>
+    <KeyBoard @letterClick="addChar"/>
   </v-container>
 
   <h2>{{ guess }}</h2>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import keyBoard from '@/components/KeyBoard.vue'
+import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
