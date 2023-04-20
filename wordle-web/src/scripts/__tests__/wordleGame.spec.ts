@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { Letter, LetterStatus } from '@/scripts/letter'
+import { LetterStatus } from '@/scripts/letter'
 import { Word } from '@/scripts/word'
 
 describe('Word', () => {
