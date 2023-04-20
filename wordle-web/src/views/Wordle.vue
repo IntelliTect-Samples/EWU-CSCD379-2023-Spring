@@ -1,13 +1,13 @@
 <template>
   <h1>Wordle Redux?</h1>
-  <v-text-field 
-    v-model="guess" 
-    label="Guess" 
+  <v-text-field
+    v-model="guess"
+    label="Guess"
     variant="solo"
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess">Check</v-btn>
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
   <div>
     <v-row v-for="word in game.guesses" :key="word.text">
       <v-col v-for="letter in word.letters" :key="letter.char">
@@ -15,6 +15,7 @@
       </v-col>
     </v-row>
   </div>
+
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
@@ -46,25 +47,6 @@ watch(
   },
   { flush: 'post' }
 )
-/*
-function keyPress(e KeyboardEvent) {
-  if (e.key.length == 1) {
-    guess.value += e.key
-  }
-
-  if(e.key === 'Enter') {
-    this.checkGuess()
-  }
-
-  if(e.key === 'Backspace') {
-    game.currentGuess.pop()
-  }
-}
-
-function checkGuess() {
-  game.submitGuess()
-}
-*/
 
 function checkGuess() {
   game.submitGuess()
@@ -88,5 +70,6 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+  //event.preventDefault()
 }
 </script>
