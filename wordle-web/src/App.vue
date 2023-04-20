@@ -1,112 +1,28 @@
 <template>
   <header>
-    
     <div class="wrapper">
-
-      <v-card
-    class="mx-auto"
-    max-width="500"
-    variant="outlined"
-    width="30vw"
-    height="20vh"
-  >
-    <v-card-item>
-      <div>
-        <div class="text-h6 mb-5">
-          Wordle from wish(for now)
-        </div>
-        <div class="text-caption">Are you ready to get dictionarical?</div>
-      </div>
-    </v-card-item>
-
-    <v-card-actions>
-      <v-btn variant="outlined">
-        <RouterLink to="/">Home</RouterLink>
-      </v-btn>
-      <v-btn variant="outlined">
-        <RouterLink to="/game">Game</RouterLink>
-      </v-btn>
-      <v-btn variant="outlined">
-        <RouterLink to="/about">About</RouterLink>
-      </v-btn>
-      
-    </v-card-actions>
-  </v-card>
-     
-
       <nav>
-        
-
- 
+        <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
+        <RouterLink to="/about">About</RouterLink>
       </nav>
+      <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
+      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
     </div>
   </header>
 
   <RouterView />
 </template>
 
+<script setup lang="ts">
+import { useTheme } from 'vuetify/lib/framework.mjs'
 
+const theme = useTheme()
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+function setInverseTheme() {
+  theme.global.name.value = 'inverse'
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+function setDarkTheme() {
+  theme.global.name.value = 'dark'
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style>
+</script>
