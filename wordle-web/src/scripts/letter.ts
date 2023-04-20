@@ -9,8 +9,9 @@ export class Letter {
   char: string
   status: LetterStatus = 0
 
-  constructor(char: string) {
+  constructor(char: string = '', status?: LetterStatus) {
     this.char = char.toUpperCase()
+    this.status = status ?? LetterStatus.NotGuessed
   }
 
   get color() {
