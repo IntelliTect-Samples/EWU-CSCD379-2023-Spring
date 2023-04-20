@@ -1,5 +1,5 @@
-import { Word } from './word'
-import { Letter, LetterStatus } from './letter'
+import type { Word } from './word'
+import { Letter, LetterStatus } from "./letter"
 
 export abstract class WordsService {
   static getRandomWord(): string {
@@ -9,49 +9,54 @@ export abstract class WordsService {
   static isValidWord(word: string): boolean {
     return this.#words.includes(word)
   }
+  
 
-  static validWords(GuessedWord: Word, wordList: string[]): string[] {
-    const guessedLetters: Letter[] = GuessedWord.letters
+  static validWords(GuessedWord : Word, wordList: string[]): string[] {
+     
+    const guessedLetters : Letter[] = GuessedWord.letters;
+
 
     // Filter out words that are confirmed to be invalid
     return wordList.filter((candidate) => {
-      // For the current word, is it valid?
-      console.log(candidate)
-      // We set is valid to true by default, innocent until proven guilty
-      let isValid: boolean = true
+        // For the current word, is it valid?
+        console.log(candidate)
+        // We set is valid to true by default, innocent until proven guilty
+        let isValid : boolean = true;
 
-      const everyPotentialLetter = candidate.split('')
+        const everyPotentialLetter = candidate.split('')
 
-      everyPotentialLetter.forEach((l1, i1) => {
-        // If the letter is not in the word
-        if (guessedLetters.findIndex((l) => l.char == l1) == -1) {
-          return
-        }
-        // Loop through each letter in the guessed word because it displays the validation information
-        guessedLetters.forEach((l2, i2) => {
-          // if the character in the validation word does not match character in candidate word
-          if (l2.char != l1) {
+        everyPotentialLetter.forEach((l1, i1) => {
+          // If the letter is not in the word
+          if(guessedLetters.findIndex(l => l.char == l1) == -1){
             return
           }
+          // Loop through each letter in the guessed word because it displays the validation information
+          guessedLetters.forEach((l2, i2) => {
+              // if the character in the validation word does not match character in candidate word
+              if(l2.char != l1){
+                return; 
+              }
+            
+              // Thes status of the guessed letter
+              const status : LetterStatus = l2.status; 
 
-          // Thes status of the guessed letter
-          const status: LetterStatus = l2.status
+              // If it's wrong we get set isValid to false and now it will be for certain removed
+              if(status == LetterStatus.Wrong){
 
-          // If it's wrong we get set isValid to false and now it will be for certain removed
-          if (status == LetterStatus.Wrong) {
-            // Remove word from wordList
-            isValid = false
-          }
-
-          // If it's misplaced, if the index are the same, it is for certain incorrect
-          if (status == LetterStatus.Misplaced && i1 == i2) {
-            isValid = false
-          }
-        })
-      })
-      return isValid
-    })
+                // Remove word from wordList
+                isValid = false  
+              }
+              
+              // If it's misplaced, if the index are the same, it is for certain incorrect
+              if(status == LetterStatus.Misplaced && i1 == i2){ 
+                isValid = false
+              } 
+          });
+    });
+        return isValid
+   })
   }
+  
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static #words: string[] = [
@@ -13029,3 +13034,4 @@ export abstract class WordsService {
     'zymic'
   ]
 }
+
