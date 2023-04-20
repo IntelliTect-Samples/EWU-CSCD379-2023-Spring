@@ -12,43 +12,81 @@ export abstract class WordsService {
 
   static validWords(GuessedWord: Word, wordList: string[]): string[] {
     const guessedLetters: Letter[] = GuessedWord.letters
-
     // Filter out words that are confirmed to be invalid
     return wordList.filter((candidate) => {
       // For the current word, is it valid?
-      console.log(candidate)
+      const guessWordChars = guessedLetters.map((l) => l.char)
+
       // We set is valid to true by default, innocent until proven guilty
       let isValid: boolean = true
 
-      const everyPotentialLetter = candidate.split('')
+      const CandidateChars = candidate.split('')
 
-      everyPotentialLetter.forEach((l1, i1) => {
-        // If the letter is not in the word
-        if (guessedLetters.findIndex((l) => l.char == l1) == -1) {
-          return
-        }
+      for (let i1 = 0; i1 < 5; i1++) {
+        let l1 = CandidateChars[i1]
         // Loop through each letter in the guessed word because it displays the validation information
-        guessedLetters.forEach((l2, i2) => {
-          // if the character in the validation word does not match character in candidate word
-          if (l2.char != l1) {
-            return
-          }
+        for (let i2 = 0; i2 < 5; i2++) {
+          let l2 = guessWordChars[i2]
+          // if the character in the validation word does not match character in candidate word and indexes do not match
+          if (l2 === l1 && i1 == i2) {
+            // The status of the guessed letter
+            const status: LetterStatus = guessedLetters[i2].status
 
-          // Thes status of the guessed letter
-          const status: LetterStatus = l2.status
+            if(status == LetterStatus.Correct){
+              CandidateChars[i1] = "_"
+              guessWordChars[i2] = "_"
+              break
+            }
+            // If it's misplaced, if the index are the same, it is for certain incorrect
+            if(status == LetterStatus.Misplaced){
+              CandidateChars[i1] = "_"
+              guessWordChars[i2] = "_"
 
-          // If it's wrong we get set isValid to false and now it will be for certain removed
-          if (status == LetterStatus.Wrong) {
-            // Remove word from wordList
-            isValid = false
-          }
+              isValid = false
+            }
 
-          // If it's misplaced, if the index are the same, it is for certain incorrect
-          if (status == LetterStatus.Misplaced && i1 == i2) {
-            isValid = false
+            //is this correct to do here??? idk????, remove if statement if test 2 question should be answered differently and leper should stay
+            if(status == LetterStatus.Wrong){
+              CandidateChars[i1] = "_"
+              guessWordChars[i2] = "_"
+
+              isValid = false
+            }
           }
-        })
-      })
+        }
+      }
+
+      for (let i1 = 0; i1 < 5; i1++) {
+        let l1 = CandidateChars[i1]
+        if(l1 !== "_"){
+          // Loop through each letter in the guessed word because it displays the validation information
+          for (let i2 = 0; i2 < 5; i2++) {
+            let l2 = guessWordChars[i2]
+            if(l1===l2){
+              const status: LetterStatus = guessedLetters[i2].status
+
+              if(status == LetterStatus.Correct){
+                CandidateChars[i1] = "_"
+                guessWordChars[i2] = "_"
+                break
+              }
+              if(status == LetterStatus.Misplaced){
+                CandidateChars[i1] = "_"
+                guessWordChars[i2] = "_"
+                break
+              }
+              // If it's wrong we get set isValid to false and now it will be for certain removed
+              if(status == LetterStatus.Wrong) {
+                CandidateChars[i1] = "_"
+                guessWordChars[i2] = "_"
+                // Remove word from wordList
+                isValid = false
+                
+              }
+            }
+          }
+        }
+      }
       return isValid
     })
   }
