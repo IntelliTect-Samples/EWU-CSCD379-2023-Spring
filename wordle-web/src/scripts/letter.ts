@@ -2,14 +2,15 @@
 // of the letter in the wordle word
 export enum LetterStatus {
   NotGuessed = 0,
-  Correct,
-  Misplaced,
-  Wrong
+  Correct = 1,
+  Misplaced = 2,
+  Wrong = 3
 }
 
 export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
+  theme: Array<string> = ['grey', 'green', 'orange', 'red']
 
   constructor(char: string, status?: LetterStatus) {
     this.char = char
@@ -17,15 +18,6 @@ export class Letter {
   }
 
   get color() {
-    switch (this.status) {
-      case LetterStatus.Correct:
-        return 'green'
-      case LetterStatus.Misplaced:
-        return 'orange'
-      case LetterStatus.Wrong:
-        return 'red'
-      default:
-        return 'grey'
-    }
+    return this.theme[this.status]
   }
 }
