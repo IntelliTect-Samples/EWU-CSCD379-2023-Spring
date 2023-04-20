@@ -28,12 +28,22 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
-onMounted() => {
+onMounted(() => {
   window.addEventListener('keyup', keyPress)
-}
-onUnmounted() => {
+})
+onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
-}
+})
+
+watch(
+  guess,
+  (newGuess, oldGuess) => {
+    if (newGuess.length > 5) {
+      guess.value = oldGuess || ''
+    }
+  },
+  { flush: 'post' }
+)
 /*
 function keyPress(e KeyboardEvent) {
   if (e.key.length == 1) {
