@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { WordleGame } from '@/scripts/wordleGame.ts'
+import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
 import LetterButton from '../components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
