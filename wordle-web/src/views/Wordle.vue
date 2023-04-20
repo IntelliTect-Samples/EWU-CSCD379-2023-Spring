@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
