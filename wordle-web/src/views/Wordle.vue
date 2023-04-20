@@ -1,15 +1,17 @@
 <template>
   <h1>Wordle Redux?</h1>
-  <v-text-field v-model="guess" label="Guess" variant="solo"></v-text-field>
+  <v-text-field 
+    v-model="guess" 
+    label="Guess" 
+    variant="solo"
+    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
+  ></v-text-field>
 
-  <v-btn @click="checkGuess">Check</v-btn>
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess">Check</v-btn>
   <div>
     <v-row v-for="word in game.guesses" :key="word.text">
       <v-col v-for="letter in word.letters" :key="letter.char">
-        <LetterButton :letter="letter"></LetterButton>
-        <v-btn :color="letter.color">
-          {{ letter.char }}
-        </v-btn>
+        <LetterButton :letter="letter" @click="letterClick(letter, $event)"></LetterButton>
       </v-col>
     </v-row>
   </div>
