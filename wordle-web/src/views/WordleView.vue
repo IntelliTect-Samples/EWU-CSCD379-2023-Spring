@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row v-for="word in game.guesses" :key="word.text">
-      <v-col v-for="letter in word.letters" :key="letter.char">
+      <v-col v-for="letter in word.letters" :key="letter.char" class="pa-1 ma-1">
         <LetterButton :letter="letter"></LetterButton>
       </v-col>
     </v-row>

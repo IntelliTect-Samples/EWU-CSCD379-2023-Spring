@@ -28,6 +28,7 @@ export class WordleGame {
       const word = new Word()
       this.guesses.push(word)
     }
+    console.log(this.guesses)
     this.currentGuessIndex = 0
     this.status = GameState.Active
   }
@@ -36,8 +37,10 @@ export class WordleGame {
     console.log(this.currentGuess.text)
     if (this.currentGuess.check(this.secretWord)) {
       this.status = GameState.Won
-    } else if (this.currentGuessIndex >= this.guesses.length) {
+      console.log('You won!')
+    } else if (this.currentGuessIndex >= this.guesses.length - 1) {
       this.status = GameState.Lost
+      console.log('You lost!')
     }
     this.currentGuessIndex++
   }
