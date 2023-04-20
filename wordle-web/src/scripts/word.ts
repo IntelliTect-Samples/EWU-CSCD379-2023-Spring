@@ -3,16 +3,18 @@ import { Letter, LetterStatus } from './letter'
 export class Word {
   public letters = Array<Letter>()
 
-  constructor(word?: string | null, numberOfLetters = 5) {
+  constructor(word?: string | null | number) {
     if (word) {
-      // add word letters to array
-      for (const letter of word) {
-        this.letters.push(new Letter(letter))
-      }
-    }
-    else {
-      for (let i = this.letters.length; i < numberOfLetters; i++) {
-        this.letters.push(new Letter())
+      if (typeof word == 'number') {
+        // Add one letter for each number. With blank spots
+        for (let i = 0; i < word; i++) {
+          this.letters.push(new Letter(''))
+        }
+      } else {
+        // add word letters to array
+        for (const letter of word) {
+          this.letters.push(new Letter(letter))
+        }
       }
     }
   }
@@ -21,7 +23,7 @@ export class Word {
     return this.letters.map((l) => l.char).join('')
   }
 
-  push(letter: Letter) {
+  push(char: string) {
     for(const letter of this.letters) {
       if(letter.char === '') {
         letter.char = char
