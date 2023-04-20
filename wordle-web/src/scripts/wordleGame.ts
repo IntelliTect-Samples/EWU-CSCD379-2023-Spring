@@ -20,9 +20,9 @@ export class WordleGame {
   }
 
   submitGuess(guess: string) {
-    const word = new Word("plate")
+    const word = new Word('plate')
     this.guesses.push(word)
     word.check(this.secretWord)
-    WordsService.validWords(word,  ["apple", "pales", "peach", "crypt"]) ; 
+    WordsService.validWords(word, ['apple', 'pales', 'peach', 'crypt'])
   }
 }
