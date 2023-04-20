@@ -18,11 +18,13 @@
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
+
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
+import { ref, reactive } from 'vue'
+import LetterButton from '../components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
+import { watch, onMounted, onUnmounted } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -87,5 +89,4 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
   }
 }
-//<h3>{{ game.secretWord }}</h3>
 </script>
