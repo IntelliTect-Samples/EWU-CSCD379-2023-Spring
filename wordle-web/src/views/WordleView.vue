@@ -10,6 +10,8 @@
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
 
+  <KeyBoard @letterClick="addChar" />
+
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
@@ -20,6 +22,7 @@
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
+import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
 
