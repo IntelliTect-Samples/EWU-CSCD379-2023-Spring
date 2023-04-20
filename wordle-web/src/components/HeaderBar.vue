@@ -38,10 +38,10 @@
           <v-navigation-drawer location = 'right' v-model = "settings" width = 'fit-content' elevation = '1'>
             <v-list-item-group>
                 <v-list-item>
-                    <v-btn icon = 'mdi-white-balance-sunny'></v-btn>
+                    <v-btn icon = 'mdi-white-balance-sunny' @click = 'setInverseTheme'></v-btn>
                 </v-list-item>
                 <v-list-item>
-                    <v-btn icon = 'mdi-moon-waning-crescent'></v-btn>
+                    <v-btn icon = 'mdi-moon-waning-crescent' @click = 'setDarkTheme'></v-btn>
                 </v-list-item>
             </v-list-item-group>
           </v-navigation-drawer>
@@ -56,7 +56,18 @@ export default {
     data: () => ({
         drawer: false,
         settings: false
-    })
+    }),
+    methods: {
+        setInverseTheme,
+        setDarkTheme
+    }
+}
+function setInverseTheme() {
+  theme.global.name.value = 'inverse'
+}
+
+function setDarkTheme() {
+  theme.global.name.value = 'dark'
 }
 </script>
 

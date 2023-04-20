@@ -17,9 +17,10 @@
 import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
+import KeyBoard from '@/components/KeyBoard.vue'
+import GameBoard from '@/components/GameBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { watch, onMounted, onUnmounted } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
