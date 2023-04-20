@@ -16,14 +16,6 @@ header {
   z-index: 1;
 }
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
-
 nav a.router-link-exact-active {
   text-decoration: underline;
 }
@@ -73,6 +65,7 @@ nav a:first-of-type {
 <script lang = 'ts'>
 import { RouterLink, RouterView } from 'vue-router'
 import headerBar from './components/HeaderBar.vue'
+
 export default {
   data: () => ({
     drawer: false
