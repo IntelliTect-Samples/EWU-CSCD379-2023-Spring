@@ -29,17 +29,22 @@ export class WordleGame {
     this.guesses.splice(0)
 
     for(let i = 0; i < 6; i++){
-      const word = new Word();
+      const word = new Word()
+      this.guesses.push(word)
     }    
+    this.currentGuessIndex = 0
   }
 
   get currentGuess() {
     return this.guesses[this.currentGuessIndex]
-    
   }
 
   submitGuess() {
-    this.currentGuess.check(this.secretWord)
-    
+    if(this.currentGuess.check(this.secretWord)) {
+      this.status = WordleGameStatus.Won
+    } else if(this.currentGuessIndex >= this.guesses.length){
+      this.status = WordleGameStatus.Lost
+    }
+    this.currentGuessIndex++
   }
 }

@@ -14,7 +14,7 @@
     </v-row>
   </div>
 
-  <h2>{{ guess }}</h2>
+  <h3>{{ game.secretWord }}</h3>
 </template>
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
