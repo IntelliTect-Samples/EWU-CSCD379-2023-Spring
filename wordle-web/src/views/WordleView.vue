@@ -1,20 +1,10 @@
 <template>
   <ThemeChoice/>
-  <h1>Wordle Mind Bender</h1>
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
-
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <h1>A play on wordle</h1>
   <div>
-    <v-row v-for="word in game.guesses" :key="word.text">
-      <v-col v-for="letter in word.letters" :key="letter.char">
-        <LetterButton :letter="letter" @click="letterClick(letter, $event)"></LetterButton>
-      </v-col>
-    </v-row>
+    <v-container>
+      <GameBoard :game="game" />
+  </v-container>
   </div>
 
   <h2>{{ guess }}</h2>
@@ -22,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
+import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
-import LetterButton from '../components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
 
@@ -54,8 +44,9 @@ function checkGuess() {
   guess.value = ''
 }
 
-function letterClick(letter: Letter, event: MouseEvent) {
+function addChar(letter: Letter, event: MouseEvent) {
   guess.value += letter.char
+  game.guess.push(letter.char)
   console.log(event.altKey)
 }
 
