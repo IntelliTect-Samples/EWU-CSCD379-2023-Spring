@@ -4,9 +4,8 @@
         <v-layout>
           <v-app-bar elevation = '2'>
 
-            <v-btn to = '/'>
-              <v-icon>mdi-axis</v-icon>
-            </v-btn>
+            <v-btn to = '/' icon = 'mdi-axis'></v-btn>
+
             <v-app-bar-title>
               <RouterLink to = '/'>
                 A Play on Wordle
@@ -14,7 +13,10 @@
             </v-app-bar-title>
 
             <template v-slot:append>
-              <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+              <v-app-bar-nav-icon @click.stop = "drawer = !drawer"></v-app-bar-nav-icon>
+              <v-app-bar-nav-icon @click.stop = "settings = !settings">
+                <v-icon>mdi-cog</v-icon>
+              </v-app-bar-nav-icon>
             </template>
 
           </v-app-bar>
@@ -33,6 +35,17 @@
             </v-list-item-group>
           </v-navigation-drawer>
 
+          <v-navigation-drawer location = 'right' v-model = "settings" width = 'fit-content' elevation = '1'>
+            <v-list-item-group>
+                <v-list-item>
+                    <v-btn icon = 'mdi-white-balance-sunny'></v-btn>
+                </v-list-item>
+                <v-list-item>
+                    <v-btn icon = 'mdi-moon-waning-crescent'></v-btn>
+                </v-list-item>
+            </v-list-item-group>
+          </v-navigation-drawer>
+
         </v-layout>
       </v-card>
     </div>
@@ -41,7 +54,8 @@
 <script lang = 'ts'>
 export default {
     data: () => ({
-        drawer: false
+        drawer: false,
+        settings: false
     })
 }
 </script>
