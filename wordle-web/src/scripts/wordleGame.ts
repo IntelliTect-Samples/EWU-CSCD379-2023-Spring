@@ -50,7 +50,7 @@ export class WordleGame {
     } else {
       // The game is over
     }
-
+  }
   /*
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()

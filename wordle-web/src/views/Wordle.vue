@@ -74,6 +74,6 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-
+}
 //<h3>{{ game.secretWord }}</h3>
 </script>
