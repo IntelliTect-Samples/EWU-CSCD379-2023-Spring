@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Wordle from '../views/wordle.vue'
+import Wordle from '../views/wordleView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,13 +21,13 @@ const router = createRouter({
     {
       path: '/game',
       name: 'game',
-      component: () => import('../views/game.vue')
+      component: () => import('../views/gameView.vue')
     },
     {
       path: '/wordle',
       name: 'wordle',
       component: Wordle
-    },
+    }
   ]
 })
 
