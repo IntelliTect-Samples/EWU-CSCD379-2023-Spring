@@ -34,7 +34,7 @@ const vuetify = createVuetify({
       inverse: {
         colors: {
           correct: '#F44336',
-          misplaced: '#03A9F4',
+          misplaced: '#FFC107',
           wrong: '#4CAF50'
         }
       }
