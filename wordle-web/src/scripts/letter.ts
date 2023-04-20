@@ -10,7 +10,6 @@ export enum LetterStatus {
 export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
-  theme: Array<string> = ['grey', 'green', 'orange', 'red']
 
   constructor(char: string, status?: LetterStatus) {
     this.char = char
@@ -18,6 +17,15 @@ export class Letter {
   }
 
   get color() {
-    return this.theme[this.status]
+    switch (this.status) {
+      case LetterStatus.Correct:
+        return 'correct'
+      case LetterStatus.Misplaced:
+        return 'misplaced'
+      case LetterStatus.Wrong:
+        return 'wrong'
+      default:
+        return 'grey'
+    }
   }
 }
