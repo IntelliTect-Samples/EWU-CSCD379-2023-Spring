@@ -3,7 +3,7 @@
   <h1>A play on wordle</h1>
   <div>
     <v-container>
-      <GameBoard :game="game" />
+      <GameBoard :game="game" @letterClick="addChar()"/>
   </v-container>
   </div>
 
@@ -44,10 +44,9 @@ function checkGuess() {
   guess.value = ''
 }
 
-function addChar(letter: Letter, event: MouseEvent) {
+function addChar(letter: Letter) {
   guess.value += letter.char
   game.guess.push(letter.char)
-  console.log(event.altKey)
 }
 
 function keyPress(event: KeyboardEvent) {
