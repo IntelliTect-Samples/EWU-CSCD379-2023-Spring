@@ -16,14 +16,6 @@ header {
   z-index: 1;
 }
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
-
 nav a.router-link-exact-active {
   text-decoration: underline;
 }
