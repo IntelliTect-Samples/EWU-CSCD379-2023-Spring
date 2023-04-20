@@ -1,5 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
+import type { Letter } from './letter'
 
 export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
@@ -7,6 +8,7 @@ export class WordleGame {
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
   }
+  guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
   numberOfGuesses = 6
@@ -32,6 +34,14 @@ export class WordleGame {
   submitGuess() {
     // put logic to win here.
     this.guess.check(this.secretWord)
+
+    // Update the guessed letters
+    for (const letter of this.guess.letters) {
+      this.guessedLetters.push(letter);
+    }
+
+    console.log(this.guessedLetters);
+
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
