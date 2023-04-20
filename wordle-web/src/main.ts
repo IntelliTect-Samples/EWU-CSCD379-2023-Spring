@@ -20,7 +20,8 @@ const vuetify = createVuetify({
     sets: {
       mdi
     }
-  }
+  },
+  //theme: { defaultTheme: 'light' }
 })
 
 const app = createApp(App)
