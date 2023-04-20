@@ -16,16 +16,12 @@ header {
   z-index: 1;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+function setInverseTheme() {
+  theme.global.name.value = 'inverse'
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+function setDarkTheme() {
+  theme.global.name.value = 'dark'
 }
 
 nav a.router-link-exact-active {
