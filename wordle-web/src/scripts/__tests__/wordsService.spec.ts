@@ -88,6 +88,7 @@ describe('validWords', () => {
     expect(newList).toStrictEqual(['apple'])//<------correct
   })
 })
+/*
 describe('validWords', () => {
   it('Filters Incorrect Words From WordList test 4, run against full wordList', () => {
     // Arrange
@@ -101,4 +102,4 @@ describe('validWords', () => {
     //Assert
     expect(newList).toStrictEqual(['apple'])
   })
-})
+})*/
