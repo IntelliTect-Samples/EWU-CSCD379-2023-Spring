@@ -69,7 +69,7 @@ describe('validWords', () => {
     //    status == misplaced { change l1 and l2 to _}
     //    status == wrong { change l1 and l2 to _, isValid == false }
     // ---------------------------
-    // ^^^^^idea seems to work^^^^^
+    // ^^^^^idea seems to work^^^^^^^^
   })
 })
 
