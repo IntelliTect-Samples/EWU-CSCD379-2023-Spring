@@ -13,6 +13,8 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  
+  <v-select label="Possible words" :items="WordsService.validWords(guess)"> </v-select>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -20,6 +22,7 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
+import { WordsService } from '@/scripts/wordsService'
 import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
