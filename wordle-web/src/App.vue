@@ -29,9 +29,7 @@ nav {
   margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+
 
 nav a.router-link-exact-active:hover {
   background-color: transparent;
