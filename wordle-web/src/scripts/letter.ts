@@ -11,7 +11,7 @@ export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
 
-  constructor(char: string, status?: LetterStatus) {
+  constructor(char: string = '', status?: LetterStatus) {
     this.char = char
     this.status = status ?? LetterStatus.NotGuessed
   }
