@@ -7,9 +7,18 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
+  static validWords(currentWord: string): Array<string> {
     //Todo
-    return new Array<string>()
+
+    const validWordList = new Array<string>()
+    for (const word of this.#words) {
+      if (word.startsWith(currentWord)) {
+        validWordList.push(word)
+      }
+    }
+
+    validWordList.sort()
+    return validWordList
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

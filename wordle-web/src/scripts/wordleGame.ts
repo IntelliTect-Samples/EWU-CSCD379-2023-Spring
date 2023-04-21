@@ -12,6 +12,7 @@ export class WordleGame {
   guesses = new Array<Word>()
   secretWord = ''
   numberOfGuesses = 6
+  validWordList = new Array<string>()
   guess!: Word
 
   // // check length of guess
@@ -48,5 +49,9 @@ export class WordleGame {
     } else {
       // The game is over
     }
+  }
+
+  selectGuess(word: string) {
+    this.guess = new Word(word)
   }
 }

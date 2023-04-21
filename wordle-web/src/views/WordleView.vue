@@ -16,6 +16,7 @@
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+  <WordList :game="game"></WordList>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +26,8 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
+import { WordsService } from '@/scripts/wordsService'
+import WordList from '@/components/WordList.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -70,5 +73,7 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
   }
   //event.preventDefault()
+
+  game.validWordList = WordsService.validWords(game.guess.text)
 }
 </script>
