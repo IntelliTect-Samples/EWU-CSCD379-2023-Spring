@@ -1,10 +1,9 @@
 <template>
-
   <v-app>
     <v-app-bar color="#5439AA" elevation="2">
-      
- 
-      <RouterLink to="/"><img id="XelaLogo" alt="Xela Games Logo" class="logo" :src="logo" width="60"/></RouterLink>
+      <RouterLink to="/"
+        ><img id="XelaLogo" alt="Xela Games Logo" class="logo" :src="logo" width="60"
+      /></RouterLink>
 
       <v-app-bar-title id="siteTitle"> Xela Games </v-app-bar-title>
 
@@ -13,9 +12,8 @@
       </v-app-bar-nav-icon>
 
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
- 
     </v-app-bar>
- 
+
     <v-navigation-drawer v-model="drawer" temporary location="end">
       <v-list>
         <v-list-item title="Home" value="home" to="/"></v-list-item>
@@ -24,14 +22,13 @@
         <v-list-item title="Wordle" value="wordle" to="/wordle"></v-list-item>
       </v-list>
     </v-navigation-drawer>
- 
+
     <v-main>
       <v-container>
         <RouterView />
       </v-container>
     </v-main>
   </v-app>
-
 </template>
 
 <script setup lang="ts">
@@ -53,7 +50,6 @@ export default {
 <style scoped>
 #siteTitle {
   font-size: 26px;
-  color: #ffffff
+  color: #ffffff;
 }
-
 </style>

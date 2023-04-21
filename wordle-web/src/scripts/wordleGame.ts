@@ -37,10 +37,10 @@ export class WordleGame {
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter);
+      this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters);
+    console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
