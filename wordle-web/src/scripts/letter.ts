@@ -8,7 +8,7 @@ export enum LetterStatus {
 }
 
 export class Letter {
-  char?: string
+  char: string
   status: LetterStatus = LetterStatus.NotGuessed
 
   constructor(char: string, status?: LetterStatus) {
