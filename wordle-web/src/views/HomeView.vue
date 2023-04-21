@@ -12,8 +12,6 @@ export default {
 </script>
 
 <template id="body">
-  <br />
-  <br />
   <h1 id="h1">
     Welcome to . . . <v-btn color="#27AE6A" @click="showImage = !showImage">CLICK ME</v-btn>
   </h1>

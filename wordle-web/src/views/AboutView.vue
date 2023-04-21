@@ -1,7 +1,6 @@
 <script setup lang="ts"></script>
 
 <template>
-  <br /><br />
   <v-card>
     <v-card-title> About </v-card-title>
     <v-card-text>
