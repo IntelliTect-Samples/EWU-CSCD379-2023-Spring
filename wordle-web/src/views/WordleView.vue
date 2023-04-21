@@ -3,13 +3,6 @@
 
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
-
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
@@ -37,16 +30,6 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
-watch(
-  guess,
-  (newGuess, oldGuess) => {
-    if (newGuess.length > 5) {
-      guess.value = oldGuess || ''
-    }
-  },
-  { flush: 'post' }
-)
-
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
@@ -69,6 +52,5 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-  //event.preventDefault()
 }
 </script>

@@ -2,6 +2,12 @@ import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
 
+export enum WordleGameStatus {
+  Active = 0,
+  Won = 1,
+  Lost = 2
+}
+
 export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
@@ -11,8 +17,9 @@ export class WordleGame {
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
-  numberOfGuesses = 6
+  status = WordleGameStatus.Active
   guess!: Word
+  numberOfGuesses = 6
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -20,15 +27,16 @@ export class WordleGame {
   //     return
   //   }
 
-  restartGame(secretWord: string) {
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
-    // create a word for each guess
-    for (let iWord = 0; iWord < this.numberOfGuesses; iWord++) {
-      const word = new Word(secretWord.length)
+
+    for (let i = 0; i < numberOfGuesses; i++) {
+      const word = new Word()
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+    this.status = WordleGameStatus.Active
   }
 
   submitGuess() {
@@ -37,10 +45,10 @@ export class WordleGame {
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter);
+      this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters);
+    console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
