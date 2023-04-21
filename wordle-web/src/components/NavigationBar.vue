@@ -16,9 +16,12 @@
               </template>
 
               <v-list>
-                <v-list-item v-for="(item, index) in items" :key="index">
-                  <v-list-item-title>{{ item.title }}</v-list-item-title>
-                </v-list-item>
+                <router-link to="/about"
+                  ><v-list-item-title>Link To About Page</v-list-item-title></router-link
+                >
+                <router-link to="/wordle"
+                  ><v-list-item-title>Link To Wordle Game</v-list-item-title></router-link
+                >
               </v-list>
             </v-menu>
           </v-app-bar-nav-icon>

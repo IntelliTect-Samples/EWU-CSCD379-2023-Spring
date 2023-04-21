@@ -1,17 +1,13 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
-    </v-card>
-  </v-sheet>
-
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <h1>This is an about page</h1>
+    <p>
+      This is wesbite designed to allow you to play the hit game Wordle. Wordle is a game in which
+      you are provided 6 guesses to figure out what a 5 letter word is. It will tell you which
+      letters were misplaced, which letters are incorrect and which letters are correctly placeed.
+      Wordle is a great game, but not as great as Meg is!
+    </p>
+  </div>
 </template>
 
 <style>
