@@ -1,15 +1,14 @@
 <template>
-  
-    <NavigationBar/>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <NavigationBar />
+  <div class="wrapper">
+    <HelloWorld msg="You did it!" />
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/wordle">Wordle</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/wordle">Wordle</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
+  </div>
 
   <RouterView />
 </template>
