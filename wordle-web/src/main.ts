@@ -20,6 +20,27 @@ const vuetify = createVuetify({
     sets: {
       mdi
     }
+  },
+  theme: {
+    defaultTheme: "dark",
+    themes: {
+      dark: {
+        colors: {
+          correct: 'green',
+          misplaced: 'orange',
+          incorrect: 'red',
+          stale: 'grey'
+        }
+      },
+      light: {
+        colors: {
+          correct: 'green',
+          misplaced: 'orange',
+          incorrect: 'red',
+          stale: 'grey'
+        }
+      }
+    }
   }
 })
 

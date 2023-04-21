@@ -41,7 +41,6 @@ import { RouterView } from 'vue-router'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()
-theme.global.name.value = 'dark'
 
 function toggleTheme() {
   if (theme.global.name.value === 'light') {
