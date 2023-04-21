@@ -1,8 +1,14 @@
 <template>
+  <v-app>
   <header>
     <v-toolbar id="toolbar">
       <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
       <v-toolbar-title>Wordle Web</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <!-- create a button the every time it is clicked, it will switch between dark and light theme -->
+        <v-btn @click="toggleTheme" text>Toggle {{ mode }} mode</v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn to="/">Home</v-btn>
@@ -13,10 +19,23 @@
   </header>
 
   <RouterView />
+  </v-app>
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import { useTheme } from 'vuetify/lib/framework.mjs'
+
+const theme = useTheme()
+
+
+const toggleTheme = () => {
+  if (theme.global.name.value === 'light') {
+    theme.global.name.value = 'dark'
+  } else if (theme.global.name.value === 'dark') {
+    theme.global.name.value = 'light'
+  }
+}
 </script>
 
 <style scoped>
