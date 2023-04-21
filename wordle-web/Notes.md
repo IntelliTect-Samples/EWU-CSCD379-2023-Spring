@@ -6,30 +6,8 @@ Solution: Force the case to only type in all caps
 
 Help:
 - How to change the icon in the tab (favicon.ico)?
+- My navigation drawers are beneath other elements so I cannot access it sometimes
+- How to change the font color on a router link?
 
 
 # Random code snippets:
-
-### Setting menu for app.vue
-          <template>
-            <v-row justify="center">
-              <v-dialog v-model="dialog" persistent width="auto">
-                <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props">
-                    <v-icon size='25px' icon="mdi:mdi-cog" />
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-title class="text-h5">Settings</v-card-title>
-                  <v-card-text>
-                    whatever we want the settings to be later
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer/>
-                    <v-btn color="primary" variant="text" @click="dialog = false">Cancel</v-btn>
-                    <v-btn color="primary" variant="text" @click="dialog = false">Save</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </v-row>
-          </template>

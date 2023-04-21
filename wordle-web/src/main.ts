@@ -20,6 +20,42 @@ const vuetify = createVuetify({
     sets: {
       mdi
     }
+  },
+
+  theme: {
+    defaultTheme: "dark",
+    themes: {
+      dark:{
+        colors: {
+          correct: '#4caf50',
+          misplaced: '#ffc107',
+          wrong: '#f44336',
+        }
+      },
+      inverse: {
+        colors: {
+          correct: '#F44336',
+          misplaced: '#03A9F4',
+          wrong: '#4CAF50',
+        }
+      },
+
+      light: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#FFEB3B',
+          wrong: '#F44336',
+        }
+      },
+
+      pastel: {
+        colors: {
+          correct: '#66BB6A',
+          misplaced: '#FFF176',
+          wrong: '#EF5350',
+        }
+      }
+    }
   }
 })
 
