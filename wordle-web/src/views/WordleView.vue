@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <h1>A play on wordle</h1>
   <div>
     <v-container>
@@ -8,6 +9,15 @@
   <KeyBoard @letterClick="addChar"/>
   </div>
 
+=======
+  <h1>Wordle Mind Bender</h1>
+
+  <GameBoard :game="game" @letterClick="addChar" />
+
+  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+>>>>>>> upstream/main
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -17,9 +27,15 @@
 import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
+<<<<<<< HEAD
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
+=======
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import GameBoard from '../components/GameBoard.vue'
+import KeyBoard from '../components/KeyBoard.vue'
+>>>>>>> upstream/main
 import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
@@ -33,16 +49,6 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
-watch(
-  guess,
-  (newGuess, oldGuess) => {
-    if (newGuess.length > 5) {
-      guess.value = oldGuess || ''
-    }
-  },
-  { flush: 'post' }
-)
-
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
@@ -50,7 +56,10 @@ function checkGuess() {
 
 function addChar(letter: Letter) {
   guess.value += letter.char
+<<<<<<< HEAD
   game.guess.push(letter.char)
+=======
+>>>>>>> upstream/main
 }
 
 function keyPress(event: KeyboardEvent) {
@@ -65,6 +74,5 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-  //event.preventDefault()
 }
 </script>

@@ -16,6 +16,6 @@ describe('LetterButton', () => {
     const letter = new Letter('a', LetterStatus.Correct)
     const wrapper = mount(LetterButton, { props: { letter: letter } })
     expect(wrapper.text()).toContain('a')
-    expect(wrapper.attributes('color')).toBe('green')
+    expect(wrapper.attributes('color')).toBe('correct')
   })
 })
