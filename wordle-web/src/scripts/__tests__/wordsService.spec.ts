@@ -2,11 +2,10 @@ import { describe, it, expect } from 'vitest'
 import { Word } from '@/scripts/word'
 import { WordsService } from '../wordsService'
 
-
 describe('validWords', () => {
   it('Filters Incorrect Words From WordList', () => {
     // Arrange
-    const GuessWord = new Word('pales')//<-----validation : m m m m w
+    const GuessWord = new Word('pales') //<-----validation : m m m m w
     const secretWord = 'apple'
     const wordList: string[] = ['peach', 'pears', 'carps', 'leapy', 'creep', 'leper']
 
@@ -14,13 +13,13 @@ describe('validWords', () => {
     GuessWord.check(secretWord)
     const newList = WordsService.validWords(GuessWord, wordList)
     //Assert
-    expect(newList).toStrictEqual(['leapy'])//<------correct
+    expect(newList).toStrictEqual(['leapy']) //<------correct
   })
 })
 describe('validWords', () => {
   it('Filters Incorrect Words From WordList test 2, removes leper', () => {
     // Arrange
-    const GuessWord = new Word('apple')//<-----validation : m m w m m
+    const GuessWord = new Word('apple') //<-----validation : m m w m m
     const secretWord = 'pales'
     const wordList: string[] = ['peach', 'pears', 'carps', 'leapy', 'creep', 'leper']
 
@@ -33,17 +32,17 @@ describe('validWords', () => {
     //apple has validation like:
     //          a p p l e
     //          m m w m m
-    
+
     // and leper has a p at index 2
     // which is fine???? maybe?
     // the misplaced letter status on apples first p says that no p's shall be in index 1
     // but is the second p in apple, which is labeled as wrong, also saying that no p's can be at index 2?????
-    // if so we have problem 
-    
-    // we have: 
+    // if so we have problem
+
+    // we have:
     //    if(wrong) {remove}
     //    if(misplaced && i1 == i2) { remove}
-    // but this causes any word with a p, like creep, to be removed when double letters, which is wrong, 
+    // but this causes any word with a p, like creep, to be removed when double letters, which is wrong,
     // only words with a p at index 2 or words with more than 1 p should be removed
     // which is why we had:
     // if(misplaced)
@@ -77,7 +76,7 @@ describe('validWords', () => {
 describe('validWords', () => {
   it('Filters Incorrect Words From WordList test 3, double letter WordList word vs single letter guess word', () => {
     // Arrange
-    const GuessWord = new Word('pales')//<-----validation : m m m m w
+    const GuessWord = new Word('pales') //<-----validation : m m m m w
     const secretWord = 'apple'
     const wordList: string[] = ['apple']
 
@@ -85,7 +84,7 @@ describe('validWords', () => {
     GuessWord.check(secretWord)
     const newList = WordsService.validWords(GuessWord, wordList)
     //Assert
-    expect(newList).toStrictEqual(['apple'])//<------correct
+    expect(newList).toStrictEqual(['apple']) //<------correct
   })
 })
 /*

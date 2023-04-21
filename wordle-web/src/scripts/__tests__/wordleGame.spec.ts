@@ -22,6 +22,4 @@ describe('Word', () => {
     expect(word.letters[3].status).toBe(LetterStatus.Misplaced)
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
-
-  
 })

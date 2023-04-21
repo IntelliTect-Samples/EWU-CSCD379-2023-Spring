@@ -36,23 +36,23 @@ export abstract class WordsService {
             // The status of the guessed letter
             const status: LetterStatus = guessedLetters[i2].status
 
-            if(status == LetterStatus.Correct){
-              CandidateChars[i1] = "_"
-              guessWordChars[i2] = "_"
+            if (status == LetterStatus.Correct) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
               break
             }
             // If it's misplaced, if the index are the same, it is for certain incorrect
-            if(status == LetterStatus.Misplaced){
-              CandidateChars[i1] = "_"
-              guessWordChars[i2] = "_"
+            if (status == LetterStatus.Misplaced) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
 
               isValid = false
             }
 
             //is this correct to do here??? idk????, remove if statement if test 2 question should be answered differently and leper should stay
-            if(status == LetterStatus.Wrong){
-              CandidateChars[i1] = "_"
-              guessWordChars[i2] = "_"
+            if (status == LetterStatus.Wrong) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
 
               isValid = false
             }
@@ -62,30 +62,29 @@ export abstract class WordsService {
 
       for (let i1 = 0; i1 < 5; i1++) {
         let l1 = CandidateChars[i1]
-        if(l1 !== "_"){
+        if (l1 !== '_') {
           // Loop through each letter in the guessed word because it displays the validation information
           for (let i2 = 0; i2 < 5; i2++) {
             let l2 = guessWordChars[i2]
-            if(l1===l2){
+            if (l1 === l2) {
               const status: LetterStatus = guessedLetters[i2].status
 
-              if(status == LetterStatus.Correct){
-                CandidateChars[i1] = "_"
-                guessWordChars[i2] = "_"
+              if (status == LetterStatus.Correct) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
                 break
               }
-              if(status == LetterStatus.Misplaced){
-                CandidateChars[i1] = "_"
-                guessWordChars[i2] = "_"
+              if (status == LetterStatus.Misplaced) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
                 break
               }
               // If it's wrong we get set isValid to false and now it will be for certain removed
-              if(status == LetterStatus.Wrong) {
-                CandidateChars[i1] = "_"
-                guessWordChars[i2] = "_"
+              if (status == LetterStatus.Wrong) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
                 // Remove word from wordList
                 isValid = false
-                
               }
             }
           }
