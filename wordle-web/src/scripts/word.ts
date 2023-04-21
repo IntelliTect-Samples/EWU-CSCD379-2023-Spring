@@ -45,10 +45,6 @@ export class Word {
 
   check(secretWord: string): boolean {
     console.log(this.text)
-<<<<<<< HEAD
-=======
-
->>>>>>> main
     // check if the letters are valid
     //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)

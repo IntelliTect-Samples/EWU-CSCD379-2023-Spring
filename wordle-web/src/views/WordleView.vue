@@ -1,11 +1,10 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-<<<<<<< HEAD
+  <<<<<<< HEAD
 
   <GameBoard :game="game" @letterClick="addChar" />
 
-=======
->>>>>>> main
+  ======= >>>>>>> main
   <v-text-field
     v-model="guess"
     label="Guess"
@@ -13,11 +12,11 @@
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
 
-<<<<<<< HEAD
+  <<<<<<< HEAD
   <KeyBoard @letterClick="addChar" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-=======
+  =======
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
   <div>
     <v-row v-for="word in game.guesses" :key="word.text">
@@ -26,7 +25,7 @@
       </v-col>
     </v-row>
   </div>
->>>>>>> main
+  >>>>>>> main
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
