@@ -18,6 +18,8 @@ export class WordleGame {
   guesses = new Array<Word>()
   secretWord = ''
   status = WordleGameStatus.Active
+  guess!: Word
+  numberOfGuesses = 6
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -33,7 +35,7 @@ export class WordleGame {
       const word = new Word()
       this.guesses.push(word)
     }
-    this.currentGuessIndex = 0
+    this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
   }
 
@@ -43,10 +45,10 @@ export class WordleGame {
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter);
+      this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters);
+    console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
@@ -54,14 +56,5 @@ export class WordleGame {
     } else {
       // The game is over
     }
-  }
-
-  submitGuess() {
-    if (this.currentGuess.check(this.secretWord)) {
-      this.status = WordleGameStatus.Won
-    } else if (this.currentGuessIndex >= this.guesses.length) {
-      this.status = WordleGameStatus.Lost
-    }
-    this.currentGuessIndex++
   }
 }
