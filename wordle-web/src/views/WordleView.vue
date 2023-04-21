@@ -8,14 +8,12 @@
       label="Guess"
       variant="solo"
       @input="getValidGuesses"
-      bg-color="blue-grey-darken-4"
     ></v-text-field>
 
     <v-select
       v-model="guess"
       :items="validGuesses"
       :label="'Valid Guesses: ' + validGuesses.length"
-      bg-color="blue-grey-darken-4"
     >
       <v-hover></v-hover>
     </v-select>
