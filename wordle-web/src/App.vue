@@ -6,8 +6,7 @@
       <v-toolbar-title>Wordle Web</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <!-- create a button the every time it is clicked, it will switch between dark and light theme -->
-        <v-btn @click="toggleTheme" text>Toggle {{ mode }} mode</v-btn>
+        <v-btn @click="toggleTheme" :key="mode = theme.global.name.value" text>Toggle {{ mode }} mode</v-btn>
       </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-toolbar-items>
@@ -26,7 +25,9 @@
 import { RouterView } from 'vue-router'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
+let mode
 const theme = useTheme()
+theme.global.name.value = 'dark'
 
 
 const toggleTheme = () => {
