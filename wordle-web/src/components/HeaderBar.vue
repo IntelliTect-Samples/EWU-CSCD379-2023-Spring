@@ -43,6 +43,18 @@
                 <v-list-item>
                     <v-btn icon = 'mdi-moon-waning-crescent' @click = 'setDarkTheme'/>
                 </v-list-item>
+                <v-list-item>
+                  <v-divider/>
+                </v-list-item>
+                <v-list-item>
+                    <v-btn icon = 'mdi-alpha-d-circle' @click = 'setDefaultTheme'/>
+                </v-list-item>
+                <v-list-item>
+                    <v-btn icon = 'mdi-unicorn-variant' @click = 'setUnicornTheme'/>
+                </v-list-item>
+                <v-list-item>
+                    <v-btn icon = 'mdi-halloween' @click = 'setPumpkinTheme'/>
+                </v-list-item>
             </v-list-item-group>
           </v-navigation-drawer>
 
@@ -62,16 +74,72 @@ export default {
 </script>
 
 <script setup lang = 'ts'>
+import { ref } from 'vue';
+
 const emits = defineEmits<{
     (event: 'setTheme', value: string): void
 }>()
 
+const currentTheme = ref('dark');
+
+const lightTheme = ref(false);
+
 function setLightTheme() {
-  emits('setTheme', 'light')
+  lightTheme.value = true;
+  if(currentTheme.value === 'dark') {
+    emits('setTheme', 'light')
+    currentTheme.value = 'light';
+  } else if(currentTheme.value === 'unicornDark') {
+    emits('setTheme', 'unicornLight')
+    currentTheme.value = 'unicornLight';
+  } else if(currentTheme.value === 'pumpkinDark') {
+    emits('setTheme', 'pumpkinLight')
+    currentTheme.value = 'pumpkinLight';
+  }
 }
 
 function setDarkTheme() {
-  emits('setTheme', 'dark')
+  lightTheme.value = false;
+  if(currentTheme.value === 'light') {
+    emits('setTheme', 'dark')
+    currentTheme.value = 'dark';
+  } else if(currentTheme.value === 'unicornLight') {
+    emits('setTheme', 'unicornDark')
+    currentTheme.value = 'unicornDark';
+  } else if(currentTheme.value === 'pumpkinLight') {
+    emits('setTheme', 'pumpkinDark')
+    currentTheme.value = 'pumpkinDark';
+  }
+}
+
+function setDefaultTheme() {
+  if(lightTheme.value) {
+    currentTheme.value = 'light';
+    emits('setTheme', 'light')
+  } else {
+    currentTheme.value = 'dark';
+    emits('setTheme', 'dark')
+  }
+}
+
+function setUnicornTheme() {
+  if(lightTheme.value) {
+    currentTheme.value = 'unicornLight';
+    emits('setTheme', 'unicornLight')
+  } else {
+    currentTheme.value = 'unicornDark';
+    emits('setTheme', 'unicornDark')
+  }
+}
+
+function setPumpkinTheme() {
+  if(lightTheme.value) {
+    currentTheme.value = 'pumpkinLight';
+    emits('setTheme', 'pumpkinLight')
+  } else {
+    currentTheme.value = 'pumpkinDark';
+    emits('setTheme', 'pumpkinDark')
+  }
 }
 </script>
 

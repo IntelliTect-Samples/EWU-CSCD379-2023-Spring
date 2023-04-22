@@ -1,7 +1,7 @@
 <template>
   <h1>Wordle Mind Bender</h1>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+  <GameBoard :game="game" @letterClick="addChar"/>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
@@ -14,7 +14,6 @@
 <script setup lang="ts">
 import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
-import HeaderBar from '@/components/HeaderBar.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import type { Letter } from '@/scripts/letter'

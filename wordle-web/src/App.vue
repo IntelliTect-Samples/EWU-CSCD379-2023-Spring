@@ -73,14 +73,16 @@ export default {
   }),
   components: {
     headerBar
-  },
-  methods: {
-    changeTheme
   }
 }
 
-function changeTheme(theme?: string | undefined) {
-  const current = useTheme()
-  current.global.name.value = theme ?? 'dark'
+</script>
+
+<script setup lang = 'ts'>
+
+const theme = useTheme()
+
+function changeTheme(newTheme?: string | undefined) {
+  theme.global.name.value = newTheme ?? 'dark'
 }
 </script>
