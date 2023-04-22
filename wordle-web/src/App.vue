@@ -1,17 +1,19 @@
 <template>
 
   <header>
-    <NavigationBar />
-  <div class="wrapper"></div>
-   
-      <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>--> 
+    <div class="wrapper"></div>
+
+
+    <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
+      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>-->
   </header>
 
   <RouterView />
+  <NavigationBar />
+
 </template>
 
-<s setup lang="ts">
+<script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
 import HelloWorld from './components/HelloWorld.vue'

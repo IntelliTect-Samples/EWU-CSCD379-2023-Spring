@@ -57,7 +57,6 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
-      
     }
   }
 }

@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
       <template v-slot:activator="{ props }">
-        <v-btn  dark v-bind="props">
+        <v-btn dark v-bind="props">
           <v-icon>mdi-cog</v-icon>
         </v-btn>
       </template>

@@ -2,8 +2,7 @@
   <v-card>
     <v-layout>
       <v-app-bar>
-        <template v-slot:image>
-        </template>
+        <template v-slot:image> </template>
         <template v-slot:prepend>
           <router-link to="/"
             ><v-app-bar-nav-icon icon="mdi-vuejs"></v-app-bar-nav-icon
