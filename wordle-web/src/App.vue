@@ -1,5 +1,6 @@
 <template>
   <header>
+    <AppBar />
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
@@ -15,6 +16,7 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import AppBar from './components/AppBar.vue';
 
 const theme = useTheme()
 

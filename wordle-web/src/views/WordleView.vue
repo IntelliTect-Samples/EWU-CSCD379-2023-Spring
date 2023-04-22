@@ -7,7 +7,14 @@
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
   
-  <v-select label="Possible words" :items="WordsService.validWords(guess)"> </v-select>
+  <v-card>
+    Possible Words: {{ WordsService.validWords(guess).length }}
+    <v-select
+    no-data-text="Please enter at least one letter"
+    label="select"
+    :items="WordsService.validWords(guess)">
+    </v-select>
+  </v-card>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
