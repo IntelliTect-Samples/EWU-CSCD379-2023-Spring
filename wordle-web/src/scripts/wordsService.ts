@@ -13,7 +13,7 @@ export abstract class WordsService {
   static getWordList(): string[] {
     return this.#words
   }
-  
+
   static validWords(GuessedWord: Word, wordList: string[]): string[] {
     const guessedLetters: Letter[] = GuessedWord.letters
     // Filter out words that are confirmed to be invalid

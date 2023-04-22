@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { LetterStatus } from '@/scripts/letter'
 import { Word } from '@/scripts/word'
-import { WordsService } from '../wordsService'
 
 describe('Word', () => {
   it('Gets Correct Word', () => {
