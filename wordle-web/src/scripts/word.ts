@@ -1,5 +1,7 @@
 import { Letter, LetterStatus } from './letter'
 
+// Random Comment
+
 export class Word {
   public letters = Array<Letter>()
 
