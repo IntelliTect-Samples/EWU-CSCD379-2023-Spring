@@ -1,7 +1,6 @@
 <!-- main color: #318F6B Secondary color: #B5441C-->
 
 <template>
-  <br /><br />
     <h1>This is the PLAYGROUND</h1>
 
     <v-tabs fixed-tabs>
