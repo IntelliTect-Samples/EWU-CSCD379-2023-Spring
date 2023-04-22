@@ -19,8 +19,11 @@ export class WordleGame {
   currentGuessIndex = 0
   secretWord = ''
 
-  get currentGuess() {
+  get currentGuess(): Word {
     return this.guesses[this.currentGuessIndex]
+  }
+  set currentGuess(word: Word) {
+    this.guesses[this.currentGuessIndex] = word
   }
 
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {

@@ -1,12 +1,13 @@
 <template>
   <GameBoard :game="game" />
-  <div class="mt-10">
+  <div>
+    <WordsList :game="game" />
+  </div>
+  <div>
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   </div>
-  <v-container>
-    <div>Your guess: [{{ game.currentGuess.text }}]</div>
-    <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
-  </v-container>
+  <div>Your guess: [{{ game.currentGuess.text }}]</div>
+  <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
 </template>
 
 <script setup lang="ts">
@@ -14,6 +15,7 @@ import { WordleGame } from '@/scripts/wordleGame'
 import type { Letter } from '@/scripts/letter'
 import GameBoard from '@/components/GameBoard.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
+import WordsList from '@/components/WordsList.vue'
 import { onMounted, onUnmounted, reactive } from 'vue'
 
 const game = reactive(new WordleGame())
