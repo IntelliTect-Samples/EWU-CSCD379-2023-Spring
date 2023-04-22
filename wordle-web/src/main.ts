@@ -73,7 +73,7 @@ const vuetify = createVuetify({
           primary: '#C0CA33',
           secondary: '#6D4C41'
         }
-      },
+      }
     }
   }
 })
