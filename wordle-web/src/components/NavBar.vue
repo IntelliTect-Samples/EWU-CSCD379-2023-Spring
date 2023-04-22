@@ -1,5 +1,15 @@
 <template>
   <v-toolbar :elevation="4">
+    <template v-slot:prepend>
+      <v-btn icon to="/">
+        <v-icon color="success" size="x-large">mdi-earth</v-icon>
+      </v-btn>
+    </template>
+
+    <v-app-bar-title @click="$router.push('/')" align="center" class="font-weight-bold">
+      Word War 1
+    </v-app-bar-title>
+
     <template v-slot:append>
       <v-app-bar-nav-icon
         size="x-large"
@@ -7,14 +17,6 @@
         @click="drawer = !drawer"
       ></v-app-bar-nav-icon>
     </template>
-
-    <template v-slot:prepend>
-      <v-btn icon to="/">
-        <v-icon color="success" size="x-large">mdi-earth</v-icon>
-      </v-btn>
-    </template>
-
-    <v-app-bar-title @click="$router.push('/')"> Word War 1 </v-app-bar-title>
 
     <v-navigation-drawer app v-model="drawer" rail rail-width="30px" location="right" temporary>
       <template v-slot:prepend>
