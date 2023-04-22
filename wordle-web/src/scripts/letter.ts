@@ -11,7 +11,7 @@ export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
 
-  constructor(char: string, status?: LetterStatus) {
+  constructor(char: string = '', status?: LetterStatus) {
     this.char = char
     this.status = status ?? LetterStatus.NotGuessed
   }
@@ -19,11 +19,11 @@ export class Letter {
   get color() {
     switch (this.status) {
       case LetterStatus.Correct:
-        return 'green'
+        return 'correct'
       case LetterStatus.Misplaced:
-        return 'orange'
+        return 'misplaced'
       case LetterStatus.Wrong:
-        return 'red'
+        return 'wrong'
       default:
         return 'grey'
     }
