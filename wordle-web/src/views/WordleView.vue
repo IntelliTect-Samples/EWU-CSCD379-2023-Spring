@@ -16,6 +16,16 @@
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+
+
+  
+  <ValidWordList
+  :items="game.validWords"
+  :labelText="game.validWords.length + ' Possible Words'"
+  :onWordSelected="WordSelected"
+/>
+
+
 </template>
 
 <script setup lang="ts">
@@ -25,10 +35,14 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
+import ValidWordList from '../components/ValidWordList.vue'
+
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
+
+
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -47,9 +61,15 @@ watch(
   { flush: 'post' }
 )
 
+
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
+}
+
+function WordSelected(word: string) {
+  console.log(word)
+  guess.value = word
 }
 
 function addChar(letter: Letter) {
@@ -71,4 +91,8 @@ function keyPress(event: KeyboardEvent) {
   }
   //event.preventDefault()
 }
+
+
+
+
 </script>
