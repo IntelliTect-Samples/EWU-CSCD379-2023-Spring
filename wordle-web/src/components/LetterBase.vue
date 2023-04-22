@@ -1,6 +1,6 @@
 <template>
   <v-btn :color="c" v-bind:="$attrs">
-    <span class="font-weight-bold">{{ props.char }}</span>
+    <span class="font-weight-bold">{{ props.char.toUpperCase() }}</span>
   </v-btn>
 </template>
 

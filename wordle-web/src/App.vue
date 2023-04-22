@@ -1,9 +1,12 @@
 <template>
   <v-layout>
-    <v-app-bar title="Wordle">
+    <v-app-bar>
+      <template #title>
+        <h3>Wordle Mind Bender</h3>
+      </template>
 
     <template #prepend>
-      <v-icon>fa fas-trash</v-icon>
+      <v-icon icon="mdi-grid" class="mt-1 ml-2"/>
     </template>
 
     <template #append>
