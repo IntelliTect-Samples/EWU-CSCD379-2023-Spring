@@ -40,6 +40,7 @@ const vuetify = createVuetify({
       }
     }
   }
+  //theme: { defaultTheme: 'light' }
 })
 
 const app = createApp(App)

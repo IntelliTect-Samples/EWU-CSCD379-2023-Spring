@@ -51,10 +51,13 @@ export class WordleGame {
     console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
+    const list = WordsService.getWordList()
+    WordsService.validWords(this.guess, list)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      
     }
   }
 }
