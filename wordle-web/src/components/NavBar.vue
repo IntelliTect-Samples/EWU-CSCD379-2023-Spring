@@ -1,7 +1,8 @@
 <template>
   <v-layout>
-    <v-app-bar color="warning" density="compact">
+    <v-app-bar color="warning" density="compact" primary>
       <v-app-bar-title>Wordle</v-app-bar-title>
+      <SettingsTab></SettingsTab>
       <template v-slot:append>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </template>
@@ -28,6 +29,7 @@
 </template>
 
 <script setup lang="ts">
+import SettingsTab from '@/components/SettingsTab.vue'
 import { ref } from 'vue'
 
 let drawer = ref(false)

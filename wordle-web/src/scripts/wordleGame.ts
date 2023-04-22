@@ -52,6 +52,10 @@ export class WordleGame {
   }
 
   selectGuess(word: string) {
-    this.guess = new Word(word)
+    for (let i = 0; i < word.length; i++) {
+      if (this.guess.letters[i].char === '') {
+        this.guess.push(word[i])
+      }
+    }
   }
 }

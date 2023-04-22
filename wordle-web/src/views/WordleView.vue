@@ -1,21 +1,11 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
   <GameBoard :game="game" @letterClick="addChar" />
-
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+  <h3>Current secret word: {{ game.secretWord }}</h3>
   <WordList :game="game"></WordList>
 </template>
 
@@ -57,7 +47,7 @@ function checkGuess() {
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
-  guess.value += letter.char
+  game.validWordList = WordsService.validWords(game.guess.text)
 }
 
 function keyPress(event: KeyboardEvent) {

@@ -1,11 +1,11 @@
 <template>
   <v-btn color="primary">
-    {{ game?.validWordList.length }}
+    Valid Word Count: {{ game?.validWordList.length }}
 
     <v-menu activator="parent">
       <v-list>
         <v-list-item v-for="word in game?.validWordList" :key="word">
-          <v-btn block @click="submitWord(word)"> {{ word }}</v-btn>
+          <v-btn block @click="submitWord(word)">{{ word }}</v-btn>
         </v-list-item>
       </v-list>
     </v-menu>
