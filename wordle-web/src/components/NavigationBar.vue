@@ -2,25 +2,16 @@
   <v-card>
     <v-layout>
       <v-app-bar>
-
         <template v-slot:image>
-          <v-img
-            gradient="to top right, rgba(0,0,0,.8), rgba(254,116,34,.8)"
-          ></v-img>
         </template>
         <template v-slot:prepend>
           <router-link to="/"
             ><v-app-bar-nav-icon icon="mdi-vuejs"></v-app-bar-nav-icon
           ></router-link>
           <router-link to="/"><v-app-bar-title> wordle</v-app-bar-title></router-link>
-                <SettingsDialogVue/>
-        
-
+          <SettingsDialogVue />
         </template>
         <v-spacer></v-spacer>
-       
-
-
 
         <template v-slot:append>
           <v-btn>
