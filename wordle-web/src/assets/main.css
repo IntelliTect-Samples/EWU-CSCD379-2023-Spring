@@ -1,5 +1,11 @@
 @import './base.css';
 
+html { 
+  overflow-y: auto !important;
+}
+.v-btn {
+  min-width: 0 !important;
+}
 a,
 .green {
   text-decoration: none;

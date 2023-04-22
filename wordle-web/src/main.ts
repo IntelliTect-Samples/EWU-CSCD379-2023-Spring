@@ -22,26 +22,41 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: 'darkCalm',
     themes: {
-      dark: {
+      darkCalm: {
+        dark:true,
+        colors: {
+          correct: '#599c5b',
+          misplaced: '#c1a03e',
+          wrong: '#b2564f'
+        }
+      },
+      lightCalm: {
+        colors: {
+          correct: '#5ebb61',
+          misplaced: '#d7b942',
+          wrong: '#c35e57'
+        },
+      },
+      darkEnergizing: {
+        dark:true,
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
         }
       },
-      inverse: {
+      lightEnergizing: {
         colors: {
-          correct: '#F44336',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
-        }
+          wrong: '#F44336'
+        },
       }
     }
   }
 })
-
 const app = createApp(App)
 
 app.use(vuetify)

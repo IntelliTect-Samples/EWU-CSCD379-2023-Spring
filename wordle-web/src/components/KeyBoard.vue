@@ -1,9 +1,19 @@
 <template>
-  <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
-    </v-col>
-  </v-row>
+  <div dense v-for="(key, i) in keyboardLetters" :key="i" class="d-flex justify-center my-1">
+      <v-btn v-if="i == 2" :width="68" :height="58" class="mr-1" @click="enterClick" color="grey">
+        Enter
+      </v-btn>
+      <LetterButton 
+      v-for="(letter, j) in key" 
+      :key="j" 
+      :letter="letter" 
+      @click="letterClick(letter)"
+      small
+      class="mx-1"
+      :height="58"
+      :width="43"/>
+      <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="grey"><v-icon icon="mdi-backspace-outline"/></v-btn>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -40,7 +50,17 @@ const keyboardLetters = computed(() => {
 
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
+  (event: 'enter') : void
+  (event: 'delete') : void
 }>()
+
+function enterClick(){
+  emits('enter');
+}
+
+function deleteClick(){
+  emits('delete');
+}
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)

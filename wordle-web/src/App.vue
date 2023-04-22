@@ -1,28 +1,46 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-      <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
-    </div>
-  </header>
+  <v-layout>
+    <v-app-bar title="Wordle">
 
-  <RouterView />
+    <template #prepend>
+      <v-icon>fa fas-trash</v-icon>
+    </template>
+
+    <template #append>
+      <v-app-bar-nav-icon @click.stop="drawerOpen = !drawerOpen"/>
+    </template>
+  </v-app-bar>
+  <v-navigation-drawer
+        v-model="drawerOpen"
+        location="right"
+        temporary
+      >
+      <v-list>
+            <v-list-item to="/about" prepend-icon="mdi-information">
+              About
+            </v-list-item>
+          <v-list-item @click.stop="dialogOpen = true" prepend-icon="mdi-cog">
+            Settings
+            <SettingsDialog v-model="dialogOpen"/>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+      
+  <v-main>
+    <RouterView />
+  </v-main>
+
+  </v-layout>
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
+import { useTheme } from 'vuetify/lib/framework.mjs';
+import SettingsDialog from './components/SettingsDialog.vue';
+import { ref } from 'vue';
 
-const theme = useTheme()
+const dialogOpen = ref(false);
+const drawerOpen= ref(false);
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
+const theme = useTheme();
+theme.global.name.value = localStorage.getItem('v-theme') ?? 'darkEnergizing'
 </script>
