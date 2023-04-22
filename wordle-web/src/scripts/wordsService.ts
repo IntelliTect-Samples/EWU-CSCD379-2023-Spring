@@ -13,9 +13,7 @@ export abstract class WordsService {
     const possibleStrings = this.#words.filter((word) =>
       word.toUpperCase().startsWith(partialGuess.trim())
     )
-    console.log(possibleStrings)
     const possibleWords = possibleStrings.map((word) => new Word(word))
-    console.log(possibleWords)
     return possibleWords
   }
 

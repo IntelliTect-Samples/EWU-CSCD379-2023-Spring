@@ -11,7 +11,6 @@
 <script setup lang="ts">
 import type { WordleGame } from '@/scripts/wordleGame'
 import LetterButton from '@/components/LetterButton.vue'
-import type { Letter } from '@/scripts/letter'
 
 defineProps<{
   game: WordleGame

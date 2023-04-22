@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Letter } from '@/scripts/letter'
 import type { Word } from '@/scripts/word'
 import type { WordleGame } from '@/scripts/wordleGame'
 import { WordsService } from '@/scripts/wordsService'
@@ -54,25 +53,18 @@ let wordDialog = ref(false)
 
 function getValidWords(currentGuess: Word): Word[] {
   const partialGuess = currentGuess.letters.map((letter) => letter.char).join('')
-  console.log(partialGuess)
   return WordsService.validWords(partialGuess)
 }
 
 function clickWord(word: Word) {
+  props.game.currentGuess = word
   wordDialog.value = false
-}
-
-const emits = defineEmits<{
-  (event: 'wordClick', value: Word): void
-}>()
-
-function wordClick(word: Word) {
-  emits('wordClick', word)
 }
 </script>
 
 <style scoped>
-.v-card-text {
+.v-card-text,
+td {
   cursor: pointer;
 }
 </style>
