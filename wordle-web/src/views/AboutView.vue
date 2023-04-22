@@ -8,7 +8,26 @@
       Wordle is a great game, but not as great as Meg is!
     </p>
   </div>
+  <div>
+      
+      <v-btn 
+        density="compact" 
+        @click="goBack"
+      >
+        Back
+      </v-btn>  
+
+    </div>
+
 </template>
+
+<script setup lang="ts">
+import $router from '../router/index'
+
+function goBack() {
+  $router.go(-1)
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {
