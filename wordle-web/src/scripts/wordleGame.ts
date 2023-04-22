@@ -1,5 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
+import type { Letter } from './letter'
 
 export enum GameState {
   Active = 0,
@@ -14,6 +15,7 @@ export class WordleGame {
 
   status = GameState.Active
   guesses = new Array<Word>()
+  guessedLetters = new Array<Letter>()
   currentGuessIndex = 0
   secretWord = ''
 
@@ -41,6 +43,9 @@ export class WordleGame {
     } else if (this.currentGuessIndex >= this.guesses.length - 1) {
       this.status = GameState.Lost
       console.log('You lost!')
+    }
+    for (const letter of this.currentGuess.letters) {
+      this.guessedLetters.push(letter)
     }
     this.currentGuessIndex++
   }

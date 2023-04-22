@@ -1,13 +1,6 @@
 <template>
-  <div>
-    <v-row v-for="word in game.guesses" :key="word.text">
-      <v-col v-for="letter in word.letters" :key="letter.char" class="pa-1 ma-1">
-        <LetterButton :letter="letter"></LetterButton>
-      </v-col>
-    </v-row>
-  </div>
-
-  <v-btn color="primary" class="mt-5" @click="checkGuess">Submit</v-btn>
+  <GameBoard :game="game" />
+  <div class="mt-10"><KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" /></div>
   <v-container>
     <div>Your guess: [{{ game.currentGuess.text }}]</div>
     <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
@@ -16,7 +9,9 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import LetterButton from '@/components/LetterButton.vue'
+import type { Letter } from '@/scripts/letter'
+import GameBoard from '@/components/GameBoard.vue'
+import KeyBoard from '@/components/KeyBoard.vue'
 import { onMounted, onUnmounted, reactive } from 'vue'
 
 const game = reactive(new WordleGame())
@@ -27,6 +22,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function addChar(letter: Letter) {
+  game.currentGuess.push(letter.char)
+}
 
 function keyPress(event: KeyboardEvent) {
   if (event.key.length === 1) {
