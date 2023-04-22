@@ -7,7 +7,7 @@
           <router-link to="/"
             ><v-app-bar-nav-icon icon="mdi-vuejs"></v-app-bar-nav-icon
           ></router-link>
-          <router-link to="/"><v-app-bar-title> wordle</v-app-bar-title></router-link>
+          <router-link to="/"><v-app-bar-title class="primary" color="primary"> wordle</v-app-bar-title></router-link>
           <SettingsDialogVue />
         </template>
         <v-spacer></v-spacer>

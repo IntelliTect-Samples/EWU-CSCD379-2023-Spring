@@ -9,16 +9,8 @@
     </p>
   </div>
   <div>
-      
-      <v-btn 
-        density="compact" 
-        @click="goBack"
-      >
-        Back
-      </v-btn>  
-
-    </div>
-
+    <v-btn density="compact" @click="goBack"> Back </v-btn>
+  </div>
 </template>
 
 <script setup lang="ts">
