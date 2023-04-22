@@ -1,18 +1,10 @@
 <template>
   
-  <GameBoard :game="game" @letterClick="addChar" class="text-center"/>
-  <v-spacer/>
+  <GameBoard :game="game" @letterClick="addChar" class="text-center" margin="10%"/>
+
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters"/>
 
-  
-  <v-row class="justify-center" dense>
-    <v-col cols="auto">
-      <v-btn icon="mdi-keyboard-return" color="grey" @click="checkGuess" @keyup.enter="checkGuess"/> 
-    </v-col>
-    <v-col cols="auto">
-      <v-btn icon="mdi-backspace-outline" color="grey" @click="removeChar" @keyup.Backspace="removeChar"/>
-    </v-col>
-  </v-row>
+
 </template>
 
 <script setup lang="ts">
@@ -39,8 +31,14 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  guess.value += letter.char
-  game.guess.push(letter.char)
+  if(letter.char === 'Submit') {
+    checkGuess()
+  }else if(letter.char === '←') {
+    removeChar()
+  }else{
+    guess.value += letter.char
+    game.guess.push(letter.char)
+  }
 }
 
 function removeChar() {
