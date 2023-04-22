@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'grey'
 })
 
-var audio = new Audio('src/assets/zapsplat_multimedia_button_click_bright_003_92100.mp3')
+var audio = new Audio('../src/assets/zapsplat_multimedia_button_click_bright_003_92100.mp3')
 audio.volume = 0.4
 
 function playAudio() {
