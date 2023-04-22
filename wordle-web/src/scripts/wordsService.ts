@@ -12,6 +12,10 @@ export abstract class WordsService {
     return new Array<string>()
   }
 
+  static getWords(): string[] {
+    return this.#words;
+  }
+
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [
     'aahed',
