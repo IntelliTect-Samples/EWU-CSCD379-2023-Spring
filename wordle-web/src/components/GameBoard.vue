@@ -1,5 +1,5 @@
 <template>
-    <v-row dense v-for="word in game.guesses" :key="word.text">
+    <v-row dense class="justify-center" v-for="word in game.guesses" :key="word.text">
       <v-col cols="auto" v-for="letter in word.letters" :key="letter.char">
         <LetterButton :letter="letter" @click="letterClick(letter)"></LetterButton>
       </v-col>

@@ -1,5 +1,5 @@
 <template>
-  <v-btn :color="props.color">
+  <v-btn margin="0px" :color="props.color">
     {{ props.char }}
   </v-btn>
 </template>
