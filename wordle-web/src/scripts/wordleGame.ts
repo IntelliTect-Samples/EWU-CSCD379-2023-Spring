@@ -23,6 +23,7 @@ export class WordleGame {
     const word = new Word('plate')
     this.guesses.push(word)
     word.check(this.secretWord)
-    WordsService.validWords(word, ['apple', 'pales', 'peach', 'crypt'])
+    const list = WordsService.getWordList()
+    WordsService.validWords(word, list)
   }
 }
