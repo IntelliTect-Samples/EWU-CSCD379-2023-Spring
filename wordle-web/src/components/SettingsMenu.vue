@@ -3,10 +3,6 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
@@ -15,15 +11,13 @@ function setLightTheme() {
   theme.global.name.value = 'light'
 }
 
-function setPastelTheme() {
-  theme.global.name.value = 'pastel'
+function setSunsetTheme() {
+  theme.global.name.value = 'sunset'
 }
-</script>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({})
+function setOceanTheme() {
+  theme.global.name.value = 'ocean'
+}
 </script>
 
 <template>
@@ -35,20 +29,21 @@ export default defineComponent({})
     </template>
     <template v-slot:default="{ isActive }">
       <v-card width="500px" height="350px">
-        <v-toolbar color="#5439AA">
+        <v-toolbar color="primary">
           <v-toolbar-title class="flex text-center">
-            <span class="text-h4 bold">Settings</span>
+            <span class="text-h4"> Settings </span>
           </v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <V-text class="text-h5 bold"> Theme: </V-text> <br /><br />
-          <v-btn variant="tonal" color="#27AE6A" @click="setInverseTheme">Inverse</v-btn> &nbsp;
+          <V-text class="text-h5"> Theme: </V-text> <br /><br />
+
           <v-btn variant="tonal" color="#9575CD" @click="setDarkTheme">Dark</v-btn> &nbsp;
-          <v-btn variant="tonal" color="#FFEE58" @click="setLightTheme">Light</v-btn> &nbsp;
-          <v-btn variant="tonal" color="#BA68C8" @click="setPastelTheme">Pastel</v-btn>
+          <v-btn variant="tonal" color="#4CAF50" @click="setLightTheme">Light</v-btn> &nbsp;
+          <v-btn variant="tonal" color="#FF781E" @click="setSunsetTheme">Sunset</v-btn>&nbsp;
+          <v-btn variant="tonal" color="#3079CC" @click="setOceanTheme">Ocean</v-btn>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="#B0BEC5" text size="x-large" @click="isActive.value = false">Close</v-btn>
+          <v-btn variant="text" density="compact" elevation="4" text size="x-large" @click="isActive.value = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </template>

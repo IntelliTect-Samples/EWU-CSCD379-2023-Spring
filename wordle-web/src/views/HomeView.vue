@@ -15,7 +15,7 @@ export default {
   <br />
   <br />
   <h1 id="h1">
-    Welcome to . . . <v-btn color="#27AE6A" @click="showImage = !showImage">CLICK ME</v-btn>
+    Welcome to . . . <v-btn color="secondary" @click="showImage = !showImage">CLICK ME</v-btn>
   </h1>
   <br />
   <br />

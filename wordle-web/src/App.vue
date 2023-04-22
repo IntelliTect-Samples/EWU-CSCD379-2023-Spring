@@ -1,13 +1,12 @@
 <template>
   <v-app>
-    <v-app-bar color="#5439AA" elevation="2">
-      <RouterLink to="/"
-        ><img id="XelaLogo" alt="Xela Games Logo" class="logo" :src="logo" width="60"
-      /></RouterLink>
+    <v-app-bar color="primary" elevation="2">
+      
+      <img id="XelaLogo" alt="Xela Games Logo" class="logo ms-4" :src="logo" width="60" @click="$router.push('/')"/>
 
-      <v-app-bar-title id="siteTitle"> Xela Games </v-app-bar-title>
+      <v-app-bar-title font-size="" id="siteTitle" @click="$router.push('/')"> Xela Games </v-app-bar-title>
 
-      <v-app-bar-nav-icon color="#ffffff">
+      <v-app-bar-nav-icon>
         <SettingsMenu></SettingsMenu>
       </v-app-bar-nav-icon>
 
@@ -50,6 +49,5 @@ export default {
 <style scoped>
 #siteTitle {
   font-size: 26px;
-  color: #ffffff;
 }
 </style>
