@@ -2,7 +2,7 @@
   <div>
     <v-row dense class="justify-center" v-for="(word, r) in game.guesses" :key="r">
       <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
-        <LetterButton :letter="letter" @click="letterClick(letter)" height="60px" width="55px" />
+        <LetterButton :letter="letter" height="60px" width="55px" />
       </v-col>
     </v-row>
   </div>
@@ -16,12 +16,4 @@ import type { Letter } from '@/scripts/letter'
 defineProps<{
   game: WordleGame
 }>()
-
-const emits = defineEmits<{
-  (event: 'letterClick', value: Letter): void
-}>()
-
-function letterClick(letter: Letter) {
-  emits('letterClick', letter)
-}
 </script>

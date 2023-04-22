@@ -1,6 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
-import type { Letter } from './letter'
+import { LetterStatus, Letter } from './letter'
 
 export enum GameState {
   Active = 0,
@@ -45,8 +45,27 @@ export class WordleGame {
       console.log('You lost!')
     }
     for (const letter of this.currentGuess.letters) {
-      this.guessedLetters.push(letter)
+      // If the letter has not been guessed yet, add it to the list of guessed letters
+      if (!this.guessedLetters.some((l) => l.char === letter.char)) {
+        const newLetter = new Letter(letter.char, letter.status)
+        this.guessedLetters.push(newLetter)
+      }
+      // Else if the letter has been guessed, update the status if necessary
+      else {
+        const guessedLetter = this.guessedLetters.find((l) => l.char === letter.char)
+        if (guessedLetter) {
+          if (
+            guessedLetter.status === LetterStatus.Misplaced &&
+            letter.status === LetterStatus.Correct &&
+            this.secretWord.indexOf(letter.char) ===
+              this.currentGuess.text.indexOf(guessedLetter.char)
+          ) {
+            guessedLetter.status = LetterStatus.Correct
+          }
+        }
+      }
     }
+    console.log(this.guessedLetters)
     this.currentGuessIndex++
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <GameBoard :game="game" />
-  <div class="mt-10"><KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" /></div>
+  <div class="mt-10">
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  </div>
   <v-container>
     <div>Your guess: [{{ game.currentGuess.text }}]</div>
     <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
