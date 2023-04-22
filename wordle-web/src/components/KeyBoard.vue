@@ -1,6 +1,6 @@
 <template>
   <div dense v-for="(key, i) in keyboardLetters" :key="i" class="d-flex justify-center my-1">
-      <v-btn v-if="i == 2" :width="68" :height="58" class="mr-1" @click="enterClick" color="grey">
+      <v-btn v-if="i == 2" :width="68" :height="58" class="mr-1 text-overline" @click="enterClick" color="default">
         Enter
       </v-btn>
       <LetterButton 
@@ -9,10 +9,10 @@
       :letter="letter" 
       @click="letterClick(letter)"
       small
-      class="mx-1"
+      class="mx-1 text-h6"
       :height="58"
       :width="43"/>
-      <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="grey"><v-icon icon="mdi-backspace-outline"/></v-btn>
+      <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="default"><v-icon size="x-large" icon="mdi-backspace-outline"/></v-btn>
   </div>
 </template>
 
