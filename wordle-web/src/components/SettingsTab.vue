@@ -18,6 +18,10 @@
           <v-chip @click="setInverseTheme">Inverse Mode</v-chip>
         </v-chip-group>
 
+        <v-card-title class="text-center">Volume</v-card-title>
+
+        <v-slider v-model="volume" step="10" show-ticks prepend-icon="mdi-volume-high"></v-slider>
+
         <v-btn color="primary" @click="dialog = false">Close Dialog</v-btn>
       </v-card>
     </v-dialog>
@@ -29,6 +33,7 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 import { ref } from 'vue'
 
 const theme = useTheme()
+const volume = ref(10)
 
 function setInverseTheme() {
   theme.global.name.value = 'inverse'
@@ -37,6 +42,13 @@ function setInverseTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
+
+// function setVolume() {
+//   for(const audio in document.getElementsByTagName('audio')) {
+//     audio.volume = volume
+//   }
+//   console.log(volume)
+// }
 
 let dialog = ref(false)
 </script>

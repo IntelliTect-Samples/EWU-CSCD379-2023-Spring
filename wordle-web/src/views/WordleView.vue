@@ -2,11 +2,10 @@
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-
+  <WordList :game="game"></WordList>
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h3>Current secret word: {{ game.secretWord }}</h3>
-  <WordList :game="game"></WordList>
 </template>
 
 <script setup lang="ts">
