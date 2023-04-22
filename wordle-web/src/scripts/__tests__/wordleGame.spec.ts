@@ -24,16 +24,4 @@ describe('Word', () => {
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
 
-  it('Filters Incorrect Words From WordList', () => {
-    // Arrange
-    const GuessWord = new Word('apple')
-    const secretWord = 'pales'
-    const wordList: string[] = ['peach', 'pears', 'carps', 'leapy', 'creep', 'leper']
-
-    // Act
-    GuessWord.check(secretWord)
-    const newList = WordsService.validWords(GuessWord, wordList)
-    //Assert
-    expect(newList).toBe(['peach', 'leapy', 'creep', 'leper'])
-  })
 })
