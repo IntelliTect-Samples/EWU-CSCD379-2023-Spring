@@ -22,7 +22,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: 'light',
     themes: {
       dark:  {
         dark: true,
@@ -59,17 +59,17 @@ const vuetify = createVuetify({
       pumpkinDark: {
         dark: true,
         colors: {
-          correct: '#B4CEB3',
-          misplaced: '#ED9B40',
-          wrong: '#7A4419'
+          correct: '#ff9a00',
+          misplaced: '#c900ff',
+          wrong: '#000000'
         }
       },
       pumpkinLight: {
         dark: false,
         colors: {
-          correct: '#B4CEB3',
-          misplaced: '#ED9B40',
-          wrong: '#7A4419'
+          correct: '#ff9a00',
+          misplaced: '#c900ff',
+          wrong: '#000000'
         }
       }
   }    

@@ -87,28 +87,22 @@ const lightTheme = ref(false);
 function setLightTheme() {
   lightTheme.value = true;
   if(currentTheme.value === 'dark') {
-    emits('setTheme', 'light')
-    currentTheme.value = 'light';
+    setDefaultTheme();
   } else if(currentTheme.value === 'unicornDark') {
-    emits('setTheme', 'unicornLight')
-    currentTheme.value = 'unicornLight';
+    setUnicornTheme();
   } else if(currentTheme.value === 'pumpkinDark') {
-    emits('setTheme', 'pumpkinLight')
-    currentTheme.value = 'pumpkinLight';
+    setPumpkinTheme();
   }
 }
 
 function setDarkTheme() {
   lightTheme.value = false;
   if(currentTheme.value === 'light') {
-    emits('setTheme', 'dark')
-    currentTheme.value = 'dark';
+    setDefaultTheme();
   } else if(currentTheme.value === 'unicornLight') {
-    emits('setTheme', 'unicornDark')
-    currentTheme.value = 'unicornDark';
+    setUnicornTheme();
   } else if(currentTheme.value === 'pumpkinLight') {
-    emits('setTheme', 'pumpkinDark')
-    currentTheme.value = 'pumpkinDark';
+    setPumpkinTheme();
   }
 }
 
