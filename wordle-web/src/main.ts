@@ -32,6 +32,7 @@ const vuetify = createVuetify({
         }
       },
       light:  {
+        dark: false,
         colors:{
           correct: 'green',
           misplaced: 'yellow',

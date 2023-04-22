@@ -2,7 +2,7 @@
   <header>
 
     <div class="wrapper">
-      <headerBar />
+      <headerBar @setTheme="changeTheme"/>
     </div>
     
   </header>
@@ -63,7 +63,8 @@ nav a:first-of-type {
 </style>
 
 <script lang = 'ts'>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import { useTheme } from 'vuetify'
 import headerBar from './components/HeaderBar.vue'
 
 export default {
@@ -72,6 +73,14 @@ export default {
   }),
   components: {
     headerBar
+  },
+  methods: {
+    changeTheme
   }
+}
+
+function changeTheme(theme?: string | undefined) {
+  const current = useTheme()
+  current.global.name.value = theme ?? 'dark'
 }
 </script>
