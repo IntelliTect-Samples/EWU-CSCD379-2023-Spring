@@ -43,7 +43,15 @@ function setOceanTheme() {
           <v-btn variant="tonal" color="#3079CC" @click="setOceanTheme">Ocean</v-btn>
         </v-card-text>
         <v-card-actions>
-          <v-btn variant="text" density="compact" elevation="4" text size="x-large" @click="isActive.value = false">Close</v-btn>
+          <v-btn
+            variant="text"
+            density="compact"
+            elevation="4"
+            text
+            size="x-large"
+            @click="isActive.value = false"
+            >Close</v-btn
+          >
         </v-card-actions>
       </v-card>
     </template>

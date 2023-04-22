@@ -1,10 +1,18 @@
 <template>
   <v-app>
     <v-app-bar color="primary" elevation="2">
-      
-      <img id="XelaLogo" alt="Xela Games Logo" class="logo ms-4" :src="logo" width="60" @click="$router.push('/')"/>
+      <img
+        id="XelaLogo"
+        alt="Xela Games Logo"
+        class="logo ms-4"
+        :src="logo"
+        width="60"
+        @click="$router.push('/')"
+      />
 
-      <v-app-bar-title font-size="" id="siteTitle" @click="$router.push('/')"> Xela Games </v-app-bar-title>
+      <v-app-bar-title font-size="" id="siteTitle" @click="$router.push('/')">
+        Xela Games
+      </v-app-bar-title>
 
       <v-app-bar-nav-icon>
         <SettingsMenu></SettingsMenu>
