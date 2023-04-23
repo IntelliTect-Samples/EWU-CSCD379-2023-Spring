@@ -27,6 +27,7 @@ const vuetify = createVuetify({
       darkCalm: {
         dark:true,
         colors: {
+          primary: '#4d4d4d',
           correct: '#538d4e',
           misplaced: '#bfa746',
           wrong: '#3a3a3c',
@@ -35,6 +36,7 @@ const vuetify = createVuetify({
       },
       lightCalm: {
         colors: {
+          primary: '#6c6c6c',
           correct: '#538d4e',
           misplaced: '#bfa746',
           wrong: '#7d7d7d',
@@ -44,17 +46,36 @@ const vuetify = createVuetify({
       darkEnergizing: {
         dark:true,
         colors: {
+          primary: '#ffffff',
           correct: '#4CAF50',
-          misplaced: '#FFC107',
+          misplaced: '#e78e00',
           wrong: '#3a3a3c',
           default: '#797979',
         }
       },
       lightEnergizing: {
         colors: {
+          primary: '#141414',
           correct: '#4CAF50',
-          misplaced: '#FFC107',
+          misplaced: '#ef8801',
           wrong: '#F44336',
+          default: '#d3d6da'
+        },
+      },
+      darkEaster: {
+        dark:true,
+        colors: {
+          correct: '#00b8ac',
+          misplaced: '#6000e7',
+          wrong: '#c63ebd',
+          default: '#797979',
+        }
+      },
+      lightEaster: {
+        colors: {
+          correct: '#00b8ac',
+          misplaced: '#6000e7',
+          wrong: '#c63ebd',
           default: '#d3d6da'
         },
       }

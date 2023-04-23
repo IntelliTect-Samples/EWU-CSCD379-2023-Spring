@@ -9,9 +9,10 @@
       :letter="letter" 
       @click="letterClick(letter)"
       small
-      class="mx-1 text-h6"
+      class="mx-1"
+      :class="[padding, btnWidth, textSize]"
       :height="58"
-      :width="43"/>
+      :width="btnWidth"/>
       <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="default"><v-icon size="x-large" icon="mdi-backspace-outline"/></v-btn>
   </div>
 </template>
@@ -20,6 +21,26 @@
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import { computed } from 'vue'
+import { useDisplay } from 'vuetify/lib/framework.mjs';
+
+const display = useDisplay();
+
+const padding = computed(()=> display.width.value < 460 ? 'px-0' :'')
+
+const btnWidth = computed(()=>{
+  const width = display.width.value;
+
+  if (width < 400){
+    return 23;
+  } else if (width < 560){
+    return 38;
+  }
+  return 43;
+});
+
+const textSize = computed(()=>{
+  return display.width.value < 560 ? 'text-h6' : 'text-h5'
+})
 
 const props = defineProps<{
   guessedLetters: Letter[]

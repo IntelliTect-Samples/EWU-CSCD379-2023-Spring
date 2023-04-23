@@ -30,7 +30,10 @@
       </v-navigation-drawer>
       
   <v-main>
-    <RouterView />
+    <v-container class="pa-3 pt-5">
+
+      <RouterView />
+    </v-container>
   </v-main>
 
   </v-layout>

@@ -10,8 +10,7 @@
         <v-switch :label="isDarkMode ? 'Dark' : 'Light'" color="primary" v-model="isDarkMode"></v-switch>
         <v-divider/>
         <v-radio-group label="Theme" v-model="style">
-          <v-radio label="Calm" value="Calm"/>
-          <v-radio label="Energizing" value="Energizing"/>
+          <v-radio v-for="(s,i) in styles" :label="s" :value="s" :key="i" />
         </v-radio-group>
       </div>
 
@@ -29,10 +28,20 @@ defineProps<{
 }>();
 
 const theme = useTheme()
+const styles = ['Calm', 'Energizing', 'Easter'];
 
-console.log('theme:',theme.global.name.value)
 const isDarkMode = ref(theme.global.name.value.includes("dark"));
-const style = ref<string>(theme.global.name.value.includes('Calm') ? 'Calm' : 'Energizing')
+
+const style = ref<string>(getCurrentStyle());
+
+function getCurrentStyle(){
+    for(const s of styles){
+        if(theme.global.name.value.includes(s)){
+            return s;
+        }
+    }
+    return styles[0];
+}
 
 watch([isDarkMode, style], ([isDark,style])=>{
     const d = isDark ? 'dark' : 'light';

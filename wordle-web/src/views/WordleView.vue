@@ -1,11 +1,11 @@
 <template>
-
-    <div class="d-flex flex-column align-center flex-grow-0 pa-4 mt-8 scale">
+    <div class="d-flex flex-column align-center">
     <GameBoard :game="game" @letterClick="addChar" />
     <h2 class="my-1 text-overline">{{ guess || 'Enter a Guess' }}</h2>
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" @enter="checkGuess" @delete="deleteClick"/>
 
   </div>
+
   <h3>{{ game.secretWord }}</h3>
   <small v-for="(w,i) of list" :key="`${w}-${i}`">{{ w }}<br/></small>
 </template>
@@ -68,7 +68,7 @@ function keyPress(event: KeyboardEvent) {
 }
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .scale {
   transform: scale(.7,.7);
 }
@@ -85,4 +85,4 @@ function keyPress(event: KeyboardEvent) {
 }
 
 
-</style>
+</style> -->
