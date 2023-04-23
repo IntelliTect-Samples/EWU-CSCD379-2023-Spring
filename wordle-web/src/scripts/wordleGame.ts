@@ -37,13 +37,13 @@ export class WordleGame {
     }
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
-    
     this.validWords = WordsService.validWords(this);
   }
 
   validWords = Array<string>();
 
   submitGuess() {
+    
     // put logic to win here.
     this.guess.check(this.secretWord)
 

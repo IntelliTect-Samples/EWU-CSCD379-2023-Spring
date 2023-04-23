@@ -55,9 +55,7 @@ export abstract class WordsService {
             valid = false;
           }
         }
-        // 
-
-
+        
         if (valid){
           validWords.add(word);
         }
