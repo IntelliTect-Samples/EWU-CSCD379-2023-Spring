@@ -10,8 +10,8 @@
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
 
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-
+  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters"/>
+  
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
