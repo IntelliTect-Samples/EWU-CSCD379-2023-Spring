@@ -15,13 +15,57 @@ import * as directives from 'vuetify/directives'
 const defaultDark = {
   dark: true,
   colors: {
+    primary: '#bfbfbf',
+    correct: '#1e6b1e',
+    misplaced: '#eba10d',
+    wrong: '#6d1212',
+    unknown: '#7979a0'
+  }
+}
+const autumnDark = {
+  dark: true,
+  colors: {
     primary: '#ff4500',
+  }
+}
+const coffeeDark = {
+  dark: true,
+  colors: {
+    primary: '#c17149',
+  }
+}
+const unicornVomitDark = {
+  dark: true,
+  colors: {
+    primary: '#ff0066',
   }
 }
 const defaultLight = {
   dark: false,
   colors: {
-    primary: '#660066',
+    primary: '#333333',
+    correct: '#1e6b1e',
+    misplaced: '#eba10d',
+    wrong: '#6d1212',
+    unknown: '#505050'
+  }
+}
+const autumnLight = {
+  dark: false,
+  colors: {
+    primary: '#a51900',
+  }
+}
+const coffeeLight = {
+  dark: false,
+  colors: {
+    primary: '#4b2a1b',
+  }
+}
+const unicornVomitLight = {
+  dark: false,
+  colors: {
+    primary: '#ff0066',
   }
 }
 
@@ -38,7 +82,7 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme: 'defaultDark',
     themes: {
-      defaultDark, defaultLight,
+      defaultDark, defaultLight, autumnDark, autumnLight, coffeeDark, coffeeLight, unicornVomitDark, unicornVomitLight
     }
   }
 })

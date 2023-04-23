@@ -1,4 +1,3 @@
-//Class that represents a letter in the bootleg wordle game
 export enum LetterStatus {
     Unknown = 0,
     Correct,
@@ -16,12 +15,12 @@ export class letter {
     get color(){
         switch(this.status){
             case LetterStatus.Correct:
-                return 'green';
+                return '--v-correct';
             case LetterStatus.Misplaced:
-                return 'gold';
+                return '--v-misplaced';
             case LetterStatus.Wrong:
-                return 'black';
+                return '--v-wrong';
         }
-        return 'grey';
+        return '--v-unknown';
     }
 }
