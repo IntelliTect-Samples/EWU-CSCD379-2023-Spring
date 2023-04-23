@@ -13,6 +13,8 @@ export abstract class WordsService {
   static validWords(game: WordleGame, previousValid: string[] | undefined = undefined): Array<string> {
 
     const validLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced).map(l => l.char));
+    const wrongLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Wrong).map(l => l.char));
+    const absoluteWrongs = wrongLetters.filter(l => !validLetters.includes(l));
 
     const validWords = new Set<string>();
 
@@ -33,47 +35,35 @@ export abstract class WordsService {
       game.guesses.forEach(guess =>{
         let valid = true;
 
-        if (!validLetters.every(vl => word.includes(vl))){
-          // skip if it doesn't contain any correctly or misplaced letters
-          valid = false;
-        }
-        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char)){
-          // skip words that share a misplaced letter at the same index
-          valid = false;
-        }
-        if (!correctLetters.every((cl,i) => {
-          if (!cl){
-            return true;
-          }else{
-            return cl == word[i];
+        // make sure it doesn't contain any absolutely wrong letters
+        for (const l of word){
+          if (absoluteWrongs.includes(l)){
+            valid = false;
+            break;
           }
-        })){
-          // skip words that don't share a correctly placed letter
-          valid = false;
         }
-        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char) && word.includes(gl.char))){
-          // remove words that share a wrong letter that isn't also a valid letter
-          valid = false;
+
+        // if its valid here, we can start our other checks
+        if (valid){
+          // it has to include all misplaced and correct letters
+          if ((!validLetters.every(vl => word.includes(vl))) ||
+          // cant share misplaced letters at the same index
+          guess.letters.some((gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char) ||
+          // must share correct letters at the same index
+          !correctLetters.every((cl,i) => !cl || cl == word[i])){
+            // skip if it doesn't contain any correctly or misplaced letters
+            valid = false;
+          }
         }
+        // 
+
+
         if (valid){
           validWords.add(word);
         }
       })
     })
 
-    const removeList = Array<string>();
-    validWords.forEach((word) =>{
-      game.guesses.forEach( guess => {
-        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && word.includes(gl.char) && !validLetters.includes(gl.char))){
-          // remove words that share a wrong letter that arent valid
-          removeList.push(word);
-        }
-      });
-    });
-
-    removeList.forEach(word => validWords.delete(word))
-
-    
     return [...validWords];
   }
 
