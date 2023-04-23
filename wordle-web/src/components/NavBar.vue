@@ -34,8 +34,8 @@
                     <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
                     <v-list-item @click.stop="setting = true" @click="setLightTheme" prepend-icon="mdi-weather-sunny" > LightTheme </v-list-item>
                     <v-list-item @click.stop="setting = true" @click="setDarkTheme" prepend-icon="mdi-lightbulb-night" > Dark Theme </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setNeonLight" prepend-icon="mdi-lightbulb-night" > Neon Dark </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setNeonDark" prepend-icon="mdi-lightbulb-night" > Dark Theme </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setProtanopia_Deuteranopia" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setTritanopia" prepend-icon="mdi-lightbulb-night" > Tritanopia Mode </v-list-item>
                     <v-list-item @click.stop="setting = !setting" prepend-icon="mdi-information" to="/about"> About</v-list-item> 
                 </v-list-item-content>
             </v-list-item>
@@ -47,6 +47,7 @@
 <script>
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import { defineComponent } from 'vue'
+
 
 export default defineComponent({
   name: 'NavBar',
@@ -65,12 +66,12 @@ export default defineComponent({
         theme.global.name.value = 'dark'
     }
 
-    function setNeonDark() {
-        theme.global.name.value = 'neonDark'
+    function setProtanopia_Deuteranopia() {
+        theme.global.name.value = 'Protanopia_Deuteranopia'
     }
 
-    function setNeonLight() {
-        theme.global.name.value = 'neonLight'
+    function setTritanopia() {
+        theme.global.name.value = 'Tritanopia'
     }
 
     function setDefault() {
@@ -85,8 +86,8 @@ export default defineComponent({
     return {
         setLightTheme,
         setDarkTheme,
-        setNeonLight,
-        setNeonDark,
+        setProtanopia_Deuteranopia,
+        setTritanopia,
         setDefault,
     }
   },

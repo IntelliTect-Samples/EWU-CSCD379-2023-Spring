@@ -38,26 +38,25 @@ const vuetify = createVuetify({
           wrong: '#F44336'
         }
       },
-      neonDark: {
+      Protanopia_Deuteranopia: {
         dark: true,
         colors: {
-          correct: '#39FF14',
-          misplaced: '#FFFF33',
-          wrong: '#EE4B2B'
+          correct: '#0D47A1',
+          misplaced: '#FFFF00',
+          wrong: '#795548'
         }
       },
-      neonLight: {
-        dark: false,
+      Tritanopia: {
+        dark: true,
         colors: {
-          correct: '#39FF14',
-          misplaced: '#FFFF33',
-          wrong: '#EE4B2B'
+          correct: '#546E7A',
+          misplaced: '#FCE4EC',
+          wrong: '#FF1744'
         }
       }
     }
   }
 })
-
 const app = createApp(App)
 
 app.use(vuetify)
