@@ -2,17 +2,16 @@
   <div :class="themeClass">
     <v-card class="mx-auto mb-12" max-width="448">
       <v-layout>
-        <v-app-bar color="white" density="compact">
+        <v-app-bar class="custom-app-bar" color="white" density="compact">
           <template v-slot:prepend>
             <RouterLink to="/">
               <Icon icon="tabler:go-game" color="#155" width="50" height="50" />
             </RouterLink>
-            <RouterLink to="/">
-              <v-app-bar-title>Wordle Game</v-app-bar-title>
-            </RouterLink>
-
-            <nav></nav>
           </template>
+
+          <RouterLink to="/">
+            <v-app-bar-title>Wordle Game</v-app-bar-title>
+          </RouterLink>
 
           <template v-slot:append>
             <v-menu>
@@ -88,3 +87,11 @@ function setPainfulTheme() {
   theme.global.name.value = 'painful'
 }
 </script>
+
+<style scoped>
+.custom-app-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
