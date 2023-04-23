@@ -5,9 +5,9 @@
             <v-toolbar-title @click="$router.push('/')"><v-icon>mdi-diamond-stone</v-icon> Wordle Redux</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items class="red--text">
-                <v-btn  to="/">Home</v-btn>
-                <v-btn  to="/wordle">Wordle</v-btn>
-                <v-btn  to="/about">About</v-btn>
+                <v-btn to="/">Home</v-btn>
+                <v-btn to="/wordle">Wordle</v-btn>
+                <v-btn to="/about">About</v-btn>
                 <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark" > </v-app-bar-nav-icon>
                 <v-app-bar-nav-icon @click.stop="setting = !setting" icon="mdi-cog"></v-app-bar-nav-icon>
             </v-toolbar-items>
@@ -34,11 +34,11 @@
                     <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
                     <v-list-item @click.stop="setting = true" @click="setDefault" prepend-icon="mdi-theme-light-dark" > Light/Dark Mode </v-list-item>
                     <p>Dark Mode Game Mode</p>
-                    <v-list-item @click.stop="setting = true" @click="setProtanopia_Deuteranopia" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Dark Mode </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setTritanopia" prepend-icon="mdi-lightbulb-night" > Tritanopia Dark Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setProtanopia_Deuteranopia" prepend-icon="mdi-eye-plus" > Protanopia/Deuteranopia Dark Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setTritanopia" prepend-icon="mdi-eye-plus" > Tritanopia Dark Mode </v-list-item>
                     <p>Light Mode Game Mode</p>
-                    <v-list-item @click.stop="setting = true" @click="setProtanopia_DeuteranopiaLight" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Light Mode </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setTritanopiaLight" prepend-icon="mdi-lightbulb-night" > Tritanopia Light Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setProtanopia_DeuteranopiaLight" prepend-icon="mdi-eye-plus-outline" > Protanopia/Deuteranopia Light Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setTritanopiaLight" prepend-icon="mdi-eye-plus-outline" > Tritanopia Light Mode </v-list-item>
                     <v-list-item @click.stop="setting = !setting" prepend-icon="mdi-information" to="/about"> About</v-list-item> 
                 </v-list-item-content>
             </v-list-item>
