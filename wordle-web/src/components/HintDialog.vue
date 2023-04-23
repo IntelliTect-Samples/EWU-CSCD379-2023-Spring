@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
     <v-dialog width="auto">
       <template v-slot:activator="{ props }">
         <v-btn color="primary" v-bind="props">
@@ -15,7 +15,7 @@
         </v-row>
       </v-card>
     </v-dialog>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,7 +25,5 @@ defineProps<{
   game: WordleGame
 }>()
 
-function enterWord() {
-}
-
+function enterWord() {}
 </script>

@@ -9,7 +9,6 @@
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-
   <!--<h2>{{ guess }}</h2> -->
   <!--<h3>{{ game.secretWord }}</h3> -->
 </template>
@@ -56,6 +55,4 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
   }
 }
-
-
 </script>
