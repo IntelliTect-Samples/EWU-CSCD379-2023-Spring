@@ -26,19 +26,70 @@
 
     <v-list density="compact">
       <v-list-item>
-        <v-btn @click="toggleLightMode">Light Mode</v-btn>
+        <v-card color="#424242">
+          <v-btn color="white" @click="toggleLightMode">Light Mode</v-btn>
+          <v-card-text>
+            Green: Correct
+          </v-card-text>
+          <v-card-text>
+            Light-Orange: Misplaced
+          </v-card-text>
+          <v-card-text>
+            Red: Wrong
+          </v-card-text>
+
+        </v-card>
       </v-list-item>
 
-      <v-list-item>
-        <v-btn @click="toggleDarkMode">Dark Mode</v-btn>
-      </v-list-item>
+      <v-divider></v-divider>
 
       <v-list-item>
-        <v-btn @click="toggleCowboyMode">Cowboy</v-btn>
+        <v-card color="#424242">
+          <v-btn color="black" @click="toggleDarkMode">Dark Mode</v-btn>
+          <v-card-text>
+            Green: Correct
+          </v-card-text>
+          <v-card-text>
+            Light-Orange: Misplaced
+          </v-card-text>
+          <v-card-text>
+            Red: Wrong
+          </v-card-text>
+        </v-card>
       </v-list-item>
 
+      <v-divider></v-divider>
+
       <v-list-item>
-        <v-btn @click="toggleAquaMode">Aqua</v-btn>
+        <v-card color="#424242">
+          <v-btn color="#6D4C41" @click="toggleCowboyMode">Cowboy</v-btn>
+          <v-card-text>
+            Blue: Correct
+          </v-card-text>
+          <v-card-text>
+            Orange: Misplaced
+          </v-card-text>
+          <v-card-text>
+            Blue-Grey: Wrong
+          </v-card-text>
+        </v-card>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
+      <v-list-item>
+        <v-card color="#424242">
+          <v-btn color="#01579B" @click="toggleAquaMode">Aqua</v-btn>
+          <v-card-text>
+            Teal: Correct
+          </v-card-text>
+          <v-card-text>
+            Yellow: Misplaced
+          </v-card-text>
+          <v-card-text>
+            Pink: Wrong
+          </v-card-text>
+        </v-card>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
