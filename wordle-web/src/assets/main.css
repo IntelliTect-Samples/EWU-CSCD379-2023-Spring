@@ -7,6 +7,16 @@ a,
   transition: 0.4s;
 }
 
+.cheese-theme {
+  background-color: #fdd835;
+  color: #f57f17;
+}
+
+.painful-theme {
+  background-color: #bfff00;
+  color: #ba26ff;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);

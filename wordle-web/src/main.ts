@@ -37,6 +37,20 @@ const vuetify = createVuetify({
           misplaced: '#FFC107',
           wrong: '#4CAF50'
         }
+      },
+      cheese: {
+        colors: {
+          correct: '#FFFF00',
+          misplaced: '#FFEE58',
+          wrong: '#F57F17Zings'
+        }
+      },
+      painful: {
+        colors: {
+          correct: '#9E9D24',
+          misplaced: '#A7FFEB',
+          wrong: '#E040FB'
+        }
       }
     }
   }
