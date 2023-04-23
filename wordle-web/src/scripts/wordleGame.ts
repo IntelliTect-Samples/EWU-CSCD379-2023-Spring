@@ -39,6 +39,8 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
+  validWords = Array<string>();
+
   submitGuess() {
     // put logic to win here.
     this.guess.check(this.secretWord)
@@ -56,5 +58,6 @@ export class WordleGame {
     } else {
       // The game is over
     }
+    this.validWords = WordsService.validWords(this);
   }
 }

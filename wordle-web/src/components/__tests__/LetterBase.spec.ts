@@ -7,12 +7,12 @@ describe('LetterBase', () => {
   it('renders properly with defaults', () => {
     const wrapper = mount(LetterBase, { props: {} })
     expect(wrapper.text()).toContain('?')
-    expect(wrapper.attributes('color')).toBe('grey')
+    expect(wrapper.attributes('color')).toBe('default')
   })
 
   it('renders properly with passed params', () => {
     const wrapper = mount(LetterBase, { props: { char: 'a', color: 'blue' } })
-    expect(wrapper.text()).toContain('a')
+    expect(wrapper.text()).toContain('A')
     expect(wrapper.attributes('color')).toBe('blue')
   })
 })

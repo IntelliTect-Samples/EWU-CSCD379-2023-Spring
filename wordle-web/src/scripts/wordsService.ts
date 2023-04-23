@@ -1,3 +1,6 @@
+import { LetterStatus } from "./letter";
+import type { WordleGame } from "./wordleGame"
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,9 +10,63 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(game: WordleGame): Array<string> {
+
+    const validLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced).map(l => l.char));
+
+    const validWords = new Set<string>();
+
+    // we concat all the correct letters from the guesses into it's own 
+    // array here incase the user happens to make poor decisions.
+    const correctLetters = Array(5);
+    game.guesses.forEach(guess => {
+      guess.letters.forEach((l,i) => {
+        if (l.status == LetterStatus.Correct){
+          correctLetters[i] = l.char;
+        }
+      })
+    })
+
+    this.#words.forEach(word => {
+      game.guesses.forEach(guess =>{
+        let valid = true;
+
+        if (!validLetters.every(vl => word.includes(vl))){
+          // skip if it doesn't contain any correctly or misplaced letters
+          valid = false;
+        }
+        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char)){
+          // skip words that share a misplaced letter at the same index
+          valid = false;
+        }
+        if (!correctLetters.every((cl,i) => !cl || cl == word[i])){
+          // skip words that don't share a correctly placed letter
+          valid = false;
+        }
+        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char))){
+          // remove words that share a wrong letter that isn't also a valid letter
+          valid = false;
+        }
+        if (valid){
+          validWords.add(word);
+        }
+      })
+    })
+
+    const removeList = Array<string>();
+    validWords.forEach((word) =>{
+      game.guesses.forEach( guess => {
+        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char))){
+          // remove words that share a wrong letter at the same index
+          removeList.push(word);
+        }
+      });
+    });
+
+    removeList.forEach(word => validWords.delete(word))
+
+    
+    return [...validWords];
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

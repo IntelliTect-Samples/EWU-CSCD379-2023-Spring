@@ -7,6 +7,7 @@
 
   </div>
   <h3>{{ game.secretWord }}</h3>
+  <small v-for="(w,i) of list" :key="`${w}-${i}`">{{ w }}<br/></small>
 </template>
 
 <script setup lang="ts">
@@ -15,9 +16,18 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import { watch } from 'vue'
+import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const list = ref<string[]>();
+
+watch(()=>game.validWords, (value)=>{
+  console.log('change');
+  console.log('valid words', value)
+  list.value = value;
+});
 
 console.log(game.secretWord)
 
