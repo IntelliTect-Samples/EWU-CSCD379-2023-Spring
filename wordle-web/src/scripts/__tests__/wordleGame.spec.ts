@@ -13,7 +13,7 @@ describe('Word', () => {
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
 
-  it('Gets wrong word', () => {
+  it('Gets Wrong Word', () => {
     const word = new Word('apple')
     expect(word.check('plane')).toBe(false)
     expect(word.letters[0].status).toBe(LetterStatus.Misplaced)

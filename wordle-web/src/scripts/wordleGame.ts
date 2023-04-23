@@ -66,11 +66,12 @@ export class WordleGame {
         }
       }
     }
-    if (this.currentGuessIndex >= this.guesses.length - 1) {
+    console.log(this.guessedLetters)
+    if (this.currentGuessIndex < this.guesses.length - 1) {
+      this.currentGuessIndex++
+    } else {
       this.status = GameState.Lost
       console.log('You lost!')
     }
-    console.log(this.guessedLetters)
-    this.currentGuessIndex++
   }
 }
