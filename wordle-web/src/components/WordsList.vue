@@ -59,6 +59,7 @@ function getValidWords(currentGuess: Word): Word[] {
 }
 
 function clickWord(word: Word) {
+  // eslint-disable-next-line vue/no-mutating-props
   props.game.currentGuess = word
   wordDialog.value = false
 }

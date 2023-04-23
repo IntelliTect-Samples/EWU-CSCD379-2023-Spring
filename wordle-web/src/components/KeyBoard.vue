@@ -81,6 +81,7 @@ function enterClick() {
   audio.play()
 }
 function backspaceClick() {
+  // eslint-disable-next-line vue/no-mutating-props
   props.game.currentGuess.pop()
   const audio = new Audio()
   audio.src = 'src/assets/click2.wav'
