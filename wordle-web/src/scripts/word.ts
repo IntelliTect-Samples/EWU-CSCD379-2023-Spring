@@ -31,6 +31,10 @@ export class Word {
     })
   }
 
+  set(value: string){
+    value.split('').forEach(l => this.push(l));
+  }
+
   get text() {
     return this.letters.map((l) => l.char).join('')
   }

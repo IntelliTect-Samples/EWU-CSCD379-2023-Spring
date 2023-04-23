@@ -1,4 +1,5 @@
 import { LetterStatus, type Letter } from './letter'
+import {WordleGame} from "@/scripts/wordleGame";
 
 export abstract class WordsService {
   static getRandomWord(): string {
@@ -9,23 +10,44 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(guesses: Letter[], wordList?: string[]): Array<string> {
+  static validWords(game: WordleGame, wordList?: string[]): Array<string> {
+    const letterDetails: {
+      letter: Letter
+      position: number
+    }[] = []
+
     if(wordList === undefined) wordList = this.#words
     const validList: Array<string> = []
 
-    const correctGuesses = guesses.filter(
-      (g) => g.status === LetterStatus.Correct || g.status === LetterStatus.Misplaced
-    )
-    const invalidGuesses = guesses.filter((g) => g.status === LetterStatus.Wrong)
+    game.guesses.forEach(guess => {
+      let guessIndex = 0;
+        guess.letters.forEach((letter, index) => {
+            letterDetails.push({
+              letter: letter,
+              position: guessIndex,
+            })
+          guessIndex++;
+        })
+    })
+
+    const correctGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Correct)
+    const misplacedGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Misplaced)
+    const invalidGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Wrong)
+
     wordList.forEach((word) => {
       let valid = true
       correctGuesses.forEach((guess) => {
-        if (!word.includes(guess.char)) {
+        if (word.charAt(guess.position) !== guess.letter.char) {
           valid = false
         }
       });
+      misplacedGuesses.forEach(guess =>{
+        if (!word.includes(guess.letter.char)) {
+            valid = false
+        }
+      })
       invalidGuesses.forEach((guess) => {
-        if (word.includes(guess.char)) {
+        if (word.includes(guess.letter.char)) {
           valid = false
         }
       });

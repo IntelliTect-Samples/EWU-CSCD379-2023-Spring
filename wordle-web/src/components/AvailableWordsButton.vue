@@ -47,7 +47,7 @@ const wordsPerPage = 12
 const currentPage = ref(0)
 
 const availableWords = computed(() => {
-  return WordsService.validWords(props.wordleGame.guessedLetters)
+  return WordsService.validWords(props.wordleGame)
 })
 
 const doPagination = computed(() => {
