@@ -2,14 +2,20 @@
   <v-card>
     <v-layout>
       <v-app-bar>
+        <template v-slot:image> </template>
         <template v-slot:prepend>
           <router-link to="/"
-            ><v-app-bar-nav-icon icon="mdi-domain"></v-app-bar-nav-icon
+            ><v-app-bar-nav-icon icon="mdi-vuejs"></v-app-bar-nav-icon
           ></router-link>
-          <router-link to="/"><v-app-bar-title> wordle</v-app-bar-title></router-link>
+          <router-link to="/"
+            ><v-app-bar-title class="primary" color="primary"> wordle</v-app-bar-title></router-link
+          >
+          <SettingsDialogVue />
         </template>
+        <v-spacer></v-spacer>
+
         <template v-slot:append>
-          <v-app-bar-nav-icon>
+          <v-btn>
             <v-menu>
               <template v-slot:activator="{ props }">
                 <v-btn v-bind="props" icon="mdi-hamburger"> </v-btn>
@@ -24,7 +30,7 @@
                 >
               </v-list>
             </v-menu>
-          </v-app-bar-nav-icon>
+          </v-btn>
         </template>
       </v-app-bar>
     </v-layout>
@@ -33,4 +39,5 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import SettingsDialogVue from './SettingsDialog.vue'
 </script>

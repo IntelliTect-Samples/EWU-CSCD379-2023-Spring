@@ -2,13 +2,24 @@
   <div>
     <h1>This is an about page</h1>
     <p>
-      This is wesbite designed to allow you to play the hit game Wordle. Wordle is a game in which
+      This is website designed to allow you to play the hit game Wordle. Wordle is a game in which
       you are provided 6 guesses to figure out what a 5 letter word is. It will tell you which
       letters were misplaced, which letters are incorrect and which letters are correctly placeed.
       Wordle is a great game, but not as great as Meg is!
     </p>
   </div>
+  <div>
+    <v-btn density="compact" @click="goBack"> Back </v-btn>
+  </div>
 </template>
+
+<script setup lang="ts">
+import $router from '../router/index'
+
+function goBack() {
+  $router.go(-1)
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {
