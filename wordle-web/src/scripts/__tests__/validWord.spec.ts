@@ -15,9 +15,9 @@ describe('ValidWord', () => {
     it('One Valid Word Guessed Complete Word - Wrong order', () => {
         const valid = Word.ValidWords(wordleWords, [
             new Letter('a', LetterStatus.Correct),
+            new Letter('p', LetterStatus.Misplaced),
             new Letter('p', LetterStatus.Correct),
-            new Letter('p', LetterStatus.Correct),
-            new Letter('l', LetterStatus.Correct),
+            new Letter('l', LetterStatus.Misplaced),
             new Letter('e', LetterStatus.Correct),
         ])
         expect(valid.length).toBe(1)
@@ -38,7 +38,7 @@ describe('ValidWord', () => {
 
     it('No y - doesnt return layer', () => {
         const valid = Word.ValidWords(wordleWords, [
-            new Letter('y', LetterStatus.Correct),
+            new Letter('y', LetterStatus.Wrong),
         ])
         expect(valid.length).toBe(2)
         expect(valid).toEqual(wordleWords.slice(0, 2))
