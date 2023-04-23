@@ -1,10 +1,22 @@
 <template>
-  <head>
+  <v-app>
+    <Navbar />
+    <v-content>
+      <RouterView></RouterView>
+    </v-content>
+  </v-app>
+
+
+  
+
+  <!-- <head>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
   </head>
+  
+
   <header>
     <div class="wrapper">
       <nav>
@@ -23,12 +35,15 @@
       <v-btn @click="setNeon">Neon Colors</v-btn>
     </div>
   </header>
-
-  <RouterView />
+  <RouterView/> -->
 </template>
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import Navbar from './components/NavBar.vue'
+
+
+
 
 const theme = useTheme()
 
