@@ -4,6 +4,10 @@
       <LetterButton :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
+  <v-row>
+    <LetterButton :letter="new Letter('?')" @click="letterClick(new Letter('?'))" />
+  </v-row>
+  <br />
 </template>
 
 <script setup lang="ts">
