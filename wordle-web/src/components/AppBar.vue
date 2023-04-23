@@ -32,7 +32,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import icon from './icons/icon.vue'
+import icon from './icons/CustomIcon.vue'
 
 let showDrawer = ref(false)
 </script>
