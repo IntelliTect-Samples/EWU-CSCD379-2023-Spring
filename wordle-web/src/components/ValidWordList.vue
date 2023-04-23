@@ -6,11 +6,6 @@
 import { ref, watchEffect } from 'vue'
 const guessword = ref('')
 
-export interface Props {
-  items?: string[]
-  labelText: string
-}
-
 defineProps({
   items: {
     type: Array,
