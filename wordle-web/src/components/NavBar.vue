@@ -32,10 +32,13 @@
                 <v-list-item-content>
                     <v-list-item-title class="title" >Wordle Redux</v-list-item-title>
                     <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
-                    <v-list-item @click.stop="setting = true" @click="setLightTheme" prepend-icon="mdi-weather-sunny" > LightTheme </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setDarkTheme" prepend-icon="mdi-lightbulb-night" > Dark Theme </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setProtanopia_Deuteranopia" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Mode </v-list-item>
-                    <v-list-item @click.stop="setting = true" @click="setTritanopia" prepend-icon="mdi-lightbulb-night" > Tritanopia Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setDefault" prepend-icon="mdi-theme-light-dark" > Light/Dark Mode </v-list-item>
+                    <p>Dark Mode Game Mode</p>
+                    <v-list-item @click.stop="setting = true" @click="setProtanopia_Deuteranopia" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Dark Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setTritanopia" prepend-icon="mdi-lightbulb-night" > Tritanopia Dark Mode </v-list-item>
+                    <p>Light Mode Game Mode</p>
+                    <v-list-item @click.stop="setting = true" @click="setProtanopia_DeuteranopiaLight" prepend-icon="mdi-lightbulb-night" > Protanopia/Deuteranopia Light Mode </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setTritanopiaLight" prepend-icon="mdi-lightbulb-night" > Tritanopia Light Mode </v-list-item>
                     <v-list-item @click.stop="setting = !setting" prepend-icon="mdi-information" to="/about"> About</v-list-item> 
                 </v-list-item-content>
             </v-list-item>
@@ -74,6 +77,15 @@ export default defineComponent({
         theme.global.name.value = 'Tritanopia'
     }
 
+    function setProtanopia_DeuteranopiaLight() {
+        theme.global.name.value = 'Protanopia_DeuteranopiaLight'
+    }
+
+    function setTritanopiaLight() {
+        theme.global.name.value = 'TritanopiaLight'
+    }
+
+
     function setDefault() {
       if (theme.global.name.value == 'light') {
         theme.global.name.value = 'dark'
@@ -81,6 +93,8 @@ export default defineComponent({
       else if (theme.global.name.value == 'dark') {
         theme.global.name.value = 'light'
       }
+      else 
+        theme.global.name.value = 'light'
     }
 
     return {
@@ -88,6 +102,8 @@ export default defineComponent({
         setDarkTheme,
         setProtanopia_Deuteranopia,
         setTritanopia,
+        setProtanopia_DeuteranopiaLight,
+        setTritanopiaLight,
         setDefault,
     }
   },

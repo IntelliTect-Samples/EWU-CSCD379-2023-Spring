@@ -53,6 +53,22 @@ const vuetify = createVuetify({
           misplaced: '#FCE4EC',
           wrong: '#FF1744'
         }
+      },
+      Protanopia_DeuteranopiaLight: {
+        dark: false,
+        colors: {
+          correct: '#0D47A1',
+          misplaced: '#FFFF00',
+          wrong: '#795548'
+        }
+      },
+      TritanopiaLight: {
+        dark: false,
+        colors: {
+          correct: '#546E7A',
+          misplaced: '#FCE4EC',
+          wrong: '#FF1744'
+        }
       }
     }
   }
