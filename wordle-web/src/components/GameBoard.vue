@@ -9,12 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
 import LetterButton from '@/components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
-
-const AvailableWords = defineAsyncComponent(() => import('./AvailableWords.vue'))
 
 const props = defineProps<{
   game: WordleGame
