@@ -18,6 +18,6 @@ describe('LetterBase', () => {
     const letter = new Letter('b', LetterStatus.Correct)
     const wrapper = mount(LetterButton, { props: { letter: letter} })
     expect(wrapper.text()).toContain('b')
-    expect(wrapper.attributes('color')).toBe('green')
+    expect(wrapper.attributes('color')).toBe('correct')
   })
 })

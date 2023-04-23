@@ -6,12 +6,12 @@ describe('Letter', () => {
   it('gets color', () => {
     const letter = new Letter('a')
     letter.status = LetterStatus.Correct
-    expect(letter.color).toBe('green')
+    expect(letter.color).toBe('correct')
   })
 
   it('gets wrong color', () => {
     const letter = new Letter('a')
     letter.status = LetterStatus.Wrong
-    expect(letter.color).toBe('red')
+    expect(letter.color).toBe('wrong')
   })
 })
