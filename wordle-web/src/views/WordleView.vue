@@ -7,7 +7,7 @@
     v-model="guess"
     label="Guess"
     variant="solo"
-    readonly
+    disabled
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
   <v-card style=" width: 40%; position: fixed; left: 50%; bottom: -50px; transform: translate(-50%, -50%);">
@@ -20,7 +20,6 @@
 
   <ValidWordList
     :items="game.validWords"
-    :labelText="game.validWords.length + ' Possible Words '"
     @change="select"
   />
 </template>

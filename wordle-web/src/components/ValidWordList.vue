@@ -1,29 +1,65 @@
 <template>
-  <v-select v-model="guessword" :items="items" :label="labelText" return object></v-select>
+  <v-row justify="center">
+    <v-dialog
+      v-model="dialog"
+      scrollable
+      width="auto"
+      ><template v-slot:activator="{ props }">
+        <v-btn
+          color="primary"
+          v-bind="props"
+          @click="props"
+        >{{ `(${items.length}) Possible Words` }}</v-btn>
+      </template>
+      <v-card>
+        <v-card-title>Select Words</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text style="height: 300px; max-width: 150px;">
+          <v-hover><v-btn
+            v-for="(item, index) in items"
+            :key="index"
+            :text="wordGuess === item"
+            @click="wordGuess = item"
+          >
+            {{ item }}
+          </v-btn></v-hover>
+        </v-card-text>
+        <v-divider></v-divider>
+        
+        <v-card-actions>
+          <v-btn
+            color="blue-darken-1"
+            variant="text"
+            @click="dialog = false"
+          >
+            Close
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </v-row>
 </template>
-
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
-const guessword = ref('')
+//v-select is like 3 line of code including the template
+import { defineProps, ref, watchEffect } from 'vue'
 
+const dialog = ref(false)
+const wordGuess = ref('')
 defineProps({
   items: {
     type: Array,
-    // eslint-disable-next-line vue/require-valid-default-prop
-    default: ''
+    default: () => []
   },
-  labelText: {
-    type: String,
-    default: 'Words'
-  }
 })
 
 const emit = defineEmits<{
-  (validguess: 'change', value: string): void
+  change: (value: string) => void
 }>()
-function selectF() {
-  console.log('guessword', guessword.value)
-  emit('change', guessword.value)
+
+function save() {
+  emit('change', wordGuess.value)
+  dialog.value = false
 }
-watchEffect(() => selectF())
+
+watchEffect(() => save())
 </script>
