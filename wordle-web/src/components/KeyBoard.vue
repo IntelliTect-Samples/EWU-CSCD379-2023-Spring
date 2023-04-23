@@ -16,6 +16,7 @@ const props = defineProps<{
 }>()
 
 const keyboardLetters = computed(() => {
+  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
 
   const keyboardKeys = [
@@ -40,6 +41,7 @@ const keyboardLetters = computed(() => {
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
 }>()
+
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }

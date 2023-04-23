@@ -17,23 +17,28 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
+
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
 }
+
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
 }
+
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
   if (event.key === 'Enter') {

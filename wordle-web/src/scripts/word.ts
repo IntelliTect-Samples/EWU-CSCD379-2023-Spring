@@ -3,7 +3,7 @@ import { Letter, LetterStatus } from './letter'
 export class Word {
   public letters = Array<Letter>()
 
-  constructor(word?: string | null | number) {
+  constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
       if (typeof word == 'number') {
         // Add one letter for each number. With blank spots
@@ -15,6 +15,11 @@ export class Word {
         for (const letter of word) {
           this.letters.push(new Letter(letter))
         }
+      }
+    } else {
+      // add empty letters to array
+      for (let i = this.letters.length; i < numberOfLetters; i++) {
+        this.letters.push(new Letter())
       }
     }
   }
@@ -45,7 +50,6 @@ export class Word {
 
   check(secretWord: string): boolean {
     console.log(this.text)
-
     // check if the letters are valid
     //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)

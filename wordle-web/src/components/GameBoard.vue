@@ -10,12 +10,15 @@
 import LetterButton from '@/components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
+
 defineProps<{
   game: WordleGame
 }>()
+
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
 }>()
+
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
