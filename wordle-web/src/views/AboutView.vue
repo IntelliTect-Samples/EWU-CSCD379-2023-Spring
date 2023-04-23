@@ -1,5 +1,5 @@
 <template>
-  <v-sheet color="#9E9E9E" height="800px" class="pt-10 my-5">
+  <v-sheet location="center" color="#9E9E9E" height="820px" width="800px" class="pt-10 my-5">
     <v-card color="cyan-darken-3" class="ma-5" elevation="5" rounded="xl">
       <v-card-title>About Us</v-card-title>
       <v-card-text>
@@ -22,17 +22,14 @@
 
     </v-card>
 
-    <v-card color="cyan-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <!-- TODO: figure out how to align picture into the center -->
-      <img
+    <!-- TODO: figure out how to align picture into the center -->
+    <img
       alt="nala"
-      justify-center
       src="@/assets/nala.jpg"
       width="350"
       height="400"
       color="white"
       />
-    </v-card>
     
   </v-sheet>
   
