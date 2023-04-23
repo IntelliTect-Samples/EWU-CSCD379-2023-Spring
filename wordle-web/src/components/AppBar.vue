@@ -3,7 +3,7 @@
     <nav>
       <v-layout>
         <v-toolbar prominent>
-            <RouterLink to="/"><icon/></RouterLink>
+          <RouterLink to="/"><icon /></RouterLink>
           <v-toolbar-title><RouterLink to="/">Wordle</RouterLink></v-toolbar-title>
           <v-app-bar-nav-icon
             variant="text"
