@@ -10,7 +10,7 @@
       @click="router.push('/')"
     />
 
-    <v-app-bar-title>The Good Word</v-app-bar-title>
+    <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
 
     <v-btn icon="mdi-arrow-right-bold-hexagon-outline" @click.stop="settings = !settings"></v-btn>
 
