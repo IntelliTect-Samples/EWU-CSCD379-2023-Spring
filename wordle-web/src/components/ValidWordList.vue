@@ -11,7 +11,8 @@ export interface Props {
 const props = defineProps({
   items: {
     type: Array,
-    default: []
+    // eslint-disable-next-line vue/require-valid-default-prop
+    default: ''
   },
   labelText: {
     type: String,
