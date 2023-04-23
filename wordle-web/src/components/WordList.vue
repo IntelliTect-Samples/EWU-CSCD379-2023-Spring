@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" location="bottom" temporary>
       <v-list>
         <v-list-item v-for="word in game?.validWordList" :key="word">
-          <v-btn block @click="submitWord(word)">{{ word }}</v-btn>
+          <v-btn color="primary" block @click="submitWord(word)">{{ word }}</v-btn>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

@@ -9,6 +9,11 @@
       transition="dialog-top-transition"
     >
       <v-card width="100%" height="100%">
+        <v-card-item class="justify-end">
+          <v-btn icon dark @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-item>
         <v-card-title class="text-center">Settings</v-card-title>
 
         <v-chip-group outlined class="justify-center ma-10 pa-10">
@@ -16,13 +21,9 @@
 
           <v-chip size="small" @click="setDarkTheme">Dark Mode</v-chip>
           <v-chip size="small" @click="setInverseTheme">Inverse Mode</v-chip>
+          <v-chip size="small" @click="setCalmTheme">Calm Mode</v-chip>
+          <v-chip size="small" @click="setColorfulTheme">Colorful Mode</v-chip>
         </v-chip-group>
-
-        <v-card-title class="text-center">Volume</v-card-title>
-
-        <v-slider v-model="volume" step="10" show-ticks prepend-icon="mdi-volume-high"></v-slider>
-
-        <v-btn color="primary" @click="dialog = false">Close Dialog</v-btn>
       </v-card>
     </v-dialog>
   </v-btn>
@@ -33,7 +34,6 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 import { ref } from 'vue'
 
 const theme = useTheme()
-const volume = ref(10)
 
 function setInverseTheme() {
   theme.global.name.value = 'inverse'
@@ -41,6 +41,14 @@ function setInverseTheme() {
 
 function setDarkTheme() {
   theme.global.name.value = 'dark'
+}
+
+function setCalmTheme() {
+  theme.global.name.value = 'calm'
+}
+
+function setColorfulTheme() {
+  theme.global.name.value = 'colorful'
 }
 
 // function setVolume() {
