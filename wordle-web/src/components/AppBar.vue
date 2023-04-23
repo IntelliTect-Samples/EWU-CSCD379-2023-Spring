@@ -1,18 +1,3 @@
-<script lang="ts">
-export default {
-  data: () => ({
-    menu: false,
-    settings: false
-  }),
-  watch: {
-    group() {
-      this.menu = false
-      this.settings = false
-    }
-  }
-}
-</script>
-
 <template>
   <v-app-bar id="toolbar">
     <img
@@ -81,9 +66,24 @@ export default {
 </template>
 
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()
+let menu = ref(false)
+let settings = ref(false)
+
+watch(menu, (val) => {
+  if (val) {
+    settings.value = false
+  }
+})
+
+watch(settings, (val) => {
+  if (val) {
+    menu.value = false
+  }
+})
 
 function toggleDarkMode() {
   theme.global.name.value = 'dark'
