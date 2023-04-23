@@ -35,12 +35,12 @@ Note: Custom CSS can only be used where specified.
 - The above two items must be implemented with built in Veutify features ✅
 
 4. Style the main game page ❌✅
-- Make it look like [wordle.com](https://www.nytimes.com/games/wordle/index.html) or the Wordle mobile app ❌✅
+- Make it look like [wordle.com](https://www.nytimes.com/games/wordle/index.html) or the Wordle mobile app ❌✅ Sort of
 - Add gradient to guesses blocks and keys (with CSS) ❌✅
-- Add drop shadow to keys (No CSS) ❌✅
-- Make the app responsive (No CSS) ❌✅
+- Add drop shadow to keys (No CSS) ✅
+- Make the app responsive (No CSS) ✅
 
-5. Include a link to your Azure App in your PR comments.
+5. Include a link to your Azure App in your PR comments. ✅ On the Wordle-Web Readme
 
 ## Extra Credit
 
