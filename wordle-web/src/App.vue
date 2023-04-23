@@ -1,4 +1,29 @@
 <template>
+  <v-app>
+    <nav>
+      <v-card>
+        <AppBar />
+      </v-card>
+    </nav>
+  </v-app>
+</template>
+
+<script setup lang="ts">
+import { useTheme } from 'vuetify/lib/framework.mjs'
+import AppBar from './components/AppBar.vue'
+
+let drawer = false
+const theme = useTheme()
+
+function setInverseTheme() {
+  theme.global.name.value = 'inverse'
+}
+
+function setDarkTheme() {
+  theme.global.name.value = 'dark'
+}
+
+/* <template>
   <header>
     <div class="wrapper">
       <nav>
@@ -11,18 +36,5 @@
   </header>
 
   <RouterView />
-</template>
-
-<script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
-
-const theme = useTheme()
-
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
+</template>*/
 </script>

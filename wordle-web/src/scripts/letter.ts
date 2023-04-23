@@ -10,10 +10,12 @@ export enum LetterStatus {
 export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
+  index: number = NaN
 
-  constructor(char: string = '', status?: LetterStatus) {
+  constructor(char: string = '', status?: LetterStatus, index?: number) {
     this.char = char
     this.status = status ?? LetterStatus.NotGuessed
+    this.index = index ?? NaN
   }
 
   get color() {

@@ -7,10 +7,76 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(knowns: string[][]): Array<string> {
+    //key:
+    //  letter[0] = char
+    //  letter[1] = status
+    //  letter[2] = index
+
+    console.log('Knowns:')
+    console.log(knowns)
+    let wordList = Array(this.#words.length)
+    let ind = 0
+    for (const word of this.#words) {
+      wordList[ind] = word
+      ind = ind + 1
+    }
+    //let wordList = this.#words
+    for (let i = 0; i < knowns.length; i++) {
+      let temp = []
+      if (knowns[i][1] == 'Correct') {
+        for (const word of wordList) {
+          let tempWord = word.split('')
+          if (tempWord[parseInt(knowns[i][2])] == knowns[i][0]) {
+            //split of index matches letter index
+            temp.push(word)
+          }
+        }
+        console.log('entered Correct')
+        wordList = temp
+      } else if (knowns[i][1] == 'Misplaced') {
+        for (const word of wordList) {
+          let tempWord = word.split('')
+          if (
+            tempWord.indexOf(knowns[i][0], 0) != -1 &&
+            tempWord[parseInt(knowns[i][2])] != knowns[i][0]
+          ) {
+            //if char exists but not in place known to be false
+            temp.push(word)
+          }
+        }
+        console.log('entered Misplaced')
+        wordList = temp
+      } else if (knowns[i][1] == 'Wrong') {
+        for (const word of wordList) {
+          let tempWord = word.split('')
+          if (tempWord.indexOf(knowns[i][0], 0) == -1) {
+            //if char does not exist
+            temp.push(word)
+          }
+        }
+        console.log('entered Wrong')
+        wordList = temp
+      }
+      console.log(temp)
+    }
+
+    return wordList
   }
+
+  /*static validWords(guessedLetters: Array<Letter>): Array<string> {
+    let wordList = this.#words
+    for(const letter in guessedLetters){
+      if(letter.status === LetterStatus.Correct){
+        let temp = Array<string>
+        for(const word in #words){
+          let tempSplit = word.split('')
+          if(tempSplit[letter.index] == letter.char)
+        }
+      }
+    }
+    return new Array<string>()
+  }*/
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [

@@ -1,11 +1,12 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+
+  <v-btn @click="showPossibleWords">Show Possible Words</v-btn>
+  <v-btn @click="setGuess('tests')">Set Guess Test</v-btn>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -17,6 +18,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import type { Word } from '@/scripts/word'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -29,9 +31,24 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
+function setGuess(str: String) {
+  let word = str.split('')
+  console.log(word)
+  for (let i = 0; i < 5; i++) {
+    game.guess.pop()
+  }
+  for (let i = 0; i < word.length; i++) {
+    game.guess.push(word[i])
+  }
+}
+
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
+}
+
+function showPossibleWords() {
+  game.showPossibleWords()
 }
 
 function addChar(letter: Letter) {
