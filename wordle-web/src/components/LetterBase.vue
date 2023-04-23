@@ -1,13 +1,6 @@
-<template>
-<<<<<<< Updated upstream
-  <v-btn style="width: 50px; min-width: 50px; height: 50px; min-height: 50px" :color="props.color"
+<template>  <v-btn style="width: 50px; min-width: 50px; height: 50px; min-height: 50px" :color="props.color"
   class="gradient-key hover-shadow">
-=======
-  <v-btn
-    style="width: 50px; min-width: 50px; height: 50px; min-height: 50px" :color="props.color" 
-    class="gradient-key">
->>>>>>> Stashed changes
-    {{ props.char }}
+  {{ props.char }}
   </v-btn>
 </template>
 
@@ -24,14 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 
 <style>
-<<<<<<< Updated upstream
-  .gradient-key {
-    background: linear-gradient(to right, grey, blue);
-  }
-</style>
-=======
 .gradient-key {
-  background: linear-gradient(grey, blue);
+  background: linear-gradient(to right,grey,blue);
 }
 </style>
->>>>>>> Stashed changes
