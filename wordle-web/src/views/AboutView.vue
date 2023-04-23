@@ -7,6 +7,7 @@
         settings dialog, and Style the main game page. Learning how to do much of that thanks to the
         Great Meg!
       </p>
+        <v-btn  @click="$router.push('/')">Home</v-btn>
     </v-card>
   </v-sheet>
 </template>
