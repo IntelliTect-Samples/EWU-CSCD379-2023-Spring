@@ -11,11 +11,11 @@
       <v-card width="100%" height="100%">
         <v-card-title class="text-center">Settings</v-card-title>
 
-        <v-card-title class="text-center">Theme</v-card-title>
-        <v-chip-group class="justify-center ma-10 pa-10">
-          <v-chip @click="setDarkTheme">Dark Mode</v-chip>
+        <v-chip-group outlined class="justify-center ma-10 pa-10">
+          <v-card-title class="text-center">Theme</v-card-title>
 
-          <v-chip @click="setInverseTheme">Inverse Mode</v-chip>
+          <v-chip size="small" @click="setDarkTheme">Dark Mode</v-chip>
+          <v-chip size="small" @click="setInverseTheme">Inverse Mode</v-chip>
         </v-chip-group>
 
         <v-card-title class="text-center">Volume</v-card-title>

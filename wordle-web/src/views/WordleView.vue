@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+import * as tone from '@/components/audio/click.mp3'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
@@ -18,6 +19,8 @@ import { watch, onMounted, onUnmounted } from 'vue'
 import { WordsService } from '@/scripts/wordsService'
 import WordList from '@/components/WordList.vue'
 
+var audio = new Audio(tone.default)
+audio.volume = 0.4
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
@@ -45,6 +48,7 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
+  audio.play()
   game.guess.push(letter.char)
   game.validWordList = WordsService.validWords(game.guess.text)
 }
@@ -59,7 +63,6 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-  //event.preventDefault()
 
   game.validWordList = WordsService.validWords(game.guess.text)
 }

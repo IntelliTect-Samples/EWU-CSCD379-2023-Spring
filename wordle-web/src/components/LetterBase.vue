@@ -1,11 +1,23 @@
+<style>
+.charButton {
+  background-image: radial-gradient(circle, #252525, #161616, #000000);
+}
+</style>
+
 <template>
-  <v-btn height="65" variant="outlined" :color="props.color" @click="playAudio">
+  <v-btn
+    class="charButton"
+    elevation="8"
+    size="small"
+    height="50"
+    variant="outlined"
+    :color="props.color"
+  >
     {{ props.char }}
   </v-btn>
 </template>
 
 <script setup lang="ts">
-import * as tone from '@/components/audio/click.mp3'
 export interface Props {
   char?: string
   color?: string
@@ -15,11 +27,4 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'grey'
 })
-
-var audio = new Audio(tone.default)
-audio.volume = 0.4
-
-function playAudio() {
-  audio.play()
-}
 </script>
