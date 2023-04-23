@@ -52,14 +52,10 @@ const vuetify = createVuetify({
           surface: '#B9D2EE',
           primary: '#2865AB',
           secondary: '#498AD4',
-          error: '#C70039',
-          info: '#17DEEE',
-          success: '#21B20C',
-          warning: '#FF7F50'
         }
       },
 
-      sunset: {
+      desert: {
         colors: {
           correct: '#FEDFC9',
           misplaced: '#FF781E',
@@ -68,10 +64,6 @@ const vuetify = createVuetify({
           surface: '#FFB380',
           primary: '#FF7316',
           secondary: '#FC6500',
-          error: '#C70039',
-          info: '#17DEEE',
-          success: '#21B20C',
-          warning: '#FF7F50'
         }
       }
     }

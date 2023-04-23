@@ -11,8 +11,8 @@ function setLightTheme() {
   theme.global.name.value = 'light'
 }
 
-function setSunsetTheme() {
-  theme.global.name.value = 'sunset'
+function setDesertTheme() {
+  theme.global.name.value = 'desert'
 }
 
 function setOceanTheme() {
@@ -39,7 +39,7 @@ function setOceanTheme() {
 
           <v-btn variant="tonal" color="#9575CD" @click="setDarkTheme">Dark</v-btn> &nbsp;
           <v-btn variant="tonal" color="#4CAF50" @click="setLightTheme">Light</v-btn> &nbsp;
-          <v-btn variant="tonal" color="#FF781E" @click="setSunsetTheme">Sunset</v-btn>&nbsp;
+          <v-btn variant="tonal" color="#FF781E" @click="setDesertTheme">Desert</v-btn>&nbsp;
           <v-btn variant="tonal" color="#3079CC" @click="setOceanTheme">Ocean</v-btn>
         </v-card-text>
         <v-card-actions>
