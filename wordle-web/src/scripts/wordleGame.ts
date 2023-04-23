@@ -21,7 +21,6 @@ export class WordleGame {
   validWordList = new Array<string>()
   status = WordleGameStatus.Active
   guess!: Word
-  numberOfGuesses = 6
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
