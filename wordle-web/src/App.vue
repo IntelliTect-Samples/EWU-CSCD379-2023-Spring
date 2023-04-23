@@ -1,14 +1,19 @@
 <template>
+
   <header>
     <div class="wrapper"></div>
 
     <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>-->
   </header>
+  <div>   <NavigationBar/>
+</div>
+<div><RouterView />
+</div>
 
-  <RouterView />
-  <NavigationBar />
 </template>
+
+
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'

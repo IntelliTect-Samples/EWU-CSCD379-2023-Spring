@@ -2,14 +2,15 @@
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
-
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+  
 </template>
+  
+
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
