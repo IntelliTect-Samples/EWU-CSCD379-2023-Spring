@@ -12,7 +12,7 @@
         <v-card-text style="height: 300px; max-width: 150px">
           <v-hover
             ><v-btn
-              v-for="(item, index) in items" 
+              v-for="(item, index) in items"
               :key="index"
               :text="wordGuess === item"
               @click="wordGuess = item"
