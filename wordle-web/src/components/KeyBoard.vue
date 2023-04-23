@@ -10,7 +10,7 @@
       @click="letterClick(letter)"
       small
       class="mx-1"
-      :class="[padding, btnWidth, textSize]"
+      :class="textSize"
       :height="58"
       :width="btnWidth"/>
       <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="default"><v-icon size="x-large" icon="mdi-backspace-outline"/></v-btn>
@@ -25,17 +25,11 @@ import { useDisplay } from 'vuetify/lib/framework.mjs';
 
 const display = useDisplay();
 
-const padding = computed(()=> display.width.value < 460 ? 'px-0' :'')
-
 const btnWidth = computed(()=>{
-  const width = display.width.value;
+  let baseWidth = 43;
 
-  if (width < 400){
-    return 23;
-  } else if (width < 560){
-    return 38;
-  }
-  return 43;
+  let scaledWidth = display.width.value / 13;
+  return Math.min(baseWidth,scaledWidth)
 });
 
 const textSize = computed(()=>{

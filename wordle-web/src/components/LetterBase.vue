@@ -1,17 +1,10 @@
 <template>
-  <v-btn :color="color" v-bind:="$attrs" class="removeMin">
+  <v-btn :color="color" class="removeMin">
     <span class="font-weight-bold ">{{ props.char.toUpperCase() }}</span>
   </v-btn>
 </template>
 
-<script lang="ts">
-export default {
-  inheritAttrs:false
-}
-</script>
-
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
 
 export interface Props {
   char?: string

@@ -1,12 +1,6 @@
 <template>
-  <LetterBase :char="props.letter.char" :color="props.letter.color" v-bind="$attrs"></LetterBase>
+  <LetterBase :char="props.letter.char" :color="props.letter.color"></LetterBase>
 </template>
-
-<script lang="ts">
-export default {
-  inheritAttrs:false
-}
-</script>
 
 <script setup lang="ts">
 import type { Letter} from '@/scripts/letter'
