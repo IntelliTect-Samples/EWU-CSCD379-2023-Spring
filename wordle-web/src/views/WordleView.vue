@@ -47,6 +47,7 @@ onUnmounted(() => {
 watch(
   guess,
   (newGuess, oldGuess) => {
+    UpdateSelect(newGuess)
     if (newGuess.length > 5) {
       guess.value = oldGuess || ''
     }
@@ -55,7 +56,6 @@ watch(
 )
 
 function checkGuess() {
-  tempfix(guess.value)
   game.submitGuess()
   guess.value = ''
 }
@@ -64,7 +64,7 @@ function select(validguess: string) {
   guess.value = validguess
 }
 
-function tempfix(g: string) {
+function UpdateSelect(g: string) {
   const temp = g.split('')
   for (let i = 0; i < 5; i++) {
     game.guess.pop()
