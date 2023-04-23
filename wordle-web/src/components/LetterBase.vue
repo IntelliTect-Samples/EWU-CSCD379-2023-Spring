@@ -5,6 +5,7 @@
 </template>
 
 <script setup lang="ts">
+import * as tone from '@/components/audio/click.mp3'
 export interface Props {
   char?: string
   color?: string
@@ -15,7 +16,6 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'grey'
 })
 
-import * as tone from '@/components/audio/click.mp3'
 var audio = new Audio(tone.default)
 audio.volume = 0.4
 
