@@ -5,9 +5,8 @@
     <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>-->
   </header>
-
-  <RouterView />
-  <NavigationBar />
+  <div><NavigationBar /></div>
+  <div><RouterView /></div>
 </template>
 
 <script setup lang="ts">
