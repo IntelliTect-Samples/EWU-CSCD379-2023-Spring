@@ -3,8 +3,8 @@
     <v-row justify="center" dense v-for="(key, i) in keyboardLetters" :key="i">
       <v-btn
         v-if="i == 2"
-        class="mx-2 my-1"
         :size="size"
+        class="mx-2 my-1"
         elevation="10"
         color="grey-darken-4"
         theme="dark"
@@ -14,10 +14,10 @@
         Check
       </v-btn>
       <LetterButton
-        :size="size"
-        :class="size == 'small' || 'x-small' ? 'mx-1 my-1' : 'mx-2 my-1'"
         v-for="(letter, j) in key"
         :key="j"
+        :size="size"
+        :class="size === 'default' ? 'mx-2 my-1' : 'mx-1 my-1'"
         :letter="letter"
         @click="letterClick(letter)"
       />
@@ -71,7 +71,9 @@ const keyboardLetters = computed(() => {
     let keyboardRow: Letter[] = []
 
     for (let key of keyboardKey) {
-      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
+      keyboardRow.push(props.guessedLetters.sort((a,b)=>{
+        return a.status - b.status
+      }).find((l) => l.char === key) ?? new Letter(key))
     }
 
     keyboardLetters.push(keyboardRow)
@@ -102,14 +104,9 @@ function keyPress(event: KeyboardEvent) {
 }
 
 const size = computed(() => {
-  const size = {
-    xs: 'x-small',
-    sm: 'x-small',
-    md: 'default',
-    lg: 'default',
-    xl: 'default',
-    xxl: 'default'
-  }[name.value]
+  // Set size to x-small for sm or xs screens
+  const size =  name.value.includes('s') ? 'x-small' : 'default';
+  // Set size to as small as possible for anything less than 510px since it would wrap row 1
   if (width.value < 515) {
     return ''
   }
