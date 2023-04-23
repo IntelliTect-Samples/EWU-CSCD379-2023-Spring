@@ -10,18 +10,17 @@
     disabled
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
-  <v-card style=" width: 40%; position: fixed; left: 50%; bottom: -50px; transform: translate(-50%, -50%);">
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <v-card
+    style="width: 40%; position: fixed; left: 50%; bottom: -50px; transform: translate(-50%, -50%)"
+  >
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   </v-card>
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess" > Check </v-btn>
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 
-  <ValidWordList
-    :items="game.validWords"
-    @change="select"
-  />
+  <ValidWordList :items="game.validWords" @change="select" />
 </template>
 
 <script setup lang="ts">
@@ -34,7 +33,6 @@ import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
-
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -80,7 +78,6 @@ function UpdateSelect(g: string) {
     game.guess.push(temp[i])
   }
 }
-
 
 function addChar(letter: Letter) {
   clickSound.play()
