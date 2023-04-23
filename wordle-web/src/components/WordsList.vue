@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-row class="justify-center pa-0">
-      <v-col cols="auto" class="">
-        <v-card color="transparent">
+      <v-col cols="auto">
+        <v-card flat color="transparent">
           <v-card-title class="text-decoration-underline" align="center">
             Possible Words
           </v-card-title>

@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { WordsService } from '../wordsService'
-import { Word } from '../word'
 
 describe('WordsService', () => {
   it('Returns True Given "Real" Word', () => {
