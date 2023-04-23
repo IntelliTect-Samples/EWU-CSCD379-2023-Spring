@@ -13,7 +13,7 @@ export abstract class WordsService {
   }
 
   static getWords(): string[] {
-    return this.#words;
+    return this.#words
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
