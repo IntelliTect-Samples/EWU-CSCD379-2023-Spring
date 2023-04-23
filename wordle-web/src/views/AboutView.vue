@@ -1,25 +1,18 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
+  <v-container>
+    <v-card class="mx-auto" max-width="600">
+      <v-card-title>About</v-card-title>
+      <v-card-text>
+        This is a class project for the Web Development course.
+        Our goal is to create a web application using
+        Vue.js and Vuetify that allows users to play the game Wordle.
+        We're fortunate to have Meg as our instructor. She's a skilled web 
+        developer and an excellent teacher who is passionate about helping
+        us learn and grow in our skills.
+      </v-card-text>
+      <v-card-actions>
+        <v-btn variant="outlined" prepend-icon="mdi-keyboard-backspace" @click="$router.go(-1)">Back</v-btn>
+      </v-card-actions>
     </v-card>
-  </v-sheet>
-
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+  </v-container>
 </template>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
