@@ -4,6 +4,7 @@
       <v-btn
         v-if="i == 2"
         class="mx-2 my-1"
+        :size="size"
         elevation="10"
         color="grey-darken-4"
         theme="dark"
@@ -13,7 +14,8 @@
         Check
       </v-btn>
       <LetterButton
-        class="mx-2 my-1"
+        :size="size"
+        :class="size == 'small' || 'x-small' ? 'mx-1 my-1' : 'mx-2 my-1'"
         v-for="(letter, j) in key"
         :key="j"
         :letter="letter"
@@ -21,6 +23,7 @@
       />
       <v-btn
         v-if="i == 2"
+                :size="size"
         class="mx-2 my-1"
         elevation="10"
         color="gray"
@@ -38,7 +41,10 @@
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
+import { withCtx } from 'vue'
+import { watch } from 'vue'
 import { computed, onMounted, onUnmounted } from 'vue'
+import { useDisplay } from 'vuetify'
 
 export interface Props {
   guessedLetters: Letter[]
@@ -51,6 +57,8 @@ const emits = defineEmits<{
   (event: 'checkGuess'): void
   (event: 'backspace'): void
 }>()
+
+const { name, width } = useDisplay();
 
 const keyboardLetters = computed(() => {
   console.log(props.guessedLetters.length)
@@ -97,4 +105,12 @@ function keyPress(event: KeyboardEvent) {
     emits('letterClick', new Letter(event.key.toLowerCase()))
   }
 }
+
+const size = computed(() => {
+  const size = {xs:'x-small',sm:'x-small',md:'default',lg:'default',xl:'default',xxl:'default'}[name.value];
+  if(width.value < 515){
+    return '';
+  }
+  return size;
+})
 </script>
