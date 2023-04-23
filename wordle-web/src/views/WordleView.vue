@@ -21,7 +21,8 @@
     :items="game.validWords"
     :labelText="game.validWords.length + ' Possible Words '"
     @change="select"
-  /></template>
+  />
+</template>
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
@@ -31,8 +32,6 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
-import { word } from '@/scripts/word'
-
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -62,20 +61,18 @@ function checkGuess() {
 }
 
 function select(validguess) {
-  guess.value = validguess 
+  guess.value = validguess
 }
 
-function tempfix(g : string) {
+function tempfix(g: string) {
   const temp = g.split('')
-  for(let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     game.guess.pop()
   }
-  for(let i = 0; i < temp.length; i++) {
+  for (let i = 0; i < temp.length; i++) {
     game.guess.push(temp[i])
   }
 }
-
-
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)

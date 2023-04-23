@@ -11,10 +11,10 @@ export abstract class WordsService {
   }
 
   static validWords(guess: Word, secretWord: string) {
-    let valid = new Array<string>()
-    let correctIndex = new Array<number>()
-    let correctLetter = new Array<string>()
-    let MisplacedLetter = new Array<string>()
+    const valid = new Array<string>()
+    const correctIndex = new Array<number>()
+    const correctLetter = new Array<string>()
+    const MisplacedLetter = new Array<string>()
     //Todo
     //find correct letters from secret word
     guess.check(secretWord)
