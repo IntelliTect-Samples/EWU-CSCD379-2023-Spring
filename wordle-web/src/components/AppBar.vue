@@ -7,6 +7,7 @@
       width="50"
       height="50"
       color="white"
+      @click="router.push('/')"
     />
 
     <v-app-bar-title>The Good Word</v-app-bar-title>
@@ -68,6 +69,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import router from '@/router'
 
 const theme = useTheme()
 let menu = ref(false)
@@ -97,7 +99,6 @@ function toggleCowboyMode() {
 function toggleAquaMode() {
   theme.global.name.value = 'aqua'
 }
-
 </script>
 
 <style scoped>
