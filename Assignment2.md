@@ -37,7 +37,7 @@ Note: Custom CSS can only be used where specified.
 4. Style the main game page ❌✅
 - Make it look like [wordle.com](https://www.nytimes.com/games/wordle/index.html) or the Wordle mobile app ✅
 - Add gradient to guesses blocks and keys (with CSS) ❌✅
-- Add drop shadow to keys (No CSS) ✅
+- Add drop shadow to keys (No CSS) ❌✅
 - Make the app responsive (No CSS) ✅
 
 5. Include a link to your Azure App in your PR comments. ✅ On the Wordle-Web Readme
