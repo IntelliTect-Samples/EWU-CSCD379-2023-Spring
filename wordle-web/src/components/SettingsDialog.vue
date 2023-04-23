@@ -29,7 +29,7 @@
   </v-row>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useTheme } from 'vuetify'
 
 export default {
