@@ -32,7 +32,7 @@
             Green: Correct
           </v-card-text>
           <v-card-text>
-            Light-Orange: Misplaced
+            Orange: Misplaced
           </v-card-text>
           <v-card-text>
             Red: Wrong
@@ -50,7 +50,7 @@
             Green: Correct
           </v-card-text>
           <v-card-text>
-            Light-Orange: Misplaced
+            Orange: Misplaced
           </v-card-text>
           <v-card-text>
             Red: Wrong
@@ -67,7 +67,7 @@
             Blue: Correct
           </v-card-text>
           <v-card-text>
-            Orange: Misplaced
+            Light-Orange: Misplaced
           </v-card-text>
           <v-card-text>
             Blue-Grey: Wrong
