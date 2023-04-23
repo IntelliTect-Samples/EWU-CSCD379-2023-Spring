@@ -29,7 +29,10 @@
       width="350"
       height="400"
       color="white"
-      />
+    />
+
+    <v-btn to="/wordle">Return To Game</v-btn>
+    
     
   </v-sheet>
   

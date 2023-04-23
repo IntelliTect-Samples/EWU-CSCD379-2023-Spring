@@ -1,5 +1,5 @@
 <template>
-    <v-btn :color="props.color">
+    <v-btn elevation="24" :color="props.color">
       {{ props.char }}
     </v-btn>
 </template>
