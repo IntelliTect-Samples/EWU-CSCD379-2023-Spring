@@ -25,6 +25,9 @@ jobs:
       - name: Lint Code
         working-directory: ./wordle-web
         run: npm run lint
+      - name: Prettier
+        working-directory: ./wordle-web
+        run: npm run format
       - name: Prettier Check
         working-directory: ./wordle-web
         run: npm run format:check
