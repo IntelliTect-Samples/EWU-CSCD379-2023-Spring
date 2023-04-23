@@ -7,6 +7,8 @@ export class WordleGame {
   }
   guesses = new Array<Word>()
   secretWord = ''
+  list = WordsService.getWordList()
+
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -20,10 +22,9 @@ export class WordleGame {
   }
 
   submitGuess(guess: string) {
-    const word = new Word('plate')
+    const word = new Word(guess)
     this.guesses.push(word)
     word.check(this.secretWord)
-    const list = WordsService.getWordList()
-    WordsService.validWords(word, list)
+    this.list = WordsService.validWords(word, this.list)
   }
 }
