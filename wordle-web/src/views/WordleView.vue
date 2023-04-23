@@ -5,6 +5,12 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters"/>
 
 
+  <WordSelect :validWords = validWords />
+
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+
+  <h2>{{ guess }}</h2>
+  <h3>{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
@@ -13,10 +19,13 @@ import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import type { Letter } from '@/scripts/letter'
+import WordSelect from '../components/WordSelect.vue'
+import { WordsService } from '../scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
+let validWords:Array<string> = ['these', 'are', 'valid', 'words']
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -56,6 +65,7 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
+    validWords = WordsService.validWords(guess.value)
   }
 }
 </script>

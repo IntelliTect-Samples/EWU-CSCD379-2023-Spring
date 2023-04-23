@@ -7,9 +7,15 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(currGuess:string): Array<string> {
+    let guessFilter = new RegExp(currGuess)
+    let wordsList:Array<string> = ['']
+
+    for (let word in this.#words)
+      if (guessFilter.test(word))
+        wordsList.push(word)
+
+    return wordsList
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
