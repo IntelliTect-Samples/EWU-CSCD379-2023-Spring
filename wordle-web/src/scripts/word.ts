@@ -2,19 +2,27 @@ import { Letter, LetterStatus } from './letter'
 
 export class Word {
   public letters = Array<Letter>()
-  constructor(word?: string | null, len: number = 5) {
-    
+  constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
-      for (const letter of word) {
-        this.letters.push(new Letter(letter))
+      if (typeof word == 'number') {
+        // Add one letter for each number. With blank spots
+        for (let i = 0; i < word; i++) {
+          this.letters.push(new Letter(''))
+        }
+      } else {
+        // add word letters to array
+        for (const letter of word) {
+          this.letters.push(new Letter(letter))
+        }
       }
-    }
-    else{
-      for(let i = 0; i < len; i++){
+    } else {
+      // add empty letters to array
+      for (let i = this.letters.length; i < numberOfLetters; i++) {
         this.letters.push(new Letter())
       }
     }
   }
+
 
   get text() {
     return this.letters.map((l) => l.char).join('')
