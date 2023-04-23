@@ -15,7 +15,7 @@
       :wordle-game="game"
       :key="game.guesses.length"
       @guessChanged="setGuess"
-    ></AvailableWordsButton>
+    />
     <h3>{{ game.secretWord }}</h3>
   </v-container>
 </template>

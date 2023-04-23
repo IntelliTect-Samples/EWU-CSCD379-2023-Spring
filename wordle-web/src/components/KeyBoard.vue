@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center" dense v-for="(key, i) in keyboardLetters" :key="i">
       <v-btn
-        v-if="i == 2"
+        v-if="i === 2"
         :size="size"
         class="mx-2 my-1"
         elevation="10"
@@ -22,7 +22,7 @@
         @click="letterClick(letter)"
       />
       <v-btn
-        v-if="i == 2"
+        v-if="i === 2"
         :size="size"
         class="mx-2 my-1"
         elevation="10"

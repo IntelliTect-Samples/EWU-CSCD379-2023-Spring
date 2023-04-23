@@ -1,25 +1,33 @@
-<template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
-    </v-card>
-  </v-sheet>
+<script setup lang="ts"></script>
 
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+<template>
+  <v-card>
+    <v-card-title> About </v-card-title>
+    <v-card-text>
+      This project was created by an aspiring web developer who is taking a class through Eastern
+      Washington University - CSCD379<br />
+      The end goal of this project is to create a working version of the classic word game Wordle
+      using Vue.js and Vuetify. Along with a few other things to make it interesting.
+      <br /><br />
+      One of our instrustors is Meg, she is a genius sofware engineer at Intellitect. Shadowing her
+      made me realize I wanted to become a developer! <br />
+      The other instructor is Grant, and he is the Chief Techical Officer at Intellitect.
+    </v-card-text>
+  </v-card>
+  <br /><br />
+  <v-btn class="button" variant="outlined" color="secondary" @click="$router.go(-1)">Back</v-btn>
+  &nbsp;
+  <v-btn variant="outlined" color="secondary" to="/">Home</v-btn>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
+<!-- <style>
+h1 {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+    place-items: center;
 }
-</style>
+
+p {
+    min-height: 100vh;
+    place-items: center;
+}
+</style> -->

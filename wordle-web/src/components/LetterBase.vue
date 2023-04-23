@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useDisplay } from 'vuetify/lib/framework.mjs'
+import { useDisplay } from 'vuetify'
 
 export interface Props {
   char?: string
