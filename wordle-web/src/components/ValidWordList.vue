@@ -44,7 +44,7 @@ defineProps({
 })
 
 const emit = defineEmits<{
-  change: (value: string) => void
+  (event: 'change', value: string): void
 }>()
 
 function save() {
