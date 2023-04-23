@@ -13,7 +13,7 @@ Note: Custom CSS can only be used where specified.
 
 1. Create a custom component to show available words ❌✅
 - Create/extend a word list component with a method called validWords that returns an array of valid words based on current guesses ✅
-- Create unit tests for the validWords method ❌✅
+- Create unit tests for the validWords method ✅
 - Display the number of valid words based on the entered letters ✅
 - When the number is clicked, show a dialog with all the available words with scrolling if there are too many to show on the screen. ✅
 - When a word is clicked, the word should be entered as the guess but not submitted ❌✅
