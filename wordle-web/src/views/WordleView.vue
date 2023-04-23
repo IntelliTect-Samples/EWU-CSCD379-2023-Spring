@@ -6,26 +6,39 @@
 
     <div>
       <GameBoard :game="game" @letterClick="addChar" />
+      <br />
     </div>
     
     <div>
-      <v-text-field
-      v-model="guess"
-      label="Guess"
-      variant="solo"
-      @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-      ></v-text-field>
+      <v-responsive
+        class="mx-auto"
+        max-width="300"
+      >
+        <v-text-field
+        v-model="guess"
+        label="Guess"
+        variant="solo"
+        @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
+        ></v-text-field>
+      </v-responsive>
+
     </div>
 
     <div>
-      <v-select
-      v-model="guess"
-      :items="validGuesses"
-      :label="'Valid Guesses: ' + validGuesses.length"
-      @update:model-value="inputFromValidGuesses"
+      <v-responsive
+        class="mx-auto"
+        max-width="300"
       >
-        <v-hover></v-hover>
-      </v-select>
+        <v-select
+        v-model="guess"
+        :items="validGuesses"
+        :label="'Valid Guesses: ' + validGuesses.length"
+        @update:model-value="inputFromValidGuesses"
+        >
+          <v-hover></v-hover>
+        </v-select>
+      </v-responsive>
+      
     </div>
 
 
