@@ -11,11 +11,10 @@
 <script setup lang="ts">
 import * as tone from '@/components/audio/click.mp3'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { watch, onMounted, onUnmounted } from 'vue'
 import { WordsService } from '@/scripts/wordsService'
 import WordList from '@/components/WordList.vue'
 
