@@ -1,10 +1,16 @@
 <template>
+  <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head>
   <header>
     <div class="wrapper">
       <nav>
+        <span class="material-symbols-outlined">diamond</span>
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
         <RouterLink to="/about">About</RouterLink>
       </nav>
+      <span class="material-symbols-outlined">settings</span>
       <v-btn @click="setLightTheme"> Light Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
       <v-btn @click="setDefault">Default Colors</v-btn>
