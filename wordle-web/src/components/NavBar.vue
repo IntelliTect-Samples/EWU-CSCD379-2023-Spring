@@ -8,7 +8,7 @@
                 <v-btn  to="/">Home</v-btn>
                 <v-btn  to="/wordle">Wordle</v-btn>
                 <v-btn  to="/about">About</v-btn>
-                <v-app-bar-nav-icon @click="setLightTheme" icon="mdi-theme-light-dark" > </v-app-bar-nav-icon>
+                <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark" > </v-app-bar-nav-icon>
                 <v-app-bar-nav-icon @click.stop="setting = !setting" icon="mdi-cog"></v-app-bar-nav-icon>
             </v-toolbar-items>
         </v-toolbar>
@@ -32,8 +32,10 @@
                 <v-list-item-content>
                     <v-list-item-title class="title" >Wordle Redux</v-list-item-title>
                     <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
-                    <v-list-item @click="setLightTheme" prepend-icon="mdi-theme-light-dark" > LightTheme </v-list-item>
-                    <v-list-item @click="setDarkTheme" prepend-icon="mdi-theme-light-dark" > DarkTheme </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setLightTheme" prepend-icon="mdi-weather-sunny" > LightTheme </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setDarkTheme" prepend-icon="mdi-lightbulb-night" > Dark Theme </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setNeonLight" prepend-icon="mdi-lightbulb-night" > Neon Dark </v-list-item>
+                    <v-list-item @click.stop="setting = true" @click="setNeonDark" prepend-icon="mdi-lightbulb-night" > Dark Theme </v-list-item>
                     <v-list-item @click.stop="setting = !setting" prepend-icon="mdi-information" to="/about"> About</v-list-item> 
                 </v-list-item-content>
             </v-list-item>
@@ -44,34 +46,52 @@
 
 <script>
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import { defineComponent } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'NavBar',
   data: () => ({
     drawer: false,
     setting: false,
   }),
   setup() {
-    const theme = useTheme();
-    return { theme };
-  },
-  methods: {
-    setLight() {
-      if (this.theme.global.name === 'neonLight') {
-        this.theme.global.name = 'neonLight';
-      } else {
-        this.theme.global.name = 'light';
+    const theme = useTheme()
+
+    function setLightTheme() {
+        theme.global.name.value = 'light'
+    }
+
+    function setDarkTheme() {
+        theme.global.name.value = 'dark'
+    }
+
+    function setNeonDark() {
+        theme.global.name.value = 'neonDark'
+    }
+
+    function setNeonLight() {
+        theme.global.name.value = 'neonLight'
+    }
+
+    function setDefault() {
+      if (theme.global.name.value == 'light') {
+        theme.global.name.value = 'dark'
       }
-    },
-    setDark() {
-      if (this.theme.global.name === 'neonDark') {
-        this.theme.global.name = 'neonDark';
-      } else {
-        this.theme.global.name = 'dark';
+      else if (theme.global.name.value == 'dark') {
+        theme.global.name.value = 'light'
       }
     }
-  }
-}
+
+    return {
+        setLightTheme,
+        setDarkTheme,
+        setNeonLight,
+        setNeonDark,
+        setDefault,
+    }
+  },
+})
+
 
 
 </script>
