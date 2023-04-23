@@ -89,7 +89,7 @@
     </nav>
   </template>
   
-  <script>
+  <script lang="ts">
   import { useTheme } from 'vuetify/lib/framework.mjs'
   import { defineComponent } from 'vue'
   
