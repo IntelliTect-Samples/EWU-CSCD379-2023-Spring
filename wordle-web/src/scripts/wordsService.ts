@@ -39,7 +39,13 @@ export abstract class WordsService {
           // skip words that share a misplaced letter at the same index
           valid = false;
         }
-        if (!correctLetters.every((cl,i) => !cl || cl == word[i])){
+        if (!correctLetters.every((cl,i) => {
+          if (!cl){
+            return true;
+          }else{
+            return cl == word[i];
+          }
+        })){
           // skip words that don't share a correctly placed letter
           valid = false;
         }
@@ -56,8 +62,8 @@ export abstract class WordsService {
     const removeList = Array<string>();
     validWords.forEach((word) =>{
       game.guesses.forEach( guess => {
-        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char))){
-          // remove words that share a wrong letter at the same index
+        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && word.includes(gl.char) && !validLetters.includes(gl.char))){
+          // remove words that share a wrong letter that arent valid
           removeList.push(word);
         }
       });

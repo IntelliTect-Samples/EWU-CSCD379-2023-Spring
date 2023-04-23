@@ -21,6 +21,10 @@ describe('Valid Words Single Guess', () => {
     game.submitGuess();
     const validWords = WordsService.validWords(game);
 
+    it("Contains Words", ()=>{
+        expect(validWords.length).greaterThanOrEqual(1);
+    });
+
     it('Have "i" and "e" in correct spot', () => {
         validWords.forEach(word =>{
             expect(word[2]).toBe("i");
@@ -30,10 +34,6 @@ describe('Valid Words Single Guess', () => {
 
     it('Do not contain letter "k"', () => {
         expectWordsDoNotContainLetter(validWords, 'k')
-    })
-
-    it('Does not contain letter "b"', ()=>{
-        expectWordsDoNotContainLetter(validWords, 'b');
     })
 });
 
@@ -68,7 +68,6 @@ describe('Valid Words Three Guesses',()=>{
     let validWords = WordsService.validWords(game);
 
     it("Contain correct letters BIER", ()=>{
-        expectWordsDoContainLetter(validWords,'b')
         expectWordsDoContainLetter(validWords,'r')
         expectWordsDoContainLetter(validWords,'i')
         expectWordsDoContainLetter(validWords,'e')

@@ -37,6 +37,8 @@ export class WordleGame {
     }
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
+    
+    this.validWords = WordsService.validWords(this);
   }
 
   validWords = Array<string>();
@@ -58,6 +60,7 @@ export class WordleGame {
     } else {
       // The game is over
     }
-    this.validWords = WordsService.validWords(this);
+    this.validWords = WordsService.validWords(this, this.validWords);
+    console.log(this.validWords);
   }
 }
