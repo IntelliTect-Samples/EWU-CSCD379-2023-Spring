@@ -23,6 +23,11 @@ const vuetify = createVuetify({
   },
   theme: {
     defaultTheme: 'dark',
+    variations: {
+      colors: ['primary', 'secondary'],
+      lighten: 1,
+      darken: 2,
+    },
     themes: {
       dark: {
         colors: {
@@ -31,11 +36,27 @@ const vuetify = createVuetify({
           wrong: '#F44336'
         }
       },
-      inverse: {
+      light: {
         colors: {
-          correct: '#F44336',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#F44336'
+        }
+      },
+      neonDark: {
+        dark: true,
+        colors: {
+          correct: '#39FF14',
+          misplaced: '#FFFF33',
+          wrong: '#EE4B2B'
+        }
+      },
+      neonLight: {
+        dark: false,
+        colors: {
+          correct: '#39FF14',
+          misplaced: '#FFFF33',
+          wrong: '#EE4B2B'
         }
       }
     }

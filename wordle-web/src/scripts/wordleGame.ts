@@ -51,7 +51,4 @@ export class WordleGame {
       // The game is over
     }
   }
-
-
-
 }

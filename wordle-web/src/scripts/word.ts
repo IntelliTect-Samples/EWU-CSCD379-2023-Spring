@@ -77,12 +77,6 @@ export class Word {
       }
     }
 
-
-
-    
-
-
-
     console.log(guessChars)
     console.log(secretChars)
     console.log(isCorrect)

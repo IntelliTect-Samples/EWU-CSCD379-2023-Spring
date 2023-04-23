@@ -1,5 +1,5 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <h1>Wordle Redux</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -17,15 +17,11 @@
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 
-
-  
   <ValidWordList
-  :items="game.validWords"
-  :labelText="game.validWords.length + ' Possible Words'"
-  :onWordSelected="WordSelected"
-/>
-
-
+    :items="game.validWords"
+    :labelText="game.validWords.length + ' Possible Words'"
+    :onWordSelected="WordSelected"
+  />
 </template>
 
 <script setup lang="ts">
@@ -37,12 +33,9 @@ import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
 
-
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
-
-
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -60,7 +53,6 @@ watch(
   },
   { flush: 'post' }
 )
-
 
 function checkGuess() {
   game.submitGuess()
@@ -91,8 +83,4 @@ function keyPress(event: KeyboardEvent) {
   }
   //event.preventDefault()
 }
-
-
-
-
 </script>
