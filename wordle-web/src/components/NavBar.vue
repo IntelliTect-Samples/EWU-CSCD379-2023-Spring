@@ -43,7 +43,6 @@
                 </v-list-item-content>
             </v-list-item>
         </v-navigation-drawer>
-
     </nav>
 </template>
 
@@ -84,7 +83,6 @@ export default defineComponent({
     function setTritanopiaLight() {
         theme.global.name.value = 'TritanopiaLight'
     }
-
 
     function setDefault() {
       if (theme.global.name.value == 'light') {

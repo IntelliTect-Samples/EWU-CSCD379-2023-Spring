@@ -12,7 +12,7 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <v-btn @click="checkGuess" @keyup.enter="checkGuess" > Check </v-btn>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -32,9 +32,15 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
+import clicking_button from '@/assets/clicking_button_sound.mp3'
+import guess_button from '@/assets/guess_button_sound.mp3'
+
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const guessSound = new Audio(guess_button)
+const clickSound = new Audio(clicking_button)
+
 console.log(game.secretWord)
 
 onMounted(() => {
@@ -56,6 +62,7 @@ watch(
 )
 
 function checkGuess() {
+  guessSound.play()
   game.submitGuess()
   guess.value = ''
 }
@@ -74,7 +81,9 @@ function UpdateSelect(g: string) {
   }
 }
 
+
 function addChar(letter: Letter) {
+  clickSound.play()
   game.guess.push(letter.char)
   guess.value += letter.char
 }
@@ -84,10 +93,12 @@ function keyPress(event: KeyboardEvent) {
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
+    clickSound.play()
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
     console.log('Back')
   } else if (event.key.length === 1 && event.key !== ' ') {
+    clickSound.play()
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
