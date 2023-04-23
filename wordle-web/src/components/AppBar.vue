@@ -1,3 +1,18 @@
+<script lang="ts">
+export default {
+  data: () => ({
+    menu: false,
+    settings: false
+  }),
+  watch: {
+    group() {
+      this.menu = false
+      this.settings = false
+    }
+  }
+}
+</script>
+
 <template>
   <v-app-bar id="toolbar">
     <img
@@ -25,19 +40,19 @@
 
     <v-list density="compact">
       <v-list-item>
-        <v-btn>Light Mode</v-btn>
+        <v-btn @click="toggleLightMode">Light Mode</v-btn>
       </v-list-item>
 
       <v-list-item>
-        <v-btn>Dark Mode</v-btn>
+        <v-btn @click="toggleDarkMode">Dark Mode</v-btn>
       </v-list-item>
 
       <v-list-item>
-        <v-btn>Cowboy</v-btn>
+        <v-btn @click="toggleCowboyMode">Cowboy</v-btn>
       </v-list-item>
 
       <v-list-item>
-        <v-btn>Aqua</v-btn>
+        <v-btn @click="toggleAquaMode">Aqua</v-btn>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -65,20 +80,24 @@
   </v-navigation-drawer>
 </template>
 
-<script lang="ts">
-export default {
-  data: () => ({
-    menu: false,
-    settings: false
-  }),
+<script setup lang="ts">
+import { useTheme } from 'vuetify/lib/framework.mjs'
 
-  watch: {
-    group() {
-      this.menu = false
-      this.settings = false
-    }
-  }
+const theme = useTheme()
+
+function toggleDarkMode() {
+  theme.global.name.value = 'dark'
 }
+function toggleLightMode() {
+  theme.global.name.value = 'light'
+}
+function toggleCowboyMode() {
+  theme.global.name.value = 'cowboy'
+}
+function toggleAquaMode() {
+  theme.global.name.value = 'aqua'
+}
+
 </script>
 
 <style scoped>

@@ -62,8 +62,22 @@ const vuetify = createVuetify({
           stale: 'grey'
         }
       },
-      cowboy,
-      aqua
+      cowboy: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#EF6C00',
+          incorrect: '#D50000',
+          stale: 'grey'
+        }
+      },
+      aqua: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#EF6C00',
+          incorrect: '#D50000',
+          stale: 'grey'
+        }
+      }
     }
   }
 })
