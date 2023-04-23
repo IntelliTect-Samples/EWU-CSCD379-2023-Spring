@@ -5,7 +5,7 @@
     <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>-->
   </header>
-  <div><NavigationBar /></div>
+  <div class="ma-10"><NavigationBar /></div>
   <div><RouterView /></div>
 </template>
 
