@@ -6,7 +6,7 @@
       </v-btn>
     </template>
 
-    <v-app-bar-title @click="$router.push('/')" align="center" class="font-weight-bold">
+    <v-app-bar-title @click="$router.push('/')" class="font-weight-bold">
       Word War 1
     </v-app-bar-title>
 

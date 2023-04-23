@@ -21,7 +21,7 @@ export class Letter {
       case LetterStatus.Misplaced:
         return 'yellow'
       case LetterStatus.Wrong:
-        return 'red'
+        return '#424242'
       default:
         return 'grey'
     }

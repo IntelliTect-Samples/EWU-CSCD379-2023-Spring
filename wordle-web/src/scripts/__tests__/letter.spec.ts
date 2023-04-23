@@ -11,7 +11,7 @@ describe('Letter', () => {
   it('Gets Wrong Color', () => {
     const letter = new Letter('a')
     letter.status = LetterStatus.Wrong
-    expect(letter.color).toBe('red')
+    expect(letter.color).toBe('#424242') //grey-darken-3
   })
 
   it('Gets Misplaced Color', () => {

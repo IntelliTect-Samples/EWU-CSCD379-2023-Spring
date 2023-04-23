@@ -9,6 +9,7 @@ export interface Props {
   char?: string
   color?: string
 }
+
 const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'grey'
