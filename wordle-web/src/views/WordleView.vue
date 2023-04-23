@@ -4,7 +4,7 @@
     <WordsList :game="game" />
   </div>
   <div>
-    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" :game="game" />
   </div>
   <div>Your guess: [{{ game.currentGuess.text }}]</div>
   <div>Secret word: [{{ game.secretWord.toUpperCase() }}]</div>
