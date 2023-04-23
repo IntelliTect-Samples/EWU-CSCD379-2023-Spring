@@ -16,14 +16,12 @@ export class Letter {
 
   get color() {
     switch (this.status) {
-      case LetterStatus.NotGuessed:
-        return 'grey'
       case LetterStatus.Correct:
-        return 'green'
+        return 'correct'
       case LetterStatus.Misplaced:
-        return 'yellow'
+        return 'misplaced'
       case LetterStatus.Wrong:
-        return 'red'
+        return 'wrong'
       default:
         return 'grey'
     }
