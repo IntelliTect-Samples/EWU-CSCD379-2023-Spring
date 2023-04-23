@@ -17,9 +17,9 @@ const cowboy = {
   colors: {
     background: '#4E342E',
     surface: '#6D4C41',
-    correct: '#4CAF50',
-    misplaced: '#EF6C00',
-    incorrect: '#D50000'
+    correct: '#01579B',
+    misplaced: '#FF7043',
+    incorrect: '#263238'
   }
 }
 
