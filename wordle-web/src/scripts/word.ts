@@ -24,6 +24,13 @@ export class Word {
     }
   }
 
+  clear(){
+    this.letters.forEach(letter => {
+      letter.char = ''
+      letter.status = LetterStatus.NotGuessed
+    })
+  }
+
   get text() {
     return this.letters.map((l) => l.char).join('')
   }
@@ -87,28 +94,5 @@ export class Word {
     console.log(isCorrect)
     return isCorrect
     // check if the letters are in the right place
-  }
-
-  public static ValidWords(words: string[], guesses: Letter[]) {
-      let validList:string[] = [];
-
-      const correctGuesses = guesses.filter(g=>g.status === LetterStatus.Correct || g.status === LetterStatus.Misplaced);
-      words.forEach((word) => {
-          let valid = true;
-          correctGuesses.forEach((guess) => {
-              if(!word.includes(guess.letter)) {
-                  valid = false;
-              }
-          });
-          if(valid) {
-              validList.push(word);
-          }
-      });
-      guesses.forEach((guess) => {
-          if(guess.status === LetterStatus.Wrong) {
-              validList = validList.filter((word) => !word.includes(guess.letter))
-          }
-      });
-      return validList;
   }
 }

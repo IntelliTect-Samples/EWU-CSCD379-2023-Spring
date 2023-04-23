@@ -1,3 +1,5 @@
+import { LetterStatus, type Letter } from './letter'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,9 +9,33 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(guesses: Letter[]): Array<string> {
+    let validList: Array<string> = []
+
+    const correctGuesses = guesses.filter(
+      (g) => g.status === LetterStatus.Correct || g.status === LetterStatus.Misplaced
+    )
+    this.#words.forEach((word) => {
+      let valid = true
+      correctGuesses.forEach((guess) => {
+        if (!word.includes(guess.char)) {
+          valid = false
+        }
+      })
+      if (valid) {
+        validList.push(word)
+      }
+    })
+    guesses.forEach((guess) => {
+      if (guess.status === LetterStatus.Wrong) {
+        validList = validList.filter((word) => !word.includes(guess.char))
+      }
+    })
+    return validList
+  }
+
+  static getWords(): string[] {
+    return this.#words
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
