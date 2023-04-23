@@ -1,5 +1,5 @@
 <template>
-  <v-container>    
+  <v-container>
     <h1>Wordle Mind Bender</h1>
 
     <GameBoard :game="game" @letterClick="addChar" />
@@ -11,7 +11,11 @@
       @backspace="backspace"
       @check-guess="checkGuess"
     />
-    <AvailableWordsButton :wordle-game="game" @guessChanged="setGuess" :key="game.guesses.length"></AvailableWordsButton>
+    <AvailableWordsButton
+      :wordle-game="game"
+      :key="game.guesses.length"
+      @guessChanged="setGuess"
+    ></AvailableWordsButton>
     <h3>{{ game.secretWord }}</h3>
   </v-container>
 </template>
@@ -34,7 +38,6 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  console.log("addChar", letter)
   game.guess.push(letter.char)
   guess.value += letter.char
 }
@@ -44,12 +47,9 @@ function backspace() {
   guess.value = guess.value.slice(0, -1)
 }
 
-function setGuess(value:string){
-  for(let i = 0; i < value.length; i++){
+function setGuess(value: string) {
+  for (let i = 0; i < value.length; i++) {
     addChar(new Letter(value[i]))
   }
 }
-
-
-
 </script>

@@ -23,7 +23,7 @@
       />
       <v-btn
         v-if="i == 2"
-                :size="size"
+        :size="size"
         class="mx-2 my-1"
         elevation="10"
         color="gray"
@@ -41,8 +41,6 @@
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
-import { withCtx } from 'vue'
-import { watch } from 'vue'
 import { computed, onMounted, onUnmounted } from 'vue'
 import { useDisplay } from 'vuetify'
 
@@ -58,10 +56,9 @@ const emits = defineEmits<{
   (event: 'backspace'): void
 }>()
 
-const { name, width } = useDisplay();
+const { name, width } = useDisplay()
 
 const keyboardLetters = computed(() => {
-  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
 
   const keyboardKeys = [
@@ -88,7 +85,6 @@ function letterClick(letter: Letter) {
 }
 
 onMounted(() => {
-  console.log("mount");
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
@@ -96,7 +92,6 @@ onUnmounted(() => {
 })
 
 function keyPress(event: KeyboardEvent) {
-  console.log("Press", props.guessedLetters.find((l) => l.char === event.key.toLowerCase()))
   if (event.key === 'Enter') {
     emits('checkGuess')
   } else if (event.key === 'Backspace') {
@@ -107,10 +102,17 @@ function keyPress(event: KeyboardEvent) {
 }
 
 const size = computed(() => {
-  const size = {xs:'x-small',sm:'x-small',md:'default',lg:'default',xl:'default',xxl:'default'}[name.value];
-  if(width.value < 515){
-    return '';
+  const size = {
+    xs: 'x-small',
+    sm: 'x-small',
+    md: 'default',
+    lg: 'default',
+    xl: 'default',
+    xxl: 'default'
+  }[name.value]
+  if (width.value < 515) {
+    return ''
   }
-  return size;
+  return size
 })
 </script>
