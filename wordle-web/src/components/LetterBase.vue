@@ -1,12 +1,17 @@
 <template>
-  <v-btn :class="`${useDarkText ? 'text-black' : ''}`" :size="size" elevation="8" :color="props.color">
+  <v-btn
+    :class="`${useDarkText ? 'text-black' : ''}`"
+    :size="size"
+    elevation="8"
+    :color="props.color"
+  >
     <b>{{ props.char }}</b>
   </v-btn>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import {useDisplay, useTheme} from 'vuetify'
+import { useDisplay, useTheme } from 'vuetify'
 
 export interface Props {
   char?: string
@@ -19,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { mobile, xs } = useDisplay()
-const { name } = useTheme();
+const { name } = useTheme()
 
 const size = computed(() => {
   if (mobile.value && xs.value) {
@@ -39,7 +44,12 @@ const useDarkText = computed(() => {
   text-decoration: none;
 }
 .v-btn {
-  background-image: linear-gradient(to right, rgba(var(--v-theme-surface), 0.9) 0%, rgba(var(--v-theme-surface), 0.5) 50%, rgba(var(--v-theme-primary), 0.8) 100%);
+  background-image: linear-gradient(
+    to right,
+    rgba(var(--v-theme-surface), 0.9) 0%,
+    rgba(var(--v-theme-surface), 0.5) 50%,
+    rgba(var(--v-theme-primary), 0.8) 100%
+  );
   transition: 0.5s;
   background-size: 200% auto;
   display: block;

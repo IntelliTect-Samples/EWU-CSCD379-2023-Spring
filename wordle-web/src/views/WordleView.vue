@@ -11,11 +11,7 @@
       @backspace="backspace"
       @check-guess="checkGuess"
     />
-    <AvailableWordsButton
-      :wordle-game="game"
-      :key="game.guesses.length"
-      @guessChanged="setGuess"
-    />
+    <AvailableWordsButton :wordle-game="game" :key="game.guesses.length" @guessChanged="setGuess" />
     <h3>{{ game.secretWord }}</h3>
   </v-container>
 </template>
@@ -33,13 +29,13 @@ const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
 function checkGuess() {
-  if(guess.value.length < 5) return
+  if (guess.value.length < 5) return
   game.submitGuess()
   guess.value = ''
 }
 
 function addChar(letter: Letter) {
-  if(guess.value.length >= 5) return
+  if (guess.value.length >= 5) return
   game.guess.push(letter.char)
   guess.value += letter.char
 }

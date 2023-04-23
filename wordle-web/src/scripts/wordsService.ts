@@ -1,5 +1,5 @@
 import { LetterStatus, type Letter } from './letter'
-import {WordleGame} from "@/scripts/wordleGame";
+import { WordleGame } from '@/scripts/wordleGame'
 
 export abstract class WordsService {
   static getRandomWord(): string {
@@ -16,18 +16,18 @@ export abstract class WordsService {
       position: number
     }[] = []
 
-    if(wordList === undefined) wordList = this.#words
+    if (wordList === undefined) wordList = this.#words
     const validList: Array<string> = []
 
-    game.guesses.forEach(guess => {
-      let guessIndex = 0;
-        guess.letters.forEach((letter, index) => {
-            letterDetails.push({
-              letter: letter,
-              position: guessIndex,
-            })
-          guessIndex++;
+    game.guesses.forEach((guess) => {
+      let guessIndex = 0
+      guess.letters.forEach((letter, index) => {
+        letterDetails.push({
+          letter: letter,
+          position: guessIndex
         })
+        guessIndex++
+      })
     })
 
     const correctGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Correct)
@@ -37,11 +37,11 @@ export abstract class WordsService {
     // remove correct guesses from the list of misplaced guesses
     // this ensures that if they guess the wrong spot and then right one, it doesn't remove the word
     correctGuesses.forEach((guess) => {
-        const index = misplacedGuesses.findIndex((g) => g.letter.char === guess.letter.char)
-        if (index > -1) {
-            misplacedGuesses.splice(index, 1)
-        }
-    });
+      const index = misplacedGuesses.findIndex((g) => g.letter.char === guess.letter.char)
+      if (index > -1) {
+        misplacedGuesses.splice(index, 1)
+      }
+    })
 
     wordList.forEach((word) => {
       let valid = true
@@ -49,19 +49,19 @@ export abstract class WordsService {
         if (word.charAt(guess.position) !== guess.letter.char) {
           valid = false
         }
-      });
-      misplacedGuesses.forEach(guess =>{
+      })
+      misplacedGuesses.forEach((guess) => {
         if (!word.includes(guess.letter.char)) {
-            valid = false
+          valid = false
         }
       })
       invalidGuesses.forEach((guess) => {
         if (word.includes(guess.letter.char)) {
           valid = false
         }
-      });
+      })
       if (valid) {
-        validList.push(word);
+        validList.push(word)
       }
     })
 

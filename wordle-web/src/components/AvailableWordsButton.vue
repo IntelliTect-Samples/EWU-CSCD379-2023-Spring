@@ -1,7 +1,9 @@
 <template>
   <v-menu :close-on-content-click="false" v-model:model-value="showMenu">
     <template v-slot:activator="{ props }">
-      <v-btn :class="`${useDarkText ? 'text-black' : ''}`" text v-bind="props"> Available Words: {{ availableWords.length }} </v-btn>
+      <v-btn :class="`${useDarkText ? 'text-black' : ''}`" text v-bind="props">
+        Available Words: {{ availableWords.length }}
+      </v-btn>
     </template>
     <v-card>
       <v-card-title> Available Words </v-card-title>
@@ -30,7 +32,7 @@
 import type { WordleGame } from '@/scripts/wordleGame'
 import { WordsService } from '@/scripts/wordsService'
 import { computed, ref } from 'vue'
-import {useTheme} from "vuetify";
+import { useTheme } from 'vuetify'
 
 export interface Props {
   wordleGame: WordleGame
@@ -42,7 +44,7 @@ const emits = defineEmits<{
   (event: 'guessChanged', value: string): void
 }>()
 
-const { name: themeName } = useTheme();
+const { name: themeName } = useTheme()
 
 const showMenu = ref(false)
 

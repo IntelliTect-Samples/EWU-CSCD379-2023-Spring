@@ -16,7 +16,9 @@
         v-for="(letter, j) in key"
         :key="j"
         :size="size"
-        :class="`${size === 'default' ? 'mx-2 my-1' : 'mx-1 my-1'} ${useDarkText ? 'text-black' : ''}`"
+        :class="`${size === 'default' ? 'mx-2 my-1' : 'mx-1 my-1'} ${
+          useDarkText ? 'text-black' : ''
+        }`"
         :letter="letter"
         @click="letterClick(letter)"
       />
@@ -40,7 +42,7 @@ import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
 import { computed, onMounted, onUnmounted } from 'vue'
-import {useDisplay, useTheme} from 'vuetify'
+import { useDisplay, useTheme } from 'vuetify'
 
 export interface Props {
   guessedLetters: Letter[]
@@ -55,7 +57,7 @@ const emits = defineEmits<{
 }>()
 
 const { name: breakpointName, width } = useDisplay()
-const { name: themeName } = useTheme();
+const { name: themeName } = useTheme()
 
 const keyboardLetters = computed(() => {
   const keyboardLetters: Letter[][] = []
@@ -70,9 +72,13 @@ const keyboardLetters = computed(() => {
     let keyboardRow: Letter[] = []
 
     for (let key of keyboardKey) {
-      keyboardRow.push(props.guessedLetters.sort((a,b)=>{
-        return a.status - b.status
-      }).find((l) => l.char === key) ?? new Letter(key))
+      keyboardRow.push(
+        props.guessedLetters
+          .sort((a, b) => {
+            return a.status - b.status
+          })
+          .find((l) => l.char === key) ?? new Letter(key)
+      )
     }
 
     keyboardLetters.push(keyboardRow)
@@ -108,7 +114,7 @@ function keyPress(event: KeyboardEvent) {
 
 const size = computed(() => {
   // Set size to x-small for sm or xs screens
-  const size =  breakpointName.value.includes('s') ? 'x-small' : 'default';
+  const size = breakpointName.value.includes('s') ? 'x-small' : 'default'
   // Set size to as small as possible for anything less than 510px since it would wrap row 1
   if (width.value < 545) {
     return ''
