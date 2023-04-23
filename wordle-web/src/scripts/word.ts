@@ -29,10 +29,10 @@ export class Word {
     }
   }
   pop() {
-    for(let i = this.letters.length-1; i < 0; i--){
-      if(this.letters[i].char !== ""){
-        this.letters[i].char = ""
-        break
+    for (let i = this.letters.length - 1; i >= 0; i--) {
+      if (this.letters[i].char !== '') {
+        this.letters[i].char = ''
+        return
       }
     }
   }
