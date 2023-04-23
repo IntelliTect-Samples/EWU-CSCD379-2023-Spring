@@ -28,6 +28,17 @@ export class Word {
     return this.letters.map((l) => l.char).join('')
   }
 
+  clear() {
+    let newLetters: Array<Letter> = [
+      new Letter(''),
+      new Letter(''),
+      new Letter(''),
+      new Letter(''),
+      new Letter('')
+    ]
+    this.letters = newLetters
+  }
+
   push(char: string) {
     // Find the first empty letter and replace it
     for (const letter of this.letters) {

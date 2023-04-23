@@ -4,18 +4,22 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-  
+
   <v-card>
     Possible Words: {{ WordsService.validWords(guess).length }}
     <v-select
-    no-data-text="Please enter at least one letter"
-    label="select"
-    :items="WordsService.validWords(guess)">
+      no-data-text="Please enter at least one letter"
+      label="select"
+      :items="WordsService.validWords(guess)"
+      v-model="selected"
+      @update:model-value="selectWord(selected)"
+      onchange="selectWord(this.value)"
+    >
     </v-select>
   </v-card>
 
   <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+  <!--<h3>{{ game.secretWord }}</h3>-->
 </template>
 
 <script setup lang="ts">
@@ -25,9 +29,12 @@ import { WordsService } from '@/scripts/wordsService'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import { Word } from '@/scripts/word'
 
 const guess = ref('')
+const selected = ref('')
 const game = reactive(new WordleGame())
+const selectElement = document.querySelector('select')
 console.log(game.secretWord)
 
 onMounted(() => {
@@ -36,6 +43,15 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function selectWord(selected: string) {
+  game.guess.clear()
+  guess.value = ''
+  for (let letter of selected) {
+    game.guess.push(letter)
+    guess.value += letter
+  }
+}
 
 function checkGuess() {
   game.submitGuess()
