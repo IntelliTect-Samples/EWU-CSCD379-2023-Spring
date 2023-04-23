@@ -1,18 +1,33 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
-    </v-card>
-  </v-sheet>
+  <v-card class="mx-auto mt-12" max-width="844">
+    <v-img
+      src="https://www.wric.com/wp-content/uploads/sites/74/2023/04/patches.jpg?w=540"
+      cover
+    ></v-img>
 
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+    <v-card-title> It was foretold, in class. Meg likes cats. </v-card-title>
+
+    <v-card-subtitle> So here's a cat </v-card-subtitle>
+    <v-card-text>
+      This site is a copy of the game, Wordle, intended to gain experience with front-end
+      development using Vue. The homework description says to say that Meg is awesome. Meg is
+      awesome.
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="primary" @click="goBack">Go Back</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goBack() {
+  router.back()
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {
