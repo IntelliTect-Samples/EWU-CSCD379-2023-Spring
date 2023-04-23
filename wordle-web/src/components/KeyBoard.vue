@@ -43,6 +43,7 @@ import { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
 import { computed, onMounted, onUnmounted } from 'vue'
 import { useDisplay, useTheme } from 'vuetify'
+import wordleClick from '@/assets/wordleclick.mp3'
 
 export interface Props {
   guessedLetters: Letter[]
@@ -92,6 +93,7 @@ const useDarkText = computed(() => {
 })
 
 function letterClick(letter: Letter) {
+  playClick();
   emits('letterClick', letter)
 }
 
@@ -103,6 +105,7 @@ onUnmounted(() => {
 })
 
 function keyPress(event: KeyboardEvent) {
+  playClick();
   if (event.key === 'Enter') {
     emits('checkGuess')
   } else if (event.key === 'Backspace') {
@@ -110,6 +113,10 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key.length === 1 && event.key !== ' ') {
     emits('letterClick', new Letter(event.key.toLowerCase()))
   }
+}
+
+function playClick(){
+  new Audio(wordleClick).play();
 }
 
 const size = computed(() => {
