@@ -19,7 +19,7 @@ const cowboy = {
     surface: '#6D4C41',
     correct: '#4CAF50',
     misplaced: '#EF6C00',
-    incorrect: '#D50000',
+    incorrect: '#D50000'
   }
 }
 
@@ -30,10 +30,9 @@ const aqua = {
     surface: '#01579B',
     correct: '#4CAF50',
     misplaced: '#EF6C00',
-    incorrect: '#D50000',
+    incorrect: '#D50000'
   }
 }
-
 
 const vuetify = createVuetify({
   components,
@@ -45,7 +44,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: "dark",
+    defaultTheme: 'dark',
     themes: {
       dark: {
         colors: {
@@ -64,7 +63,7 @@ const vuetify = createVuetify({
         }
       },
       cowboy,
-      aqua,
+      aqua
     }
   }
 })
