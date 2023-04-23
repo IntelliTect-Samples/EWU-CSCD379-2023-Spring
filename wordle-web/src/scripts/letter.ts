@@ -12,8 +12,9 @@ export class Letter {
     letter: string;
     status: LetterStatus = LetterStatus.NotGuessed;
 
-    constructor(letter: string) {
+    constructor(letter: string, status:LetterStatus = LetterStatus.NotGuessed){
         this.letter = letter;
+        this.status = status;
     }
 
     get color() {
