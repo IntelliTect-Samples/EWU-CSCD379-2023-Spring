@@ -16,7 +16,7 @@
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>
 
-  <v-navigation-drawer title="Settings" v-model="settings" location="left" app>
+  <v-navigation-drawer title="Settings" v-model="settings" location="left" app temporary>
     <v-list>
       <v-list-item title="Themes"></v-list-item>
     </v-list>
@@ -42,7 +42,7 @@
     </v-list>
   </v-navigation-drawer>
 
-  <v-navigation-drawer v-model="menu" location="right" app>
+  <v-navigation-drawer v-model="menu" location="right" app temporary>
     <v-list>
       <v-list-item title="Menu"></v-list-item>
     </v-list>
