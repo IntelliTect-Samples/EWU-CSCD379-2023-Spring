@@ -7,6 +7,7 @@
         class="rounded"
         height="58px"
         min-width="43px"
+        :elevation="10"
       />
     </v-col>
   </v-row>
@@ -47,5 +48,9 @@ const emits = defineEmits<{
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
+
+  const audio = new Audio()
+  audio.src = 'src/assets/click2.wav'
+  audio.play()
 }
 </script>
