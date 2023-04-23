@@ -1,6 +1,6 @@
 <style>
 .charButton {
-  background: rgb(0, 0, 0);
+  background: rgb(0,0,0);
   background: radial-gradient(circle, #252525, #161616, #000000);
 }
 </style>
@@ -9,6 +9,7 @@
   <v-btn
     class="charButton"
     elevation="8"
+    min-size="x-small"
     size="small"
     height="50"
     variant="outlined"
