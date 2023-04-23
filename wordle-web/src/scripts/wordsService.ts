@@ -10,7 +10,7 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(game: WordleGame): Array<string> {
+  static validWords(game: WordleGame, previousValid: string[] | undefined = undefined): Array<string> {
 
     const validLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced).map(l => l.char));
 
@@ -27,7 +27,9 @@ export abstract class WordsService {
       })
     })
 
-    this.#words.forEach(word => {
+    const words = previousValid || this.#words;
+
+    words.forEach(word => {
       game.guesses.forEach(guess =>{
         let valid = true;
 
@@ -49,7 +51,7 @@ export abstract class WordsService {
           // skip words that don't share a correctly placed letter
           valid = false;
         }
-        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char))){
+        if (guess.letters.some((gl, i) => gl.status == LetterStatus.Wrong && !validLetters.includes(gl.char) && word.includes(gl.char))){
           // remove words that share a wrong letter that isn't also a valid letter
           valid = false;
         }
