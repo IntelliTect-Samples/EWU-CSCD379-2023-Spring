@@ -6,8 +6,7 @@
         :size="size"
         class="mx-2 my-1"
         elevation="10"
-        @click="emits('checkGuess')"
-        @keyup.enter="emits('checkGuess')"
+        @click="guessClicked"
         :class="`${useDarkText ? 'text-black' : ''}`"
       >
         <b>Check</b>
@@ -27,8 +26,7 @@
         :size="size"
         class="mx-2 my-1"
         elevation="10"
-        @click="emits('backspace')"
-        @keyup.backspace="emits('backspace')"
+        @click="backspaceClicked"
         :class="`${useDarkText ? 'text-black' : ''}`"
       >
         <v-icon icon="mdi-backspace" />
@@ -95,6 +93,16 @@ const useDarkText = computed(() => {
 function letterClick(letter: Letter) {
   playClick();
   emits('letterClick', letter)
+}
+
+function guessClicked(){
+  playClick();
+  emits('checkGuess')
+}
+
+function backspaceClicked(){
+  playClick();
+  emits('backspace')
 }
 
 onMounted(() => {
