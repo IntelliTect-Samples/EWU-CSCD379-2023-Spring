@@ -5,25 +5,10 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
+  <HintDialog :game="game" />
+
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <div>
-    <v-dialog width="auto">
-      <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props">
-          {{ game.list.length }}
-        </v-btn>
-      </template>
-
-      <v-card>
-        <v-row v-for="word in game.list" :key="word">
-          <v-btn @click="enterWord" color="primary">
-            {{ word }}
-          </v-btn>
-        </v-row>
-      </v-card>
-    </v-dialog>
-  </div>
 
   <!--<h2>{{ guess }}</h2> -->
   <!--<h3>{{ game.secretWord }}</h3> -->
@@ -35,6 +20,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import HintDialog from '../components/HintDialog.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -71,7 +57,5 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 
-function enterWord() {
-  game.submitGuess()
-}
+
 </script>
