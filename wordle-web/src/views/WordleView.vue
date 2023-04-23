@@ -52,6 +52,7 @@ watch(
     }
   },
   { flush: 'post' }
+  
 )
 
 function checkGuess() {
@@ -60,7 +61,7 @@ function checkGuess() {
   guess.value = ''
 }
 
-function select(validguess) {
+function select(validguess : string) {
   guess.value = validguess
 }
 
