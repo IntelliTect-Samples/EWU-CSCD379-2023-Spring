@@ -34,6 +34,15 @@ export abstract class WordsService {
     const misplacedGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Misplaced)
     const invalidGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Wrong)
 
+    // remove correct guesses from the list of misplaced guesses
+    // this ensures that if they guess the wrong spot and then right one, it doesn't remove the word
+    correctGuesses.forEach((guess) => {
+        const index = misplacedGuesses.findIndex((g) => g.letter.char === guess.letter.char)
+        if (index > -1) {
+            misplacedGuesses.splice(index, 1)
+        }
+    });
+
     wordList.forEach((word) => {
       let valid = true
       correctGuesses.forEach((guess) => {
