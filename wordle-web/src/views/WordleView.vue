@@ -1,34 +1,42 @@
 <template>
-  <main>
+  <main class="align-center">
     <br />
-    <h1>Wordle Mind Bender</h1>
+    <h1>The Good Word</h1>
     <br />
-    <v-text-field
+
+    <div>
+      <GameBoard :game="game" @letterClick="addChar" />
+    </div>
+    
+    <div>
+      <v-text-field
       v-model="guess"
       label="Guess"
       variant="solo"
-      @input="getValidGuesses"
-    ></v-text-field>
+      @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
+      ></v-text-field>
+    </div>
 
-    <v-select
+    <div>
+      <v-select
       v-model="guess"
       :items="validGuesses"
       :label="'Valid Guesses: ' + validGuesses.length"
-    >
-      <v-hover></v-hover>
-    </v-select>
+      @update:model-value="inputFromValidGuesses"
+      >
+        <v-hover></v-hover>
+      </v-select>
+    </div>
+
+
     <br />
 
-    <v-btn @click="checkGuess">Check</v-btn>
+    <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+
     <div>
-      <v-row v-for="word in game.guesses" :key="word.text">
-        <v-col v-for="letter in word.letters" :key="letter.char">
-          <v-card :color="letter.color">
-            <v-card-title>{{ letter.char }}</v-card-title>
-          </v-card>
-        </v-col>
-      </v-row>
+      <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
     </div>
+
     <div>
       <br />
       <h2>Guess: {{ guess }}</h2>
@@ -41,18 +49,74 @@
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive } from 'vue'
+import GameBoard from '../components/GameBoard.vue'
+import KeyBoard from '../components/KeyBoard.vue'
+import type { Letter } from '@/scripts/letter'
+import { watch, onMounted, onUnmounted } from 'vue'
 import { WordsService } from '@/scripts/wordsService'
 
 let validGuesses = new Array<string>()
+let validWord = ''
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
+onMounted(() => {
+  window.addEventListener('keyup', keyPress)
+})
+onUnmounted(() => {
+  window.removeEventListener('keyup', keyPress)
+})
+
+watch(
+  guess,
+  (newGuess, oldGuess) => {
+    if (newGuess.length > 5) {
+      guess.value = oldGuess || ''
+    }
+  },
+  { flush: 'post' }
+)
+
 function checkGuess() {
-  game.submitGuess(guess.value)
+  game.submitGuess()
+  guess.value = ''
+  getValidGuesses()
+}
+
+function addChar(letter: Letter) {
+  game.guess.push(letter.char)
+  guess.value += letter.char
+  getValidGuesses()
+}
+
+function keyPress(event: KeyboardEvent) {
+  console.log(event.key)
+  if (event.key === 'Enter') {
+    checkGuess()
+  } else if (event.key === 'Backspace') {
+    guess.value = guess.value.slice(0, -1)
+    console.log(validWord)
+    getValidGuesses()
+    game.guess.pop()
+    console.log('Back')
+  } else if (event.key.length === 1 && event.key !== ' ') {
+    guess.value += event.key.toLowerCase()
+    console.log(validWord)
+    getValidGuesses()
+    game.guess.push(event.key.toLowerCase())
+  }
+  //event.preventDefault()
 }
 
 function getValidGuesses() {
   validGuesses = WordsService.validWords(guess.value)
+}
+
+function inputFromValidGuesses() {
+  const index = game.guess.text.length
+  for(let i = index; i < 5; i++){
+    game.guess.push(guess.value[i])
+  }
 }
 </script>

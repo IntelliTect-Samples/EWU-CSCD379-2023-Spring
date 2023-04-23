@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="justify-center">
     <AppBar></AppBar>
     <main class="pt-16">
       <v-spacer></v-spacer>

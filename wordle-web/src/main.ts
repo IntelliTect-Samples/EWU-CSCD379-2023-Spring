@@ -28,9 +28,9 @@ const aqua = {
   colors: {
     background: '#37474F',
     surface: '#01579B',
-    correct: '#4CAF50',
-    misplaced: '#EF6C00',
-    incorrect: '#D50000'
+    correct: '#009688',
+    misplaced: '#CDDC39',
+    incorrect: '#C51162'
   }
 }
 
