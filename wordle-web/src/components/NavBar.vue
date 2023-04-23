@@ -113,25 +113,16 @@
 import { ref } from 'vue'
 import { useTheme } from 'vuetify'
 
+let drawer = ref(false)
+let dialog = ref(false)
+
 const theme = useTheme()
 const myThemes = ['dark', 'light', 'ChristmasSweater', 'Easter', 'Neon']
 const selectedTheme = ref(myThemes[4])
 
 const setTheme = () => {
   theme.global.name.value = selectedTheme.value
-  // Optional: Get value of current theme
   console.log(`Current theme is ${theme.global.current.value}`)
-}
-</script>
-
-<script lang="ts">
-export default {
-  data() {
-    return {
-      drawer: false,
-      dialog: false
-    }
-  }
 }
 </script>
 
