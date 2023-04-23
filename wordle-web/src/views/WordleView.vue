@@ -1,11 +1,9 @@
 <template>
-  
-  <GameBoard :game="game" @letterClick="addChar" class="text-center" margin="10%"/>
+  <GameBoard :game="game" @letterClick="addChar" class="text-center" margin="10%" />
 
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters"/>
+  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-
-  <WordSelect :validWords = validWords />
+  <WordSelect :validWords="validWords" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
@@ -25,7 +23,7 @@ import { WordsService } from '../scripts/wordsService'
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
-let validWords:Array<string> = ['these', 'are', 'valid', 'words']
+let validWords: Array<string> = ['these', 'are', 'valid', 'words']
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -40,11 +38,11 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  if(letter.char === 'Submit') {
+  if (letter.char === 'Submit') {
     checkGuess()
-  }else if(letter.char === '←') {
+  } else if (letter.char === '←') {
     removeChar()
-  }else{
+  } else {
     guess.value += letter.char
     game.guess.push(letter.char)
   }

@@ -1,10 +1,8 @@
 <template>
   <header>
-
     <div class="wrapper">
-      <headerBar @setTheme="changeTheme"/>
+      <headerBar @setTheme="changeTheme" />
     </div>
-    
   </header>
   <RouterView />
 </template>
@@ -62,7 +60,7 @@ nav a:first-of-type {
 }
 </style>
 
-<script lang = 'ts'>
+<script lang="ts">
 import { RouterView } from 'vue-router'
 import { useTheme } from 'vuetify'
 import headerBar from './components/HeaderBar.vue'
@@ -75,11 +73,9 @@ export default {
     headerBar
   }
 }
-
 </script>
 
-<script setup lang = 'ts'>
-
+<script setup lang="ts">
 const theme = useTheme()
 
 function changeTheme(newTheme?: string | undefined) {

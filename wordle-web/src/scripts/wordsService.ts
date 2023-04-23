@@ -7,13 +7,11 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(currGuess:string): Array<string> {
+  static validWords(currGuess: string): Array<string> {
     let guessFilter = new RegExp(currGuess)
-    let wordsList:Array<string> = ['']
+    let wordsList: Array<string> = ['']
 
-    for (let word in this.#words)
-      if (guessFilter.test(word))
-        wordsList.push(word)
+    for (let word in this.#words) if (guessFilter.test(word)) wordsList.push(word)
 
     return wordsList
   }

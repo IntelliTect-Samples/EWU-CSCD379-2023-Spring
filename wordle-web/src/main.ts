@@ -24,17 +24,17 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme: 'dark',
     themes: {
-      dark:  {
+      dark: {
         dark: true,
-        colors:{
+        colors: {
           correct: '#03fc45',
           misplaced: '#fcf003',
           wrong: '#fc032c'
         }
       },
-      light:  {
+      light: {
         dark: false,
-        colors:{
+        colors: {
           correct: '#03fc45',
           misplaced: '#fcf003',
           wrong: '#fc032c'
@@ -72,7 +72,7 @@ const vuetify = createVuetify({
           wrong: '#CD113B'
         }
       }
-  }    
+    }
   }
 })
 

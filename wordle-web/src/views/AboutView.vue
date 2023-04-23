@@ -1,18 +1,16 @@
 <template>
-  <div class = 'about'>
+  <div class="about">
     <h1>About Page</h1>
     <p>
-      Our project is going pretty well so far. This framework is pretty cool -- it sure
-      beats coding everything from scratch!
+      Our project is going pretty well so far. This framework is pretty cool -- it sure beats coding
+      everything from scratch!
     </p>
-    <p>
-      And yes, Meg is a great teacher.
-    </p>
-    <v-btn @click = 'goBack'>Go Back</v-btn>
+    <p>And yes, Meg is a great teacher.</p>
+    <v-btn @click="goBack">Go Back</v-btn>
   </div>
 </template>
 
-<script lang = 'ts'>
+<script lang="ts">
 function goBack() {
   this.$router.go(-1)
 }
