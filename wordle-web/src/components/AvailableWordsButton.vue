@@ -1,7 +1,7 @@
 <template>
   <v-menu :close-on-content-click="false" v-model:model-value="showMenu">
     <template v-slot:activator="{ props }">
-      <v-btn text v-bind="props"> Available Words: {{ availableWords.length }} </v-btn>
+      <v-btn :class="`${useDarkText ? 'text-black' : ''}`" text v-bind="props"> Available Words: {{ availableWords.length }} </v-btn>
     </template>
     <v-card>
       <v-card-title> Available Words </v-card-title>
@@ -30,6 +30,7 @@
 import type { WordleGame } from '@/scripts/wordleGame'
 import { WordsService } from '@/scripts/wordsService'
 import { computed, ref } from 'vue'
+import {useTheme} from "vuetify";
 
 export interface Props {
   wordleGame: WordleGame
@@ -40,6 +41,8 @@ const props = defineProps<Props>()
 const emits = defineEmits<{
   (event: 'guessChanged', value: string): void
 }>()
+
+const { name: themeName } = useTheme();
 
 const showMenu = ref(false)
 
@@ -57,6 +60,10 @@ const doPagination = computed(() => {
     shownWords = getPageWords(currentPage.value)
   }
   return shownWords
+})
+
+const useDarkText = computed(() => {
+  return themeName.value !== 'dark'
 })
 
 function getPageWords(page: number) {

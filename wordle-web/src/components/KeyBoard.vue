@@ -6,18 +6,17 @@
         :size="size"
         class="mx-2 my-1"
         elevation="10"
-        color="grey-darken-4"
-        theme="dark"
         @click="emits('checkGuess')"
         @keyup.enter="emits('checkGuess')"
+        :class="`${useDarkText ? 'text-black' : ''}`"
       >
-        Check
+        <b>Check</b>
       </v-btn>
       <LetterButton
         v-for="(letter, j) in key"
         :key="j"
         :size="size"
-        :class="size === 'default' ? 'mx-2 my-1' : 'mx-1 my-1'"
+        :class="`${size === 'default' ? 'mx-2 my-1' : 'mx-1 my-1'} ${useDarkText ? 'text-black' : ''}`"
         :letter="letter"
         @click="letterClick(letter)"
       />
@@ -26,10 +25,9 @@
         :size="size"
         class="mx-2 my-1"
         elevation="10"
-        color="gray"
-        theme="dark"
         @click="emits('backspace')"
         @keyup.backspace="emits('backspace')"
+        :class="`${useDarkText ? 'text-black' : ''}`"
       >
         <v-icon icon="mdi-backspace" />
       </v-btn>
@@ -42,7 +40,7 @@ import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
 import { computed, onMounted, onUnmounted } from 'vue'
-import { useDisplay } from 'vuetify'
+import {useDisplay, useTheme} from 'vuetify'
 
 export interface Props {
   guessedLetters: Letter[]
@@ -56,7 +54,8 @@ const emits = defineEmits<{
   (event: 'backspace'): void
 }>()
 
-const { name, width } = useDisplay()
+const { name: breakpointName, width } = useDisplay()
+const { name: themeName } = useTheme();
 
 const keyboardLetters = computed(() => {
   const keyboardLetters: Letter[][] = []
@@ -82,6 +81,10 @@ const keyboardLetters = computed(() => {
   return keyboardLetters
 })
 
+const useDarkText = computed(() => {
+  return themeName.value !== 'dark'
+})
+
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
@@ -105,9 +108,9 @@ function keyPress(event: KeyboardEvent) {
 
 const size = computed(() => {
   // Set size to x-small for sm or xs screens
-  const size =  name.value.includes('s') ? 'x-small' : 'default';
+  const size =  breakpointName.value.includes('s') ? 'x-small' : 'default';
   // Set size to as small as possible for anything less than 510px since it would wrap row 1
-  if (width.value < 515) {
+  if (width.value < 545) {
     return ''
   }
   return size

@@ -33,11 +33,13 @@ const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
 function checkGuess() {
+  if(guess.value.length < 5) return
   game.submitGuess()
   guess.value = ''
 }
 
 function addChar(letter: Letter) {
+  if(guess.value.length >= 5) return
   game.guess.push(letter.char)
   guess.value += letter.char
 }
