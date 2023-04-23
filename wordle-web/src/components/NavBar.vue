@@ -21,14 +21,14 @@
     <v-navigation-drawer app v-model="drawer" rail rail-width="30px" location="right" temporary>
       <template v-slot:prepend>
         <v-btn
-          color="purple-accent-2"
+          color="success"
           size="medium"
           class="ml-4 mt-1"
           icon="mdi-close-circle-outline"
           @click="drawer = !drawer"
         ></v-btn>
         <v-btn
-          color="purple-accent-2"
+          color="success"
           size="medium"
           class="ml-3 mt-1"
           icon="mdi-cog-outline"
@@ -85,13 +85,24 @@
       </template>
       <v-list class="mt-2">
         <v-list-item>
-          <v-btn class="neon-button" @click="$router.push('/')"> Home </v-btn>
+          <v-btn color="success" variant="outlined" class="nav-btn" @click="$router.push('/')">
+            Home
+          </v-btn>
         </v-list-item>
         <v-list-item>
-          <v-btn class="neon-button" @click="$router.push('/about')"> About </v-btn>
+          <v-btn color="success" variant="outlined" class="nav-btn" @click="$router.push('/about')">
+            About
+          </v-btn>
         </v-list-item>
         <v-list-item>
-          <v-btn class="neon-button" @click="$router.push('/wordle')"> Game </v-btn>
+          <v-btn
+            color="success"
+            variant="outlined"
+            class="nav-btn"
+            @click="$router.push('/wordle')"
+          >
+            Game
+          </v-btn>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -136,32 +147,8 @@ export default {
   text-decoration: underline;
   transform: translateY(-0.1rem);
 }
-
-.neon-button {
-  color: hsl(317, 100%, 55%);
-
-  font-size: 1.5rem;
-  font-weight: 700;
-
-  text-shadow: 0 0 0.1em white, 0 0 0.55em black;
-
-  box-shadow: inset 0 0 0.5em hsl(317, 100%, 55%);
-
-  border: hsl(317, 100%, 55%) 3px solid;
-  border-radius: 0.5rem;
-  margin-bottom: 2rem;
-  width: 8rem;
-}
-
-.neon-button:hover,
-.neon-button:focus {
-  text-shadow: none;
-  color: rgb(0, 178, 228);
-  background: hsl(317, 100%, 55%);
-  box-shadow: 0 0.5em 0.9rem hsl(317, 100%, 55%);
-}
-
-.neon-button:hover::after {
-  opacity: 0.9;
+.nav-btn {
+  width: 150px;
+  margin-top: 20px;
 }
 </style>
