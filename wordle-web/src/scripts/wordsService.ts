@@ -11,8 +11,9 @@ export abstract class WordsService {
     //Todo
 
     const validWordList = new Array<string>()
+
     for (const word of this.#words) {
-      if (word.startsWith(currentWord)) {
+      if (word.startsWith(currentWord) && validWordList.length < 100) {
         validWordList.push(word)
       }
     }

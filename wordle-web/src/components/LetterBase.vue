@@ -1,5 +1,5 @@
 <template>
-  <v-btn height="65" variant="outlined" :color="props.color">
+  <v-btn height="65" variant="outlined" :color="props.color" @click="playAudio">
     {{ props.char }}
   </v-btn>
 </template>
@@ -14,4 +14,12 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'grey'
 })
+
+import * as tone from '@/components/audio/click.mp3'
+var audio = new Audio(tone.default)
+audio.volume = 0.4
+
+function playAudio() {
+  audio.play()
+}
 </script>

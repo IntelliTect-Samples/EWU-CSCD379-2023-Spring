@@ -50,13 +50,11 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
-    console.log('Back')
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())

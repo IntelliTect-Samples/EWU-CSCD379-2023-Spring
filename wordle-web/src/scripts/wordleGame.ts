@@ -52,10 +52,17 @@ export class WordleGame {
   }
 
   selectGuess(word: string) {
+    this.removeGuess()
     for (let i = 0; i < word.length; i++) {
       if (this.guess.letters[i].char === '') {
         this.guess.push(word[i])
       }
+    }
+  }
+
+  removeGuess() {
+    while (this.guess.text !== '') {
+      this.guess.pop()
     }
   }
 }
