@@ -17,6 +17,7 @@ import GameBoard from '@/components/GameBoard.vue'
 import KeyBoard from '@/components/KeyBoard.vue'
 import WordsList from '@/components/WordsList.vue'
 import { onMounted, onUnmounted, reactive } from 'vue'
+import { WordsService } from '@/scripts/wordsService'
 
 const game = reactive(new WordleGame())
 
@@ -42,6 +43,10 @@ function keyPress(event: KeyboardEvent) {
 }
 
 function checkGuess() {
-  game.submitGuess()
+  if (WordsService.isValidWord(game.currentGuess.text.toLowerCase())) {
+    game.submitGuess()
+  } else {
+    alert('Invalid word')
+  }
 }
 </script>

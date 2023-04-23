@@ -43,9 +43,7 @@ export class WordleGame {
     if (this.currentGuess.check(this.secretWord)) {
       this.status = GameState.Won
       console.log('You won!')
-    } else if (this.currentGuessIndex >= this.guesses.length - 1) {
-      this.status = GameState.Lost
-      console.log('You lost!')
+      return
     }
     for (const letter of this.currentGuess.letters) {
       // If the letter has not been guessed yet, add it to the list of guessed letters
@@ -67,6 +65,10 @@ export class WordleGame {
           }
         }
       }
+    }
+    if (this.currentGuessIndex >= this.guesses.length - 1) {
+      this.status = GameState.Lost
+      console.log('You lost!')
     }
     console.log(this.guessedLetters)
     this.currentGuessIndex++

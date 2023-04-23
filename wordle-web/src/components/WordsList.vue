@@ -8,7 +8,7 @@
           </v-card-title>
           <v-card-text
             align="center"
-            class="font-weight-bold cursor-pointer"
+            class="font-weight-bold cursor-pointer text-h4"
             @click="wordDialog = !wordDialog"
           >
             {{ possibleWords.length }}
@@ -20,10 +20,12 @@
   <!------------------------ DIALOG -------------------------------->
   <v-dialog v-model="wordDialog" max-width="290">
     <v-card class="pa-3">
-      <v-table height="500px" class="pa-3">
+      <v-table height="500px" class="pa-3" hover>
         <tbody>
           <tr v-for="(word, i) in possibleWords" :key="i">
-            <td @click="clickWord(word)">{{ word.text }}</td>
+            <td @click="clickWord(word)">
+              {{ word.text }}
+            </td>
           </tr>
         </tbody>
       </v-table>
