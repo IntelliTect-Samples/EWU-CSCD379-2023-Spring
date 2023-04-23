@@ -9,28 +9,31 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(guesses: Letter[]): Array<string> {
-    let validList: Array<string> = []
+  static validWords(guesses: Letter[], wordList?: string[]): Array<string> {
+    if(wordList === undefined) wordList = this.#words
+    const validList: Array<string> = []
 
     const correctGuesses = guesses.filter(
       (g) => g.status === LetterStatus.Correct || g.status === LetterStatus.Misplaced
     )
-    this.#words.forEach((word) => {
+    const invalidGuesses = guesses.filter((g) => g.status === LetterStatus.Wrong)
+    wordList.forEach((word) => {
       let valid = true
       correctGuesses.forEach((guess) => {
         if (!word.includes(guess.char)) {
           valid = false
         }
-      })
+      });
+      invalidGuesses.forEach((guess) => {
+        if (word.includes(guess.char)) {
+          valid = false
+        }
+      });
       if (valid) {
-        validList.push(word)
+        validList.push(word);
       }
     })
-    guesses.forEach((guess) => {
-      if (guess.status === LetterStatus.Wrong) {
-        validList = validList.filter((word) => !word.includes(guess.char))
-      }
-    })
+
     return validList
   }
 
