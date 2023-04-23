@@ -6,7 +6,7 @@
         <RouterLink to="/about">About</RouterLink>
       </nav>
       <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
+      <v-btn @click="setDarkOrLightTheme"> Dark/Light Theme </v-btn>
     </div>
   </header>
 
@@ -22,7 +22,12 @@ function setInverseTheme() {
   theme.global.name.value = 'inverse'
 }
 
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
+function setDarkOrLightTheme() {
+  if (theme.global.name.value == 'dark') {
+    theme.global.name.value = 'light'
+  }
+  else {
+    theme.global.name.value = 'dark'
+  }
 }
 </script>
