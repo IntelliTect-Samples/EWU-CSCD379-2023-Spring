@@ -51,7 +51,7 @@ const vuetify = createVuetify({
           background: '#B9D2EE',
           surface: '#B9D2EE',
           primary: '#2865AB',
-          secondary: '#498AD4',
+          secondary: '#498AD4'
         }
       },
 
@@ -63,7 +63,7 @@ const vuetify = createVuetify({
           background: '#FFB380',
           surface: '#FFB380',
           primary: '#FF7316',
-          secondary: '#FC6500',
+          secondary: '#FC6500'
         }
       }
     }
