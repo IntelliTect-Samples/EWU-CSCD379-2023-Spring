@@ -6,9 +6,12 @@
   <header>
     <div class="wrapper">
       <nav>
-        <span class="material-symbols-outlined">diamond</span>
+        <span class="material-symbols-outlined">diamond</span> 
+        Wordle Redux
+        <div class="text-right">
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
         <RouterLink to="/about">About</RouterLink>
+        </div>
       </nav>
       <span class="material-symbols-outlined">settings</span>
       <v-btn @click="setLightTheme"> Light Theme </v-btn>
