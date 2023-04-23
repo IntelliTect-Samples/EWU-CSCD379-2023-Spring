@@ -12,6 +12,29 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+const cowboy = {
+  dark: false,
+  colors: {
+    background: '#4E342E',
+    surface: '#6D4C41',
+    correct: '#4CAF50',
+    misplaced: '#EF6C00',
+    incorrect: '#D50000',
+  }
+}
+
+const aqua = {
+  dark: true,
+  colors: {
+    background: '#37474F',
+    surface: '#01579B',
+    correct: '#4CAF50',
+    misplaced: '#EF6C00',
+    incorrect: '#D50000',
+  }
+}
+
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -26,20 +49,22 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
-          correct: 'green',
-          misplaced: 'orange',
-          incorrect: 'red',
+          correct: '#4CAF50',
+          misplaced: '#EF6C00',
+          incorrect: '#D50000',
           stale: 'grey'
         }
       },
       light: {
         colors: {
-          correct: 'green',
-          misplaced: 'orange',
-          incorrect: 'red',
+          correct: '#4CAF50',
+          misplaced: '#EF6C00',
+          incorrect: '#D50000',
           stale: 'grey'
         }
-      }
+      },
+      cowboy,
+      aqua,
     }
   }
 })

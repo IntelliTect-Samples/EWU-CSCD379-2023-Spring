@@ -11,13 +11,33 @@
 
     </v-app-bar>
 
-    <v-navigation-drawer v-model="settings" location="left" app>
+    <v-navigation-drawer title="Settings" v-model="settings" location="left" app>
+
       <v-list>
-          <v-list-item title="Settings"></v-list-item>
+          <v-list-item title="Themes"></v-list-item>
       </v-list>
 
       <v-divider></v-divider>
       
+      <v-list density="compact">
+          <v-list-item>
+              <v-btn>Light Mode</v-btn>
+          </v-list-item>
+              
+          <v-list-item>
+              <v-btn>Dark Mode</v-btn>
+          </v-list-item>
+
+          <v-list-item>
+              <v-btn>Cowboy</v-btn>
+          </v-list-item>
+
+          <v-list-item>
+              <v-btn>Aqua</v-btn>
+          </v-list-item>
+
+      </v-list>
+
     </v-navigation-drawer>
 
     <v-navigation-drawer v-model="menu" location="right" app>
@@ -47,6 +67,26 @@
 
 
 <script lang="ts">
+import { useTheme } from 'vuetify/lib/framework.mjs';
+
+
+  const theme = useTheme()
+
+  function toggleCowboy() {
+    theme.global.name.value = 'cowboy'
+  }
+
+  function toggleAqua() {
+    theme.global.name.value = 'aqua'
+  }
+
+  function toggleDark() {
+    theme.global.name.value = 'dark'
+  }
+
+  function toggleLight() {
+    theme.global.name.value = 'light'
+  }
 
   export default {
       data: () => ({
