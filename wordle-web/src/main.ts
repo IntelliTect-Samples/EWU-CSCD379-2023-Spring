@@ -19,7 +19,8 @@ const cowboy = {
     surface: '#6D4C41',
     correct: '#01579B',
     misplaced: '#FF7043',
-    incorrect: '#263238'
+    incorrect: '#263238',
+    stale: '#A1887F'
   }
 }
 
@@ -30,7 +31,8 @@ const aqua = {
     surface: '#01579B',
     correct: '#009688',
     misplaced: '#CDDC39',
-    incorrect: '#C51162'
+    incorrect: '#C51162',
+    stale: '#4FC3F7'
   }
 }
 
