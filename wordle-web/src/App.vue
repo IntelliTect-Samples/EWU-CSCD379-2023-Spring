@@ -4,8 +4,7 @@
       <v-layout>
         <v-app-bar class="custom-app-bar" color="primary" density="compact">
           <template v-slot:prepend>
-
-            <RouterLink to="/">
+            <RouterLink to="/wordle">
               <h1 class="titleClass">Wordle Web</h1>
             </RouterLink>
             <RouterLink to="/">
@@ -23,6 +22,20 @@
             <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
             <v-btn @click="setKhorneTheme"> Khorne Theme </v-btn>
             <v-btn @click="setCornTheme"> Corn Theme </v-btn>
+
+            <RouterLink to="/">
+              <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
+            </RouterLink>
+
+            <v-navigation-drawer color="white"
+            >hi
+              <v-list-item>
+                <RouterLink to="/about">About</RouterLink>
+              </v-list-item>
+              <v-list-item>
+                <RouterLink to="/wordle">Game</RouterLink>
+              </v-list-item>
+            </v-navigation-drawer>
           </template>
 
         </v-app-bar>
