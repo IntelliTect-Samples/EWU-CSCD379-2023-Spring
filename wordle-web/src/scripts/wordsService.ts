@@ -9,14 +9,15 @@ export abstract class WordsService {
 
   static validWords(currentWord: string): Array<string> {
     //Todo
-    const validWordsList = new Array<string>()
+    const validWordList = new Array<string>()
     for(const word of this.#words){
-      if(word.startsWith(currentWord) && validWordsList.length < 100){
-        validWordsList.push(word)
+      if(word.startsWith(currentWord) && validWordList.length < 100){
+        validWordList.push(word)
       }
     }
-    validWordsList.sort()
-    return validWordsList
+    validWordList.sort()
+    return validWordList
+
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
