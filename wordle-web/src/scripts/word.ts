@@ -23,14 +23,13 @@ export class Word {
     }
   }
 
-
   get text() {
     return this.letters.map((l) => l.char).join('')
   }
 
   push(char: string) {
-    for(const letter of this.letters){
-      if(letter.char === ""){
+    for (const letter of this.letters) {
+      if (letter.char === '') {
         letter.char = char
         break
       }

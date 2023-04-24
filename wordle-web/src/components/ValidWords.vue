@@ -1,15 +1,9 @@
 <template>
   <v-row justify="center">
-    <v-dialog
-      scrollable
-      width="auto"
-    >
+    <v-dialog scrollable width="auto">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-        {{ WordsService.validWords(props.game.guess.text).length }}
+        <v-btn color="primary" v-bind="props">
+          {{ WordsService.validWords(props.game.guess.text).length }}
         </v-btn>
       </template>
       <v-card>
@@ -26,21 +20,18 @@
             @click="fillGuess(item)"
           />
         </v-list>
-        <v-card-text style="height: 300px;">
-        </v-card-text>
+        <v-card-text style="height: 300px"> </v-card-text>
       </v-card>
     </v-dialog>
   </v-row>
 </template>
 
 <script setup lang="ts">
-
-import type { WordleGame } from '@/scripts/wordleGame';
-import { WordsService } from '@/scripts/wordsService';
-  const props = defineProps<{
-    game: WordleGame
-  }
-  >()
+import type { WordleGame } from '@/scripts/wordleGame'
+import { WordsService } from '@/scripts/wordsService'
+const props = defineProps<{
+  game: WordleGame
+}>()
 const emits = defineEmits<{
   (event: 'fillGuess', value: string): void
 }>()

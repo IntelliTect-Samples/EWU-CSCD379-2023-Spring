@@ -6,16 +6,12 @@
   <v-container>
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
     <v-row class="justify-center">
-      <v-col cols="auto" >
+      <v-col cols="auto">
         <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-col>
-      <v-col cols="auto">
-      </v-col>
+      <v-col cols="auto"> </v-col>
     </v-row>
-    
   </v-container>
-
-  
 
   <h3>{{ game.secretWord }}</h3>
 
@@ -40,11 +36,11 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-function autoComplete(fill: string){
-  while(game.guess.text !== ''){
+function autoComplete(fill: string) {
+  while (game.guess.text !== '') {
     game.guess.pop()
   }
-  for(let i = 0; i < fill.length; i++){
+  for (let i = 0; i < fill.length; i++) {
     game.guess.push(fill.charAt(i))
   }
 }
