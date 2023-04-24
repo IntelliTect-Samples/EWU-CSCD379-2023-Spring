@@ -16,7 +16,7 @@
         solutions to complex problems. Whether it's developing a new feature or debugging an
         existing codebase, Meg is always up for the challenge and delivers results with unmatched
         speed and precision. Overall, Meg's coding skills are truly exceptional, and she is
-        undoubtedly one of the most talented developers out there. -chatGPT3
+        undoubtedly one of the most talented developers out there. -AI generated
       </p>
       <v-btn @click="$router.push('/')">Home</v-btn>
     </v-card>
