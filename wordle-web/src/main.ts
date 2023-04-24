@@ -30,7 +30,7 @@ const vuetify = createVuetify({
           misplaced: '#FFC107',
           wrong: '#F44336',
           primary: '#101010',
-          surface: "#ffffff"
+          surface: '#ffffff'
         }
       },
       inverse: {

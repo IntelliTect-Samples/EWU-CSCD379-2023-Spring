@@ -1,6 +1,3 @@
-import type { Word } from './word'
-import { LetterStatus, type Letter } from './letter'
-
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -12,13 +9,12 @@ export abstract class WordsService {
 
   static validWords(guess: string): Array<string> {
     //Todo
-    if(guess !== ""){
-      return this.#words.filter((element, index, array) => {
+    if (guess !== '') {
+      return this.#words.filter((element) => {
         return element.substring(0, guess.length) == guess
       })
-    }
-    else{
-      return new Array<string>
+    } else {
+      return new Array<string>()
     }
   }
 

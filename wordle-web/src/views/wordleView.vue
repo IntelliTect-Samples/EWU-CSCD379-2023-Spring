@@ -6,16 +6,12 @@
   <v-container>
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
     <v-row class="justify-center">
-      <v-col cols="auto" >
+      <v-col cols="auto">
         <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-col>
-      <v-col cols="auto">
-      </v-col>
+      <v-col cols="auto"> </v-col>
     </v-row>
-    
   </v-container>
-
-  
 
   <h3>{{ game.secretWord }}</h3>
 
@@ -26,7 +22,6 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { WordsService } from '@/scripts/wordsService'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
@@ -41,19 +36,13 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-function autoComplete(fill: string){
-  while(game.guess.text !== ''){
+function autoComplete(fill: string) {
+  while (game.guess.text !== '') {
     game.guess.pop()
   }
-  for(let i = 0; i < fill.length; i++){
+  for (let i = 0; i < fill.length; i++) {
     game.guess.push(fill.charAt(i))
   }
-}
-function getValidCount(): number{
-  return WordsService.validWords(game.guess.text).length
-}
-function showList() {
-  document.getElementById("list")!.hidden = !(document.getElementById("list")!.hidden)
 }
 function checkGuess() {
   game.submitGuess()
