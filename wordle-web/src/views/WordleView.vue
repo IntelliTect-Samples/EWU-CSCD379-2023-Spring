@@ -11,8 +11,9 @@
 
   <v-btn @click="restartGame" @keyup.enter="restartGame"> Restart </v-btn>
 
-  <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+  <br />
+  <ValidWords :list="list" :key="game.guesses.length" @setWord="setWord" />
 </template>
 
 <script setup lang="ts">
@@ -23,11 +24,15 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { WordsService } from '../scripts/wordsService'
 import { watch, onMounted, onUnmounted } from 'vue'
+import ValidWords from '../components/ValidWords.vue'
+import { Word } from '../scripts/word'
 
 const guess = ref('')
 const subtitle = ref('')
 const game = reactive(new WordleGame())
+const list = ref(game.getValidWords())
 console.log(game.secretWord)
+console.log(game.validWordList.length)
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -55,6 +60,7 @@ function checkGuess() {
     game.clearCurrentGuess()
   } else {
     game.submitGuess()
+    list.value = game.getValidWords()
     if (game.endGame()) {
       subtitle.value = 'You Win!'
       game.restartGame()
@@ -76,6 +82,12 @@ function restartGame() {
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
+}
+
+function setWord(word: string) {
+  const nGuess = new Word(word)
+  game.inputWord(nGuess)
+  guess.value = word
 }
 
 function keyPress(event: KeyboardEvent) {
