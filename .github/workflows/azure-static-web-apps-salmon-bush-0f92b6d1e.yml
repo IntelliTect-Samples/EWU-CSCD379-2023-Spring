@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - wordle-web/**
+    branches: ["main"]
   pull_request:
     types: [opened, synchronize, reopened]
 
