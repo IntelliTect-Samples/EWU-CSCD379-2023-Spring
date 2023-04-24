@@ -9,7 +9,7 @@
     >Possible Guesses: {{ game.possibleWords.length }}</v-btn
   >
   <v-btn @click="showDialog = !showDialog"
-    >Possible Guesses (with current guess): {{ game.possibleGuess.length }}</v-btn
+    >Possible Guesses (with current letters): {{ game.possibleGuess.length }}</v-btn
   >
 
   <template>
