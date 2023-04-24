@@ -6,7 +6,7 @@
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <v-btn @click="showBigDialog = !showBigDialog"
-    >Possible Guesses: {{ game.possibleWords.length }}</v-btn
+    >Possible Guesses (with known letters): {{ game.possibleWords.length }}</v-btn
   >
   <v-btn @click="showDialog = !showDialog"
     >Possible Guesses (with current letters): {{ game.possibleGuess.length }}</v-btn
@@ -88,13 +88,6 @@ function checkGuess() {
   guess.value = ''
 }
 
-function showPossibleWords() {
-  game.showPossibleWords()
-}
-
-function showGuessWords() {
-  game.showWorkingWords()
-}
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
