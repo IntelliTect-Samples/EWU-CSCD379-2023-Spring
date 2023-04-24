@@ -39,7 +39,12 @@ export class Word {
   }
 
   set(value: string) {
+    this.clear()
     value.split('').forEach((l) => this.push(l))
+  }
+
+  clear() {
+    this.letters.forEach((l) => (l.char = ''))
   }
 
   // Remove the last letter

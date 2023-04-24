@@ -18,7 +18,9 @@
       <v-card-text>
         <v-row>
           <v-col v-for="word in partial" :key="word" cols="4">
-            <v-btn color="default" variant="elevated" width="100">{{ word }}</v-btn>
+            <v-btn color="default" variant="elevated" width="100" @click="setWord(word)">{{
+              word
+            }}</v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -38,6 +40,15 @@ import { computed, ref, watch } from 'vue'
 const props = defineProps<{
   game: WordleGame
 }>()
+
+const emit = defineEmits<{
+  (e: 'set-word', value: string): void
+}>()
+
+function setWord(word: string) {
+  emit('set-word', word)
+  show.value = false
+}
 
 const show = ref(false)
 const index = ref(0)

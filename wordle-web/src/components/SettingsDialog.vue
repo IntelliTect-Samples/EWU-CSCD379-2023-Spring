@@ -50,6 +50,7 @@ watch([isDarkMode, style], ([isDark, style]) => {
 
 const emit = defineEmits<{
   (e: 'update:model-value', value: boolean): void
+  (e: 'set-word', value: string): void
 }>()
 
 function close() {

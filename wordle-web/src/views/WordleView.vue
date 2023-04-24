@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column align-center">
     <GameBoard :game="game" @letterClick="addChar" />
-    <AvailableWords :game="game" class="my-2" />
+    <AvailableWords :game="game" class="my-2" @set-word="setWord" />
     <KeyBoard
       @letterClick="addChar"
       :guessedLetters="game.guessedLetters"
@@ -31,6 +31,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function setWord(word: string) {
+  game.guess.set(word)
+}
 
 function checkGuess() {
   game.submitGuess()
