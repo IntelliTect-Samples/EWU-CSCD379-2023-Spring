@@ -33,9 +33,9 @@ const vuetify = createVuetify({
       },
       inverse: {
         colors: {
-          correct: '#F44336',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#F44336'
         }
       },
       oceandark: {
@@ -44,7 +44,10 @@ const vuetify = createVuetify({
           background: '#0277BD',
           surface: '#26C6DA',
           primary: '#FFFF8D',
-          secondary: '#9FA8DA'
+          secondary: '#9FA8DA',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
         }
       },
       oceanlight: {
@@ -53,7 +56,10 @@ const vuetify = createVuetify({
           background: '#0277BD',
           surface: '#26C6DA',
           primary: '#FFFF8D',
-          secondary: '#9FA8DA'
+          secondary: '#9FA8DA',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
         }
       },
       forestlight: {
@@ -62,7 +68,10 @@ const vuetify = createVuetify({
           background: '#2E7D32',
           surface: '#B2FF59',
           primary: '#C0CA33',
-          secondary: '#6D4C41'
+          secondary: '#6D4C41',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
         }
       },
       forestdark: {
@@ -71,7 +80,10 @@ const vuetify = createVuetify({
           background: '#2E7D32',
           surface: '#B2FF59',
           primary: '#C0CA33',
-          secondary: '#6D4C41'
+          secondary: '#6D4C41',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
         }
       }
     }

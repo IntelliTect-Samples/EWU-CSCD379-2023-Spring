@@ -34,7 +34,7 @@ function data() {
 
   return {
     theme,
-    toggleDefaultLight: () => (theme.global.name.value = 'light'),
+    toggleDefaultLight: () => (theme.global.name.value = 'inverse'),
     toggleDefaultDark: () => (theme.global.name.value = 'dark'),
     toggleTheme2Light: () => (theme.global.name.value = 'oceanlight'),
     toggleTheme2Dark: () => (theme.global.name.value = 'oceandark'),
