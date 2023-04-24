@@ -1,29 +1,31 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-  <GameBoard :game="game" @letterClick="addChar" />
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
-
-  <KeyBoard @letterClick="addChar" />
-
-  <v-btn @click="checkGuess">Check</v-btn>
   <div>
-    <v-row v-for="word in game.guesses" :key="word.text">
-      <v-col v-for="letter in word.letters" :key="letter.char">
-        <LetterButton :letter="letter"></LetterButton>
-        <v-btn :color="letter.color">
-          {{ letter.char }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </div>
+    <h1>Wordle Mind Bender</h1>
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+    <GameBoard :game="game" @letterClick="addChar" />
+
+    <v-text-field
+      v-model="guess"
+      label="Guess"
+      variant="solo"
+      @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
+    ></v-text-field>
+    <div>
+      <KeyBoard @letterClick="addChar" />
+    </div>
+
+    <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+    <div>
+      <v-row v-for="word in game.guesses" :key="word.text">
+        <v-col v-for="letter in word.letters" :key="letter.char">
+          <LetterButton :letter="letter" @click="letterClick(letter, $event)"></LetterButton>
+        </v-col>
+      </v-row>
+    </div>
+
+    <h2>{{ guess }}</h2>
+    <h3>{{ game.secretWord }}</h3>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +38,7 @@ import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-console.log(game.secretWord)
+console.log(game.guesses)
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -62,6 +64,11 @@ function checkGuess() {
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
+}
+
+function letterClick(letter: Letter, event: MouseEvent) {
+  guess.value += letter.char
+  console.log(event.altKey)
 }
 
 function keyPress(event: KeyboardEvent) {
