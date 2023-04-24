@@ -41,16 +41,8 @@ export abstract class WordsService {
 
     words.forEach((word) => {
       game.guesses.forEach((guess) => {
-        let valid = true
-
         // make sure it doesn't contain any absolutely wrong letters
-        for (const l of word) {
-          if (absoluteWrongs.includes(l)) {
-            valid = false
-            break
-          }
-        }
-
+        let valid = !word.split('').some((l) => absoluteWrongs.includes(l))
         // if its valid here, we can start our other checks
         if (valid) {
           // it has to include all misplaced and correct letters

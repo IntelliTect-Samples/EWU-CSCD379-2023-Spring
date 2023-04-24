@@ -2,11 +2,11 @@
   <v-layout>
     <v-app-bar>
       <template #title>
-        <h3>Wordle Mind Bender</h3>
+        <div @click="$router.push('/')" style="cursor: pointer">Wordle Mind Bender</div>
       </template>
 
       <template #prepend>
-        <v-icon icon="mdi-grid" class="mt-1 ml-2" />
+        <v-icon icon="mdi-grid" class="mt-1 ml-2" @click="$router.push('/')" />
       </template>
 
       <template #append>
