@@ -1,6 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
-import { Letter, LetterStatus } from "@/scripts/letter";
+import { Letter, LetterStatus } from '@/scripts/letter'
 
 export enum WordleGameStatus {
   Active = 0,
