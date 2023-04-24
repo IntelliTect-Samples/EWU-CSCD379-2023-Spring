@@ -15,7 +15,7 @@
               v-for="(item, index) in items"
               :key="index"
               :text="wordGuess === item"
-              @click="wordGuess = item"
+              @click="typeof item === 'string' && (wordGuess = item)"
             >
               {{ item }}
             </v-btn></v-hover
@@ -35,7 +35,7 @@
 import { ref, watchEffect } from 'vue'
 
 const dialog = ref(false)
-const wordGuess = ref()
+const wordGuess = ref<string>('')
 defineProps({
   items: {
     type: Array,
