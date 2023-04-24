@@ -1,5 +1,5 @@
-## Wordle-web link ##
-https://delightful-glacier-0286a821e.3.azurestaticapps.net
+## Assignment2 Link##
+https://white-sky-03b34b91e.3.azurestaticapps.net
 
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
