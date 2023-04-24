@@ -37,27 +37,39 @@ export class WordleGame {
 
     // Update the guessed letters
     for (const guessLetter of this.guess.letters) {
-      for(const guessedLetter of this.guessedLetters){
-        if(guessLetter.char === guessedLetter.char){
-          if(guessedLetter.status === LetterStatus.Correct){
+      for (const guessedLetter of this.guessedLetters) {
+        if (guessLetter.char === guessedLetter.char) {
+          if (guessedLetter.status === LetterStatus.Correct) {
             continue
-          } else if(guessedLetter.status === LetterStatus.Misplaced && guessLetter.status === LetterStatus.Correct){
+          } else if (
+            guessedLetter.status === LetterStatus.Misplaced &&
+            guessLetter.status === LetterStatus.Correct
+          ) {
             this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          } else if(guessedLetter.status === LetterStatus.Misplaced && guessLetter.status === LetterStatus.Wrong){
+          } else if (
+            guessedLetter.status === LetterStatus.Misplaced &&
+            guessLetter.status === LetterStatus.Wrong
+          ) {
             continue
-          } else if(guessedLetter.status === LetterStatus.Wrong && guessLetter.status === LetterStatus.Misplaced){
+          } else if (
+            guessedLetter.status === LetterStatus.Wrong &&
+            guessLetter.status === LetterStatus.Misplaced
+          ) {
             this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          } else if(guessedLetter.status === LetterStatus.Wrong && guessLetter.status === LetterStatus.Correct){
+          } else if (
+            guessedLetter.status === LetterStatus.Wrong &&
+            guessLetter.status === LetterStatus.Correct
+          ) {
             this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
           } else {
             this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
           }
         }
       }
-      this.guessedLetters.push(guessLetter);
+      this.guessedLetters.push(guessLetter)
     }
 
-    console.log(this.guessedLetters);
+    console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
