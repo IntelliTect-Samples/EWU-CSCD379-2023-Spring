@@ -1,7 +1,7 @@
 <template>
   <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
     <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+      <LetterButton :class="[`rounded-${0}`]" :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
 </template>

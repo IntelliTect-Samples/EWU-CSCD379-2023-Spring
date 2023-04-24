@@ -9,7 +9,7 @@ describe('LetterBase', () => {
     const letter = new Letter('a')
     const wrapper = mount(LetterButton, { props: { letter: letter} })
     expect(wrapper.text()).toContain('a')
-    expect(wrapper.attributes('color')).toBe('grey')
+    expect(wrapper.attributes('color')).toBe('grey-darken-1')
   })
 })
 
