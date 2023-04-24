@@ -23,7 +23,7 @@ export class Letter {
       case LetterStatus.Misplaced:
         return 'misplaced'
       case LetterStatus.Wrong:
-        return 'incorrect'
+        return 'wrong'
       default:
         return 'stale'
     }

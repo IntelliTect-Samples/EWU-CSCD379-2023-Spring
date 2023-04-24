@@ -28,7 +28,7 @@ const vuetify = createVuetify({
         colors: {
           correct: '#4CAF50',
           misplaced: '#EF6C00',
-          incorrect: '#D50000',
+          wrong: '#D50000',
           stale: '#9E9E9E'
         }
       },
@@ -36,7 +36,7 @@ const vuetify = createVuetify({
         colors: {
           correct: '#4CAF50',
           misplaced: '#EF6C00',
-          incorrect: '#D50000',
+          wrong: '#D50000',
           stale: '#9E9E9E'
         }
       },
@@ -47,7 +47,7 @@ const vuetify = createVuetify({
           surface: '#6D4C41',
           correct: '#01579B',
           misplaced: '#FF7043',
-          incorrect: '#263238',
+          wrong: '#263238',
           stale: '#A1887F'
         }
       },
@@ -58,7 +58,7 @@ const vuetify = createVuetify({
           surface: '#01579B',
           correct: '#009688',
           misplaced: '#CDDC39',
-          incorrect: '#C51162',
+          wrong: '#C51162',
           stale: '#4FC3F7'
         }
       }
