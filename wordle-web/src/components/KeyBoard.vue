@@ -91,17 +91,17 @@ const useDarkText = computed(() => {
 })
 
 function letterClick(letter: Letter) {
-  playClick();
+  playClick()
   emits('letterClick', letter)
 }
 
-function guessClicked(){
-  playClick();
+function guessClicked() {
+  playClick()
   emits('checkGuess')
 }
 
-function backspaceClicked(){
-  playClick();
+function backspaceClicked() {
+  playClick()
   emits('backspace')
 }
 
@@ -113,7 +113,7 @@ onUnmounted(() => {
 })
 
 function keyPress(event: KeyboardEvent) {
-  playClick();
+  playClick()
   if (event.key === 'Enter') {
     emits('checkGuess')
   } else if (event.key === 'Backspace') {
@@ -123,8 +123,8 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 
-function playClick(){
-  new Audio(wordleClick).play();
+function playClick() {
+  new Audio(wordleClick).play()
 }
 
 const size = computed(() => {

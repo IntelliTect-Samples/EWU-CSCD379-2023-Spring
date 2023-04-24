@@ -1,5 +1,5 @@
 <template>
-  <LetterBase :char="letter.char" :color="letter.color"/>
+  <LetterBase :char="letter.char" :color="letter.color" />
 </template>
 
 <script setup lang="ts">

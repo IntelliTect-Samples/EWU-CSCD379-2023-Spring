@@ -12,9 +12,9 @@
       The other instructor is Grant, and he is the Chief Technical Officer at IntelliTect.
     </v-card-text>
     <v-card-actions>
-      <v-spacer/>
+      <v-spacer />
       <v-img width="10%" :src="grant" />
-      <v-spacer/>
+      <v-spacer />
     </v-card-actions>
   </v-card>
   <br /><br />
