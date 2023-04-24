@@ -1,20 +1,14 @@
 <template>
   <v-menu :close-on-content-click="false" v-model:model-value="showMenu">
     <template v-slot:activator="{ props }">
-      <v-btn text v-bind="props">
-        Word Count: {{ wordList.length }}
-      </v-btn>
+      <v-btn text v-bind="props"> Word Count: {{ wordList.length }} </v-btn>
     </template>
     <v-card>
       <v-card-title> Valid Words </v-card-title>
       <v-card-text>
         <v-list height="720px">
-          <v-list-item
-            v-for="word in paginate"
-            :key="word"
-            class="text-h7"
-            @click="setWord(word)"
-          > {{ word }}
+          <v-list-item v-for="word in paginate" :key="word" class="text-h7" @click="setWord(word)">
+            {{ word }}
           </v-list-item>
         </v-list>
       </v-card-text>
@@ -28,7 +22,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { computed, ref } from 'vue'
 
 export interface Props {
@@ -36,7 +29,7 @@ export interface Props {
 }
 const props = defineProps<Props>()
 const emits = defineEmits<{
- (event: 'setWord', value: string): void
+  (event: 'setWord', value: string): void
 }>()
 const showMenu = ref(false)
 const wordsPerPage = 50
