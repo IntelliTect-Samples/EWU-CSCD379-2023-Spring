@@ -14,12 +14,12 @@ describe('Word', () => {
   })
 
   it('Gets Wrong Word', () => {
-    const word = new Word('plane')
-    expect(word.check('apple')).toBe(false)
+    const word = new Word('apple')
+    expect(word.check('plane')).toBe(false)
     expect(word.letters[0].status).toBe(LetterStatus.Misplaced)
     expect(word.letters[1].status).toBe(LetterStatus.Misplaced)
-    //expect(word.letters[2].status).toBe(LetterStatus.Wrong)
-    expect(word.letters[3].status).toBe(LetterStatus.Wrong)
+    expect(word.letters[2].status).toBe(LetterStatus.Wrong)
+    expect(word.letters[3].status).toBe(LetterStatus.Misplaced)
     expect(word.letters[4].status).toBe(LetterStatus.Correct)
   })
 })
