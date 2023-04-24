@@ -18,9 +18,7 @@
         <v-hover>
           <div v-if="game.possibleWords.length < 300">
             <div v-for="word in game.possibleWords" :key="word">
-              <v-btn @click=";[setGuess(word), (showBigDialog = !showBigDialog)]">{{
-                word
-              }}</v-btn>
+              <v-btn @click=";[setGuess(word), (showBigDialog = !showBigDialog)]">{{ word }}</v-btn>
             </div>
           </div>
           <v-btn v-else @click="showBigDialog = !showBigDialog"
@@ -38,9 +36,7 @@
         <v-hover>
           <div v-if="game.possibleGuess.length < 300">
             <div v-for="word in game.possibleGuess" :key="word">
-              <v-btn @click=";[setGuess(word), (showDialog = !showDialog)]">{{
-                word
-              }}</v-btn>
+              <v-btn @click=";[setGuess(word), (showDialog = !showDialog)]">{{ word }}</v-btn>
             </div>
           </div>
           <v-btn v-else @click="showBigDialog = !showBigDialog"
