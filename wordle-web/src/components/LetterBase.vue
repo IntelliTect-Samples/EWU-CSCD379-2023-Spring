@@ -1,16 +1,11 @@
 <template>
-  <v-btn
-    :class="`${useDarkText ? 'text-black' : ''}`"
-    :size="size"
-    elevation="8"
-    :color="color"
-  >
+  <v-btn :class="`${useDarkText ? 'text-black' : ''}`" :size="size" elevation="8" :color="color">
     <b>{{ char }}</b>
   </v-btn>
 </template>
 
 <script setup lang="ts">
-import {computed, ref} from 'vue'
+import { computed, ref } from 'vue'
 import { useDisplay, useTheme } from 'vuetify'
 
 export interface Props {
@@ -22,22 +17,22 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'default'
 })
-let mobileDisplay = ref(false);
-let xsDisplay= ref(false);
-try{
+let mobileDisplay = ref(false)
+let xsDisplay = ref(false)
+try {
   const { mobile, xs } = useDisplay()
-  mobileDisplay.value = mobile.value;
-  xsDisplay.value = xs.value;
-} catch(e){
+  mobileDisplay.value = mobile.value
+  xsDisplay.value = xs.value
+} catch (e) {
   // Expected failure in Jest tests
   // "Error: Could not find Vuetify display injection"
 }
 
-let nameTheme = ref("dark");
-try{
+let nameTheme = ref('dark')
+try {
   const { name } = useTheme()
-  nameTheme.value = name.value;
-} catch(e){
+  nameTheme.value = name.value
+} catch (e) {
   // Expected failure in Jest tests
   // "Error: Could not find Vuetify theme injection"
 }
