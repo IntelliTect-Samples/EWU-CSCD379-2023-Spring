@@ -21,7 +21,7 @@ export abstract class WordsService {
 
     game.guesses.forEach((guess) => {
       let guessIndex = 0
-      guess.letters.forEach(letter => {
+      guess.letters.forEach((letter) => {
         letterDetails.push({
           letter: letter,
           position: guessIndex

@@ -57,9 +57,9 @@ const availableWords = computed(() => {
 
 const doPagination = computed(() => {
   let page = currentPage.value
-  let shownWords = getPageWords(page);
+  let shownWords = getPageWords(page)
   if (shownWords.length == 0) {
-    page = 0;
+    page = 0
     shownWords = getPageWords(page)
   }
   return shownWords
@@ -76,7 +76,7 @@ function getPageWords(page: number) {
 }
 
 function setGuess(word: string) {
-  emits('guessChanged', word);
+  emits('guessChanged', word)
   showMenu.value = false
 }
 </script>
