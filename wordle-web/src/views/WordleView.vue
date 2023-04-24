@@ -1,17 +1,6 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
-  <GameBoard :game="game" @letterClick="addChar" />
-
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
-
-  <KeyBoard @letterClick="addChar" />
-
+  <GameBoard :game="game" @letterClick="addChar"/>
+  <KeyBoard @letterClick="addChar"/>
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>

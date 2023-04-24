@@ -1,9 +1,12 @@
 <template>
-  <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
-    <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
-    </v-col>
-  </v-row>
+  <div class="mt-16 pt-16">
+    <v-row class="justify-center"  dense v-for="(word, r) in game.guesses" :key="r">
+      <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
+        <LetterButton :letter="letter" @click="letterClick(letter)" :elevation="10"/>
+      </v-col>
+    </v-row>
+  </div>
+  
 </template>
 
 <script setup lang="ts">
