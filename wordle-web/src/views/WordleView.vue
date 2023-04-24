@@ -3,8 +3,8 @@
 
   <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
   <div class="ma-20 p-10">
-  <KeyBoard class="ma-10 p-10" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-</div>
+    <KeyBoard class="ma-10 p-10" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  </div>
   <HintDialog :game="game" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
