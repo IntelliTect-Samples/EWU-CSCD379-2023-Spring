@@ -7,14 +7,49 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
+  static getAll() {
+    let all = Array()
+    for (const word of this.#words) {
+      all.push(word)
+    }
+    return all
+  }
+
+  static currentWords(curGuess: string[], currentList: string[]) {
+    //key:
+    //  letter[0] = char
+    //  letter[1] = status
+    //  letter[2] = index
+    let wordList = Array()
+    //let wordList = this.#words
+    for (const word of currentList) {
+      let add = true
+      let split = word.split('')
+      for (let i = 0; i < curGuess.length; i++) {
+        if (split[i] != curGuess[i]) {
+          add = false
+        }
+      }
+      if (add == true) {
+        wordList.push(word)
+      }
+    }
+    /*console.log("PressCheck")
+    console.log(currentList)
+    console.log(curGuess.length)
+    console.log(curGuess)*/
+    console.log(wordList)
+    return wordList
+  }
+
   static validWords(knowns: string[][]): Array<string> {
     //key:
     //  letter[0] = char
     //  letter[1] = status
     //  letter[2] = index
 
-    console.log('Knowns:')
-    console.log(knowns)
+    //console.log('Knowns:')
+    //console.log(knowns)
     let wordList = Array(this.#words.length)
     let ind = 0
     for (const word of this.#words) {
@@ -32,7 +67,7 @@ export abstract class WordsService {
             temp.push(word)
           }
         }
-        console.log('entered Correct')
+        //console.log('entered Correct')
         wordList = temp
       } else if (knowns[i][1] == 'Misplaced') {
         for (const word of wordList) {
@@ -45,38 +80,33 @@ export abstract class WordsService {
             temp.push(word)
           }
         }
-        console.log('entered Misplaced')
+        //console.log('entered Misplaced')
         wordList = temp
       } else if (knowns[i][1] == 'Wrong') {
-        for (const word of wordList) {
-          let tempWord = word.split('')
-          if (tempWord.indexOf(knowns[i][0], 0) == -1) {
-            //if char does not exist
-            temp.push(word)
+        let present = false
+        for (let j = 0; j < knowns.length; j++) {
+          if (i != j && knowns[j][0] === knowns[i][0]) {
+            present = true //if the letter is present in a different index
+            //technically isn't correct, but should usually work out
           }
         }
-        console.log('entered Wrong')
-        wordList = temp
+        if (!present) {
+          for (const word of wordList) {
+            let tempWord = word.split('')
+            if (tempWord.indexOf(knowns[i][0], 0) == -1) {
+              //if char does not exist
+              temp.push(word)
+            }
+          }
+          //console.log('entered Wrong')
+          wordList = temp
+        }
       }
-      console.log(temp)
+      //console.log(wordList)
     }
 
     return wordList
   }
-
-  /*static validWords(guessedLetters: Array<Letter>): Array<string> {
-    let wordList = this.#words
-    for(const letter in guessedLetters){
-      if(letter.status === LetterStatus.Correct){
-        let temp = Array<string>
-        for(const word in #words){
-          let tempSplit = word.split('')
-          if(tempSplit[letter.index] == letter.char)
-        }
-      }
-    }
-    return new Array<string>()
-  }*/
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [

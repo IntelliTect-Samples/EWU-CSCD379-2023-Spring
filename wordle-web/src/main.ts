@@ -25,17 +25,35 @@ const vuetify = createVuetify({
     defaultTheme: 'dark',
     themes: {
       dark: {
+        dark: true,
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
         }
       },
-      inverse: {
+      bland: {
+        dark: true,
         colors: {
-          correct: '#F44336',
+          correct: '#ffffff',
+          misplaced: '#5D4037',
+          wrong: '#000000'
+        }
+      },
+      light: {
+        dark: false,
+        colors: {
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#F44336'
+        }
+      },
+      blue: {
+        dark: true,
+        colors: {
+          correct: '#2962ff',
+          misplaced: '#6200ea',
+          wrong: '#d50000'
         }
       }
     }

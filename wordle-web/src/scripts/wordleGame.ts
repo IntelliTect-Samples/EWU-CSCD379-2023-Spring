@@ -16,6 +16,8 @@ export class WordleGame {
   }
   guessedLetters: Letter[] = []
   allGuessData: Letter[] = []
+  possibleWords = new Array<string>()
+  possibleGuess = new Array<string>()
   guesses = new Array<Word>()
   secretWord = ''
   status = WordleGameStatus.Active
@@ -28,6 +30,18 @@ export class WordleGame {
   //     return
   //   }
 
+  getPossibleWords() {
+    console.log('In getPossibleWords')
+    console.log(this.possibleWords.length)
+    return this.possibleWords.length
+  }
+
+  getPossibleGuesses() {
+    console.log('In getPossibleGuesses')
+    console.log(this.possibleGuess.length)
+    return this.possibleGuess.length
+  }
+
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
@@ -37,7 +51,22 @@ export class WordleGame {
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+    this.possibleWords = WordsService.getAll()
+    this.possibleGuess = WordsService.getAll()
     this.status = WordleGameStatus.Active
+  }
+
+  showWorkingWords() {
+    let guessSplit = this.guess.text.split('')
+    let letterList = new Array(guessSplit.length)
+
+    for (let i = 0; i < guessSplit.length; i++) {
+      letterList[i] = guessSplit[i]
+    }
+    console.log('Testing current words')
+    //console.log(letterList)
+    this.possibleGuess = WordsService.currentWords(letterList, this.possibleWords)
+    console.log(this.possibleGuess)
   }
 
   showPossibleWords() {
@@ -56,7 +85,9 @@ export class WordleGame {
       }
       indexTracker = indexTracker + 1
     }
-    console.log(WordsService.validWords(letterList))
+    this.possibleWords = WordsService.validWords(letterList)
+    console.log(this.possibleWords.length)
+    console.log(this.possibleWords)
   }
 
   guessedLetterCheck() {
@@ -94,6 +125,8 @@ export class WordleGame {
     }*/
 
     this.guessedLetterCheck()
+    this.showPossibleWords()
+
     console.log('GUESSED LETTERS CHECK')
     console.log(this.guessedLetters)
 
@@ -103,7 +136,7 @@ export class WordleGame {
     } else {
       // The game is over
     }
-
+    this.showWorkingWords()
     console.log('CHECK GOES HERE THIS IS WORKING')
     console.log(this.guesses[0])
   }

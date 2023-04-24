@@ -5,9 +5,56 @@
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <v-btn @click="showPossibleWords">Show Possible Words</v-btn>
-  <v-btn @click="setGuess('tests')">Set Guess Test</v-btn>
+  <v-btn @click="showBigDialog = !showBigDialog"
+    >Possible Guesses: {{ game.possibleWords.length }}</v-btn
+  >
+  <v-btn @click="showDialog = !showDialog"
+    >Possible Guesses (with current guess): {{ game.possibleGuess.length }}</v-btn
+  >
 
+  <template>
+    <v-dialog v-model="showBigDialog">
+      <v-card>
+        <v-hover>
+          <v-btn
+            v-if="game.possibleWords.length < 300"
+            v-for="word in game.possibleWords"
+            @click="
+              setGuess(word)
+              showBigDialog = !showBigDialog
+            "
+            >{{ word }}</v-btn
+          >
+          <v-btn v-else @click="showBigDialog = !showBigDialog"
+            >Try to get the possible words bellow 300</v-btn
+          >
+          <v-btn @click="showBigDialog = !showBigDialog">Close Guesses</v-btn>
+        </v-hover>
+      </v-card>
+    </v-dialog>
+  </template>
+
+  <template>
+    <v-dialog v-model="showDialog">
+      <v-card>
+        <v-hover>
+          <v-btn
+            v-if="game.possibleGuess.length < 300"
+            v-for="word in game.possibleGuess"
+            @click="
+              setGuess(word)
+              showDialog = !showDialog
+            "
+            >{{ word }}</v-btn
+          >
+          <v-btn v-else @click="showBigDialog = !showBigDialog"
+            >Try to get the possible words bellow 300</v-btn
+          >
+          <v-btn @click="showDialog = !showDialog">Close Guesses</v-btn>
+        </v-hover>
+      </v-card>
+    </v-dialog>
+  </template>
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
@@ -23,6 +70,8 @@ import type { Word } from '@/scripts/word'
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
+let showDialog = ref(false)
+let showBigDialog = ref(false)
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -51,6 +100,10 @@ function showPossibleWords() {
   game.showPossibleWords()
 }
 
+function showGuessWords() {
+  game.showWorkingWords()
+}
+
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
@@ -67,6 +120,8 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
+
+    game.showWorkingWords()
   }
 }
 </script>

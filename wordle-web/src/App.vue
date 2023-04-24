@@ -12,7 +12,6 @@
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import AppBar from './components/AppBar.vue'
 
-let drawer = false
 const theme = useTheme()
 
 function setInverseTheme() {
