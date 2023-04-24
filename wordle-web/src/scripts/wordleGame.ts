@@ -14,7 +14,7 @@ export class WordleGame {
 
   win: boolean = false
   continue: boolean = true
-  knownLetters: string[] = ['','','','','']
+  knownLetters: string[] = ['', '', '', '', '']
   notAllowedLetters: string[] = []
   containsLetters: string[] = []
   validWordList: string[] = this.getValidWords()
