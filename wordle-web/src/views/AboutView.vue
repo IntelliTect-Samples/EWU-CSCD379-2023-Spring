@@ -1,18 +1,33 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
-    </v-card>
-  </v-sheet>
+<v-card class="mx-auto mt-12" max-width="844">
+    <v-img
+      src="https://i.makeagif.com/media/2-08-2016/LUwPC9.gif"
+      max-width="320"
+      
+    ></v-img> <v-card-title> Meg is super cool and awesome and likes cats and and </v-card-title>
 
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+
+<v-card-text>
+  This site is a group project for a class, duplicating the Wordle Project in Vue.
+</v-card-text>
+<v-card-actions>
+  <v-container>
+    <v-btn variant="outlined" @click="goBack">Go Back</v-btn>
+  </v-container>
+</v-card-actions>
+</v-card>
+  
 </template>
+
+
+
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+const router = useRouter()
+function goBack() {
+  router.back()
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {

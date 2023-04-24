@@ -1,6 +1,35 @@
 <template>
   <header>
     <div class="wrapper">
+      <v-layout>
+        <v-app-bar class="custom-app-bar" color="white" density="compact">
+          <template v-slot:prepend>
+
+            <RouterLink to="/">
+              <h1 class="titleClass">Wordle Web</h1>
+            </RouterLink>
+
+
+            <v-list-item>
+              <RouterLink to="/about">About</RouterLink>
+            </v-list-item>
+
+            <RouterLink to="/">
+              <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
+            </RouterLink>
+
+            <v-navigation-drawer color="black">
+              <v-list-item>
+                <RouterLink to="/about">About</RouterLink>
+              </v-list-item>
+              <v-list-item>
+                <RouterLink to="/wordle">Game</RouterLink>
+              </v-list-item>
+            </v-navigation-drawer>
+          </template>
+
+        </v-app-bar>
+      </v-layout>
       <nav>
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
         <RouterLink to="/about">About</RouterLink>
