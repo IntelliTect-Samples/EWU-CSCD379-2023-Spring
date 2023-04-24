@@ -9,11 +9,10 @@
 
       <v-card>
         <v-row v-for="word in game.list" :key="word">
-      		<v-btn @click="enterWord(word)" color="primary">
-        		{{ word }}
-      		</v-btn>
-    	  </v-row>
-
+          <v-btn @click="enterWord(word)" color="primary">
+            {{ word }}
+          </v-btn>
+        </v-row>
       </v-card>
     </v-dialog>
   </div>
@@ -29,13 +28,11 @@ defineProps<{
   guessedLetters: Letter[]
 }>()
 
-
 function enterWord(word: string) {
   const guess = new Word(word)
   for (const letter of guess.letters) {
     letterClick(letter)
   }
-  
 }
 
 const emits = defineEmits<{
@@ -45,6 +42,4 @@ const emits = defineEmits<{
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
-
-
 </script>
