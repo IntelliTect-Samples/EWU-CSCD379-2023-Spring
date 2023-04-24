@@ -1,13 +1,15 @@
 <template>
   <div class="WordSelect">
-    <v-select :list="validWords"></v-select>
+    <v-select :items="validWords"></v-select>
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: ['validWords']
+<script setup lang="ts">
+export interface WordSelectProps {
+  validWords: Array<string>
 }
+
+const props = defineProps<WordSelectProps>()
 </script>
 
 <style scoped>

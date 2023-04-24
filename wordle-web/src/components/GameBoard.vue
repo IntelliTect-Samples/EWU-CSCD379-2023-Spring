@@ -10,13 +10,16 @@
 </template>
 
 <script setup lang="ts">
-import { WordleGame } from '@/scripts/wordleGame'
+/** __vue_virtual_code_placeholder */
+import type { WordleGame } from '@/scripts/wordleGame'
 import LetterButton from '@/components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
 
-defineProps({
+export interface GameBoardProps {
   game: WordleGame
-})
+}
+
+const props = defineProps<GameBoardProps>()
 
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
