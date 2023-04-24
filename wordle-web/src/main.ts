@@ -37,6 +37,20 @@ const vuetify = createVuetify({
           misplaced: '#FFC107',
           wrong: '#4CAF50'
         }
+      },
+      marvel: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#283593',
+          wrong: '#D50000'
+        }
+      },
+      dc: {
+        colors: {
+          correct: '#FFFF00',
+          misplaced: '#E65100',
+          wrong: '#000000'
+        }
       }
     }
   }
