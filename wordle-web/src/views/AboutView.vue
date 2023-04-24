@@ -4,10 +4,10 @@
       <v-card-title>About Us</v-card-title>
       <v-card-text>
         Hello! Our names are Nolan Posey and Hunter Thompson. This web app is a project we are
-        working on for our CSCD 379 class at Eastern Washington University. The goal of this project
-        is to emulate the game Wordle and to apply our own custom flair to the game in order to 
-        really make it our own. The name of our game is called "The Good Word" and we hope you enjoy 
-        playing it as much as we enjoying making it!
+        working on for our CSCD 379 .NET Web Applications class at Eastern Washington University. 
+        The goal of this project is to emulate the game Wordle and to apply our own custom flair 
+        to the game in order to really make it our own. The name of our game is called "The Good Word" 
+        and we hope you enjoy playing it as much as we enjoying making it!
       </v-card-text>
     </v-card>
 
