@@ -5,7 +5,6 @@
       <LetterButton :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
-  <AvailableWords :guessedLetters="game.guessedLetters" />
 </template>
 
 <script setup lang="ts">

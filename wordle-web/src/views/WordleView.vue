@@ -32,6 +32,8 @@
     </v-row>
   </v-container>
 
+  <ValidWords :game="game" />
+
   <h2 class="text-center">{{ guess }}</h2>
   <h3 class="text-center">{{ game.secretWord }}</h3>
 </template>
@@ -43,6 +45,7 @@ import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
+import ValidWords from '../components/ValidWords.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())

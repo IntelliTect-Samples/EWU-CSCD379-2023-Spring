@@ -1,3 +1,5 @@
+import { Word } from './word'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,9 +9,11 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(currentGuess: string): Array<Word> {
+    const validWords = this.#words.filter((word) =>
+      word.toUpperCase().startsWith(currentGuess.toUpperCase().trim())
+    )
+    return validWords.map((word) => new Word(word))
   }
 
   static getWords(): string[] {
