@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import { Letter, LetterStatus } from '../letter'
 import { WordsService } from '../wordsService'
 import { WordleGame } from '../wordleGame'
 

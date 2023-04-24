@@ -73,6 +73,7 @@ const keyboardLetters = computed(() => {
     for (let key of keyboardKey) {
       keyboardRow.push(
         props.guessedLetters
+          .slice(0, props.guessedLetters.length)
           .sort((a, b) => {
             return a.status - b.status
           })
