@@ -1,3 +1,4 @@
+import { Letter } from '@/scripts/letter'
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 
@@ -8,6 +9,7 @@ export class WordleGame {
     this.restartGame(secretWord)
   }
   guesses = new Array<Word>()
+  guessedLetters: Letter[] = []
   secretWord = ''
   numberOfGuesses = 6
   guess!: Word
@@ -57,6 +59,10 @@ export class WordleGame {
   submitGuess() {
     // put logic to win here.
     this.win = this.guess.check(this.secretWord)
+    // Update the guessed letters
+    for (const letter of this.guess.letters) {
+      this.guessedLetters.push(letter)
+    }
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.updateRegexList()
