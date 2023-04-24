@@ -2,10 +2,9 @@
   <header>
     <div class="wrapper">
       <v-layout>
-        <v-app-bar class="custom-app-bar" color="white" density="compact">
+        <v-app-bar class="custom-app-bar" color="black" density="compact">
           <template v-slot:prepend>
-
-            <RouterLink to="/">
+            <RouterLink to="/wordle">
               <h1 class="titleClass">Wordle Web</h1>
             </RouterLink>
 
@@ -18,7 +17,8 @@
               <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
             </RouterLink>
 
-            <v-navigation-drawer color="black">
+            <v-navigation-drawer color="white"
+            >hi
               <v-list-item>
                 <RouterLink to="/about">About</RouterLink>
               </v-list-item>
