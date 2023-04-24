@@ -32,10 +32,10 @@
 </template>
 <script setup lang="ts">
 //v-select is like 3 line of code including the template
-import { defineProps, ref, watchEffect } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const dialog = ref(false)
-const wordGuess = ref()
+const wordGuess = ref('')
 defineProps({
   items: {
     type: Array,
@@ -44,7 +44,7 @@ defineProps({
 })
 
 const emit = defineEmits<{
-  (event: 'change', value: string): void
+  change: (value: string) => void
 }>()
 
 function save() {

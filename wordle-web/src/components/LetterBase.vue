@@ -1,8 +1,14 @@
 <template>
-  <v-btn
-    style="width: 50px; min-width: 50px; height: 50px; min-height: 50px" :color="props.color"
-    class="gradient-key hover-shadow">
-    {{ props.char }}
+<v-btn style="
+  width: 50px; 
+  min-width: 50px; 
+  height: 50px; 
+  min-height: 50px; 
+  background: linear-gradient(to right, grey, blue);" 
+  :color="props.color"
+  :elevation="12"
+  :flat = "true"
+  >{{ props.char }}
   </v-btn>
 </template>
 
@@ -16,10 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'grey'
 })
+
 </script>
 
-<style>
-.gradient-key {
-  background: linear-gradient(to right, grey, blue);
-}
-</style>
+
