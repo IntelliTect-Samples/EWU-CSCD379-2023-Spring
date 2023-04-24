@@ -2,11 +2,8 @@
   <v-row justify="center">
     <v-dialog scrollable width="auto">
       <template v-slot:activator="{ props }">
-        <v-btn
-          color="primary"
-          v-bind="props"
-        >
-        {{ WordsService.validWords(game.guess.text).length }}
+        <v-btn color="primary" v-bind="props">
+          {{ WordsService.validWords(game.guess.text).length }}
         </v-btn>
       </template>
       <v-card>
