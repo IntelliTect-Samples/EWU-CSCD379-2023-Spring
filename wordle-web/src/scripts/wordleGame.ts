@@ -14,12 +14,12 @@ export class WordleGame {
 
   win: boolean = false
   continue: boolean = true
-  knownLetters: string[] = []
+  knownLetters: string[] = ['','','','','']
   notAllowedLetters: string[] = []
   containsLetters: string[] = []
   validWordList: string[] = this.getValidWords()
 
-  restartGame(secretWord: string) {
+  restartGame(secretWord?: string) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
     // create a word for each guess
