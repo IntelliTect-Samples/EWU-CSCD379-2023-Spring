@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - wordle-web/**
+    branches: ["azure-assignment-deployment"]
   pull_request:
     types: [opened, synchronize, reopened]
 

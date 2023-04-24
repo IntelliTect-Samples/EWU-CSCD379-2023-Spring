@@ -1,21 +1,21 @@
 export abstract class WordsService {
   static getRandomWord(): string {
-    return this.#words[Math.floor(Math.random() * this.#words.length)]
+    return this.words[Math.floor(Math.random() * this.words.length)]
   }
 
   static isValidWord(word: string): boolean {
-    return this.#words.includes(word)
+    return this.words.includes(word)
   }
 
   static validWords(word: string): Array<string> {
     //Todo
-    let newList = new Array<string>()
+    const newList = new Array<string>()
 
     if (word == '') {
       return newList
     }
 
-    this.#words.forEach((element) => {
+    this.words.forEach((element) => {
       if (element.startsWith(word)) {
         newList.push(element)
       }
@@ -25,7 +25,7 @@ export abstract class WordsService {
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
-  static readonly #words: string[] = [
+  private static readonly words: string[] = [
     'aahed',
     'aalii',
     'aargh',

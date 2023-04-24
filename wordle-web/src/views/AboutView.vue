@@ -1,17 +1,32 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
+  <v-sheet location="center" color="#9E9E9E" height="820px" width="800px" class="pt-10 my-5">
+    <v-card color="cyan-darken-3" class="ma-5" elevation="5" rounded="xl">
+      <v-card-title>About Us</v-card-title>
+      <v-card-text>
+        Hello! Our names are Nolan Posey and Hunter Thompson. This web app is a project we are
+        working on for our CSCD 379 .NET Web Applications class at Eastern Washington University.
+        The goal of this project is to emulate the game Wordle and to apply our own custom flair to
+        the game in order to really make it our own. The name of our game is called "The Good Word"
+        and we hope you enjoy playing it as much as we enjoying making it!
+      </v-card-text>
     </v-card>
-  </v-sheet>
 
-  <v-row no-gutters>
-    <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
-      <v-card class="ma-1">
-        <v-card-title> {{ i }} </v-card-title>
-      </v-card>
-    </v-col>
-  </v-row>
+    <v-card color="cyan-darken-3" class="ma-5" elevation="5" rounded="xl">
+      <v-card-title>Our Teacher Meg</v-card-title>
+      <v-card-text>
+        Meg has been teaching us CSharp and Vuetify since Winter quarter of the 2022-2023 school
+        year. Her ability and passion to teach has helped us hone the necessary skills we as
+        programmers need in order to be successful in our careers. Meg is over-worked and
+        under-paid, but since we have no money... and no influence over her bosses Mark and Grant...
+        we have decided to gift her with this cute image Nolan's cat Nala.
+      </v-card-text>
+    </v-card>
+
+    <!-- TODO: figure out how to align picture into the center -->
+    <img alt="nala" src="@/assets/nala.jpg" width="350" height="400" color="white" />
+
+    <v-btn to="/wordle">Return To Game</v-btn>
+  </v-sheet>
 </template>
 
 <style>
