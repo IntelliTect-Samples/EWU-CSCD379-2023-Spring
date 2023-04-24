@@ -10,14 +10,11 @@
     disabled
     @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
   ></v-text-field>
-  <v-card
-    style="width: 40%; position: fixed; left: 50%; bottom: -50px; transform: translate(-50%, -50%)"
-  >
+
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-  </v-card>
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <h2>{{ guess }}</h2>
+  <!-- <h2>{{ guess }}</h2> -->
   <h3>{{ game.secretWord }}</h3>
 
   <ValidWordList :items="game.validWords" @change="select" />
