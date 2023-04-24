@@ -13,7 +13,7 @@ export interface Props {
   color?: string
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'default'
 })
@@ -45,7 +45,7 @@ const size = computed(() => {
 })
 
 const useDarkText = computed(() => {
-  return name.value !== 'dark'
+  return nameTheme.value !== 'dark'
 })
 </script>
 
