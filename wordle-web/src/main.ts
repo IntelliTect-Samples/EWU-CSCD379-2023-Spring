@@ -37,6 +37,20 @@ const vuetify = createVuetify({
           misplaced: '#FFC107',
           wrong: '#4CAF50'
         }
+      },
+      neon: {
+        colors: {
+          correct: '#00FFFF',
+          misplaced: '#FFFF00',
+          wrong: '#FF00FF'
+        }
+      },
+      pastel: {
+        colors: {
+          correct: '#D2FFF3',
+          misplaced: '#FFF3D2',
+          wrong: '#F3D2FF'
+        }
       }
     }
   }

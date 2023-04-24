@@ -1,7 +1,14 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+    <v-col cols="auto" v-for="(letter, j) in key" :key="j">
+      <v-hover v-slot="{ isHovering, props }">
+        <LetterButton
+          :letter="letter"
+          @click="letterClick(letter)"
+          v-bind="props"
+          :elevation="isHovering ? 15 : 6"
+        />
+      </v-hover>
     </v-col>
   </v-row>
 </template>

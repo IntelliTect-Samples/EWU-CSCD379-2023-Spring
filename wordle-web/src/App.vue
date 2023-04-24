@@ -8,6 +8,9 @@
       </nav>
       <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn @click="setNeonTheme"> Neon Theme </v-btn>
+      <v-btn @click="setPastelTheme"> Pastel Theme </v-btn>
     </div>
   </header>
 
@@ -16,7 +19,7 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import AppBar from './components/AppBar.vue';
+import AppBar from './components/AppBar.vue'
 
 const theme = useTheme()
 
@@ -26,5 +29,13 @@ function setInverseTheme() {
 
 function setDarkTheme() {
   theme.global.name.value = 'dark'
+}
+
+function setNeonTheme() {
+  theme.global.name.value = 'neon'
+}
+
+function setPastelTheme() {
+  theme.global.name.value = 'pastel'
 }
 </script>

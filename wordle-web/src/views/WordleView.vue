@@ -19,7 +19,7 @@
   </v-card>
 
   <h2>{{ guess }}</h2>
-  <!--<h3>{{ game.secretWord }}</h3>-->
+  <h3>{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
@@ -29,7 +29,6 @@ import { WordsService } from '@/scripts/wordsService'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { Word } from '@/scripts/word'
 
 const guess = ref('')
 const selected = ref('')
@@ -59,8 +58,10 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  game.guess.push(letter.char)
-  guess.value += letter.char
+  if (guess.value.length < 5) {
+    game.guess.push(letter.char)
+    guess.value += letter.char
+  }
 }
 
 function keyPress(event: KeyboardEvent) {

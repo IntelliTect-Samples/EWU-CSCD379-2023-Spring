@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="448">
+  <v-card class="mx-auto" max-width="448" zIndex="0">
     <v-layout>
       <v-app-bar density="compact">
         <template v-slot:prepend>
