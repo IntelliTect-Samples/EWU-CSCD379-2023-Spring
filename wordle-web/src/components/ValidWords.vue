@@ -9,7 +9,7 @@
           color="primary"
           v-bind="props"
         >
-        {{ WordsService.validWords(game.guess.text).length }}
+        {{ WordsService.validWords(props.game.guess.text).length }}
         </v-btn>
       </template>
       <v-card>

@@ -39,7 +39,7 @@
 
 <script setup lang="ts">
 
-import SettingsTab from '@/components/SettingsPopout.vue.js'
+import SettingsTab from '@/components/SettingsPopout.vue'
 import { ref } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
