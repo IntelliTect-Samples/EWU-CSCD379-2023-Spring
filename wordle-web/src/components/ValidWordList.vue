@@ -38,13 +38,13 @@ const dialog = ref(false)
 const wordGuess = ref('')
 defineProps({
   items: {
-    type: Array,
+    type: Array<String>(),
     default: () => []
   }
 })
 
 const emit = defineEmits<{
-  change: (value: string) => void
+  (event: 'change', value: string): void
 }>()
 
 function save() {
