@@ -1,5 +1,4 @@
 <template>
-  
   <header>
     <div class="wrapper">
       <nav>
@@ -26,8 +25,7 @@ function setInverseTheme() {
 function setDarkOrLightTheme() {
   if (theme.global.name.value == 'dark') {
     theme.global.name.value = 'light'
-  }
-  else {
+  } else {
     theme.global.name.value = 'dark'
   }
 }

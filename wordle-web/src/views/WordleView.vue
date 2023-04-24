@@ -1,14 +1,14 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-  <h2> {{ subtitle }} </h2>
+  <h2>{{ subtitle }}</h2>
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <br>
+  <br />
   <KeyBoard @letterClick="addChar" />
-  <br>
+  <br />
 
   <v-btn size="large" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-  
+
   <v-btn @click="restartGame" @keyup.enter="restartGame"> Restart </v-btn>
 
   <h2>{{ guess }}</h2>
@@ -47,23 +47,20 @@ watch(
 )
 
 function checkGuess() {
-  if(guess.value.length !== game.secretWord.length) {
+  if (guess.value.length !== game.secretWord.length) {
     subtitle.value = 'Guess is Incorrect Length'
     game.clearCurrentGuess()
-  }
-  else if (!WordsService.isValidWord(guess.value)){
+  } else if (!WordsService.isValidWord(guess.value)) {
     subtitle.value = 'Guess is not a Valid Word'
     game.clearCurrentGuess()
-  }
-  else{
+  } else {
     game.submitGuess()
-    if(game.endGame()){
-      subtitle.value = "You Win!"
+    if (game.endGame()) {
+      subtitle.value = 'You Win!'
       game.restartGame()
-    }
-    else {
+    } else {
       if (game.continue === false) {
-        subtitle.value = "You Failed! The word was: " + game.secretWord
+        subtitle.value = 'You Failed! The word was: ' + game.secretWord
         game.restartGame()
       }
     }
@@ -73,7 +70,7 @@ function checkGuess() {
 
 function restartGame() {
   game.restartGame()
-  subtitle.value = "Game was Reset"
+  subtitle.value = 'Game was Reset'
 }
 
 function addChar(letter: Letter) {

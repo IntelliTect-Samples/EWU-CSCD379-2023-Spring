@@ -11,7 +11,7 @@ export class WordleGame {
   secretWord = ''
   numberOfGuesses = 6
   guess!: Word
-  
+
   win: boolean = false
   continue: boolean = true
   knownLetters: string[] = []
@@ -30,7 +30,7 @@ export class WordleGame {
     this.guess = this.guesses[0]
     this.win = false
     this.continue = true
-    this.knownLetters = ['','','','','']
+    this.knownLetters = ['', '', '', '', '']
     this.notAllowedLetters = []
     this.containsLetters = []
     this.validWordList = this.getValidWords()
@@ -40,12 +40,17 @@ export class WordleGame {
     this.guess.clear()
   }
 
-  endGame():boolean {
+  endGame(): boolean {
     return this.win
   }
 
   getValidWords(): string[] {
-    this.validWordList = WordsService.validWords(this.knownLetters, this.notAllowedLetters, this.containsLetters, this.secretWord.length)
+    this.validWordList = WordsService.validWords(
+      this.knownLetters,
+      this.notAllowedLetters,
+      this.containsLetters,
+      this.secretWord.length
+    )
     return this.validWordList
   }
 
@@ -56,7 +61,6 @@ export class WordleGame {
     if (index < this.guesses.length - 1) {
       this.updateRegexList()
       this.guess = this.guesses[index + 1]
-
     } else {
       this.continue = false
     }
@@ -113,6 +117,4 @@ export class WordleGame {
     }
     this.validWordList = this.getValidWords()
   }
-
-
 }

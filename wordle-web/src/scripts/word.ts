@@ -48,7 +48,6 @@ export class Word {
       this.letters[i].char = ''
     }
   }
-  
 
   check(secretWord: string): boolean {
     console.log(this.text)
