@@ -3,7 +3,7 @@
   <h2>{{ subtitle }}</h2>
   <GameBoard :game="game" @letterClick="addChar" />
   <br />
-  <KeyBoard @letterClick="addChar" />
+  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <br />
 
   <v-btn size="large" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
@@ -62,11 +62,9 @@ function checkGuess() {
     list.value = game.getValidWords()
     if (game.endGame()) {
       subtitle.value = 'You Win!'
-      game.restartGame()
     } else {
       if (game.continue === false) {
         subtitle.value = 'You Failed! The word was: ' + game.secretWord
-        game.restartGame()
       }
     }
   }
@@ -76,6 +74,7 @@ function checkGuess() {
 function restartGame() {
   game.restartGame()
   subtitle.value = 'Game was Reset'
+  list.value = game.getValidWords()
 }
 
 function addChar(letter: Letter) {
