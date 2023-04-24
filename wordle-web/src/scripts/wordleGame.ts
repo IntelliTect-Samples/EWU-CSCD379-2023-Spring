@@ -57,40 +57,40 @@ export class WordleGame {
       // The game is over
     }
   }
-  
+
   getAvailableWords() {
-    const availableWords: string[] = [];
-    const secretWordChars = this.secretWord.split('');
-    const wordList = WordsService.getWordsList();
+    const availableWords: string[] = []
+    const secretWordChars = this.secretWord.split('')
+    const wordList = WordsService.getWordsList()
 
     for (const word of wordList) {
-      const chars = word.split('');
-      let isAvailable = true;
+      const chars = word.split('')
+      let isAvailable = true
 
       for (let i = 0; i < chars.length; i++) {
-        const char = chars[i];
-        const index = secretWordChars.indexOf(char);
+        const char = chars[i]
+        const index = secretWordChars.indexOf(char)
 
         if (index === -1) {
-          isAvailable = false;
-          break;
+          isAvailable = false
+          break
         } else {
-          secretWordChars.splice(index, 1);
+          secretWordChars.splice(index, 1)
         }
       }
 
       if (isAvailable) {
-        availableWords.push(word);
+        availableWords.push(word)
       }
 
       if (secretWordChars.length === 0) {
-        break;
+        break
       } else {
-        secretWordChars.splice(0);
-        secretWordChars.push(...this.secretWord.split(''));
+        secretWordChars.splice(0)
+        secretWordChars.push(...this.secretWord.split(''))
       }
     }
 
-    return availableWords;
+    return availableWords
   }
 }

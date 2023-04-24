@@ -1,5 +1,5 @@
 <template>
-    <div :class="themeClass">
+  <div :class="themeClass">
     <v-card class="mx-auto mb-12" max-width="448">
       <v-layout>
         <v-app-bar class="custom-app-bar" color="white" density="compact">
@@ -47,7 +47,7 @@
         </v-app-bar>
       </v-layout>
     </v-card>
-   <RouterView />
+    <RouterView />
   </div>
 </template>
 
@@ -57,7 +57,7 @@ import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
 const theme = useTheme()
 
-const themeClass = computed (() => {
+const themeClass = computed(() => {
   if (theme.global.name.value === 'marvel') {
     return 'marvel-theme'
   }
