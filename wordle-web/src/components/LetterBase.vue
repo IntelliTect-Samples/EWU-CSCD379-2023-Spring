@@ -16,16 +16,17 @@
   })
 
   function setGradient(): string{
+
     if(props.color == 'correct'){
-      return "background: linear-gradient(black, green)"
+      return "background: linear-gradient(white, green)"
     }
     else if(props.color == 'misplaced'){
-      return "background: linear-gradient(black, yellow)"
+      return "background: linear-gradient(white, rgb(246,190,0))"
     }
     else if(props.color == 'wrong'){
-      return "background: linear-gradient(black, red)"
+      return "background: linear-gradient(white, red)"
     }
-    return "background: linear-gradient(black, grey)"
+    return "background: linear-gradient(white, grey)"
    
   }
   </script>
