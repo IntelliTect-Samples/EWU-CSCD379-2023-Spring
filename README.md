@@ -4,7 +4,7 @@
 
 ![](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
 <br>
-Extra credit pls. It was mentioned in class Meg likes cats.
+
 <br>
 
 <p>
