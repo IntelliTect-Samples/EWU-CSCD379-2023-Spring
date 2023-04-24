@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { WordsService } from '@/scripts/wordsService'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
@@ -48,12 +47,6 @@ function autoComplete(fill: string){
   for(let i = 0; i < fill.length; i++){
     game.guess.push(fill.charAt(i))
   }
-}
-function getValidCount(): number{
-  return WordsService.validWords(game.guess.text).length
-}
-function showList() {
-  document.getElementById("list")!.hidden = !(document.getElementById("list")!.hidden)
 }
 function checkGuess() {
   game.submitGuess()

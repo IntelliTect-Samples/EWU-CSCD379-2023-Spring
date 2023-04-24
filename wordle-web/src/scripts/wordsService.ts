@@ -11,7 +11,7 @@ export abstract class WordsService {
   static validWords(guess: string): Array<string> {
     //Todo
     if(guess !== ""){
-      return this.#words.filter((element, index, array) => {
+      return this.#words.filter((element) => {
         return element.substring(0, guess.length) == guess
       })
     }
