@@ -1,10 +1,14 @@
 <template>
   <div>
-    <v-dialog width="auto">
+    <v-dialog width="300px">
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props">
-          {{ game.list.length }}
-        </v-btn>
+        <v-flex justify-center>
+          <div class="m-5 py-3">
+            <v-btn class="m-5" elevation="24" height="30px" color="primary" v-bind="props">
+              {{ game.list.length }}
+            </v-btn>
+          </div>
+        </v-flex>
       </template>
 
       <v-card>

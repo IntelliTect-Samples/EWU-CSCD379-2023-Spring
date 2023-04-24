@@ -1,11 +1,8 @@
 <template>
   <header>
     <div class="wrapper"></div>
-    <div></div>
-    <!-- <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>-->
   </header>
-  <div class="ma-10"><NavigationBar /></div>
+  <div class="ma-16"><NavigationBar /></div>
   <div><RouterView /></div>
 </template>
 
