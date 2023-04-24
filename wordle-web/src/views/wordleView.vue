@@ -5,12 +5,20 @@
   </v-container>
   <v-container>
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+    <v-row class="justify-center">
+      <v-col cols="auto" >
+        <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn @click="showList">{{ WordsService.validWords(game.guess.text).length }}</v-btn>
+      </v-col>
+    </v-row>
+    
   </v-container>
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  
 
   <h3>{{ game.secretWord }}</h3>
-  <v-btn @click="showList">{{ WordsService.validWords(game.guess.text).length }}</v-btn>
 
   <v-container id="list" hidden>
     <ValidWords @fillGuess="autoComplete" :items="WordsService.validWords(game.guess.text)"/>
