@@ -10,7 +10,6 @@
         <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-col>
       <v-col cols="auto">
-        <v-btn @click="showList">{{ WordsService.validWords(game.guess.text).length }}</v-btn>
       </v-col>
     </v-row>
     
@@ -20,8 +19,8 @@
 
   <h3>{{ game.secretWord }}</h3>
 
-  <v-container id="list" hidden>
-    <ValidWords @fillGuess="autoComplete" :items="WordsService.validWords(game.guess.text)"/>
+  <v-container id="list">
+    <ValidWords @fillGuess="autoComplete" :game="game"></ValidWords>
   </v-container>
 </template>
 
@@ -49,6 +48,9 @@ function autoComplete(fill: string){
   for(let i = 0; i < fill.length; i++){
     game.guess.push(fill.charAt(i))
   }
+}
+function getValidCount(): number{
+  return WordsService.validWords(game.guess.text).length
 }
 function showList() {
   document.getElementById("list")!.hidden = !(document.getElementById("list")!.hidden)
