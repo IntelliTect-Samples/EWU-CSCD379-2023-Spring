@@ -1,10 +1,9 @@
 <template>
-  <div id="gradient">
-    <v-btn class="shadow-5 elevation-10" :color="props.color">
-      {{ props.char }}
-    </v-btn>
-  </div>
+  <v-btn class="shadow-5, elevation-10" id="gradient" :color="props.color">
+    {{ props.char }}
+  </v-btn>
 </template>
+
 <style scoped>
 #gradient {
   background: linear-gradient(to right, #e1e1e1, #747474);
