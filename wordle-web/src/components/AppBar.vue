@@ -12,7 +12,7 @@
 
     <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
 
-    <v-btn icon="mdi-arrow-right-bold-hexagon-outline" @click.stop="settings = !settings"></v-btn>
+    <v-btn icon="mdi-lightbulb-outline" @click.stop="settings = !settings"></v-btn>
 
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>

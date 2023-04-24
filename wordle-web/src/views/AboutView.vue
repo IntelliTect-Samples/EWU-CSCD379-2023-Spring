@@ -17,7 +17,7 @@
         Meg has been teaching us CSharp and Vuetify since Winter quarter of the 2022-2023 school year. Her ability 
         and passion to teach has helped us hone the necessary skills we as programmers need in order to be successful
         in our careers. Meg is over-worked and under-paid, but since we have no money... and no influence over her bosses 
-        Mark and Grant... we have decided to gift her with this cute image of a cat named Nala.
+        Mark and Grant... we have decided to gift her with this cute image Nolan's cat Nala.
       </v-card-text>
 
     </v-card>
