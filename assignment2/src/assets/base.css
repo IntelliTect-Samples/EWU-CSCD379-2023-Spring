@@ -3,6 +3,11 @@
   --v-sett-back: #323232;
   --v-menu-bottom: white;
   --v-back: #141414;
+
+  --v-unknown: #7979a0;
+  --v-correct: #1e6b1e;
+  --v-misplaced: #eba10d;
+  --v-wrong: #6d1212;
 }
 
 *,

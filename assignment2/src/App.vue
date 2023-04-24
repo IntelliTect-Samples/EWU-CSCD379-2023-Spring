@@ -5,9 +5,9 @@
         dialog: false,
         themeselect: useTheme().global.current.value.dark ? useTheme().global.name.value.substring(0, useTheme().global.name.value.length - 4) : useTheme().global.name.value.substring(0, useTheme().global.name.value.length - 5),
         themedark: useTheme().global.current.value.dark ? "Dark" : "Light",
-        //guesses: 6,
-        //guessLabels: ['3', '6', '9', '12'],
-        colors: [useTheme().global.current.value.colors.unknown, useTheme().global.current.value.colors.correct, useTheme().global.current.value.colors.misplaced, useTheme().global.current.value.colors.wrong],
+        guesses: 6,
+        guessLabels: ['3', '6', '9', '12'],
+        letterColor: [document.querySelector('html')?.style.getPropertyValue('--v-unknown'), document.querySelector('html')?.style.getPropertyValue('--v-correct'), document.querySelector('html')?.style.getPropertyValue('--v-misplaced'), document.querySelector('html')?.style.getPropertyValue('--v-wrong')]
       }
     },
     setup () {
@@ -35,8 +35,18 @@
           r!.style.setProperty('--v-back', '#d9d9d9')
         }
       }, 
-      toggleScheme: (rad:string, tog:string) => {
+      toggleScheme: (rad:string, tog:string, lett:(string | undefined)[]) => {
+        const r = document.querySelector('html');
         theme.global.name.value = rad.concat(tog)
+        const u = theme.global.current.value.colors.unknown
+        const c = theme.global.current.value.colors.correct
+        const m = theme.global.current.value.colors.misplaced
+        const w = theme.global.current.value.colors.wrong
+        r!.style.setProperty('--v-unknown', u)
+        r!.style.setProperty('--v-correct', c)
+        r!.style.setProperty('--v-misplaced', m)
+        r!.style.setProperty('--v-wrong', w)
+        lett = [r!.style.getPropertyValue('--v-unknown'), r!.style.getPropertyValue('--v-correct'), r!.style.getPropertyValue('--v-misplaced'), r!.style.getPropertyValue('--v-wrong')]
       }
     }
   }
@@ -70,7 +80,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </v-radio-group>
 
             <p> <v-icon icon="mdi-water-opacity"></v-icon> Color Scheme: </p>
-            <v-radio-group v-model="themeselect" column @change="toggleScheme(themeselect, themedark)" style="margin-left: 25px;">
+            <v-radio-group v-model="themeselect" column @change="toggleScheme(themeselect, themedark, letterColor)" style="margin-left: 25px;">
               <v-radio label="Default" color="primary" value="default"></v-radio>
               <v-radio label="Autumn" color="primary" value="autumn"></v-radio>
               <v-radio label="Coffee" color="primary" value="coffee"></v-radio>
@@ -79,7 +89,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <br>
             <h2>Gameplay</h2>
             <p># of Guesses</p>
-            <!-- <v-slider :ticks="guessLabels" v-model="guesses" :min="3" :max="12" :step="1" show-ticks="always" class="slide"></v-slider> -->
+            <v-slider :ticks="guessLabels" v-model="guesses" :min="3" :max="12" :step="1" show-ticks="always" class="slide"></v-slider>
           </v-card-text>
           <v-card-actions>
             <v-btn block @click="dialog = false" color="primary">Close Dialog</v-btn>

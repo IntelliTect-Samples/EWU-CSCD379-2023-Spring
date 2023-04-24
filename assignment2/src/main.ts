@@ -26,18 +26,30 @@ const autumnDark = {
   dark: true,
   colors: {
     primary: '#ff4500',
+    correct: '#e65400',
+    misplaced: '#d69200',
+    wrong: '#9d0e01',
+    unknown: '#a44b1e'
   }
 }
 const coffeeDark = {
   dark: true,
   colors: {
     primary: '#c17149',
+    correct: '#c86a1e',
+    misplaced: '#cb864d',
+    wrong: '#612c00',
+    unknown: '#a0532c'
   }
 }
 const unicornVomitDark = {
   dark: true,
   colors: {
     primary: '#ff0066',
+    correct: '#89d813',
+    misplaced: '#9999ff',
+    wrong: '#ff0066',
+    unknown: '#cc3399'
   }
 }
 const defaultLight = {
@@ -54,18 +66,30 @@ const autumnLight = {
   dark: false,
   colors: {
     primary: '#a51900',
+    correct: '#e65400',
+    misplaced: '#d69200',
+    wrong: '#9d0e01',
+    unknown: '#a44b1e'
   }
 }
 const coffeeLight = {
   dark: false,
   colors: {
     primary: '#4b2a1b',
+    correct: '#c86a1e',
+    misplaced: '#cb864d',
+    wrong: '#612c00',
+    unknown: '#a0532c'
   }
 }
 const unicornVomitLight = {
   dark: false,
   colors: {
     primary: '#ff0066',
+    correct: '#89d813',
+    misplaced: '#9999ff',
+    wrong: '#ff0066',
+    unknown: '#cc3399'
   }
 }
 
