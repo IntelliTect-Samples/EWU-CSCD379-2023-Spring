@@ -1,5 +1,9 @@
 <template>
   <WelcomeItem>
+    <template #heading>-- Home Page --</template>
+  </WelcomeItem>
+
+  <WelcomeItem>
     <template #icon>
       <DocumentationIcon />
     </template>
