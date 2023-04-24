@@ -11,9 +11,7 @@
 </template>
 
 <script lang="ts">
-function goBack(this: {
-[x: string]: any; goBack: () => void; 
-}) {
+function goBack(this: { [x: string]: any; goBack: () => void }) {
   this.$router.go(-1)
 }
 
