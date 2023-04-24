@@ -16,12 +16,13 @@
     <v-dialog v-model="showBigDialog">
       <v-card>
         <v-hover>
-          <v-btn
-            v-if="game.possibleWords.length < 300"
-            v-for="word in game.possibleWords"
-            @click=";[setGuess(word), (showBigDialog = !showBigDialog)]"
-            >{{ word }}</v-btn
-          >
+          <div v-if="game.possibleWords.length < 300">
+            <div v-for="word in game.possibleWords">
+              <v-btn :key="word" @click=";[setGuess(word), (showBigDialog = !showBigDialog)]">{{
+                word
+              }}</v-btn>
+            </div>
+          </div>
           <v-btn v-else @click="showBigDialog = !showBigDialog"
             >Try to get the possible words bellow 300</v-btn
           >
@@ -35,12 +36,13 @@
     <v-dialog v-model="showDialog">
       <v-card>
         <v-hover>
-          <v-btn
-            v-if="game.possibleGuess.length < 300"
-            v-for="word in game.possibleGuess"
-            @click=";[setGuess(word), (showDialog = !showDialog)]"
-            >{{ word }}</v-btn
-          >
+          <div v-if="game.possibleGuess.length < 300">
+            <div v-for="word in game.possibleGuess">
+              <v-btn :key="word" @click=";[setGuess(word), (showDialog = !showDialog)]">{{
+                word
+              }}</v-btn>
+            </div>
+          </div>
           <v-btn v-else @click="showBigDialog = !showBigDialog"
             >Try to get the possible words bellow 300</v-btn
           >
