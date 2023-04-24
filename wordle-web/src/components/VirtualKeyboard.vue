@@ -1,93 +1,99 @@
 <template>
-  <div class="keyboard">
-    <v-card color="lightgrey" mx-auto variant="outlined">
-      <v-card-item>
+  <div class="">
+    
+    <v-card color="secondary" class="justify-center pa-0">
+      <v-card-item >
         <v-row class="justify-center">
-          <v-col v-for="(key, index) in keys[0]" :key="index" cols="auto" class="px-1">
-            <v-btn size="small" class="key" @click="onKeyClick(key)">{{ key }}</v-btn>
+          <v-col v-for="(key, index) in keyboardLetters[0]" :key="index" cols="auto" class="px-1">
+            <LetterButton class="key key-gradient" :letter="key" @click="letterClick(key)" />
           </v-col>
         </v-row>
         <v-row class="justify-center">
-          <v-col v-for="(key, index) in keys[1]" :key="index" cols="auto" class="px-1">
-            <v-btn size="small" class="key" @click="onKeyClick(key)">{{ key }}</v-btn>
+          <v-col v-for="(key, index) in keyboardLetters[1]" :key="index" cols="auto" class="px-1">
+            <LetterButton class="key key-gradient" :letter="key" @click="letterClick(key)" />
           </v-col>
         </v-row>
         <v-row class="justify-center">
           <v-col cols="auto" class="px-1">
-            <v-btn size="small" class="key special-key" @click="onKeyClick('Enter')">Enter</v-btn>
+            <v-btn size="small" class="key special-key key-gradient" @click=backspaceClick()>Delete</v-btn>
           </v-col>
-          <v-col v-for="(key, index) in keys[2]" :key="index" cols="auto" class="px-1">
-            <v-btn size="small" class="key" @click="onKeyClick(key)">{{ key }}</v-btn>
+          <v-col v-for="(key, index) in keyboardLetters[2]" :key="index" cols="auto" class="px-1">
+            <LetterButton class="key key-gradient" :letter="key" @click="letterClick(key)" />
           </v-col>
           <v-col cols="auto" class="px-1">
-            <v-btn size="small" class="key special-key" @click="onKeyClick('Backspace')"
-              >Delete</v-btn
-            >
+            <v-btn size="small" class="key special-key key-gradient" @click=enterClick()>Enter</v-btn>
           </v-col>
+        </v-row>
+        <v-row>
+          <v-divider></v-divider>
         </v-row>
       </v-card-item>
     </v-card>
-
-    <v-divider class="my-2"></v-divider>
+  
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import type { PropType } from 'vue'
+<script setup lang="ts">
+import LetterButton from '@/components/LetterButton.vue'
+import { Letter } from '@/scripts/letter'
+import { computed } from 'vue'
 
-export default defineComponent({
-  props: {
-    guess: {
-      type: String as PropType<string>,
-      required: true
+const props = defineProps<{
+  guessedLetters: Letter[]
+}>()
+
+const keyboardLetters = computed(() => {
+  console.log(props.guessedLetters.length)
+  const keyboardLetters: Letter[][] = []
+  const keyboardKeys = [
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+  ]
+  for (let keyboardKey of keyboardKeys) {
+    let keyboardRow: Letter[] = []
+    for (let key of keyboardKey) {
+      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
     }
-  },
-  created() {
-    document.addEventListener('keydown', (event) => {
-      this.onKeyClick(event.key)
-    })
-  },
-  data() {
-    return {
-      keys: [
-        ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-        ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-        ['z', 'x', 'c', 'v', 'b', 'n', 'm']
-      ]
-    }
-  },
-  methods: {
-    onKeyClick(key: string) {
-      this.$emit('key-pressed', key)
-    }
+    keyboardLetters.push(keyboardRow)
   }
+  return keyboardLetters
 })
+
+
+const emits = defineEmits<{
+  (event: 'letterClick', value: Letter): void
+  (event: 'backspaceClick'): void
+  (event: 'enterClick'): void
+}>()
+function letterClick(letter: Letter) {
+  emits('letterClick', letter)
+}
+function backspaceClick() {
+  emits('backspaceClick')
+}
+function enterClick() {
+  emits('enterClick')
+}
+
 </script>
 
 <style scoped>
 .key {
-  min-width: 40px;
-  width: 40px;
-  border-radius: 0;
+  width: 1rem;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 5px; 
 }
 
+.key-gradient {
+  background-image: linear-gradient(to top, #6F6F6F6D, #B5B5B5A9);
+}
 .special-key {
-  min-width: 60px;
-  width: 60px;
-}
-
-@media (max-width: 600px) {
-  .key {
-    font-size: 0.8rem;
-    min-width: 35px;
-    width: 35px;
-  }
-
-  .special-key {
-    font-size: 0.8rem;
-    min-width: 55px;
-    width: 55px;
-  }
+  border: 1px solid #ccc;
+  width: 5rem;
+  height: 2rem;
 }
 </style>

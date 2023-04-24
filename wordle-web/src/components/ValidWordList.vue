@@ -13,13 +13,8 @@
       <v-card>
         <v-card-title>Valid Words </v-card-title>
         <v-list>
-          <v-list-item v-for="(word) in validWords" :key="word">
-            <v-btn
-              @click="selectWord(word)"
-                color="primary"
-              variant="text"
-              >{{ word }}
-            </v-btn>
+          <v-list-item v-for="word in validWords" :key="word">
+            <v-btn @click="selectWord(word)" color="primary" variant="text">{{ word }} </v-btn>
           </v-list-item>
         </v-list>
       </v-card>
@@ -36,8 +31,7 @@ export default defineComponent({
   },
   data() {
     return {
-      showDialog: false,
-      
+      showDialog: false
     }
   },
   computed: {

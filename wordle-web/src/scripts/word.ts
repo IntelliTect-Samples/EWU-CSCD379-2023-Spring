@@ -5,16 +5,23 @@ export class Word {
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
-      // add word letters to array
-      for (const letter of word) {
-        this.letters.push(new Letter(letter))
+      if (typeof word == 'number') {
+        // Add one letter for each number. With blank spots
+        for (let i = 0; i < word; i++) {
+          this.letters.push(new Letter(''))
+        }
+      } else {
+        // add word letters to array
+        for (const letter of word) {
+          this.letters.push(new Letter(letter))
+        }
       }
-    } else { 
-    // add empty letters to array
-    for (let i = this.letters.length; i < numberOfLetters; i++) {
-      this.letters.push(new Letter())
+    } else {
+      // add empty letters to array
+      for (let i = this.letters.length; i < numberOfLetters; i++) {
+        this.letters.push(new Letter())
+      }
     }
-  }
   }
 
   get text() {
@@ -22,27 +29,27 @@ export class Word {
   }
 
   push(char: string) {
+    // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
         letter.char = char
-        break
+        return
       }
     }
   }
-    // // removes the last letter from the array, traverses array backwards
-    // pop() {
-    //   for (let i = this.letters.length - 1; i >= 0; i--) {
-    //     if (this.letters[i].char !== '') {
-    //       this.letters[i].char = ''
-    //       break
-    //     }
-    //   }
-    // }
-  
+
+  // Remove the last letter
+  pop() {
+    for (let i = this.letters.length - 1; i >= 0; i--) {
+      if (this.letters[i].char !== '') {
+        this.letters[i].char = ''
+        return
+      }
+    }
+  }
 
   check(secretWord: string): boolean {
     console.log(this.text)
-
     // check if the letters are valid
     //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)

@@ -1,8 +1,7 @@
 <template>
   <v-dialog transition="dialog-bottom-transition" width="auto">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" icon>
-        <v-icon>mdi-help-circle-outline</v-icon>
+      <v-btn v-bind="props" prepend-icon="mdi-help-circle-outline"> How To Play
       </v-btn>
     </template>
     <template v-slot:default="{ isActive }">

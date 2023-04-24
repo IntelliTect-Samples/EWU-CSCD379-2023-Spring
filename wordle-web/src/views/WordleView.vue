@@ -1,84 +1,87 @@
 <template>
-  <v-div>
+  <div>
     <Navbar></Navbar>
-    <GameBoard></GameBoard>
-    <v-container>
-      <v-row>
-        <v-text-field
-          padding="0"
-          label="Guess"
-          variant="outlined"
-          :value="selectedWord || guess"
-        ></v-text-field>
+    <v-label>Current Guess: {{ guess }}</v-label>
+    <v-label>Selected Word: {{ selectedWord }}</v-label>
+    <GameBoard :game = "game" @letter-click="addChar"></GameBoard>
+    
+    <div class="ma-5">
+      <v-row class="justify-center">
+        <ValidWordList class="ml-2" :validWords="validWords"  @word-selected="handleWordSelected" />
 
-        <v-btn size="small" class="ml-2" @click="checkGuess">Check</v-btn>
-
-        <ValidWordList class="ml-2" :validWords="validWords" @word-selected="handleWordSelected" />
+        <v-btn size="small" class="ml-2" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-row>
-    </v-container>
-    <VirtualKeyboard :guess="guess" @key-pressed="handleKeyPress"></VirtualKeyboard>
+    </div>
+    <VirtualKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" @enterClick="checkGuess" @backspaceClick="removeChar"/>
 
-    <div>
-      <v-row v-for="word in game.guesses" :key="word.text">
-        <v-col v-for="letter in word.letters" :key="letter.char">
-          <v-btn :color="letter.color">{{ letter.char }}</v-btn>
-          <v-LetterButton :letter="letter"></v-LetterButton>
-        </v-col>
-      </v-row>
-    </div> 
- 
-  </v-div>
+    </div>
 </template>
 
 <script setup lang="ts">
-import Navbar from '@/components/NavbarItem.vue'
+import { WordleGame } from '@/scripts/wordleGame'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '@/components/GameBoard.vue'
 import VirtualKeyboard from '@/components/VirtualKeyboard.vue'
-import LetterButton from '@/components/LetterButton.vue'
+import type { Letter } from '@/scripts/letter'
+import { ValidationStatus, WordsService } from '@/scripts/wordsService'
 
-import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive } from 'vue'
+import Navbar from '@/components/NavbarItem.vue'
 import ValidWordList from '@/components/ValidWordList.vue'
-import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+console.log(game.secretWord)
+
+onMounted(() => {
+  window.addEventListener('keyup', keyPress)
+})
+onUnmounted(() => {
+  window.removeEventListener('keyup', keyPress)
+})
+
 const validWords = ref<string[]>()
 const selectedWord = ref('')
 
-function checkGuess() {
-  // check the length of the guess
-  if (guess.value.length !== 5) {
-    alert(guess.value + ' is only ' + guess.value.length + ' letters long, too short to ride!')
-    return
-  }
-  // check if the guess has already been guessed
-  if (game.guesses.find((g) => g.text === guess.value)) {
-    alert('You have already guessed ' + guess.value + ', Try something new!')
-    return
-  }
-  // check if the guess is in the valid words list
-  if (!WordsService.getFullList().includes(guess.value)) {
-    alert('Sorry.. ' + guess.value + ' is not a valid word')
-    return
-  }
-  // submit the guess
-  game.submitGuess(guess.value)
-  validWords.value = WordsService.validWords(game.guesses[game.guesses.length - 1])
-  guess.value = ''
-}
-
 function handleWordSelected(word: string) {
-  guess.value = word
+  for (let letter of word) {
+    game.guess.push(letter)
+    guess.value = game.guess.text
+  }
 }
 
-function handleKeyPress(key: string) {
-  if (key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1) // remove the last character from the guess
-  } else if (key === 'Enter') {
-    checkGuess() // submit the guess
-  } else if (guess.value.length < 5 && key.length === 1 && key.match(/[a-z]/i)) {
-    guess.value += key // add the pressed key to the guess
+function checkGuess() {
+  const validCheck = WordsService.validateWord(guess.value)
+    if (validCheck != ValidationStatus.Valid) {
+      for (let letter of guess.value) {
+        game.guess.pop()
+      }
+      alert(validCheck)
+      return
+    }
+  game.submitGuess()
+  validWords.value = game.getValidWords()
+  guess.value = game.guess.text
+}
+
+function addChar(letter: Letter) {
+  game.guess.push(letter.char)
+  guess.value = game.guess.text
+}
+
+function removeChar() {
+  game.guess.pop()
+  guess.value = game.guess.text
+}
+
+function keyPress(event: KeyboardEvent) {
+  if (event.key === 'Enter') {
+    checkGuess()
+  } else if (event.key === 'Backspace') {
+    game.guess.pop()
+    guess.value = game.guess.text
+  } else if (event.key.length === 1 && event.key !== ' ') {
+    game.guess.push(event.key.toLowerCase())
+    guess.value = game.guess.text
   }
 }
 </script>

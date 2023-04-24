@@ -1,37 +1,51 @@
 <template>
-  <v-container fluid class="game-board">
-    <v-row class="justify-center custom-row" v-for="(row, rowIndex) in 6" :key="'row-' + rowIndex">
-      <v-col v-for="(col, colIndex) in 5" :key="'col-' + colIndex" cols="auto" class="px-1">
-        <v-chip class="square" outlined></v-chip>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
+    <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
+      <LetterButton class="key square key-gradient" :letter="letter" @click="letterClick(letter)" />
+    </v-col>
+  </v-row>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import LetterButton from '@/components/LetterButton.vue'
+import type { Letter } from '@/scripts/letter'
+import type { WordleGame } from '@/scripts/wordleGame'
 
-export default defineComponent({
-  components: {},
+defineProps<{
+  game: WordleGame
+}>()
 
-  methods: {
-    handleKeyPress(key: string) {
-      console.log('Key pressed:', key)
-    }
-  }
-})
+const emits = defineEmits<{
+  (event: 'letterClick', value: Letter): void
+}>()
+
+function letterClick(letter: Letter) {
+  emits('letterClick', letter)
+  console.log(letter.status)
+}
+
 </script>
-
 <style scoped>
+
+
 .square {
-  color: white;
   border-radius: 0 !important;
-  border: 2px solid black;
-  width: 50px;
-  height: 50px;
+  border: 3px solid black;
+  font-size: 1.5rem;
+  height: 40px;
+  width: 40px;
+}
+.key {
+  width: 1rem;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  border-radius: 5px;
+
+}
+.key-gradient {
+  background-image: linear-gradient(to top, #6F6F6F6D, #B5B5B5A9);
 }
 
-.custom-row {
-  margin-top: 1px;
-}
 </style>

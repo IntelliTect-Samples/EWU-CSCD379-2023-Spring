@@ -1,8 +1,8 @@
 <template>
   <v-dialog transition="dialog-bottom-transition" scrollable width="auto">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" icon>
-        <v-icon>mdi-chart-box-outline</v-icon>
+      <v-btn v-bind="props" prepend-icon="mdi-chart-box-outline">
+        Leaderboard
       </v-btn>
     </template>
     <template v-slot:default="{ isActive }">
@@ -11,7 +11,7 @@
         <v-divider></v-divider>
         <v-card-text></v-card-text>
         <v-card-text>
-          <v-simple-table>
+          <v-table>
             <template v-slot:default>
               <thead>
                 <tr>
@@ -31,7 +31,7 @@
                 <td>1,000,000</td>
               </tbody>
             </template>
-          </v-simple-table>
+          </v-table>
         </v-card-text>
         <v-card-actions>
           <v-btn color="blue-darken-1" variant="text" @click="isActive.value = false">
@@ -46,5 +46,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-export default defineComponent({})
+export default defineComponent({
+  name: 'LeaderBoard',
+})
 </script>
