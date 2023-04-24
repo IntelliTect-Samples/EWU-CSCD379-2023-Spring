@@ -101,7 +101,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTheme } from 'vuetify'
-import { RouterView } from 'vue-router'
 
 let drawer = ref(false)
 let dialog = ref(false)
