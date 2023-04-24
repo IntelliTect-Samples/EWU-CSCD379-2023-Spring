@@ -35,16 +35,16 @@
 import { ref, watchEffect } from 'vue'
 
 const dialog = ref(false)
-const wordGuess = ref('')
+const wordGuess = ref()
 defineProps({
   items: {
-    type: Array<String>(),
+    type: Array,
     default: () => []
   }
 })
 
 const emit = defineEmits<{
-  (event: 'change', value: string): void
+  (validguess: 'change', value: string): void
 }>()
 
 function save() {

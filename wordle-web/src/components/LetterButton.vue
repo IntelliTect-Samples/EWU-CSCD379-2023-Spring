@@ -1,5 +1,9 @@
 <template>
-  <LetterBase :char="props.letter.char" :color="props.letter.color" class="gradient-key" ></LetterBase>
+  <LetterBase
+    :char="props.letter.char"
+    :color="props.letter.color"
+    class="gradient-key"
+  ></LetterBase>
 </template>
 
 <script setup lang="ts">

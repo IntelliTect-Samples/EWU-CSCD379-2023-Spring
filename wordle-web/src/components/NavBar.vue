@@ -80,9 +80,6 @@
           >
             Tritanopia Light Mode
           </v-list-item>
-          <v-list-item @click.stop="setting = !setting" prepend-icon="mdi-information" to="/about">
-            About</v-list-item
-          >
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
@@ -145,4 +142,6 @@ export default defineComponent({
     }
   }
 })
+
 </script>
+
