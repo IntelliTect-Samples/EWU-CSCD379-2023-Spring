@@ -1,18 +1,15 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-
+  <h2> {{ subtitle }} </h2>
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
-
+  <br>
   <KeyBoard @letterClick="addChar" />
+  <br>
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <v-btn size="large" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  
+  <v-btn @click="restartGame" @keyup.enter="restartGame"> Restart </v-btn>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -24,9 +21,11 @@ import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import { WordsService } from '../scripts/wordsService.ts'
 import { watch, onMounted, onUnmounted } from 'vue'
 
 const guess = ref('')
+const subtitle = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
@@ -48,8 +47,33 @@ watch(
 )
 
 function checkGuess() {
-  game.submitGuess()
+  if(guess.value.length !== game.secretWord.length) {
+    subtitle.value = 'Guess is Incorrect Length'
+    game.clearCurrentGuess()
+  }
+  else if (!WordsService.isValidWord(guess.value)){
+    subtitle.value = 'Guess is not a Valid Word'
+    game.clearCurrentGuess()
+  }
+  else{
+    game.submitGuess()
+    if(game.endGame()){
+      subtitle.value = "You Win!"
+      game.restartGame()
+    }
+    else {
+      if (game.continue === false) {
+        subtitle.value = "You Failed! The word was: " + game.secretWord
+        game.restartGame()
+      }
+    }
+  }
   guess.value = ''
+}
+
+function restartGame() {
+  game.restartGame()
+  subtitle.value = "Game was Reset"
 }
 
 function addChar(letter: Letter) {

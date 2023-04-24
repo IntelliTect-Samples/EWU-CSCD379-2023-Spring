@@ -7,9 +7,56 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  // Create/extend a word list component with a method called validWords that returns an array of valid words based on current guesses
+  static validWords(
+    knownLetters: string[],
+    notAllowedLetters: string[],
+    containsLetters: string[],
+    len: number = 5
+  ): Array<string> {
+    const regexString = knownLetters
+      .map((letter) => {
+        if (letter) {
+          return letter
+        } else {
+          return '[a-z]'
+        }
+      })
+      .join('')
+
+    const negativeLookaheads = '^[^' + notAllowedLetters.toString() + ']*$'
+
+    let positiveLookaheads = ''
+
+    for (let i = 0; i < containsLetters.length; i++) {
+      let startTerm = true
+      if (startTerm) {
+        positiveLookaheads += '(?='
+        startTerm = false
+      }
+      const ch = containsLetters[i]
+      if (containsLetters[i + 1] !== undefined && containsLetters[i + 1] !== ch) {
+        positiveLookaheads += '.*' + ch + ')'
+        startTerm = true
+      } else {
+        positiveLookaheads += '.*' + ch
+      }
+    }
+
+    const regExGreen: RegExp = new RegExp(`^${regexString}$`)
+
+    let result: string[] = this.#words.filter((word) => regExGreen.test(word))
+    if (notAllowedLetters.length != 0) {
+      const regExNeg: RegExp = new RegExp(`${negativeLookaheads}`)
+      const resultRed = result.filter((word) => regExNeg.test(word))
+      result = resultRed
+    }
+    if (containsLetters.length != 0) {
+      const regExContains: RegExp = new RegExp(`^${positiveLookaheads})[a-z]{${len}}$`)
+      const resultYellow = result.filter((word) => regExContains.test(word))
+      result = resultYellow
+    }
+    return result
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
