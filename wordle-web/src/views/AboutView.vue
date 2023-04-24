@@ -1,5 +1,12 @@
 <template>
-  <v-sheet location="center" color="#9E9E9E" height="920px" width="800px" class="pt-10 my-5" rounded="lg">
+  <v-sheet
+    location="center"
+    color="#9E9E9E"
+    height="920px"
+    width="800px"
+    class="pt-10 my-5"
+    rounded="lg"
+  >
     <v-card color="cyan-darken-3" class="ma-5" elevation="5" rounded="xl">
       <v-card-title>About Us</v-card-title>
       <v-card-text>
