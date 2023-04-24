@@ -11,16 +11,23 @@
       <v-card-title class="d-flex align-center bg-primary">
         Hints
         <v-spacer />
-        <v-btn icon variant="tonal" @click="show = !show" size="small"
+        <v-btn icon variant="tonal" @click="show = !show" dense size="small"
           ><v-icon icon="mdi-window-close"
         /></v-btn>
       </v-card-title>
       <v-card-text>
         <v-row>
           <v-col v-for="word in partial" :key="word" cols="4">
-            <v-btn color="default" variant="elevated" width="100" @click="setWord(word)">{{
-              word
-            }}</v-btn>
+            <v-hover v-slot="{ isHovering, props }">
+              <v-btn
+                v-bind="props"
+                :color="`${isHovering ? 'correct' : 'default'}`"
+                variant="elevated"
+                width="100"
+                @click="setWord(word)"
+                >{{ word }}</v-btn
+              >
+            </v-hover>
           </v-col>
         </v-row>
       </v-card-text>

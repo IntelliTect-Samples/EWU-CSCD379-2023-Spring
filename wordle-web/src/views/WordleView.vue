@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column align-center">
     <GameBoard :game="game" @letterClick="addChar" />
-    <AvailableWords :game="game" class="my-2" @set-word="setWord" />
+    <AvailableWords :game="game" class="my-3" @set-word="setWord" />
     <KeyBoard
       @letterClick="addChar"
       :guessedLetters="game.guessedLetters"
@@ -9,7 +9,6 @@
       @delete="deleteClick"
     />
   </div>
-  <h3>{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
