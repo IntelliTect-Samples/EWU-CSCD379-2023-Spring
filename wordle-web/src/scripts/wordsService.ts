@@ -1,5 +1,5 @@
 import { LetterStatus, type Letter } from './letter'
-import { WordleGame } from '@/scripts/wordleGame'
+import type { WordleGame } from './wordleGame'
 
 export abstract class WordsService {
   static getRandomWord(): string {
