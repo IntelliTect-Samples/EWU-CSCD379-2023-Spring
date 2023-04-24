@@ -4,7 +4,6 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <WordSelect :validWords="validWords" />
-
 </template>
 
 <script setup lang="ts">

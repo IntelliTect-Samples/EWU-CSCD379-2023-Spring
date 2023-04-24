@@ -8,10 +8,10 @@ export abstract class WordsService {
   }
 
   static validWords(currGuess: string): Array<string> {
-    let guessFilter = new RegExp(currGuess)
-    let wordsList: Array<string> = ['']
+    const guessFilter = new RegExp(currGuess)
+    const wordsList: Array<string> = ['']
 
-    for (let word in this.#words) if (guessFilter.test(word)) wordsList.push(word)
+    for (const word in this.#words) if (guessFilter.test(word)) wordsList.push(word)
 
     return wordsList
   }
