@@ -38,8 +38,8 @@ export class Word {
     }
   }
 
-  set(value: string){
-    value.split('').forEach(l => this.push(l));
+  set(value: string) {
+    value.split('').forEach((l) => this.push(l))
   }
 
   // Remove the last letter

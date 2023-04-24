@@ -1,9 +1,13 @@
 <template>
-    <div class="d-flex flex-column align-center">
+  <div class="d-flex flex-column align-center">
     <GameBoard :game="game" @letterClick="addChar" />
-    <AvailableWords :game="game" class="my-2"/>
-    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" @enter="checkGuess" @delete="deleteClick"/>
-
+    <AvailableWords :game="game" class="my-2" />
+    <KeyBoard
+      @letterClick="addChar"
+      :guessedLetters="game.guessedLetters"
+      @enter="checkGuess"
+      @delete="deleteClick"
+    />
   </div>
   <h3>{{ game.secretWord }}</h3>
 </template>
@@ -38,9 +42,9 @@ function addChar(letter: Letter) {
   guess.value += letter.char
 }
 
-function deleteClick(){
+function deleteClick() {
   guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
+  game.guess.pop()
 }
 
 function keyPress(event: KeyboardEvent) {

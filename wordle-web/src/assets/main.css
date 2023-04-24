@@ -1,6 +1,6 @@
 @import './base.css';
 
-html { 
+html {
   overflow-y: auto !important;
 }
 a,

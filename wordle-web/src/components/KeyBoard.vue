@@ -1,19 +1,29 @@
 <template>
   <div dense v-for="(key, i) in keyboardLetters" :key="i" class="d-flex justify-center my-1">
-      <v-btn v-if="i == 2" :width="68" :height="58" class="mr-1 text-overline" @click="enterClick" color="default">
-        Enter
-      </v-btn>
-      <LetterButton 
-      v-for="(letter, j) in key" 
-      :key="j" 
-      :letter="letter" 
+    <v-btn
+      v-if="i == 2"
+      :width="68"
+      :height="58"
+      class="mr-1 text-overline"
+      @click="enterClick"
+      color="default"
+    >
+      Enter
+    </v-btn>
+    <LetterButton
+      v-for="(letter, j) in key"
+      :key="j"
+      :letter="letter"
       @click="letterClick(letter)"
       small
       class="mx-1"
       :class="textSize"
       :height="58"
-      :width="btnWidth"/>
-      <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="default"><v-icon size="x-large" icon="mdi-backspace-outline"/></v-btn>
+      :width="btnWidth"
+    />
+    <v-btn v-if="i == 2" :width="68" :height="58" class="ml-1" @click="deleteClick" color="default"
+      ><v-icon size="x-large" icon="mdi-backspace-outline"
+    /></v-btn>
   </div>
 </template>
 
@@ -21,18 +31,18 @@
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import { computed } from 'vue'
-import { useDisplay } from 'vuetify/lib/framework.mjs';
+import { useDisplay } from 'vuetify/lib/framework.mjs'
 
-const display = useDisplay();
+const display = useDisplay()
 
-const btnWidth = computed(()=>{
-  let baseWidth = 43;
+const btnWidth = computed(() => {
+  let baseWidth = 43
 
-  let scaledWidth = display.width.value / 13;
-  return Math.min(baseWidth,scaledWidth)
-});
+  let scaledWidth = display.width.value / 13
+  return Math.min(baseWidth, scaledWidth)
+})
 
-const textSize = computed(()=>{
+const textSize = computed(() => {
   return display.width.value < 560 ? 'text-h6' : 'text-h5'
 })
 
@@ -65,16 +75,16 @@ const keyboardLetters = computed(() => {
 
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
-  (event: 'enter') : void
-  (event: 'delete') : void
+  (event: 'enter'): void
+  (event: 'delete'): void
 }>()
 
-function enterClick(){
-  emits('enter');
+function enterClick() {
+  emits('enter')
 }
 
-function deleteClick(){
-  emits('delete');
+function deleteClick() {
+  emits('delete')
 }
 
 function letterClick(letter: Letter) {

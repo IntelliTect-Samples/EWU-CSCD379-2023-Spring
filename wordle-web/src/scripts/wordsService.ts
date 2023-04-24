@@ -1,5 +1,5 @@
-import { LetterStatus } from "./letter";
-import type { WordleGame } from "./wordleGame"
+import { LetterStatus } from './letter'
+import type { WordleGame } from './wordleGame'
 
 export abstract class WordsService {
   static getRandomWord(): string {
@@ -10,59 +10,71 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(game: WordleGame, previousValid: string[] | undefined = undefined): Array<string> {
+  static validWords(
+    game: WordleGame,
+    previousValid: string[] | undefined = undefined
+  ): Array<string> {
+    const validLetters = game.guesses.flatMap((guess) =>
+      guess.letters
+        .filter((l) => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced)
+        .map((l) => l.char)
+    )
+    const wrongLetters = game.guesses.flatMap((guess) =>
+      guess.letters.filter((l) => l.status == LetterStatus.Wrong).map((l) => l.char)
+    )
+    const absoluteWrongs = wrongLetters.filter((l) => !validLetters.includes(l))
 
-    const validLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced).map(l => l.char));
-    const wrongLetters = game.guesses.flatMap(guess => guess.letters.filter(l => l.status == LetterStatus.Wrong).map(l => l.char));
-    const absoluteWrongs = wrongLetters.filter(l => !validLetters.includes(l));
+    const validWords = new Set<string>()
 
-    const validWords = new Set<string>();
-
-    // we concat all the correct letters from the guesses into it's own 
+    // we concat all the correct letters from the guesses into it's own
     // array here incase the user happens to make poor decisions.
-    const correctLetters = Array(5);
-    game.guesses.forEach(guess => {
-      guess.letters.forEach((l,i) => {
-        if (l.status == LetterStatus.Correct){
-          correctLetters[i] = l.char;
+    const correctLetters = Array(5)
+    game.guesses.forEach((guess) => {
+      guess.letters.forEach((l, i) => {
+        if (l.status == LetterStatus.Correct) {
+          correctLetters[i] = l.char
         }
       })
     })
 
-    const words = previousValid || this.#words;
+    const words = previousValid || this.#words
 
-    words.forEach(word => {
-      game.guesses.forEach(guess =>{
-        let valid = true;
+    words.forEach((word) => {
+      game.guesses.forEach((guess) => {
+        let valid = true
 
         // make sure it doesn't contain any absolutely wrong letters
-        for (const l of word){
-          if (absoluteWrongs.includes(l)){
-            valid = false;
-            break;
+        for (const l of word) {
+          if (absoluteWrongs.includes(l)) {
+            valid = false
+            break
           }
         }
 
         // if its valid here, we can start our other checks
-        if (valid){
+        if (valid) {
           // it has to include all misplaced and correct letters
-          if ((!validLetters.every(vl => word.includes(vl))) ||
-          // cant share misplaced letters at the same index
-          guess.letters.some((gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char) ||
-          // must share correct letters at the same index
-          !correctLetters.every((cl,i) => !cl || cl == word[i])){
+          if (
+            !validLetters.every((vl) => word.includes(vl)) ||
+            // cant share misplaced letters at the same index
+            guess.letters.some(
+              (gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char
+            ) ||
+            // must share correct letters at the same index
+            !correctLetters.every((cl, i) => !cl || cl == word[i])
+          ) {
             // skip if it doesn't contain any correctly or misplaced letters
-            valid = false;
+            valid = false
           }
         }
-        
-        if (valid){
-          validWords.add(word);
+
+        if (valid) {
+          validWords.add(word)
         }
       })
     })
 
-    return [...validWords];
+    return [...validWords]
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

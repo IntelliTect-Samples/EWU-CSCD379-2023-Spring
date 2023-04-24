@@ -5,7 +5,6 @@
 </template>
 
 <script setup lang="ts">
-
 export interface Props {
   char?: string
   color?: string
@@ -14,11 +13,10 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'default'
 })
-
 </script>
 
 <style scoped>
-.removeMin{
+.removeMin {
   min-width: 0;
 }
 </style>
