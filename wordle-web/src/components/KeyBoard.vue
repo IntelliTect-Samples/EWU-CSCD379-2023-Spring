@@ -46,7 +46,6 @@ const emits = defineEmits<{
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
-  game
 }
 </script>
 
