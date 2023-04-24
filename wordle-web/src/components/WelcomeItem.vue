@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <v-container class="item">
     <i>
       <slot name="icon"></slot>
     </i>
@@ -9,13 +9,14 @@
       </h3>
       <slot></slot>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <style scoped>
 .item {
   margin-top: 2rem;
   display: flex;
+  text-align: justify;
 }
 
 .details {
@@ -30,14 +31,14 @@ i {
   width: 32px;
   height: 32px;
 
-  color: var(--color-text);
+  /* color: var(--color-text); */
 }
 
 h3 {
   font-size: 1.2rem;
   font-weight: 500;
   margin-bottom: 0.4rem;
-  color: var(--color-heading);
+  /* color: var(--color-heading); */
 }
 
 @media (min-width: 1024px) {
@@ -50,16 +51,16 @@ h3 {
     top: calc(50% - 25px);
     left: -26px;
     position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
+    border: 1px solid;
+    /* background: var(--color-background); */
     border-radius: 8px;
     width: 50px;
     height: 50px;
   }
 
-  .item:before {
-    content: ' ';
-    border-left: 1px solid var(--color-border);
+  /* .item:before {
+    content: " ";
+    border-left: 1px solid ;
     position: absolute;
     left: 0;
     bottom: calc(50% + 25px);
@@ -67,13 +68,13 @@ h3 {
   }
 
   .item:after {
-    content: ' ';
+    content: ;
     border-left: 1px solid var(--color-border);
     position: absolute;
     left: 0;
     top: calc(50% + 25px);
     height: calc(50% - 25px);
-  }
+  } */
 
   .item:first-of-type:before {
     display: none;

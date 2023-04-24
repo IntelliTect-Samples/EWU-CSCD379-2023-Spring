@@ -10,9 +10,9 @@ describe('LetterBase', () => {
     expect(wrapper.attributes('color')).toBe('grey')
   })
 
-  it('renders properly with passed params', () => {
-    const wrapper = mount(LetterBase, { props: { char: 'a', color: 'blue' } })
-    expect(wrapper.text()).toContain('a')
-    expect(wrapper.attributes('color')).toBe('blue')
+  it('renders properly', () => {
+    const wrapper = mount(LetterBase, { props: { char: 'a', color: 'green' } })
+    expect(wrapper.text()).toContain('A')
+    expect(wrapper.attributes('color')).toBe('green')
   })
 })

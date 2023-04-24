@@ -1,28 +1,26 @@
-<template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-      <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
-    </div>
-  </header>
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import NavBar from '@/components/NavBar.vue'
+</script>
 
-  <RouterView />
+<template>
+  <v-app>
+    <NavBar />
+
+    <v-main class="pb-0">
+      <RouterView />
+    </v-main>
+  </v-app>
 </template>
 
-<script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
-
-const theme = useTheme()
-
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
+<style scoped>
+.v-main {
+  align-self: center;
+  padding: 3rem 3rem;
+  max-width: 60vw;
+  min-width: 600px;
 }
 
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
+@media (min-width: 1024px) {
 }
-</script>
+</style>

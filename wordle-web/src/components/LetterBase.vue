@@ -1,6 +1,6 @@
 <template>
-  <v-btn :color="props.color">
-    {{ props.char }}
+  <v-btn :color="props.color" class="rounded-0 pa-0">
+    {{ props.char.toUpperCase() }}
   </v-btn>
 </template>
 

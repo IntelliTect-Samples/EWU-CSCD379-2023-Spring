@@ -2,20 +2,19 @@ import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import LetterButton from '../LetterButton.vue'
-import { Letter, LetterStatus } from '@/scripts/letter'
+import { LetterStatus, Letter } from '@/scripts/letter'
 
 describe('LetterButton', () => {
   it('renders properly', () => {
-    const letter = new Letter('a')
-    const wrapper = mount(LetterButton, { props: { letter } })
-    expect(wrapper.text()).toContain('a')
+    const testLetter = new Letter('a')
+    const wrapper = mount(LetterButton, { props: { letter: testLetter } })
+    expect(wrapper.text()).toContain('A')
     expect(wrapper.attributes('color')).toBe('grey')
   })
-
   it('renders properly with passed params', () => {
-    const letter = new Letter('a', LetterStatus.Correct)
-    const wrapper = mount(LetterButton, { props: { letter: letter } })
-    expect(wrapper.text()).toContain('a')
-    expect(wrapper.attributes('color')).toBe('correct')
+    const testLetter = new Letter('b', LetterStatus.Correct)
+    const wrapper = mount(LetterButton, { props: { letter: testLetter } })
+    expect(wrapper.text()).toContain('B')
+    expect(wrapper.attributes('color')).toBe('green')
   })
 })

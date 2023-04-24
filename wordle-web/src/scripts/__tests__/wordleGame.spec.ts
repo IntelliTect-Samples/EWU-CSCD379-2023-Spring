@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { LetterStatus } from '@/scripts/letter'
-import { Word } from '@/scripts/word'
+import { LetterStatus } from '../letter.js'
+import { Word } from '../word.js'
 
 describe('Word', () => {
   it('Gets Correct Word', () => {

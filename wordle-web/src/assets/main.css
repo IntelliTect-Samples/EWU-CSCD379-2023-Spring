@@ -1,5 +1,10 @@
 @import './base.css';
 
+#app {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
 a,
 .green {
   text-decoration: none;
