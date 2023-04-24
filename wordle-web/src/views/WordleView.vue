@@ -7,21 +7,33 @@
   <v-container fluid>
     <v-row>
       <v-col>
-        <v-btn @click="checkGuess" @keyup.enter="checkGuess" color="grey"> Enter </v-btn>
+        <v-btn
+          @click="checkGuess"
+          @keyup.enter="checkGuess"
+          color="grey"
+          style="background: linear-gradient(to right, #e1e1e1, #747474)"
+        >
+          Enter
+        </v-btn>
       </v-col>
       <v-col class="text-center">
         <LetterButton :letter="new Letter('?')" @click="letterClick(new Letter('?'))" />
       </v-col>
       <v-col class="text-right">
-        <v-btn @click="backSpace" @keyup.enter="backSpace" color="grey"
-          ><v-icon>mdi-backspace</v-icon></v-btn
+        <v-btn
+          @click="backSpace"
+          @keyup.enter="backSpace"
+          color="grey"
+          style="background: linear-gradient(to right, #e1e1e1, #747474)"
         >
+          <v-icon>mdi-backspace</v-icon>
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+  <h2 class="text-center">{{ guess }}</h2>
+  <h3 class="text-center">{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
