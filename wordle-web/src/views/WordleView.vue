@@ -20,8 +20,8 @@
             v-if="game.possibleWords.length < 300"
             v-for="word in game.possibleWords"
             @click="
-              setGuess(word)
-              showBigDialog = !showBigDialog
+              setGuess(word);
+              showBigDialog = !showBigDialog;
             "
             >{{ word }}</v-btn
           >
@@ -42,8 +42,8 @@
             v-if="game.possibleGuess.length < 300"
             v-for="word in game.possibleGuess"
             @click="
-              setGuess(word)
-              showDialog = !showDialog
+              setGuess(word);
+              showDialog = !showDialog;
             "
             >{{ word }}</v-btn
           >
