@@ -15,7 +15,7 @@
               v-for="(item, index) in items"
               :key="index"
               :text="wordGuess === item"
-              @click="wordGuess = <string>item"
+              @click="wordGuess = item"
             >
               {{ item }}
             </v-btn></v-hover
