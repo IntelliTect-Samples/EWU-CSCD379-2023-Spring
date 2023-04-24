@@ -5,7 +5,6 @@
   <KeyBoard class="ma-10 p-10" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <HintDialog :game="game" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <!--<h2>{{ guess }}</h2> -->

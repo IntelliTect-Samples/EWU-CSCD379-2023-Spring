@@ -17,6 +17,6 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   char: '?',
-  color: 'grey',
+  color: 'grey'
 })
 </script>
