@@ -1,6 +1,6 @@
 <style>
 .charButton {
-  background: rgb(0,0,0);
+  background: rgb(0, 0, 0);
   background: radial-gradient(circle, #252525, #161616, #000000);
 }
 </style>
