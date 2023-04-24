@@ -1,3 +1,6 @@
+import { LetterStatus, type Letter } from './letter'
+import { WordleGame } from '@/scripts/wordleGame'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,9 +10,57 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(game: WordleGame, wordList?: string[]): Array<string> {
+    const letterDetails: {
+      letter: Letter
+      position: number
+    }[] = []
+
+    if (wordList === undefined) wordList = this.#words
+    const validList: Array<string> = []
+
+    game.guesses.forEach((guess) => {
+      let guessIndex = 0
+      guess.letters.forEach((letter, index) => {
+        letterDetails.push({
+          letter: letter,
+          position: guessIndex
+        })
+        guessIndex++
+      })
+    })
+
+    const correctGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Correct)
+    const misplacedGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Misplaced)
+    const invalidGuesses = letterDetails.filter((g) => g.letter.status === LetterStatus.Wrong)
+
+    wordList.forEach((word) => {
+      let valid = true
+      correctGuesses.forEach((guess) => {
+        if (word.charAt(guess.position) !== guess.letter.char) {
+          valid = false
+        }
+      })
+      misplacedGuesses.forEach((guess) => {
+        if (!word.includes(guess.letter.char)) {
+          valid = false
+        }
+      })
+      invalidGuesses.forEach((guess) => {
+        if (word.charAt(guess.position) === guess.letter.char) {
+          valid = false
+        }
+      })
+      if (valid) {
+        validList.push(word)
+      }
+    })
+
+    return validList
+  }
+
+  static getWords(): string[] {
+    return this.#words
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

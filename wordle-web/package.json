@@ -14,10 +14,11 @@
     "format:check": "prettier --check src/"
   },
   "dependencies": {
+    "@vueuse/sound": "^2.0.1",
     "animate.css": "^4.1.1",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "vuetify": "3.1.13"
+    "vuetify": "^3.1.13"
   },
   "devDependencies": {
     "@mdi/font": "^7.2.96",

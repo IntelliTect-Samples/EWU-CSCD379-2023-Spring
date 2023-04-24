@@ -35,7 +35,7 @@ function setOceanTheme() {
           </v-toolbar-title>
         </v-toolbar>
         <v-card-text>
-          <V-text class="text-h5"> Theme: </V-text> <br /><br />
+          <v-card-title class="text-h5 pb-8"> Theme: </v-card-title>
 
           <v-btn variant="tonal" color="#9575CD" @click="setDarkTheme">Dark</v-btn> &nbsp;
           <v-btn variant="tonal" color="#4CAF50" @click="setLightTheme">Light</v-btn> &nbsp;

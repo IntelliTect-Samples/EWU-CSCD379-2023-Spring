@@ -24,6 +24,17 @@ export class Word {
     }
   }
 
+  clear() {
+    this.letters.forEach((letter) => {
+      letter.char = ''
+      letter.status = LetterStatus.NotGuessed
+    })
+  }
+
+  set(value: string) {
+    value.split('').forEach((l) => this.push(l))
+  }
+
   get text() {
     return this.letters.map((l) => l.char).join('')
   }
@@ -49,7 +60,6 @@ export class Word {
   }
 
   check(secretWord: string): boolean {
-    console.log(this.text)
     // check if the letters are valid
     //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)
@@ -60,11 +70,9 @@ export class Word {
         this.letters[i].status = LetterStatus.Correct
         guessChars[i] = '_'
         secretChars[i] = '_'
-        console.log(`Letter ${i} is correct`)
       } else {
         isCorrect = false
         this.letters[i].status = LetterStatus.Wrong
-        console.log(`Letter ${i} is incorrect`)
       }
     }
 
@@ -75,16 +83,11 @@ export class Word {
             this.letters[i].status = LetterStatus.Misplaced
             guessChars[i] = '_'
             secretChars[j] = '_'
-            console.log(`Letter ${i} is misplaced`)
             break
           }
         }
       }
     }
-
-    console.log(guessChars)
-    console.log(secretChars)
-    console.log(isCorrect)
     return isCorrect
     // check if the letters are in the right place
   }

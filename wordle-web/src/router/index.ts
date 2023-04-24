@@ -12,20 +12,17 @@ const router = createRouter({
       name: 'Home',
       component: HomeView
     },
-
     {
       //better format
       path: '/wordle',
       name: 'wordle',
       component: Wordle
     },
-
     {
       path: '/about',
       name: 'about',
       component: AboutView
     },
-
     {
       path: '/game',
       name: 'game',

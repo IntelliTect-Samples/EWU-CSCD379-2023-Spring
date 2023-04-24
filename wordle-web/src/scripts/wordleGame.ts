@@ -48,8 +48,6 @@ export class WordleGame {
       this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters)
-
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
