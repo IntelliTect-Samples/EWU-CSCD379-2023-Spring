@@ -20,6 +20,27 @@ const vuetify = createVuetify({
     sets: {
       mdi
     }
+  },
+  theme: {
+    defaultTheme: 'light',
+    themes: {
+      christmas: {
+        colors: {
+          primary: '#c54245',
+          secondary: '#346633',
+          background: '#346633',
+          surface: '#346633'
+        }
+      },
+      halloween: {
+        colors: {
+          primary: '#E66C2C',
+          secondary: '#E66C2C',
+          background: '#121212',
+          surface: '#121212'
+        }
+      }
+    }
   }
 })
 
