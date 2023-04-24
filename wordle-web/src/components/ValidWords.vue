@@ -2,8 +2,11 @@
   <v-row justify="center">
     <v-dialog scrollable width="auto">
       <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props">
-          {{ WordsService.validWords(props.game.guess.text).length }}
+        <v-btn
+          color="primary"
+          v-bind="props"
+        >
+        {{ WordsService.validWords(game.guess.text).length }}
         </v-btn>
       </template>
       <v-card>
@@ -11,7 +14,7 @@
         <v-divider></v-divider>
         <v-list>
           <v-list-item
-            v-for="(item, i) in WordsService.validWords(game.guess.text)"
+            v-for="(item, i) in WordsService.validWords(props.game.guess.text)"
             :key="i"
             :value="item"
             active-color="primary"
