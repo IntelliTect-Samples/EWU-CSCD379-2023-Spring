@@ -4,9 +4,14 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - Assignment-1
       - Assignment-2
+      - Assignment-3
+      - Assignment-4
+      - Assignment-5
+      - Assignment-6
     paths:
-      - wordle-web/**
+    - wordle-web/**
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -18,21 +23,28 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - uses: actions/checkout@v3
-        name: Checkout Code
-      - uses: actions/setup-node@v3
-        name: Setup Node
+      - name: Checkout Code 
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm ci
+      - name: Install Packages
+        run: npm ci
         working-directory: ./wordle-web
-        name: npm ci
-      - run: npm run test:unit
+      - name: Lint Code
         working-directory: ./wordle-web
-        name: Run Vitest Unit Tests
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
+        run: npm run lint
+      - name: Prettier Check
+        working-directory: ./wordle-web
+        run: npm run format:check
+      - name: Build Vue App 
+        working-directory: ./wordle-web
+        run: npm run build
+      - name: Run Vitest Unit Tests
+        run: npm run test:unit
+        working-directory: ./wordle-web
+        
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
