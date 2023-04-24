@@ -1,5 +1,3 @@
-import type { Word } from './word'
-import { LetterStatus, type Letter } from './letter'
 
 export abstract class WordsService {
   static getRandomWord(): string {
