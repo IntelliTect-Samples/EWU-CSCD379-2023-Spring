@@ -21,7 +21,7 @@ import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { WordsService } from '../scripts/wordsService.ts'
+import { WordsService } from '../scripts/wordsService'
 import { watch, onMounted, onUnmounted } from 'vue'
 
 const guess = ref('')
