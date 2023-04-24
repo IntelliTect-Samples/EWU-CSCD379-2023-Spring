@@ -26,7 +26,7 @@ export default {
             displaySuggestions() {
                 //display ? "false" : "true";
                 let temp = guesses[cur].split("")
-                this.$refs.suggestions.validWords(temp)
+                //this.$refs.suggestions.validWords(temp)
             },
             guesses,
             cur,
