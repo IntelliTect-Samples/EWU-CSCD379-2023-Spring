@@ -1,5 +1,10 @@
 <template>
-  <LetterBase :char="props.letter.char" :color="props.letter.color"></LetterBase>
+  <LetterBase
+    rounded="0"
+    :elevation="10"
+    :char="props.letter.char"
+    :color="props.letter.color"
+  ></LetterBase>
 </template>
 
 <script setup lang="ts">

@@ -3,11 +3,18 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
+  <div></div>
+
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+
+  <div></div>
 
   <v-btn @click="showBigDialog = !showBigDialog"
     >Possible Guesses (with known letters): {{ game.possibleWords.length }}</v-btn
   >
+
+  <div></div>
+
   <v-btn @click="showDialog = !showDialog"
     >Possible Guesses (with current letters): {{ game.possibleGuess.length }}</v-btn
   >
@@ -47,7 +54,6 @@
       </v-card>
     </v-dialog>
   </template>
-  <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
 
