@@ -9,7 +9,7 @@
 
       <v-card>
         <v-row v-for="word in game.list" :key="word">
-          <v-btn @click="enterWord" color="primary">
+          <v-btn @click="enterWord(word)" color="primary">
             {{ word }}
           </v-btn>
         </v-row>
@@ -20,10 +20,26 @@
 
 <script setup lang="ts">
 import type { WordleGame } from '@/scripts/wordleGame'
+import { Word } from '@/scripts/word'
+import type { Letter } from '@/scripts/letter'
 
 defineProps<{
   game: WordleGame
+  guessedLetters: Letter[]
 }>()
 
-function enterWord() {}
+function enterWord(word: string) {
+  const guess = new Word(word)
+  for (const letter of guess.letters) {
+    letterClick(letter)
+  }
+}
+
+const emits = defineEmits<{
+  (event: 'letterClick', value: Letter): void
+}>()
+
+function letterClick(letter: Letter) {
+  emits('letterClick', letter)
+}
 </script>
