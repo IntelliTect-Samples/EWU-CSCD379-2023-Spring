@@ -88,7 +88,6 @@ function checkGuess() {
   guess.value = ''
 }
 
-
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
