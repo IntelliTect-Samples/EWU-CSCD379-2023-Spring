@@ -1,3 +1,6 @@
+# URL
+  * https://red-tree-066bc401e.3.azurestaticapps.net/
+
 # wordle-web
 
 This template should help get you started developing with Vue 3 in Vite.
