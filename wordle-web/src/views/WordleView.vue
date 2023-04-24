@@ -41,10 +41,14 @@
       
     </div>
 
+    <v-divider></v-divider>
 
     <br />
+    <div>
+      <v-btn location="center" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+    </div>
 
-    <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+    <br />
 
     <div>
       <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
