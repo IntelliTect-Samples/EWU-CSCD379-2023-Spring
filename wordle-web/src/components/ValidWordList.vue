@@ -35,7 +35,7 @@
 import { defineProps, ref, watchEffect } from 'vue'
 
 const dialog = ref(false)
-const wordGuess = ref('')
+const wordGuess = ref()
 defineProps({
   items: {
     type: Array,

@@ -20,6 +20,6 @@ const props = withDefaults(defineProps<Props>(), {
 
 <style>
 .gradient-key {
-  background: linear-gradient(to right,grey,blue);
+  background: linear-gradient(to right, grey, blue);
 }
 </style>
