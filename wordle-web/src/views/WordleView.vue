@@ -5,6 +5,8 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
+  <ValidWords :game="game"></ValidWords>
+
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
@@ -17,6 +19,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import ValidWords from '@/components/ValidWords.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())

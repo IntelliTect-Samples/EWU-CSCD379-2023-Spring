@@ -20,6 +20,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
+  validWordList = new Array<string>()
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -56,5 +57,20 @@ export class WordleGame {
     } else {
       // The game is over
     }
+  }
+  removeGuess(){
+    while(this.guess.text !== ''){
+      this.guess.pop()
+    }
+  }
+
+  selectGuess(word: string){
+    this.removeGuess()
+    for(let i = 0; i < word.length; i++){
+      if(this.guess.letters[i].char === ''){
+        this.guess.push(word[i])
+      }
+    }
+    
   }
 }
