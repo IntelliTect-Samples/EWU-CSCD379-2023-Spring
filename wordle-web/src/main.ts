@@ -31,11 +31,32 @@ const vuetify = createVuetify({
           wrong: '#F44336'
         }
       },
+      light: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
+        }
+      },
       inverse: {
         colors: {
           correct: '#F44336',
           misplaced: '#FFC107',
           wrong: '#4CAF50'
+        }
+      },
+      minecraft: {
+        colors: {
+          correct: '#4DD0E1',
+          misplaced: '#E65100',
+          wrong: '#616161'
+        }
+      },
+      pirate: {
+        colors: {
+          correct: '#FFD700',
+          misplaced: '#795548',
+          wrong: '#0D47A1'
         }
       }
     }

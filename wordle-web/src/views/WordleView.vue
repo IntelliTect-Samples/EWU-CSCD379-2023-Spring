@@ -2,7 +2,6 @@
   <h1>Wordle Mind Bender</h1>
   <h2>{{ subtitle }}</h2>
   <GameBoard :game="game" @letterClick="addChar" />
-
   <br />
   <KeyBoard @letterClick="addChar" />
   <br />
