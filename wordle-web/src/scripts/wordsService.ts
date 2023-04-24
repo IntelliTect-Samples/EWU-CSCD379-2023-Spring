@@ -33,7 +33,7 @@ export abstract class WordsService {
 
     //add valid guesses to array
     for (let i = 0; i < this.#words.length; i++) {
-      if(valid.length === 150){
+      if(valid.length === 150) {
         break
       }
 
