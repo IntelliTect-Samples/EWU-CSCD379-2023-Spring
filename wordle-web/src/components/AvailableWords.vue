@@ -10,8 +10,8 @@
             </v-card-title>
             <v-card-text>
                 <v-row>
-                    <v-col v-for="word in partial" :key="word" cols="4"  sm="3" >
-                        <v-btn >{{ word }}</v-btn>
+                    <v-col v-for="word in partial" :key="word" cols="4" >
+                        <v-btn color="default" variant="elevated" width="100" >{{ word }}</v-btn>
                     </v-col>
                 </v-row>
                 

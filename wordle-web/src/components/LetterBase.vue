@@ -1,6 +1,6 @@
 <template>
   <v-btn :color="color" class="removeMin">
-    <span class="font-weight-bold ">{{ props.char.toUpperCase() }}</span>
+    <span class="font-weight-bold"> {{ props.char.toUpperCase() }} </span>
   </v-btn>
 </template>
 
@@ -14,10 +14,11 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'default'
 })
+
 </script>
 
 <style scoped>
 .removeMin{
-  min-width: 0 !important;
+  min-width: 0;
 }
 </style>
