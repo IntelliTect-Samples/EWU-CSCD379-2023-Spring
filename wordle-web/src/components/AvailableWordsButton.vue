@@ -13,7 +13,7 @@
             v-for="word in doPagination"
             :key="word"
             class="text-h5"
-            @click="addGuess(word)"
+            @click="setGuess(word)"
           >
             {{ word }}
           </v-list-item>
@@ -56,10 +56,11 @@ const availableWords = computed(() => {
 })
 
 const doPagination = computed(() => {
-  var shownWords = getPageWords(currentPage.value)
+  let page = currentPage.value
+  let shownWords = getPageWords(page);
   if (shownWords.length == 0) {
-    currentPage.value = 0
-    shownWords = getPageWords(currentPage.value)
+    page = 0;
+    shownWords = getPageWords(page)
   }
   return shownWords
 })
@@ -74,12 +75,8 @@ function getPageWords(page: number) {
   return availableWords.value.slice(start, end)
 }
 
-function addGuess(word: string) {
-  props.wordleGame.guess.clear()
-  for (let i = 0; i < word.length; i++) {
-    props.wordleGame.guess.push(word.charAt(i))
-  }
-  emits('guessChanged', word)
+function setGuess(word: string) {
+  emits('guessChanged', word);
   showMenu.value = false
 }
 </script>

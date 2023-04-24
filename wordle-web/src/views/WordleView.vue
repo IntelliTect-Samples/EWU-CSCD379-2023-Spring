@@ -46,6 +46,7 @@ function backspace() {
 }
 
 function setGuess(value: string) {
+  game.guess.clear()
   for (let i = 0; i < value.length; i++) {
     addChar(new Letter(value[i]))
   }
