@@ -4,24 +4,9 @@
 
     <GameBoard :game="game" @letterClick="addChar" />
 
-    <v-text-field
-      v-model="guess"
-      label="Guess"
-      variant="solo"
-      @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-    ></v-text-field>
-    <div>
-      <KeyBoard @letterClick="addChar" />
-    </div>
+    <KeyBoard @letterClick="addChar" />
 
     <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-    <div>
-      <v-row v-for="word in game.guesses" :key="word.text">
-        <v-col v-for="letter in word.letters" :key="letter.char">
-          <LetterButton :letter="letter" @click="letterClick(letter, $event)"></LetterButton>
-        </v-col>
-      </v-row>
-    </div>
 
     <h2>{{ guess }}</h2>
     <h3>{{ game.secretWord }}</h3>
@@ -29,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
@@ -57,18 +41,13 @@ watch(
   { flush: 'post' }
 )
 function checkGuess() {
-  game.submitGuess(guess.value)
+  game.submitGuess()
   guess.value = ''
 }
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
   guess.value += letter.char
-}
-
-function letterClick(letter: Letter, event: MouseEvent) {
-  guess.value += letter.char
-  console.log(event.altKey)
 }
 
 function keyPress(event: KeyboardEvent) {
@@ -83,6 +62,5 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-  //event.preventDefault()
 }
 </script>

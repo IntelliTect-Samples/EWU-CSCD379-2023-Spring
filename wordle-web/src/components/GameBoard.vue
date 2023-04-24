@@ -17,7 +17,6 @@ import type { WordleGame } from '@/scripts/wordleGame'
 const props = defineProps<{
   game: WordleGame
 }>()
-console.log('GAME: ', props.game.guesses)
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
 }>()

@@ -1,6 +1,7 @@
 <template>
   <div>
     <NavBar class="ma-10" />
+
     <RouterView />
   </div>
 </template>
