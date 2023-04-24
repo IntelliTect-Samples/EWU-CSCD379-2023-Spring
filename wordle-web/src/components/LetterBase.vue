@@ -12,10 +12,24 @@
 </style>
 
 <script setup lang="ts">
+// Working on implementing the gradient background for the letter buttons
+// import { computed } from 'vue'
 export interface Props {
   char?: string
   color?: string
 }
+
+// const myGradient = computed(() => {
+//   if (props.color == "misplaced") {
+//     return 'linear-gradient(to right, #ff44AC, #ff5e62)'
+//   }
+//   if (props.color == "correct") {
+//     return 'linear-gradient(to right, #00f2fe, #4facfe)'
+//   }
+//   if (props.color == "wrong") {
+//     return 'linear-gradient(to right, #ff9966, #ff5e62)'
+//   }
+// })
 
 const props = withDefaults(defineProps<Props>(), {
   char: '?',
