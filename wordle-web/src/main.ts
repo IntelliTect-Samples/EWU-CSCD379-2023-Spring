@@ -28,14 +28,34 @@ const vuetify = createVuetify({
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#F44336'
+          wrong: '#F44336',
+          primary: '#101010',
+          surface: "#ffffff"
         }
       },
       inverse: {
         colors: {
           correct: '#F44336',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#4CAF50',
+          primary: '#eeeeee'
+        }
+      },
+      khorne: {
+        colors: {
+          correct: '#FFD700',
+          misplaced: '#f1c78e',
+          wrong: '#101010',
+          primary: '#6a0001'
+        }
+      },
+      corn: {
+        colors: {
+          correct: '#FFD700',
+          misplaced: '#9b673c',
+          wrong: '#403703',
+          primary: '#FFD700',
+          background: '#afbd22'
         }
       }
     }
