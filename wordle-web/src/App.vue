@@ -15,9 +15,7 @@
               <v-icon icon="$menu" />
               <v-menu activator="parent">
                 <v-list>
-                  <v-list-item to="/about">
-                    About
-                  </v-list-item>
+                  <v-list-item to="/about"> About </v-list-item>
                 </v-list>
               </v-menu>
             </v-app-bar-nav-icon>
@@ -26,18 +24,10 @@
               <v-icon icon="mdi-cog" />
               <v-menu activator="parent">
                 <v-list>
-                  <v-list-item @click="setDarkOrLightTheme">
-                    Dark/Light
-                  </v-list-item>
-                  <v-list-item @click="setInverseTheme">
-                    Inverse Theme
-                  </v-list-item>
-                  <v-list-item @click="setMinecraftTheme">
-                    Minecraft Theme
-                  </v-list-item>
-                  <v-list-item @click="setPirateTheme">
-                    Pirate Theme
-                  </v-list-item>
+                  <v-list-item @click="setDarkOrLightTheme"> Dark/Light </v-list-item>
+                  <v-list-item @click="setInverseTheme"> Inverse Theme </v-list-item>
+                  <v-list-item @click="setMinecraftTheme"> Minecraft Theme </v-list-item>
+                  <v-list-item @click="setPirateTheme"> Pirate Theme </v-list-item>
                 </v-list>
               </v-menu>
             </v-app-bar-nav-icon>
@@ -61,8 +51,7 @@ function setInverseTheme() {
 function setDarkOrLightTheme() {
   if (theme.global.name.value == 'dark') {
     theme.global.name.value = 'light'
-  }
-  else {
+  } else {
     theme.global.name.value = 'dark'
   }
 }

@@ -3,13 +3,12 @@
     <v-card color="#546E7A" class="ma-5" elevation="5">
       <v-card-title>About</v-card-title>
       <v-card-text>
-        Welcome to our custom Wordle clone! This clone is being developed
-        as a CSCD379 class project.
+        Welcome to our custom Wordle clone! This clone is being developed as a CSCD379 class
+        project.
       </v-card-text>
       <v-btn to="/wordle">Return Home</v-btn>
     </v-card>
   </v-sheet>
-
 </template>
 
 <style>

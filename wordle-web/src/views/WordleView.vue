@@ -1,6 +1,6 @@
 <template>
-  <GameBoard :game="game" @letterClick="addChar"/>
-  <KeyBoard @letterClick="addChar"/>
+  <GameBoard :game="game" @letterClick="addChar" />
+  <KeyBoard @letterClick="addChar" />
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>

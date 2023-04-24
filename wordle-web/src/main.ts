@@ -22,7 +22,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: "dark",
+    defaultTheme: 'dark',
     themes: {
       dark: {
         colors: {
@@ -58,7 +58,7 @@ const vuetify = createVuetify({
           misplaced: '#795548',
           wrong: '#0D47A1'
         }
-      },
+      }
     }
   }
 })
