@@ -1,22 +1,36 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
+  <br />
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <v-container fluid>
+    <v-row>
+      <v-col>
+        <v-btn @click="checkGuess" @keyup.enter="checkGuess" color="grey"> Enter </v-btn>
+      </v-col>
+      <v-col class="text-center">
+        <LetterButton :letter="new Letter('?')" @click="letterClick(new Letter('?'))" />
+      </v-col>
+      <v-col class="text-right">
+        <v-btn @click="backSpace" @keyup.enter="backSpace" color="grey"
+          ><v-icon>mdi-backspace</v-icon></v-btn
+        >
+      </v-col>
+    </v-row>
+  </v-container>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
+import { Letter } from '@/scripts/letter'
+import LetterButton from '@/components/LetterButton.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
-import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -39,6 +53,16 @@ function addChar(letter: Letter) {
   guess.value += letter.char
 }
 
+const emits = defineEmits<{
+  (event: 'letterClick', value: Letter): void
+}>()
+
+function letterClick(letter: Letter) {
+  emits('letterClick', letter)
+  game.guess.push(letter.char)
+  guess.value += letter.char
+}
+
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
   if (event.key === 'Enter') {
@@ -51,5 +75,11 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+
+function backSpace() {
+  guess.value = guess.value.slice(0, -1)
+  game.guess.pop()
+  console.log('Back')
 }
 </script>

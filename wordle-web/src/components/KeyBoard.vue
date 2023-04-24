@@ -1,11 +1,9 @@
 <template>
+  <br />
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
+    <v-col class="key-column" v-for="(letter, j) in key" :key="j">
       <LetterButton :letter="letter" @click="letterClick(letter)" />
     </v-col>
-  </v-row>
-  <v-row>
-    <LetterButton :letter="new Letter('?')" @click="letterClick(new Letter('?'))" />
   </v-row>
   <br />
 </template>
@@ -48,5 +46,14 @@ const emits = defineEmits<{
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
+  game
 }
 </script>
+
+<style scoped>
+.key-column {
+  padding: 0;
+  margin: 0;
+  flex-grow: 0;
+}
+</style>

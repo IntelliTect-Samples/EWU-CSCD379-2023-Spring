@@ -10,7 +10,7 @@
           </template>
 
           <RouterLink to="/">
-            <v-app-bar-title>Wordle Game</v-app-bar-title>
+            <h1 class="titleClass">Wordle</h1>
           </RouterLink>
 
           <template v-slot:append>

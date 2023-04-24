@@ -7,6 +7,13 @@ a,
   transition: 0.4s;
 }
 
+.titleClass {
+  color: black;
+  font-family: 'Helvetica Neue';
+  font-weight: bolder;
+  font-size: 34px;
+}
+
 .cheese-theme {
   background-color: #fdd835;
   color: #f57f17;
