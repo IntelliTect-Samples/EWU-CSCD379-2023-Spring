@@ -1,7 +1,6 @@
 <template>
   <nav>
     <v-toolbar flat app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title @click="$router.push('/')"
         ><v-icon>mdi-diamond-stone</v-icon> Wordle Redux</v-toolbar-title
       >
@@ -12,6 +11,7 @@
         <v-btn to="/about">About</v-btn>
         <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="setting = !setting" icon="mdi-cog"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar-items>
     </v-toolbar>
 

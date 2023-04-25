@@ -18,7 +18,7 @@
         speed and precision. Overall, Meg's coding skills are truly exceptional, and she is
         undoubtedly one of the most talented developers out there. -AI generated
       </p>
-      <v-btn @click="$router.push('/')">Home</v-btn>
+      <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
 </template>
