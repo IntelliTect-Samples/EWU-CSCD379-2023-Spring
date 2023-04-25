@@ -10,7 +10,7 @@
         <v-btn to="/wordle">Wordle</v-btn>
         <v-btn to="/about">About</v-btn>
         <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
-        <v-app-bar-nav-icon @click.stop="setting = !setting" icon="mdi-cog"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="setting = true" icon="mdi-cog"></v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar-items>
     </v-toolbar>
@@ -32,19 +32,17 @@
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
-
-    <v-navigation-drawer
-      @click.stop="setting = !setting"
-      location="right"
-      v-model="setting"
-      temporary
-    >
+  </nav>
+  <v-dialog
+        v-model="setting"
+        width="auto"
+      >
+      <v-card>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Wordle Redux</v-list-item-title>
           <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
           <v-list-item
-            @click.stop="setting = true"
             @click="setDefault"
             prepend-icon="mdi-theme-light-dark"
           >
@@ -52,14 +50,12 @@
           </v-list-item>
           <p>Dark Mode Game Mode</p>
           <v-list-item
-            @click.stop="setting = true"
             @click="setProtanopia_Deuteranopia"
             prepend-icon="mdi-eye-plus"
           >
             Protanopia/Deuteranopia Dark Mode
           </v-list-item>
           <v-list-item
-            @click.stop="setting = true"
             @click="setTritanopia"
             prepend-icon="mdi-eye-plus"
           >
@@ -67,14 +63,12 @@
           </v-list-item>
           <p>Light Mode Game Mode</p>
           <v-list-item
-            @click.stop="setting = true"
             @click="setProtanopia_DeuteranopiaLight"
             prepend-icon="mdi-eye-plus-outline"
           >
             Protanopia/Deuteranopia Light Mode
           </v-list-item>
           <v-list-item
-            @click.stop="setting = true"
             @click="setTritanopiaLight"
             prepend-icon="mdi-eye-plus-outline"
           >
@@ -82,8 +76,8 @@
           </v-list-item>
         </v-list-item-content>
       </v-list-item>
-    </v-navigation-drawer>
-  </nav>
+      </v-card>
+    </v-dialog>
 </template>
 
 <script lang="ts">
