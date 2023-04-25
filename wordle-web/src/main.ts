@@ -25,18 +25,18 @@ const vuetify = createVuetify({
     themes: {
       christmas: {
         colors: {
-          primary: '#c54245',
-          secondary: '#346633',
-          background: '#346633',
-          surface: '#346633'
+          correct: '#346633',
+          misplaced: '#D3D3D3',
+          wrong: '#c54245',
+          primary: '#c54245'
         }
       },
       halloween: {
         colors: {
-          primary: '#E66C2C',
-          secondary: '#E66C2C',
-          background: '#121212',
-          surface: '#121212'
+          correct: '#E66C2C',
+          misplaced: '#D3D3D3',
+          wrong: '#121212',
+          primary: '#E66C2C'
         }
       },
       dark: {
