@@ -78,3 +78,13 @@ The course work will be cross-platform. However, in class the instructors will b
 - Make sure all the extensions are installed
 - Restart VS Code
 - Pull the repo again and see if the unmodified version works
+
+git branch -r 
+  origin/Assingment-2
+  origin/HEAD -> origin/main
+  origin/main
+PS C:\Users\igoss\Desktop\EWU-CSCD379-2023-Spring> git branch 
+* main
+PS C:\Users\igoss\Desktop\EWU-CSCD379-2023-Spring> git checkout
+Your branch is up to date with 'origin/main'.
+PS C:\Users\igoss\Desktop\EWU-CSCD379-2023-Spring> git checkout Assingment-2
