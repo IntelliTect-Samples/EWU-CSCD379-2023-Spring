@@ -14,7 +14,7 @@
 import LetterButton from '@/components/LetterButton.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
-const props = defineProps<{
+defineProps<{
   game: WordleGame
 }>()
 const emits = defineEmits<{
