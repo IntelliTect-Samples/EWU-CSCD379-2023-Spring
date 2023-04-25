@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <v-toolbar flat app>
+    <v-toolbar color="primary" flat app>
       <v-toolbar-title @click="$router.push('/')"
         ><v-icon>mdi-diamond-stone</v-icon> Wordle Redux</v-toolbar-title
       >

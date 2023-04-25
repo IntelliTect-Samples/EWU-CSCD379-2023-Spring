@@ -3,13 +3,7 @@
 
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    disabled
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
+  <p>Guess: {{ guess }}</p>
 
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>

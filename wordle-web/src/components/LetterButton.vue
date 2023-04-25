@@ -2,7 +2,6 @@
   <LetterBase
     :char="props.letter.char"
     :color="props.letter.color"
-    class="gradient-key"
   ></LetterBase>
 </template>
 
@@ -17,8 +16,4 @@ export interface Props {
 const props = defineProps<Props>()
 </script>
 
-<style>
-.gradient-key {
-  background: linear-gradient(to right, grey, blue);
-}
-</style>
+

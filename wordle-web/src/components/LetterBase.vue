@@ -5,11 +5,11 @@
       min-width: 50px;
       height: 50px;
       min-height: 50px;
-      background: linear-gradient(to right, grey, blue);
     "
-    :color="props.color"
+    :color = "props.color"
     :elevation="12"
     :flat="true"
+    :style="{ 'background-image': 'linear-gradient(to right, #00000040, #FFFFFF40) !important'}"
     >{{ props.char }}
   </v-btn>
 </template>
