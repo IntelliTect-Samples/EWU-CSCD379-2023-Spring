@@ -1,10 +1,7 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col cols="auto" v-for="(char, j) in key" :key="j">
+    <v-col v-for="(char, j) in key" :key="j">
       <LetterButton
-        size="small"
-        height="60"
-        min-width="30"
         :letter="new Letter(char)"
         @click="letterClick(new Letter(char))"
         :elevation="20"
