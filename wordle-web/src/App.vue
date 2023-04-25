@@ -7,21 +7,13 @@
       <NavBar/>
     </div>
   </header>
-
+  <nav-bar></nav-bar>
   <RouterView />
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
+
 import NavBar from '@/components/NavBar.vue'
 
-const theme = useTheme()
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
 </script>

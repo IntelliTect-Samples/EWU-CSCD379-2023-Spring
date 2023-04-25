@@ -1,9 +1,18 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+    <v-col cols="auto" v-for="(letter, j) in key" :key="j">
+      <LetterButton
+      size="small"
+         height="75"
+         width="75"
+         :letter="letter"
+         @click="letterClick(letter)"
+      />
+
+
     </v-col>
   </v-row>
+  
 </template>
 
 <script setup lang="ts">
@@ -44,5 +53,16 @@ const emits = defineEmits<{
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
+  makeSound()
 }
+function makeSound(){
+    var sound = new Audio('../src/assets/sound.mp3')
+    sound.currentTime=0;
+    sound.play()
+    setInterval(function(){
+    if(sound.currentTime> 1){
+      sound.pause();
+    }
+    },1);
+  }
 </script>
