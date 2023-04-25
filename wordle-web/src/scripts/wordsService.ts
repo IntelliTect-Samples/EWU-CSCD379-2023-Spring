@@ -30,7 +30,6 @@ export class WordsService {
       return ValidationStatus.Valid
     }
   }
-      
 
   static matchWords(guesses: Array<Word>): string[] {
       let wordList = this.#words.slice();

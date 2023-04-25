@@ -40,7 +40,6 @@ export class WordleGame {
 
   submitGuess() {
     // Check if the guess is valid
-
     this.guess.check(this.secretWord)
         
      // Update the guessed letters
@@ -52,14 +51,25 @@ export class WordleGame {
     const validWords = WordsService.matchWords(this.guesses)
 
     const index = this.guesses.indexOf(this.guess)
+    console.log('current guess index = ' + index)
+
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
-    } else {
-      // The game is over
-    }
-    
-    
 
+      console.log('guess text = ' + this.guesses[0])
+      console.log('secret word = ' + this.secretWord)
+// check if the game is won
+    if (this.guess.text === this.secretWord) {
+      this.status = WordleGameStatus.Won
+      console.log("You won!")
+      this.restartGame()
     }
+    else if (index === 5 && this.guess.text !== this.secretWord) {
+      this.status = WordleGameStatus.Lost
+        alert('You lost!')
+        this.restartGame()
+    }
+  }
+}
 }
 
