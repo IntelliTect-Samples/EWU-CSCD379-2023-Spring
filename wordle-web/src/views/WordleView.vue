@@ -95,14 +95,23 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  game.guess.push(letter.char)
-  guess.value += letter.char
+  if(letter.char === 'Enter'){
+    checkGuess()
+    //console.log(game.guess)
+  } else if(letter.char === 'Backspace'){
+    guess.value = guess.value.slice(0, -1)
+    game.guess.pop()
+  } else {
+    game.guess.push(letter.char)
+    guess.value += letter.char
+  }
 }
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
   if (event.key === 'Enter') {
     checkGuess()
+    console.log(game.guess)
   } else if (event.key === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
