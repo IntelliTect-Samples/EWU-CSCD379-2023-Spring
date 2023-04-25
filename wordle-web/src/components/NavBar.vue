@@ -1,15 +1,14 @@
 <template>
    <v-layout>
-     <v-app-bar color="grey" density="compact" primary>
-       <v-app-bar-title to="../wordle">
-         <v-btn :ripple="false" variant="plain" to="../wordle">
+     <v-app-bar color="primary" density="compact" primary>
+       <v-app-bar-title to="../wordle" class="ml-30">
+         <v-btn justify="center" :ripple="false" variant="plain" to="../wordle">
            <v-icon>mdi-file-word-box</v-icon>
            Wurdle
          </v-btn>
        </v-app-bar-title>
-
-       <TutorialCard></TutorialCard>
        <SettingsTab></SettingsTab>
+       <HelpTab></HelpTab>
        <template v-slot:append>
          <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
        </template>
@@ -27,7 +26,9 @@
  </template>
 
  <script setup lang="ts">
-
+ import SettingsTab from '../components/SettingsTab.vue'
+ import HelpTab from '../components/HelpTab.vue'
  import { ref } from 'vue'
+ 
  let drawer = ref(false)
  </script>

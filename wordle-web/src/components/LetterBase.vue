@@ -1,5 +1,13 @@
 <template>
-  <v-btn :color="props.color">
+  <v-btn 
+     class="charButton"
+     elevation="8"
+     min-size="x-small"
+     size="small"
+     height="50"
+     width="75"
+     :color="props.color"
+    >
     {{ props.char }}
   </v-btn>
 </template>
@@ -12,6 +20,6 @@ export interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
   char: '?',
-  color: 'grey'
+  color: 'primary'
 })
 </script>

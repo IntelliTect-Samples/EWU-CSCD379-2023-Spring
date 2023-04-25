@@ -26,6 +26,7 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
+          primary: 'grey',
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
@@ -33,11 +34,34 @@ const vuetify = createVuetify({
       },
       inverse: {
         colors: {
-          correct: '#F44336',
+          primary: 'grey',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#F44336'
         }
-      }
+      },
+      darkDark: {
+        dark: true,
+        colors: {
+          primary: '#0000',
+          secondary: '#0000',
+          correct: '#013220',
+          misplaced: '#696700',
+          wrong: '#671B0E'
+        }
+      },
+      neon: {
+        dark: true,
+        colors: {
+          primary: '#bf00ff',
+          secondary: '#0000',
+          correct: '#39ff14',
+          misplaced: '#fefe22',
+          wrong: '#ff2400 '
+        }
+      },
+
+
     }
   }
 })
