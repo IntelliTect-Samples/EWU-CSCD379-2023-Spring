@@ -1,5 +1,9 @@
 <template>
-  <v-btn elevation="24" :color="props.color">
+  <v-btn
+    elevation="10"
+    :color="props.color"
+    style="background-image: var(--btn-gradient) !important"
+  >
     {{ props.char }}
   </v-btn>
 </template>

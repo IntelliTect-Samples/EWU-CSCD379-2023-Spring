@@ -30,10 +30,21 @@
       <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
       <v-row dense class="justify-center" cols="auto">
         <v-col cols="auto">
-          <v-btn @click="checkGuess" class="elevation-6"> Check </v-btn>
+          <v-btn
+            @click="checkGuess"
+            class="elevation-10"
+            style="background-image: var(--btn-gradient)"
+          >
+            Check
+          </v-btn>
         </v-col>
         <v-col cols="auto">
-          <v-btn @click="toggleText" class="elevation-6">{{ buttonText }}</v-btn>
+          <v-btn
+            @click="toggleText"
+            class="elevation-10"
+            style="background-image: var(--btn-gradient)"
+            >{{ buttonText }}</v-btn
+          >
         </v-col>
       </v-row>
     </div>
