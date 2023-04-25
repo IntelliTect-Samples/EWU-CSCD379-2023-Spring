@@ -16,7 +16,8 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
-const keyboardLetters = [
+
+const keyboardLetters: [string[], string[], string[]] = [
   ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
   ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
   ['z', 'x', 'c', 'v', 'b', 'n', 'm']
