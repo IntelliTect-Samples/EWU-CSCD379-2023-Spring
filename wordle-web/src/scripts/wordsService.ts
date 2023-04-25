@@ -8,7 +8,6 @@ export abstract class WordsService {
   }
 
   static validWords(word: string): Array<string> {
-    //Todo
     const newList = new Array<string>()
 
     if (word == '') {

@@ -11,17 +11,6 @@
 
     <div>
       <v-responsive class="mx-auto" max-width="300">
-        <v-text-field
-          v-model="guess"
-          label="Guess"
-          variant="solo"
-          @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-        ></v-text-field>
-      </v-responsive>
-    </div>
-
-    <div>
-      <v-responsive class="mx-auto" max-width="300">
         <v-select
           v-model="guess"
           :items="validGuesses"
@@ -36,21 +25,17 @@
     <v-divider></v-divider>
 
     <br />
-    <div>
-      <v-btn location="center" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-    </div>
-
-    <br />
 
     <div>
       <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-    </div>
-
-    <div>
-      <br />
-      <h2>Guess: {{ guess }}</h2>
-      <br />
-      <h3>Secret Word: {{ game.secretWord }}</h3>
+      <v-row dense class="justify-center" cols="auto">
+        <v-col cols="auto">
+          <v-btn @click="checkGuess" class="elevation-6"> Check </v-btn>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn @click="toggleText" class="elevation-6">{{ buttonText }}</v-btn>
+        </v-col>
+      </v-row>
     </div>
   </main>
 </template>
@@ -66,8 +51,11 @@ import { WordsService } from '@/scripts/wordsService'
 
 let validGuesses = new Array<string>()
 let validWord = ''
+// TODO: Possible refactor 'buttonText' to prevent hardcoding.
+let buttonText = ref('Display correct word')
 const guess = ref('')
 const game = reactive(new WordleGame())
+
 console.log(game.secretWord)
 
 onMounted(() => {
@@ -87,7 +75,19 @@ watch(
   { flush: 'post' }
 )
 
+// TODO: Possible refactor 'buttonText' to prevent hardcoding.
+function toggleText() {
+  buttonText.value =
+    buttonText.value === `${game.secretWord}` ? 'Display correct word' : `${game.secretWord}`
+}
+
 function checkGuess() {
+  // TODO: Add a UI effect to show that the guess is not of right length.
+  if (game.guess.text.length !== game.secretWord.length) {
+    console.log('Guess is not of the right length')
+    return
+  }
+
   game.submitGuess()
   guess.value = ''
   getValidGuesses()

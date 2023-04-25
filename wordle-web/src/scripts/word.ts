@@ -5,16 +5,9 @@ export class Word {
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
-      if (typeof word == 'number') {
-        // Add one letter for each number. With blank spots
-        for (let i = 0; i < word; i++) {
-          this.letters.push(new Letter(''))
-        }
-      } else {
-        // add word letters to array
-        for (const letter of word) {
-          this.letters.push(new Letter(letter))
-        }
+      // add word letters to array
+      for (const letter of word) {
+        this.letters.push(new Letter(letter))
       }
     } else {
       // add empty letters to array
@@ -46,6 +39,14 @@ export class Word {
         return
       }
     }
+  }
+
+  checkLength(secretWord: string): boolean {
+    if (this.letters.length !== secretWord.length) {
+      console.log('wrong length')
+      return false
+    }
+    return true
   }
 
   check(secretWord: string): boolean {
