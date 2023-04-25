@@ -15,7 +15,7 @@
       </v-toolbar-items>
     </v-toolbar>
 
-    <v-navigation-drawer @click.stop="drawer = !drawer" v-model="drawer" temporary>
+    <v-navigation-drawer location="right" @click.stop="drawer = !drawer" v-model="drawer" temporary>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Wordle Redux</v-list-item-title>
@@ -48,7 +48,7 @@
           >
             Light/Dark Mode
           </v-list-item>
-          <p>Dark Mode Game Mode</p>
+          <p>Dark Mode Color Blind Theme</p>
           <v-list-item
             @click="setProtanopia_Deuteranopia"
             prepend-icon="mdi-eye-plus"
@@ -61,7 +61,7 @@
           >
             Tritanopia Dark Mode
           </v-list-item>
-          <p>Light Mode Game Mode</p>
+          <p>Light Mode Color Blind Theme</p>
           <v-list-item
             @click="setProtanopia_DeuteranopiaLight"
             prepend-icon="mdi-eye-plus-outline"
