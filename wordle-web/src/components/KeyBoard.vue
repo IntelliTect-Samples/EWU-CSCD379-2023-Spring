@@ -1,9 +1,11 @@
 <template>
   <div style="margin-bottom: 50px">
     <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
+      <v-btn @click="keyPress('Enter')" v-if="i === 2">enter</v-btn>
       <v-col cols="auto" v-for="(letter, j) in key" :key="j">
         <LetterButton :letter="letter" @click="letterClick(letter)" />
       </v-col>
+      <v-btn @click="keyPress('Backspace')" v-if="i === 2">back</v-btn>
     </v-row>
   </div>
 </template>
@@ -42,9 +44,14 @@ const keyboardLetters = computed(() => {
 
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
+  (event: 'keyPress', value: string): void
 }>()
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
+}
+
+function keyPress(event: string) {
+  emits('keyPress', event)
 }
 </script>

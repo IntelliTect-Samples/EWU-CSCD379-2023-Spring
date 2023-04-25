@@ -5,7 +5,7 @@
         <v-flex justify-center>
           <div class="m-5 py-3">
             <v-btn class="m-5" elevation="24" height="30px" color="primary" v-bind="props">
-              {{ game.list.length }}
+              Number of Valid Words: {{ game.list.length }}
             </v-btn>
           </div>
         </v-flex>

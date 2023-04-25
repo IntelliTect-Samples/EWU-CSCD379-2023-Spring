@@ -2,10 +2,18 @@
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
-  <KeyBoard class="ma-10 p-10" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-  <HintDialog :game="game" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <KeyBoard
+    class="ma-10 p-10"
+    @keyPress="keyPress"
+    @letterClick="addChar"
+    :guessedLetters="game.guessedLetters"
+  />
+  <HintDialog
+    class="text-center"
+    :game="game"
+    @letterClick="addChar"
+    :guessedLetters="game.guessedLetters"
+  />
 
   <!--<h2>{{ guess }}</h2> -->
   <!--<h3>{{ game.secretWord }}</h3> -->
@@ -40,17 +48,28 @@ function addChar(letter: Letter) {
   guess.value += letter.char
 }
 
-function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-    console.log('Back')
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+function keyPress(event: KeyboardEvent | string) {
+  let x = 0
+  if (typeof event === 'string') {
+    if (event === 'Enter') {
+      checkGuess()
+    } else if (event === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+      console.log('Back')
+    }
+  } else {
+    console.log(event.key)
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+      console.log('Back')
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
 }
 </script>
