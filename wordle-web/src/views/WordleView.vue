@@ -95,10 +95,10 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  if(letter.char === 'Enter'){
+  if (letter.char === 'Enter') {
     checkGuess()
     //console.log(game.guess)
-  } else if(letter.char === 'Backspace'){
+  } else if (letter.char === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
   } else {
