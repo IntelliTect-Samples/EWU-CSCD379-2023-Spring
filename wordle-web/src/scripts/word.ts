@@ -6,12 +6,10 @@ export class Word {
   constructor(word?: string | null | number) {
     if (word) {
       if (typeof word == 'number') {
-        // Add one letter for each number. With blank spots
         for (let i = 0; i < word; i++) {
           this.letters.push(new Letter(''))
         }
       } else {
-        // add word letters to array
         for (const letter of word) {
           this.letters.push(new Letter(letter))
         }
@@ -24,7 +22,6 @@ export class Word {
   }
 
   push(char: string) {
-    // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
         letter.char = char
@@ -33,7 +30,6 @@ export class Word {
     }
   }
 
-  // Remove the last letter
   pop() {
     for (let i = this.letters.length - 1; i >= 0; i--) {
       if (this.letters[i].char !== '') {
@@ -44,9 +40,6 @@ export class Word {
   }
 
   check(secretWord: string): boolean {
-    console.log(this.text)
-    // check if the letters are valid
-    //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)
     const secretChars = secretWord.split('')
     let correct = true

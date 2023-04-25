@@ -7,6 +7,7 @@
         min-width="30"
         :letter="new Letter(char)"
         @click="letterClick(new Letter(char))"
+        :elevation="20"
       />
     </v-col>
   </v-row>

@@ -10,6 +10,7 @@ export class WordleGame {
   guesses = new Array<Word>()
   secretWord = ''
   numberOfGuesses = 6
+  validWordList = new Array<string>()
   guess!: Word
 
   restartGame(secretWord: string) {
@@ -20,6 +21,21 @@ export class WordleGame {
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+  }
+
+  removeGuess() {
+    while (this.guess.text !== '') {
+      this.guess.pop()
+    }
+  }
+
+  selectGuess(word: string) {
+    this.removeGuess()
+    for (let i = 0; i < word.length; i++) {
+      if (this.guess.letters[i].char === '') {
+        this.guess.push(word[i])
+      }
+    }
   }
 
   submitGuess() {

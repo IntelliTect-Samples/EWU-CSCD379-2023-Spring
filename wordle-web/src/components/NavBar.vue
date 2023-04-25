@@ -1,10 +1,10 @@
 <template>
   <v-layout>
     <v-app-bar color="primary">
-      <v-app-bar-title>
-        <v-icon to="/"></v-icon>
-        Wordle</v-app-bar-title
-      >
+      <v-app-bar-title @click="$router.push('/')">
+        <v-icon>mdi-looks</v-icon>
+        Wordle
+      </v-app-bar-title>
       <SettingsDialog />
       <template v-slot:append>
         <v-app-bar-nav-icon @click.stop="open = !open"></v-app-bar-nav-icon>

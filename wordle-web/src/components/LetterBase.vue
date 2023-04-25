@@ -1,5 +1,14 @@
 <template>
-  <v-btn :color="props.color" elevation="5">
+  <v-btn
+    style="
+      width: 50px;
+      min-width: 50px;
+      height: 50px;
+      min-height: 50px;
+      background: linear-gradient(to right, grey, red);
+    "
+    :color="props.color"
+  >
     {{ props.char }}
   </v-btn>
 </template>

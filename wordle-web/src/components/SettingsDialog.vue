@@ -32,7 +32,7 @@ let dialog = ref(false)
 const theme = useTheme()
 
 const setLight = () => {
-  theme.global.name.value = 'light'
+  theme.global.name.value = 'inverse'
 }
 
 const setDark = () => {

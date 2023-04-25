@@ -24,3 +24,9 @@ function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
 </script>
+
+<style scoped>
+#gradient {
+  background: linear-gradient(to right, #e1e1e1, #747474);
+}
+</style>

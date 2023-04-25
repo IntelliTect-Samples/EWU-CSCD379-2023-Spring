@@ -6,6 +6,7 @@
 
     <KeyBoard @letterClick="addChar" />
 
+    <WordList :game="game"></WordList>
     <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
     <h2>{{ guess }}</h2>
@@ -19,10 +20,15 @@ import KeyBoard from '../components/KeyBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import type { Letter } from '@/scripts/letter'
+import { WordsService } from '@/scripts/wordsService'
+import WordList from '@/components/WordList.vue'
+import click from '@/assets/click.mp3'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-console.log(game.guesses)
+
+const audio = new Audio(click)
+audio.volume = 0.4
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -46,8 +52,10 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
+  audio.play()
   game.guess.push(letter.char)
   guess.value += letter.char
+  game.validWordList = WordsService.validWords(game.guess.text)
 }
 
 function keyPress(event: KeyboardEvent) {
@@ -59,8 +67,10 @@ function keyPress(event: KeyboardEvent) {
     game.guess.pop()
     console.log('Back')
   } else if (event.key.length === 1 && event.key !== ' ') {
+    audio.play()
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+  game.validWordList = WordsService.validWords(game.guess.text)
 }
 </script>

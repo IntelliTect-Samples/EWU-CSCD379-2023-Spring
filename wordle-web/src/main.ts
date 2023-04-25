@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import { mdi } from 'vuetify/iconsets/mdi'
 
-import './assets/main.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 // Vuetify
@@ -22,7 +21,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     themes: {
       christmas: {
         colors: {
@@ -38,6 +37,22 @@ const vuetify = createVuetify({
           secondary: '#E66C2C',
           background: '#121212',
           surface: '#121212'
+        }
+      },
+      dark: {
+        colors: {
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336',
+          primary: '#000000'
+        }
+      },
+      inverse: {
+        colors: {
+          correct: '#F44336',
+          misplaced: '#FFC107',
+          wrong: '#4CAF50',
+          primary: '#DEE4E7'
         }
       }
     }
