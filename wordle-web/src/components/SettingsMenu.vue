@@ -1,23 +1,44 @@
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
+import { useTheme } from 'vuetify'
+import { ref } from 'vue'
+import { watch } from 'vue'
 
 const theme = useTheme()
+const isDark = ref(true)
 
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
-
-function setLightTheme() {
-  theme.global.name.value = 'light'
+function setDefaultTheme() {
+  if (isDark.value) {
+    theme.global.name.value = 'dark'
+  } else {
+    theme.global.name.value = 'light'
+  }
 }
 
 function setDesertTheme() {
-  theme.global.name.value = 'desert'
+  if (isDark.value) {
+    theme.global.name.value = 'desertDark'
+  } else {
+    theme.global.name.value = 'desertLight'
+  }
 }
 
 function setOceanTheme() {
-  theme.global.name.value = 'ocean'
+  if (isDark.value) {
+    theme.global.name.value = 'oceanDark'
+  } else {
+    theme.global.name.value = 'oceanLight'
+  }
 }
+
+watch(isDark, () => {
+  if (theme.global.name.value.includes('ocean')) {
+    setOceanTheme()
+  } else if (theme.global.name.value.includes('desert')) {
+    setDesertTheme()
+  } else {
+    setDefaultTheme()
+  }
+})
 </script>
 
 <template>
@@ -37,8 +58,9 @@ function setOceanTheme() {
         <v-card-text>
           <v-card-title class="text-h5 pb-8"> Theme: </v-card-title>
 
-          <v-btn variant="tonal" color="#9575CD" @click="setDarkTheme">Dark</v-btn> &nbsp;
-          <v-btn variant="tonal" color="#4CAF50" @click="setLightTheme">Light</v-btn> &nbsp;
+          <v-switch inset v-model="isDark" :label="'Light/Dark'"></v-switch>
+
+          <v-btn variant="tonal" color="#9575CD" @click="setDefaultTheme">Default</v-btn> &nbsp;
           <v-btn variant="tonal" color="#FF781E" @click="setDesertTheme">Desert</v-btn>&nbsp;
           <v-btn variant="tonal" color="#3079CC" @click="setOceanTheme">Ocean</v-btn>
         </v-card-text>
