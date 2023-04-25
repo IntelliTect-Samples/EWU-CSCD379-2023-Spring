@@ -1,6 +1,6 @@
 <template>
   <main>
-    <GameBoard :game="game" @letterClick="addChar" />
+    <GameBoard :game="game" />
 
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 

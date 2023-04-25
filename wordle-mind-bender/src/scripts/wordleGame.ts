@@ -1,6 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
-import type { Letter } from './letter'
+import { Letter, LetterStatus } from './letter'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -21,12 +21,6 @@ export class WordleGame {
   guess!: Word
   numberOfGuesses = 6
 
-  // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
-
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
@@ -45,7 +39,7 @@ export class WordleGame {
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter)
+      this.validateLetter(letter)
     }
 
     console.log(this.guessedLetters)
@@ -55,6 +49,21 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+    }
+  }
+
+  validateLetter(letter: Letter) {
+    const currentLetter = this.guessedLetters.find(
+      (guessedLetter) => guessedLetter.char == letter.char
+    )
+
+    if (currentLetter) {
+      if (letter.status === LetterStatus.Misplaced && currentLetter.status == LetterStatus.Wrong)
+        currentLetter.status = letter.status
+      if (letter.status === LetterStatus.Correct && currentLetter.status !== LetterStatus.Correct)
+        currentLetter.status = letter.status
+    } else {
+      this.guessedLetters.push(new Letter(letter.char, letter.status))
     }
   }
 }

@@ -3,7 +3,6 @@
     <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
       <LetterButton
         :letter="letter"
-        @click="letterClick(letter)"
         class="elevation-0 text-h5 font-weight-black rounded-sm"
         height="4rem"
         style="pointer-events: none"
@@ -14,18 +13,9 @@
 
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
-import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
 
 defineProps<{
   game: WordleGame
 }>()
-
-const emits = defineEmits<{
-  (event: 'letterClick', value: Letter): void
-}>()
-
-function letterClick(letter: Letter) {
-  emits('letterClick', letter)
-}
 </script>
