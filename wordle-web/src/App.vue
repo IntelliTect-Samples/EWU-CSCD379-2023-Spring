@@ -78,7 +78,7 @@ export default {
 <script setup lang="ts">
 const theme = useTheme()
 
-function changeTheme(newTheme?: string | undefined) {
-  theme.global.name.value = newTheme ?? 'dark'
+function changeTheme(newTheme: string) {
+  theme.global.name.value = newTheme
 }
 </script>

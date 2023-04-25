@@ -1,6 +1,6 @@
 <template>
-  <v-card :color="props.color">
-    <v-btn id="gradient" :elevation="10" @click="playSound">
+  <v-card :elevation="3" :color="props.color">
+    <v-btn id="gradient" @click="playSound">
       {{ props.char }}
     </v-btn>
   </v-card>
