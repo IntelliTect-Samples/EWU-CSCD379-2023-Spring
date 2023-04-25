@@ -14,6 +14,30 @@
   </v-row>
 </template>
 
+<script setup lang="ts">
+import Axios from "axios";
+import { ref } from "vue";
+
+interface weatherData {
+  date: string
+  temperatureC: number
+  temperatureF: number
+  summary: string
+}
+
+const weatherData = ref<weatherData>()
+
+Axios.get('https://localhost:7225/WeatherForecast')
+  .then(response) => {
+    console.log(response.data)
+    weatherData.value = response.data
+  })
+  .catch(err) => {
+    console.log(err)
+  })
+
+</script>
+
 <style>
 @media (min-width: 1024px) {
   .about {
