@@ -1,6 +1,6 @@
 <template>
   <v-layout>
-    <v-app-bar>
+    <v-app-bar color="primary">
       <template #title>
         <div @click="$router.push('/')" style="cursor: pointer">Wordle Mind Bender</div>
       </template>

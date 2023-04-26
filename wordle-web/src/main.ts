@@ -65,6 +65,7 @@ const vuetify = createVuetify({
       darkEaster: {
         dark: true,
         colors: {
+          primary: '#51c9c1',
           correct: '#00b8ac',
           misplaced: '#6000e7',
           wrong: '#c63ebd',
@@ -73,6 +74,7 @@ const vuetify = createVuetify({
       },
       lightEaster: {
         colors: {
+          primary: '#00b8ac',
           correct: '#00b8ac',
           misplaced: '#6000e7',
           wrong: '#c63ebd',
