@@ -1,5 +1,5 @@
 <template>
-  <v-btn :color="color" class="removeMin">
+  <v-btn class="removeMin">
     <span class="font-weight-bold"> {{ props.char.toUpperCase() }} </span>
   </v-btn>
 </template>
