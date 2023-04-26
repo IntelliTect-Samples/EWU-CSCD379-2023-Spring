@@ -1,7 +1,7 @@
-<style>
-.charButton {
-  background: aqua;
-}
+<style scoped>
+  .charButton {
+    background: rgb(22,21,21);
+    background: linear-gradient(345deg, rgba(22,21,21,1) 69%, rgba(75,75,75,1) 100%);  }
 </style>
 
 <template>

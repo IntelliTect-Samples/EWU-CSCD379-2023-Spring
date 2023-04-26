@@ -32,14 +32,18 @@ onUnmounted(() => {
 })
 
 function checkGuess() {
-  game.submitGuess()
-  guess.value = ''
+  if (game.guess.text.length === 5) {
+    game.submitGuess()
+    guess.value = ''
+  }
 }
 
 function addChar(letter: Letter) {
-  audio.play()
-  game.guess.push(letter.char)
-  game.validWordList = WordsService.validWords(game.guess.text)
+  if(game.guess.text.length < 5) {
+    audio.play()
+    game.guess.push(letter.char)
+    game.validWordList = WordsService.validWords(game.guess.text)
+  }
 }
 
 function keyPress(event: KeyboardEvent) {
@@ -48,11 +52,12 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
   }
 
-  game.validWordList = WordsService.validWords(game.guess.text)
+  if(game.guess.text.length < 5 && event.key.length === 1 && event.key !== ' ') {
+    guess.value += event.key.toLowerCase()
+    game.guess.push(event.key.toLowerCase())
+    game.validWordList = WordsService.validWords(game.guess.text)
+  } 
 }
 </script>

@@ -67,6 +67,26 @@ const vuetify = createVuetify({
           primary: '#2D3047',
           background: '454372'
         }
+      },
+      darkCalm: {
+        dark: true,
+        colors: {
+          correct: '#70877F',
+          misplaced: '#C4A77D',
+          wrong: '#EF946C',
+          primary: '#2F2963',
+          background: '454372'
+        }
+      },
+      darkColorful: {
+        dark: true,
+        colors: {
+          correct: '#1B998B',
+          misplaced: '#FFFD82',
+          wrong: '#E84855',
+          primary: '#2D3047',
+          background: '454372'
+        }
       }
     }
   }

@@ -17,12 +17,18 @@
         <v-card-title class="text-center">Settings</v-card-title>
 
         <v-chip-group outlined class="justify-center ma-10 pa-10">
+          <v-card-title class="text-center">Light/Dark</v-card-title>
+          <v-switch
+            v-model="lightDarkToggle"
+            @click="setLightDark(lightDarkToggle)"
+            hide-details
+            inset
+          ></v-switch>
+
           <v-card-title class="text-center">Theme</v-card-title>
 
-          <v-chip size="small" @click="setDarkTheme">Dark Mode</v-chip>
-          <v-chip size="small" @click="setInverseTheme">Inverse Mode</v-chip>
-          <v-chip size="small" @click="setCalmTheme">Calm Mode</v-chip>
-          <v-chip size="small" @click="setColorfulTheme">Colorful Mode</v-chip>
+          <v-chip size="small" @click="setCalmTheme(lightDarkToggle)">Calm Mode</v-chip>
+          <v-chip size="small" @click="setColorfulTheme(lightDarkToggle)">Colorful Mode</v-chip>
         </v-chip-group>
       </v-card>
     </v-dialog>
@@ -35,28 +41,29 @@ import { ref } from 'vue'
 
 const theme = useTheme()
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
+function setLightDark(lightOrDark: boolean) {
+  if(lightOrDark == true) {
+    theme.global.name.value = 'inverse'
+  } else {
+    theme.global.name.value = 'dark'
+  }
 }
 
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
+function setCalmTheme(lightOrDark: boolean) {
+  if(lightOrDark == true) {
+    theme.global.name.value = 'darkCalm'
+  } else {
+    theme.global.name.value = 'calm'
+  }
 }
 
-function setCalmTheme() {
-  theme.global.name.value = 'calm'
-}
-
-function setColorfulTheme() {
-  theme.global.name.value = 'colorful'
-}
-
-// function setVolume() {
-//   for(const audio in document.getElementsByTagName('audio')) {
-//     audio.volume = volume
-//   }
-//   console.log(volume)
-// }
+function setColorfulTheme(lightOrDark: boolean) {
+  if(lightOrDark == true) {
+    theme.global.name.value = 'darkColorful'
+  } else {
+    theme.global.name.value = 'colorful'
+  }}
 
 let dialog = ref(false)
+let lightDarkToggle = ref(true)
 </script>

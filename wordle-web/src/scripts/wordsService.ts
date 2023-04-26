@@ -9,16 +9,17 @@ export abstract class WordsService {
 
   static validWords(currentWord: string): Array<string> {
     //Todo
-
+    
     const validWordList = new Array<string>()
-
-    for (const word of this.#words) {
-      if (word.startsWith(currentWord) && validWordList.length < 100) {
-        validWordList.push(word)
+    if (currentWord.length > 0) {
+      for (const word of this.#words) {
+        if (word.startsWith(currentWord) && currentWord.length > 0) {
+          validWordList.push(word)
+        }
       }
     }
 
-    validWordList.sort()
+    // validWordList.sort()
     return validWordList
   }
 
