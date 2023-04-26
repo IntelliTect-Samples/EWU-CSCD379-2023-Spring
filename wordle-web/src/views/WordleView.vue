@@ -18,7 +18,7 @@ import { WordsService } from '../scripts/wordsService'
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
-let validWords: Array<string> = ['these', 'are', 'valid', 'words']
+let validWords: string[] = ['these', 'are', 'valid', 'words']
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)

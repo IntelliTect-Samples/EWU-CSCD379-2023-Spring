@@ -7,12 +7,9 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(currGuess: string): Array<string> {
-    const guessFilter = new RegExp(currGuess)
-    const wordsList: Array<string> = ['']
-
-    for (const word in this.#words) if (guessFilter.test(word)) wordsList.push(word)
-
+  static validWords(currGuess: string): string[] {
+    let wordsList: string[] = []
+    for (const word of this.#words) if (word.includes(currGuess)) wordsList.push(word)
     return wordsList
   }
 
