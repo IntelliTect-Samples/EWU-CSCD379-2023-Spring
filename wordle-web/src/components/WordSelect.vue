@@ -1,6 +1,6 @@
 <template>
   <div class="WordSelect">
-    <v-select :items = validWords></v-select>
+    <v-select :items="validWords"></v-select>
   </div>
 </template>
 

@@ -51,6 +51,18 @@
             <v-list-item>
               <v-btn icon="mdi-halloween" @click="setPumpkinTheme" />
             </v-list-item>
+            <v-list-item>
+              <v-divider />
+            </v-list-item>
+            <v-list-item>
+              <v-card class="bg-correct on-correct">correct</v-card>
+            </v-list-item>
+            <v-list-item>
+              <v-card class="bg-misplaced on-misplaced">misplaced</v-card>
+            </v-list-item>
+            <v-list-item>
+              <v-card class="bg-wrong on-wrong">wrong</v-card>
+            </v-list-item>
           </v-list-item-group>
         </v-navigation-drawer>
       </v-layout>

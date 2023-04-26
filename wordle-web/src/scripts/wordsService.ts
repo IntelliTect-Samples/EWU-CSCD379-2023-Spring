@@ -8,7 +8,7 @@ export abstract class WordsService {
   }
 
   static validWords(currGuess: string): string[] {
-    let wordsList: string[] = []
+    const wordsList: string[] = []
     for (const word of this.#words) if (word.includes(currGuess)) wordsList.push(word)
     return wordsList
   }
