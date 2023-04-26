@@ -17,7 +17,8 @@
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>
 
-  <v-navigation-drawer title="Settings" v-model="settings" location="left" app temporary>
+  <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
+    <v-card>
     <v-list density="compact">
       <v-list-item title="Themes" class="py-6"></v-list-item>
       <v-divider class="py-3"></v-divider>
@@ -63,7 +64,8 @@
         </v-card>
       </v-list-item>
     </v-list>
-  </v-navigation-drawer>
+  </v-card>
+  </v-dialog>
 
   <v-navigation-drawer v-model="menu" location="right" app temporary>
     <v-list density="compact">
