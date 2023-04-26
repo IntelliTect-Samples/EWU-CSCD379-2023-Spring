@@ -1,9 +1,11 @@
 <template>
   <v-app class="justify-center">
     <AppBar></AppBar>
-    <main class="pt-16">
-      <v-spacer></v-spacer>
+    <br />
+    <br />
+    <br />
 
+    <main>
       <RouterView />
     </main>
   </v-app>

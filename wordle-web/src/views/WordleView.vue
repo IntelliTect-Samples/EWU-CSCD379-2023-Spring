@@ -1,5 +1,5 @@
 <template>
-  <main class="align-center">
+  <div class="align-center">
     <br />
     <h1>The Good Word</h1>
     <br />
@@ -48,7 +48,7 @@
         </v-col>
       </v-row>
     </div>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">
