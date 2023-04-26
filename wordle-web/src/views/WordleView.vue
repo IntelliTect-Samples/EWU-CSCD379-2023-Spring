@@ -5,18 +5,30 @@
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <v-card>
+  
+  <v-card width="25%">
     Possible Words: {{ WordsService.validWords(guess).length }}
-    <v-select
-      no-data-text="Please enter at least one letter"
-      label="select"
-      :items="WordsService.validWords(guess)"
-      v-model="selected"
-      @update:model-value="selectWord(selected)"
-      onchange="selectWord(this.value)"
-    >
-    </v-select>
+    <v-btn @click="dialog = !dialog">Select</v-btn>
+    <v-dialog   
+      v-model="dialog"
+      activator="#select"
+      transition="dialog-bottom-transition"
+      width="auto"  
+    > 
+      <v-card width="270px">
+      <v-select
+        no-data-text="Please enter at least one letter"
+        label="Available Words"
+        :items="WordsService.validWords(guess)"
+        v-model="selected"
+        @update:model-value="selectWord(selected)"
+        onchange="selectWord(this.value)"
+        >
+        </v-select>
+      </v-card>
+    </v-dialog>
   </v-card>
+  
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -33,7 +45,7 @@ import type { Letter } from '@/scripts/letter'
 const guess = ref('')
 const selected = ref('')
 const game = reactive(new WordleGame())
-const selectElement = document.querySelector('select')
+const dialog = ref(false)
 console.log(game.secretWord)
 
 onMounted(() => {
@@ -50,6 +62,7 @@ function selectWord(selected: string) {
     game.guess.push(letter)
     guess.value += letter
   }
+  dialog.value = false
 }
 
 function checkGuess() {

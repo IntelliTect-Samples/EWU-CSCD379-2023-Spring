@@ -12,6 +12,44 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+const pastel = {
+  dark: true,
+  colors: {
+    correct: '#D2FFF3',
+    misplaced: '#FFF3D2',
+    wrong: '#F3D2FF',
+  }
+}
+
+const pastelAndLight = {
+  dark: false,
+  colors: {
+    correct: '#D2FFF3',
+    misplaced: '#FFF3D2',
+    wrong: '#F3D2FF',
+    background: '#FFFFFF'
+  }
+}
+
+const neon = {
+  dark: true,
+  colors: {
+    correct: '#00FFFF',
+    misplaced: '#FFFF00',
+    wrong: '#FF00FF',
+  }
+}
+
+const neonAndLight = {
+  dark: false,
+  colors: {
+    correct: '#00FFFF',
+    misplaced: '#FFFF00',
+    wrong: '#FF00FF',
+  }
+}
+
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -24,6 +62,10 @@ const vuetify = createVuetify({
   theme: {
     defaultTheme: 'dark',
     themes: {
+      pastel,
+      pastelAndLight,
+      neon,
+      neonAndLight,
       dark: {
         colors: {
           correct: '#4CAF50',
@@ -31,25 +73,11 @@ const vuetify = createVuetify({
           wrong: '#F44336'
         }
       },
-      inverse: {
+      light: {
         colors: {
-          correct: '#F44336',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
-        }
-      },
-      neon: {
-        colors: {
-          correct: '#00FFFF',
-          misplaced: '#FFFF00',
-          wrong: '#FF00FF'
-        }
-      },
-      pastel: {
-        colors: {
-          correct: '#D2FFF3',
-          misplaced: '#FFF3D2',
-          wrong: '#F3D2FF'
+          wrong: '#F44336'
         }
       }
     }
