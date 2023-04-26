@@ -3,25 +3,23 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <div></div>
-
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <div></div>
+  <br />
 
   <v-btn @click="showBigDialog = !showBigDialog"
     >Possible Guesses (with known letters): {{ game.possibleWords.length }}</v-btn
   >
 
-  <div></div>
+  <br />
 
   <v-btn @click="showDialog = !showDialog"
     >Possible Guesses (with current letters): {{ game.possibleGuess.length }}</v-btn
   >
 
   <template>
-    <v-dialog v-model="showBigDialog">
-      <v-card>
+    <v-dialog v-model="showBigDialog" width="500px">
+      <v-card class="align-center" min-width="100%">
         <v-hover>
           <div v-if="game.possibleWords.length < 300">
             <div v-for="word in game.possibleWords" :key="word">
@@ -38,7 +36,7 @@
   </template>
 
   <template>
-    <v-dialog v-model="showDialog">
+    <v-dialog v-model="showDialog" width="500px">
       <v-card>
         <v-hover>
           <div v-if="game.possibleGuess.length < 300">

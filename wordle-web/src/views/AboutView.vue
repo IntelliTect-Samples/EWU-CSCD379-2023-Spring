@@ -1,6 +1,6 @@
 <template>
-  <v-sheet color="blue" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" max-height="275" class="ma-5 pa-5" elevation="5" rounded="xl">
+  <v-sheet class="pt-10 my-5">
+    <v-card color="grey-darken-3" max-height="275" class="ma-5 pa-5" elevation="5" rounded="xl">
       <v-card-title>About</v-card-title>
       <body>
         This has been an interesting class so far, but I am not looking forward to the c# section as

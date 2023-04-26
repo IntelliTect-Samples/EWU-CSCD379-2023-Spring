@@ -1,10 +1,7 @@
 <template>
   <v-app>
-    <nav>
-      <v-card>
-        <AppBar />
-      </v-card>
-    </nav>
+    <AppBar />
+    <p><RouterView /></p>
   </v-app>
 </template>
 
