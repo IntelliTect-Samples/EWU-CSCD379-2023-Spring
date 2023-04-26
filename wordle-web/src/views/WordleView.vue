@@ -59,7 +59,7 @@ function checkGuess() {
   guess.value = ''
 }
 function selectWord(word: string) {
-  guess.value = word
+  game.guess.value = word
   dialog.value = false
 }
 
