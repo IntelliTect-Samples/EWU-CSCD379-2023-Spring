@@ -22,6 +22,7 @@
 
   <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
     <v-card rounded="lg">
+      <!-- TODO: Center the title of the v-card-title tag. -->
       <v-card-title id="card-title" elevation="6">
         <v-icon>mdi-cog</v-icon> Settings
         <v-btn icon @click.stop="settings = !settings" class="float-right">
@@ -72,26 +73,31 @@
   </v-dialog>
 
   <v-navigation-drawer v-model="menu" location="right" app temporary>
-    <v-list density="compact">
-      <v-list-item title="Menu" class="py-6"></v-list-item>
-      <v-divider class="py-3"></v-divider>
-      <v-list-item>
-        <v-btn to="/">Home</v-btn>
-      </v-list-item>
+    <v-spacer />
+    <v-card rounded="lg" class="mt-6" elevation="0">
+      <v-card-title id="card-title" elevation="6"> <v-icon>mdi-menu</v-icon> Menu </v-card-title>
 
-      <v-list-item>
-        <v-btn to="/about">About</v-btn>
-      </v-list-item>
+      <v-list density="compact">
+        <br />
 
-      <v-list-item>
-        <v-btn to="/wordle">Play Game</v-btn>
-      </v-list-item>
-    </v-list>
+        <v-list-item>
+          <v-btn to="/">Home</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/about">About</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/wordle">Play Game</v-btn>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import router from '@/router'
 import nightInKyoto from '@/assets/music/nightInKyoto.mp3'
@@ -102,11 +108,13 @@ let settings = ref(false)
 const isPaused = ref(true)
 const audio = ref(new Audio(nightInKyoto))
 
-// watch(menu, (val) => {
-//   if (val) {
-//     settings.value = false
-//   }
-// })
+// TODO: Possibly remove, as it's not applicable since the it's not possible to press the menu
+//       button and the settings button at the same time, due to using 'v-dialog'.
+watch(menu, (val) => {
+  if (val) {
+    settings.value = false
+  }
+})
 
 watch(settings, (val) => {
   if (val) {
