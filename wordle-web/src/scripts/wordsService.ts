@@ -34,10 +34,7 @@ export abstract class WordsService {
         wordList.push(word)
       }
     }
-    /*console.log("PressCheck")
-    console.log(currentList)
-    console.log(curGuess.length)
-    console.log(curGuess)*/
+
     console.log(wordList)
     return wordList
   }
