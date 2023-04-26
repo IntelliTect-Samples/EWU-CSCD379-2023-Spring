@@ -39,8 +39,6 @@
           </v-card>
         </v-list-item>
 
-        <!--        <v-divider></v-divider>-->
-
         <v-list-item>
           <v-card color="#424242">
             <v-btn color="black" @click="toggleDarkMode">Dark Mode</v-btn>
@@ -50,8 +48,6 @@
           </v-card>
         </v-list-item>
 
-        <!--        <v-divider></v-divider>-->
-
         <v-list-item>
           <v-card color="#424242">
             <v-btn color="#6D4C41" @click="toggleCowboyMode">Cowboy</v-btn>
@@ -60,8 +56,6 @@
             <v-card-text> Wrong: Blue-Grey </v-card-text>
           </v-card>
         </v-list-item>
-
-        <!--        <v-divider></v-divider>-->
 
         <v-list-item>
           <v-card color="#424242">
