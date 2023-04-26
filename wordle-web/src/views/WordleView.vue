@@ -39,7 +39,7 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  if(game.guess.text.length < 5) {
+  if (game.guess.text.length < 5) {
     audio.play()
     game.guess.push(letter.char)
     game.validWordList = WordsService.validWords(game.guess.text)
@@ -54,10 +54,10 @@ function keyPress(event: KeyboardEvent) {
     game.guess.pop()
   }
 
-  if(game.guess.text.length < 5 && event.key.length === 1 && event.key !== ' ') {
+  if (game.guess.text.length < 5 && event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
     game.validWordList = WordsService.validWords(game.guess.text)
-  } 
+  }
 }
 </script>

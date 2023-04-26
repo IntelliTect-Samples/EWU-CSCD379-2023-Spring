@@ -42,7 +42,7 @@ import { ref } from 'vue'
 const theme = useTheme()
 
 function setLightDark(lightOrDark: boolean) {
-  if(lightOrDark == true) {
+  if (lightOrDark == true) {
     theme.global.name.value = 'inverse'
   } else {
     theme.global.name.value = 'dark'
@@ -50,7 +50,7 @@ function setLightDark(lightOrDark: boolean) {
 }
 
 function setCalmTheme(lightOrDark: boolean) {
-  if(lightOrDark == true) {
+  if (lightOrDark == true) {
     theme.global.name.value = 'darkCalm'
   } else {
     theme.global.name.value = 'calm'
@@ -58,11 +58,12 @@ function setCalmTheme(lightOrDark: boolean) {
 }
 
 function setColorfulTheme(lightOrDark: boolean) {
-  if(lightOrDark == true) {
+  if (lightOrDark == true) {
     theme.global.name.value = 'darkColorful'
   } else {
     theme.global.name.value = 'colorful'
-  }}
+  }
+}
 
 let dialog = ref(false)
 let lightDarkToggle = ref(true)

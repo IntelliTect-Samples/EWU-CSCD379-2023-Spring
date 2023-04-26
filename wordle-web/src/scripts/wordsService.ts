@@ -9,7 +9,7 @@ export abstract class WordsService {
 
   static validWords(currentWord: string): Array<string> {
     //Todo
-    
+
     const validWordList = new Array<string>()
     if (currentWord.length > 0) {
       for (const word of this.#words) {
