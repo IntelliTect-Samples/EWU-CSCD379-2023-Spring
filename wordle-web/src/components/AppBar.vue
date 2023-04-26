@@ -19,52 +19,52 @@
 
   <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
     <v-card>
-    <v-list density="compact">
-      <v-list-item title="Themes" class="py-6"></v-list-item>
-      <v-divider class="py-3"></v-divider>
-      <v-list-item>
-        <v-card color="#424242">
-          <v-btn color="white" @click="toggleLightMode">Light Mode</v-btn>
-          <v-card-text> Correct: Green </v-card-text>
-          <v-card-text> Misplaced: Orange </v-card-text>
-          <v-card-text> Wrong: Red </v-card-text>
-        </v-card>
-      </v-list-item>
+      <v-list density="compact">
+        <v-list-item title="Themes" class="py-6"></v-list-item>
+        <v-divider class="py-3"></v-divider>
+        <v-list-item>
+          <v-card color="#424242">
+            <v-btn color="white" @click="toggleLightMode">Light Mode</v-btn>
+            <v-card-text> Correct: Green </v-card-text>
+            <v-card-text> Misplaced: Orange </v-card-text>
+            <v-card-text> Wrong: Red </v-card-text>
+          </v-card>
+        </v-list-item>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-list-item>
-        <v-card color="#424242">
-          <v-btn color="black" @click="toggleDarkMode">Dark Mode</v-btn>
-          <v-card-text> Correct: Green </v-card-text>
-          <v-card-text> Misplaced: Orange </v-card-text>
-          <v-card-text> Wrong: Red </v-card-text>
-        </v-card>
-      </v-list-item>
+        <v-list-item>
+          <v-card color="#424242">
+            <v-btn color="black" @click="toggleDarkMode">Dark Mode</v-btn>
+            <v-card-text> Correct: Green </v-card-text>
+            <v-card-text> Misplaced: Orange </v-card-text>
+            <v-card-text> Wrong: Red </v-card-text>
+          </v-card>
+        </v-list-item>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-list-item>
-        <v-card color="#424242">
-          <v-btn color="#6D4C41" @click="toggleCowboyMode">Cowboy</v-btn>
-          <v-card-text> Correct: Blue </v-card-text>
-          <v-card-text> Misplaced: Light-Orange </v-card-text>
-          <v-card-text> Wrong: Blue-Grey </v-card-text>
-        </v-card>
-      </v-list-item>
+        <v-list-item>
+          <v-card color="#424242">
+            <v-btn color="#6D4C41" @click="toggleCowboyMode">Cowboy</v-btn>
+            <v-card-text> Correct: Blue </v-card-text>
+            <v-card-text> Misplaced: Light-Orange </v-card-text>
+            <v-card-text> Wrong: Blue-Grey </v-card-text>
+          </v-card>
+        </v-list-item>
 
-      <v-divider></v-divider>
+        <v-divider></v-divider>
 
-      <v-list-item>
-        <v-card color="#424242">
-          <v-btn color="#01579B" @click="toggleAquaMode">Aqua</v-btn>
-          <v-card-text> Correct: Teal </v-card-text>
-          <v-card-text> Misplaced: Yellow </v-card-text>
-          <v-card-text> Wrong: Pink </v-card-text>
-        </v-card>
-      </v-list-item>
-    </v-list>
-  </v-card>
+        <v-list-item>
+          <v-card color="#424242">
+            <v-btn color="#01579B" @click="toggleAquaMode">Aqua</v-btn>
+            <v-card-text> Correct: Teal </v-card-text>
+            <v-card-text> Misplaced: Yellow </v-card-text>
+            <v-card-text> Wrong: Pink </v-card-text>
+          </v-card>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </v-dialog>
 
   <v-navigation-drawer v-model="menu" location="right" app temporary>
