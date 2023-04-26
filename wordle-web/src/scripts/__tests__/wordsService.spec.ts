@@ -14,6 +14,19 @@ function expectWordsDoContainLetter(words: string[], letter: string) {
   })
 }
 
+describe('misplaced', () => {
+  const game = new WordleGame('glubs')
+  game.guess.set('quick')
+  game.submitGuess()
+  const validWords = WordsService.validWords(game)
+
+  it('Has no words with u at index 1', () => {
+    validWords.forEach((word) => {
+      expect(word[1]).not.toBe('u')
+    })
+  })
+})
+
 describe('Valid Words Single Guess', () => {
   const game = new WordleGame('tribe')
 

@@ -14,17 +14,27 @@ export abstract class WordsService {
     game: WordleGame,
     previousValid: string[] | undefined = undefined
   ): Array<string> {
+    // all letters that were correct or misplaced
     const validLetters = game.guesses.flatMap((guess) =>
       guess.letters
         .filter((l) => l.status == LetterStatus.Correct || l.status == LetterStatus.Misplaced)
         .map((l) => l.char)
     )
+    // all wrong letters
     const wrongLetters = game.guesses.flatMap((guess) =>
       guess.letters.filter((l) => l.status == LetterStatus.Wrong).map((l) => l.char)
     )
+    // all wrong letters that arent misplaced
     const absoluteWrongs = wrongLetters.filter((l) => !validLetters.includes(l))
 
-    const validWords = new Set<string>()
+    // map of misplaced letters and their indices
+    const misplaced = game.guesses
+      .flatMap((guess) =>
+        guess.letters.map((l, i) => {
+          return { letter: l, index: i }
+        })
+      )
+      .filter((l) => l.letter.status == LetterStatus.Misplaced)
 
     // we concat all the correct letters from the guesses into it's own
     // array here incase the user happens to make poor decisions.
@@ -38,35 +48,31 @@ export abstract class WordsService {
     })
 
     const words = previousValid || this.#words
+    const validWords = new Array<string>()
 
     words.forEach((word) => {
-      game.guesses.forEach((guess) => {
-        // make sure it doesn't contain any absolutely wrong letters
-        let valid = !word.split('').some((l) => absoluteWrongs.includes(l))
-        // if its valid here, we can start our other checks
-        if (valid) {
-          // it has to include all misplaced and correct letters
-          if (
-            !validLetters.every((vl) => word.includes(vl)) ||
-            // cant share misplaced letters at the same index
-            guess.letters.some(
-              (gl, i) => gl.status == LetterStatus.Misplaced && word[i] == gl.char
-            ) ||
-            // must share correct letters at the same index
-            !correctLetters.every((cl, i) => !cl || cl == word[i])
-          ) {
-            // skip if it doesn't contain any correctly or misplaced letters
-            valid = false
-          }
-        }
+      if (
+        // it includes absolutely wrong letters
+        word.split('').some((l) => absoluteWrongs.includes(l)) ||
+        // doesn't include all the correct/misplaced letter
+        !validLetters.every((vl) => word.includes(vl)) ||
+        // doesn't share a correct letter's index
+        !correctLetters.every((cl, i) => !cl || cl == word[i]) ||
+        // cant share misplaced letters at the same index
+        word
+          .split('')
+          .some((wl, i) =>
+            misplaced.filter((m) => m.index == i).some((m) => m.index == i && m.letter.char == wl)
+          )
+      ) {
+        // then it is not valid
+        return
+      }
 
-        if (valid) {
-          validWords.add(word)
-        }
-      })
+      validWords.push(word)
     })
 
-    return [...validWords]
+    return validWords
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
