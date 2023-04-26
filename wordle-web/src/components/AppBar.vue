@@ -6,11 +6,14 @@
       src="@/assets/books.png"
       width="50"
       height="50"
-      color="white"
       @click="router.push('/')"
     />
 
     <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
+
+    <v-btn @click="toggleMusic">
+      <v-icon size="large">{{ isPaused ? 'mdi-volume-high' : 'mdi-volume-mute' }}</v-icon>
+    </v-btn>
 
     <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
 
@@ -18,9 +21,17 @@
   </v-app-bar>
 
   <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
-    <v-card>
-      <v-list density="compact">
-        <v-list-item title="Themes" class="py-6"></v-list-item>
+    <v-card rounded="lg">
+      <!-- TODO: Center the title of the v-card-title tag. -->
+      <v-card-title id="card-title" elevation="6">
+        <v-icon>mdi-cog</v-icon> Settings
+        <v-btn icon @click.stop="settings = !settings" class="float-right">
+          <v-icon class="float-right">mdi-close</v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-list density="compact" class="pa-3">
+        <v-list-item-title>Theme</v-list-item-title>
         <v-divider class="py-3"></v-divider>
         <v-list-item>
           <v-card color="#424242">
@@ -31,8 +42,6 @@
           </v-card>
         </v-list-item>
 
-        <v-divider></v-divider>
-
         <v-list-item>
           <v-card color="#424242">
             <v-btn color="black" @click="toggleDarkMode">Dark Mode</v-btn>
@@ -42,8 +51,6 @@
           </v-card>
         </v-list-item>
 
-        <v-divider></v-divider>
-
         <v-list-item>
           <v-card color="#424242">
             <v-btn color="#6D4C41" @click="toggleCowboyMode">Cowboy</v-btn>
@@ -52,8 +59,6 @@
             <v-card-text> Wrong: Blue-Grey </v-card-text>
           </v-card>
         </v-list-item>
-
-        <v-divider></v-divider>
 
         <v-list-item>
           <v-card color="#424242">
@@ -68,33 +73,43 @@
   </v-dialog>
 
   <v-navigation-drawer v-model="menu" location="right" app temporary>
-    <v-list density="compact">
-      <v-list-item title="Menu" class="py-6"></v-list-item>
-      <v-divider class="py-3"></v-divider>
-      <v-list-item>
-        <v-btn to="/">Home</v-btn>
-      </v-list-item>
+    <v-spacer />
+    <v-card rounded="lg" class="mt-6" elevation="0">
+      <v-card-title id="card-title" elevation="6"> <v-icon>mdi-menu</v-icon> Menu </v-card-title>
 
-      <v-list-item>
-        <v-btn to="/about">About</v-btn>
-      </v-list-item>
+      <v-list density="compact">
+        <br />
 
-      <v-list-item>
-        <v-btn to="/wordle">Play Game</v-btn>
-      </v-list-item>
-    </v-list>
+        <v-list-item>
+          <v-btn to="/">Home</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/about">About</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/wordle">Play Game</v-btn>
+        </v-list-item>
+      </v-list>
+    </v-card>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import router from '@/router'
+import nightInKyoto from '@/assets/music/nightInKyoto.mp3'
 
 const theme = useTheme()
 let menu = ref(false)
 let settings = ref(false)
+const isPaused = ref(true)
+const audio = ref(new Audio(nightInKyoto))
 
+// TODO: Possibly remove, as it's not applicable since the it's not possible to press the menu
+//       button and the settings button at the same time, due to using 'v-dialog'.
 watch(menu, (val) => {
   if (val) {
     settings.value = false
@@ -106,6 +121,20 @@ watch(settings, (val) => {
     menu.value = false
   }
 })
+
+onMounted(() => {
+  audio.value.loop = true
+  audio.value.volume = 0.2
+})
+
+function toggleMusic() {
+  if (isPaused.value) {
+    audio.value.play()
+  } else {
+    audio.value.pause()
+  }
+  isPaused.value = !isPaused.value
+}
 
 function toggleDarkMode() {
   theme.global.name.value = 'dark'
@@ -131,7 +160,11 @@ function toggleAquaMode() {
   padding: 6px 24px;
   font-size: 26px;
   font-weight: bold;
-  border-bottom: 1px solid #656464; /* TODO: Maybe a different color? */
+  border-bottom: 1px solid #656464;
   min-height: 65px;
+}
+
+#card-title {
+  border-bottom: 1px solid;
 }
 </style>
