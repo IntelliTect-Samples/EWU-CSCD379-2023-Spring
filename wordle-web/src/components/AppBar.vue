@@ -11,7 +11,9 @@
 
     <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
 
-    <v-btn @click="toggleMusic" icon="mdi-volume-high" app></v-btn>
+    <v-btn @click="toggleMusic">
+      <v-icon size="large">{{ isPaused ? 'mdi-volume-high' : 'mdi-volume-mute' }}</v-icon>
+    </v-btn>
 
     <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
 
