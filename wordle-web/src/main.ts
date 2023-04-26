@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, computed } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { mdi } from 'vuetify/iconsets/mdi'
@@ -12,6 +12,8 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
+const themeInUse = localStorage.getItem('theme') || 'aqua'
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -22,7 +24,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'aqua',
+    defaultTheme: themeInUse,
     themes: {
       dark: {
         colors: {
