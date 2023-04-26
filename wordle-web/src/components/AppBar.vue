@@ -6,7 +6,6 @@
       src="@/assets/books.png"
       width="50"
       height="50"
-      color="white"
       @click="router.push('/')"
     />
 
@@ -18,9 +17,16 @@
   </v-app-bar>
 
   <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
-    <v-card>
-      <v-list density="compact">
-        <v-list-item title="Themes" class="py-6"></v-list-item>
+    <v-card rounded="lg">
+      <v-card-title id="card-title" elevation="6">
+        <v-icon>mdi-cog</v-icon> Settings
+        <v-btn icon @click.stop="settings = !settings" class="float-right">
+          <v-icon class="float-right">mdi-close</v-icon>
+        </v-btn>
+      </v-card-title>
+
+      <v-list density="compact" class="pa-3">
+        <v-list-item-title>Theme</v-list-item-title>
         <v-divider class="py-3"></v-divider>
         <v-list-item>
           <v-card color="#424242">
@@ -31,7 +37,7 @@
           </v-card>
         </v-list-item>
 
-        <v-divider></v-divider>
+        <!--        <v-divider></v-divider>-->
 
         <v-list-item>
           <v-card color="#424242">
@@ -42,7 +48,7 @@
           </v-card>
         </v-list-item>
 
-        <v-divider></v-divider>
+        <!--        <v-divider></v-divider>-->
 
         <v-list-item>
           <v-card color="#424242">
@@ -53,7 +59,7 @@
           </v-card>
         </v-list-item>
 
-        <v-divider></v-divider>
+        <!--        <v-divider></v-divider>-->
 
         <v-list-item>
           <v-card color="#424242">
@@ -95,11 +101,11 @@ const theme = useTheme()
 let menu = ref(false)
 let settings = ref(false)
 
-watch(menu, (val) => {
-  if (val) {
-    settings.value = false
-  }
-})
+// watch(menu, (val) => {
+//   if (val) {
+//     settings.value = false
+//   }
+// })
 
 watch(settings, (val) => {
   if (val) {
@@ -131,7 +137,11 @@ function toggleAquaMode() {
   padding: 6px 24px;
   font-size: 26px;
   font-weight: bold;
-  border-bottom: 1px solid #656464; /* TODO: Maybe a different color? */
+  border-bottom: 1px solid #656464;
   min-height: 65px;
+}
+
+#card-title {
+  border-bottom: 1px solid;
 }
 </style>
