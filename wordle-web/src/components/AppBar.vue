@@ -11,6 +11,8 @@
 
     <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
 
+    <v-btn @click="toggleMusic" icon="mdi-volume-high" app></v-btn>
+
     <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
 
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
@@ -93,13 +95,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { reactive, ref, watch, onMounted } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import router from '@/router'
+import nightInKyoto from '@/assets/music/nightInKyoto.mp3'
 
 const theme = useTheme()
 let menu = ref(false)
 let settings = ref(false)
+const isPaused = ref(true)
+const audio = ref(new Audio(nightInKyoto))
 
 // watch(menu, (val) => {
 //   if (val) {
@@ -112,6 +117,20 @@ watch(settings, (val) => {
     menu.value = false
   }
 })
+
+onMounted(() => {
+  audio.value.loop = true
+  audio.value.volume = 0.2
+})
+
+function toggleMusic() {
+  if (isPaused.value) {
+    audio.value.play()
+  } else {
+    audio.value.pause()
+  }
+  isPaused.value = !isPaused.value
+}
 
 function toggleDarkMode() {
   theme.global.name.value = 'dark'
