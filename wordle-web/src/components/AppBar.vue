@@ -109,15 +109,19 @@ watch(settings, (val) => {
 
 function toggleDarkMode() {
   theme.global.name.value = 'dark'
+  localStorage.setItem('theme', 'dark')
 }
 function toggleLightMode() {
   theme.global.name.value = 'light'
+  localStorage.setItem('theme', 'light')
 }
 function toggleCowboyMode() {
   theme.global.name.value = 'cowboy'
+  localStorage.setItem('theme', 'cowboy')
 }
 function toggleAquaMode() {
   theme.global.name.value = 'aqua'
+  localStorage.setItem('theme', 'aqua')
 }
 </script>
 
