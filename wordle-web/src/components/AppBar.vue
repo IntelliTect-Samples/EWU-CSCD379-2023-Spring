@@ -18,13 +18,9 @@
   </v-app-bar>
 
   <v-navigation-drawer title="Settings" v-model="settings" location="left" app temporary>
-    <v-list>
-      <v-list-item title="Themes"></v-list-item>
-    </v-list>
-
-    <v-divider></v-divider>
-
     <v-list density="compact">
+      <v-list-item title="Themes" class="py-6"></v-list-item>
+      <v-divider class="py-3"></v-divider>
       <v-list-item>
         <v-card color="#424242">
           <v-btn color="white" @click="toggleLightMode">Light Mode</v-btn>
@@ -70,13 +66,9 @@
   </v-navigation-drawer>
 
   <v-navigation-drawer v-model="menu" location="right" app temporary>
-    <v-list>
-      <v-list-item title="Menu"></v-list-item>
-    </v-list>
-
-    <v-divider></v-divider>
-
     <v-list density="compact">
+      <v-list-item title="Menu" class="py-6"></v-list-item>
+      <v-divider class="py-3"></v-divider>
       <v-list-item>
         <v-btn to="/">Home</v-btn>
       </v-list-item>

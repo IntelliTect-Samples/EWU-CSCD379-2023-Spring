@@ -2,8 +2,8 @@
   <v-sheet
     location="center"
     color="#9E9E9E"
-    height="920px"
-    width="800px"
+    height="auto"
+    max-width="800px"
     class="pt-10 my-5"
     rounded="lg"
   >
