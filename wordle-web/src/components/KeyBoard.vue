@@ -1,7 +1,39 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+    <v-col cols="auto" v-for="(letter, j) in key" :key="j">
+      <LetterButton
+        v-if="letter.char.length === 1"
+        :letter="letter"
+        @click="letterClick(letter)"
+        class="rounded"
+        height="58px"
+        min-width="50px"
+        :elevation="10"
+        liner-gradient="to bottom, #43A047 10%,#E65100 100%"
+        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
+      />
+      <LetterButton
+        v-if="letter.char === 'ENTER'"
+        :letter="letter"
+        @click="EnterC()"
+        class="rounded"
+        height="58px"
+        min-width="70px"
+        :elevation="10"
+        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
+
+      />
+      <LetterButton
+        v-if="letter.char === '<='"
+        :letter="letter"
+        @click="BackSpaceC()"
+        class="rounded"
+        height="58px"
+        max-width="70px"
+        :elevation="10"
+        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
+
+      />
     </v-col>
   </v-row>
 </template>
@@ -9,40 +41,52 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
+import type { WordleGame } from '@/scripts/wordleGame'
 import { computed } from 'vue'
 
 const props = defineProps<{
   guessedLetters: Letter[]
+  game: WordleGame
 }>()
 
 const keyboardLetters = computed(() => {
-  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
 
-  const keyboardKeys = [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+  const keyboardChars = [
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<=']
   ]
 
-  for (let keyboardKey of keyboardKeys) {
+  for (let keyboardRowChars of keyboardChars) {
     let keyboardRow: Letter[] = []
-
-    for (let key of keyboardKey) {
-      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
+    for (let key of keyboardRowChars) {
+      keyboardRow.push(
+        props.guessedLetters.find((letter) => letter.char === key) ?? new Letter(key)
+      )
     }
-
     keyboardLetters.push(keyboardRow)
   }
-
   return keyboardLetters
 })
-
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
+  (event: 'enterClick'): void
 }>()
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
+
+function EnterC() {
+  props.game.submitGuess()
+}
+
+function BackSpaceC() {
+  props.game.currentGuess.pop()
+  const audio = new Audio()
+  audio.src = 'src/assets/mixkit-cool-interface-click-tone-2568.wav'
+  audio.play()
+}
 </script>
+

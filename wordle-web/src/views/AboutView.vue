@@ -14,6 +14,14 @@
 
   <v-text-field> USE HAMBURGER MENU TO GO BACK </v-text-field>
 
+  <v-btn color="purple" variant="outlined" class="nav-btn" @click="$router.push('/')">
+    Back to Home
+  </v-btn>
+
+  <v-btn color="purple" variant="outlined" class="nav-btn" @click="$router.push('/wordle')">
+    Back to Game
+  </v-btn>
+
   <!-- <v-row no-gutters>
     <v-col v-for="i in 10" :key="i" cols="12" sm="6" md="4" lg="3">
       <v-card class="ma-1">
@@ -32,3 +40,19 @@
   }
 }
 </style> -->
+
+<!-- ----------------------------the script has broken code but needed for inclass stuff --------KEEP-------------------- -->
+
+<!-- <script setup lang="tx">
+import Axios from "axios"
+
+Axios.get("https://localhost:7255/WeatherForecast")
+  .then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+</script> -->
+
+<!-- ----------------------------the script has broken code but needed for inclass stuff --------KEEP-------------------- -->
