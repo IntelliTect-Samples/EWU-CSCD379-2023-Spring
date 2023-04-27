@@ -9,4 +9,30 @@ export class game {
         const s = Math.floor(Math.random() * (wordList.length - 1))
         this.secret = wordList[s]
     }
+
+    validWords(g:string){
+        let tempList:string[] = []
+        let holdList:string[] = []
+        wordList.forEach(word => {
+            if(word.charAt(0) == g.charAt(0)){
+              tempList.push(word)
+            }
+          })
+          for(let j = 1; j < g.length; j++){
+            if(g.charAt(j) != '?'){
+                tempList.forEach(word => {
+                    if(word.charAt(j) == g.charAt(j)){
+                        holdList.push(word)
+                    }
+                })
+                tempList = holdList
+                holdList = []
+            }
+          }
+          return tempList
+    }
+
+    contains(g:string){
+        return wordList.includes(g)
+    }
 }
