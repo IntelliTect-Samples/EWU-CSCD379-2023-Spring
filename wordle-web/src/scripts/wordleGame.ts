@@ -1,4 +1,4 @@
-import { Letter } from '@/scripts/letter'
+import type { Letter } from '@/scripts/letter'
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 
