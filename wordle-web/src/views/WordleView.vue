@@ -7,6 +7,9 @@
     @letterClick="addChar"
     :guessedLetters="game.guessedLetters"
   />
+
+  <LoseCard :ifLoss="game.status === WordleGameStatus.Lost" @restartGame="restartGame"> </LoseCard>
+  <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
 
   <h3>Current secret word: {{ game.secretWord }}</h3>
@@ -21,10 +24,14 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { WordsService } from '@/scripts/wordsService'
 import WordList from '@/components/WordList.vue'
+import { WordleGameStatus } from '@/scripts/wordleGame'
+import WinCard from '@/components/WinCard.vue'
+import LoseCard from '@/components/LoseCard.vue'
 
 var audio = new Audio(tone.default)
 audio.volume = 0.4
 const guess = ref('')
+const win = ref(false)
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
 
@@ -39,6 +46,17 @@ function checkGuess() {
   if (game.guess.text.length === 5) {
     game.submitGuess()
     guess.value = ''
+  }
+
+  if (game.status === WordleGameStatus.Won) {
+    win.value = true
+  }
+}
+
+function restartGame() {
+  if (game.status !== WordleGameStatus.Active) {
+    game.restartGame()
+    win.value = false
   }
 }
 

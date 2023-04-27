@@ -42,7 +42,9 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    if (this.guess.check(this.secretWord)) {
+      this.status = WordleGameStatus.Won
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -56,6 +58,7 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      this.status = WordleGameStatus.Lost
     }
   }
 

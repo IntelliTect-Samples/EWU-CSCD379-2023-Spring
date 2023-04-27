@@ -16,6 +16,7 @@
         v-if="letter.char !== ' ' && letter.char !== '_'"
         size="small"
         height="60"
+        width="40"
         min-width="30"
         :letter="letter"
         @click="letterClick(letter)"
@@ -27,7 +28,6 @@
         variant="outlined"
         :rounded="false"
         min-width="30"
-        padding-top="10"
         @click="checkGuess"
       >
         Enter
