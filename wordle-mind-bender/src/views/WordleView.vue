@@ -6,7 +6,7 @@
 
     <v-row dense class="justify-center" cols="auto">
       <v-col cols="auto">
-        <AvailableWords></AvailableWords>
+        <AvailableWords @inputGuess="inputGuess"></AvailableWords>
       </v-col>
       <v-col cols="auto">
         <v-btn
@@ -47,7 +47,7 @@ import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
-import type { Letter } from '@/scripts/letter'
+import { Letter } from '@/scripts/letter'
 import AvailableWords from '../components/AvailableWords.vue'
 
 const guess = ref('')
@@ -80,6 +80,12 @@ function addChar(letter: Letter) {
   }
 }
 
+function inputGuess(input: string) {
+  for (let i = 0; i < input.length; i++) {
+    addChar(new Letter(input[i]))
+  }
+}
+
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
   if (event.key === 'Enter') {
@@ -98,5 +104,3 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 </script>
-
-<style></style>

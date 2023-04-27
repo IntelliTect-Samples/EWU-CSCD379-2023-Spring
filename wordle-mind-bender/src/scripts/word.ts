@@ -86,6 +86,5 @@ export class Word {
     console.log(secretChars)
     console.log(isCorrect)
     return isCorrect
-    // check if the letters are in the right place
   }
 }
