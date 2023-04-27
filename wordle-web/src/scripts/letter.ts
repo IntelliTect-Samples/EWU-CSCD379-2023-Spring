@@ -10,6 +10,7 @@ export enum LetterStatus {
 export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
+  static char: string
 
   constructor(char: string, status?: LetterStatus) {
     this.char = char
@@ -25,7 +26,7 @@ export class Letter {
       case LetterStatus.Wrong:
         return 'wrong'
       default:
-        return 'grey'
+        return 'gradient-btn'
     }
   }
 }

@@ -8,7 +8,7 @@
 
 <style>
 .gradient-btn {
-  background: linear-gradient(to right, #0000005d, #09476b33);
+  background: linear-gradient(to right, #0000005d, #09476b33) !important;
   color: white;
 }
 </style>
