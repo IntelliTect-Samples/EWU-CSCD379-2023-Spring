@@ -9,9 +9,9 @@ export abstract class WordsService {
 
   static validWords(guesses: string[], secretWord: string): string[] {
     const wordsList: string[] = []
-    let expression: string[] = ['[^]', '[^]', '[^]', '[^]', '[^]']
+    const expression: string[] = ['[^]', '[^]', '[^]', '[^]', '[^]']
 
-    for (let guess of guesses) {
+    for (const guess of guesses) {
       for (let i = 0; i < secretWord.length; i++) {
         if (guess[i] == secretWord[i] || expression[i] == secretWord[i])
           // Correctly Placed
@@ -31,7 +31,7 @@ export abstract class WordsService {
       console.log(expression.join(''))
     }
 
-    let regex = new RegExp(expression.join(''))
+    const regex = new RegExp(expression.join(''))
 
     for (const word of this.#words) {
       if (regex.test(word)) wordsList.push(word)

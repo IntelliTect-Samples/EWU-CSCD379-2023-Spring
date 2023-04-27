@@ -3,7 +3,7 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <WordSelect :validWords="validWords" v-model="selection" />
+  <WordSelect :validWords="validWords" v-model="selection" @selectWord="addWord" />
 
   <p>{{ selection }}</p>
 </template>
@@ -36,6 +36,16 @@ function checkGuess() {
   guesses.push(guess.value)
   validWords.value = WordsService.validWords(guesses, game.secretWord)
   guess.value = ''
+}
+
+function addWord(word: string) {
+  for (let i = 0; i < 5; i++) {
+    removeChar()
+  }
+  for (let i = 0; i < word.length; i++) {
+    guess.value += word[i]
+    game.guess.push(word[i])
+  }
 }
 
 function addChar(letter: Letter) {
