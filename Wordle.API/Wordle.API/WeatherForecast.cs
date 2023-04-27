@@ -1,4 +1,4 @@
-namespace Wordle.API
+namespace Wordle.Api
 {
     public class WeatherForecast
     {

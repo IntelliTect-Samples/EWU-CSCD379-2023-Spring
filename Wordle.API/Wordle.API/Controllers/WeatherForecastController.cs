@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Wordle.API.Controllers
+namespace Wordle.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
