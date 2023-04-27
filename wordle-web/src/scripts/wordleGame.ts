@@ -3,15 +3,14 @@ import { WordsService } from './wordsService'
 import type { Letter } from './letter'
 
 export enum WordleGameStatus {
-  Active = 0,
-  Won = 1,
-  Lost = 2
+  Active,
+  Won,
+  Lost
 }
 
 export class WordleGame {
-  constructor(secretWord?: string, numberOfGuesses: number = 6) {
+  constructor(secretWord?: string | null) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
-    this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
   }
   guessedLetters: Letter[] = []
@@ -57,40 +56,7 @@ export class WordleGame {
       // The game is over
     }
   }
-
   getAvailableWords() {
-    const availableWords: string[] = []
-    const secretWordChars = this.secretWord.split('')
-    const wordList = WordsService.getWordsList()
-
-    for (const word of wordList) {
-      const chars = word.split('')
-      let isAvailable = true
-
-      for (let i = 0; i < chars.length; i++) {
-        const char = chars[i]
-        const index = secretWordChars.indexOf(char)
-
-        if (index === -1) {
-          isAvailable = false
-          break
-        } else {
-          secretWordChars.splice(index, 1)
-        }
-      }
-
-      if (isAvailable) {
-        availableWords.push(word)
-      }
-
-      if (secretWordChars.length === 0) {
-        break
-      } else {
-        secretWordChars.splice(0)
-        secretWordChars.push(...this.secretWord.split(''))
-      }
-    }
-
-    return availableWords
+    return WordsService.availWords(this.guesses);
   }
 }

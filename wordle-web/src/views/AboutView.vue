@@ -6,9 +6,7 @@
       engaging.
     </v-card-text>
     <v-card-actions>
-      <v-container>
         <v-btn variant="outlined" @click="Back">Go Back</v-btn>
-      </v-container>
     </v-card-actions>
   </v-card>
 </template>

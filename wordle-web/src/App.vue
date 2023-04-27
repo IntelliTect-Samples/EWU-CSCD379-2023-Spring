@@ -3,14 +3,14 @@
     <v-card class="mx-auto mb-12" max-width="448">
       <v-layout>
         <v-app-bar class="custom-app-bar" color="white" density="compact">
+          <v-app-bar-title to="/">
+            <v-btn :ripple="false" variant="plain" to="/">
+              <v-icon class ="mdi mdi-cellphone-settings"></v-icon>
+                Wordle
+              </v-btn>
+          </v-app-bar-title>
           <template v-slot:prepend>
-            <RouterLink to="/">
-              <Icon icon="tabler:go-game" color="#155" width="50" height="50" />
-            </RouterLink>
           </template>
-          <RouterLink to="/wordle">
-            <h1 class="titleClass">Wordle</h1>
-          </RouterLink>
           <template v-slot:append>
             <v-menu>
               <template v-slot:activator="{ props }">

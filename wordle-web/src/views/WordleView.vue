@@ -1,14 +1,11 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
+  &nbsp;
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
   <v-btn @click="showAvailableWords">Show Available Words</v-btn>
   <v-dialog v-model="dialog" max-width="600">
     <v-card>
@@ -20,8 +17,7 @@
           <v-list-item
             v-for="(word, index) in availableWords"
             :key="index"
-            @click="selectWord(word)"
-          >
+            @click="selectWord(word)">
             <v-list-item-title>{{ word }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -40,6 +36,7 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -59,12 +56,13 @@ function checkGuess() {
   guess.value = ''
 }
 function selectWord(word: string) {
-  game.guess.value = word
+//  game.guess.value = word
+  guess.value = word
   dialog.value = false
 }
 
 function showAvailableWords() {
-  availableWords.value = game.getAvailableWords()
+  availableWords.value = game.getAvailableWords();
   dialog.value = true
 }
 
