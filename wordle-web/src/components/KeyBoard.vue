@@ -21,7 +21,6 @@
         min-width="70px"
         :elevation="10"
         style="background-image;: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
-        
       />
       <LetterButton
         v-if="letter.char === '<='"
