@@ -10,7 +10,7 @@
         min-width="50px"
         :elevation="10"
         liner-gradient="to bottom, #43A047 10%,#E65100 100%"
-        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
+        style="background-image;: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
       />
       <LetterButton
         v-if="letter.char === 'ENTER'"
@@ -20,7 +20,8 @@
         height="58px"
         min-width="70px"
         :elevation="10"
-        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
+        style="background-image;: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
+        
       />
       <LetterButton
         v-if="letter.char === '<='"
@@ -30,7 +31,7 @@
         height="58px"
         max-width="70px"
         :elevation="10"
-        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
+        style="background-image;: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
       />
     </v-col>
   </v-row>

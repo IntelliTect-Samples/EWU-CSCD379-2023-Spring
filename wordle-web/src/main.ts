@@ -30,6 +30,7 @@ const vuetify = createVuetify({
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
+          
         }
       },
       Light: {
