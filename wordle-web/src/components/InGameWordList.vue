@@ -1,19 +1,16 @@
 <template>
   <div>
-        <v-card flat color="transparent">
-          <v-card-title align="center">
-            Possible Words From Word List That Are Avalible (Click on Number)
-          </v-card-title>
-          <v-card-text
-            align="center"
-            class="text-h4"
-            @click="wordDialog = !wordDialog" >
-            {{ possibleWords.length }}
-          </v-card-text>
-        </v-card>
+    <v-card flat color="transparent">
+      <v-card-title align="center">
+        Possible Words From Word List That Are Avalible (Click on Number)
+      </v-card-title>
+      <v-card-text align="center" class="text-h4" @click="wordDialog = !wordDialog">
+        {{ possibleWords.length }}
+      </v-card-text>
+    </v-card>
   </div>
   <v-dialog v-model="wordDialog" max-width="350">
-    <v-card >
+    <v-card>
       <v-table height="350px" hover>
         <tbody>
           <tr v-for="(word, i) in possibleWords" :key="i">
@@ -52,10 +49,10 @@ function getValidWords(currentGuess: Word): Word[] {
 }
 
 function clickWord(word: Word) {
+  // eslint-disable-next-line vue/no-mutating-props
   props.game.currentGuess = word
   wordDialog.value = false
 }
-
 </script>
 <style scoped>
 .v-card-text,

@@ -10,7 +10,7 @@
         min-width="50px"
         :elevation="10"
         liner-gradient="to bottom, #43A047 10%,#E65100 100%"
-        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
+        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
       />
       <LetterButton
         v-if="letter.char === 'ENTER'"
@@ -20,8 +20,7 @@
         height="58px"
         min-width="70px"
         :elevation="10"
-        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
-
+        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
       />
       <LetterButton
         v-if="letter.char === '<='"
@@ -31,8 +30,7 @@
         height="58px"
         max-width="70px"
         :elevation="10"
-        style="background: linear-gradient(to bottom, #43A047 10%,#E65100 100%);"
-
+        style="background: linear-gradient(to bottom, #43a047 10%, #e65100 100%)"
       />
     </v-col>
   </v-row>
@@ -83,10 +81,10 @@ function EnterC() {
 }
 
 function BackSpaceC() {
+  // eslint-disable-next-line vue/no-mutating-props
   props.game.currentGuess.pop()
   const audio = new Audio()
   audio.src = 'src/assets/mixkit-cool-interface-click-tone-2568.wav'
   audio.play()
 }
 </script>
-

@@ -15,4 +15,3 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'grey'
 })
 </script>
-

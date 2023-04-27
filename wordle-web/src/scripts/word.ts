@@ -34,7 +34,6 @@ export class Word {
 
   // Remove the last letter
   pop() {
-
     for (let i = this.letters.length - 1; i >= 0; i--) {
       if (this.letters[i].char !== '') {
         this.letters[i].char = ''
@@ -45,34 +44,34 @@ export class Word {
 
   check(secretWord: string): boolean {
     console.log(this.text)
-  const guessChars = this.letters.map((l) => l.char)
-  const secretChars = secretWord.toUpperCase().split('')
-  let isCorrect = true
-  for (let i = 0; i < 5; i++) {
-    if (this.letters[i].char === secretChars[i]) {
-      this.letters[i].status = LetterStatus.Correct
-      guessChars[i] = '_'
-      secretChars[i] = '_'
-      console.log(`Letter ${i} is correct`)
-    } else {
-      isCorrect = false
-      this.letters[i].status = LetterStatus.Wrong
-      console.log(`Letter ${i} is incorrect`)
+    const guessChars = this.letters.map((l) => l.char)
+    const secretChars = secretWord.toUpperCase().split('')
+    let isCorrect = true
+    for (let i = 0; i < 5; i++) {
+      if (this.letters[i].char === secretChars[i]) {
+        this.letters[i].status = LetterStatus.Correct
+        guessChars[i] = '_'
+        secretChars[i] = '_'
+        console.log(`Letter ${i} is correct`)
+      } else {
+        isCorrect = false
+        this.letters[i].status = LetterStatus.Wrong
+        console.log(`Letter ${i} is incorrect`)
+      }
     }
-  }
-  for (let i = 0; i < 5; i++) {
-    if (guessChars[i] !== '_') {
-      for (let j = 0; j < 5; j++) {
-        if (secretChars[j] === guessChars[i]) {
-          this.letters[i].status = LetterStatus.Misplaced
-          guessChars[i] = '_'
-          secretChars[j] = '_'
-          console.log(`Letter ${i} is misplaced`)
-          break
+    for (let i = 0; i < 5; i++) {
+      if (guessChars[i] !== '_') {
+        for (let j = 0; j < 5; j++) {
+          if (secretChars[j] === guessChars[i]) {
+            this.letters[i].status = LetterStatus.Misplaced
+            guessChars[i] = '_'
+            secretChars[j] = '_'
+            console.log(`Letter ${i} is misplaced`)
+            break
+          }
         }
       }
     }
-  }
 
     console.log(guessChars)
     console.log(secretChars)
