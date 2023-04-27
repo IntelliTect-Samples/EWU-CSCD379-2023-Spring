@@ -14,7 +14,8 @@
         <v-card-title color="correct" title="Word List"></v-card-title>
         <v-card-text>
           <v-list v-for="(item, idx) in items" :key="idx">
-            <v-list-item item.value="item.value">{{ item.title }}</v-list-item>
+            <v-list-item item.title="item.title">{{ item.title }}</v-list-item>
+            <v-list-item item.value="item.value">{{ item.value }}</v-list-item>
           </v-list>
         </v-card-text>
         <v-card-actions class="justify-end">
@@ -26,7 +27,10 @@
 </template>
 
 <script setup lang="ts">
+// import { WordleGame } from '@/scripts/wordleGame'
+
 import { ref } from 'vue'
+// const game = reactive(new WordleGame())
 const items = [
   {
     title: 'Item #1',
