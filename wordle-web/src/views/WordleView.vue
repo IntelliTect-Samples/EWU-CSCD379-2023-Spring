@@ -1,17 +1,20 @@
 <template>
   <v-container>
     <GameBoard :game="game" @letterClick="addChar" />
+    <br />
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
     <v-row class="justify-center">
       <v-col cols="auto">
-        <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+        <v-btn @click="checkGuess" @keyup.enter="checkGuess" elevation="5"> Check </v-btn>
       </v-col>
     </v-row>
+    <br />
     <PossibleWords
       @guessClick="checkGuess"
       @wordSelection="selectWord"
       :game="game"
       :guess="guess"
+      elevation="5"
     />
   </v-container>
 </template>

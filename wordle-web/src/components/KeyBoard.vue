@@ -6,7 +6,7 @@
           :letter="letter"
           @click="letterClick(letter)"
           v-bind="props"
-          :elevation="isHovering ? 15 : 6"
+          :elevation="isHovering ? 15 : 5"
         />
       </v-hover>
     </v-col>
