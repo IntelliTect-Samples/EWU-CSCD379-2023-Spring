@@ -6,6 +6,11 @@
 </template>
 
 <script setup lang="ts">
+export interface Props {
+  char?: string
+  color?: string
+}
+
 import { computed } from 'vue'
 
 const keyGradient = computed(() => {
@@ -20,11 +25,6 @@ const keyGradient = computed(() => {
       return 'linear-gradient(to right, rgba(128, 128, 128, 0.3), rgba(128, 128, 128, 0.6))'
   }
 })
-
-export interface Props {
-  char?: string
-  color?: string
-}
 
 const props = withDefaults(defineProps<Props>(), {
   char: '?',
