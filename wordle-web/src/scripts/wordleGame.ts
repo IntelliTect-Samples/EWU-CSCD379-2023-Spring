@@ -21,8 +21,9 @@ export class WordleGame {
   containsLetters: string[] = []
   validWordList: string[] = this.getValidWords()
 
-  restartGame(secretWord?: string) {
+  restartGame(secretWord?: string, numberOfGuesses?: number) {
     this.secretWord = secretWord || WordsService.getRandomWord()
+    this.numberOfGuesses = numberOfGuesses || 6
     this.guesses.splice(0)
     // create a word for each guess
     for (let iWord = 0; iWord < this.numberOfGuesses; iWord++) {

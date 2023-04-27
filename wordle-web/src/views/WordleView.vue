@@ -6,7 +6,9 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <br />
   <h2>{{ subtitle }}</h2>
-  <v-btn @click="restartGame" @keyup.enter="restartGame"> Restart </v-btn>
+  <v-btn @click="restartGame(7)"> Easy </v-btn>
+  <v-btn @click="restartGame(6)"> Medium </v-btn>
+  <v-btn @click="restartGame(5)"> Hard </v-btn>
 
   <h3>{{ game.secretWord }}</h3>
   <br />
@@ -69,9 +71,9 @@ function checkGuess() {
   guess.value = ''
 }
 
-function restartGame() {
-  game.restartGame()
-
+function restartGame(numberOfGuesses?: number) {
+  const num = numberOfGuesses || 6
+  game.restartGame(undefined, num)
   subtitle.value = 'Game was Reset'
   list.value = game.getValidWords()
 }
