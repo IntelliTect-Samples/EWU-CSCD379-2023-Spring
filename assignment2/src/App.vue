@@ -7,7 +7,6 @@
         themedark: useTheme().global.current.value.dark ? "Dark" : "Light",
         guesses: 6,
         guessLabels: ['3', '6', '9', '12'],
-        letterColor: [document.querySelector('html')?.style.getPropertyValue('--v-unknown'), document.querySelector('html')?.style.getPropertyValue('--v-correct'), document.querySelector('html')?.style.getPropertyValue('--v-misplaced'), document.querySelector('html')?.style.getPropertyValue('--v-wrong')]
       }
     },
     setup () {
@@ -35,18 +34,8 @@
           r!.style.setProperty('--v-back', '#d9d9d9')
         }
       }, 
-      toggleScheme: (rad:string, tog:string, lett:(string | undefined)[]) => {
-        const r = document.querySelector('html');
+      toggleScheme: (rad:string, tog:string) => {
         theme.global.name.value = rad.concat(tog)
-        const u = theme.global.current.value.colors.unknown
-        const c = theme.global.current.value.colors.correct
-        const m = theme.global.current.value.colors.misplaced
-        const w = theme.global.current.value.colors.wrong
-        r!.style.setProperty('--v-unknown', u)
-        r!.style.setProperty('--v-correct', c)
-        r!.style.setProperty('--v-misplaced', m)
-        r!.style.setProperty('--v-wrong', w)
-        lett = [r!.style.getPropertyValue('--v-unknown'), r!.style.getPropertyValue('--v-correct'), r!.style.getPropertyValue('--v-misplaced'), r!.style.getPropertyValue('--v-wrong')]
       }
     }
   }
@@ -80,7 +69,7 @@ import { RouterLink, RouterView } from 'vue-router'
             </v-radio-group>
 
             <p> <v-icon icon="mdi-water-opacity"></v-icon> Color Scheme: </p>
-            <v-radio-group v-model="themeselect" column @change="toggleScheme(themeselect, themedark, letterColor)" style="margin-left: 25px;">
+            <v-radio-group v-model="themeselect" column @change="toggleScheme(themeselect, themedark)" style="margin-left: 25px;">
               <v-radio label="Default" color="primary" value="default"></v-radio>
               <v-radio label="Autumn" color="primary" value="autumn"></v-radio>
               <v-radio label="Coffee" color="primary" value="coffee"></v-radio>

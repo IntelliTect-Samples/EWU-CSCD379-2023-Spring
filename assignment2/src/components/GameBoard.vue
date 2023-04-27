@@ -5,33 +5,36 @@ export default {
         for (let i = 3; i < this.guess; i++) {
             guesses.push("");
         }
-        let cur = 0
-        let display = false
         return {
-            addLetter: (c: string) => {
-                guesses[cur] += c;
+            guesses,
+            cur: 0,
+            prim: useTheme().global.current.value.colors.primary,
+            row1: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+            row2: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
+        };
+    },
+    methods: {
+        addLetter: function(c: string) {
+                if(this.guesses[this.cur].length < 5){
+                    this.guesses[this.cur] += c;
+                }
+                console.log(this.guesses)
             },
-            remove: () => {
-                //
+            remove: function() {
+                if(this.guesses[this.cur].length > 0){
+                    this.guesses[this.cur] = this.guesses[this.cur].slice(0, 4);
+                }
+                console.log(this.guesses)
             },
-            enter: () => {
+            enter: function() {
                 //
-                if (cur < guesses.length) {
+                if (this.cur < this.guesses.length) {
                     //
-                    console.log(cur);
-                    cur += 1;
-                    console.log(cur);
+                    console.log(this.cur);
+                    this.cur += 1;
+                    console.log(this.cur);
                 }
             },
-            displaySuggestions() {
-                //display ? "false" : "true";
-                let temp = guesses[cur].split("")
-                //this.$refs.suggestions.validWords(temp)
-            },
-            guesses,
-            cur,
-            display
-        };
     },
     watch: {
         guess() {
@@ -53,6 +56,7 @@ export default {
     props: ["guess", "colors"],
     components: { SuggestionMenu }
 }
+import { useTheme } from 'vuetify/lib/framework.mjs';
 import SuggestionMenu from './SuggestionMenu.vue'
 </script>
 
@@ -68,32 +72,15 @@ import SuggestionMenu from './SuggestionMenu.vue'
     </div>
     <div id="keys">
         <v-row justify="center">
-            <v-btn elevation="14" variant="tonal" @click="addLetter('Q')" :color="$props.colors[0]" rounded="xl">Q</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('W')" :color="$props.colors[1]" rounded="xl">W</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('E')" :color="$props.colors[2]" rounded="xl">E</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('R')" :color="$props.colors[3]" rounded="xl">R</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('T')" :color="$props.colors[0]" rounded="xl">T</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('Y')" :color="$props.colors[0]" rounded="xl">Y</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('U')" :color="$props.colors[0]" rounded="xl">U</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('I')" :color="$props.colors[0]" rounded="xl">I</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('O')" :color="$props.colors[0]" rounded="xl">O</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('P')" :color="$props.colors[0]" rounded="xl">P</v-btn>
+            <v-btn v-for="lett in row1" elevation="14" variant="tonal" @click="addLetter(lett)" :color="$props.colors[0]" rounded="xl">{{ lett }}</v-btn>
         </v-row>
         <v-row justify="center">
-            <v-btn elevation="14" variant="tonal" @click="remove()" :color="$props.colors[0]" rounded="xl"><v-icon>mdi-backspace-reverse-outline</v-icon></v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('A')" :color="$props.colors[0]" rounded="xl">A</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('S')" :color="$props.colors[0]" rounded="xl">S</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('D')" :color="$props.colors[0]" rounded="xl">D</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('F')" :color="$props.colors[0]" rounded="xl">F</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('G')" :color="$props.colors[0]" rounded="xl">G</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('H')" :color="$props.colors[0]" rounded="xl">H</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('J')" :color="$props.colors[0]" rounded="xl">J</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('K')" :color="$props.colors[0]" rounded="xl">K</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('L')" :color="$props.colors[0]" rounded="xl">L</v-btn>
+            <v-btn v-for="lett in row2" elevation="14" variant="tonal" @click="addLetter(lett)" :color="$props.colors[0]" rounded="xl">{{ lett }}</v-btn>
+            <v-btn elevation="14" variant="outlined" @click="remove()" color="prim" rounded="xl" class="exc"><v-icon>mdi-backspace-outline</v-icon></v-btn>
         </v-row>
         <v-row justify="center">
-            <v-btn elevation="14" variant="tonal" @click="displaySuggestions()" :color="$props.colors[0]" rounded="xl"><v-icon>mdi-chevron-down-circle-outline</v-icon></v-btn>
-            <v-btn elevation="14" variant="tonal" @click="addLetter('?')" :color="$props.colors[0]" rounded="xl">?</v-btn>
+            <SuggestionMenu :guesses="guesses"></SuggestionMenu>
+            <v-btn elevation="14" variant="outlined" @click="addLetter('?')" color="prim" rounded="xl" class="exc">?</v-btn>
             <v-btn elevation="14" variant="tonal" @click="addLetter('Z')" :color="$props.colors[0]" rounded="xl">Z</v-btn>
             <v-btn elevation="14" variant="tonal" @click="addLetter('X')" :color="$props.colors[0]" rounded="xl">X</v-btn>
             <v-btn elevation="14" variant="tonal" @click="addLetter('C')" :color="$props.colors[0]" rounded="xl">C</v-btn>
@@ -101,10 +88,9 @@ import SuggestionMenu from './SuggestionMenu.vue'
             <v-btn elevation="14" variant="tonal" @click="addLetter('B')" :color="$props.colors[0]" rounded="xl">B</v-btn>
             <v-btn elevation="14" variant="tonal" @click="addLetter('N')" :color="$props.colors[0]" rounded="xl">N</v-btn>
             <v-btn elevation="14" variant="tonal" @click="addLetter('M')" :color="$props.colors[0]" rounded="xl">M</v-btn>
-            <v-btn elevation="14" variant="tonal" @click="enter()" :color="$props.colors[0]" rounded="xl"><v-icon>mdi-arrow-left-bottom</v-icon></v-btn>
+            <v-btn elevation="14" variant="outlined" @click="enter()" color="prim" rounded="xl" class="exc">Enter</v-btn>
         </v-row>
     </div>
-    <SuggestionMenu v-model="display" :guesses="guesses" id="suggest" ref="suggestions"></SuggestionMenu>
 </template>
 
 <style scoped>
@@ -112,9 +98,12 @@ import SuggestionMenu from './SuggestionMenu.vue'
         margin: 5px;
         background-image: linear-gradient(#d9d9d900, #bfbebe29, #8b8b8b92);
     }
+    .exc {
+        background-image: none;
+    }
     .tile {
-        min-height: 75px;
-        min-width: 75px;
+        min-height: 70px;
+        min-width: 70px;
         margin: 3px;
         background: radial-gradient(#00000088, #14141488, #ffffff22);
     }

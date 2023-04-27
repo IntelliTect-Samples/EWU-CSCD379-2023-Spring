@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <!-- <Gameboard :guess="$root!.$data.guesses" :colors="$root!.$data.letterColor"></Gameboard> -->
+    <Gameboard :guess="6" :colors="['grey', 'green', 'yellow', 'red']"></Gameboard>
 </template>
 
 <style>
