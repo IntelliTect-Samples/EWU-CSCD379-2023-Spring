@@ -1,6 +1,7 @@
 <template>
   <div class="WordSelect">
     <v-select :items="validWords"></v-select>
+    {{ validWords.length }} potential words
   </div>
 </template>
 
