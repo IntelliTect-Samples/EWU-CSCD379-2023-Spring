@@ -1,15 +1,11 @@
 <template>
   <v-app-bar id="toolbar">
-    <img
-      alt="books logo"
-      class="logo"
-      src="@/assets/books.png"
-      width="50"
-      height="50"
-      @click="router.push('/')"
-    />
-
-    <v-app-bar-title @click="router.push('/')">The Good Word</v-app-bar-title>
+    <v-toolbar-title>
+      <div @click="router.push('/')" id="toolbar-title">
+        <v-icon icon="mdi-book-open-page-variant" />
+        The Good Word
+      </div>
+    </v-toolbar-title>
 
     <v-btn @click="toggleMusic">
       <v-icon size="large">{{ isPaused ? 'mdi-volume-high' : 'mdi-volume-mute' }}</v-icon>
@@ -20,7 +16,7 @@
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>
 
-  <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
+  <v-dialog transition="fab-transition" width="350px" title="Settings" v-model="settings" temporary>
     <v-card rounded="lg">
       <!-- TODO: Center the title of the v-card-title tag. -->
       <v-card-title id="card-title" elevation="6">
@@ -72,8 +68,7 @@
     </v-card>
   </v-dialog>
 
-  <v-navigation-drawer v-model="menu" location="right" app temporary>
-    <v-spacer />
+  <v-navigation-drawer v-model="menu" location="right" temporary>
     <v-card rounded="lg" class="mt-6" elevation="0">
       <v-card-title id="card-title" elevation="6"> <v-icon>mdi-menu</v-icon> Menu </v-card-title>
 
@@ -166,5 +161,10 @@ function toggleAquaMode() {
 
 #card-title {
   border-bottom: 1px solid;
+}
+
+#toolbar-title {
+  cursor: pointer;
+  width: 180px;
 }
 </style>
