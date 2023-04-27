@@ -8,11 +8,6 @@
         <RouterLink to="/">
           <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
         </RouterLink>
-
-        <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
-        <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-        <v-btn @click="setKhorneTheme"> Khorne Theme </v-btn>
-        <v-btn @click="setCornTheme"> Corn Theme </v-btn>
       </template>
 
       <SettingsTab />
@@ -42,17 +37,4 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 const theme = useTheme()
 
 let drawer = ref(false)
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
-function setKhorneTheme() {
-  theme.global.name.value = 'khorne'
-}
-function setCornTheme() {
-  theme.global.name.value = 'corn'
-}
 </script>
