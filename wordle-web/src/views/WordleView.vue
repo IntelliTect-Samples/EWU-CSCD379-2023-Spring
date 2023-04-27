@@ -3,7 +3,7 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <WordSelect :validWords="validWords" />
+  <WordSelect :validWords = validWords />
 </template>
 
 <script setup lang="ts">
@@ -18,7 +18,7 @@ import { WordsService } from '../scripts/wordsService'
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
-let validWords: string[] = ['these', 'are', 'valid', 'words']
+let validWords = ref(['Enter a guess first!'])
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -29,6 +29,7 @@ onUnmounted(() => {
 
 function checkGuess() {
   game.submitGuess()
+  validWords.value = WordsService.validWords(guess.value, game.secretWord)
   guess.value = ''
 }
 
@@ -58,7 +59,6 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
-    validWords = WordsService.validWords(guess.value)
   }
 }
 </script>

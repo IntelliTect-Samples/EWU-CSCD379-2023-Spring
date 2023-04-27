@@ -7,9 +7,24 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(currGuess: string): string[] {
+  static validWords(currGuess: string, secretWord: string): string[] {
     const wordsList: string[] = []
-    for (const word of this.#words) if (word.includes(currGuess)) wordsList.push(word)
+    let expression = ''
+
+    for (let i = 0; i < secretWord.length; i++) {
+      if (currGuess[i] == secretWord[i])
+        expression = expression.concat(secretWord[i])
+      else
+        expression = expression.concat('[a-z]')
+    }
+
+    let regex = new RegExp(expression)
+
+    for (const word of this.#words) {
+      if (regex.test(word)) 
+        wordsList.push(word)
+    }
+
     return wordsList
   }
 
