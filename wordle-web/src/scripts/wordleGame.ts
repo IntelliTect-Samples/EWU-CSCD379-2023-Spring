@@ -31,14 +31,14 @@ export class WordleGame {
   //   }
 
   getPossibleWords() {
-    console.log('In getPossibleWords')
-    console.log(this.possibleWords.length)
+    //console.log('In getPossibleWords')
+    //console.log(this.possibleWords.length)
     return this.possibleWords.length
   }
 
   getPossibleGuesses() {
-    console.log('In getPossibleGuesses')
-    console.log(this.possibleGuess.length)
+    //console.log('In getPossibleGuesses')
+    //console.log(this.possibleGuess.length)
     return this.possibleGuess.length
   }
 
@@ -63,10 +63,10 @@ export class WordleGame {
     for (let i = 0; i < guessSplit.length; i++) {
       letterList[i] = guessSplit[i]
     }
-    console.log('Testing current words')
+    //console.log('Testing current words')
     //console.log(letterList)
     this.possibleGuess = WordsService.currentWords(letterList, this.possibleWords)
-    console.log(this.possibleGuess)
+    //console.log(this.possibleGuess)
   }
 
   showPossibleWords() {
@@ -77,17 +77,17 @@ export class WordleGame {
       letterList[indexTracker][0] = letter.char
       letterList[indexTracker][2] = letter.index
       if (letter.status === LetterStatus.Correct) {
-        letterList[indexTracker][1] = 'Correct'
+        letterList[indexTracker][1] = "0"
       } else if (letter.status === LetterStatus.Misplaced) {
-        letterList[indexTracker][1] = 'Misplaced'
+        letterList[indexTracker][1] = "1"
       } else {
-        letterList[indexTracker][1] = 'Wrong'
+        letterList[indexTracker][1] = "2"
       }
       indexTracker = indexTracker + 1
     }
     this.possibleWords = WordsService.validWords(letterList)
-    console.log(this.possibleWords.length)
-    console.log(this.possibleWords)
+    //console.log(this.possibleWords.length)
+    //console.log(this.possibleWords)
   }
 
   guessedLetterCheck() {

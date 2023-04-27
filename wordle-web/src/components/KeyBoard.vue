@@ -1,13 +1,19 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col cols="auto" dense v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+      <div v-if="letter.char != 'Backspace'">
+        <LetterButton :style="{'filter': 'drop-shadow(2px 2px 1px #808080)'}" :letter="letter" @click="letterClick(letter)" />
+      </div>
+      <div v-else>
+        <BackspaceButton :style="{'filter': 'drop-shadow(2px 2px 1px #808080)'}" :letter="letter" @click="letterClick(letter)" />
+      </div>
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
+import BackspaceButton from '@/components/BackspaceButton.vue'
 import { Letter } from '@/scripts/letter'
 import { computed } from 'vue'
 

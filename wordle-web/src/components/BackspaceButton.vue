@@ -1,21 +1,22 @@
 <style scoped>
   .gradient {
+    background-color: rgb(158, 158, 158);
     background-image: radial-gradient(rgba(121, 121, 121, 0), rgba(143, 143, 143, 0.2)) !important
   }
 </style>
 <template>
-  <LetterBase
+  <BackspaceIcon
     height="40px"
+    width="70px"
     rounded="0"
-    :char="props.letter.char"
-    :color="props.letter.color"
+    fill="#ffffff"
     class="gradient"
-  ></LetterBase>
+  ></BackspaceIcon>
 </template>
 
 <script setup lang="ts">
 import type { Letter } from '@/scripts/letter'
-import LetterBase from './LetterBase.vue'
+import BackspaceIcon from './icons/BackspaceIcon.vue'
 
 export interface Props {
   letter: Letter

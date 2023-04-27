@@ -3,8 +3,6 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
   <br />
 
   <v-btn @click="showBigDialog = !showBigDialog"
@@ -17,19 +15,21 @@
     >Possible Guesses (with current letters): {{ game.possibleGuess.length }}</v-btn
   >
 
+  <br/>
+
   <template>
     <v-dialog v-model="showBigDialog" width="500px">
-      <v-card class="align-center" min-width="100%">
+      <v-card class="align-center" width="500px">
         <v-hover>
           <div v-if="game.possibleWords.length < 300">
             <div v-for="word in game.possibleWords" :key="word">
-              <v-btn @click=";[setGuess(word), (showBigDialog = !showBigDialog)]">{{ word }}</v-btn>
+              <v-btn width="500px" @click=";[setGuess(word), (showBigDialog = !showBigDialog)]">{{ word }}</v-btn>
             </div>
           </div>
-          <v-btn v-else @click="showBigDialog = !showBigDialog"
+          <v-btn width="500px" v-else @click="showBigDialog = !showBigDialog"
             >Try to get the possible words bellow 300</v-btn
           >
-          <v-btn @click="showBigDialog = !showBigDialog">Close Guesses</v-btn>
+          <v-btn width="500px" @click="showBigDialog = !showBigDialog">Close Guesses</v-btn>
         </v-hover>
       </v-card>
     </v-dialog>
@@ -37,17 +37,17 @@
 
   <template>
     <v-dialog v-model="showDialog" width="500px">
-      <v-card>
+      <v-card class="align-center">
         <v-hover>
           <div v-if="game.possibleGuess.length < 300">
             <div v-for="word in game.possibleGuess" :key="word">
-              <v-btn @click=";[setGuess(word), (showDialog = !showDialog)]">{{ word }}</v-btn>
+              <v-btn width="500px" @click=";[setGuess(word), (showDialog = !showDialog)]">{{ word }}</v-btn>
             </div>
           </div>
-          <v-btn v-else @click="showBigDialog = !showBigDialog"
+          <v-btn width="500px" v-else @click="showBigDialog = !showBigDialog"
             >Try to get the possible words bellow 300</v-btn
           >
-          <v-btn @click="showDialog = !showDialog">Close Guesses</v-btn>
+          <v-btn width="500px" @click="showDialog = !showDialog">Close Guesses</v-btn>
         </v-hover>
       </v-card>
     </v-dialog>

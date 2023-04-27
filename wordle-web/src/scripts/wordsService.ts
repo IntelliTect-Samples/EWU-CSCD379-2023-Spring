@@ -16,27 +16,9 @@ export abstract class WordsService {
   }
 
   static currentWords(curGuess: string[], currentList: string[]) {
-    //key:
-    //  letter[0] = char
-    //  letter[1] = status
-    //  letter[2] = index
-    let wordList = Array()
-    //let wordList = this.#words
-    for (const word of currentList) {
-      let add = true
-      let split = word.split('')
-      for (let i = 0; i < curGuess.length; i++) {
-        if (split[i] != curGuess[i]) {
-          add = false
-        }
-      }
-      if (add == true) {
-        wordList.push(word)
-      }
-    }
-
-    console.log(wordList)
-    return wordList
+    let curWord = curGuess.join('')
+    return currentList.filter((w) => w.startsWith(curWord)).sort()
+    
   }
 
   static validWords(knowns: string[][]): Array<string> {
@@ -56,7 +38,7 @@ export abstract class WordsService {
     //let wordList = this.#words
     for (let i = 0; i < knowns.length; i++) {
       let temp = []
-      if (knowns[i][1] == 'Correct') {
+      if (knowns[i][1] == "0") {
         for (const word of wordList) {
           let tempWord = word.split('')
           if (tempWord[parseInt(knowns[i][2])] == knowns[i][0]) {
@@ -66,25 +48,33 @@ export abstract class WordsService {
         }
         //console.log('entered Correct')
         wordList = temp
-      } else if (knowns[i][1] == 'Misplaced') {
-        for (const word of wordList) {
-          let tempWord = word.split('')
-          if (
-            tempWord.indexOf(knowns[i][0], 0) != -1 &&
-            tempWord[parseInt(knowns[i][2])] != knowns[i][0]
-          ) {
-            //if char exists but not in place known to be false
-            temp.push(word)
-          }
-        }
-        //console.log('entered Misplaced')
-        wordList = temp
-      } else if (knowns[i][1] == 'Wrong') {
+      } else if (knowns[i][1] == '1') {
         let present = false
         for (let j = 0; j < knowns.length; j++) {
-          if (i != j && knowns[j][0] === knowns[i][0]) {
-            present = true //if the letter is present in a different index
-            //technically isn't correct, but should usually work out
+          if (i != j && knowns[j][0] === knowns[i][0] && parseInt(knowns[j][1]) < parseInt(knowns[i][1])) {
+            present = true //if the letter is present in a different index and is more correct
+          }
+        }
+        if (!present){
+          for (const word of wordList) {
+            let tempWord = word.split('')
+            if (
+              tempWord.indexOf(knowns[i][0], 0) != -1 &&
+              tempWord[parseInt(knowns[i][2])] != knowns[i][0]
+            ) {
+              //if char exists but not in place known to be false
+              temp.push(word)
+            }
+          }
+          wordList = temp
+        }
+        //console.log('entered Misplaced')
+        //wordList = temp
+      } else if (knowns[i][1] == '2') {
+        let present = false
+        for (let j = 0; j < knowns.length; j++) {
+          if (i != j && knowns[j][0] === knowns[i][0] && parseInt(knowns[j][1]) < parseInt(knowns[i][1])) {
+            present = true //if the letter is present in a different index and is more correct
           }
         }
         if (!present) {
