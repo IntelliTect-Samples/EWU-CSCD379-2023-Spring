@@ -1,14 +1,16 @@
 <template>
   <v-btn 
-     class="charButton"
-     elevation="8"
-     min-size="x-small"
-     size="small"
-     height="50"
-     width="75"
-     :color="props.color"
-    >
-    {{ props.char }}
+  style="
+       width: 75px;
+       min-width: 50px;
+       height: 60px;
+       min-height: 50px;
+     "
+     :color = "props.color"
+     :elevation="12"
+     :flat="true"
+     :style="{ 'background-image': 'linear-gradient(to right, #00000040, #FFFFFF40) !important'}"
+     >{{ props.char }}
   </v-btn>
 </template>
 
@@ -22,4 +24,5 @@ const props = withDefaults(defineProps<Props>(), {
   char: '?',
   color: 'primary'
 })
+
 </script>

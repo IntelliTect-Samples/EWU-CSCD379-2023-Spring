@@ -1,7 +1,11 @@
 <template>
-  <v-row class="justify-center mt-3" dense v-for="(word, r) in game.guesses" :key="r">
+
+  <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
     <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
-      <LetterButton  :letter="letter" @click="letterClick(letter)" />
+      <LetterButton  :letter="letter" @click="letterClick(letter)" 
+
+      
+      />
     </v-col>
   </v-row>
 </template>
@@ -21,5 +25,16 @@ const emits = defineEmits<{
 
 function letterClick(letter: Letter) {
   emits('letterClick', letter)
+  makeSound()
 }
+function makeSound(){
+    const sound = new Audio('../src/assets/sound.mp3')
+    sound.currentTime=0;
+    sound.play()
+    setInterval(function(){
+    if(sound.currentTime> 0.5){
+      sound.pause();
+    }
+    },1);
+  }
 </script>

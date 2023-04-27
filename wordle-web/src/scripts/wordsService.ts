@@ -1,3 +1,7 @@
+import { Word } from '@/scripts/word'
+ import { LetterStatus } from '@/scripts/letter'
+
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,9 +11,66 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
+  static validWords(guess: Word, secretWord: string) {
+    const valid = new Array<string>()
+    const correctIndex = new Array<number>()
+    const correctLetter = new Array<string>()
+    const MisplacedLetter = new Array<string>()
     //Todo
-    return new Array<string>()
+    //find correct letters from secret word
+    guess.check(secretWord)
+    for (let j = 0; j < secretWord.length; j++) {
+      if (guess.letters[j].status === LetterStatus.Correct) {
+        correctLetter.push(guess.letters[j].char)
+        correctIndex.push(j)
+      } else if (guess.letters[j].status === LetterStatus.Misplaced) {
+        MisplacedLetter.push(guess.letters[j].char)
+      }
+    }
+    //return nothing if no correct or misplaced letters to avoid lag
+    if (correctLetter.length === 0 && MisplacedLetter.length === 0) {
+      return valid
+    }
+
+    //add valid guesses to array
+    for (let i = 0; i < this.#words.length; i++) {
+      if(valid.length === 150) {
+        break 
+      }
+
+      const listword = new Word(this.#words[i])
+
+      let flag1 = true
+
+      for (let j = 0; j < correctIndex.length; j++) {
+        if (
+          guess.letters[correctIndex[j]].char !== listword.letters[correctIndex[j]].char ||
+          correctLetter[j] !== listword.letters[correctIndex[j]].char
+        ) {
+          flag1 = false
+          break
+        }
+      }
+
+      if (!flag1) {
+        continue
+      }
+
+      //add word to array if it contains all misplaced letters
+      let flag2 = true
+
+      for (const letter of MisplacedLetter) {
+        if (!listword.text.includes(letter)) {
+          flag2 = false
+          break
+        }
+      }
+      if (flag2) {
+        valid.push(this.#words[i])
+      }
+    }
+
+    return valid
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

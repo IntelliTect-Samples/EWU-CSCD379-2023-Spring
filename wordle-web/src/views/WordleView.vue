@@ -1,19 +1,18 @@
 <template>
 
   <GameBoard :game="game" @letterClick="addChar" />
+  <v-card-actions class="justify-center">
+    <h2>{{ guess }}</h2>
+    <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  </v-card-actions>
 
-  <v-text-field
-    v-model="guess"
-    label="Guess"
-    variant="solo"
-    @keydown.prevent="($event:KeyboardEvent) => keyPress($event)"
-  ></v-text-field>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <ValidWordList :items="game.validWords" @change="select" />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  
 
-  <h2>{{ guess }}</h2>
+  
   <h3>{{ game.secretWord }}</h3>
 </template>
 
@@ -24,6 +23,7 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import { watch, onMounted, onUnmounted } from 'vue'
+import ValidWordList from '../components/ValidWordList.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -39,6 +39,7 @@ onUnmounted(() => {
 watch(
   guess,
   (newGuess, oldGuess) => {
+    UpdateSelect(newGuess)
     if (newGuess.length > 5) {
       guess.value = oldGuess || ''
     }
@@ -50,6 +51,19 @@ function checkGuess() {
   game.submitGuess()
   guess.value = ''
 }
+
+function select(validguess: string) {
+   guess.value = validguess
+ }
+ function UpdateSelect(g: string) {
+   const temp = g.split('')
+   for (let i = 0; i < 5; i++) {
+     game.guess.pop()
+   }
+   for (let i = 0; i < temp.length; i++) {
+     game.guess.push(temp[i])
+   }
+ }
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)

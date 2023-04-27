@@ -60,9 +60,10 @@ function makeSound(){
     sound.currentTime=0;
     sound.play()
     setInterval(function(){
-    if(sound.currentTime> 1){
+    if(sound.currentTime> 0.5){
       sound.pause();
     }
     },1);
   }
+
 </script>

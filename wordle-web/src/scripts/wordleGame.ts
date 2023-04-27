@@ -13,6 +13,7 @@ export class WordleGame {
   secretWord = ''
   numberOfGuesses = 6
   guess!: Word
+  validWords = new Array<String>()
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -33,14 +34,15 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
+    this.validWords = WordsService.validWords(this.guess, this.secretWord)
     this.guess.check(this.secretWord)
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter);
+      this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters);
+    console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
