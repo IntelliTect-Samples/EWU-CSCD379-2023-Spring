@@ -1,11 +1,10 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col class="key-column" v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+      <LetterButton :letter="letter" @click="letterClick(letter)" class="key-button" />
     </v-col>
   </v-row>
 </template>
-
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
@@ -46,11 +45,20 @@ function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
 </script>
-
 <style scoped>
 .key-column {
   padding: 0;
   margin: 0;
   flex-grow: 0;
+}
+
+.key-button {
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.key-column {
+  padding: 0;
+  margin: 0;
+  flex-grow: 0;
+  background: linear-gradient(to right, #5d5f687c, #8b8b86);
 }
 </style>

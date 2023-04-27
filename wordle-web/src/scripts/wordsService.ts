@@ -1,5 +1,5 @@
 import { LetterStatus } from './letter'
-import type { Word } from './word'
+import { Word } from './word'
 
 export enum Validate {
   Invalid = 'Invalid',
@@ -29,6 +29,12 @@ export abstract class WordsService {
 
   static getWordsList(): string[] {
     return this.#words
+  }
+  static currentG(currentGuess: string): Array<Word> {
+    const validWords = this.#words.filter((word) =>
+      word.toUpperCase().startsWith(currentGuess.toUpperCase().trim())
+    )
+    return validWords.map((word) => new Word(word))
   }
 
   static availWords(guesses: Array<Word>): string[] {

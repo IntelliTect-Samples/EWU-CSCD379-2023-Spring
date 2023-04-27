@@ -19,7 +19,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-
+  isWon = false
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
   //     console.log('wrong length')
@@ -40,8 +40,9 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
-
+    if (this.guess.check(this.secretWord) == true) {
+      this.isWon = true
+    }
     // Update the guessed letters
     for (const letter of this.guess.letters) {
       this.guessedLetters.push(letter)
