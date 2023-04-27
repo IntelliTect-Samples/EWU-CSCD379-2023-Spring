@@ -20,7 +20,7 @@
           </tr>
         </tbody>
       </v-table>
-      <v-btn color="secondary" text @click="wordDialog = false">Close</v-btn>
+      <v-btn color="correct" text @click="wordDialog = false">Close</v-btn>
     </v-card>
   </v-dialog>
 </template>
