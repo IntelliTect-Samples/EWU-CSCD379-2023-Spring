@@ -57,6 +57,6 @@ export class WordleGame {
     }
   }
   getAvailableWords() {
-    return WordsService.availWords(this.guesses);
+    return WordsService.availWords(this.guesses)
   }
 }

@@ -1,8 +1,6 @@
 <template>
   <v-card-title primary-title class="justify-center">
-    <v-card-text>
-      Welcome our Wordle game.
-    </v-card-text>
+    <v-card-text> Welcome our Wordle game. </v-card-text>
   </v-card-title>
 </template>
 <script setup lang="ts">

@@ -1,10 +1,10 @@
-import { LetterStatus } from "./letter"
+import { LetterStatus } from './letter'
 import type { Word } from './word'
 
 export enum Validate {
-  Invalid = "Invalid",
-  WrongL = "Wrong",
-  Valid = "Valid"
+  Invalid = 'Invalid',
+  WrongL = 'Wrong',
+  Valid = 'Valid'
 }
 export abstract class WordsService {
   static getRandomWord(): string {
@@ -17,7 +17,7 @@ export abstract class WordsService {
 
   static validWords(word: string): Validate {
     console.log('Checking validation of ' + word)
-  
+
     if (word.length !== 5) {
       return Validate.WrongL
     } else if (!this.#words.includes(word)) {
@@ -26,71 +26,80 @@ export abstract class WordsService {
       return Validate.Valid
     }
   }
-  
+
   static getWordsList(): string[] {
     return this.#words
   }
 
   static availWords(guesses: Array<Word>): string[] {
-    let wordList = this.#words.slice();
-    let filteredWordList: string[] = [];
-  
+    let wordList = this.#words.slice()
+    let filteredWordList: string[] = []
+
     guesses.forEach((guess, index) => {
       if (guess.text.trim() !== '') {
         wordList = wordList.filter((word) => {
-          let lettersMatch = true;
-  
+          let lettersMatch = true
+
           for (let i = 0; i < guess.letters.length; i++) {
-            const guessLetter = guess.letters[i];
-  
+            const guessLetter = guess.letters[i]
+
             if (guessLetter.status === LetterStatus.Correct && guessLetter.char !== word[i]) {
-              lettersMatch = false;
-              break;
+              lettersMatch = false
+              break
             }
             if (guessLetter.status === LetterStatus.Wrong && word.includes(guessLetter.char)) {
-              lettersMatch = false;
-              break;
+              lettersMatch = false
+              break
             }
             if (guessLetter.status === LetterStatus.Misplaced && !word.includes(guessLetter.char)) {
-              lettersMatch = false;
-              break;
+              lettersMatch = false
+              break
             }
           }
-          return lettersMatch;
-        });
-  
+          return lettersMatch
+        })
+
         // Filter the word list based on previous guesses
         for (let i = 0; i < index; i++) {
-          const prevGuess = guesses[i];
+          const prevGuess = guesses[i]
           if (prevGuess.text.trim() !== '') {
             wordList = wordList.filter((word) => {
-              let lettersMatch = true;
-  
+              let lettersMatch = true
+
               for (let j = 0; j < prevGuess.letters.length; j++) {
-                const prevGuessLetter = prevGuess.letters[j];
-  
-                if (prevGuessLetter.status === LetterStatus.Correct && prevGuessLetter.char !== word[j]) {
-                  lettersMatch = false;
-                  break;
+                const prevGuessLetter = prevGuess.letters[j]
+
+                if (
+                  prevGuessLetter.status === LetterStatus.Correct &&
+                  prevGuessLetter.char !== word[j]
+                ) {
+                  lettersMatch = false
+                  break
                 }
-                if (prevGuessLetter.status === LetterStatus.Wrong && word.includes(prevGuessLetter.char)) {
-                  lettersMatch = false;
-                  break;
+                if (
+                  prevGuessLetter.status === LetterStatus.Wrong &&
+                  word.includes(prevGuessLetter.char)
+                ) {
+                  lettersMatch = false
+                  break
                 }
-                if (prevGuessLetter.status === LetterStatus.Misplaced && !word.includes(prevGuessLetter.char)) {
-                  lettersMatch = false;
-                  break;
+                if (
+                  prevGuessLetter.status === LetterStatus.Misplaced &&
+                  !word.includes(prevGuessLetter.char)
+                ) {
+                  lettersMatch = false
+                  break
                 }
               }
-              return lettersMatch;
-            });
+              return lettersMatch
+            })
           }
         }
-  
-        filteredWordList = wordList.slice();
+
+        filteredWordList = wordList.slice()
       }
-    });
-    return filteredWordList;
+    })
+    return filteredWordList
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

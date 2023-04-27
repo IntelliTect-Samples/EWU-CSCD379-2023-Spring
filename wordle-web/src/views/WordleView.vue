@@ -17,7 +17,8 @@
           <v-list-item
             v-for="(word, index) in availableWords"
             :key="index"
-            @click="selectWord(word)">
+            @click="selectWord(word)"
+          >
             <v-list-item-title>{{ word }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -56,13 +57,13 @@ function checkGuess() {
   guess.value = ''
 }
 function selectWord(word: string) {
-//  game.guess.value = word
+  //  game.guess.value = word
   guess.value = word
   dialog.value = false
 }
 
 function showAvailableWords() {
-  availableWords.value = game.getAvailableWords();
+  availableWords.value = game.getAvailableWords()
   dialog.value = true
 }
 

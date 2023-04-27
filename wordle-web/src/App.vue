@@ -5,12 +5,11 @@
         <v-app-bar class="custom-app-bar" color="white" density="compact">
           <v-app-bar-title to="/">
             <v-btn :ripple="false" variant="plain" to="/">
-              <v-icon class ="mdi mdi-cellphone-settings"></v-icon>
-                Wordle
-              </v-btn>
+              <v-icon class="mdi mdi-cellphone-settings"></v-icon>
+              Wordle
+            </v-btn>
           </v-app-bar-title>
-          <template v-slot:prepend>
-          </template>
+          <template v-slot:prepend> </template>
           <template v-slot:append>
             <v-menu>
               <template v-slot:activator="{ props }">
