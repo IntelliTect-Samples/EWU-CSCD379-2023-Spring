@@ -1,9 +1,13 @@
 <template>
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <KeyBoard
+    @backspace="backspace"
+    @checkGuess="checkGuess"
+    @letterClick="addChar"
+    :guessedLetters="game.guessedLetters"
+  />
   <WordList :game="game"></WordList>
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h3>Current secret word: {{ game.secretWord }}</h3>
 </template>
@@ -44,6 +48,12 @@ function addChar(letter: Letter) {
     game.guess.push(letter.char)
     game.validWordList = WordsService.validWords(game.guess.text)
   }
+}
+
+function backspace() {
+  audio.play()
+  guess.value = guess.value.slice(0, -1)
+  game.guess.pop()
 }
 
 function keyPress(event: KeyboardEvent) {
