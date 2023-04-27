@@ -2,10 +2,18 @@
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col cols="auto" dense v-for="(letter, j) in key" :key="j">
       <div v-if="letter.char != 'Backspace'">
-        <LetterButton :style="{'filter': 'drop-shadow(2px 2px 1px #808080)'}" :letter="letter" @click="letterClick(letter)" />
+        <LetterButton
+          :style="{ filter: 'drop-shadow(2px 2px 1px #808080)' }"
+          :letter="letter"
+          @click="letterClick(letter)"
+        />
       </div>
       <div v-else>
-        <BackspaceButton :style="{'filter': 'drop-shadow(2px 2px 1px #808080)'}" :letter="letter" @click="letterClick(letter)" />
+        <BackspaceButton
+          :style="{ filter: 'drop-shadow(2px 2px 1px #808080)' }"
+          :letter="letter"
+          @click="letterClick(letter)"
+        />
       </div>
     </v-col>
   </v-row>

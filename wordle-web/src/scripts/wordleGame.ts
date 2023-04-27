@@ -77,11 +77,11 @@ export class WordleGame {
       letterList[indexTracker][0] = letter.char
       letterList[indexTracker][2] = letter.index
       if (letter.status === LetterStatus.Correct) {
-        letterList[indexTracker][1] = "0"
+        letterList[indexTracker][1] = '0'
       } else if (letter.status === LetterStatus.Misplaced) {
-        letterList[indexTracker][1] = "1"
+        letterList[indexTracker][1] = '1'
       } else {
-        letterList[indexTracker][1] = "2"
+        letterList[indexTracker][1] = '2'
       }
       indexTracker = indexTracker + 1
     }

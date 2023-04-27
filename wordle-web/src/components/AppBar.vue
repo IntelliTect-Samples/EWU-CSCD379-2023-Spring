@@ -2,18 +2,19 @@
   <nav>
     <v-layout>
       <v-toolbar prominent>
-        <!--<RouterLink to="/"><icon /></RouterLink>
-        <v-toolbar-title><RouterLink to="/">Wordle</RouterLink></v-toolbar-title>-->
         <RouterLink to="/">
-          <div :style="{'float':'left'}">
+          <div :style="{ float: 'left' }">
             <icon></icon>
           </div>
-          <div :style="{'float':'right'}">
-            <v-toolbar-title :style="{'float':'right'}">Wordle</v-toolbar-title>
+          <div :style="{ float: 'right' }">
+            <v-toolbar-title :style="{ float: 'right' }">Wordle</v-toolbar-title>
           </div>
         </RouterLink>
-        <v-toolbar-title></v-toolbar-title><!--Needed for spacing-->
-        <v-btn :style="{'height': '100%'}" @click="showDialog = !showDialog"><settingsIcon :style="{'height': '40px'}" /></v-btn>
+        <v-toolbar-title></v-toolbar-title
+        ><!--Needed for spacing-->
+        <v-btn :style="{ height: '100%' }" @click="showDialog = !showDialog"
+          ><settingsIcon :style="{ height: '40px' }"
+        /></v-btn>
         <v-app-bar-nav-icon
           variant="text"
           @click.stop="showDrawer = !showDrawer"

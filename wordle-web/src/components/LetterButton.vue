@@ -1,7 +1,7 @@
 <style scoped>
-  .gradient {
-    background-image: radial-gradient(rgba(121, 121, 121, 0), rgba(143, 143, 143, 0.2)) !important
-  }
+.gradient {
+  background-image: radial-gradient(rgba(121, 121, 121, 0), rgba(143, 143, 143, 0.2)) !important;
+}
 </style>
 <template>
   <LetterBase

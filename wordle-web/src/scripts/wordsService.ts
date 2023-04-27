@@ -18,7 +18,6 @@ export abstract class WordsService {
   static currentWords(curGuess: string[], currentList: string[]) {
     let curWord = curGuess.join('')
     return currentList.filter((w) => w.startsWith(curWord)).sort()
-    
   }
 
   static validWords(knowns: string[][]): Array<string> {
@@ -38,7 +37,7 @@ export abstract class WordsService {
     //let wordList = this.#words
     for (let i = 0; i < knowns.length; i++) {
       let temp = []
-      if (knowns[i][1] == "0") {
+      if (knowns[i][1] == '0') {
         for (const word of wordList) {
           let tempWord = word.split('')
           if (tempWord[parseInt(knowns[i][2])] == knowns[i][0]) {
@@ -51,11 +50,15 @@ export abstract class WordsService {
       } else if (knowns[i][1] == '1') {
         let present = false
         for (let j = 0; j < knowns.length; j++) {
-          if (i != j && knowns[j][0] === knowns[i][0] && parseInt(knowns[j][1]) < parseInt(knowns[i][1])) {
+          if (
+            i != j &&
+            knowns[j][0] === knowns[i][0] &&
+            parseInt(knowns[j][1]) < parseInt(knowns[i][1])
+          ) {
             present = true //if the letter is present in a different index and is more correct
           }
         }
-        if (!present){
+        if (!present) {
           for (const word of wordList) {
             let tempWord = word.split('')
             if (
@@ -73,7 +76,11 @@ export abstract class WordsService {
       } else if (knowns[i][1] == '2') {
         let present = false
         for (let j = 0; j < knowns.length; j++) {
-          if (i != j && knowns[j][0] === knowns[i][0] && parseInt(knowns[j][1]) < parseInt(knowns[i][1])) {
+          if (
+            i != j &&
+            knowns[j][0] === knowns[i][0] &&
+            parseInt(knowns[j][1]) < parseInt(knowns[i][1])
+          ) {
             present = true //if the letter is present in a different index and is more correct
           }
         }
