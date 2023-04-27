@@ -10,7 +10,7 @@ export enum LetterStatus {
 export class Letter {
   char: string
   status: LetterStatus = LetterStatus.NotGuessed
-static char: string
+  static char: string
 
   constructor(char: string, status?: LetterStatus) {
     this.char = char

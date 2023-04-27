@@ -1,16 +1,24 @@
 <template>
   <v-container class="d-flex flex-column justify-center">
-    <v-row class="justify-center d-flex flex-nowrap " dense v-for="(key, i) in keyboardLetters" :key="i">
+    <v-row
+      class="justify-center d-flex flex-nowrap"
+      dense
+      v-for="(key, i) in keyboardLetters"
+      :key="i"
+    >
       <v-col class="d-flex flex-shrink-1" cols="auto" v-for="(letter, j) in key" :key="j">
-      <LetterButton 
-      height="50px" width="40px"
-      min-height="1px" min-width="1px"
-      :elevation="10"
-      :letter="letter" @click="letterClick(letter)" />
+        <LetterButton
+          height="50px"
+          width="40px"
+          min-height="1px"
+          min-width="1px"
+          :elevation="10"
+          :letter="letter"
+          @click="letterClick(letter)"
+        />
       </v-col>
     </v-row>
   </v-container>
-  
 </template>
 
 <script setup lang="ts">
@@ -27,7 +35,7 @@ const keyboardLetters = computed(() => {
   const keyboardKeys = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['enter','z', 'x', 'c', 'v', 'b', 'n', 'm', 'del']
+    ['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'del']
   ]
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []

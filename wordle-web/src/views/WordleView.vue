@@ -1,6 +1,6 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-  
+
   <GameBoard :game="game" @letterClick="addChar" />
   <br />
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
@@ -78,7 +78,7 @@ function restartGame() {
 function addChar(letter: Letter) {
   if (letter.char === 'enter') {
     checkGuess()
-  } else if (letter.char === 'del'){
+  } else if (letter.char === 'del') {
     backSpace()
   } else {
     game.guess.push(letter.char)
