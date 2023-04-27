@@ -35,6 +35,7 @@ export class WordleGame {
     this.knownLetters = ['', '', '', '', '']
     this.notAllowedLetters = []
     this.containsLetters = []
+    this.guessedLetters = []
     this.validWordList = this.getValidWords()
   }
 
@@ -61,7 +62,16 @@ export class WordleGame {
     this.win = this.guess.check(this.secretWord)
     // Update the guessed letters
     for (const letter of this.guess.letters) {
-      this.guessedLetters.push(letter)
+      if (letter.status == 1) {
+        for (const guessLetter of this.guessedLetters) {
+          if (guessLetter.char == letter.char) {
+            guessLetter.status = 1
+          }
+        }
+        this.guessedLetters.push(letter)
+      } else {
+        this.guessedLetters.push(letter)
+      }
     }
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
