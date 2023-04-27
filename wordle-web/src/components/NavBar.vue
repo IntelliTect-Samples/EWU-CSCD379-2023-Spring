@@ -1,6 +1,6 @@
 <template>
    <v-layout>
-     <v-app-bar color="primary" density="compact" primary>
+     <v-app-bar color="primary" density="compact">
        <v-app-bar-title to="../wordle" class="ml-30">
          <v-btn justify="center" :ripple="false" variant="plain" to="../wordle">
            <v-icon>mdi-file-word-box</v-icon>
