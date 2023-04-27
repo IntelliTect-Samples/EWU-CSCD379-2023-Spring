@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Writers;
 using Wordle.Api.Data;
+using Wordle.Api.Services;
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
@@ -28,6 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
+builder.Services.AddScoped<WordService>();
 
 
 var app = builder.Build();
