@@ -1,6 +1,5 @@
 <template>
-  <AppBar class="app-bar" 
-  :style="{ zIndex: '1000', marginBottom: '16px' }" />
+  <AppBar class="app-bar" :style="{ zIndex: '1000', marginBottom: '16px' }" />
   <RouterView />
 </template>
 

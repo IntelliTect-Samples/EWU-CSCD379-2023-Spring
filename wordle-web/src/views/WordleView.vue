@@ -1,51 +1,31 @@
 <template>
-  <GameBoard :game="game" @letterClick="addChar" />
-
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
-  
-  <v-card width="25%">
-    Possible Words: {{ WordsService.validWords(guess).length }}
-    <v-btn @click="dialog = !dialog">Select</v-btn>
-    <v-dialog   
-      v-model="dialog"
-      activator="#select"
-      transition="dialog-bottom-transition"
-      width="auto"  
-    > 
-      <v-card width="270px">
-      <v-select
-        no-data-text="Please enter at least one letter"
-        label="Available Words"
-        :items="WordsService.validWords(guess)"
-        v-model="selected"
-        @update:model-value="selectWord(selected)"
-        onchange="selectWord(this.value)"
-        >
-        </v-select>
-      </v-card>
-    </v-dialog>
-  </v-card>
-  
-
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+  <v-container>
+    <GameBoard :game="game" @letterClick="addChar" />
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+    <v-row class="justify-center">
+      <v-col cols="auto">
+        <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+      </v-col>
+    </v-row>
+    <PossibleWords
+      @guessClick="checkGuess"
+      @wordSelection="selectWord"
+      :game="game"
+      :guess="guess"
+    />
+  </v-container>
 </template>
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import { WordsService } from '@/scripts/wordsService'
+import PossibleWords from '@/components/PossibleWords.vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
-const selected = ref('')
 const game = reactive(new WordleGame())
-const dialog = ref(false)
 console.log(game.secretWord)
 
 onMounted(() => {
@@ -54,16 +34,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function selectWord(selected: string) {
-  game.guess.clear()
-  guess.value = ''
-  for (let letter of selected) {
-    game.guess.push(letter)
-    guess.value += letter
-  }
-  dialog.value = false
-}
 
 function checkGuess() {
   game.submitGuess()
@@ -88,6 +58,15 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
+  }
+}
+
+function selectWord(selected: string) {
+  game.guess.clear()
+  guess.value = ''
+  for (let letter of selected) {
+    game.guess.push(letter)
+    guess.value += letter
   }
 }
 </script>

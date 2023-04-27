@@ -12,44 +12,6 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
-const pastel = {
-  dark: true,
-  colors: {
-    correct: '#D2FFF3',
-    misplaced: '#FFF3D2',
-    wrong: '#F3D2FF',
-  }
-}
-
-const pastelAndLight = {
-  dark: false,
-  colors: {
-    correct: '#D2FFF3',
-    misplaced: '#FFF3D2',
-    wrong: '#F3D2FF',
-    background: '#FFFFFF'
-  }
-}
-
-const neon = {
-  dark: true,
-  colors: {
-    correct: '#00FFFF',
-    misplaced: '#FFFF00',
-    wrong: '#FF00FF',
-  }
-}
-
-const neonAndLight = {
-  dark: false,
-  colors: {
-    correct: '#00FFFF',
-    misplaced: '#FFFF00',
-    wrong: '#FF00FF',
-  }
-}
-
-
 const vuetify = createVuetify({
   components,
   directives,
@@ -60,24 +22,55 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: 'defaultDark',
     themes: {
-      pastel,
-      pastelAndLight,
-      neon,
-      neonAndLight,
-      dark: {
+      defaultDark: {
+        dark: true,
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
         }
       },
-      light: {
+      defaultLight: {
+        dark: false,
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
+        }
+      },
+      neonDark: {
+        dark: true,
+        colors: {
+          correct: '#00FFFF',
+          misplaced: '#FFFF00',
+          wrong: '#FF00FF'
+        }
+      },
+      neonLight: {
+        dark: false,
+        colors: {
+          correct: '#00FFFF',
+          misplaced: '#FFFF00',
+          wrong: '#FF00FF'
+        }
+      },
+      pastelDark: {
+        dark: true,
+        colors: {
+          correct: '#D2FFF3',
+          misplaced: '#FFF3D2',
+          wrong: '#F3D2FF'
+        }
+      },
+      pastelLight: {
+        dark: false,
+        colors: {
+          correct: '#D2FFF3',
+          misplaced: '#FFF3D2',
+          wrong: '#F3D2FF',
+          background: '#FFFFFF'
         }
       }
     }

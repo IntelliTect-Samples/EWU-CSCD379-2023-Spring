@@ -10,7 +10,8 @@
       </v-card-text>
       <v-card-actions>
         <v-btn variant="outlined" prepend-icon="mdi-keyboard-backspace" @click="$router.go(-1)">
-        Back</v-btn>
+          Back</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-container>
