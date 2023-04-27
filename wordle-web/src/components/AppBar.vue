@@ -20,7 +20,7 @@
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>
 
-  <v-dialog width="350px" title="Settings" v-model="settings" app temporary>
+  <v-dialog transition="fab-transition" width="350px" title="Settings" v-model="settings" app temporary>
     <v-card rounded="lg">
       <!-- TODO: Center the title of the v-card-title tag. -->
       <v-card-title id="card-title" elevation="6">
