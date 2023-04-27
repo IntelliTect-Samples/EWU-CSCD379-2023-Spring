@@ -1,6 +1,5 @@
 <template>
   <div class="align-center">
-    <br />
     <h1>The Good Word</h1>
     <br />
 
@@ -62,7 +61,6 @@ import { WordsService } from '@/scripts/wordsService'
 
 let validGuesses = new Array<string>()
 let validWord = ''
-// TODO: Possible refactor 'buttonText' to prevent hardcoding.
 let buttonText = ref('Display correct word')
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -86,7 +84,6 @@ watch(
   { flush: 'post' }
 )
 
-// TODO: Possible refactor 'buttonText' to prevent hardcoding.
 function toggleText() {
   buttonText.value =
     buttonText.value === `${game.secretWord}` ? 'Display correct word' : `${game.secretWord}`
