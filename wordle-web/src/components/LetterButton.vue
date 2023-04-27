@@ -1,17 +1,9 @@
 <template>
   <LetterBase
-    class="gradient-btn"
     :char="props.letter.char"
     :color="props.letter.color"
   ></LetterBase>
 </template>
-
-<style>
-.gradient-btn {
-  background: linear-gradient(to right, #0000005d, #09476b33) !important;
-  color: white;
-}
-</style>
 
 <script setup lang="ts">
 import type { Letter } from '@/scripts/letter'
