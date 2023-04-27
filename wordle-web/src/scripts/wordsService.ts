@@ -7,22 +7,34 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(currGuess: string, secretWord: string): string[] {
+  static validWords(guesses: string[], secretWord: string): string[] {
     const wordsList: string[] = []
-    let expression = ''
+    let expression: string[] = ['[^]', '[^]', '[^]', '[^]', '[^]']
 
-    for (let i = 0; i < secretWord.length; i++) {
-      if (currGuess[i] == secretWord[i])
-        expression = expression.concat(secretWord[i])
-      else
-        expression = expression.concat('[a-z]')
+    for (let guess of guesses) {
+      for (let i = 0; i < secretWord.length; i++) {
+        if (guess[i] == secretWord[i] || expression[i] == secretWord[i])
+          // Correctly Placed
+          expression[i] = secretWord[i]
+        else {
+          if (secretWord.includes(guess[i]) && !expression[i].includes(guess[i])) {
+            // Incorrectly placed
+            expression[i] = expression[i].split(']')[0].concat(guess[i]).concat(']')
+          } else
+            for (let j = 0; j < expression.length; j++)
+              if (expression[j].includes('[^') && !expression[j].includes(guess[i])) {
+                // Incorrect
+                expression[j] = expression[j].split(']')[0].concat(guess[i]).concat(']')
+              }
+        }
+      }
+      console.log(expression.join(''))
     }
 
-    let regex = new RegExp(expression)
+    let regex = new RegExp(expression.join(''))
 
     for (const word of this.#words) {
-      if (regex.test(word)) 
-        wordsList.push(word)
+      if (regex.test(word)) wordsList.push(word)
     }
 
     return wordsList
