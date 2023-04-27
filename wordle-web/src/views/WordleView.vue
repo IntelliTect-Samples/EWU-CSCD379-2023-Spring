@@ -1,13 +1,11 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-  <h2>{{ subtitle }}</h2>
+  
   <GameBoard :game="game" @letterClick="addChar" />
   <br />
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <br />
-
-  <v-btn size="large" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
+  <h2>{{ subtitle }}</h2>
   <v-btn @click="restartGame" @keyup.enter="restartGame"> Restart </v-btn>
 
   <h3>{{ game.secretWord }}</h3>
@@ -78,8 +76,14 @@ function restartGame() {
 }
 
 function addChar(letter: Letter) {
-  game.guess.push(letter.char)
-  guess.value += letter.char
+  if (letter.char === 'enter') {
+    checkGuess()
+  } else if (letter.char === 'del'){
+    backSpace()
+  } else {
+    game.guess.push(letter.char)
+    guess.value += letter.char
+  }
 }
 
 function setWord(word: string) {
@@ -101,5 +105,11 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
   }
   //event.preventDefault()
+}
+
+function backSpace() {
+  guess.value = guess.value.slice(0, -1)
+  game.guess.pop()
+  console.log('Back')
 }
 </script>
