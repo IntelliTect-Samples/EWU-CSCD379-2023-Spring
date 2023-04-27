@@ -26,6 +26,7 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * [TypeScript](https://www.typescriptlang.org/docs/) ([Style Guide](https://google.github.io/styleguide/tsguide.html))
 * [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
+* [Axios](https://axios-http.com/docs/intro) (Calling APIs)
 
 ### Back End
 * [.NET](https://dotnet.microsoft.com/en-us/)
