@@ -73,6 +73,7 @@ function checkGuess() {
 
 function restartGame() {
   game.restartGame()
+
   subtitle.value = 'Game was Reset'
   list.value = game.getValidWords()
 }
