@@ -1,33 +1,31 @@
-/**
- * class that represents a letter in the wordle word and status
- * of the letter in the wordle word
- */
+// Class that represents a letter in the wordle word and status
+// of the letter in the wordle word
 export enum LetterStatus {
   NotGuessed = 0,
-  Correct = 0,
+  Correct,
   Misplaced,
   Wrong
 }
 
-export class Letter  {
-  letter: string;
-  status: LetterStatus = LetterStatus.NotGuessed;
+export class Letter {
+  char: string
+  status: LetterStatus = LetterStatus.NotGuessed
 
-  constructor(letter: string) {
-    this.letter = letter;
+  constructor(char: string = '', status?: LetterStatus) {
+    this.char = char
+    this.status = status ?? LetterStatus.NotGuessed
   }
+
   get color() {
     switch (this.status) {
       case LetterStatus.Correct:
-        return 'green';
+        return 'correct'
       case LetterStatus.Misplaced:
-        return 'orange';
+        return 'misplaced'
       case LetterStatus.Wrong:
-        return 'red';
+        return 'wrong'
       default:
-        return 'grey';
+        return 'notGuessed'
     }
   }
-
-
 }

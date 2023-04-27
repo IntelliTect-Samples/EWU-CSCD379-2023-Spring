@@ -1,26 +1,19 @@
 <template>
-  <div class="about">
-
-    <v-card>
-      <v-card-title> This is a vue/vuetify class! </v-card-title>
-      <v-card-subtitle> (College Class) </v-card-subtitle>
-
+  <main>
+    <v-card class="mx-auto elevation-3">
+      <v-card-title>About</v-card-title>
       <v-card-text>
-        Lorem ipsum dolor sit amet blah blah blah
-        <v-icon icon="mdi:mdi-abacus" />
+        Welcome to our Wordle game app! This project was created for a class assignment and
+        showcases our skills in Vue.js and Veutify. I hope you enjoy playing the game and exploring
+        the different features, including the ability to customize the color scheme and view
+        available words. Thank you for visiting and have fun! Meg is super awesome!!!
       </v-card-text>
-
       <v-card-actions>
-        <v-spacer />
-        <v-btn text color="warning">Cancel</v-btn>
-        <v-btn text color="primary">OK</v-btn>
+        <v-btn color="teal" variant="tonal" @click="$router.go(-1)">Back</v-btn>
       </v-card-actions>
     </v-card>
-    <h1>This is an about page</h1>
-
-  </div>
+  </main>
 </template>
-
 <style>
 @media (min-width: 1024px) {
   .about {
