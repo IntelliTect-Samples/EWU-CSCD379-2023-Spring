@@ -47,7 +47,7 @@ const vuetify = createVuetify({
           primary: '#000000'
         }
       },
-      inverse: {
+      light: {
         colors: {
           correct: '#F44336',
           misplaced: '#FFC107',
