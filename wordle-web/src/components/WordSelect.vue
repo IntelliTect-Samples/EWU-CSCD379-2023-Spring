@@ -1,13 +1,13 @@
 <template>
   <div class="WordSelect">
-    <v-select :items="validWords"></v-select>
+    <v-select :value="value" :items="validWords" @input="$emit('input', $event)"></v-select>
     {{ validWords.length }} potential words
   </div>
 </template>
 
 <script lang="ts">
 export default {
-  props: ['validWords']
+  props: ['value', 'validWords']
 }
 </script>
 

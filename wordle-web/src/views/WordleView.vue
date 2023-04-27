@@ -3,7 +3,9 @@
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <WordSelect :validWords = validWords />
+  <WordSelect :validWords="validWords" v-model="selection" />
+
+  <p>{{ selection }}</p>
 </template>
 
 <script setup lang="ts">
@@ -12,13 +14,15 @@ import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
 import type { Letter } from '@/scripts/letter'
-import WordSelect from '../components/WordSelect.vue'
-import { WordsService } from '../scripts/wordsService'
+import WordSelect from '@/components/WordSelect.vue'
+import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
-let validWords = ref(['Enter a guess first!'])
+let validWords = ref(['?????'])
+let guesses: string[] = []
+const selection = ref(null)
 
 onMounted(() => {
   window.addEventListener('keyup', keyPress)
@@ -29,7 +33,8 @@ onUnmounted(() => {
 
 function checkGuess() {
   game.submitGuess()
-  validWords.value = WordsService.validWords(guess.value, game.secretWord)
+  guesses.push(guess.value)
+  validWords.value = WordsService.validWords(guesses, game.secretWord)
   guess.value = ''
 }
 
