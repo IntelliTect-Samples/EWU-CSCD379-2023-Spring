@@ -11,42 +11,32 @@
         <v-card-text>
           <v-list>
             <v-list-item>
-              <v-btn prepend-icon="mdi-weather-sunny"  @click="setDarkTheme">
-                Dark Mode
-              </v-btn>
+              <v-btn prepend-icon="mdi-weather-sunny" @click="setDarkTheme"> Dark Mode </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-weather-night"  @click="setInverseTheme">
-                Light Mode
-              </v-btn>
+              <v-btn prepend-icon="mdi-weather-night" @click="setInverseTheme"> Light Mode </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-bottle-tonic-skull"  @click="setToxicLightTheme">
+              <v-btn prepend-icon="mdi-bottle-tonic-skull" @click="setToxicLightTheme">
                 Toxic Light
               </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-bottle-tonic-skull"  @click="setToxicDarkTheme">
+              <v-btn prepend-icon="mdi-bottle-tonic-skull" @click="setToxicDarkTheme">
                 Toxic Dark
               </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-tsunami"  @click="setOceanLightTheme">
-                Ocean Light
-              </v-btn>
+              <v-btn prepend-icon="mdi-tsunami" @click="setOceanLightTheme"> Ocean Light </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-tsunami"  @click="setOceanDarkTheme">
-                Ocean Dark
-              </v-btn>
+              <v-btn prepend-icon="mdi-tsunami" @click="setOceanDarkTheme"> Ocean Dark </v-btn>
             </v-list-item>
-
-  
           </v-list>
         </v-card-text>
 
@@ -64,7 +54,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'SettingsMenu',
+  name: 'SettingsMenu'
 })
 </script>
 

@@ -1,9 +1,5 @@
 <template>
-  <v-btn 
-    class="justify-center key-gradient key" 
-    size="small" 
-    :color="props.color " 
-    elevation="6"
+  <v-btn class="justify-center key-gradient key" size="small" :color="props.color" elevation="6"
     >{{ props.char }}
   </v-btn>
 </template>
@@ -28,12 +24,8 @@ const props = withDefaults(defineProps<Props>(), {
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 5px;
-  
- 
-
 }
-  .key-gradient {
-  background-image: linear-gradient(to top, #6F6F6F31, #B5B5B5C9);
+.key-gradient {
+  background-image: linear-gradient(to top, #6f6f6f31, #b5b5b5c9);
 }
-
 </style>

@@ -1,8 +1,8 @@
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 const state = reactive({
   theme: 'dark',
-  mode: 'standard',
-});
+  mode: 'standard'
+})
 
-export default state;
+export default state

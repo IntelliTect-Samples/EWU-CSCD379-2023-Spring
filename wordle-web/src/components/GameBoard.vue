@@ -1,11 +1,15 @@
 <template>
   <div class="pa-5">
-  <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
-    <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
-      <LetterButton class="key square key-gradient" :letter="letter" @click="letterClick(letter)" />
-    </v-col>
-  </v-row>
-</div>
+    <v-row class="justify-center" dense v-for="(word, r) in game.guesses" :key="r">
+      <v-col cols="auto" v-for="(letter, c) in word.letters" :key="`${r}-${c}`">
+        <LetterButton
+          class="key square key-gradient"
+          :letter="letter"
+          @click="letterClick(letter)"
+        />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -25,11 +29,8 @@ function letterClick(letter: Letter) {
   emits('letterClick', letter)
   console.log(letter.status)
 }
-
 </script>
 <style scoped>
-
-
 .square {
   border-radius: 0 !important;
   border: 3px solid black;
@@ -44,10 +45,8 @@ function letterClick(letter: Letter) {
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 5px;
-
 }
 .key-gradient {
-  background-image: linear-gradient(to top, #6F6F6F6D, #B5B5B5A9);
+  background-image: linear-gradient(to top, #6f6f6f6d, #b5b5b5a9);
 }
-
 </style>

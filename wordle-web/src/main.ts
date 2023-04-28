@@ -26,23 +26,23 @@ const vuetify = createVuetify({
     defaultTheme: 'light',
     themes: {
       dark: {
-        colors:{
-        misplaced: colors.amber.lighten1,
-        wrong: colors.grey.darken1,
-        correct: colors.lightGreen.darken1,
-        background: colors.grey.darken4,
-        secondary: colors.grey.darken4
-      }
-    },
+        colors: {
+          misplaced: colors.amber.lighten1,
+          wrong: colors.grey.darken1,
+          correct: colors.lightGreen.darken1,
+          background: colors.grey.darken4,
+          secondary: colors.grey.darken4
+        }
+      },
       light: {
-        colors:{
-        misplaced: colors.amber.darken1,
-        wrong: colors.grey.lighten1,
-        correct: colors.green.lighten1,
-        background:colors.grey.lighten4,
-        secondary:colors.grey.lighten4
-      }
-    },
+        colors: {
+          misplaced: colors.amber.darken1,
+          wrong: colors.grey.lighten1,
+          correct: colors.green.lighten1,
+          background: colors.grey.lighten4,
+          secondary: colors.grey.lighten4
+        }
+      },
       // Add Toxic Light, Ocean Light
       toxicLight: {
         colors: {
@@ -68,7 +68,7 @@ const vuetify = createVuetify({
           misplaced: colors.lightBlue.lighten2,
           wrong: colors.blue.darken2,
           correct: colors.teal.lighten1,
-          secondary:colors.blue.lighten5
+          secondary: colors.blue.lighten5
         }
       },
       oceanDark: {
@@ -77,14 +77,12 @@ const vuetify = createVuetify({
           misplaced: colors.lightBlue.lighten2,
           wrong: colors.blue.darken2,
           correct: colors.teal.lighten1,
-          secondary:colors.indigo.darken4
-
+          secondary: colors.indigo.darken4
         }
       }
     }
   }
 })
-
 
 const app = createApp(App)
 

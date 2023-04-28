@@ -5,17 +5,12 @@
       <v-card-text> - some guy named Jake</v-card-text>
     </v-card>
   </v-sheet>
-      <v-card class="ma-1">
-        <v-card-title> *Ahem*..   MEG RULES </v-card-title>
-        <v-card-text> - also some guy named Jake</v-card-text>
-      </v-card>
-      <v-btn to="/wordle">
-        back to the action
-      </v-btn>
+  <v-card class="ma-1">
+    <v-card-title> *Ahem*.. MEG RULES </v-card-title>
+    <v-card-text> - also some guy named Jake</v-card-text>
+  </v-card>
+  <v-btn to="/wordle"> back to the action </v-btn>
 </template>
-
-
-
 
 <!-- <script setup lang="ts">
 // import Axios from 'axios';

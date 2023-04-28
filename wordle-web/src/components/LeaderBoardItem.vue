@@ -1,9 +1,7 @@
 <template>
   <v-dialog transition="dialog-bottom-transition" scrollable width="auto">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" prepend-icon="mdi-chart-box-outline">
-        Leaderboard
-      </v-btn>
+      <v-btn v-bind="props" prepend-icon="mdi-chart-box-outline"> Leaderboard </v-btn>
     </template>
     <template v-slot:default="{ isActive }">
       <v-card>
@@ -47,6 +45,6 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'LeaderBoard',
+  name: 'LeaderBoard'
 })
 </script>

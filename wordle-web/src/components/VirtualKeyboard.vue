@@ -1,9 +1,14 @@
 <template>
   <div class="">
-    <v-card color="secondary" class="justify-center pa-2" >
-      <v-card-item >
+    <v-card color="secondary" class="justify-center pa-2">
+      <v-card-item>
         <v-row class="justify-center">
-          <v-col v-for="(key, index) in keyboardLetters[0]" :key="index" cols="auto" class="pa-1 mt-4">
+          <v-col
+            v-for="(key, index) in keyboardLetters[0]"
+            :key="index"
+            cols="auto"
+            class="pa-1 mt-4"
+          >
             <LetterButton class="key key-gradient" :letter="key" @click="letterClick(key)" />
           </v-col>
         </v-row>
@@ -14,13 +19,17 @@
         </v-row>
         <v-row class="justify-center">
           <v-col cols="auto" class="pa-1 mb-4">
-            <v-btn size="small" class="key special-key key-gradient" @click=backspaceClick()>Delete</v-btn>
+            <v-btn size="small" class="key special-key key-gradient" @click="backspaceClick()"
+              >Delete</v-btn
+            >
           </v-col>
           <v-col v-for="(key, index) in keyboardLetters[2]" :key="index" cols="auto" class="pa-1">
             <LetterButton class="key key-gradient" :letter="key" @click="letterClick(key)" />
           </v-col>
           <v-col cols="auto" class="pa-1">
-            <v-btn size="small" class="key special-key key-gradient" @click=enterClick()>Enter</v-btn>
+            <v-btn size="small" class="key special-key key-gradient" @click="enterClick()"
+              >Enter</v-btn
+            >
           </v-col>
         </v-row>
         <v-row>
@@ -28,7 +37,6 @@
         </v-row>
       </v-card-item>
     </v-card>
-  
   </div>
 </template>
 
@@ -59,7 +67,6 @@ const keyboardLetters = computed(() => {
   return keyboardLetters
 })
 
-
 const emits = defineEmits<{
   (event: 'letterClick', value: Letter): void
   (event: 'backspaceClick'): void
@@ -74,7 +81,6 @@ function backspaceClick() {
 function enterClick() {
   emits('enterClick')
 }
-
 </script>
 
 <style scoped>
@@ -84,11 +90,11 @@ function enterClick() {
   font-size: 1rem;
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 .key-gradient {
-  background-image: linear-gradient(to top, #6F6F6F6D, #B5B5B5A9);
+  background-image: linear-gradient(to top, #6f6f6f6d, #b5b5b5a9);
 }
 .special-key {
   border: 1px solid #ccc;

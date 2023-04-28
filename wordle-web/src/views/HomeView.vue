@@ -1,7 +1,7 @@
 <template>
-  <v-container class="fill-height" style="width: max-content;" >
+  <v-container class="fill-height" style="width: max-content">
     <v-row class="text-center" style="">
-      <v-col >
+      <v-col>
         <h1>JB's Wordle Clone</h1>
         <p>Wordle-Wordle-Wordle!.</p>
         <v-col>
@@ -13,10 +13,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 
-
-export default defineComponent( {
-  name: "HomeView",
-});
+export default defineComponent({
+  name: 'HomeView'
+})
 </script>

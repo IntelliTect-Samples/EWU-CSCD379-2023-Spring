@@ -1,15 +1,22 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <GameBoard :game = "game" @letter-click="addChar"></GameBoard>
+    <GameBoard :game="game" @letter-click="addChar"></GameBoard>
     <div class="ma-5">
       <v-row class="justify-center">
-        <ValidWordList class="ml-2" :validWords="validWords"  @word-selected="handleWordSelected" />
-        <v-btn size="small" class="ml-2" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+        <ValidWordList class="ml-2" :validWords="validWords" @word-selected="handleWordSelected" />
+        <v-btn size="small" class="ml-2" @click="checkGuess" @keyup.enter="checkGuess">
+          Check
+        </v-btn>
       </v-row>
     </div>
-    <VirtualKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" @enterClick="checkGuess" @backspaceClick="removeChar"/>
-    </div>
+    <VirtualKeyboard
+      :guessedLetters="game.guessedLetters"
+      @letterClick="addChar"
+      @enterClick="checkGuess"
+      @backspaceClick="removeChar"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -46,13 +53,13 @@ function handleWordSelected(word: string) {
 
 function checkGuess() {
   const validCheck = WordsService.validateWord(guess.value)
-    if (validCheck != ValidationStatus.Valid) {
-      for (let letter of guess.value) {
-        game.guess.pop()
-      }
-      alert(validCheck)
-      return
+  if (validCheck != ValidationStatus.Valid) {
+    for (let letter of guess.value) {
+      game.guess.pop()
     }
+    alert(validCheck)
+    return
+  }
   game.submitGuess()
   validWords.value = game.getValidWords()
   guess.value = game.guess.text
