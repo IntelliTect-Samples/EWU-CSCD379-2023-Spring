@@ -22,6 +22,7 @@ export class WordleGame {
   numberOfGuesses = 6
 
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
+    WordsService.loadWords()
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
 
@@ -36,6 +37,8 @@ export class WordleGame {
   submitGuess() {
     // put logic to win here.
     this.guess.check(this.secretWord)
+
+    WordsService.availableWords(this.guess)
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {

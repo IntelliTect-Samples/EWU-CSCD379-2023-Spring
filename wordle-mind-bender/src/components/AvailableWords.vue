@@ -7,7 +7,7 @@
         style="background-image: var(--btn-gradient)"
         class="elevation-7"
         v-on:keydown.enter.prevent
-        >Available Words</v-btn
+        >{{ WordsService.possibleWords.size }}</v-btn
       >
     </template>
     <template v-slot:default="{ isActive }">
@@ -15,9 +15,9 @@
         <v-card-title color="correct" title="Available Words"></v-card-title>
         <v-card-text>
           <v-list density="compact">
-            <v-list-item v-for="(item, i) in items" :key="i" :value="item">
-              <v-list-item-title @click=";(isActive.value = false), sendGuess(item)">
-                {{ item }}
+            <v-list-item v-for="(word, i) in WordsService.possibleWords" :key="i" :value="word">
+              <v-list-item-title @click=";(isActive.value = false), sendGuess(word)">
+                {{ word }}
               </v-list-item-title>
             </v-list-item>
           </v-list>
@@ -31,6 +31,8 @@
 </template>
 
 <script setup lang="ts">
+import { WordsService } from '@/scripts/wordsService'
+
 const emits = defineEmits<{
   (event: 'inputGuess', value: string): void
 }>()
@@ -38,6 +40,4 @@ const emits = defineEmits<{
 function sendGuess(word: string) {
   emits('inputGuess', word)
 }
-
-const items = ['hello', 'world', 'apple', 'orange', 'grape', 'melon', 'peach']
 </script>
