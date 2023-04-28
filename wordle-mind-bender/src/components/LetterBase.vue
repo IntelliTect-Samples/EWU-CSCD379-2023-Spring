@@ -1,5 +1,9 @@
 <template>
-  <v-btn :color="props.color" :style="{ 'background-image': 'var(--btn-gradient) !important' }">
+  <v-btn
+    :color="props.color"
+    :style="{ 'background-image': 'var(--btn-gradient) !important' }"
+    v-on:keydown.enter.prevent
+  >
     {{ props.char.toUpperCase() }}
   </v-btn>
 </template>

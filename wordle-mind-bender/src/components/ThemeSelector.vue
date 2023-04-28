@@ -1,7 +1,9 @@
 <template>
   <v-dialog transition="dialog-bottom-transition" width="30rem">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" class="ml-1"><v-icon icon="mdi-cog" size="x-large"></v-icon></v-btn>
+      <v-btn v-bind="props" class="ml-1" v-on:keydown.enter.prevent
+        ><v-icon icon="mdi-cog" size="x-large"></v-icon
+      ></v-btn>
     </template>
     <template v-slot:default="{ isActive }">
       <v-card>

@@ -24,6 +24,7 @@
           color="teal"
           style="background-image: var(--btn-gradient)"
           class="elevation-7"
+          v-on:keydown.enter.prevent
         >
           <v-icon icon="mdi-backspace"></v-icon>
         </v-btn>

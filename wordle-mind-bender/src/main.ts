@@ -18,7 +18,7 @@ const MossyWoodland = {
     correct: '#18392b',
     misplaced: '#6b4318',
     wrong: '#4E342E',
-    notGuessed: '#524945'
+    notGuessed: '#695d58'
   }
 }
 
