@@ -4,8 +4,6 @@ import pushAudio from '../components/audio/tap.ogg'
 
 export class Word {
   public letters = Array<Letter>()
-  public playPopAudio = new Audio(popAudio)
-  public playPushAudio = new Audio(pushAudio)
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
@@ -36,7 +34,7 @@ export class Word {
     // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
-        this.playPushAudio.play()
+        new Audio(pushAudio).play()
         letter.char = char
         return
       }
@@ -47,7 +45,7 @@ export class Word {
   pop() {
     for (let i = this.letters.length - 1; i >= 0; i--) {
       if (this.letters[i].char !== '') {
-        this.playPopAudio.play()
+        new Audio(popAudio).play()
         this.letters[i].char = ''
         return
       }
