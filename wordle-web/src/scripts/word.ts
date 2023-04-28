@@ -4,8 +4,8 @@ import pushAudio from '../components/audio/tap.ogg'
 
 export class Word {
   public letters = Array<Letter>()
-  private playPopAudio = new Audio(popAudio)
-  private playPushAudio = new Audio(pushAudio)
+  public playPopAudio = new Audio(popAudio)
+  public playPushAudio = new Audio(pushAudio)
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
