@@ -62,7 +62,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
     themes: {
       MossyWoodland,
       MossyWoodlandLight,
