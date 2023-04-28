@@ -2,7 +2,7 @@
   <v-expansion-panels v-model="wordDialog">
     <v-expansion-panel>
       <v-expansion-panel-header>
-        Valid Words available ({{ possibleWords.length }}) Start typing to reveal the words
+        Words available ({{ possibleWords.length }}) Start typing to reveal the words
       </v-expansion-panel-header>
       <v-expansion-panel-content>
         <v-table height="500px" class="pa-3" hover>
