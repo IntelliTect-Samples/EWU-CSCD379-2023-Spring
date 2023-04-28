@@ -1,7 +1,13 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col cols="auto" v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" class="elevation-7" />
+      <LetterButton
+        :letter="letter"
+        @click="letterClick(letter)"
+        class="elevation-7 px-0 font-weight-bold"
+        min-width="2.5rem"
+        height="3rem"
+      />
     </v-col>
   </v-row>
 </template>
