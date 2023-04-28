@@ -16,8 +16,11 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static loadWords() {
+  static resetService() {
     this.possibleWords = ref(this.#words)
+    this.correctChars = []
+    this.misplacedChars = []
+    this.wrongChars = []
   }
 
   static validWords(guess: Word): Array<string> {
@@ -32,11 +35,6 @@ export abstract class WordsService {
     }
 
     this.possibleWords.value = newPossibleWords
-
-    console.log(this.correctChars)
-    console.log(this.misplacedChars)
-    console.log(this.wrongChars)
-
     return this.possibleWords.value
   }
 

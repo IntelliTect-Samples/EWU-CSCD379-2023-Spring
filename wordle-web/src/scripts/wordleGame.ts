@@ -22,7 +22,7 @@ export class WordleGame {
   numberOfGuesses = 6
 
   restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
-    WordsService.loadWords()
+    WordsService.resetService()
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
 
