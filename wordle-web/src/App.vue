@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <navbar :theme="theme" />
     <v-main>
       <router-view />
     </v-main>

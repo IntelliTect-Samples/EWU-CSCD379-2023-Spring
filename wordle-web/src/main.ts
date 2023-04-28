@@ -9,7 +9,7 @@ import '@mdi/font/css/materialdesignicons.css'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import colors from 'vuetify/lib/util/colors'
+
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -27,57 +27,56 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
-          misplaced: colors.amber.lighten1,
-          wrong: colors.grey.darken1,
-          correct: colors.lightGreen.darken1,
-          background: colors.grey.darken4,
-          secondary: colors.grey.darken4
+          misplaced: '#FFC107',
+          wrong: '#424242',
+          correct: '#558B2F',
+          background: '#212121',
+          secondary: '#212121'
         }
       },
       light: {
         colors: {
-          misplaced: colors.amber.darken1,
-          wrong: colors.grey.lighten1,
-          correct: colors.green.lighten1,
-          background: colors.grey.lighten4,
-          secondary: colors.grey.lighten4
+          misplaced: '#FFC107',
+          wrong: '#BDBDBD',
+          correct: '#8BC34A',
+          background: '#ECEFF1',
+          secondary: '#ECEFF1'
         }
       },
-      // Add Toxic Light, Ocean Light
       toxicLight: {
         colors: {
-          background: colors.purple.lighten1,
-          misplaced: colors.amber.lighten1,
-          wrong: colors.purple.darken1,
-          correct: colors.green.lighten1,
-          secondary: colors.purple.lighten1
+          background: '#BA68C8',
+          misplaced: '#FFC107',
+          wrong: '#9C27B0',
+          correct: '#8BC34A',
+          secondary: '#BA68C8'
         }
       },
       toxicDark: {
         colors: {
-          background: colors.purple.darken4,
-          misplaced: colors.amber.darken1,
-          wrong: colors.purple.darken2,
-          correct: colors.green.lighten1,
-          secondary: colors.purple.darken4
+          background: '#311B92',
+          misplaced: '#FFC107',
+          wrong: '#5E35B1',
+          correct: '#8BC34A',
+          secondary: '#311B92'
         }
       },
       oceanLight: {
         colors: {
-          background: colors.blue.lighten5,
-          misplaced: colors.lightBlue.lighten2,
-          wrong: colors.blue.darken2,
-          correct: colors.teal.lighten1,
-          secondary: colors.blue.lighten5
+          background: '#E3F2FD',
+          misplaced: '#81D4FA',
+          wrong: '#1565C0',
+          correct: '#26A69A',
+          secondary: '#E3F2FD'
         }
       },
       oceanDark: {
         colors: {
-          background: colors.indigo.darken4,
-          misplaced: colors.lightBlue.lighten2,
-          wrong: colors.blue.darken2,
-          correct: colors.teal.lighten1,
-          secondary: colors.indigo.darken4
+          background: '#1A237E',
+          misplaced: '#81D4FA',
+          wrong: '#1565C0',
+          correct: '#26A69A',
+          secondary: '#1A237E'
         }
       }
     }
