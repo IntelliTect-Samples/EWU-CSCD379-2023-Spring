@@ -1,3 +1,6 @@
+import type { Word } from './word'
+import { LetterStatus } from './letter'
+import { reactive } from 'vue'
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,11 +10,62 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static possibleWords = reactive(new Set<string>())
+  private static correctChars = new Array<[string, number]>()
+  private static wrongChars = new Array<[string, number]>()
+
+  static loadWords() {
+    for (const word of this.#words) {
+      this.possibleWords.add(word)
+    }
   }
 
+  static availableWords(word: Word) {
+    this.addCharsToList(word)
+
+    for (const word of this.possibleWords) {
+      for (const correct of this.correctChars) {
+        if (!(word.includes(correct[0]) && word.indexOf(correct[0]) == correct[1])) {
+          this.possibleWords.delete(word)
+        }
+      }
+      for (const wrong of this.wrongChars) {
+        if (wrong[1] == -1 && word.includes(wrong[0])) {
+          this.possibleWords.delete(word)
+        }
+        if (wrong[1] != -1 && word.includes(wrong[0]) && word.indexOf(wrong[0]) == wrong[1]) {
+          this.possibleWords.delete(word)
+        }
+      }
+    }
+  }
+
+  static addCharsToList(word: Word) {
+    console.log(`Validating ${word.text}`)
+    for (const letter of word.letters) {
+      const currentLetterIndex = word.letters.indexOf(letter)
+      if (
+        letter.status == LetterStatus.Correct &&
+        !this.correctChars.some((c) => c[0] == letter.char && c[1] == currentLetterIndex)
+      ) {
+        this.correctChars.push([letter.char, currentLetterIndex])
+      } else if (letter.status == LetterStatus.Wrong) {
+        // If the letter is wrong, but it is in the correct position in another word, then the index will be set to that index, otherwise the wrong letter can be in any position so the index is set to -1
+        let index = -1
+        if (this.correctChars.some((c) => c[0] == letter.char)) {
+          index = currentLetterIndex
+        }
+        if (!this.wrongChars.some((c) => c[0] == letter.char && c[1] == index)) {
+          this.wrongChars.push([letter.char, index])
+        }
+      } else if (
+        letter.status == LetterStatus.Misplaced &&
+        !this.wrongChars.some((c) => c[0] == letter.char && c[1] == currentLetterIndex)
+      ) {
+        this.wrongChars.push([letter.char, currentLetterIndex])
+      }
+    }
+  }
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [
     'aahed',

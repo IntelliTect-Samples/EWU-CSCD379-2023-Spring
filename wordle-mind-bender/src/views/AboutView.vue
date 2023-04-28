@@ -1,6 +1,6 @@
 <template>
   <main>
-    <v-card class="mx-auto elevation-3">
+    <v-card class="mx-auto elevation-3" width="50%">
       <v-card-title>About</v-card-title>
       <v-card-text>
         Welcome to our Wordle game app! This project was created for a class assignment and
