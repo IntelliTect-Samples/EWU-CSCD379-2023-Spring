@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Checkout Code 
+      - name: Checkout Code
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -38,13 +38,13 @@ jobs:
       - name: Prettier Check
         working-directory: ./wordle-web
         run: npm run format:check
-      - name: Build Vue App 
+      - name: Build Vue App
         working-directory: ./wordle-web
         run: npm run build
       - name: Run Vitest Unit Tests
         run: npm run test:unit
         working-directory: ./wordle-web
-        
+
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
