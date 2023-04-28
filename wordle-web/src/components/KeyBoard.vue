@@ -1,12 +1,7 @@
 <template>
-  <v-container class="d-flex flex-column justify-center">
-    <v-row
-      class="justify-center d-flex flex-nowrap"
-      dense
-      v-for="(key, i) in keyboardLetters"
-      :key="i"
-    >
-      <v-col class="d-flex flex-shrink-1" cols="auto" v-for="(letter, j) in key" :key="j">
+  <v-container>
+    <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
+      <v-col cols="auto" v-for="(letter, j) in key" :key="j">
         <LetterButton
           height="50px"
           width="40px"
