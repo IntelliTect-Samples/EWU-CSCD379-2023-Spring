@@ -4,7 +4,7 @@
       <v-toolbar prominent>
         <RouterLink to="/">
           <div :style="{ float: 'left' }">
-            <icon></icon>
+            <icon fill="#41b883" height="33px"></icon>
           </div>
           <div :style="{ float: 'right' }">
             <v-toolbar-title :style="{ float: 'right' }">Wordle</v-toolbar-title>
@@ -13,7 +13,7 @@
         <v-toolbar-title></v-toolbar-title
         ><!--Needed for spacing-->
         <v-btn :style="{ height: '100%' }" @click="showDialog = !showDialog"
-          ><settingsIcon :style="{ height: '40px' }"
+          ><settingsIcon fill="#41b883" :style="{ height: '40px' }"
         /></v-btn>
         <v-app-bar-nav-icon
           variant="text"
