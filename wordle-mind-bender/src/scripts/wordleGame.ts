@@ -38,7 +38,7 @@ export class WordleGame {
     // put logic to win here.
     this.guess.check(this.secretWord)
 
-    WordsService.availableWords(this.guess)
+    WordsService.validWords(this.guess)
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {

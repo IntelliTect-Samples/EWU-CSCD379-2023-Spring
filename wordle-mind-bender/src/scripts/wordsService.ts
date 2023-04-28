@@ -1,7 +1,13 @@
 import type { Word } from './word'
 import { LetterStatus } from './letter'
-import { reactive } from 'vue'
+import { ref } from 'vue'
+
 export abstract class WordsService {
+  private static correctChars: Array<[string, number]> = []
+  private static misplacedChars: Array<[string, number]> = []
+  private static wrongChars: Array<string> = []
+  static possibleWords = ref(new Array<string>())
+
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
@@ -10,62 +16,93 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static possibleWords = reactive(new Set<string>())
-  private static correctChars = new Array<[string, number]>()
-  private static wrongChars = new Array<[string, number]>()
-
   static loadWords() {
-    for (const word of this.#words) {
-      this.possibleWords.add(word)
-    }
+    this.possibleWords = ref(this.#words)
   }
 
-  static availableWords(word: Word) {
-    this.addCharsToList(word)
+  static validWords(guess: Word): Array<string> {
+    const newPossibleWords = Array<string>()
 
-    for (const word of this.possibleWords) {
-      for (const correct of this.correctChars) {
-        if (!(word.includes(correct[0]) && word.indexOf(correct[0]) == correct[1])) {
-          this.possibleWords.delete(word)
-        }
-      }
-      for (const wrong of this.wrongChars) {
-        if (wrong[1] == -1 && word.includes(wrong[0])) {
-          this.possibleWords.delete(word)
-        }
-        if (wrong[1] != -1 && word.includes(wrong[0]) && word.indexOf(wrong[0]) == wrong[1]) {
-          this.possibleWords.delete(word)
-        }
+    this.updateGuessLetterStatus(guess)
+
+    for (const word of this.possibleWords.value) {
+      if (this.validateWord(word)) {
+        newPossibleWords.push(word)
       }
     }
+
+    this.possibleWords.value = newPossibleWords
+
+    console.log(this.correctChars)
+    console.log(this.misplacedChars)
+    console.log(this.wrongChars)
+
+    return this.possibleWords.value
   }
 
-  static addCharsToList(word: Word) {
-    console.log(`Validating ${word.text}`)
-    for (const letter of word.letters) {
-      const currentLetterIndex = word.letters.indexOf(letter)
-      if (
-        letter.status == LetterStatus.Correct &&
-        !this.correctChars.some((c) => c[0] == letter.char && c[1] == currentLetterIndex)
-      ) {
-        this.correctChars.push([letter.char, currentLetterIndex])
-      } else if (letter.status == LetterStatus.Wrong) {
-        // If the letter is wrong, but it is in the correct position in another word, then the index will be set to that index, otherwise the wrong letter can be in any position so the index is set to -1
-        let index = -1
-        if (this.correctChars.some((c) => c[0] == letter.char)) {
-          index = currentLetterIndex
+  private static updateGuessLetterStatus(guess: Word): void {
+    for (let i = 0; i < guess.letters.length; i++) {
+      const letter = guess.letters[i]
+      if (letter.status === LetterStatus.Correct) {
+        if (!this.correctChars.some((c) => c[0] === letter.char && c[1] === i)) {
+          this.correctChars.push([letter.char, i])
+          this.misplacedChars = this.misplacedChars.filter(
+            (c) => c[0] !== letter.char && c[1] !== i
+          )
         }
-        if (!this.wrongChars.some((c) => c[0] == letter.char && c[1] == index)) {
-          this.wrongChars.push([letter.char, index])
+      } else if (letter.status === LetterStatus.Misplaced) {
+        if (!this.misplacedChars.some((c) => c[0] === letter.char && c[1] === i)) {
+          this.misplacedChars.push([letter.char, i])
+          this.wrongChars = this.wrongChars.filter((c) => c !== letter.char)
         }
-      } else if (
-        letter.status == LetterStatus.Misplaced &&
-        !this.wrongChars.some((c) => c[0] == letter.char && c[1] == currentLetterIndex)
-      ) {
-        this.wrongChars.push([letter.char, currentLetterIndex])
+      } else if (letter.status === LetterStatus.Wrong) {
+        if (!this.wrongChars.includes(letter.char)) {
+          this.wrongChars.push(letter.char)
+        }
       }
     }
   }
+
+  private static validateWord(word: string): boolean {
+    // the word must contain all correct chars at their index
+    for (const [char, index] of this.correctChars) {
+      if (word[index] !== char) {
+        return false
+      }
+    }
+
+    // the word must not contain any misplaced chars at their misplaced indexes
+    for (let i = 0; i < word.length; i++) {
+      if (this.misplacedChars.some((c) => c[0] === word[i] && c[1] === i)) {
+        return false
+      }
+    }
+
+    // get remaining chars that are not correct
+    let remainingNotCorrect = ''
+    for (let i = 0; i < word.length; i++) {
+      if (!this.correctChars.some((c) => c[0] === word[i] && c[1] === i)) {
+        remainingNotCorrect += word[i]
+      }
+    }
+
+    // the remaining chars must contain all misplaced chars
+    for (const [char] of this.misplacedChars) {
+      if (!remainingNotCorrect.includes(char)) {
+        return false
+      }
+    }
+
+    // the remaining chars must not contain any wrong chars
+    for (const char of remainingNotCorrect) {
+      if (this.wrongChars.includes(char)) {
+        return false
+      }
+    }
+
+    return true
+  }
+
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
   static readonly #words: string[] = [
     'aahed',
