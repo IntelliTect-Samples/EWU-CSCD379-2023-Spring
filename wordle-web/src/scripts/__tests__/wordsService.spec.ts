@@ -25,6 +25,5 @@ describe('WordsService', () => {
     // Incorrect tests
     expect(validWords.some((word) => word.text === 'PEEPS')).toBe(false)
     expect(validWords.some((word) => word.text === 'PROPS')).toBe(false)
-
   })
 })
