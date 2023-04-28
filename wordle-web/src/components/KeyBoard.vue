@@ -6,6 +6,7 @@
       height="75"
       min-width="40"
       :letter="letter"
+      elevation="7"
        @click="letterClick(letter)" />
     </v-col>
   </v-row>

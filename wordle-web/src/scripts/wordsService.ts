@@ -1,3 +1,5 @@
+import { Word } from './word'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,17 +9,15 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(currentWord: string): Array<string> {
-    //Todo
-    const validWordList = new Array<string>()
-    for(const word of this.#words){
-      if(word.startsWith(currentWord) && validWordList.length < 100){
-        validWordList.push(word)
-      }
-    }
-    validWordList.sort()
-    return validWordList
+  static validWords(currentGuess: string): Array<Word> {
+    const validWords = this.#words.filter((word) =>
+      word.toUpperCase().startsWith(currentGuess.toUpperCase().trim())
+    )
+    return validWords.map((word) => new Word(word))
+  }
 
+  static getWords(): string[] {
+    return this.#words
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
