@@ -1,19 +1,14 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <v-label>Current Guess: {{ guess }}</v-label>
-    <v-label>Selected Word: {{ selectedWord }}</v-label>
     <GameBoard :game = "game" @letter-click="addChar"></GameBoard>
-    
     <div class="ma-5">
       <v-row class="justify-center">
         <ValidWordList class="ml-2" :validWords="validWords"  @word-selected="handleWordSelected" />
-
         <v-btn size="small" class="ml-2" @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-row>
     </div>
     <VirtualKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" @enterClick="checkGuess" @backspaceClick="removeChar"/>
-
     </div>
 </template>
 

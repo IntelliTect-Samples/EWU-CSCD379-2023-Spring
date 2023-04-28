@@ -23,14 +23,26 @@
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-bottle-tonic-skull"  @click="setToxicTheme">
-                Toxic Theme
+              <v-btn  prepend-icon="mdi-bottle-tonic-skull"  @click="setToxicLightTheme">
+                Toxic Light
               </v-btn>
             </v-list-item>
 
             <v-list-item>
-              <v-btn  prepend-icon="mdi-tsunami"  @click="setOceanTheme">
-                Ocean Theme
+              <v-btn  prepend-icon="mdi-bottle-tonic-skull"  @click="setToxicDarkTheme">
+                Toxic Dark
+              </v-btn>
+            </v-list-item>
+
+            <v-list-item>
+              <v-btn  prepend-icon="mdi-tsunami"  @click="setOceanLightTheme">
+                Ocean Light
+              </v-btn>
+            </v-list-item>
+
+            <v-list-item>
+              <v-btn  prepend-icon="mdi-tsunami"  @click="setOceanDarkTheme">
+                Ocean Dark
               </v-btn>
             </v-list-item>
 
@@ -69,11 +81,19 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 
-function setToxicTheme() {
-  theme.global.name.value = 'toxic'
+function setToxicLightTheme() {
+  theme.global.name.value = 'toxicLight'
 }
 
-function setOceanTheme() {
-  theme.global.name.value = 'ocean'
+function setOceanLightTheme() {
+  theme.global.name.value = 'oceanLight'
+}
+
+function setToxicDarkTheme() {
+  theme.global.name.value = 'toxicDark'
+}
+
+function setOceanDarkTheme() {
+  theme.global.name.value = 'oceanDark'
 }
 </script>

@@ -2,13 +2,11 @@ import { Word } from '@/scripts/word'
 import { WordsService, ValidationStatus } from './wordsService'
 import type { Letter } from '@/scripts/letter'
 
-
 export enum WordleGameStatus {
   Active,
   Won,
   Lost
 }
-
 export class WordleGame {
   constructor(secretWord?: string | null) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
@@ -22,7 +20,10 @@ export class WordleGame {
   guess!: Word
   numberOfGuesses = 6
 
-  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
+  restartGame(
+      secretWord?: string | null,
+      numberOfGuesses: number = 6,
+      guessedLetters: Letter[] = []) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
 
@@ -31,6 +32,7 @@ export class WordleGame {
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+    this.guessedLetters = guessedLetters
     this.status = WordleGameStatus.Active
   }
 
@@ -51,25 +53,26 @@ export class WordleGame {
     const validWords = WordsService.matchWords(this.guesses)
 
     const index = this.guesses.indexOf(this.guess)
-    console.log('current guess index = ' + index)
 
-    if (index < this.guesses.length - 1) {
-      this.guess = this.guesses[index + 1]
-
-      console.log('guess text = ' + this.guesses[0])
-      console.log('secret word = ' + this.secretWord)
-// check if the game is won
-    if (this.guess.text === this.secretWord) {
+    if (this.guess.check(this.secretWord)) {
       this.status = WordleGameStatus.Won
       console.log("You won!")
-      this.restartGame()
+      alert("You won!")
+      this.restartGame(WordsService.getRandomWord())
     }
-    else if (index === 5 && this.guess.text !== this.secretWord) {
+
+    else if (index === this.guesses.length - 1){
       this.status = WordleGameStatus.Lost
-        alert('You lost!')
-        this.restartGame()
+      console.log("You lost!")
+      alert("You lost!")
+      this.restartGame(WordsService.getRandomWord())
+    }
+
+    else
+    { (index < this.guesses.length - 1) 
+      this.guess = this.guesses[index + 1] 
     }
   }
 }
-}
+
 

@@ -2,9 +2,10 @@
   <v-btn 
     class="justify-center key-gradient key" 
     size="small" 
-    :color="props.color" 
+    :color="props.color " 
     elevation="6"
-    >{{ props.char }}</v-btn>
+    >{{ props.char }}
+  </v-btn>
 </template>
 
 <script setup lang="ts">
@@ -27,6 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   border-radius: 5px;
+  
  
 
 }

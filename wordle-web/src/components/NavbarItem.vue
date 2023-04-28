@@ -4,11 +4,12 @@
       <v-app-bar-title  >
         <v-btn prepend-icon="mdi-puzzle" variant="text" to="/" class="text-h6 mb-1 " >Wor·dle</v-btn>
       </v-app-bar-title>
+
       <v-app-bar-nav-icon>
         <SettingsMenu></SettingsMenu>
       </v-app-bar-nav-icon>
-    <v-menu width="auto">
 
+    <v-menu width="auto">
       <template v-slot:activator="{ props }">
         <v-app-bar-nav-icon v-bind="props">
           <v-icon>mdi-hamburger</v-icon>
@@ -53,6 +54,7 @@ import HelpMenu from './HelpMenuItem.vue'
 import LeaderBoard  from './LeaderBoardItem.vue'
 import SettingsMenu from './SettingsMenu.vue'
 
+
 export default defineComponent({
   components: {
     SettingsMenu,
@@ -62,6 +64,7 @@ export default defineComponent({
  
   data: () => ({
     isActive: false,
+    isDarkMode: false,
   }),
   
 })
