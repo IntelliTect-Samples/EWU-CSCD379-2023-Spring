@@ -7,7 +7,7 @@
         style="background-image: var(--btn-gradient)"
         class="elevation-7"
         v-on:keydown.enter.prevent
-        >{{ WordsService.possibleWords.size }}</v-btn
+        >{{ WordsService.possibleWords.value.length }}</v-btn
       >
     </template>
     <template v-slot:default="{ isActive }">
@@ -15,7 +15,11 @@
         <v-card-title color="correct" title="Available Words"></v-card-title>
         <v-card-text>
           <v-list density="compact">
-            <v-list-item v-for="(word, i) in WordsService.possibleWords" :key="i" :value="word">
+            <v-list-item
+              v-for="(word, i) in WordsService.possibleWords.value"
+              :key="i"
+              :value="word"
+            >
               <v-list-item-title @click=";(isActive.value = false), sendGuess(word)">
                 {{ word }}
               </v-list-item-title>
