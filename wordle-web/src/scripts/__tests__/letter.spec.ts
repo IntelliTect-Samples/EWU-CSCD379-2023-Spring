@@ -28,7 +28,7 @@ describe('Letter', () => {
 
   it('Gets correct not Guessed Color', () => {
     const letter = new Letter('a')
-    expect(letter.color).toBe('gradient-btn')
+    expect(letter.color).toBe('grey')
   })
   it('Gets Correct Color', () => {
     const letter = new Letter('a')
