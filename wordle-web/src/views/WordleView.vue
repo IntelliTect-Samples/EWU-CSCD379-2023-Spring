@@ -26,17 +26,13 @@
     <br />
 
     <div>
-      <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+      <KeyBoard
+        @letterClick="addChar"
+        @backspaceClick="removeLastChar"
+        @enterClick="checkGuess"
+        :guessedLetters="game.guessedLetters"
+      />
       <v-row dense class="justify-center" cols="auto">
-        <v-col cols="auto">
-          <v-btn
-            @click="checkGuess"
-            class="elevation-10"
-            style="background-image: var(--btn-gradient)"
-          >
-            Enter
-          </v-btn>
-        </v-col>
         <v-col cols="auto">
           <v-btn
             @click="toggleText"
@@ -44,15 +40,6 @@
             style="background-image: var(--btn-gradient)"
             >{{ buttonText }}</v-btn
           >
-        </v-col>
-        <v-col cols="auto">
-          <v-btn
-            @click="removeLastChar"
-            class="elevation-10"
-            style="background-image: var(--btn-gradient)"
-          >
-            <v-icon color="white">mdi-backspace</v-icon>
-          </v-btn>
         </v-col>
       </v-row>
     </div>
