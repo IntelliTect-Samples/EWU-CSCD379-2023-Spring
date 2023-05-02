@@ -1,42 +1,27 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
+  <v-sheet>
+    <v-card>
+      <v-card-title>About</v-card-title>
+      <p>
+        An assignment where we make a validWords function, Convert the sidebar to an App Bar, Add a
+        settings dialog, and Style the main game page. Learning how to do much of that thanks to the
+        Great Meg!
+      </p>
+      <p>
+        Meg is an absolute coding powerhouse. Her proficiency in multiple programming languages and
+        frameworks is simply impressive. She has a keen eye for detail and a thorough understanding
+        of software engineering principles. Meg is always up-to-date with the latest industry trends
+        and innovations, making her a valuable asset to any tech team. Her problem-solving skills
+        are second to none, and she has an uncanny ability to come up with creative and elegant
+        solutions to complex problems. Whether it's developing a new feature or debugging an
+        existing codebase, Meg is always up for the challenge and delivers results with unmatched
+        speed and precision. Overall, Meg's coding skills are truly exceptional, and she is
+        undoubtedly one of the most talented developers out there. -AI generated
+      </p>
+      <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
-
-  <WeatherDialog v-model="isDialogOpen"></WeatherDialog>
-  {{ isDialogOpen }}
-  <v-card v-for="item in weatherData" :key="item.data">
-    {{ item.data }} - {{ item.temperatureC }} - {{ item.temperatureF }} - {{ item.summary }}
-  </v-card>
 </template>
-
-<script setup lang="ts">
-import Axios from "axios";
-import { ref } from "vue";
-import WeatherDialog from "@/components/WeatherDialog.vue";
-
-interface weatherData {
-  date: string
-  temperatureC: number
-  temperatureF: number
-  summary: string
-}
-
-const isDialogOpen = ref(false)
-const weatherData = ref<weatherData>()
-
-Axios.get('https://localhost:7225/WeatherForecast')
-  .then(response) => {
-    console.log(response.data)
-    weatherData.value = response.data
-  })
-  .catch(err) => {
-    console.log(err)
-  })
-
-</script>
 
 <style>
 @media (min-width: 1024px) {
