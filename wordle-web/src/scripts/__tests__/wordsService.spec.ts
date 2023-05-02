@@ -28,7 +28,6 @@ describe('validWords', () => {
     const newList = WordsService.validWords(GuessWord, wordList)
     //Assert
     expect(newList).toStrictEqual(['peach', 'pears', 'carps', 'leapy', 'creep'])
-  
   })
 })
 
@@ -46,4 +45,3 @@ describe('validWords', () => {
     expect(newList).toStrictEqual(['apple']) //<------correct
   })
 })
-
