@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/leaderBoard',
       name: 'leaderBoard',
-      component: () => import('../views/leaderBoard.vue')
+      component: () => import('../views/LeaderBoard.vue')
     }
   ]
 })
