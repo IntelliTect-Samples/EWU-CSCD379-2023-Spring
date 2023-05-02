@@ -1,6 +1,6 @@
 <template>
   <div :class="themeClass">
-    <v-card class="mx-auto mb-12" max-width="448">
+    <v-card class="mx-auto mb-12" width="auto">
       <v-layout>
         <v-app-bar class="custom-app-bar" color="white" density="compact">
           <v-app-bar-title to="/">
