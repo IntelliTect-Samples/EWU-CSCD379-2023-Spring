@@ -1,3 +1,6 @@
+import type { Word } from './word'
+import { Letter, LetterStatus } from './letter'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -7,13 +10,92 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static getWordList(): string[] {
+    return this.#words
+  }
+
+  static validWords(GuessedWord: Word, wordList: string[]): string[] {
+    const guessedLetters: Letter[] = GuessedWord.letters
+    // Filter out words that are confirmed to be invalid
+    return wordList.filter((candidate) => {
+      // For the current word, is it valid?
+      const guessWordChars = guessedLetters.map((l) => l.char)
+
+      // We set is valid to true by default, innocent until proven guilty
+      let isValid: boolean = true
+
+      const CandidateChars = candidate.split('')
+
+      for (let i1 = 0; i1 < 5; i1++) {
+        let l1 = CandidateChars[i1]
+        // Loop through each letter in the guessed word because it displays the validation information
+        for (let i2 = 0; i2 < 5; i2++) {
+          let l2 = guessWordChars[i2]
+          // if the character in the validation word does not match character in candidate word and indexes do not match
+          if (l2 === l1 && i1 == i2) {
+            // The status of the guessed letter
+            const status: LetterStatus = guessedLetters[i2].status
+
+            if (status == LetterStatus.Correct) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
+              break
+            }
+            // If it's misplaced, if the index are the same, it is for certain incorrect
+            if (status == LetterStatus.Misplaced) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
+
+              isValid = false
+            }
+
+            //is this correct to do here??? idk????, remove if statement if test 2 question should be answered differently and leper should stay
+            if (status == LetterStatus.Wrong) {
+              CandidateChars[i1] = '_'
+              guessWordChars[i2] = '_'
+
+              isValid = false
+            }
+          }
+        }
+      }
+
+      for (let i1 = 0; i1 < 5; i1++) {
+        let l1 = CandidateChars[i1]
+        if (l1 !== '_') {
+          // Loop through each letter in the guessed word because it displays the validation information
+          for (let i2 = 0; i2 < 5; i2++) {
+            let l2 = guessWordChars[i2]
+            if (l1 === l2) {
+              const status: LetterStatus = guessedLetters[i2].status
+
+              if (status == LetterStatus.Correct) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
+                break
+              }
+              if (status == LetterStatus.Misplaced) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
+                break
+              }
+              // If it's wrong we get set isValid to false and now it will be for certain removed
+              if (status == LetterStatus.Wrong) {
+                CandidateChars[i1] = '_'
+                guessWordChars[i2] = '_'
+                // Remove word from wordList
+                isValid = false
+              }
+            }
+          }
+        }
+      }
+      return isValid
+    })
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
-  static readonly #words: string[] = [
+  static #words: string[] = [
     'aahed',
     'aalii',
     'aargh',

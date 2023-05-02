@@ -33,9 +33,57 @@ const vuetify = createVuetify({
       },
       inverse: {
         colors: {
-          correct: '#F44336',
+          correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#F44336'
+        }
+      },
+      oceandark: {
+        dark: true,
+        colors: {
+          background: '#0277BD',
+          surface: '#26C6DA',
+          primary: '#FFFF8D',
+          secondary: '#9FA8DA',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
+        }
+      },
+      oceanlight: {
+        dark: false,
+        colors: {
+          background: '#0277BD',
+          surface: '#26C6DA',
+          primary: '#FFFF8D',
+          secondary: '#9FA8DA',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
+        }
+      },
+      forestlight: {
+        dark: false,
+        colors: {
+          background: '#2E7D32',
+          surface: '#B2FF59',
+          primary: '#C0CA33',
+          secondary: '#6D4C41',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
+        }
+      },
+      forestdark: {
+        dark: true,
+        colors: {
+          background: '#2E7D32',
+          surface: '#B2FF59',
+          primary: '#C0CA33',
+          secondary: '#6D4C41',
+          correct: '#4CAF50',
+          misplaced: '#FFC107',
+          wrong: '#F44336'
         }
       }
     }

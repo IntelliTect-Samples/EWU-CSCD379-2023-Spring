@@ -17,6 +17,8 @@ export class WordleGame {
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
+  list = WordsService.getWordList()
+
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
@@ -51,6 +53,7 @@ export class WordleGame {
     console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
+    this.list = WordsService.validWords(this.guess, this.list)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
     } else {

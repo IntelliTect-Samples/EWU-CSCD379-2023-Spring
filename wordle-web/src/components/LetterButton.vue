@@ -1,5 +1,5 @@
 <template>
-  <LetterBase :char="props.letter.char" :color="props.letter.color"></LetterBase>
+  <LetterBase dense :char="props.letter.char" :color="props.letter.color"></LetterBase>
 </template>
 
 <script setup lang="ts">

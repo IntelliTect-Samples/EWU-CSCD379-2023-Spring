@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <main>Home Page</main>
 </template>
 
 <script setup lang="ts">
