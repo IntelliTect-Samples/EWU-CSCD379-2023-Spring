@@ -16,10 +16,21 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import Axios from 'axios'
+
 const router = useRouter()
 function goBack() {
   router.back()
 }
+
+Axios.get('https://localhost:7053/WeatherForecast')
+  .then((response) => {
+    console.log(response.data)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
 </script>
 
 <style>
