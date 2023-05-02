@@ -66,22 +66,6 @@ const hamburgerDrawer = ref(false)
 let currentTheme = 'default'
 
 function setTheme(themeName: string) {
-  /*   switch (themeName) {
-    case 'light':
-      isDark = false
-      break
-    case 'dark':
-      isDark = true
-      break
-    case 'neon':
-      if (isDark) theme.global.name.value = themeName + 'Dark'
-      else theme.global.name.value = themeName + 'Light'
-      break
-    case 'pastel':
-      if (isDark) theme.global.name.value = themeName + 'Dark'
-      else theme.global.name.value = themeName + 'Light'
-      break
-  } */
   switch (themeName) {
     case 'light':
       theme.global.name.value = currentTheme + 'Light'
@@ -96,18 +80,5 @@ function setTheme(themeName: string) {
       break
   }
   dialog.value = false
-  /*   if (themeName === 'light') {
-    isDark = false
-  } else if (themeName === 'dark') {
-    isDark = true
-  }
-  if (isDark === false && themeName != 'light') {
-    theme.global.name.value = themeName + 'AndLight'
-  } else {
-    theme.global.name.value = themeName
-  }
-  dialog.value = false */
 }
-
-function themeDefaultLight() {}
 </script>

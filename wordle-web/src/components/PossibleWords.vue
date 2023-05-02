@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="250">
     <v-card-item class="justify-center">
-      <v-card-title>Possible Words: {{ WordsService.validWords(guess).length }}</v-card-title>
+      <v-card-title>Possible Words: {{ WordsService.validWords(props.guess).length }}</v-card-title>
     </v-card-item>
 
     <v-card-actions class="justify-center">
@@ -17,7 +17,7 @@
         <v-select
           no-data-text="Please enter at least one letter"
           label="Available Words"
-          :items="WordsService.validWords(guess)"
+          :items="WordsService.validWords(props.guess)"
           v-model="selected"
           @update:model-value="wordSelection(selected)"
           onchange="wordSelection(this.value)"
@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { WordsService } from '@/scripts/wordsService'
 import type { WordleGame } from '@/scripts/wordleGame'
-import { ref, type Ref } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
   game: WordleGame
