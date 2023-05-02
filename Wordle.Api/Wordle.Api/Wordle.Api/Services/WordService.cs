@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Services
@@ -9,11 +10,11 @@ namespace Wordle.Api.Services
         {
             _db = db;
         }
-        public string GetRandomWord() 
+        public async Task<string> GetRandomWord() 
         {
-            var count = _db.Words.Count(word => word.IsCommon);
+            var count = await _db.Words.CountAsync(word => word.IsCommon);
             var index = new System.Random().Next(count);
-            var word = _db.Words.Where(word => word.IsCommon).Skip(index).First();
+            var word = await _db.Words.Where(word => word.IsCommon).Skip(index).FirstAsync();
             return word.Text;
         }
     }

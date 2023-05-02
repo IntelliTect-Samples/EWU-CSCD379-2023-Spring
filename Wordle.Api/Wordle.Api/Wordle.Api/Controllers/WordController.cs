@@ -15,9 +15,9 @@ namespace Wordle.Api.Controllers
             _wordService = wordService; 
         }
         [HttpGet]
-        public string Get() 
+        public async Task<string> Get() 
         {
-            return _wordService.GetRandomWord();
+            return await _wordService.GetRandomWord();
         }
     }
 }
