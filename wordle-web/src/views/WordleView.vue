@@ -34,7 +34,7 @@
             class="elevation-10"
             style="background-image: var(--btn-gradient)"
           >
-            Check
+            Enter
           </v-btn>
         </v-col>
         <v-col cols="auto">
@@ -44,6 +44,15 @@
             style="background-image: var(--btn-gradient)"
             >{{ buttonText }}</v-btn
           >
+        </v-col>
+        <v-col cols="auto">
+          <v-btn
+            @click="removeLastChar"
+            class="elevation-10"
+            style="background-image: var(--btn-gradient)"
+          >
+            <v-icon color="white">mdi-backspace</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
     </div>
@@ -107,16 +116,20 @@ function addChar(letter: Letter) {
   getValidGuesses()
 }
 
+function removeLastChar() {
+  guess.value = guess.value.slice(0, -1)
+  console.log(validWord)
+  getValidGuesses()
+  game.guess.pop()
+  console.log('Back')
+}
+
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    console.log(validWord)
-    getValidGuesses()
-    game.guess.pop()
-    console.log('Back')
+    removeLastChar()
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     console.log(validWord)
