@@ -21,7 +21,7 @@ export class WordleGame {
   //     return
   //   }
 
-  restartGame(secretWord: string) {
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
     // create a word for each guess
@@ -30,6 +30,7 @@ export class WordleGame {
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+    //this.status = WordleGameStatus.Active
   }
 
   submitGuess() {
