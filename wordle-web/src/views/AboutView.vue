@@ -30,7 +30,6 @@ Axios.get('https://localhost:7053/WeatherForecast')
   .catch((err) => {
     console.log(err)
   })
-
 </script>
 
 <style>
