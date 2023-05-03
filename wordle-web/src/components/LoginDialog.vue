@@ -6,7 +6,7 @@
           <v-icon>mdi-account-circle</v-icon>
         </v-btn>
       </template>
-      <template v-slot:default="">
+      <template v-slot:default>
         <v-card>
           <v-toolbar title="login"></v-toolbar>
           <v-card-text>
