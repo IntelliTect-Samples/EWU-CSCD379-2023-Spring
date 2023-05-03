@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - Assignment3_Alan_and_Neriah
-    paths: ./Wordle.Api
+    paths: ./Wordle.Api/**
   workflow_dispatch:
 
 jobs:
