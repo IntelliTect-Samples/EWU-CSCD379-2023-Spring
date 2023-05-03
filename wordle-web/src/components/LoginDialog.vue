@@ -35,13 +35,10 @@ import { ref } from 'vue'
 const playerName = ref('')
 var dialog = ref(true)
 
-function getPlayerName(){
-    return playerName
+function getPlayerName() {
+  return playerName
 }
-
 
 //store in database function
 //fetch from database function
-
-
 </script>

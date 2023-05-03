@@ -29,7 +29,6 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import HintDialog from '../components/HintDialog.vue'
 
-
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
