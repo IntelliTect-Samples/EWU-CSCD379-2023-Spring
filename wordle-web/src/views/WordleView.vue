@@ -1,6 +1,7 @@
 <template>
+  <VCardTitle class="text-right">current name ----</VCardTitle>
   <h1>Wordle Mind Bender</h1>
-
+  
   <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
   <KeyBoard
     class="ma-10 p-10"
