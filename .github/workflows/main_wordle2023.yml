@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'Wordle2023'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3EA6CA12E0F84CA2B529A1270C698EC6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
           package: .
