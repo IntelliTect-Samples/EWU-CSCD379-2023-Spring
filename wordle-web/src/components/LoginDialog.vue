@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center">
+  <div class="text-right">
     <v-dialog v-model="dialog" transition="dialog-bottom-transition">
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" icon>
@@ -13,7 +13,7 @@
             <v-container>
               <v-row>
                 <v-col cols="12" sm="6" md="4">
-                  <v-text-field v-model="firstname" label="Firstname"></v-text-field>
+                  <v-text-field v-model="playerName" label="PlayerName"></v-text-field>
                 </v-col>
               </v-row>
             </v-container>
@@ -32,9 +32,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const firstname = ref('')
+const playerName = ref('')
 var dialog = ref(true)
 
+function getPlayerName(){
+    return playerName
+}
+
+
+//store in database function
+//fetch from database function
 
 
 </script>

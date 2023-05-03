@@ -1,7 +1,8 @@
 <template>
-  <VCardTitle class="text-right">current name ----</VCardTitle>
   <h1>Wordle Mind Bender</h1>
-
+  <!--
+  <h2 class="text-right">{{ playerName }}</h2>
+  --->
   <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
   <KeyBoard
     class="ma-10 p-10"
@@ -27,6 +28,7 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import HintDialog from '../components/HintDialog.vue'
+
 
 const guess = ref('')
 const game = reactive(new WordleGame())
