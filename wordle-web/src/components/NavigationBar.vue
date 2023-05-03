@@ -17,11 +17,11 @@
           <router-link to="/leaderBoard"><v-btn>Link To leaderBoard</v-btn></router-link>
         </v-card>
 
-        <v-card>
-          <v-btn>
-            <SettingsDialogVue />
-          </v-btn>
-        </v-card>
+        <LoginDialog />
+
+        <v-btn>
+          <SettingsDialogVue />
+        </v-btn>
 
         <template v-slot:append>
           <v-menu>
@@ -48,6 +48,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import SettingsDialogVue from './SettingsDialog.vue'
+import LoginDialog from './LoginDialog.vue'
 </script>
