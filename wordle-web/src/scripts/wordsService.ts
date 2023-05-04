@@ -1,9 +1,20 @@
 import type { Word } from './word'
 import { Letter, LetterStatus } from './letter'
+import Axios from 'axios'
 
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
+  }
+
+  static wordUrl = 'https://wordle2023.azurewebsites.net/word'
+
+  static async getWordFromApi(): Promise<string> {
+    // Make axios call to get the word from
+    const response = await Axios.get(this.wordUrl)
+
+    console.log(response.data)
+    return response.data
   }
 
   static isValidWord(word: string): boolean {
