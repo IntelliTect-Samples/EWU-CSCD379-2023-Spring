@@ -61,10 +61,10 @@ let buttonText = ref('Display correct word')
 const guess = ref('')
 const game = reactive(new WordleGame())
 
-console.log(game.secretWord)
-
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('keyup', keyPress)
+  await game.restartGame()
+  console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
