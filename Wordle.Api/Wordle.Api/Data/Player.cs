@@ -12,12 +12,16 @@ public class Player
     public int GameCount { get; set; }
     public double AverageAttempts { get; set; }
 
-    public Player(string name)
+    public Player(string name, int attempts)
     {
         Name = name;
-        GameCount = 0;
-        AverageAttempts = 0;
+        GameCount = 1;
+        AverageAttempts = attempts;
     }
 
-    public void UpdateAttempts(int attempts) { AverageAttempts = (AverageAttempts + attempts) / ++GameCount; }
+    public void UpdateAttempts(int attempts) {
+        GameCount++;
+        if (attempts > AverageAttempts) AverageAttempts += attempts / GameCount;
+        else if (attempts < AverageAttempts) AverageAttempts -= attempts / GameCount;
+    }
 }
