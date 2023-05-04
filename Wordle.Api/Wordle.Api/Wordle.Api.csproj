@@ -6,6 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+
+	<ItemGroup>
+		<None Remove="Content\Words.csv" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<Content Include="Content\Words.csv">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
