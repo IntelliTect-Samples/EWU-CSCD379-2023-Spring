@@ -1,5 +1,7 @@
 <template>
-  <GetName @overlay="onOverlay" />
+  <div class="text-right">
+    <GetName @overlay="onOverlay" />
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -11,8 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import KeyBoard from '@/components/KeyBoard.vue'
-import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
