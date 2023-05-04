@@ -1,6 +1,8 @@
 <template>
   <h1>Wordle Mind Bender</h1>
 
+  <GetName @overlay="onOverlay"/>
+
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
@@ -16,10 +18,12 @@ import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
+import GetName from '../components/GetName.vue'
 import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const input = ref(true)
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -42,15 +46,21 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-    console.log('Back')
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+  if(input.value){
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+      console.log('Back')
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
+}
+
+function onOverlay(name: string) {
+  input.value = !input.value
 }
 </script>
