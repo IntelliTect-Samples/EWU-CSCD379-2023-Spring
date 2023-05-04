@@ -33,6 +33,7 @@ onUnmounted(() => {
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
+  //test run
 }
 
 function addChar(letter: Letter) {
