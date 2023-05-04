@@ -21,6 +21,12 @@ namespace Wordle.Api.Controllers
         {
             return await _playerService.UpdatePlayerAsync(id, name, attempts);
         }
+
+        [HttpGet]
+        public async Task<List<Player>> Get()
+        {
+            return await _playerService.GetTopTen();
+        }
     }
 }
 

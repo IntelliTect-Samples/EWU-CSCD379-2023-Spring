@@ -33,5 +33,10 @@ namespace Wordle.Api.Services
                 return newPlayer.PlayerId;
             }
         }
+
+        public async Task<List<Player>> GetTopTen()
+        {
+            return await _db.Players.OrderBy( p => p.AverageAttempts ).Take(10).ToListAsync();
+        }
     }
 }
