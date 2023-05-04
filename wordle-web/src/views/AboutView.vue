@@ -13,8 +13,7 @@
     </v-card-actions>
   </v-card>
 
-  
-  <WeatherDialog v-model="isOpen" :weather="currentWeather"></WeatherDialog>
+  <WeatherDialog v-model="isOpen" :weather="currentWeather!"></WeatherDialog>
 
   <v-card v-for="item in weatherData" :key="item.date" @click="setCurrentWeather(item)">
     {{ item.date }}

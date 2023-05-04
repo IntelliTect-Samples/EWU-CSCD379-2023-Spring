@@ -1,5 +1,5 @@
 <template>
-  <v-btn :style="setGradient()">
+  <v-btn :style="setGradient()" :color="props.color">
     {{ props.char }}
   </v-btn>
 </template>
