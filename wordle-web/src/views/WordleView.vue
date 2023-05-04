@@ -32,7 +32,6 @@ onUnmounted(() => {
 
 function checkGuess() {
   game.submitGuess()
-  //comment for testing
   guess.value = ''
 }
 
