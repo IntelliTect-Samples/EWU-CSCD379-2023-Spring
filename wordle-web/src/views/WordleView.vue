@@ -1,7 +1,7 @@
 <template>
   <h1>Wordle Mind Bender</h1>
 
-  <GetName @overlay="onOverlay"/>
+  <GetName @overlay="onOverlay" />
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -46,7 +46,7 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
-  if(input.value){
+  if (input.value) {
     if (event.key === 'Enter') {
       checkGuess()
     } else if (event.key === 'Backspace') {
