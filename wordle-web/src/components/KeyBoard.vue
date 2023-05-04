@@ -1,6 +1,6 @@
 <template>
   <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
+    <v-col cols="auto" v-for="(letter, j) in key" :key="j">
       <LetterButton :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
@@ -22,7 +22,7 @@ const keyboardLetters = computed(() => {
   const keyboardKeys = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+    ['Submit', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '←']
   ]
 
   for (let keyboardKey of keyboardKeys) {

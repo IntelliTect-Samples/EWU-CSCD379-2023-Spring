@@ -25,17 +25,51 @@ const vuetify = createVuetify({
     defaultTheme: 'dark',
     themes: {
       dark: {
+        dark: true,
         colors: {
-          correct: '#4CAF50',
-          misplaced: '#FFC107',
-          wrong: '#F44336'
+          correct: '#03fc45',
+          misplaced: '#fcf003',
+          wrong: '#fc032c'
         }
       },
-      inverse: {
+      light: {
+        dark: false,
         colors: {
-          correct: '#F44336',
-          misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          correct: '#03fc45',
+          misplaced: '#fcf003',
+          wrong: '#fc032c'
+        }
+      },
+      unicornDark: {
+        dark: true,
+        colors: {
+          correct: '#8A4F7D',
+          misplaced: '#64B6AC',
+          wrong: '#065A82'
+        }
+      },
+      unicornLight: {
+        dark: false,
+        colors: {
+          correct: '#8A4F7D',
+          misplaced: '#64B6AC',
+          wrong: '#065A82'
+        }
+      },
+      pumpkinDark: {
+        dark: true,
+        colors: {
+          correct: '#ff9a00',
+          misplaced: '#c900ff',
+          wrong: '#CD113B'
+        }
+      },
+      pumpkinLight: {
+        dark: false,
+        colors: {
+          correct: '#ff9a00',
+          misplaced: '#c900ff',
+          wrong: '#CD113B'
         }
       }
     }

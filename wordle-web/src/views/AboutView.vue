@@ -1,49 +1,31 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>Hello World</v-card-title>
-    </v-card>
-  </v-sheet>
-
-  {{ isDialogOpen }}
-  <WeatherDialog v-model="isDialogOpen" :weather="currentWeather!"></WeatherDialog>
-
-  <v-card v-for="item in weatherData" :key="item.date" @click="setCurrentWeather(item)">
-    {{ item.date }}</v-card
-  >
+  <div class="about">
+    <h1>About Page</h1>
+    <p>
+      Our project is going pretty well so far. This framework is pretty cool -- it sure beats coding
+      everything from scratch!
+    </p>
+    <p>And yes, Meg is a great teacher.</p>
+    <v-btn @click="goBack">Go Back</v-btn>
+  </div>
 </template>
 
-<script setup lang="ts">
-import Axios from 'axios'
-import { ref } from 'vue'
-import WeatherDialog from '@/components/WeatherDialog.vue'
-import type { WeatherData } from '@/types/WeatherData'
-
-const isDialogOpen = ref(false)
-const weatherData = ref<WeatherData[]>()
-const currentWeather = ref<WeatherData>()
-
-function setCurrentWeather(weather: WeatherData) {
-  currentWeather.value = weather
-  isDialogOpen.value = true
+<script lang="ts">
+function goBack(this: { [x: string]: any; goBack: () => void }) {
+  this.$router.go(-1)
 }
 
-Axios.get('https://localhost:7053/WeatherForecast')
-  .then((response) => {
-    console.log(response.data)
-    weatherData.value = response.data
-  })
-  .catch((err) => {
-    console.log(err)
-  })
+export default {
+  methods: {
+    goBack
+  }
+}
 </script>
 
 <style>
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
   }
 }
 </style>

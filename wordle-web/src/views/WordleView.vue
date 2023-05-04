@@ -1,28 +1,32 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
-
   <GetName @overlay="onOverlay" />
 
   <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <WordSelect :validWords="validWords" v-model="selection" @selectWord="addWord" />
 
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+  <p>{{ selection }}</p>
 </template>
 
 <script setup lang="ts">
+import KeyBoard from '@/components/KeyBoard.vue'
+import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import GetName from '../components/GetName.vue'
 import type { Letter } from '@/scripts/letter'
+import WordSelect from '@/components/WordSelect.vue'
+import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+let validWords = ref(['?????'])
+let guesses: string[] = []
+const selection = ref(null)
 const input = ref(true)
 
 onMounted(async () => {
@@ -36,12 +40,35 @@ onUnmounted(() => {
 
 function checkGuess() {
   game.submitGuess()
+  guesses.push(guess.value)
+  validWords.value = WordsService.validWords(guesses, game.secretWord)
   guess.value = ''
 }
 
+function addWord(word: string) {
+  for (let i = 0; i < 5; i++) {
+    removeChar()
+  }
+  for (let i = 0; i < word.length; i++) {
+    guess.value += word[i]
+    game.guess.push(word[i])
+  }
+}
+
 function addChar(letter: Letter) {
-  game.guess.push(letter.char)
-  guess.value += letter.char
+  if (letter.char === 'Submit') {
+    checkGuess()
+  } else if (letter.char === '←') {
+    removeChar()
+  } else {
+    guess.value += letter.char
+    game.guess.push(letter.char)
+  }
+}
+
+function removeChar() {
+  guess.value = guess.value.slice(0, -1)
+  game.guess.pop()
 }
 
 function keyPress(event: KeyboardEvent) {

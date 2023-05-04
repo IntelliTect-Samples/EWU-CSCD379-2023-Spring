@@ -1,9 +1,5 @@
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <main>Welcome to our Play on Wordle! Head to the game page to play!</main>
 </template>
 
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
-</script>
+<script setup lang="ts"></script>
