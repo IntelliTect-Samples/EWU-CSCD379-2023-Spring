@@ -1,6 +1,15 @@
+import Axios from 'axios'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
+  }
+
+  static wordUrl = 'https://wordleweb.azurewebsites.net/word'
+  static async getWordFromApi(): Promise<string> {
+    const result = await Axios.get(this.wordUrl)
+    console.log(result.data)
+    return result.data
   }
 
   static isValidWord(word: string): boolean {
