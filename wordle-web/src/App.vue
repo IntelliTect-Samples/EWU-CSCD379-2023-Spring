@@ -1,46 +1,21 @@
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">Class</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+      <headerBar @setTheme="changeTheme" />
     </div>
   </header>
-
   <RouterView />
 </template>
-
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
 
 <style scoped>
 header {
   line-height: 1.5;
   max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+  z-index: 1;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  text-decoration: underline;
 }
 
 nav a.router-link-exact-active:hover {
@@ -84,3 +59,26 @@ nav a:first-of-type {
   }
 }
 </style>
+
+<script lang="ts">
+import { RouterView } from 'vue-router'
+import { useTheme } from 'vuetify'
+import headerBar from './components/HeaderBar.vue'
+
+export default {
+  data: () => ({
+    drawer: false
+  }),
+  components: {
+    headerBar
+  }
+}
+</script>
+
+<script setup lang="ts">
+const theme = useTheme()
+
+function changeTheme(newTheme: string) {
+  theme.global.name.value = newTheme
+}
+</script>

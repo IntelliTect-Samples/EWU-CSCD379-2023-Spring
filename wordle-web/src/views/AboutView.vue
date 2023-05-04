@@ -1,29 +1,31 @@
 <template>
   <div class="about">
-    <v-card>
-      <v-card-title> This is a vue/vuetify class! </v-card-title>
-      <v-card-subtitle> (College Class) </v-card-subtitle>
-
-      <v-card-text>
-        Lorem ipsum dolor sit amet blah blah blah
-        <v-icon icon="mdi:mdi-abacus" />
-      </v-card-text>
-
-      <v-card-actions>
-        <v-spacer />
-        <v-btn text color="warning">Cancel</v-btn>
-        <v-btn text color="primary">OK</v-btn>
-      </v-card-actions>
-    </v-card>
+    <h1>About Page</h1>
+    <p>
+      Our project is going pretty well so far. This framework is pretty cool -- it sure beats coding
+      everything from scratch!
+    </p>
+    <p>And yes, Meg is a great teacher.</p>
+    <v-btn @click="goBack">Go Back</v-btn>
   </div>
 </template>
+
+<script lang="ts">
+function goBack(this: { [x: string]: any; goBack: () => void }) {
+  this.$router.go(-1)
+}
+
+export default {
+  methods: {
+    goBack
+  }
+}
+</script>
 
 <style>
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
-    display: flex;
-    align-items: center;
   }
 }
 </style>
