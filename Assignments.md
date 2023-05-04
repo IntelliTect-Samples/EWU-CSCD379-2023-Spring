@@ -103,6 +103,7 @@ gantt
   - A link to your deployed website & API page
 - Your git diff in YOUR pr in YOUR repo (not the PR against the class repo) should only show changes relevant to the assignment criteria, any changes outside of that will cause you to lose points for messy code 
   - We know the repo against the class will be messy, that code will not be reviewed. The PR in your repo is the one that will be reviewed
+- Here is an example! https://github.com/IntelliTect-Samples/EWU-CSCD379-2023-Spring/pull/70
 
 ### PR Reviews:
 You will review PRs like normal, the only difference is if you are reviewing a PR that was created in someone elses repo... you will do the review in their repo, and just add a comment on the PR the class repo with a link to your review
