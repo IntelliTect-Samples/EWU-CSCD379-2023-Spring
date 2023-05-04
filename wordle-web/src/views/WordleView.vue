@@ -1,5 +1,7 @@
 <template>
-  <GameBoard :game="game" @letterClick="addChar" class="text-center" margin="10%" />
+  <GetName @overlay="onOverlay" />
+
+  <GameBoard :game="game" @letterClick="addChar" />
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
@@ -12,20 +14,25 @@
 import KeyBoard from '@/components/KeyBoard.vue'
 import GameBoard from '@/components/GameBoard.vue'
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, watch, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import GameBoard from '../components/GameBoard.vue'
+import KeyBoard from '../components/KeyBoard.vue'
+import GetName from '../components/GetName.vue'
 import type { Letter } from '@/scripts/letter'
 import WordSelect from '@/components/WordSelect.vue'
 import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-console.log(game.secretWord)
 let validWords = ref(['?????'])
 let guesses: string[] = []
 const selection = ref(null)
+const input = ref(true)
 
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('keyup', keyPress)
+  await game.restartGame()
+  console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
@@ -66,14 +73,21 @@ function removeChar() {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    removeChar()
-    console.log('Back')
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+  if (input.value) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+      console.log('Back')
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
+}
+
+function onOverlay(name: string) {
+  input.value = !input.value
 }
 </script>
