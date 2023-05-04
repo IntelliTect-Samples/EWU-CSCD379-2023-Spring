@@ -19,9 +19,37 @@ export abstract class WordsService {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
-    //Todo
-    return new Array<string>()
+  static validWords(guesses: string[], secretWord: string): string[] {
+    const wordsList: string[] = []
+    const expression: string[] = ['[^]', '[^]', '[^]', '[^]', '[^]']
+
+    for (const guess of guesses) {
+      for (let i = 0; i < secretWord.length; i++) {
+        if (guess[i] == secretWord[i] || expression[i] == secretWord[i])
+          // Correctly Placed
+          expression[i] = secretWord[i]
+        else {
+          if (secretWord.includes(guess[i]) && !expression[i].includes(guess[i])) {
+            // Incorrectly placed
+            expression[i] = expression[i].split(']')[0].concat(guess[i]).concat(']')
+          } else
+            for (let j = 0; j < expression.length; j++)
+              if (expression[j].includes('[^') && !expression[j].includes(guess[i])) {
+                // Incorrect
+                expression[j] = expression[j].split(']')[0].concat(guess[i]).concat(']')
+              }
+        }
+      }
+      console.log(expression.join(''))
+    }
+
+    const regex = new RegExp(expression.join(''))
+
+    for (const word of this.#words) {
+      if (regex.test(word)) wordsList.push(word)
+    }
+
+    return wordsList
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
