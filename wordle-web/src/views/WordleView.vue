@@ -1,8 +1,35 @@
 <template>
   <h1>Wordle Mind Bender</h1>
-  <!--
-  <h2 class="text-right">{{ playerName }}</h2>
-  --->
+
+  <div class="text-right">
+    <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition">
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props">
+          {{ playerName }}
+        </v-btn>
+      </template>
+      <template v-slot:default>
+        <v-card>
+          <v-toolbar title="login"></v-toolbar>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="6" md="4">
+                  <v-text-field v-model="playerName" label="PlayerName"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-spacer></v-spacer>
+          <v-card-actions class="justify-end">
+            <v-btn variant="text" @click="dialog = false">Close</v-btn>
+            <v-btn variant="text" @click="dialog = false">Submit</v-btn>
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-dialog>
+  </div>
+
   <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
   <KeyBoard
     class="ma-10 p-10"
@@ -74,4 +101,8 @@ function keyPress(event: KeyboardEvent | string) {
     }
   }
 }
+
+//import { ref } from 'vue'
+const playerName = ref('Guest')
+var dialog = ref(true)
 </script>
