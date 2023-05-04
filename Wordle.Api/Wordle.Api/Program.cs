@@ -37,6 +37,15 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     Word.SeedWords(db);
+    var player = new Player()
+    {
+        PlayerId = 0,
+        Name = "Test",
+        GameCount = 0,
+        AverageAttempts = 0.0,
+        AverageSecondsPerGame = 0.0
+    };
+    db.Players.Add(player);
 }
 
 
