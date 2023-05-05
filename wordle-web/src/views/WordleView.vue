@@ -44,6 +44,14 @@
       </v-row>
     </div>
   </div>
+  <h2>{{ guess }}</h2>
+  <h3>{{ game.secretWord }}</h3>
+
+  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
+
+  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
 </template>
 
 <script setup lang="ts">
@@ -52,8 +60,7 @@ import { ref, reactive } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { watch, onMounted, onUnmounted } from 'vue'
-import { WordsService } from '@/scripts/wordsService'
+import Axios from 'axios'
 
 let validGuesses = new Array<string>()
 let validWord = ''
@@ -61,10 +68,10 @@ let buttonText = ref('Display correct word')
 const guess = ref('')
 const game = reactive(new WordleGame())
 
+const overlay = ref(true)
+
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
-  await game.restartGame()
-  console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
@@ -84,6 +91,34 @@ function toggleText() {
   buttonText.value =
     buttonText.value === `${game.secretWord}` ? 'Display correct word' : `${game.secretWord}`
 }
+
+function addWord() {
+  overlay.value = true
+  Axios.post('word/AddWordFromBody', {
+    text: 'strin',
+    isCommon: true,
+    isUsed: false
+  })
+    .then((response) => {
+      overlay.value = false
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+Axios.get('word')
+  .then((response) => {
+    game.restartGame(response.data)
+    console.log(game.secretWord)
+    setTimeout(() => {
+      overlay.value = false
+    }, 502)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 
 function checkGuess() {
   // TODO: Add a UI effect to show that the guess is not of right length.
