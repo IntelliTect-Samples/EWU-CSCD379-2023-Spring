@@ -10,22 +10,18 @@ export enum WordleGameStatus {
 
 export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
-    if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
+
+    if (!secretWord) secretWord = WordsService.getRandomWord()
     this.restartGame(secretWord)
   }
+
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-
-  // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord
@@ -48,7 +44,7 @@ export class WordleGame {
       for (const guessedLetter of this.guessedLetters) {
         if (guessLetter.char === guessedLetter.char) {
           if (guessedLetter.status === LetterStatus.Correct) {
-            continue
+            /* empty */
           } else if (
             guessedLetter.status === LetterStatus.Misplaced &&
             guessLetter.status === LetterStatus.Correct
@@ -58,7 +54,7 @@ export class WordleGame {
             guessedLetter.status === LetterStatus.Misplaced &&
             guessLetter.status === LetterStatus.Wrong
           ) {
-            continue
+            /* empty */
           } else if (
             guessedLetter.status === LetterStatus.Wrong &&
             guessLetter.status === LetterStatus.Misplaced

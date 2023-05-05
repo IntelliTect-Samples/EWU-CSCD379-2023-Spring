@@ -2,10 +2,13 @@ import Axios from 'axios'
 
 export abstract class WordsService {
   static getRandomWord(): string {
-    return this.words[Math.floor(Math.random() * this.words.length)]
+    const result = this.words[Math.floor(Math.random() * this.words.length)]
+
+    console.log(result)
+    return result
   }
 
-  static wordUrl = 'https://wordle2023.azurewebsites.net/word'
+  static wordUrl = 'https://wordleweb2023.azurewebsites.net/word'
 
   static async getWordFromApi(): Promise<string> {
     // Make axios call to get the word from
@@ -13,10 +16,6 @@ export abstract class WordsService {
 
     console.log(response.data)
     return response.data
-  }
-
-  static isValidWord(word: string): boolean {
-    return this.words.includes(word)
   }
 
   static validWords(word: string): Array<string> {
