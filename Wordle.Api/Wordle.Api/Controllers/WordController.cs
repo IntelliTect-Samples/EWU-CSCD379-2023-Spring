@@ -4,8 +4,8 @@ using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
-namespace Wordle.Api.Controllers
-{
+namespace Wordle.Api.Controllers;
+
 [Route("[controller]")]
 [ApiController]
 public class WordController : ControllerBase
@@ -40,5 +40,10 @@ public class WordController : ControllerBase
     {
         return await _wordService.AddWord(word.Text, word.IsCommon);
     }
-}
+    
+    [HttpGet("GetWordList")]
+    public async Task<IEnumerable<Word>> GetWordList()
+    {
+        return await _wordService.GetWordList();
+    }
 }

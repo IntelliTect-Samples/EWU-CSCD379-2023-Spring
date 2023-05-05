@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 
-namespace Wordle.Api.Services
-{
+namespace Wordle.Api.Services;
+
 public class WordService
 {
     private readonly AppDbContext _db;
@@ -27,10 +27,10 @@ public class WordService
         totalCount -= count.Value;
         int index = new Random().Next(totalCount);
         var words = await _db.Words.Where(word => word.IsCommon)
-                        .Skip(index)
-                        .Take(count.Value)
-                        .OrderByDescending(w => w.Text)
-                        .ToListAsync();
+                             .Skip(index)
+                             .Take(count.Value)
+                             .OrderByDescending(w => w.Text)
+                             .ToListAsync();
         return words;
     }
 
@@ -53,5 +53,9 @@ public class WordService
         await _db.SaveChangesAsync();
         return word;
     }
-}
+
+    public async Task<IEnumerable<Word>> GetWordList()
+    {
+        return await _db.Words.ToListAsync();
+    }
 }
