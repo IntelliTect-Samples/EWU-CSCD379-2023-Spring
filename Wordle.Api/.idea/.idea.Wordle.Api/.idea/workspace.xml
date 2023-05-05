@@ -9,6 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.github/workflows/main_wordle2023.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/wordsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordsService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +96,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683229497419</updated>
-      <workItem from="1683229502556" duration="7361000" />
+      <workItem from="1683229502556" duration="11120000" />
     </task>
     <servers />
   </component>
