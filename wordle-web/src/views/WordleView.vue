@@ -41,33 +41,36 @@
             >{{ buttonText }}</v-btn
           >
         </v-col>
+        <v-col cols="auto">
+          <v-btn
+            @click="addWord()"
+            class="elevation-10"
+            style="background-image: var(--btn-gradient)"
+            >Add Strin</v-btn
+          >
+        </v-col>
       </v-row>
     </div>
   </div>
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-
-  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
 </template>
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
+import { WordsService } from '@/scripts/wordsService'
 
 let validGuesses = new Array<string>()
-let validWord = ''
 let buttonText = ref('Display correct word')
 const guess = ref('')
 const game = reactive(new WordleGame())
-
 const overlay = ref(true)
 
 onMounted(async () => {
@@ -140,10 +143,8 @@ function addChar(letter: Letter) {
 
 function removeLastChar() {
   guess.value = guess.value.slice(0, -1)
-  console.log(validWord)
   getValidGuesses()
   game.guess.pop()
-  console.log('Back')
 }
 
 function keyPress(event: KeyboardEvent) {
@@ -154,7 +155,6 @@ function keyPress(event: KeyboardEvent) {
     removeLastChar()
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
-    console.log(validWord)
     getValidGuesses()
     game.guess.push(event.key.toLowerCase())
   }
