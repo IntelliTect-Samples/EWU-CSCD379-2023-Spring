@@ -67,8 +67,8 @@ Add leaderboard to the application
 - Add a link on the front page to access the leaderboard ❌✅
 - Add a link to the app bar to access the leaderboard ❌✅
 
-**5. Unit testing** ❌✅
-- Tests for the service ❌✅
+**5. Unit testing** ❌✅ (OPTIONAL) (Not covered in class, but in instructor's repo: https://github.com/granterickson/EWU-CSCD379-2023-Spring)
+- Tests for the service ❌✅ (OPTIONAL)
 - Integration tests for the controller ❌✅ (OPTIONAL)
 
 **6. Deploy site to Azure** ❌✅
