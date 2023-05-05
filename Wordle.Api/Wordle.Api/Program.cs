@@ -6,17 +6,15 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowAllOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("*");
-                          policy.AllowAnyMethod();
-                          policy.AllowAnyHeader();
-                      });
-});
-
+builder.Services.AddCors(options =>
+                         {
+                             options.AddPolicy(name: MyAllowAllOrigins, policy =>
+                                                                        {
+                                                                            policy.WithOrigins("*");
+                                                                            policy.AllowAnyMethod();
+                                                                            policy.AllowAnyHeader();
+                                                                        });
+                         });
 
 // Add services to the container.
 
@@ -27,9 +25,7 @@ builder.Services.AddSwaggerGen();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseSqlServer(connectionString);
-});
+                                            { options.UseSqlServer(connectionString); });
 builder.Services.AddScoped<WordService>();
 
 var app = builder.Build();
@@ -40,8 +36,6 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Word.SeedWords(db);
 }
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
