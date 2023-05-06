@@ -27,10 +27,10 @@ public class WordService
         totalCount -= count.Value;
         int index = new Random().Next(totalCount);
         var words = await _db.Words.Where(word => word.IsCommon)
-                             .Skip(index)
-                             .Take(count.Value)
-                             .OrderByDescending(w => w.Text)
-                             .ToListAsync();
+                        .Skip(index)
+                        .Take(count.Value)
+                        .OrderByDescending(w => w.Text)
+                        .ToListAsync();
         return words;
     }
 
