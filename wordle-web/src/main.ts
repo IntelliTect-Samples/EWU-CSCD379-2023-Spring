@@ -11,14 +11,6 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import Axios from 'axios'
-
-//Check if the app is running on localhost
-if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-  Axios.defaults.baseURL = 'https://localhost:7053/'
-} else {
-  Axios.defaults.baseURL = 'wordletest2023.azurewebsites.net/'
-}
 
 const vuetify = createVuetify({
   components,
@@ -29,6 +21,16 @@ const vuetify = createVuetify({
       mdi
     }
   },
+  display: {
+    mobileBreakpoint: 'sm',
+    thresholds: {
+      xs: 0,
+      sm: 340,
+      md: 540,
+      lg: 800,
+      xl: 1280
+    }
+  },
   theme: {
     defaultTheme: 'dark',
     themes: {
@@ -36,14 +38,54 @@ const vuetify = createVuetify({
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#F44336'
+          wrong: '#F44336',
+          primary: '#000000'
         }
       },
       inverse: {
         colors: {
           correct: '#F44336',
           misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          wrong: '#4CAF50',
+          primary: '#DEE4E7'
+        }
+      },
+      calm: {
+        colors: {
+          correct: '#70877F',
+          misplaced: '#C4A77D',
+          wrong: '#EF946C',
+          primary: '#2F2963',
+          background: '454372'
+        }
+      },
+      colorful: {
+        colors: {
+          correct: '#1B998B',
+          misplaced: '#FFFD82',
+          wrong: '#E84855',
+          primary: '#2D3047',
+          background: '454372'
+        }
+      },
+      darkCalm: {
+        dark: true,
+        colors: {
+          correct: '#70877F',
+          misplaced: '#C4A77D',
+          wrong: '#EF946C',
+          primary: '#2F2963',
+          background: '454372'
+        }
+      },
+      darkColorful: {
+        dark: true,
+        colors: {
+          correct: '#1B998B',
+          misplaced: '#FFFD82',
+          wrong: '#E84855',
+          primary: '#2D3047',
+          background: '454372'
         }
       }
     }

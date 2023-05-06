@@ -17,9 +17,10 @@ export class WordleGame {
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
+  numberOfGuesses = 6
+  validWordList = new Array<string>()
   status = WordleGameStatus.Active
   guess!: Word
-  numberOfGuesses = 6
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -27,8 +28,8 @@ export class WordleGame {
   //     return
   //   }
 
-  async restartGame(secretWord: string, numberOfGuesses: number = 6) {
-    this.secretWord = secretWord
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
+    this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
 
     for (let i = 0; i < numberOfGuesses; i++) {
@@ -41,7 +42,9 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    if (this.guess.check(this.secretWord)) {
+      this.status = WordleGameStatus.Won
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -55,6 +58,22 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      this.status = WordleGameStatus.Lost
+    }
+  }
+
+  selectGuess(word: string) {
+    this.removeGuess()
+    for (let i = 0; i < word.length; i++) {
+      if (this.guess.letters[i].char === '') {
+        this.guess.push(word[i])
+      }
+    }
+  }
+
+  removeGuess() {
+    while (this.guess.text !== '') {
+      this.guess.pop()
     }
   }
 }

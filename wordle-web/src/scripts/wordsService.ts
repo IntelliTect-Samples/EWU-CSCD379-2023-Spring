@@ -1,27 +1,26 @@
-import Axios from 'axios'
-
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
-  }
-
-  static wordUrl = 'https://wordle2023.azurewebsites.net/word'
-
-  static async getWordFromApi(): Promise<string> {
-    // Make axios call to get the word from
-    const response = await Axios.get(this.wordUrl)
-
-    console.log(response.data)
-    return response.data
   }
 
   static isValidWord(word: string): boolean {
     return this.#words.includes(word)
   }
 
-  static validWords(): Array<string> {
+  static validWords(currentWord: string): Array<string> {
     //Todo
-    return new Array<string>()
+
+    const validWordList = new Array<string>()
+    if (currentWord.length > 0) {
+      for (const word of this.#words) {
+        if (word.startsWith(currentWord) && currentWord.length > 0) {
+          validWordList.push(word)
+        }
+      }
+    }
+
+    // validWordList.sort()
+    return validWordList
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

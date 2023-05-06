@@ -1,3 +1,6 @@
+# Link to running webpage
+* https://proud-smoke-0a4e0fe1e.3.azurestaticapps.net
+
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
 For general questions, we suggest asking in Teams so that others can help as well. We encourage people to work together and collaborate. Please feel free to help your fellow students out. Though it is possible to privately message people directly, as much as possible, we encourage open discussion on the main chat so that others can benefit as well.
@@ -26,7 +29,6 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * [TypeScript](https://www.typescriptlang.org/docs/) ([Style Guide](https://google.github.io/styleguide/tsguide.html))
 * [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
-* [Axios](https://axios-http.com/docs/intro) (Calling APIs)
 
 ### Back End
 * [.NET](https://dotnet.microsoft.com/en-us/)
