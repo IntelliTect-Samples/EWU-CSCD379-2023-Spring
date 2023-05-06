@@ -23,5 +23,28 @@ namespace Wordle.Api.Services
             }
             return scores;
         }
+
+        public async Task<Player> UpdatePlayer(string name, int attempts) 
+        {
+            Player? player = await _db.Players.FirstOrDefaultAsync(player => player.Name == name);
+
+            if (player != null)
+            {
+                player.AverageAttempts = ((player.AverageAttempts * player.GameCount) + attempts) / (double)(player.GameCount + 1);
+                player.GameCount++;
+            }
+            else 
+            {
+                player = new()
+                {
+                    Name = name,
+                    AverageAttempts = attempts,
+                    GameCount = 1
+                };
+                _db.Players.Add(player);
+            }
+            await _db.SaveChangesAsync();
+            return player;
+        }
     }
 }
