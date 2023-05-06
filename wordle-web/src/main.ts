@@ -15,7 +15,7 @@ import Axios from 'axios'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-  Axios.defaults.baseURL = 'https://localhost:7053/'
+  Axios.defaults.baseURL = 'https://localhost:7175/'
 } else {
   Axios.defaults.baseURL = 'wordlewebspring2023.azurewebsites.net'
 }
