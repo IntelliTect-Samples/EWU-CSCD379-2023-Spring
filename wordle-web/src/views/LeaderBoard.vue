@@ -4,6 +4,10 @@
   </v-card>
 
   <v-card>
+    {{ players }}
+  </v-card>
+
+  <v-card>
     <v-table>
       <thead>
         <tr>
@@ -13,9 +17,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in data().desserts" :key="item.name">
+        <tr v-for="item in data().topPlayers" :key="item.name">
           <td>{{ item.name }}</td>
-          <td>{{ item.calories }}</td>
+          <td>{{ item.gamesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
         </tr>
       </tbody>
@@ -25,63 +29,74 @@
 </template>
 
 <script setup lang="ts">
+import Axios from 'axios'
 import $router from '../router/index'
 
 function goBack() {
   $router.go(-1)
 }
 
+var players = []
+
+Axios.get('word/GetTopTenPlayers')
+  .then((response) => {
+    players = response.data
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
 function data() {
   return {
-    desserts: [
+    topPlayers: [
       {
         name: 'Frozen Yogurt',
-        calories: 159,
+        gamesPlayed: 159,
         avgAttempts: 12
       },
       {
         name: 'Ice cream sandwich',
-        calories: 237,
+        gamesPlayed: 237,
         avgAttempts: 12
       },
       {
         name: 'Eclair',
-        calories: 262,
+        gamesPlayed: 262,
         avgAttempts: 12
       },
       {
         name: 'Cupcake',
-        calories: 305,
+        gamesPlayed: 305,
         avgAttempts: 12
       },
       {
         name: 'Gingerbread',
-        calories: 356,
+        gamesPlayed: 356,
         avgAttempts: 12
       },
       {
         name: 'Jelly bean',
-        calories: 375,
+        gamesPlayed: 375,
         avgAttempts: 12
       },
       {
         name: 'Lollipop',
-        calories: 392,
+        gamesPlayed: 392,
         avgAttempts: 12
       },
       {
         name: 'Honeycomb',
-        calories: 408,
+        gamesPlayed: 408,
         avgAttempts: 12
       },
       {
         name: 'Donut',
-        calories: 452,
+        gamesPlayed: 452,
         avgAttempts: 12
       },
       {
         name: 'KitKat',
-        calories: 518,
+        gamesPlayed: 518,
         avgAttempts: 12
       }
     ]

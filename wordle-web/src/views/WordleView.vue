@@ -106,6 +106,7 @@ Axios.get('word')
   })
 
 function checkGuess() {
+  localStorage.name
   game.submitGuess()
   guess.value = ''
 }

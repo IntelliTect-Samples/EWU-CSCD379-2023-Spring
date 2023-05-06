@@ -14,16 +14,18 @@ export class WordleGame {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
+    this.timer_start = Date.now(); 
+    console.log("Timer Start: " + this.timer_start)
+
   }
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
   list = WordsService.getWordList()
-
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-
+  timer_start : number
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
   //     console.log('wrong length')
@@ -60,9 +62,11 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
-      console.log('Inserting Score: ' + index + 1)
+      const timer_end = Date.now(); 
+      const total_time = timer_end - this.timer_start
+      console.log("Total Time: " + total_time)
       Axios.post('player/InsertScore', {
-        Name: 'FishTaste',
+        Name: localStorage.name,
         NumAttempts: index + 1
       })
         .then((response) => {
