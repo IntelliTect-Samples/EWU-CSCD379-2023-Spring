@@ -13,10 +13,13 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import Axios from 'axios'
 
-if (process.env.NODE_ENV === 'development') {
-  Axios.defaults.baseURL = 'http://localhost:5001/'
+
+// Check if the app is running on localhost
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  Axios.defaults.baseURL = 'https://localhost:5173/';
 } else {
-  Axios.defaults.baseURL = 'https://wordleJB.azurewebsites.net/'
+  // Add the protocol 'https://' here
+  Axios.defaults.baseURL = 'https://wordleJB.azurewebsites.net/';
 }
 
 const vuetify = createVuetify({
