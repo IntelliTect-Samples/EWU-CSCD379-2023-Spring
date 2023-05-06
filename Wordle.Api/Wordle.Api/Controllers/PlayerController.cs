@@ -28,6 +28,12 @@ namespace Wordle.Api.Controllers
         public async Task<Player> InsertScore([FromBody] PlayerDto player) {
             return await _playerService.InsertScore(player.Name, player.NumAttempts); 
         }
+
+        [HttpGet("GetTopTenPlayers")]
+        public async Task<IEnumerable<Player>> GetTopTenPlayers()
+        {
+            return await _playerService.GetTopTenPlayers();
+        }
     }
 
 }
