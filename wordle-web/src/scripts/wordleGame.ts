@@ -13,6 +13,7 @@ export class WordleGame {
     this.numberOfGuesses = numberOfGuesses
 
     //if (!secretWord) secretWord = WordsService.getRandomWord()
+    if (!secretWord) secretWord = 'null'
     this.restartGame(secretWord)
   }
 
@@ -23,7 +24,7 @@ export class WordleGame {
   guess!: Word
   numberOfGuesses = 6
 
-  async restartGame(secretWord?: string, numberOfGuesses: number = 6) {
+  async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || await WordsService.getWordFromApi()
     this.guesses.splice(0)
     // create a word for each guess
