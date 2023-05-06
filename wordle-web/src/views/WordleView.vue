@@ -13,14 +13,6 @@
   <WordList :game="game"></WordList>
 
   <h3>Current secret word: {{ game.secretWord }}</h3>
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
-
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
-
-  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
 </template>
 
 <script setup lang="ts">
@@ -35,50 +27,20 @@ import WordList from '@/components/WordList.vue'
 import { WordleGameStatus } from '@/scripts/wordleGame'
 import WinCard from '@/components/WinCard.vue'
 import LoseCard from '@/components/LoseCard.vue'
-import Axios from 'axios'
 
 var audio = new Audio(tone.default)
 audio.volume = 0.4
 const guess = ref('')
 const win = ref(false)
 const game = reactive(new WordleGame())
+console.log(game.secretWord)
 
-const overlay = ref(true)
-
-onMounted(async () => {
+onMounted(() => {
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function addWord() {
-  overlay.value = true
-  Axios.post('word/AddWordFromBody', {
-    text: 'strin',
-    isCommon: true,
-    isUsed: false
-  })
-    .then((response) => {
-      overlay.value = false
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-
-Axios.get('word')
-  .then((response) => {
-    game.restartGame(response.data)
-    console.log(game.secretWord)
-    setTimeout(() => {
-      overlay.value = false
-    }, 502)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
 
 function checkGuess() {
   if (game.guess.text.length === 5) {

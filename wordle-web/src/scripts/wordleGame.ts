@@ -28,8 +28,8 @@ export class WordleGame {
   //     return
   //   }
 
-  async restartGame(secretWord: string, numberOfGuesses: number = 6) {
-    this.secretWord = secretWord
+  restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
+    this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
 
     for (let i = 0; i < numberOfGuesses; i++) {
