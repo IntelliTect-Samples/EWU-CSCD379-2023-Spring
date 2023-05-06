@@ -1,7 +1,6 @@
-import Axios from 'axios'
-
 import type { Word } from './word'
 import { Letter, LetterStatus } from './letter'
+import Axios from 'axios'
 
 export abstract class WordsService {
   static getRandomWord(): string {
