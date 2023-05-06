@@ -18,7 +18,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
   Axios.defaults.baseURL = ''
-  Axios.defaults.baseURL = 'ckappeswordleclone.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://ckappeswordleclone.azurewebsites.net/'
 }
 
 const vuetify = createVuetify({
