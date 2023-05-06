@@ -14,7 +14,7 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
+  <v-btn @click="addWord()">Add Strin</v-btn>
 </template>
 
 <script setup lang="ts">
