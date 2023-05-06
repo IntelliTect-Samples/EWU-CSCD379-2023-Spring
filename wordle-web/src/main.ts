@@ -17,7 +17,7 @@ import Axios from 'axios'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'wordletest2023.azurewebsites.net/'
+  Axios.defaults.baseURL = 'wordlewebspring2023.azurewebsites.net'
 }
 
 const vuetify = createVuetify({
