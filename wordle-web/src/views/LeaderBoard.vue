@@ -4,10 +4,6 @@
   </v-card>
 
   <v-card>
-    {{ players }}
-  </v-card>
-
-  <v-card>
     <v-table>
       <thead>
         <tr>
@@ -36,11 +32,11 @@ function goBack() {
   $router.go(-1)
 }
 
-var players = []
+//var players = []
 
-Axios.get('word/GetTopTenPlayers')
+Axios.get('player/GetTopTenPlayers')
   .then((response) => {
-    players = response.data
+    alert(response.data)
   })
   .catch((error) => {
     console.log(error)
