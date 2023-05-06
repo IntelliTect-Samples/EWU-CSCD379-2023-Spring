@@ -2,13 +2,10 @@
   <v-sheet>
     <v-card>
       <v-card-title>Leader Board</v-card-title>
-      <p>Test</p>
+      <p>To be added</p>
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
-  <body>
-    <p>test1</p>
-  </body>
 </template>
 
 <script setup lang="ts"></script>
