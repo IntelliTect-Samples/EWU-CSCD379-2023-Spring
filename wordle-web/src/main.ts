@@ -13,6 +13,7 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import Axios from 'axios'
 
+<<<<<<< Updated upstream
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
 <<<<<<< Updated upstream
@@ -23,6 +24,12 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
   Axios.defaults.baseURL = 'https://localhost:5173/'
 } else {
   Axios.defaults.baseURL = 'wordleJB.azurewebsites.net/'
+>>>>>>> Stashed changes
+=======
+if (process.env.NODE_ENV === 'development') {
+  Axios.defaults.baseURL = 'http://localhost:5001/'
+} else {
+  Axios.defaults.baseURL = 'https://wordleJB.azurewebsites.net/'
 >>>>>>> Stashed changes
 }
 
