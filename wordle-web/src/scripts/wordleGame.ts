@@ -1,6 +1,7 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
+import Axios from 'axios'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -50,14 +51,26 @@ export class WordleGame {
       this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters)
+    // Changes list of valid words after each submission
+    this.list = WordsService.validWords(this.guess, this.list)
 
     const index = this.guesses.indexOf(this.guess)
-    this.list = WordsService.validWords(this.guess, this.list)
-    if (index < this.guesses.length - 1) {
+
+    if (this.secretWord !== this.guess.text && index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      console.log('Inserting Score: ' + index + 1)
+      Axios.post('player/InsertScore', {
+        Name: 'FishTaste',
+        NumAttempts: index + 1
+      })
+        .then((response) => {
+          console.log(response.data)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
