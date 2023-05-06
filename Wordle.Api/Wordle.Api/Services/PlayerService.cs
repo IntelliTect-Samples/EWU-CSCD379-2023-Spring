@@ -10,14 +10,14 @@ namespace Wordle.Api.Services
         {
             _db = db;
         }
-        internal Player AddPlayer(string? name, int gameCount, double averageAttempts, int aveargeSecondsPerGame)
+        internal async Task<Player> AddPlayer(string? name, int gameCount, double averageAttempts, int aveargeSecondsPerGame)
         {
             if(name is null)
             {
                 throw new ArgumentNullException("Name is required.");
             }
 
-            var player = _db.Players.FirstOrDefault(p => p.Name == name);
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
             if (player != null)
             {
                 player.GameCount = gameCount;
@@ -34,7 +34,7 @@ namespace Wordle.Api.Services
                 };
                 _db.Players.Add(player);
             }
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return player;
         }
     }

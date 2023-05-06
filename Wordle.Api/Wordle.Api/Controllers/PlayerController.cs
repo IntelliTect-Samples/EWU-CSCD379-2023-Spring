@@ -17,10 +17,16 @@ namespace Wordle.Api.Controllers
             _playerService = playerService;
         }
 
+        //[HttpGet("GetTop10")]
+        //public Player GetManyWords([FromBody] PlayerDto player)
+        //{
+        //    return _playerService.AddPlayer(player.Name, player.GameCount, player.AverageAttempts, player.AveargeSecondsPerGame);
+        //}
+
         [HttpPost("AddPlayerFromBody")]
-        public Player AddPlayerFromBody([FromBody] PlayerDto player)
+        public async Task<Player> AddPlayerFromBody([FromBody] PlayerDto player)
         {
-            return _playerService.AddPlayer(player.Name, player.GameCount, player.AverageAttempts, player.AveargeSecondsPerGame);
+            return await _playerService.AddPlayer(player.Name, player.GameCount, player.AverageAttempts, player.AveargeSecondsPerGame);
         } 
     }
 }
