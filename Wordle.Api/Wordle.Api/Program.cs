@@ -1,9 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Wordle.Api.Data;
-using Wordle.Api.Services;
-
-var MyAllowAllOrigins = "_myAllowAllOrigins";
-
 var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors(options =>
@@ -54,8 +48,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.UseCors(MyAllowAllOrigins);
 
 app.UseAuthorization();
 

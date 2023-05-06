@@ -7,9 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <style scoped>

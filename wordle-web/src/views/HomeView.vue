@@ -1,21 +1,10 @@
 <template>
   <main>Home Page</main>
-  <v-btn @click="addPlayer()" style="tonal">Add Player</v-btn>
+  <v-card>
+    <router-link to="/leaderBoard"><v-btn>Link To leaderBoard</v-btn></router-link>
+    <router-link to="/wordle"><v-btn>Link To game</v-btn></router-link>
+    <router-link to="/about"><v-btn>Link To about</v-btn></router-link>
+  </v-card>
 </template>
 
-<script setup lang="ts">
-import Axios from 'axios'
-
-function addPlayer() {
-  console.log('Adding Nick!')
-  Axios.post('player/AddPlayer', {
-    Name: 'nick'
-  })
-    .then((response) => {
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-</script>
+<script setup lang="ts"></script>
