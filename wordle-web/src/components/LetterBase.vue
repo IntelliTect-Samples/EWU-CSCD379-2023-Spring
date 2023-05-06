@@ -1,10 +1,9 @@
 <template>
   <v-btn
-    style="width: 50px; min-width: 50px; height: 50px; min-height: 50px"
     :color="props.color"
     :elevation="12"
     :flat="true"
-    :style="{ 'background-image': 'linear-gradient(to right, #00000040, #FFFFFF40) !important' }"
+    class = "my-button"
     >{{ props.char }}
   </v-btn>
 </template>
@@ -20,3 +19,16 @@ const props = withDefaults(defineProps<Props>(), {
   color: 'grey'
 })
 </script>
+
+<style scoped>
+.my-button {
+  width: 50px;
+  min-width: 50px;
+  height: 50px;
+  min-height: 50px;
+  background-image: linear-gradient(to right, #00000040, #FFFFFF40) !important;
+}
+
+</style>
+
+

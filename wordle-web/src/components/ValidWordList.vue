@@ -10,16 +10,16 @@
         <v-card-title>Select Words</v-card-title>
         <v-divider></v-divider>
         <v-card-text style="height: 300px; max-width: 150px">
-          <v-hover
-            ><v-btn
+          <v-hover> 
+            <v-btn
               v-for="(item, index) in items"
               :key="index"
               :text="wordGuess === item"
               @click="typeof item === 'string' && (wordGuess = item)"
             >
               {{ item }}
-            </v-btn></v-hover
-          >
+            </v-btn>
+            </v-hover> 
         </v-card-text>
         <v-divider></v-divider>
 

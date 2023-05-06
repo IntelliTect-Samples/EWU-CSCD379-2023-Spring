@@ -10,27 +10,27 @@
         <v-btn to="/wordle">Wordle</v-btn>
         <v-btn to="/leaderboard">Leader Board</v-btn>
         <v-btn to="/about">About</v-btn>
-        <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click="setTheme('default')" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="setting = true" icon="mdi-cog"></v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar-items>
     </v-toolbar>
 
     <v-navigation-drawer location="right" @click.stop="drawer = !drawer" v-model="drawer" temporary>
-      <v-list-item>
+      <v-list-item >
         <v-list-item-content>
           <v-list-item-title class="title">Wordle Redux</v-list-item-title>
           <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
-          <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-home" to="/">
+          <v-list-item prepend-icon="mdi-home" to="/">
             Home
           </v-list-item>
-          <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-star" to="/wordle">
+          <v-list-item prepend-icon="mdi-star" to="/wordle">
             Wordle
           </v-list-item>
-          <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-star-box" to="/leaderboard">
+          <v-list-item prepend-icon="mdi-star-box" to="/leaderboard">
             Leader Board
           </v-list-item>
-          <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-information" to="/about">
+          <v-list-item prepend-icon="mdi-information" to="/about">
             About</v-list-item
           >
         </v-list-item-content>
@@ -43,21 +43,21 @@
         <v-list-item-content>
           <v-list-item-title class="title">Wordle Redux</v-list-item-title>
           <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
-          <v-list-item @click="setDefault" prepend-icon="mdi-theme-light-dark">
+          <v-list-item @click="setTheme('default')" prepend-icon="mdi-theme-light-dark">
             Light/Dark Mode
           </v-list-item>
           <p>Dark Mode Color Blind Theme</p>
-          <v-list-item @click="setProtanopia_Deuteranopia" prepend-icon="mdi-eye-plus">
+          <v-list-item @click="setTheme('Protanopia_Deuteranopia')" prepend-icon="mdi-eye-plus">
             Protanopia/Deuteranopia Dark Mode
           </v-list-item>
-          <v-list-item @click="setTritanopia" prepend-icon="mdi-eye-plus">
+          <v-list-item @click="setTheme('Tritanopia')" prepend-icon="mdi-eye-plus">
             Tritanopia Dark Mode
           </v-list-item>
           <p>Light Mode Color Blind Theme</p>
-          <v-list-item @click="setProtanopia_DeuteranopiaLight" prepend-icon="mdi-eye-plus-outline">
+          <v-list-item @click="setTheme('Protanopia_DeuteranopiaLight')" prepend-icon="mdi-eye-plus-outline">
             Protanopia/Deuteranopia Light Mode
           </v-list-item>
-          <v-list-item @click="setTritanopiaLight" prepend-icon="mdi-eye-plus-outline">
+          <v-list-item @click="setTheme('TritanopiaLight')" prepend-icon="mdi-eye-plus-outline">
             Tritanopia Light Mode
           </v-list-item>
         </v-list-item-content>
@@ -66,60 +66,32 @@
   </v-dialog>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { defineComponent } from 'vue'
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'NavBar',
-  data: () => ({
-    drawer: false,
-    setting: false
-  }),
-  setup() {
-    const theme = useTheme()
+const theme = useTheme()
+const drawer = ref (false)
+const setting = ref (false)
 
-    function setLightTheme() {
-      theme.global.name.value = 'light'
-    }
-
-    function setDarkTheme() {
+function setTheme(themecolor: string){
+  if(themecolor === "light" )
+    theme.global.name.value = 'light'
+  else if(themecolor === "dark")
+    theme.global.name.value = 'dark'
+  else if(themecolor === "Protanopia_Deuteranopia")
+    theme.global.name.value = 'Protanopia_Deuteranopia'
+  else if(themecolor === "Tritanopia")
+    theme.global.name.value = 'Tritanopia'
+  else if(themecolor === "Protanopia_DeuteranopiaLight")
+    theme.global.name.value = 'Protanopia_DeuteranopiaLight'
+  else if(themecolor === "TritanopiaLight")
+    theme.global.name.value = 'TritanopiaLight'
+  else if(themecolor === "default")
+    if (theme.global.name.value == 'light') {
       theme.global.name.value = 'dark'
-    }
-
-    function setProtanopia_Deuteranopia() {
-      theme.global.name.value = 'Protanopia_Deuteranopia'
-    }
-
-    function setTritanopia() {
-      theme.global.name.value = 'Tritanopia'
-    }
-
-    function setProtanopia_DeuteranopiaLight() {
-      theme.global.name.value = 'Protanopia_DeuteranopiaLight'
-    }
-
-    function setTritanopiaLight() {
-      theme.global.name.value = 'TritanopiaLight'
-    }
-
-    function setDefault() {
-      if (theme.global.name.value == 'light') {
-        theme.global.name.value = 'dark'
-      } else if (theme.global.name.value == 'dark') {
-        theme.global.name.value = 'light'
-      } else theme.global.name.value = 'light'
-    }
-
-    return {
-      setLightTheme,
-      setDarkTheme,
-      setProtanopia_Deuteranopia,
-      setTritanopia,
-      setProtanopia_DeuteranopiaLight,
-      setTritanopiaLight,
-      setDefault
-    }
-  }
-})
+    } else if (theme.global.name.value == 'dark') {
+      theme.global.name.value = 'light'
+    } else theme.global.name.value = 'light'
+    }  
 </script>
