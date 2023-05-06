@@ -15,7 +15,6 @@
     :guessedLetters="game.guessedLetters"
   />
 
-
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>

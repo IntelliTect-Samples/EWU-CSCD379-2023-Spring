@@ -1,15 +1,13 @@
 <template>
   <main>Home Page</main>
   <v-btn @click="addPlayer()" style="tonal">Add Player</v-btn>
-
 </template>
 
 <script setup lang="ts">
-
-import Axios from 'axios';
+import Axios from 'axios'
 
 function addPlayer() {
-  console.log("Adding Nick!")
+  console.log('Adding Nick!')
   Axios.post('player/AddPlayer', {
     Name: 'nick'
   })
