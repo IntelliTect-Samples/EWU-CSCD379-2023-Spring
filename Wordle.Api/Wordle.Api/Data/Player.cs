@@ -6,6 +6,7 @@
         public required string Name { get; set; }
         public int GameCount { get; set; }
         public double AverageAttempts { get; set; }
-        public int AveargeSecondsPerGame { get; set; }
+        public int AverageSecondsPerGame { get; set; }
+        public double WeightedScore { get; set; }
     }
 }
