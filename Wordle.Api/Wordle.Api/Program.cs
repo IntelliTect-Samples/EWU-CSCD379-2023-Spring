@@ -31,7 +31,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<WordService>();
-
+builder.Services.AddScoped<PlayerService>(); 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -39,15 +39,9 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     Word.SeedWords(db);
-    var player = new Player()
-    {
-        PlayerId = 0,
-        Name = "Test",
-        GameCount = 0,
-        AverageAttempts = 0.0,
-        AverageSecondsPerGame = 0.0
-    };
-    db.Players.Add(player);
+
+    // Initialize some default players 
+    Player.SeedPlayers(db); 
 }
 
 
