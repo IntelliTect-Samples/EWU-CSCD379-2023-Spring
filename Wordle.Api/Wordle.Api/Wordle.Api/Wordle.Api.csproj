@@ -7,10 +7,14 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Content\Players.csv" />
 		<None Remove="Content\Words.csv" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="Content\Players.csv">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Content\Words.csv">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
