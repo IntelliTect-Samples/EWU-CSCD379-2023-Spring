@@ -16,7 +16,7 @@
     </v-card>
   </v-dialog>
 
-  <v-dialog v-model="submitted" align="center" justify="center" class="fill-height">
+  <v-dialog v-model="submitted">
     <v-card max-width="200px">
       <v-card-title class="headline">Username saved</v-card-title>
     </v-card>
