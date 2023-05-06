@@ -5,7 +5,7 @@ export abstract class WordsService {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
 
-  static wordUrl = 'word'
+  static wordUrl = 'ckappeswordleclone.azurewebsites.net/word'
 
   static async getWordFromApi(): Promise<string> {
     // Make axios call to get the word from
