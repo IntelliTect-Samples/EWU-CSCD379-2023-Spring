@@ -2,17 +2,6 @@
   <v-sheet>
     <v-card>
       <v-card-title>Leader Board</v-card-title>
-<<<<<<< HEAD
-        <div> 
-            <p>First</p>
-            <v-progress-linear 
-            v-model="progress"
-            color="amber"
-            height="25"
-            striped
-            ><strong>First place</strong> </v-progress-linear>
-        </div>
-=======
       <v-progress-linear 
         v-model="progress[0]"
         color="amber"
@@ -36,7 +25,6 @@
         ></v-progress-linear>
       </template>
 
->>>>>>> Assingn-3
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
