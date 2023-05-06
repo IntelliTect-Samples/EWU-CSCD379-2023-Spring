@@ -2,6 +2,12 @@ import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
 
+export enum WordleGameStatus {
+  Active = 0,
+  Won = 1,
+  Lost = 2
+}
+
 export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
@@ -12,6 +18,7 @@ export class WordleGame {
   guesses = new Array<Word>()
   secretWord = ''
   numberOfGuesses = 6
+  status = WordleGameStatus.Active
   guess!: Word
   validWords = new Array<String>()
 
@@ -21,15 +28,16 @@ export class WordleGame {
   //     return
   //   }
 
-  restartGame(secretWord: string) {
+  async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || WordsService.getRandomWord()
     this.guesses.splice(0)
     // create a word for each guess
-    for (let iWord = 0; iWord < this.numberOfGuesses; iWord++) {
+    for (let iWord = 0; iWord < numberOfGuesses; iWord++) {
       const word = new Word(secretWord.length)
       this.guesses.push(word)
     }
     this.guess = this.guesses[0]
+    this.status = WordleGameStatus.Active
   }
 
   submitGuess() {

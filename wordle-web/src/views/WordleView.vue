@@ -24,21 +24,51 @@ import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
+import Axios from 'axios'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
 
+const overlay = ref(true)
+
 console.log(game.secretWord)
 
-onMounted(() => {
+onMounted(async () => {
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
+/*
+function addWord() {
+  overlay.value = true
+  Axios.post('word/AddWordFromBody', {
+    text: 'strin',
+    isCommon: true,
+    isUsed: false
+  })
+    .then((response) => {
+      overlay.value = false
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+Axios.get('word')
+  .then((response) => {
+    game.restartGame(response.data)
+    console.log(game.secretWord)
+    setTimeout(() => {
+      overlay.value = false
+    }, 502)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+*/
 watch(
   guess,
   (newGuess, oldGuess) => {
