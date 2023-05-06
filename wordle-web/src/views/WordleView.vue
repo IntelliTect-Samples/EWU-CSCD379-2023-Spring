@@ -1,4 +1,9 @@
 <template>
+  <div class="text-right">
+      <v-btn v-model="updateUsername" @click="updateDialogValue(true)">
+        Username: {{ username }}
+      </v-btn>
+  </div>
   <div class="align-center">
     <h1>The Good Word</h1>
     <br />
@@ -53,6 +58,8 @@
     </div>
   </div>
 
+  <UsernameDialog />
+
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
@@ -66,12 +73,17 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
+import { eventBus } from '@/scripts/eventBus'
+import UsernameDialog from "@/components/UsernameDialog.vue";
 
 let validGuesses = new Array<string>()
 let buttonText = ref('Display correct word')
+let username: string = localStorage.getItem('username') || 'Guest'
+let updateUsername = ref()
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
+
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -89,6 +101,10 @@ watch(
   },
   { flush: 'post' }
 )
+
+function updateDialogValue(newValue: unknown) {
+  eventBus.emit('updateDialogValue', newValue)
+}
 
 function toggleText() {
   buttonText.value =
