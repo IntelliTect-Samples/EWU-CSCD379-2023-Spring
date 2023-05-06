@@ -12,25 +12,21 @@ namespace Wordle.Api.Services
             _db = db;
         }
         
-        public async Task<int> UpdatePlayerAsync(int id, string name, int attempts)
+        public async Task<string> UpdatePlayerAsync(string name, int attempts)
         {
-            if (id != -1)
+            Player? player = _db.Players.SingleOrDefaultAsync( p => p.Name == name ).Result;
+            if (player is not null)
             {
-                Player? player = _db.Players.SingleAsync( p => p.PlayerId == id ).Result;
-                if (player != null)
-                {
-                    player.UpdateAttempts(attempts);
-                    _db.SaveChanges();
-                    return player.PlayerId;
-                }
-                throw new DbUpdateException("Player ID: " + id);
+                player.UpdateAttempts(attempts);
+                _db.SaveChanges();
+                return player.Name;
             }
             else
             {
                 Player newPlayer = new Player(name, attempts);
                 await _db.Players.AddAsync(newPlayer);
                 _db.SaveChanges();
-                return newPlayer.PlayerId;
+                return newPlayer.Name;
             }
         }
 

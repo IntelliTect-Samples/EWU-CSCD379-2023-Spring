@@ -17,9 +17,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("UpdatePlayer")]
-        public async Task<int> Update(int id, string name, int attempts)
+        public async Task<string> Update(string name, int attempts)
         {
-            return await _playerService.UpdatePlayerAsync(id, name, attempts);
+            return await _playerService.UpdatePlayerAsync(name, attempts);
         }
 
         [HttpGet("GetPlayer")]
