@@ -7,7 +7,6 @@ on:
   push:
     branches:
       - main
-      - Assignment-3
       - azure-assignment-deployment
     paths:
       - Wordle.Api/**
