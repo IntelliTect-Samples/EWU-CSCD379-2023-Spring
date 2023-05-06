@@ -19,5 +19,11 @@ namespace Wordle.Api.Controllers
         {
             return await _leaderboardService.GetTopScores();
         }
+
+        [HttpPost]
+        public async Task<Player> UpdatePlayers(string name, int attempts)
+        {
+            return await _leaderboardService.UpdatePlayer(name, attempts);
+        }
     }
 }
