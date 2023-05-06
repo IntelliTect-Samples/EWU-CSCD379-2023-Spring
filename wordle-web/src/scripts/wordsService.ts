@@ -9,7 +9,7 @@ export abstract class WordsService {
 
   static async getWordFromApi(): Promise<string> {
     // Make axios call to get the word from
-    const response = await Axios.get(this.wordUrl)
+    const response = await Axios.get('ckappeswordleclone.azurewebsites.net/word')
 
     console.log(response.data)
     return response.data
