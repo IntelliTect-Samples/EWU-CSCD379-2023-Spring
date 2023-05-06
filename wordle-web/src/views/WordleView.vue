@@ -13,7 +13,7 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-
+  
   <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
 </template>
 
