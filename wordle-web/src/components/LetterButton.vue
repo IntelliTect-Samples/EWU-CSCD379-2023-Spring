@@ -1,8 +1,5 @@
 <template>
-  <LetterBase
-    :char="props.letter.char"
-    :color="props.letter.color"
-  ></LetterBase>
+  <LetterBase :char="props.letter.char" :color="props.letter.color"></LetterBase>
 </template>
 
 <script setup lang="ts">
@@ -15,5 +12,3 @@ export interface Props {
 
 const props = defineProps<Props>()
 </script>
-
-

@@ -5,7 +5,7 @@
 
   <p>Guess: {{ guess }}</p>
 
-    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <!-- <h2>{{ guess }}</h2> -->

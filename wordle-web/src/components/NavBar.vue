@@ -8,6 +8,7 @@
       <v-toolbar-items class="red--text">
         <v-btn to="/">Home</v-btn>
         <v-btn to="/wordle">Wordle</v-btn>
+        <v-btn to="/leaderboard">Leader Board</v-btn>
         <v-btn to="/about">About</v-btn>
         <v-app-bar-nav-icon @click="setDefault" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="setting = true" icon="mdi-cog"></v-app-bar-nav-icon>
@@ -26,6 +27,9 @@
           <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-star" to="/wordle">
             Wordle
           </v-list-item>
+          <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-star-box" to="/leaderboard">
+            Leader Board
+          </v-list-item>
           <v-list-item @click.stop="drawer = !drawer" prepend-icon="mdi-information" to="/about">
             About</v-list-item
           >
@@ -33,51 +37,33 @@
       </v-list-item>
     </v-navigation-drawer>
   </nav>
-  <v-dialog
-        v-model="setting"
-        width="auto"
-      >
-      <v-card>
+  <v-dialog v-model="setting" width="auto">
+    <v-card>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Wordle Redux</v-list-item-title>
           <v-list-item-subtitle>Wordle Redux</v-list-item-subtitle>
-          <v-list-item
-            @click="setDefault"
-            prepend-icon="mdi-theme-light-dark"
-          >
+          <v-list-item @click="setDefault" prepend-icon="mdi-theme-light-dark">
             Light/Dark Mode
           </v-list-item>
           <p>Dark Mode Color Blind Theme</p>
-          <v-list-item
-            @click="setProtanopia_Deuteranopia"
-            prepend-icon="mdi-eye-plus"
-          >
+          <v-list-item @click="setProtanopia_Deuteranopia" prepend-icon="mdi-eye-plus">
             Protanopia/Deuteranopia Dark Mode
           </v-list-item>
-          <v-list-item
-            @click="setTritanopia"
-            prepend-icon="mdi-eye-plus"
-          >
+          <v-list-item @click="setTritanopia" prepend-icon="mdi-eye-plus">
             Tritanopia Dark Mode
           </v-list-item>
           <p>Light Mode Color Blind Theme</p>
-          <v-list-item
-            @click="setProtanopia_DeuteranopiaLight"
-            prepend-icon="mdi-eye-plus-outline"
-          >
+          <v-list-item @click="setProtanopia_DeuteranopiaLight" prepend-icon="mdi-eye-plus-outline">
             Protanopia/Deuteranopia Light Mode
           </v-list-item>
-          <v-list-item
-            @click="setTritanopiaLight"
-            prepend-icon="mdi-eye-plus-outline"
-          >
+          <v-list-item @click="setTritanopiaLight" prepend-icon="mdi-eye-plus-outline">
             Tritanopia Light Mode
           </v-list-item>
         </v-list-item-content>
       </v-list-item>
-      </v-card>
-    </v-dialog>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script lang="ts">
@@ -136,6 +122,4 @@ export default defineComponent({
     }
   }
 })
-
 </script>
-
