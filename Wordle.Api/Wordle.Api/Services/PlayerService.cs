@@ -13,7 +13,10 @@ namespace Wordle.Api.Services
 
         public async Task<IEnumerable<Player>> GetTopTen()
         {
-            var players = _db.Players.Take(10).ToListAsync();
+            var players = _db.Players
+                .OrderByDescending(p => p.WeightedScore)
+                .Take(10)
+                .ToListAsync();
             return await players;
         }
         public async Task<Player> AddPlayer(string? name, int gameCount, double averageAttempts, int averageSecondsPerGame)
@@ -29,7 +32,7 @@ namespace Wordle.Api.Services
                 player.GameCount = gameCount;
                 player.AverageAttempts = averageAttempts;
                 player.AverageSecondsPerGame = averageSecondsPerGame;
-                player.WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame);
+                player.WeightedScore = await CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame);
             }
             else
             {
@@ -39,7 +42,7 @@ namespace Wordle.Api.Services
                     GameCount = gameCount,
                     AverageAttempts = averageAttempts,
                     AverageSecondsPerGame = averageSecondsPerGame,
-                    WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame)
+                    WeightedScore = await CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame)
                 };
                 _db.Players.Add(player);
             }
@@ -47,29 +50,32 @@ namespace Wordle.Api.Services
             return player;
         }
 
-        private double CalculateWeightedScore(int gameCount, double averageAttempts, int averageSecondsPerGame)
+        private async Task<double> CalculateWeightedScore(int gameCount, double averageAttempts, int averageSecondsPerGame)
         {
+            // Not working correctly yet
+            if (!_db.Players.Any()) return 1;
 
             // Finding the minimum and maximum values for GameCount
-            int minGameCount = _db.Players.Min(p => p.GameCount);
-            int maxGameCount = _db.Players.Max(p => p.GameCount);
+            int minGameCount = await _db.Players.MinAsync(p => p.GameCount);
+            int maxGameCount = await _db.Players.MaxAsync(p => p.GameCount);
 
-            double normalizedGameCount = (gameCount - minGameCount) /
-                (maxGameCount - minGameCount);
+            double normalizedGameCount = (maxGameCount - minGameCount) != 0 ? (gameCount - minGameCount) /
+                (maxGameCount - minGameCount) : 0.0;
 
             // Finding the minimum and maximum values for AverageAttempts
-            double minAverageAttempts = _db.Players.Min(p => p.AverageAttempts);
-            double maxAverageAttempts = _db.Players.Max(p => p.AverageAttempts);
+            double minAverageAttempts = await _db.Players.MinAsync(p => p.AverageAttempts);
+            double maxAverageAttempts = await _db.Players.MaxAsync(p => p.AverageAttempts);
 
-            double normalizedAverageAttempts = (averageAttempts - minAverageAttempts) /
-                (maxAverageAttempts - minAverageAttempts);
+            double normalizedAverageAttempts = (maxAverageAttempts - minAverageAttempts) != 0
+    ? (averageAttempts - minAverageAttempts) / (maxAverageAttempts - minAverageAttempts)
+    : 0.0;
 
             // Finding the minimum and maximum values for AverageSecondsPerGame
-            double minAverageSecondsPerGame = _db.Players.Min(p => p.AverageSecondsPerGame);
-            double maxAverageSecondsPerGame = _db.Players.Max(p => p.AverageSecondsPerGame);
+            double minAverageSecondsPerGame = await _db.Players.MinAsync(p => p.AverageSecondsPerGame);
+            double maxAverageSecondsPerGame = await _db.Players.MaxAsync(p => p.AverageSecondsPerGame);
 
-            double normalizedAverageSecondsPerGame = (averageSecondsPerGame - minAverageSecondsPerGame) /
-                (maxAverageSecondsPerGame - minAverageSecondsPerGame);
+            double normalizedAverageSecondsPerGame = (maxAverageSecondsPerGame - minAverageSecondsPerGame) != 0 ?(averageSecondsPerGame - minAverageSecondsPerGame) /
+                (maxAverageSecondsPerGame - minAverageSecondsPerGame) : 0.0;
 
             double overallScore = (0.3 * normalizedGameCount) + (0.4 * normalizedAverageAttempts) + (0.3 * normalizedAverageSecondsPerGame);
 
