@@ -15,7 +15,7 @@ namespace Wordle.Api.Services
         public async Task<string> GetRandomWord()
         {
             var count = await _db.Words.CountAsync(word => word.IsCommon);
-            var index = new System.Random().Next(count);
+            var index = new Random().Next(count);
             var word = await _db.Words.Where(word => word.IsCommon).Skip(index).FirstAsync();
             return word.Text;
         }
