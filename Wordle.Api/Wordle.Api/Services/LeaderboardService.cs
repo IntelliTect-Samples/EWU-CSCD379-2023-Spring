@@ -50,7 +50,7 @@ public class LeaderboardService
         return player;
     }
 
-    public async Task<Player> UpdatePlayer(string playerName, int timeInSeconds, double attempts)
+    private async Task<Player> UpdatePlayer(string playerName, int timeInSeconds, double attempts)
     {
         var player =
             await _db.Players.FirstOrDefaultAsync(player => player.PlayerName == playerName);
