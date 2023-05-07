@@ -1,9 +1,12 @@
 <template>
   <v-card>
-    <main>-- L Page --</main>
+    <main>-- Leaderboard --</main>
   </v-card>
-  <v-card> time to complete last game = {{ totalTime }} seconds </v-card>
-  <v-card>
+  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
+  <v-card> Time to complete last game = {{ totalTime }} seconds </v-card>
+  <v-card v-if="!overlay && players.length">
     <v-table>
       <thead>
         <tr>
@@ -13,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in data().topPlayers" :key="item.name">
+        <tr v-for="item in players" :key="item.name">
           <td>{{ item.name }}</td>
           <td>{{ item.gamesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
@@ -26,83 +29,32 @@
 
 <script setup lang="ts">
 import Axios from 'axios'
+import { ref } from 'vue'
 import $router from '../router/index'
 
 var totalTime = localStorage.total_time / 1000
+const overlay = ref(true)
+var players: any[] = []
 
 function goBack() {
   $router.go(-1)
 }
 
-//var players = []
-/*
 Axios.get('player/GetTopTenPlayers')
   .then((response) => {
-    response.data.forEach((player) => {
+    response.data.forEach((player : any) => {
+      console.log(`${player.Name}, ${player.GameCount}, ${player.AverageAttempts}`)
 
+      players.push({
+        name: `${player.Name}`,
+        gamesPlayed: `${player.GameCount}`,
+        avgAttempts: `${player.AverageAttempts}` 
+      })
 
+      overlay.value = false
     })
-      
-    
   })
   .catch((error) => {
     console.log(error)
-  })*/
-
-function data() {
-  return {
-    topPlayers: [
-      {
-        name: 'Frozen Yogurt',
-        gamesPlayed: 159,
-        avgAttempts: 12
-      },
-      {
-        name: 'Ice cream sandwich',
-        gamesPlayed: 237,
-        avgAttempts: 12
-      },
-      {
-        name: 'Eclair',
-        gamesPlayed: 262,
-        avgAttempts: 12
-      },
-      {
-        name: 'Cupcake',
-        gamesPlayed: 305,
-        avgAttempts: 12
-      },
-      {
-        name: 'Gingerbread',
-        gamesPlayed: 356,
-        avgAttempts: 12
-      },
-      {
-        name: 'Jelly bean',
-        gamesPlayed: 375,
-        avgAttempts: 12
-      },
-      {
-        name: 'Lollipop',
-        gamesPlayed: 392,
-        avgAttempts: 12
-      },
-      {
-        name: 'Honeycomb',
-        gamesPlayed: 408,
-        avgAttempts: 12
-      },
-      {
-        name: 'Donut',
-        gamesPlayed: 452,
-        avgAttempts: 12
-      },
-      {
-        name: 'KitKat',
-        gamesPlayed: 518,
-        avgAttempts: 12
-      }
-    ]
-  }
-}
+  })
 </script>
