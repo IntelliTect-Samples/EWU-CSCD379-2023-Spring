@@ -35,7 +35,7 @@ namespace Wordle.Api.Services
         {
             if (newPlayerName is null || newPlayerName.Length < 3)
             {
-                throw new ArgumentException("PlayerName must be < 3 characters long");
+                newPlayerName = "Guest";
             }
             var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == newPlayerName);
             if (player != null)
