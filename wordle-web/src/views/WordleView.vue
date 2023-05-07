@@ -2,8 +2,9 @@
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
-
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <div style="padding-top: 3em">
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  </div>
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
