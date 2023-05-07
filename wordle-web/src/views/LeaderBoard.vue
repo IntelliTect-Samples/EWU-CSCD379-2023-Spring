@@ -10,9 +10,9 @@
     <v-table>
       <thead>
         <tr>
-          <th class="text-left">player Name</th>
-          <th class="text-left">Score</th>
-          <th class="text-left">Agv Attempts</th>
+          <th class="text-left">Player Name</th>
+          <th class="text-left">Games Played</th>
+          <th class="text-left">Average Attempts</th>
         </tr>
       </thead>
       <tbody>
@@ -42,13 +42,13 @@ function goBack() {
 
 Axios.get('player/GetTopTenPlayers')
   .then((response) => {
-    response.data.forEach((player : any) => {
+    response.data.forEach((player: any) => {
       console.log(`${player.Name}, ${player.GameCount}, ${player.AverageAttempts}`)
 
       players.push({
         name: `${player.Name}`,
         gamesPlayed: `${player.GameCount}`,
-        avgAttempts: `${player.AverageAttempts}` 
+        avgAttempts: `${player.AverageAttempts}`
       })
 
       overlay.value = false
