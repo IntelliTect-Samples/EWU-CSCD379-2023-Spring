@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -22,5 +23,4 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetRandomWord();
         }
     }
-}
-
+}    
