@@ -33,21 +33,15 @@ namespace Wordle.Api.Migrations
                     b.Property<double>("AverageAttempts")
                         .HasColumnType("float");
 
-                    b.Property<int?>("AverageTimeInSeconds")
+                    b.Property<int?>("AverageSecondsPerGame")
                         .HasColumnType("int");
 
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("PlayerName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("TotalAttempts")
-                        .HasColumnType("float");
-
-                    b.Property<int>("TotalTimeInSeconds")
-                        .HasColumnType("int");
 
                     b.HasKey("PlayerId");
 

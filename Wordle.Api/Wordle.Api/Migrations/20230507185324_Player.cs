@@ -16,12 +16,10 @@ namespace Wordle.Api.Migrations
                 {
                     PlayerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameCount = table.Column<int>(type: "int", nullable: false),
-                    TotalTimeInSeconds = table.Column<int>(type: "int", nullable: false),
-                    AverageTimeInSeconds = table.Column<int>(type: "int", nullable: true),
-                    TotalAttempts = table.Column<double>(type: "float", nullable: true),
-                    AverageAttempts = table.Column<double>(type: "float", nullable: false)
+                    AverageAttempts = table.Column<double>(type: "float", nullable: false),
+                    AverageSecondsPerGame = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
