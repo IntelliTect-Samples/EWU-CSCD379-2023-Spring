@@ -5,16 +5,6 @@ export abstract class WordsService {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
 
-  static wordUrl = 'https://wordle2023.azurewebsites.net/word'
-
-  static async getWordFromApi(): Promise<string> {
-    // Make axios call to get the word from
-    const response = await Axios.get(this.wordUrl)
-
-    console.log(response.data)
-    return response.data
-  }
-
   static isValidWord(word: string): boolean {
     return this.#words.includes(word)
   }
