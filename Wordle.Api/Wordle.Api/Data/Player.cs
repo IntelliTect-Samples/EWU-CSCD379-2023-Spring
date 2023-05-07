@@ -16,7 +16,9 @@ namespace Wordle.Api.Data
         {
             if (!db.Players.Any())
             {
-                var playerLine = System.IO.File.ReadAllLines("Content/Players.csv");
+                string directoryPath = Directory.GetCurrentDirectory();
+                string modelPath = Path.Combine(directoryPath, "Content/Players.csv");
+                var playerLine = System.IO.File.ReadAllLines(modelPath);
                 foreach (var line in playerLine)
                 {
                     var parts = line.Split(',');
@@ -29,6 +31,7 @@ namespace Wordle.Api.Data
                     };
                     db.Players.Add(player);
                 }
+                
                 db.SaveChanges();
             }
         }
