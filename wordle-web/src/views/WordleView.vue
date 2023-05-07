@@ -4,7 +4,7 @@
   <div class="text-right">
     <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition">
       <template v-slot:activator="{ props }">
-        <v-btn v-bind="props">
+        <v-btn v-bind="props" @click="stopKeyboard()">
           {{ playerName }}
         </v-btn>
       </template>
@@ -22,8 +22,8 @@
           </v-card-text>
           <v-spacer></v-spacer>
           <v-card-actions class="justify-end">
-            <v-btn variant="text" @click="dialog = false">Close</v-btn>
-            <v-btn variant="text" @click="dialog = false">Submit</v-btn>
+            <v-btn variant="text" @click="dialog = false; startKeyboard()">Close</v-btn>
+            <v-btn variant="text" @click="dialog = false; startKeyboard()">Submit</v-btn>
           </v-card-actions>
         </v-card>
       </template>
@@ -44,17 +44,13 @@
     :guessedLetters="game.guessedLetters"
   />
 
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
+ 
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
-  <v-card>once game is won or lost, go to leader board to see time</v-card>
+<v-card>once game is won or lost, go to leader board to see time</v-card>
 </template>
 
 <script setup lang="ts">
@@ -72,10 +68,28 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 
 const overlay = ref(true)
+var dialog = ref(true)
+
 
 onMounted(async () => {
-  window.addEventListener('keyup', keyPress)
+  if(!dialog.value){
+    window.addEventListener('keyup', keyPress)
+  }
 })
+
+
+
+function startKeyboard() : void {
+  window.addEventListener('keyup', keyPress)
+
+
+}
+function stopKeyboard() : void {
+  console.log("Stopping Keyboard")
+  window.removeEventListener('keyup', keyPress)
+
+}
+
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
@@ -146,5 +160,4 @@ function keyPress(event: KeyboardEvent | string) {
 
 //import { ref } from 'vue'
 const playerName = ref('Guest')
-var dialog = ref(true)
 </script>
