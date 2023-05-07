@@ -1,3 +1,4 @@
+<!-- TODO: Update/fix about page layout... -->
 <template>
   <v-sheet
     location="center"

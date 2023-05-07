@@ -1,30 +1,29 @@
 import Axios from 'axios'
 
 export abstract class WordsService {
-  static getRandomWord(): string {
-    const result = this.words[Math.floor(Math.random() * this.words.length)]
-
-    console.log(result)
-    return result
-  }
-
   static wordUrl = 'https://wordleweb2023.azurewebsites.net/word'
 
+  // static getRandomWord(): string {
+  //   const result = this.words[Math.floor(Math.random() * this.words.length)]
+  //
+  //   console.log(result)
+  //   return result
+  // }
+
   static async getWordFromApi(): Promise<string> {
-    // Make axios call to get the word from
     const response = await Axios.get(this.wordUrl)
     console.log(response.data)
     return response.data
   }
 
   static validWords(word: string): Array<string> {
-    const newList = new Array<string>()
+    const newList: string[] = new Array<string>()
 
     if (word == '') {
       return newList
     }
 
-    this.words.forEach((element) => {
+    this.words.forEach((element: string) => {
       if (element.startsWith(word)) {
         newList.push(element)
       }

@@ -1,5 +1,3 @@
-// Class that represents a letter in the wordle word and status
-// of the letter in the wordle word
 export enum LetterStatus {
   NotGuessed = 0,
   Correct,
@@ -16,7 +14,7 @@ export class Letter {
     this.status = status ?? LetterStatus.NotGuessed
   }
 
-  get color() {
+  get color(): string {
     switch (this.status) {
       case LetterStatus.Correct:
         return 'correct'

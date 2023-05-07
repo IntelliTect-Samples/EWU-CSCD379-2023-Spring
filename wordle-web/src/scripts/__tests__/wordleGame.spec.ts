@@ -5,7 +5,7 @@ import { Word } from '@/scripts/word'
 describe('Word', () => {
   it('Gets Correct Word', () => {
     const word = new Word('apple')
-    expect(word.check('apple')).toBe(true)
+    expect(word.checkWord('apple')).toBe(true)
     expect(word.letters[0].status).toBe(LetterStatus.Correct)
     expect(word.letters[1].status).toBe(LetterStatus.Correct)
     expect(word.letters[2].status).toBe(LetterStatus.Correct)
@@ -15,7 +15,7 @@ describe('Word', () => {
 
   it('Gets Wrong Word', () => {
     const word = new Word('apple')
-    expect(word.check('plane')).toBe(false)
+    expect(word.checkWord('plane')).toBe(false)
     expect(word.letters[0].status).toBe(LetterStatus.Misplaced)
     expect(word.letters[1].status).toBe(LetterStatus.Misplaced)
     expect(word.letters[2].status).toBe(LetterStatus.Wrong)

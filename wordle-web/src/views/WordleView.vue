@@ -79,8 +79,6 @@
 </template>
 
 <script setup lang="ts">
-/* **** [ Imports ] **** */
-
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
@@ -92,8 +90,6 @@ import { eventBus } from '@/scripts/eventBus'
 import UsernameDialog from '@/components/UsernameDialog.vue'
 import { Timer } from 'timer-node'
 
-/* **** [ Variables ] **** */
-
 let buttonText = ref('Display correct word')
 let validGuesses = new Array<string>()
 let username = ref(localStorage.getItem('username') || 'Guest')
@@ -103,8 +99,6 @@ const guess = ref('')
 const overlay = ref(true)
 const game = reactive(new WordleGame())
 
-/* **** [ (Un)Mounts ] **** */
-
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
   timer.start()
@@ -113,8 +107,6 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
   timer.stop()
 })
-
-/* **** [ Watches ] **** */
 
 watch(
   guess,
@@ -126,11 +118,9 @@ watch(
   { flush: 'post' }
 )
 
-/* **** [ General ] **** */
-
 Axios.get('word')
   .then((response) => {
-    game.restartGame(response.data)
+    game.startNewGame(response.data)
     console.log(game.secretWord)
     setTimeout(() => {
       overlay.value = false
@@ -139,8 +129,6 @@ Axios.get('word')
   .catch((error) => {
     console.log(error)
   })
-
-/* **** [ Functions ] **** */
 
 function updateDialogValue(newValue: unknown) {
   eventBus.emit('updateDialogValue', newValue)
@@ -169,7 +157,7 @@ function addWord() {
 
 function checkGuess() {
   // TODO: Add a UI effect to show that the guess is not of right length.
-  if (game.guess.text.length !== game.secretWord.length) {
+  if (game.guess.word.length !== game.secretWord.length) {
     console.log('Guess is not of the right length')
     return
   }
@@ -210,7 +198,7 @@ function getValidGuesses() {
 }
 
 function inputFromValidGuesses() {
-  const index = game.guess.text.length
+  const index = game.guess.word.length
   for (let i = index; i < 5; i++) {
     game.guess.push(guess.value[i])
   }
