@@ -6,8 +6,6 @@ name: Build and deploy ASP.Net Core app to Azure Web App - vicwwapp
 on:
   push:
     branches:
-      - main
-      - Assignment-3
       - Assignment-3-vic
     paths:
       - Wordle.Api/**
