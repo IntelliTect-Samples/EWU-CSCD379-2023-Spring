@@ -41,7 +41,7 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    const result = this.guess.check(this.secretWord)
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -56,5 +56,6 @@ export class WordleGame {
     } else {
       // The game is over
     }
+    return result
   }
 }

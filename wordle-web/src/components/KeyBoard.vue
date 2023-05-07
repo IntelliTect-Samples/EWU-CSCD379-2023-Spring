@@ -13,6 +13,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   guessedLetters: Letter[]
+  result: boolean
 }>()
 
 const keyboardLetters = computed(() => {
