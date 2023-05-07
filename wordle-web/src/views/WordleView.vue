@@ -56,6 +56,7 @@ import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
+import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -99,6 +100,9 @@ function newGame() {
     })
     .catch((error) => {
       console.log(error)
+      game.restartGame(WordsService.getRandomWord())
+      console.log(game.secretWord)
+      overlay.value = false
     })
 }
 
