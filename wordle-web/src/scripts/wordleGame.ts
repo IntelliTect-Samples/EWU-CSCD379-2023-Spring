@@ -89,7 +89,7 @@ export class WordleGame {
   }
 
   // TODO: Find a way to disable not just input, but the ability to backspace.
-  private gameOver(correctlyGuessed: boolean) {
+  gameOver(correctlyGuessed: boolean) {
     if (correctlyGuessed) {
       this.status = WordleGameStatus.Won
       console.log('You Win!')
