@@ -7,6 +7,23 @@
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" :result="result" />
   </div>
 
+  <v-dialog v-model="result"
+    ><v-card>
+      <v-card-text> Enter Name Below </v-card-text>
+      <v-text-field label="Name" required></v-text-field>
+      <v-card-actions>
+        <v-btn
+          :onclick="
+            () => {
+              result = false
+            }
+          "
+          >Submit</v-btn
+        >
+      </v-card-actions>
+    </v-card></v-dialog
+  >
+
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
