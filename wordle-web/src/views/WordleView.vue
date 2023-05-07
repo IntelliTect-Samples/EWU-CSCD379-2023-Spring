@@ -72,6 +72,7 @@
   </div>
 
   <UsernameDialog />
+  <BoardDisplay />
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
@@ -89,6 +90,7 @@ import { WordsService } from '@/scripts/wordsService'
 import { eventBus } from '@/scripts/eventBus'
 import UsernameDialog from '@/components/UsernameDialog.vue'
 import { Timer } from 'timer-node'
+import BoardDisplay from '@/components/BoardDisplay.vue'
 
 let buttonText = ref('Display correct word')
 let validGuesses = new Array<string>()
