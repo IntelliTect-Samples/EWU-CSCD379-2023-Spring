@@ -42,4 +42,4 @@ namespace Wordle.Api.Controllers
         }
     }
 }
-
+   

@@ -1,13 +1,15 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - Wordle2023
+
+name: Build and deploy ASP.Net Core app to Azure Web App - WordleJB
+
 
 on:
   push:
     branches:
       - main
-    paths: 
+    paths:
       - Wordle.Api/**
   workflow_dispatch:
 
@@ -56,7 +58,8 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Wordle2023'
+
+          app-name: 'WordleJB'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E2E94F7819B948AE99124A51E6D52A38 }}
           package: .
