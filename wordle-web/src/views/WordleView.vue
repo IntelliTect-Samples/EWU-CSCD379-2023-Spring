@@ -1,4 +1,7 @@
-<template>
+<t emplate>
+  <GameScore :gameState="gameState"/>
+  <v-chip @click="restartGame">Restart</v-chip>
+  <UserName />
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -17,9 +20,13 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import UserName from '@/components/UserName.vue'
+import keyboardDisabled from '@/components/UserName.vue'
+import GameScore from '@/components/GameScore.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const gameState = ref(game.status)
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -33,6 +40,7 @@ onUnmounted(() => {
 function checkGuess() {
   game.submitGuess()
   guess.value = ''
+  gameState.value = game.status
 }
 
 function addChar(letter: Letter) {
@@ -42,6 +50,9 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
+  if (keyboardDisabled.value === true) {
+    return
+  }
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
@@ -52,5 +63,12 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+
+function restartGame() {
+  game.restartGame()
+  guess.value = ''
+  game.status = 0
+  gameState.value = game.status
 }
 </script>

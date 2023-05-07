@@ -1,19 +1,19 @@
 <template>
   <v-btn @click.stop="dialog = !dialog">
     <v-icon>mdi-login</v-icon>
-    {{ UserName }}
+    {{ usersName }}
   </v-btn>
 
   <v-dialog v-model="dialog" transition="dialog-bottom-transition" width="auto" persistent>
-    <v-card class="justify-center text-center" width="400px" height="320px">
-      Enter a user name:
+    <v-card class="justify-center text-center" width="500px" height="150px">
+      You are currently logged in as: {{ usersName }}
       <v-text-field
-        label="Label"
+        label="Enter a User Name"
         variant="outlined"
         v-model="inputUserName"
         @input="updateUserName"
       ></v-text-field>
-      <v-btn variant="outlined" @click="saveUserName">Enter</v-btn>
+      <v-btn variant="outlined" @click="saveUserName" :disabled="!inputUserName">Enter</v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -22,19 +22,16 @@
 import { ref } from 'vue'
 
 const dialog = ref(false)
-const UserName = ref('guest')
+const usersName = ref('guest')
 const inputUserName = ref('')
+const keyboardDisabled = ref(false)
 
 function updateUserName() {
-  UserName.value = inputUserName.value
+  usersName.value = inputUserName.value
 }
 
 function saveUserName() {
-  UserName.value = inputUserName.value
+  usersName.value = inputUserName.value
   dialog.value = false
-}
-
-function clearInput() {
-  inputUserName.value = ''
 }
 </script>
