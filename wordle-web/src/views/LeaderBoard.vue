@@ -2,7 +2,9 @@
   <v-card>
     <main>-- L Page --</main>
   </v-card>
-
+  <v-card>
+    time to complete last game = {{ totalTime }} seconds
+  </v-card>
   <v-card>
     <v-table>
       <thead>
@@ -28,19 +30,26 @@
 import Axios from 'axios'
 import $router from '../router/index'
 
+var totalTime = localStorage.total_time/1000
+
 function goBack() {
   $router.go(-1)
 }
 
 //var players = []
-
+/*
 Axios.get('player/GetTopTenPlayers')
   .then((response) => {
-    alert(response.data)
+    response.data.forEach((player) => {
+
+
+    })
+      
+    
   })
   .catch((error) => {
     console.log(error)
-  })
+  })*/
 
 function data() {
   return {

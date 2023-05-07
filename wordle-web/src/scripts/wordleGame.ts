@@ -62,9 +62,10 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
-      const timer_end = Date.now(); 
-      const total_time = timer_end - this.timer_start
-      console.log("Total Time: " + total_time)
+      localStorage.endTime = Date.now()
+
+      localStorage.total_time = localStorage.endTime - localStorage.startTime
+      
       Axios.post('player/InsertScore', {
         Name: localStorage.name,
         NumAttempts: index + 1

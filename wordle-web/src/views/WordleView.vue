@@ -54,6 +54,7 @@
   </v-overlay>
 
   <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
+  <v-card>once game is won or lost, go to leader board to see time</v-card>
 </template>
 
 <script setup lang="ts">
@@ -64,6 +65,8 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import HintDialog from '../components/HintDialog.vue'
 import Axios from 'axios'
+
+localStorage.startTime = Date.now()
 
 const guess = ref('')
 const game = reactive(new WordleGame())
