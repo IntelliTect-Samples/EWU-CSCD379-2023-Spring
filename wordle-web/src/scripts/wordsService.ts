@@ -1,3 +1,5 @@
+import  Axios  from 'axios'
+
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -21,6 +23,14 @@ export abstract class WordsService {
 
     // validWordList.sort()
     return validWordList
+  }
+
+  static async getApiWord(): Promise<string> {
+
+    var res =  await Axios.get('https://wordlewebapp2023.azurewebsites.net/word');
+    console.log(res.data);
+
+    return res.data;
   }
 
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json

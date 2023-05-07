@@ -1,6 +1,7 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
+import Axios from 'axios'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -14,6 +15,7 @@ export class WordleGame {
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
   }
+  currentPlayer!: string
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
@@ -71,9 +73,30 @@ export class WordleGame {
     }
   }
 
+  setPlayerName(name:string) {
+    if(name != null) {
+      this.currentPlayer = name
+    } else {
+      this.currentPlayer = 'Guest'
+    }
+  }
+
   removeGuess() {
     while (this.guess.text !== '') {
       this.guess.pop()
     }
+  }
+
+  postPlayerToApi(name: string, attempts: number) {
+    Axios.post('https://wordlewebapp2023.azurewebsites.net/Player', {
+      playerName: name,
+      gameCount: 1,
+      averageAttempts: attempts
+    })
+    .then(function (response) {
+      console.log(response)
+    }).catch(function (error) {
+      console.log(error)
+    })
   }
 }

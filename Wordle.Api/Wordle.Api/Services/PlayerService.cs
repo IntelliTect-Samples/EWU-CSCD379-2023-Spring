@@ -31,15 +31,15 @@ namespace Wordle.Api.Services
             var player = await _db.Players.FirstOrDefaultAsync(p => p.PlayerName == playerName);
             if (player != null) 
             {
-                player.GameCount = gameCount;
-                player.AverageAttempts = avgAttempt;
+                player.AverageAttempts = (player.GameCount * player.AverageAttempts + avgAttempt) / (player.GameCount + 1);
+                player.GameCount++;
             }
             else
             {
                 player = new()
                 {
                     PlayerName = playerName,
-                    GameCount = gameCount,
+                    GameCount = 1,
                     AverageAttempts = avgAttempt
                 };
                 _db.Players.Add(player);
