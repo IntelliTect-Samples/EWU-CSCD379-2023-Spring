@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-//Test comment
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()

@@ -2,6 +2,7 @@ import { Letter, LetterStatus } from './letter'
 
 export class Word {
   public letters = Array<Letter>()
+  public isScored = false
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
@@ -28,6 +29,24 @@ export class Word {
     return this.letters.map((l) => l.char).join('')
   }
 
+  // See if every letter is filled
+  get isFilled() {
+    return this.letters.every((l) => l.char !== '')
+  }
+
+  // Clear the guess
+  clear() {
+    for (const letter of this.letters) {
+      letter.char = ''
+    }
+  }
+  set(word: string) {
+    this.clear()
+    for (const letter of word) {
+      this.push(letter)
+    }
+  }
+
   push(char: string) {
     // Find the first empty letter and replace it
     for (const letter of this.letters) {
@@ -49,7 +68,7 @@ export class Word {
   }
 
   check(secretWord: string): boolean {
-    console.log(this.text)
+    //console.log(this.text)
     // check if the letters are valid
     //const results = new Word()
     const guessChars = this.letters.map((l) => l.char)
@@ -60,11 +79,11 @@ export class Word {
         this.letters[i].status = LetterStatus.Correct
         guessChars[i] = '_'
         secretChars[i] = '_'
-        console.log(`Letter ${i} is correct`)
+        //console.log(`Letter ${i} is correct`)
       } else {
         isCorrect = false
         this.letters[i].status = LetterStatus.Wrong
-        console.log(`Letter ${i} is incorrect`)
+        //console.log(`Letter ${i} is incorrect`)
       }
     }
 
@@ -75,17 +94,14 @@ export class Word {
             this.letters[i].status = LetterStatus.Misplaced
             guessChars[i] = '_'
             secretChars[j] = '_'
-            console.log(`Letter ${i} is misplaced`)
+            //console.log(`Letter ${i} is misplaced`)
             break
           }
         }
       }
     }
 
-    console.log(guessChars)
-    console.log(secretChars)
-    console.log(isCorrect)
+    this.isScored = true
     return isCorrect
-    // check if the letters are in the right place
   }
 }

@@ -18,13 +18,16 @@ import Axios from 'axios'
 import { ref } from 'vue'
 import WeatherDialog from '@/components/WeatherDialog.vue'
 import type { WeatherData } from '@/types/WeatherData'
+
 const isDialogOpen = ref(false)
 const weatherData = ref<WeatherData[]>()
 const currentWeather = ref<WeatherData>()
+
 function setCurrentWeather(weather: WeatherData) {
   currentWeather.value = weather
   isDialogOpen.value = true
 }
+
 Axios.get('https://localhost:7053/WeatherForecast')
   .then((response) => {
     console.log(response.data)
