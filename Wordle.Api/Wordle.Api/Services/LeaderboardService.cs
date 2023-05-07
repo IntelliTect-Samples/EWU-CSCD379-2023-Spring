@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 
@@ -48,6 +47,7 @@ namespace Wordle.Api.Services
         {
             var player = new Player(Name, 1, Attempts);
             _db.Players.Add(player);
+            
         }
 
         public void UpdatePlayer(Player player, double Attempts)
