@@ -6,14 +6,17 @@ namespace Wordle.Api.Services
     public class PlayerService
     {
         
-        private readonly AppDbContext _db;
+        private readonly Players _db;
 
-        public PlayerService(AppDbContext db)
+        public PlayerService(Players db)
         {
             _db = db;
         }
 
-
+        public async Task<IEnumerable<Player>> GetPlayer()
+        {
+            
+        }
 
     }
 }
