@@ -9,8 +9,8 @@
           {{ dialogTitle }}
         </v-card-title>
         <v-card-text>
-          You {{ gameState === WordleGameStatus.Won ? 'won' : 'lost' }} in {{ timer }} seconds.
-          Your score is {{ score }}
+          You {{ gameState === WordleGameStatus.Won ? 'won' : 'lost' }} in {{ timer }} seconds. Your
+          score is {{ score }}
         </v-card-text>
         <v-card-actions>
           <v-btn @click="dialog = false"> Done </v-btn>
@@ -20,8 +20,7 @@
 
     <v-chip v-if="timerVisible">
       <v-progress-circular indeterminate color="green" :size="20"></v-progress-circular>
-      Time: {{ timer }}
-      Score: {{ score }}
+      Time: {{ timer }} Score: {{ score }}
     </v-chip>
   </div>
 </template>
@@ -29,7 +28,6 @@
 <script setup lang="ts">
 import { ref, watch, defineProps } from 'vue'
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-
 
 const startDialog = ref(true)
 const dialog = ref(false)

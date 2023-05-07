@@ -3,6 +3,7 @@
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
+        <RouterLink to="/leaderboard">Leaderboard</RouterLink> |
         <RouterLink to="/about">About</RouterLink>
       </nav>
       <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>

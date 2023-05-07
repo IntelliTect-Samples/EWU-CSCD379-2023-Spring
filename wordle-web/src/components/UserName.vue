@@ -19,12 +19,12 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue'
 import { ref } from 'vue'
 
 const dialog = ref(false)
 const usersName = ref('guest')
 const inputUserName = ref('')
-const keyboardDisabled = ref(false)
 
 function updateUserName() {
   usersName.value = inputUserName.value
@@ -34,4 +34,28 @@ function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
 }
+
+const emits = defineEmits<{
+  (event: 'disableKeyboard'): void
+  (event: 'enableKeyboard'): void
+}>()
+
+function disableKeyboard() {
+  emits('disableKeyboard')
+}
+
+function enableKeyboard() {
+  emits('enableKeyboard')
+}
+
+watch(
+  () => dialog.value,
+  (newStatus) => {
+    if (newStatus) {
+      disableKeyboard()
+    } else {
+      enableKeyboard()
+    }
+  }
+)
 </script>
