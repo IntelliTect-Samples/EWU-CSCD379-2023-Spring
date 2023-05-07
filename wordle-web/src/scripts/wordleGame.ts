@@ -73,8 +73,8 @@ export class WordleGame {
     }
   }
 
-  setPlayerName(name:string) {
-    if(name != null) {
+  setPlayerName(name: string) {
+    if (name != null) {
       this.currentPlayer = name
     } else {
       this.currentPlayer = 'Guest'
@@ -93,10 +93,11 @@ export class WordleGame {
       gameCount: 1,
       averageAttempts: attempts
     })
-    .then(function (response) {
-      console.log(response)
-    }).catch(function (error) {
-      console.log(error)
-    })
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
   }
 }

@@ -12,14 +12,12 @@
   <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
 
-
   <v-card class="mt-5 me-5" position="absolute" location="top end" elevation="0" variant="outlined">
-    <h2 class="pt-2 pe-5 ps-5 pb-2">Player name: {{ game.currentPlayer }} </h2>
+    <h2 class="pt-2 pe-5 ps-5 pb-2">Player name: {{ game.currentPlayer }}</h2>
   </v-card>
   <v-btn @click="testApi">asd</v-btn>
   <h3>Current secret word: {{ game.secretWord }}</h3>
-  <PlayerNameCard :wordGame="game"></PlayerNameCard>
-
+  <PlayerNameCard @enterChar="setName"></PlayerNameCard>
 </template>
 
 <script setup lang="ts">
@@ -50,9 +48,8 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
-
 function testApi() {
-  game.postPlayerToApi("Dan", 4);
+  game.postPlayerToApi('Dan', 4)
 }
 
 function checkGuess() {
@@ -100,5 +97,9 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
     game.validWordList = WordsService.validWords(game.guess.text)
   }
+}
+
+function setName(name: string) {
+  game.setPlayerName(name)
 }
 </script>
