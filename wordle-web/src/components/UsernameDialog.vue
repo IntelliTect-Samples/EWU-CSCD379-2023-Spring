@@ -24,24 +24,19 @@
 </template>
 
 <script setup lang="ts">
-/* **** [ Imports ] **** */
-
 import { onMounted, onUnmounted, ref } from 'vue'
 import { eventBus } from '@/scripts/eventBus'
-
-/* **** [ Variables ] **** */
 
 let dialog = ref()
 let username = ref('')
 let submitted = ref(false)
+const emits = defineEmits<{
+  // Emits new name value to parent component.
+  (event: 'updateNameValue', value: string): void
+}>()
 const updateModelValue = (newValue: unknown) => {
   dialog.value = newValue
 }
-const emits = defineEmits<{
-  (event: 'updateNameValue', value: string): void
-}>()
-
-/* **** [ (Un)Mounts ] **** */
 
 onMounted(() => {
   eventBus.on('updateDialogValue', updateModelValue)
@@ -50,13 +45,9 @@ onUnmounted(() => {
   eventBus.off('updateDialogValue', updateModelValue)
 })
 
-/* **** [ General ] **** */
-
 if (!localStorage.getItem('username')) {
   updateModelValue(true)
 }
-
-/* **** [ Functions ] **** */
 
 function closeDialog() {
   dialog.value = false
