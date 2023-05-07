@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using Wordle.Api.Data;
@@ -83,10 +84,11 @@ namespace Wordle.Api.Services
          
         }
 
-        public async Task<IEnumerable<Player>> GetTopTenPlayers()
+        public async Task<string> GetTopTenPlayers()
         {
-            return await _db.Players.OrderByDescending((player) => player.AverageAttempts)
-                .OrderBy((player) => player.GameCount).Take(10).ToListAsync(); 
+            return JsonConvert.SerializeObject 
+            (await _db.Players.OrderBy((player) => player.AverageAttempts)
+                .OrderByDescending((player) => player.GameCount).Take(10).ToListAsync()); 
 
         }
 
