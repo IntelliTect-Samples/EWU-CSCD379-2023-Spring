@@ -18,7 +18,7 @@ namespace Wordle.Api.Controllers
         [HttpGet("Leaderboard")]
         public async Task<IEnumerable<Player>> GetLeaderboard() 
         {
-            return _leaderboardService.GetLeaderboard();
+             return _leaderboardService.GetLeaderboard();
         }
 
         [HttpPost("AddPlayer")]

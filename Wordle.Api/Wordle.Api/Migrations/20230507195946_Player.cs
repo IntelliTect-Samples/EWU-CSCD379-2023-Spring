@@ -18,8 +18,7 @@ namespace Wordle.Api.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameCount = table.Column<int>(type: "int", nullable: false),
-                    AverageAttempts = table.Column<double>(type: "float", nullable: false),
-                    AverageSecondsPerGame = table.Column<int>(type: "int", nullable: true)
+                    AverageAttempts = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {

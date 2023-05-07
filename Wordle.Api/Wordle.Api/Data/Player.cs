@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Reflection.Metadata;
 
 namespace Wordle.Api.Data
 {
@@ -12,6 +10,13 @@ namespace Wordle.Api.Data
         public required string Name { get; set; }
         public int GameCount { get; set; }
         public double AverageAttempts { get; set; }
-        public int? AverageSecondsPerGame { get; set; }
+
+        public Player(int playerId, string name, int gameCount, double averageAttempts)
+        {
+            PlayerId = playerId;
+            Name = name;
+            GameCount = gameCount;
+            AverageAttempts = averageAttempts;
+        }
     }
 }
