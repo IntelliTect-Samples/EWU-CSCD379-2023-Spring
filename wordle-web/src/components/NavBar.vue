@@ -10,6 +10,10 @@
         </RouterLink>
       </template>
 
+      <RouterLink to="/leaderboard">
+        <h2>Leaderboard</h2>
+      </RouterLink>
+
       <SettingsTab />
       <template v-slot:append>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
