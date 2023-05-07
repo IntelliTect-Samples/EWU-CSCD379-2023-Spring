@@ -1,6 +1,5 @@
 <template>
-  <GameScore :gameState="gameState" />
-  <v-chip @click="restartGame">Restart</v-chip>
+  <GameScore @restartGame="restartGame" :gameState="gameState" />
   <UserName @disableKeyboard="setKeyboard(false)" @enableKeyboard="setKeyboard(true)" />
   <h1>Wordle Mind Bender</h1>
 

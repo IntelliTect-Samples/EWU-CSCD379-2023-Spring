@@ -1,6 +1,24 @@
 <template>
   <h1 align="center">Top 10 Wordle Scores</h1>
-  <v-row class="justify-center" dense v-for="i in 10" :key="i">
-    <v-col cols="auto">Score {{ i }}</v-col>
+  <v-row class="justify-center" dense v-for="(leader, index) in LeaderData" :key="leader.playerId">
+    <v-col cols="auto">{{ index + 1 }}: {{ leader.name }} - {{ leader.gameCount }} games, {{ leader.averageAttempts }} average attempts</v-col>
   </v-row>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue'
+import Axios from 'axios'
+import type { LeaderData } from '@/types/LeaderData'
+
+const LeaderData = ref<LeaderData[]>()
+
+Axios.get('http://localhost:5006/Leaderboard')
+  .then((response) => {
+    console.log(response.data)
+    LeaderData.value = response.data
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
+</script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="startDialog" width="auto">
+    <v-dialog v-model="startDialog" width="auto" persistent>
       <v-btn @click="startGame"> Start Game! </v-btn>
     </v-dialog>
     <v-dialog v-model="dialog" width="auto">
@@ -14,6 +14,7 @@
         </v-card-text>
         <v-card-actions>
           <v-btn @click="dialog = false"> Done </v-btn>
+          <v-btn @click="startGame"> Play Again </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,6 +29,7 @@
 <script setup lang="ts">
 import { ref, watch, defineProps } from 'vue'
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
+import axios from 'axios'
 
 const startDialog = ref(true)
 const dialog = ref(false)
@@ -58,6 +60,18 @@ watch(
       dialog.value = true
       clearInterval(timerInterval)
     }
+    // axios
+    //   .post('http://localhost:5006/Leaderboard', {
+    //     //Placeholders for now
+    //     name: 'guest',
+    //     attempts: 1,
+    //   })
+    //   .then((response) => {
+    //     console.log(response)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error)
+    //   })
   }
 )
 
