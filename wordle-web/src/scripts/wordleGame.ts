@@ -2,6 +2,7 @@ import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
 import Axios from 'axios'
+import { Player } from './Player'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -15,14 +16,16 @@ export class WordleGame {
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
   }
-  currentPlayer!: string
+  currentPlayer = 'Guest'
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
   numberOfGuesses = 6
   validWordList = new Array<string>()
+  topPlayers = new Array<Player>()
   status = WordleGameStatus.Active
   guess!: Word
+  amountOfGuesses = 0
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -43,9 +46,11 @@ export class WordleGame {
   }
 
   submitGuess() {
+    this.amountOfGuesses++
     // put logic to win here.
     if (this.guess.check(this.secretWord)) {
       this.status = WordleGameStatus.Won
+      this.postPlayerToApi(this.currentPlayer, this.amountOfGuesses)
     }
 
     // Update the guessed letters
@@ -74,7 +79,7 @@ export class WordleGame {
   }
 
   setPlayerName(name: string) {
-    if (name != null) {
+    if (name != '' || name != null) {
       this.currentPlayer = name
     } else {
       this.currentPlayer = 'Guest'
@@ -99,5 +104,16 @@ export class WordleGame {
       .catch(function (error) {
         console.log(error)
       })
+  }
+
+  async getTopPlayers(): Promise<string> {
+    const response = await Axios.get(
+      'https://wordlewebapp2023.azurewebsites.net/Player/GetTopPlayers'
+    )
+
+    for (const player of response.data) {
+      this.topPlayers.push(new Player(player.playerName, player.averageAttempts))
+    }
+    return response.data
   }
 }

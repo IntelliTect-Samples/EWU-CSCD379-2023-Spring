@@ -8,16 +8,14 @@
     :guessedLetters="game.guessedLetters"
   />
 
+  <LeaderBoard></LeaderBoard>
+
   <LoseCard :ifLoss="game.status === WordleGameStatus.Lost" @restartGame="restartGame"> </LoseCard>
   <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
 
-  <v-card class="mt-5 me-5" position="absolute" location="top end" elevation="0" variant="outlined">
-    <h2 class="pt-2 pe-5 ps-5 pb-2">Player name: {{ game.currentPlayer }}</h2>
-  </v-card>
-  <v-btn @click="testApi">asd</v-btn>
   <h3>Current secret word: {{ game.secretWord }}</h3>
-  <PlayerNameCard @enterChar="setName"></PlayerNameCard>
+  <PlayerNameCard :playerName="game.currentPlayer" @enterChar="setName"></PlayerNameCard>
 </template>
 
 <script setup lang="ts">
@@ -33,6 +31,7 @@ import { WordleGameStatus } from '@/scripts/wordleGame'
 import WinCard from '@/components/WinCard.vue'
 import LoseCard from '@/components/LoseCard.vue'
 import PlayerNameCard from '@/components/PlayerNameCard.vue'
+import LeaderBoard from '@/components/LeaderBoard.vue'
 
 var audio = new Audio(tone.default)
 audio.volume = 0.4
@@ -47,10 +46,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function testApi() {
-  game.postPlayerToApi('Dan', 4)
-}
 
 function checkGuess() {
   if (game.guess.text.length === 5) {
