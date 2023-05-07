@@ -17,7 +17,7 @@ namespace Wordle.Api.Controllers
             _playerService = playerService;
         }
 
-        [HttpGet]
+        [HttpGet("GetTopTen")]
         public async Task<IEnumerable<Player>> GetTopTen()
         {
             return await _playerService.GetTopTen();

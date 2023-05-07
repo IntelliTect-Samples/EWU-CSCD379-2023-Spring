@@ -32,8 +32,49 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import Axios from 'axios'
 
 const progress = ref([100,80,60,40,20,18,16,14,18,10])
+
+var num1;
+var num2;
+var num3;
+var num4;
+var num5;
+var num6;
+var num7;
+var num8;
+var num9;
+var num10;
+
+function getTopTen() {
+  overlay.value = true
+  Axios.post('word/AddWordFromBody', {
+    text: 'strin',
+    isCommon: true,
+    isUsed: false
+  })
+    .then((response) => {
+      overlay.value = false
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+Axios.get('topTen')
+  .then((response) => {
+    game.restartGame(response.data)
+    console.log(game.secretWord)
+    setTimeout(() => {
+      overlay.value = false
+    }, 502)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+
 
 </script>
 

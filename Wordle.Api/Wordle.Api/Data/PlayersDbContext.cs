@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Wordle.Api.Data
 {
-    public class Players : DbContext
+    public class PlayersDbContext : DbContext
     {
-        public Players(DbContextOptions<Players> options) : base(options) 
+        public PlayersDbContext(DbContextOptions<PlayersDbContext> options) : base(options) 
         {
             
         }

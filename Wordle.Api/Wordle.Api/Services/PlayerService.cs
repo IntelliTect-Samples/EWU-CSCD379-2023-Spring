@@ -6,23 +6,23 @@ namespace Wordle.Api.Services
     public class PlayerService
     {
         
-        private readonly Players _db;
+        private readonly PlayersDbContext _db;
 
-        public PlayerService(Players db)
+        public PlayerService(PlayersDbContext db)
         {
             _db = db;
         }
         
         public async Task<IEnumerable<Player>> GetTopTen()
         {
-            var count ??= 10;
+            var count = 10;
             var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
             totalCount -= count.Value;
-            int index = ;
+            int index = totalCount.playerId;
             var topTen = await _db.Players
                 .Where(player => player.AverageAttempts)
                 .Skip(index)
-                .Take(count.name, count.AverageAttempts, count.GameCount, count.AverageSecondsPerGame)
+                .Take(player.name, player.AverageAttempts, player.GameCount, player.AverageSecondsPerGame)
                 .OrderByDescending(p => p.AverageAttempts)
                 .ToListAsync();
             return topTen;
