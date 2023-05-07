@@ -16,9 +16,7 @@ namespace Wordle.Api.Data
         {
             if (!db.Players.Any())
             {
-                string directoryPath = Directory.GetCurrentDirectory();
-                string modelPath = Path.Combine(directoryPath, "Content/Players.csv");
-                var playerLine = System.IO.File.ReadAllLines(modelPath);
+                /*var playerLine = System.IO.File.ReadAllLines("Content/Players.csv");
                 foreach (var line in playerLine)
                 {
                     var parts = line.Split(',');
@@ -30,8 +28,32 @@ namespace Wordle.Api.Data
                         AverageSecondsPerGame = int.Parse(parts[3])
                     };
                     db.Players.Add(player);
-                }
-                
+                }*/
+                var player = new Player()
+                {
+                    Name = "Theoretical Best",
+                    GameCount = 99999,
+                    AverageAttempts = 1,
+                    AverageSecondsPerGame = 1
+                };
+                db.Players.Add(player);
+                player = new Player()
+                {
+                    Name = "James",
+                    GameCount = 360,
+                    AverageAttempts = 3.6,
+                    AverageSecondsPerGame = 432
+                };
+                db.Players.Add(player);
+                player = new Player()
+                {
+                    Name = "William",
+                    GameCount = 53,
+                    AverageAttempts = 4.4,
+                    AverageSecondsPerGame = 537
+                };
+                db.Players.Add(player);
+
                 db.SaveChanges();
             }
         }
