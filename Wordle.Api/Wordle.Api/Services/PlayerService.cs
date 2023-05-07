@@ -21,6 +21,7 @@ namespace Wordle.Api.Services
         }
         public async Task<Player> AddPlayer(string? name, int gameCount, double averageAttempts, int averageSecondsPerGame)
         {
+
             if (name is null)
             {
                 throw new ArgumentNullException("Name is required.");
