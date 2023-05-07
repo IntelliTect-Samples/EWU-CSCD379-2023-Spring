@@ -4,7 +4,7 @@
   <GameBoard :game="game" @letterClick="addChar" />
 
   <div style="padding-top: 3em">
-    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" :result="result" />
   </div>
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
@@ -21,6 +21,7 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 
 const guess = ref('')
+const result = ref()
 const game = reactive(new WordleGame())
 
 onMounted(async () => {
@@ -33,7 +34,8 @@ onUnmounted(() => {
 })
 
 function checkGuess() {
-  game.submitGuess()
+  const res = game.submitGuess()
+  result.value = res
   guess.value = ''
 }
 
