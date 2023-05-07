@@ -5,7 +5,7 @@
     <v-col> Average Number of Attempts: </v-col>
     <v-col> Average Seconds Per Game: </v-col>
   </v-row>
-  <v-row v-for="(player) in leaderboard" :key="player['playerId']">
+  <v-row v-for="player in leaderboard" :key="player['playerId']">
     <v-col>
       {{ player['name'] }}
     </v-col>
