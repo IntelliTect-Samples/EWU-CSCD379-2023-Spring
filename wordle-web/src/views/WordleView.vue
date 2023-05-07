@@ -46,7 +46,7 @@ watch(showScoreDialog, (value) => {
   }
 })
 
-let interval: number
+let interval: any
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
