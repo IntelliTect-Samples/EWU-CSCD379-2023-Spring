@@ -40,6 +40,7 @@ export class WordleGame {
       this.guesses.push(word)
     }
     this.guessIndex = 0
+    this.guessedLetters = []
     this.status = WordleGameStatus.Active
   }
 

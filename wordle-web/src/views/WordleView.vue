@@ -35,6 +35,12 @@
   </div>
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
+  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
+    <v-col cols="3">
+      <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
+    </v-col>
+  </v-row>
+
   <v-row class="justify-center mt-10">
     <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
   </v-row>
@@ -45,10 +51,11 @@
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import GameBoard from '../components/GameBoard.vue'
-import GameKeyboard from '../components/GameKeyboard.vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
+import GameBoard from '../components/GameBoard.vue'
+import GameKeyboard from '../components/GameKeyboard.vue'
+import WordleSolver from '../components/WordleSolver.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -95,7 +102,10 @@ function newGame() {
     })
 }
 
-function checkGuess() {
+function checkGuess(word?: string) {
+  if (typeof word === 'string') {
+    game.guess.set(word)
+  }
   game.submitGuess()
   guess.value = ''
 }

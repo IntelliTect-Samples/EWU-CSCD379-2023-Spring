@@ -2,6 +2,7 @@ import { Letter, LetterStatus } from './letter'
 
 export class Word {
   public letters = Array<Letter>()
+  public isScored = false
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
@@ -37,6 +38,12 @@ export class Word {
   clear() {
     for (const letter of this.letters) {
       letter.char = ''
+    }
+  }
+  set(word: string) {
+    this.clear()
+    for (const letter of word) {
+      this.push(letter)
     }
   }
 
@@ -94,6 +101,7 @@ export class Word {
       }
     }
 
+    this.isScored = true
     return isCorrect
   }
 }
