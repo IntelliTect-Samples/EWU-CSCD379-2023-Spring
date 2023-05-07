@@ -11,7 +11,8 @@ namespace Wordle.Api.Controllers;
 public class LeaderboardController : ControllerBase
 {
     private readonly LeaderboardService _leaderboardService;
-    public LeaderboardController(LeaderboardService leaderboardService) 
+
+    public LeaderboardController(LeaderboardService leaderboardService)
     {
         _leaderboardService = leaderboardService;
     }
@@ -27,5 +28,4 @@ public class LeaderboardController : ControllerBase
     {
         return await _leaderboardService.AddNewPlayer(playerName, timeInSeconds, attempts);
     }
-    
 }

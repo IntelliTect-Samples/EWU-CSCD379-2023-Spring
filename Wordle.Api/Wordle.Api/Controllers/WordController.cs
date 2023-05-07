@@ -40,7 +40,7 @@ public class WordController : ControllerBase
     {
         return await _wordService.AddWord(word.Text, word.IsCommon);
     }
-    
+
     [HttpGet("GetWordList")]
     public async Task<IEnumerable<Word>> GetWordList()
     {

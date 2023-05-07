@@ -6,7 +6,8 @@ namespace Wordle.Api.Services;
 public class LeaderboardService
 {
     private readonly AppDbContext _db;
-    public LeaderboardService(AppDbContext db) 
+
+    public LeaderboardService(AppDbContext db)
     {
         _db = db;
     }
