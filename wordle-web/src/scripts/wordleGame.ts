@@ -14,9 +14,8 @@ export class WordleGame {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
-    this.timer_start = Date.now(); 
-    console.log("Timer Start: " + this.timer_start)
-
+    this.timer_start = Date.now()
+    console.log('Timer Start: ' + this.timer_start)
   }
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
@@ -25,7 +24,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-  timer_start : number
+  timer_start: number
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
   //     console.log('wrong length')
@@ -65,7 +64,7 @@ export class WordleGame {
       localStorage.endTime = Date.now()
 
       localStorage.total_time = localStorage.endTime - localStorage.startTime
-      
+
       Axios.post('player/InsertScore', {
         Name: localStorage.name,
         NumAttempts: index + 1
