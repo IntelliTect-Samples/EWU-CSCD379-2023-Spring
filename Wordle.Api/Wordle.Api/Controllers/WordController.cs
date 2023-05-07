@@ -41,4 +41,4 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWord(word.Text, word.IsCommon);
         }
     }
-}    
+}
