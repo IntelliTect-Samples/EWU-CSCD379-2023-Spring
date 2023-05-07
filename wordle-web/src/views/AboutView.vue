@@ -35,10 +35,6 @@
   </v-sheet>
 </template>
 
-<script setup lang="ts">
-import UsernameDialog from '@/components/UsernameDialog.vue'
-</script>
-
 <style>
 @media (min-width: 1024px) {
   .about {
