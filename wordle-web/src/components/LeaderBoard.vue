@@ -6,30 +6,40 @@
         <v-icon icon="mdi-account"></v-icon>
       </template>
 
-      <v-list-item-title>Player Name: Average Score: </v-list-item-title>
+      <div class="d-flex flex-wrap justify-space-between">
+        <v-list-item-title>Player Name:</v-list-item-title>
+        <v-list-item-title>Average Score:</v-list-item-title>
+      </div>
     </v-list-item>
 
     <v-list-item
-      v-for="(item, i) in props.playerName"
+      v-for="(item, i) in game.topPlayers"
       :key="i"
       :value="item"
       active-color="primary"
       display="flex"
     >
       <template v-slot:prepend>
-        <v-list-item-title class="pe-5">{{ i }}</v-list-item-title>
+        <v-list-item-title class="pe-5">{{ i + 1 }}</v-list-item-title>
         <v-icon icon="mdi-account"></v-icon>
       </template>
 
-      <v-list-item-title>{{ item.name }} {{ item.average }}</v-list-item-title>
+      <div class="d-flex flex-wrap justify-space-between">
+        <v-list-item-title>{{ item.name }}</v-list-item-title>
+        <v-list-item-title>{{ item.average }}</v-list-item-title>
+      </div>
     </v-list-item>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import type { Player } from '@/scripts/Player'
+import { WordleGame } from '@/scripts/wordleGame'
+import { reactive } from 'vue'
+import { onMounted } from 'vue'
 
-const props = defineProps<{
-  playerName: Array<Player>
-}>()
+let game = reactive(new WordleGame())
+
+onMounted(() => {
+  game.getTopPlayers()
+})
 </script>

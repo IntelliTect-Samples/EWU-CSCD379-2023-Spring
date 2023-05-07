@@ -8,8 +8,6 @@
     :guessedLetters="game.guessedLetters"
   />
 
-  <LeaderBoard :playerName="game.topPlayers"></LeaderBoard>
-
   <LoseCard :ifLoss="game.status === WordleGameStatus.Lost" @restartGame="restartGame"> </LoseCard>
   <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
@@ -32,7 +30,6 @@ import { WordleGameStatus } from '@/scripts/wordleGame'
 import WinCard from '@/components/WinCard.vue'
 import LoseCard from '@/components/LoseCard.vue'
 import PlayerNameCard from '@/components/PlayerNameCard.vue'
-import LeaderBoard from '@/components/LeaderBoard.vue'
 
 var audio = new Audio(tone.default)
 audio.volume = 0.4

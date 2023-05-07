@@ -106,26 +106,16 @@ export class WordleGame {
       })
   }
 
-  testMethod() {
-    this.topPlayers.forEach((element) => {
-      console.log(element.playerName)
-      console.log(element.playerAvg)
-    })
-  }
-
   async getTopPlayers(): Promise<string> {
     const response = await Axios.get(
       'https://wordlewebapp2023.azurewebsites.net/Player/GetTopPlayers'
     )
 
     const tempArr = new Array<Player>()
-    // console.log(response)
     for (const player of response.data) {
-      // console.log(player)
       tempArr.push(new Player(player.playerName, player.averageAttempts))
     }
     this.topPlayers = tempArr
-    this.testMethod()
 
     return response.data
   }
