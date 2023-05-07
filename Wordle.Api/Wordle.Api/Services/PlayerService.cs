@@ -32,7 +32,7 @@ namespace Wordle.Api.Services
                 player.GameCount = gameCount;
                 player.AverageAttempts = averageAttempts;
                 player.AverageSecondsPerGame = averageSecondsPerGame;
-                player.WeightedScore = await CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame);
+                player.WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame);
             }
             else
             {
@@ -42,7 +42,7 @@ namespace Wordle.Api.Services
                     GameCount = gameCount,
                     AverageAttempts = averageAttempts,
                     AverageSecondsPerGame = averageSecondsPerGame,
-                    WeightedScore = await CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame)
+                    WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame)
                 };
                 _db.Players.Add(player);
             }
@@ -50,32 +50,18 @@ namespace Wordle.Api.Services
             return player;
         }
 
-        private async Task<double> CalculateWeightedScore(int gameCount, double averageAttempts, int averageSecondsPerGame)
+        private double CalculateWeightedScore(int gameCount, double averageAttempts, int averageSecondsPerGame)
         {
-            // Not working correctly yet
-            if (!_db.Players.Any()) return 1;
+            int maxGameCount = 200;
+            double normalizedGameCount = 100 * gameCount / maxGameCount;
 
-            // Finding the minimum and maximum values for GameCount
-            int minGameCount = await _db.Players.MinAsync(p => p.GameCount);
-            int maxGameCount = await _db.Players.MaxAsync(p => p.GameCount);
+            double minAverageAttempts = 1;
+            double maxAverageAttempts = 6;
+            double normalizedAverageAttempts = 100 * (maxAverageAttempts - averageAttempts) / (maxAverageAttempts - minAverageAttempts);
 
-            double normalizedGameCount = (maxGameCount - minGameCount) != 0 ? (gameCount - minGameCount) /
-                (maxGameCount - minGameCount) : 0.0;
-
-            // Finding the minimum and maximum values for AverageAttempts
-            double minAverageAttempts = await _db.Players.MinAsync(p => p.AverageAttempts);
-            double maxAverageAttempts = await _db.Players.MaxAsync(p => p.AverageAttempts);
-
-            double normalizedAverageAttempts = (maxAverageAttempts - minAverageAttempts) != 0
-    ? (averageAttempts - minAverageAttempts) / (maxAverageAttempts - minAverageAttempts)
-    : 0.0;
-
-            // Finding the minimum and maximum values for AverageSecondsPerGame
-            double minAverageSecondsPerGame = await _db.Players.MinAsync(p => p.AverageSecondsPerGame);
-            double maxAverageSecondsPerGame = await _db.Players.MaxAsync(p => p.AverageSecondsPerGame);
-
-            double normalizedAverageSecondsPerGame = (maxAverageSecondsPerGame - minAverageSecondsPerGame) != 0 ?(averageSecondsPerGame - minAverageSecondsPerGame) /
-                (maxAverageSecondsPerGame - minAverageSecondsPerGame) : 0.0;
+            int minAverageSecondsPerGame = 1;
+            int maxAverageSecondsPerGame = 1020; // 17 minutes
+            double normalizedAverageSecondsPerGame = 100 * (maxAverageSecondsPerGame - averageSecondsPerGame) / (double)(maxAverageSecondsPerGame - minAverageSecondsPerGame);
 
             double overallScore = (0.3 * normalizedGameCount) + (0.4 * normalizedAverageAttempts) + (0.3 * normalizedAverageSecondsPerGame);
 
