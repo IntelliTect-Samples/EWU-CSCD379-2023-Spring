@@ -12,6 +12,8 @@ var builder = WebApplication.CreateBuilder(args);
                       policy =>
                       {
                           policy.WithOrigins("*");
+                          policy.WithMethods("GET", "POST", "DELETE", "PUT");
+                          policy.WithHeaders("Content-Type", "Authorization");
                       });
 });
 
