@@ -8,12 +8,13 @@
     :guessedLetters="game.guessedLetters"
   />
 
-  <LeaderBoard></LeaderBoard>
+  <LeaderBoard :playerName="game.topPlayers"></LeaderBoard>
 
   <LoseCard :ifLoss="game.status === WordleGameStatus.Lost" @restartGame="restartGame"> </LoseCard>
   <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
 
+  <v-btn @click="testApi">asd</v-btn>
   <h3>Current secret word: {{ game.secretWord }}</h3>
   <PlayerNameCard :playerName="game.currentPlayer" @enterChar="setName"></PlayerNameCard>
 </template>
@@ -46,6 +47,10 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function testApi() {
+  game.getTopPlayers()
+}
 
 function checkGuess() {
   if (game.guess.text.length === 5) {

@@ -7,11 +7,11 @@ export class Player {
     this.average = avg
   }
 
-  getPlayerName() {
+  get playerName() {
     return this.name
   }
 
-  getPlaverAvg() {
+  get playerAvg() {
     return this.average
   }
 }
