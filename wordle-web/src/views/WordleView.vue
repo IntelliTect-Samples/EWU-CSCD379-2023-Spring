@@ -36,7 +36,7 @@
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
   <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col cols="3">
+    <v-col xs="11" sm="9" md="6" lg="4">
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
