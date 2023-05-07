@@ -9,6 +9,6 @@ namespace Wordle.Api.Data
             
         }
 
-        public DbSet<Player> Players => Set<Players>();
+        public DbSet<Player> Players => Set<Player>();
     }
 }
