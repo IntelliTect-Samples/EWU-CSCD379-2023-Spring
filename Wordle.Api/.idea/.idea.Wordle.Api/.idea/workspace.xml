@@ -9,8 +9,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/BoardDisplay.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/LeaderboardService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Services/LeaderboardService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
