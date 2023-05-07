@@ -3,13 +3,19 @@
     <template #icon>
       <DocumentationIcon />
     </template>
+    <template #heading>Leaderboard</template>
+    See the top 10 ranked players
+    <RouterLink to="/leaderboard">Go to Leaderboard</RouterLink>
+  </WelcomeItem>
+  <WelcomeItem>
+    <template #icon>
+      <DocumentationIcon />
+    </template>
     <template #heading>Documentation</template>
-
     Vue’s
     <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
     provides you with all information you need to get started.
   </WelcomeItem>
-
   <WelcomeItem>
     <template #icon>
       <ToolingIcon />
