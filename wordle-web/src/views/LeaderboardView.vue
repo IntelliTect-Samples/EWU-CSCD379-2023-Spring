@@ -1,7 +1,7 @@
 <template>
-  <div style="margin: 20px"><Leaderboard /></div>
+  <div style="margin: 20px"><LeaderBoard /></div>
 </template>
 
 <script setup lang="ts">
-import Leaderboard from '../components/Leaderboard.vue'
+import LeaderBoard from '../components/LeaderBoard.vue'
 </script>

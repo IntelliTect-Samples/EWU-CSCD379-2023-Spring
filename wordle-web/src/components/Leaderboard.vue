@@ -29,14 +29,14 @@ const desserts = [
 
 import Axios from 'axios'
 import { ref } from 'vue'
-import type { WeatherData } from '@/types/WeatherData'
+import type { LeaderBoardData } from '@/types/LeaderBoardData'
 
-const LeaderboardData = ref<WeatherData[]>()
+const leaderboardData = ref<LeaderBoardData[]>()
 
 Axios.get('https://localhost:7053/api/Leaderboard')
   .then((response) => {
     console.log(response.data)
-    LeaderboardData.value = response.data
+    leaderboardData.value = response.data
   })
   .catch((err) => {
     console.log(err)

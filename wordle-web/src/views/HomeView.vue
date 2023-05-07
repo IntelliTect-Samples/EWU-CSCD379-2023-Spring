@@ -1,6 +1,8 @@
 <template>
   <main>
-    <TheWelcome />
+    <div style="margin: 20px">
+      <TheWelcome />
+    </div>
   </main>
 </template>
 
