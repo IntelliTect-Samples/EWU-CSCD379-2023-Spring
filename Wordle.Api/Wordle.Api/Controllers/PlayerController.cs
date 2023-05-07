@@ -8,13 +8,13 @@ namespace Wordle.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class LeaderBoardController : ControllerBase
+    public class PlayerController : ControllerBase
     {
-        private readonly LeaderBoardService _leaderBoardService;
+        private readonly PlayerService _playerService;
 
-        public LeaderBoardController(LeaderBoardService leaderBoardService)
+        public PlayerController(PlayerService playerService)
         {
-            _leaderBoardService = leaderBoardService;
+            _playerService = playerService;
         }
     }
 }
