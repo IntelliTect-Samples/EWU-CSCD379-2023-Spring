@@ -24,8 +24,12 @@
 </template>
 
 <script setup lang="ts">
+/* **** [ Imports ] **** */
+
 import { onMounted, onUnmounted, ref } from 'vue'
 import { eventBus } from '@/scripts/eventBus'
+
+/* **** [ Variables ] **** */
 
 let dialog = ref()
 let username = ref('')
@@ -33,19 +37,26 @@ let submitted = ref(false)
 const updateModelValue = (newValue: unknown) => {
   dialog.value = newValue
 }
+const emits = defineEmits<{
+  (event: 'updateNameValue', value: string): void
+}>()
 
-// Mount event listener on component creation
+/* **** [ (Un)Mounts ] **** */
+
 onMounted(() => {
   eventBus.on('updateDialogValue', updateModelValue)
 })
-// Remove event listener on component destruction
 onUnmounted(() => {
   eventBus.off('updateDialogValue', updateModelValue)
 })
 
+/* **** [ General ] **** */
+
 if (!localStorage.getItem('username')) {
   updateModelValue(true)
 }
+
+/* **** [ Functions ] **** */
 
 function closeDialog() {
   dialog.value = false
@@ -60,5 +71,6 @@ function submitName() {
     }, 1500)
     closeDialog()
   }
+  emits('updateNameValue', username.value)
 }
 </script>

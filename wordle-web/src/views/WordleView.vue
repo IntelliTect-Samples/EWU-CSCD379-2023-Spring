@@ -1,8 +1,21 @@
 <template>
-  <div class="text-right">
-      <v-btn v-model="updateUsername" @click="updateDialogValue(true)">
-        Username: {{ username }}
-      </v-btn>
+  <div>
+    <v-row justify="end">
+      <v-col cols="auto">
+        <v-card class="text-left">
+          <v-list>
+            <v-list-item>
+              <v-btn v-model="username" @click="updateDialogValue(true)" elevation="0">
+                Username: {{ username }}
+              </v-btn>
+            </v-list-item>
+            <v-list-item v-model="currentTime">
+              Elapsed Time: {{ currentTime }} seconds
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-col>
+    </v-row>
   </div>
   <div class="align-center">
     <h1>The Good Word</h1>
@@ -66,6 +79,8 @@
 </template>
 
 <script setup lang="ts">
+/* **** [ Imports ] **** */
+
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
@@ -74,23 +89,32 @@ import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
 import { eventBus } from '@/scripts/eventBus'
-import UsernameDialog from "@/components/UsernameDialog.vue";
+import UsernameDialog from '@/components/UsernameDialog.vue'
+import { Timer } from 'timer-node'
 
-let validGuesses = new Array<string>()
+/* **** [ Variables ] **** */
+
 let buttonText = ref('Display correct word')
-let username: string = localStorage.getItem('username') || 'Guest'
-let updateUsername = ref()
+let validGuesses = new Array<string>()
+let username = ref(localStorage.getItem('username') || 'Guest')
+const timer = new Timer()
+let currentTime = ref(timer.time)
 const guess = ref('')
-const game = reactive(new WordleGame())
 const overlay = ref(true)
+const game = reactive(new WordleGame())
 
+/* **** [ (Un)Mounts ] **** */
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
+  timer.start()
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
+  timer.stop()
 })
+
+/* **** [ Watches ] **** */
 
 watch(
   guess,
@@ -101,6 +125,22 @@ watch(
   },
   { flush: 'post' }
 )
+
+/* **** [ General ] **** */
+
+Axios.get('word')
+  .then((response) => {
+    game.restartGame(response.data)
+    console.log(game.secretWord)
+    setTimeout(() => {
+      overlay.value = false
+    }, 502)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
+/* **** [ Functions ] **** */
 
 function updateDialogValue(newValue: unknown) {
   eventBus.emit('updateDialogValue', newValue)
@@ -126,18 +166,6 @@ function addWord() {
       console.log(error)
     })
 }
-
-Axios.get('word')
-  .then((response) => {
-    game.restartGame(response.data)
-    console.log(game.secretWord)
-    setTimeout(() => {
-      overlay.value = false
-    }, 502)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
 
 function checkGuess() {
   // TODO: Add a UI effect to show that the guess is not of right length.
