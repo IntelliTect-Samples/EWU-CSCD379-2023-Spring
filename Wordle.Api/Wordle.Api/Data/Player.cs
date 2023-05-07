@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Wordle.Api.Data
 {
@@ -11,9 +12,9 @@ namespace Wordle.Api.Data
         public int GameCount { get; set; }
         public double AverageAttempts { get; set; }
 
-        public Player(int playerId, string name, int gameCount, double averageAttempts)
+        [SetsRequiredMembers]
+        public Player(string name, int gameCount, double averageAttempts)
         {
-            PlayerId = playerId;
             Name = name;
             GameCount = gameCount;
             AverageAttempts = averageAttempts;

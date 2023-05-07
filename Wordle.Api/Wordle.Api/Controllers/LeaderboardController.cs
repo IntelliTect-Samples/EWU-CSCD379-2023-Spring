@@ -16,15 +16,15 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("Leaderboard")]
-        public async Task<IEnumerable<Player>> GetLeaderboard() 
+        public IEnumerable<Player> GetLeaderboard()
         {
-             return _leaderboardService.GetLeaderboard();
+            return _leaderboardService.GetLeaderboard();
         }
 
         [HttpPost("AddPlayer")]
-        public async Task<Player> AddPlayer(string Name, double AverageAttempts, int GameCount)
+        public async Task AddPlayer(string Name, int Attempts)
         {
-            return await _leaderboardService.AddPlayer(Name, AverageAttempts, GameCount);
+            await _leaderboardService.AddPlayer(Name, Attempts);
         }
     }
 }
