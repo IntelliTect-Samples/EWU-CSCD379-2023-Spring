@@ -20,43 +20,36 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
         SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Wordle.Api.Data.Player", b =>
-                {
-                    b.Property<int>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity(
+            "Wordle.Api.Data.Player",
+            b =>
+            {
+                b.Property<int>("PlayerId").ValueGeneratedOnAdd().HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
 
-                    b.Property<double>("AverageAttempts")
-                        .HasColumnType("float");
+                b.Property<double>("AverageAttempts").HasColumnType("float");
 
-                    b.Property<int>("AverageTimeInSeconds")
-                        .HasColumnType("int");
+                b.Property<int>("AverageTimeInSeconds").HasColumnType("int");
 
-                    b.Property<int>("GameCount")
-                        .HasColumnType("int");
+                b.Property<int>("GameCount").HasColumnType("int");
 
-                    b.Property<string>("PlayerName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("PlayerName").IsRequired().HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("TotalAttempts")
-                        .HasColumnType("float");
+                b.Property<double>("TotalAttempts").HasColumnType("float");
 
-                    b.Property<int>("TotalTimeInSeconds")
-                        .HasColumnType("int");
+                b.Property<int>("TotalTimeInSeconds").HasColumnType("int");
 
-                    b.HasKey("PlayerId");
+                b.HasKey("PlayerId");
 
-                    b.ToTable("Players");
-                });
+                b.ToTable("Players");
+            });
 
-            modelBuilder.Entity("Wordle.Api.Data.Word", b =>
-                {
-                    b.Property<int>("WordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity(
+            "Wordle.Api.Data.Word",
+            b =>
+            {
+                b.Property<int>("WordId").ValueGeneratedOnAdd().HasColumnType("int");
 
                 SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"));
 

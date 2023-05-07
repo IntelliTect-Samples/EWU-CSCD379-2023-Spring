@@ -18,13 +18,13 @@ public class LeaderboardController : ControllerBase
     }
 
     [HttpGet("GetTopTenScores")]
-    public async Task<IEnumerable<Player>> GetTopTenScores() 
+    public async Task<IEnumerable<Player>> GetTopTenScores()
     {
         return await _leaderboardService.GetTopTenScores();
     }
 
     [HttpPost("AddNewPlayer")]
-    public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts) 
+    public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts)
     {
         return await _leaderboardService.AddNewPlayer(playerName, timeInSeconds, attempts);
     }

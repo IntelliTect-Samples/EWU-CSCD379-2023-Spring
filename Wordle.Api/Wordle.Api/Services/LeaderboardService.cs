@@ -11,22 +11,23 @@ public class LeaderboardService
     {
         _db = db;
     }
-    public async Task<IEnumerable<Player>> GetTopTenScores() 
+
+    public async Task<IEnumerable<Player>> GetTopTenScores()
     {
         var highScore = await _db.Players.Take(10)
-            .OrderByDescending(player => player.AverageTimeInSeconds)
-            .ToListAsync();
+                            .OrderByDescending(player => player.AverageTimeInSeconds)
+                            .ToListAsync();
         return highScore;
     }
 
-    public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts) 
+    public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts)
     {
         var name = "";
         if (playerName is null || playerName == "")
         {
             name = "Guest";
         }
-        else 
+        else
         {
             name = playerName;
         }
@@ -36,15 +37,12 @@ public class LeaderboardService
             player = await UpdatePlayer(name, timeInSeconds, attempts);
             //_db.Players.Update(player);
         }
-        else 
+        else
         {
             player = new() {
-                PlayerName = name,
-                GameCount = 1,
-                TotalAttempts = attempts,
-                TotalTimeInSeconds = timeInSeconds,
-                AverageAttempts = attempts,
-                AverageTimeInSeconds = timeInSeconds,
+                PlayerName = name,          GameCount = 1,
+                TotalAttempts = attempts,   TotalTimeInSeconds = timeInSeconds,
+                AverageAttempts = attempts, AverageTimeInSeconds = timeInSeconds,
             };
             _db.Players.Add(player);
         }
@@ -52,9 +50,10 @@ public class LeaderboardService
         return player;
     }
 
-    public async Task<Player> UpdatePlayer(string playerName, int timeInSeconds, double attempts) 
+    public async Task<Player> UpdatePlayer(string playerName, int timeInSeconds, double attempts)
     {
-        var player = await _db.Players.FirstOrDefaultAsync(player => player.PlayerName == playerName);
+        var player =
+            await _db.Players.FirstOrDefaultAsync(player => player.PlayerName == playerName);
         player!.GameCount += 1;
         player.TotalTimeInSeconds += timeInSeconds;
         player.TotalAttempts += attempts;

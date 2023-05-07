@@ -9,15 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/eventBus.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/TimerNode.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/AppBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/AppBar/AppBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/AboutView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/AboutView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/hunter/EWU-CSCD379-2023-Spring/Wordle.Api/Wordle.Api/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aacc74311ca994f12b71cddb22241be9d6654c65e94f5985c5488dee396916f/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="Toolset" />
@@ -103,12 +100,24 @@
       <updated>1683229497419</updated>
       <workItem from="1683229502556" duration="11120000" />
       <workItem from="1683342406905" duration="1656000" />
-      <workItem from="1683391596795" duration="1959000" />
+      <workItem from="1683391596795" duration="3225000" />
+      <workItem from="1683435630067" duration="861000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
