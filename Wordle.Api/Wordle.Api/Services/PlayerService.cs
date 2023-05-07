@@ -12,12 +12,22 @@ namespace Wordle.Api.Services
         {
             _db = db;
         }
-        /*
-        public async Task<IEnumerable<Player>> GetPlayer()
+        
+        public async Task<IEnumerable<Player>> GetTopTen()
         {
-            
+            var count ??= 10;
+            var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
+            totalCount -= count.Value;
+            int index = ;
+            var topTen = await _db.Players
+                .Where(player => player.AverageAttempts)
+                .Skip(index)
+                .Take(count.name, count.AverageAttempts, count.GameCount, count.AverageSecondsPerGame)
+                .OrderByDescending(p => p.AverageAttempts)
+                .ToListAsync();
+            return topTen;
         }
-        */
+        
         public async Task<Player> AddPlayer(string? newName, int? playTime)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
