@@ -11,7 +11,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230508003543_Word")]
+    [Migration("20230508005509_Word")]
     partial class Word
     {
         /// <inheritdoc />
@@ -23,35 +23,6 @@ namespace Wordle.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Wordle.Api.Data.Player", b =>
-                {
-                    b.Property<int>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
-
-                    b.Property<double>("AverageAttempts")
-                        .HasColumnType("float");
-
-                    b.Property<int>("AverageSecondsPerGame")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("WeightedScore")
-                        .HasColumnType("float");
-
-                    b.HasKey("PlayerId");
-
-                    b.ToTable("Players");
-                });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>
                 {
