@@ -1,6 +1,6 @@
 <template>
   <div class="text-right">
-    <GetName @overlay="onOverlay" />
+    <GetName :name="name" @overlay="onOverlay" />
   </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -39,6 +39,15 @@ let validWords = ref(['?????'])
 let guesses: string[] = []
 const selection = ref(null)
 const input = ref(true)
+const name = ref(undefined)
+
+Axios.get('player')
+  .then((response) => {
+    name.value = response.data
+  })
+  .catch((error) => {
+    console.log(error)
+  })
 
 newGame()
 
@@ -50,14 +59,12 @@ onUnmounted(() => {
 })
 
 function addWord() {
-  input.value = false
   Axios.post('word/AddWordFromBody', {
     text: 'tests',
     isCommon: true,
     isUsed: false
   })
     .then((response) => {
-      input.value = true
       console.log(response.data)
     })
     .catch((error) => {
@@ -66,21 +73,17 @@ function addWord() {
 }
 
 function newGame() {
-  input.value = true
   Axios.get('word')
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)
-      setTimeout(() => {
-        input.value = true
-      }, 502)
     })
     .catch((error) => {
       console.log(error)
       game.restartGame(WordsService.getRandomWord())
       console.log(game.secretWord)
-      input.value = true
     })
+  
 }
 
 function checkGuess(word?: string) {
@@ -127,6 +130,14 @@ function keyPress(event: KeyboardEvent) {
 
 function onOverlay(name: string) {
   input.value = !input.value
-  
+  Axios.post('player', {
+    name: name
+  })
+    .then((response) => {
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 </script>

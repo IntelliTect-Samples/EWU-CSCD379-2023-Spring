@@ -11,7 +11,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const name = ref('Guest')
+const props = withDefaults(defineProps<{
+  name: string
+}>(), {
+  name: 'guest'
+})
 
 const overlay = ref(false)
 
@@ -21,6 +25,6 @@ const emits = defineEmits<{
 
 function setOverlay() {
   overlay.value = !overlay.value
-  emits('overlay', name.value)
+  emits('overlay', props.name)
 }
 </script>
