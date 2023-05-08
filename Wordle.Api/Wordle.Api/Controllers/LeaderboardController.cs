@@ -9,6 +9,7 @@ namespace Wordle.Api.Controllers
     [Route("api")]
     public class LeaderboardController : ControllerBase
     {
+        // hi
         private readonly LeaderboardService _leaderboardService;
 
         public LeaderboardController(LeaderboardService leaderboardService)
