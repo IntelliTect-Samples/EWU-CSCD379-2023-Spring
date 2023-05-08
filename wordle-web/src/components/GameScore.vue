@@ -43,13 +43,10 @@ const props = defineProps({
   gameState: {
     type: Number,
     required: true
-  }
+  },
+  game: WordleGame,
+  username: String
 })
-
-Axios.defaults.baseURL = 'https://kind-stone-01ab5711e.3.azurestaticapps.net'
-if (window.location.hostname === 'localhost') {
-  Axios.defaults.baseURL = 'http://localhost:7053'
-}
 
 watch(
   () => props.gameState,
@@ -65,10 +62,12 @@ watch(
       dialog.value = true
       clearInterval(timerInterval)
     }
-    Axios.post(Axios.defaults.baseURL + '/Leaderboard', {
-      //Placeholders for now
-      name: 'guest',
-      attempts: 1
+    Axios.post('Leaderboard/AddNewScore', null, {
+      params: {
+        //Placeholders for now
+        name: props.username,
+        attempts: props.game?.guesses.indexOf(props.game.guess)
+      }
     })
       .then((response) => {
         console.log(response)

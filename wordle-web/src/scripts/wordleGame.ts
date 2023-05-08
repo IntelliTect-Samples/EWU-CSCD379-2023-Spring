@@ -57,7 +57,7 @@ export class WordleGame {
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
-    } else {
+    } else if (this.status != WordleGameStatus.Won) {
       // The game is over
       this.status = WordleGameStatus.Lost
     }

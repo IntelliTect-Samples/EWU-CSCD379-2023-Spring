@@ -33,11 +33,13 @@ function updateUserName() {
 function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
+  sendUsername()
 }
 
 const emits = defineEmits<{
   (event: 'disableKeyboard'): void
   (event: 'enableKeyboard'): void
+  (event: 'sendUsername', value: string): void
 }>()
 
 function disableKeyboard() {
@@ -46,6 +48,10 @@ function disableKeyboard() {
 
 function enableKeyboard() {
   emits('enableKeyboard')
+}
+
+function sendUsername() {
+  emits('sendUsername', usersName.value)
 }
 
 watch(

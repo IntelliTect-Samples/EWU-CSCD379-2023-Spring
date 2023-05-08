@@ -1,6 +1,6 @@
 <template>
   <h1 align="center">Top 10 Wordle Scores</h1>
-  <v-row class="justify-center" dense v-for="(leader, index) in LeaderData" :key="leader.playerId">
+  <v-row class="justify-center" dense v-for="(leader, index) in leaderData" :key="leader.playerId">
     <v-col cols="auto"
       >{{ index + 1 }}: {{ leader.name }} - {{ leader.gameCount }} games,
       {{ leader.averageAttempts }} average attempts</v-col

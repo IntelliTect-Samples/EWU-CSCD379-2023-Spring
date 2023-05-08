@@ -1,6 +1,10 @@
 <template>
-  <GameScore @restartGame="restartGame" :gameState="gameState" />
-  <UserName @disableKeyboard="setKeyboard(false)" @enableKeyboard="setKeyboard(true)" />
+  <GameScore :username="username" @restartGame="restartGame" :gameState="gameState" :game="game" />
+  <UserName
+    @sendUsername="setUsername"
+    @disableKeyboard="setKeyboard(false)"
+    @enableKeyboard="setKeyboard(true)"
+  />
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -26,6 +30,7 @@ import Axios from 'axios'
 const guess = ref('')
 const game = reactive(new WordleGame())
 const gameState = ref(game.status)
+let username: string = 'guest'
 let keyInput: boolean = true
 
 onMounted(async () => {
@@ -68,6 +73,10 @@ function restartGame() {
   guess.value = ''
   game.status = 0
   gameState.value = game.status
+}
+
+function setUsername(name: string) {
+  username = name
 }
 
 function setKeyboard(input: boolean) {
