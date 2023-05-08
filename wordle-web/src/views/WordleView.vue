@@ -1,5 +1,10 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <div style="display: flex; justify-content: space-between">
+    <h1>Wordle Mind Bender</h1>
+    <v-card
+      ><v-card-text>Username: {{ name || 'guest' }} </v-card-text></v-card
+    >
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -7,8 +12,8 @@
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" :result="result" />
   </div>
   {{ dialog() }}
-  <v-dialog v-model="showDialog"
-    ><v-card>
+  <v-dialog v-model="showDialog">
+    <v-card>
       <v-card-text> Enter Name Below </v-card-text>
       <v-text-field v-model="name" label="First name"></v-text-field>
       <v-card-actions>
@@ -19,16 +24,25 @@
               result = false
             }
           "
-          >Submit</v-btn
         >
+          Submit
+        </v-btn>
       </v-card-actions>
-    </v-card></v-dialog
-  >
+    </v-card>
+  </v-dialog>
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
+  <v-btn
+    :onclick="
+      () => {
+        game.restartGame()
+      }
+    "
+    >Restart Game</v-btn
+  >
 </template>
 
 <script setup lang="ts">
