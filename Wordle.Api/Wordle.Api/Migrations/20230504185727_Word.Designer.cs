@@ -11,7 +11,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230508005509_Word")]
+    [Migration("20230504185727_Word")]
     partial class Word
     {
         /// <inheritdoc />
