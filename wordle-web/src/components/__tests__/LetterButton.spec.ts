@@ -10,7 +10,11 @@ describe('LetterButton', () => {
 
     const wrapper = mount(LetterButton, {
       props: { letter },
-      attachTo: document.body
+      global: {
+        provide: {
+          display: { sm: false, xs: false } // override for useDisplay
+        }
+      }
     })
     expect(wrapper.text()).toContain('A')
     expect(wrapper.attributes('color')).toBe('darkgrey')

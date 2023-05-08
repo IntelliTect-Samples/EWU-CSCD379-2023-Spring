@@ -12,17 +12,15 @@
 
 <script setup lang="ts">
 import type { Letter } from '@/scripts/letter'
-import { reactive, ref } from 'vue'
+import { inject } from 'vue'
+import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 
 // Add this to make testing work because useDisplay() throws an error when testing
-let displayContent: ReturnType<typeof useDisplay>
-try {
-  displayContent = useDisplay()
-} catch (e) {
-  displayContent = { xs: ref(false), sm: ref(false) } as ReturnType<typeof useDisplay>
-}
-const display = reactive(displayContent)
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 
 interface Props {
   letter: Letter
