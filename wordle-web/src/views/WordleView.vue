@@ -30,7 +30,6 @@ const overlay = ref(true)
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
   await game.restartGame()
-  console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
@@ -39,10 +38,10 @@ onUnmounted(() => {
 function addPlayer() {
   overlay.value = true
   Axios.post('https://wordlemindbender.azurewebsites.net/Player/AddPlayerFromBody', {
-    name: 'Vera',
-    gameCount: 48,
-    averageAttempts: 2,
-    averageSecondsPerGame: 100
+    name: 'Jacob',
+    gameCount: 5,
+    averageAttempts: 5,
+    averageSecondsPerGame: 600
   })
     .then((response) => {
       setTimeout(() => {

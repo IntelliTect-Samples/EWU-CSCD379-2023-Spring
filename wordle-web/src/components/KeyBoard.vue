@@ -16,7 +16,6 @@ const props = defineProps<{
 }>()
 
 const keyboardLetters = computed(() => {
-  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
 
   const keyboardKeys = [
