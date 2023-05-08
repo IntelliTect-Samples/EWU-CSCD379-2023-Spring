@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="player in players" :key="player">
+          <tr v-for="player in players" :key="player.playerId">
             <td>{{ player.name }}</td>
             <td>{{ player.score }}</td>
             <td>{{ player.gameCount }}</td>
@@ -26,17 +26,26 @@
 
 <script lang="ts">
 import { LeaderboardService } from '../scripts/leaderboardService'
+import { Player } from '../scripts/player'
 
 export default {
   data() {
     return {
-      players: []
+      players: [] as Player[]
     }
   },
   async created() {
     try {
       const leaderboardData = await LeaderboardService.GetLeaderboard()
-      this.players = leaderboardData
+      this.players = leaderboardData.map((playerData: any) => {
+        return new Player(
+          playerData.playerId,
+          playerData.name,
+          playerData.score,
+          playerData.gameCount,
+          playerData.averageAttempts
+        )
+      })
     } catch (error) {
       console.error('Failed to fetch leaderboard data:', error)
     }

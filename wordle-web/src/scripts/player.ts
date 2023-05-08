@@ -33,19 +33,3 @@ export class Player {
       })
   }
 }
-
-// function addWord() {
-//   overlay.value = true
-//   Axios.post('word/AddWordFromBody', {
-//     text: 'strin',
-//     isCommon: true,
-//     isUsed: false
-//   })
-//     .then((response) => {
-//       overlay.value = false
-//       console.log(response.data)
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
-// }
