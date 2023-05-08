@@ -5,10 +5,10 @@
       <div v-if="solver.getLetterUsages().length > 0">
         <v-btn
           size="small"
-          class="mr-2"
+          class="mr-1 letter-large"
           v-for="(letter, index) in solver.getLetterUsages().summary().correctLetters"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'gray'"
+          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'grey-darken-3'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
@@ -28,10 +28,10 @@
         </v-btn>
         <v-btn
           size="x-small"
-          class="mx-1"
+          class="mx-0 letter-small"
           v-for="(letter, index) in item.locations"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'gray'"
+          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'grey-darken-3'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
@@ -40,18 +40,19 @@
     </v-list>
     <v-card-text>
       <div v-if="game.status === WordleGameStatus.Active">
-        valid words: {{ solver.availableWords().length }}
-        <span v-if="solver.availableWords().length < 50">
+        <div>valid words: {{ solver.availableWords().length }}</div>
+        <div v-if="solver.availableWords().length < 50">
           <v-btn
             size="x-small"
             v-for="word in solver.availableWords()"
             :key="word"
             class="mr-1"
+            color="grey-darken-3"
             @click="wordClick(word)"
           >
             {{ word }}
           </v-btn>
-        </span>
+        </div>
       </div>
     </v-card-text>
 
@@ -83,3 +84,20 @@ function wordClick(letter: string) {
 
 const solver = reactive<WordleSolver>(new WordleSolver(props.game))
 </script>
+
+<style scoped>
+.letter-large {
+  min-width: 28px;
+  width: 28px;
+}
+.letter-small {
+  min-width: 20px;
+  width: 20px;
+}
+
+.v-list-item {
+  padding: 0;
+  min-height: 22px !important;
+}
+</style>
+```
