@@ -9,9 +9,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in desserts" :key="item.name">
+      <tr v-for="item in leaderboardData" :key="item.name">
         <td>{{ item.name }}</td>
-        <td>{{ item.averageGuesses }}</td>
+        <td>{{ item.averageAttempts }}</td>
         <td>{{ item.gameCount }}</td>
       </tr>
     </tbody>
@@ -22,14 +22,6 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 import type { LeaderBoardData } from '@/types/LeaderBoardData'
-
-const desserts = [
-  { name: 'ben', averageGuesses: '5', gameCount: '2' },
-  { name: 'ben', averageGuesses: '5', gameCount: '2' },
-  { name: 'ben', averageGuesses: '5', gameCount: '2' },
-  { name: 'ben', averageGuesses: '5', gameCount: '2' },
-  { name: 'ben', averageGuesses: '5', gameCount: '2' }
-]
 
 const leaderboardData = ref<LeaderBoardData[]>()
 
