@@ -6,8 +6,6 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
-  <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
 </template>
 
@@ -31,7 +29,13 @@ onUnmounted(() => {
 })
 
 function checkGuess() {
+  if (guess.value.length < 5) return
+  if (guess.value.length > 5) guess.value = guess.value.slice(0, 5)
   game.submitGuess()
+  if (game.status === 1) {
+    alert('You Win!')
+    game.restartGame()
+  }
   guess.value = ''
 }
 
