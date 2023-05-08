@@ -45,12 +45,7 @@
     </v-col>
   </v-row>
 
-  <v-row class="justify-center mt-10">
-    <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
-  </v-row>
   <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
-  <!-- <h2>{{ guess }}</h2> -->
-  <!-- <h3>{{ game.secretWord }}</h3> -->
 </template>
 
 <script setup lang="ts">

@@ -9,8 +9,9 @@
         <v-text-field v-model="newName" :placeholder="Player.Name.value" />
       </v-card-text>
       <v-card-actions>
-        <v-btn @click="close">Cancel</v-btn>
+        <RouterLink to="/home">Cancel</RouterLink>
         <v-btn @click="confirm">Confirm</v-btn>
+        <v-btn @click="startGame">Start Game</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -35,6 +36,8 @@ watch(showDialog, (value) => {
 })
 const confirm = async () => {
   await Player.ChangeNameAsync(newName.value)
+}
+const startGame = async () => {
   close()
 }
 const close = () => {
