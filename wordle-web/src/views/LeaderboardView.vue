@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 //import Axios from 'axios'
+//Axios stuff to be fixed later
 
 const progress = ref([100,80,60,40,20,18,16,14,18,10])
 

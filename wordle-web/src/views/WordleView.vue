@@ -25,6 +25,7 @@ import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
 //import Axios from 'axios'
+//Axios stuff to be fixed later
 
 const guess = ref('')
 const game = reactive(new WordleGame())
