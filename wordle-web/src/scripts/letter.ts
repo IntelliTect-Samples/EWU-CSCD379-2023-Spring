@@ -25,7 +25,7 @@ export class Letter {
       case LetterStatus.Wrong:
         return 'wrong'
       default:
-        return 'darkgrey'
+        return 'grey'
     }
   }
 }
