@@ -22,6 +22,9 @@ export class WordleGame {
   guess!: Word
   validWords = new Array<String>()
 
+
+  
+
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
   //     console.log('wrong length')
@@ -59,4 +62,7 @@ export class WordleGame {
       // The game is over
     }
   }
+
+
+
 }

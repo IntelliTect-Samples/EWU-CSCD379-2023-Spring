@@ -1,6 +1,6 @@
 <template>
   <h1>Wordle Redux</h1>
-
+  <setUsername />
   <GameBoard :game="game" @letterClick="addChar" />
 
   <p>Guess: {{ guess }}</p>
@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive } from 'vue'
+import { ref, reactive, computed } from 'vue';
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
@@ -25,6 +25,8 @@ import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
 import Axios from 'axios'
+import SetUsername from '@/components/SetUsername.vue';
+
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -32,6 +34,7 @@ const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
 
 const overlay = ref(true)
+
 
 console.log(game.secretWord)
 
@@ -108,6 +111,7 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
+  
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
