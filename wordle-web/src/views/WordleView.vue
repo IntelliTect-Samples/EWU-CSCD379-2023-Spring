@@ -1,4 +1,5 @@
 <template>
+  <v-btn @click="nameDialog = !nameDialog">{{ displayName }}</v-btn>
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -14,7 +15,37 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <v-btn @click="addWord()" style="tonal">Add Strin</v-btn>
+  <template>
+    <v-dialog v-model="nameDialog" width="500px" persistent>
+      <v-card height="500px" width="500px" title="Name:">
+        <v-text-field label="UserName" @input="nameUpdater($event.target.value)"></v-text-field>
+        <v-btn @click="nameDialog = false">Confirm Name</v-btn>
+      </v-card>
+    </v-dialog>
+  </template>
+  <template>
+    <v-dialog v-model="endScreen" width="500px" persistent>
+      <v-card height="500px" width="500px" title="Score:">
+        <v-row>
+          <v-col> Name: </v-col>
+          <v-col> Attempts: </v-col>
+          <v-col> Time: </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn @click="nameDialog = !nameDialog">{{ displayName }}</v-btn>
+          </v-col>
+          <v-col>
+            {{ game.finalGuesses }}
+          </v-col>
+          <v-col>
+            {{ game.finalTime }}
+          </v-col>
+        </v-row>
+        <v-btn @click="handleSubmit">Send to Leaderboard</v-btn>
+      </v-card>
+    </v-dialog>
+  </template>
 </template>
 
 <script setup lang="ts">
@@ -24,11 +55,16 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
+import { watch } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 
 const overlay = ref(true)
+let nameDialog = ref(false)
+let endScreen = ref(false)
+let displayName = ref(game.displayName)
+let curStatus = game.status
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -36,6 +72,48 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function nameUpdater(newName: string) {
+  console.log(newName)
+  let str = newName
+  game.changeName(str)
+  displayName.value = game.displayName
+}
+
+function handleSubmit() {
+  submitToLeaderboard()
+  endScreen.value = false
+  game.restartGame('defal')
+}
+
+async function submitToLeaderboard() {
+  console.log('PlayerInfo')
+  console.log(game.displayName)
+  console.log(game.finalGuesses)
+  console.log(game.finalTime)
+  overlay.value = true
+  await Axios.post(
+    'Leaderboard/InsertScore?name='
+      .concat(game.displayName)
+      .concat('&numAttempts=')
+      .concat(String(game.finalGuesses))
+      .concat('&seconds=')
+      .concat(String(game.finalTime)),
+    {
+      //for some reason, these aren't working correctly, will investigate later
+      /*name: game.displayName,
+      numAttempts: game.finalGuesses,
+      seconds: game.finalTime*/
+    }
+  )
+    .then((response) => {
+      overlay.value = false
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 
 function addWord() {
   overlay.value = true
@@ -67,6 +145,12 @@ Axios.get('word')
 
 function checkGuess() {
   game.submitGuess()
+  //if(){
+  //  endScreen.value = true
+  //}
+  if (game.status != 0) {
+    endScreen.value = true
+  }
   guess.value = ''
 }
 
@@ -77,15 +161,17 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-    console.log('Back')
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+  if (!nameDialog.value) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+      console.log('Back')
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
 }
 </script>

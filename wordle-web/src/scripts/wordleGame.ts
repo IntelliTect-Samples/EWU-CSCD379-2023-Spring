@@ -1,6 +1,7 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
+import Axios from 'axios'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -17,9 +18,15 @@ export class WordleGame {
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
   secretWord = ''
+  numberOfSeconds = 0
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
+  finalTime = 0
+  finalGuesses = 0
+  useName = ''
+  displayName = 'Guest'
+  interval = setInterval(() => this.secondsPassed(), 1000)
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -27,10 +34,20 @@ export class WordleGame {
   //     return
   //   }
 
+  changeName(newName: string) {
+    this.useName = newName
+    if (this.useName == '') {
+      this.displayName = 'Guest'
+    } else {
+      this.displayName = this.useName
+    }
+  }
+
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     //this.secretWord = secretWord
     this.secretWord = await WordsService.getWordFromApi()
     this.guesses.splice(0)
+    this.numberOfSeconds = 0
 
     for (let i = 0; i < numberOfGuesses; i++) {
       const word = new Word()
@@ -40,9 +57,20 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
+  secondsPassed() {
+    this.numberOfSeconds += 1
+    console.log('Second passed')
+    console.log(this.numberOfSeconds)
+  }
+
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    var isCorrect = this.guess.check(this.secretWord)
+    if (isCorrect) {
+      this.status = WordleGameStatus.Won
+    } else {
+      this.status = WordleGameStatus.Active
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -52,10 +80,17 @@ export class WordleGame {
     console.log(this.guessedLetters)
 
     const index = this.guesses.indexOf(this.guess)
-    if (index < this.guesses.length - 1) {
+    if (index < this.guesses.length - 1 && this.status == WordleGameStatus.Active) {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      console.log('Game Over')
+      if (this.status != WordleGameStatus.Won) {
+        //display dialog for collecting information
+        this.status = WordleGameStatus.Lost
+      }
+      this.finalGuesses = index + 1
+      this.finalTime = this.numberOfSeconds
     }
   }
 }
