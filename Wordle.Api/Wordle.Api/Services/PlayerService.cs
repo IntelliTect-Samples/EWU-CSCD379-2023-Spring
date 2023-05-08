@@ -32,7 +32,7 @@ namespace Wordle.Api.Services
         public async Task<Player> AddPlayer(string? newName, int? playTime, int? guesses)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
-            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.Name == newName);
+            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.name == newName);
             if(player != null) 
             {
                 player.GameCount++;
@@ -52,7 +52,7 @@ namespace Wordle.Api.Services
                     TotalSecondsPlayed = playTime,
                     AverageSecondsPerGame = playTime
                 };
-                db.Players.Add(player);
+                _db.Players.Add(player);
             }
             await _db.SaveChangesAsync();
             return player;
