@@ -25,7 +25,7 @@
             <v-btn
               variant="text"
               @click="
-                dialog = false
+                dialog = false,
                 startKeyboard()
               "
               >Close</v-btn
@@ -33,7 +33,7 @@
             <v-btn
               variant="text"
               @click="
-                dialog = false
+                dialog = false,
                 startKeyboard()
               "
               >Submit</v-btn
