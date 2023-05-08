@@ -15,7 +15,7 @@ namespace Wordle.Api.Controllers
             _leaderboardService = leaderboardService;
         }
 
-        [HttpPost(Name = "AddNewScore")]
+        [HttpPost("AddNewScore")]
         public async Task<Player> AddNewScore(string name, int attempts)
         {
             //Add the players score to the database
@@ -23,7 +23,7 @@ namespace Wordle.Api.Controllers
 
         }
 
-        [HttpGet(Name = "GetTopTenScores")]
+        [HttpGet("GetTopTenScores")]
         public async Task<IEnumerable<Player>> GetTopTenScores()
         {
             return await _leaderboardService.GetTopTenScores();

@@ -1,7 +1,10 @@
 <template>
   <h1 align="center">Top 10 Wordle Scores</h1>
-  <v-row class="justify-center" dense v-for="(leader, index) in leaderData" :key="leader.playerId">
-    <v-col cols="auto">{{ index + 1 }}: {{ leader.name }} - {{ leader.gameCount }} games, {{ leader.averageAttempts }} average attempts</v-col>
+  <v-row class="justify-center" dense v-for="(leader, index) in LeaderData" :key="leader.playerId">
+    <v-col cols="auto"
+      >{{ index + 1 }}: {{ leader.name }} - {{ leader.gameCount }} games,
+      {{ leader.averageAttempts }} average attempts</v-col
+    >
   </v-row>
 </template>
 
@@ -12,12 +15,7 @@ import type { LeaderData } from '@/types/LeaderData'
 
 const leaderData = ref<LeaderData[]>()
 
-Axios.defaults.baseURL = 'https://kind-stone-01ab5711e.3.azurestaticapps.net'
-if (window.location.hostname === 'localhost') {
-  Axios.defaults.baseURL = 'http://localhost:7053'
-}
-
-Axios.get(Axios.defaults.baseURL + '/Leaderboard')
+Axios.get('leaderboard/GetTopTenScores')
   .then((response) => {
     console.log(response.data)
     leaderData.value = response.data
@@ -25,5 +23,4 @@ Axios.get(Axios.defaults.baseURL + '/Leaderboard')
   .catch((err) => {
     console.log(err)
   })
-
 </script>

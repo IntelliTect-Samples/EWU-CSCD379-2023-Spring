@@ -11,6 +11,13 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import Axios from 'axios'
+
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  Axios.defaults.baseURL = 'https://localhost:7053'
+} else {
+  Axios.defaults.baseURL = 'https://wordleafterlyte.azurewebsites.net/'
+}
 
 const vuetify = createVuetify({
   components,
