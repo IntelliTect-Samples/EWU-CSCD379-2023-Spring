@@ -11,7 +11,7 @@
     <tbody>
       <tr v-for="item in leaderboardData" :key="item.name">
         <td>{{ item.name }}</td>
-        <td>{{ item.averageAttempts }}</td>
+        <td>{{ Math.round((item.averageAttempts + Number.EPSILON) * 100) / 100 }}</td>
         <td>{{ item.gameCount }}</td>
       </tr>
     </tbody>

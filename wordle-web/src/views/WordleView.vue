@@ -86,7 +86,11 @@ function handleSubmit() {
 
 async function submitToLeaderboard() {
   overlay.value = true
-  await Axios.post('api/AddPlayer', { name: game.displayName, attempts: game.finalGuesses })
+  await Axios.post('api/AddPlayer', {
+    name: game.displayName,
+    attempts: game.finalGuesses,
+    secondsPerGame: game.finalTime
+  })
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
 }

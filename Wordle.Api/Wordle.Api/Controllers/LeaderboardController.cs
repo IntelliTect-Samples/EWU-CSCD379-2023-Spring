@@ -25,7 +25,7 @@ namespace Wordle.Api.Controllers
         [HttpPost("AddPlayer")]
         public async Task<Player> AddPlayer(PlayerDto player)
         {
-            return await _leaderboardService.AddPlayer(player.Name, player.Attempts);
+            return await _leaderboardService.AddPlayer(player.Name, player.Attempts, player.secondsPerGame);
         }
     }
 }

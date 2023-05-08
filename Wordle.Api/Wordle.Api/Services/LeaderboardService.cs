@@ -18,7 +18,7 @@ namespace Wordle.Api.Services
             return  _db.Players.OrderBy(player => player.AverageAttempts).Take(10).ToList();
         }
 
-        public async Task<Player> AddPlayer(string? name, double Attempts)
+        public async Task<Player> AddPlayer(string? name, double Attempts, int secondsPerGame)
         {
 
             if (name is null)
@@ -30,7 +30,8 @@ namespace Wordle.Api.Services
             if (player != null)
             {
                 player.GameCount += 1;
-                player.AverageAttempts = player.AverageAttempts + (Attempts - player.AverageAttempts) / player.GameCount;
+                player.AverageAttempts = (player.AverageAttempts + (Attempts - player.AverageAttempts) / player.GameCount);
+                player.AverageSeconds = player.AverageSeconds + (secondsPerGame - player.AverageSeconds) / player.GameCount;
             }
             else
             {
@@ -38,7 +39,8 @@ namespace Wordle.Api.Services
                 {
                     Name = name,
                     AverageAttempts = Attempts,
-                    GameCount = 1
+                    GameCount = 1,
+                    AverageSeconds = secondsPerGame
                 };
                 _db.Players.Add(player);
             }
