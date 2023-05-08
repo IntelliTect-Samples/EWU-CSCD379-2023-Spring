@@ -3,8 +3,8 @@
     :color="letter.color"
     label
     outlined
-    :height="display.xs ? '30' : display.sm ? '40' : '50'"
-    :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
+    :height="display?.xs ? '30' : display?.sm ? '40' : '50'"
+    :size="display?.xs ? 'x-small' : display?.sm ? 'small' : 'large'"
   >
     {{ letter.char.toUpperCase() }}
   </v-btn>
@@ -12,10 +12,17 @@
 
 <script setup lang="ts">
 import type { Letter } from '@/scripts/letter'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 
-const display = ref(useDisplay())
+// Add this to make testing work because useDisplay() throws an error when testing
+let displayContent: ReturnType<typeof useDisplay>
+try {
+  displayContent = useDisplay()
+} catch (e) {
+  displayContent = { xs: ref(false), sm: ref(false) } as ReturnType<typeof useDisplay>
+}
+const display = reactive(displayContent)
 
 interface Props {
   letter: Letter
