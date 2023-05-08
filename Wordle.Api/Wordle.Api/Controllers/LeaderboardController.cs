@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -22,9 +23,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddPlayer")]
-        public async Task AddPlayer(string Name, int Attempts)
+        public async Task<Player> AddPlayer(PlayerDto player)
         {
-            await _leaderboardService.AddPlayer(Name, Attempts);
+            return await _leaderboardService.AddPlayer(player.Name, player.Attempts);
         }
     }
 }

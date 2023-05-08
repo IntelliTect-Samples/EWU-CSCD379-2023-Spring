@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 
@@ -14,48 +15,35 @@ namespace Wordle.Api.Services
 
         public List<Player> GetLeaderboard()
         {
-            return  _db.Players.OrderByDescending(player => player.AverageAttempts).Take(10).ToList();
+            return  _db.Players.OrderBy(player => player.AverageAttempts).Take(10).ToList();
         }
 
-        public async Task AddPlayer(string Name, double Attempts)
+        public async Task<Player> AddPlayer(string? name, double Attempts)
         {
-            if (Name.IsNullOrEmpty())
+
+            if (name is null)
             {
-                throw new ArgumentNullException(nameof(Name));
+                throw new ArgumentNullException("Name is required.");
             }
 
-            if (Attempts <= 0)
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
+            if (player != null)
             {
-                throw new ArgumentOutOfRangeException(nameof(Attempts));
-            }
-
-            Player player = _db.Players.Single(player => player.Name == Name);
-
-            if (player == null)
-            {
-                InsertPlayer(Name, Attempts);
+                player.GameCount += 1;
+                player.AverageAttempts = player.AverageAttempts + (Attempts - player.AverageAttempts) / player.GameCount;
             }
             else
             {
-                UpdatePlayer(player, Attempts);
+                player = new Player()
+                {
+                    Name = name,
+                    AverageAttempts = Attempts,
+                    GameCount = 1
+                };
+                _db.Players.Add(player);
             }
-
             await _db.SaveChangesAsync();
-        }
-
-        public void InsertPlayer(string Name, double Attempts)
-        {
-            
-            _db.Players.Add(new Player() { Name=Name, AverageAttempts=Attempts, GameCount=1 });
-
-        }
-
-        public void UpdatePlayer(Player player, double Attempts)
-        {
-            player.GameCount += 1;
-            int gameCount = player.GameCount;
-            double averageAttempts = player.AverageAttempts;
-            player.AverageAttempts = averageAttempts + (Attempts - averageAttempts) / gameCount;
+            return player;
         }
     }
 }

@@ -20,12 +20,12 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-
-  // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
+  numberOfSeconds = 0
+  finalTime = 0
+  finalGuesses = 0
+  useName = ''
+  displayName = 'Guest'
+  interval = setInterval(() => this.secondsPassed(), 1000)
 
   async restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || (await WordsService.getWordFromApi())
@@ -39,9 +39,28 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
+  changeName(newName: string) {
+    this.useName = newName
+    localStorage.setItem('name', JSON.stringify(newName))
+    if (this.useName == '') {
+      this.displayName = 'Guest'
+    } else {
+      this.displayName = this.useName
+    }
+  }
+
+  secondsPassed() {
+    this.numberOfSeconds += 1
+  }
+
   submitGuess() {
     // put logic to win here.
-    const result = this.guess.check(this.secretWord)
+    const isCorrect = this.guess.check(this.secretWord)
+    if (isCorrect) {
+      this.status = WordleGameStatus.Won
+    } else {
+      this.status = WordleGameStatus.Active
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -49,11 +68,16 @@ export class WordleGame {
     }
 
     const index = this.guesses.indexOf(this.guess)
-    if (index < this.guesses.length - 1) {
+    if (index < this.guesses.length - 1 && this.status == WordleGameStatus.Active) {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      if (this.status != WordleGameStatus.Won) {
+        //display dialog for collecting information
+        this.status = WordleGameStatus.Lost
+      }
+      this.finalGuesses = index + 1
+      this.finalTime = this.numberOfSeconds
     }
-    return result
   }
 }
