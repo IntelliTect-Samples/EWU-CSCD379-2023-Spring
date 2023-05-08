@@ -24,14 +24,14 @@ import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
-import Axios from 'axios'
+//import Axios from 'axios'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
 
-const overlay = ref(true)
+//const overlay = ref(true)
 
 console.log(game.secretWord)
 

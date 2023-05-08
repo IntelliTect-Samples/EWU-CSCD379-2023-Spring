@@ -32,11 +32,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Axios from 'axios'
+//import Axios from 'axios'
 
 const progress = ref([100,80,60,40,20,18,16,14,18,10])
 
-const overlay = ref(true)
+//const overlay = ref(true)
 /*
 var num1;
 var num2;
