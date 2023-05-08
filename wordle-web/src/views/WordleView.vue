@@ -89,28 +89,6 @@ async function submitToLeaderboard() {
   await Axios.post('api/AddPlayer', { name: game.displayName, attempts: game.finalGuesses })
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
-
-  // await Axios.post(
-  //   'api/AddPlayer'
-  //     .concat(game.displayName)
-  //     .concat('&numAttempts=')
-  //     .concat(String(game.finalGuesses))
-  //     .concat('&seconds=')
-  //     .concat(String(game.finalTime)),
-  //   {
-  //     //for some reason, these aren't working correctly, will investigate later
-  //     /*name: game.displayName,
-  //     numAttempts: game.finalGuesses,
-  //     seconds: game.finalTime*/
-  //   }
-  // )
-  //   .then((response) => {
-  //     overlay.value = false
-  //     console.log(response.data)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error)
-  //   })
 }
 
 onMounted(async () => {
