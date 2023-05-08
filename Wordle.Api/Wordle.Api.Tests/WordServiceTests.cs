@@ -23,3 +23,4 @@ namespace Wordle.Api.Tests
             Assert.AreEqual(5, word.Length);
         }
     }
+}
