@@ -48,6 +48,7 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
     this.startTime = Date.now()
   }
+  /////////
 
   submitGuess() {
     this.guess.check(this.secretWord)
