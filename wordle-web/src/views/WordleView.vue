@@ -5,9 +5,19 @@
 
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+  <KeyBoard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
 
   <WordSelect :validWords="validWords" v-model="selection" @selectWord="addWord" />
+
+  <v-btn
+    @click="newGame"
+    @keyup.enter="checkGuess"
+    color="secondary"
+    size="x-large"
+    v-if="game.status !== WordleGameStatus.Active"
+  >
+    New Game
+  </v-btn>
 
   <p>{{ selection }}</p>
 </template>
@@ -21,6 +31,7 @@ import GetName from '../components/GetName.vue'
 import type { Letter } from '@/scripts/letter'
 import WordSelect from '@/components/WordSelect.vue'
 import { WordsService } from '@/scripts/wordsService'
+import Axios from 'axios'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -28,6 +39,8 @@ let validWords = ref(['?????'])
 let guesses: string[] = []
 const selection = ref(null)
 const input = ref(true)
+
+newGame()
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -37,14 +50,14 @@ onUnmounted(() => {
 })
 
 function addWord() {
-  overlay.value = true
+  input.value = false
   Axios.post('word/AddWordFromBody', {
     text: 'tests',
     isCommon: true,
     isUsed: false
   })
     .then((response) => {
-      overlay.value = false
+      input.value = true
       console.log(response.data)
     })
     .catch((error) => {
@@ -53,20 +66,20 @@ function addWord() {
 }
 
 function newGame() {
-  overlay.value = true
+  input.value = true
   Axios.get('word')
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)
       setTimeout(() => {
-        overlay.value = false
+        input.value = true
       }, 502)
     })
     .catch((error) => {
       console.log(error)
       game.restartGame(WordsService.getRandomWord())
       console.log(game.secretWord)
-      overlay.value = false
+      input.value = true
     })
 }
 
@@ -78,16 +91,6 @@ function checkGuess(word?: string) {
   guesses.push(guess.value)
   validWords.value = WordsService.validWords(guesses, game.secretWord)
   guess.value = ''
-}
-
-function addWord(word: string) {
-  for (let i = 0; i < 5; i++) {
-    removeChar()
-  }
-  for (let i = 0; i < word.length; i++) {
-    guess.value += word[i]
-    game.guess.push(word[i])
-  }
 }
 
 function addChar(letter: Letter) {
@@ -124,5 +127,6 @@ function keyPress(event: KeyboardEvent) {
 
 function onOverlay(name: string) {
   input.value = !input.value
+  
 }
 </script>
