@@ -37,7 +37,7 @@ Axios.get('https://localhost:7053/WeatherForecast')
     console.log(err)
   })
 </script>
-
+<!-- style -->
 <style>
 @media (min-width: 1024px) {
   .about {
