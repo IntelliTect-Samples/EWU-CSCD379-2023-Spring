@@ -14,8 +14,7 @@ export class WordleGame {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
-    this.timer_start = Date.now()
-    console.log('Timer Start: ' + this.timer_start)
+    this.count = 0
   }
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
@@ -24,12 +23,19 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-  timer_start: number
+  count: number
+  counter: any
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
   //     console.log('wrong length')
   //     return
   //   }
+
+  // 5 things:
+  // 1) When the user enters their username we have to start the interval
+  // 2) When the user clicks the button we have to stop the interval
+  // 3) When the user clicks enter we have to return a boolean stating if the game is over
+  // 4) We have to display the count
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord
@@ -43,7 +49,8 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
-  submitGuess() {
+  submitGuess(): boolean {
+    let gameOver: boolean = false
     // put logic to win here.
     this.guess.check(this.secretWord)
 
@@ -61,6 +68,7 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      gameOver = true
       localStorage.endTime = Date.now()
 
       localStorage.total_time = localStorage.endTime - localStorage.startTime
@@ -76,5 +84,6 @@ export class WordleGame {
           console.log(error)
         })
     }
+    return gameOver
   }
 }

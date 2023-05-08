@@ -22,8 +22,22 @@
           </v-card-text>
           <v-spacer></v-spacer>
           <v-card-actions class="justify-end">
-            <v-btn variant="text" @click="dialog = false; startKeyboard()">Close</v-btn>
-            <v-btn variant="text" @click="dialog = false; startKeyboard()">Submit</v-btn>
+            <v-btn
+              variant="text"
+              @click="
+                dialog = false
+                startKeyboard()
+              "
+              >Close</v-btn
+            >
+            <v-btn
+              variant="text"
+              @click="
+                dialog = false
+                startKeyboard()
+              "
+              >Submit</v-btn
+            >
           </v-card-actions>
         </v-card>
       </template>
@@ -44,18 +58,16 @@
     :guessedLetters="game.guessedLetters"
   />
 
- 
-
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-<v-card>once game is won or lost, go to leader board to see time</v-card>
+  <v-card>once game is won or lost, go to leader board to see time {{ count }}</v-card>
 </template>
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, type Ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
@@ -70,24 +82,26 @@ const game = reactive(new WordleGame())
 const overlay = ref(true)
 var dialog = ref(true)
 
+let timerInterval: any = null
+let count: Ref<number> = ref(0)
 
 onMounted(async () => {
-  if(!dialog.value){
+  if (!dialog.value) {
     window.addEventListener('keyup', keyPress)
   }
 })
 
-
-
-function startKeyboard() : void {
+function startKeyboard(): void {
+  timerInterval = setInterval(() => {
+    console.log(count)
+    count.value++
+  }, 1000)
   window.addEventListener('keyup', keyPress)
-
-
 }
-function stopKeyboard() : void {
-  console.log("Stopping Keyboard")
-  window.removeEventListener('keyup', keyPress)
+function stopKeyboard(): void {
+  clearInterval(timerInterval)
 
+  window.removeEventListener('keyup', keyPress)
 }
 
 onUnmounted(() => {
@@ -124,7 +138,10 @@ Axios.get('word')
 
 function checkGuess() {
   localStorage.name
-  game.submitGuess()
+  if (game.submitGuess()) {
+    clearInterval(timerInterval)
+  }
+
   guess.value = ''
 }
 
