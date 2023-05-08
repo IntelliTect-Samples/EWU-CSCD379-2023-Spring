@@ -19,7 +19,6 @@
     <ValidWords @fillGuess="autoComplete" :game="game"></ValidWords>
   </v-container>
 
-  <v-btn @click="testApi">API</v-btn>
   <NameCardDialog :playerName="game.currentPlayer" @enterChar="setName"></NameCardDialog>
 </template>
 
@@ -72,9 +71,6 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 
-function testApi() {
-  game.postPlayerToApi('Dan', 4)
-}
 function setName(name: string) {
   game.setPlayerName(name)
 }
