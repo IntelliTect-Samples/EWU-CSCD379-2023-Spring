@@ -15,6 +15,13 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import { reactive } from 'vue'
+import { useDisplay } from 'vuetify'
+import { provide } from 'vue'
+
+// Provide the useDisplay to other components so that it can be used in testing.
+const display = reactive(useDisplay())
+provide('display', display)
 
 const theme = useTheme()
 
