@@ -75,11 +75,14 @@ export class WordleGame {
   }
 
   postPlayerToApi(name: string, attempts: number) {
-    Axios.post('https://wordlewebapp2023.azurewebsites.net/Player', {
-      playerName: name,
-      gameCount: 1,
-      averageAttempts: attempts
-    })
+    Axios.post(
+      'https://wordleweb.azurewebsites.net/leaderboard?name='.concat(
+        name,
+        '&attempts=',
+        attempts.toString()
+      ),
+      name.concat(',', attempts.toString(), ',', attempts.toString())
+    )
       .then(function (response) {
         console.log(response)
       })
