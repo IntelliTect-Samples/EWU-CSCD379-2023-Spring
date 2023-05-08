@@ -35,11 +35,6 @@ export class WordleGame {
   guessIndex = 0
   onGameEnd: ((result: PlayerResult) => void) | null = null
 
-  // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord
