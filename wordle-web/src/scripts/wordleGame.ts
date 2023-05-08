@@ -35,7 +35,6 @@ export class WordleGame {
   guessIndex = 0
   onGameEnd: ((result: PlayerResult) => void) | null = null
 
-  //Delete
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord
     this.guesses.splice(0)
