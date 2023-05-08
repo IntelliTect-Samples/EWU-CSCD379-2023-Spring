@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="wrapper">
-      <v-card>
+      <v-card class="rounded-0">
         <v-tool-bar>
           <v-btn variant="plain" to="/"> Home </v-btn>
           <v-btn variant="plain" to="/wordle"> Wordle </v-btn>

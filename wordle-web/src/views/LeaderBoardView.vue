@@ -1,4 +1,8 @@
 <template>
+  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
+
   <h1>Leaderboard</h1>
   <v-table striped class="text-no-wrap">
     <thead>
@@ -11,7 +15,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in leaderboardData" :key="item.name">
+      <tr v-for="item in leaderboardData" :key="item.playerId">
         <td>{{ item.name }}</td>
         <td>{{ item.gameCount }}</td>
         <td>{{ item.averageAttempts }}</td>
@@ -36,11 +40,13 @@ interface LeaderboardData {
 }
 
 const leaderboardUrl = 'https://wordlemindbender.azurewebsites.net/Player/GetTopTenPlayers'
+const overlay = ref(true)
 
 const leaderboardData = ref<LeaderboardData[]>()
 Axios.get(leaderboardUrl)
   .then((response) => {
     console.log(response.data)
+    overlay.value = false
     leaderboardData.value = response.data
   })
   .catch((err) => {
