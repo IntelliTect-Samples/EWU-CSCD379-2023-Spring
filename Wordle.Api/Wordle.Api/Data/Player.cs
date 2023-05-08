@@ -16,11 +16,10 @@ namespace Wordle.Api.Data
         {
             if (!db.Players.Any())
             {
-                Player player = new() { Name = "Winner" };
+                Player player = new() { Name = "Joshua" };
                 db.Players.Add(player);
                 db.SaveChanges();
             }
-            else { throw new Exception(); }
         }
     }
 }
