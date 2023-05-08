@@ -11,8 +11,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230506212537_WeightedScoreColumn")]
-    partial class WeightedScoreColumn
+    [Migration("20230508003543_Word")]
+    partial class Word
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
