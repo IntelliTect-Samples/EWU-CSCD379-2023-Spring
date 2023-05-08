@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     getTopTenScores() {
-      Axios.get('https://wordlewebassignment.azurewebsites.net/player')
+      Axios.get('/player')
         .then((response) => {
           this.players = response.data.map((player: Player) => ({
             ...player,
