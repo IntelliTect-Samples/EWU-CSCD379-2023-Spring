@@ -3,9 +3,9 @@
     <div class="wrapper">
       <v-card>
         <v-tool-bar>
-          <v-btn variant="plain" t="/"> Home </v-btn>
-          <v-btn variant="plain" t="/wordle"> Wordle </v-btn>
-          <v-btn variant="plain" t="/leaderboard"> Leader Board </v-btn>
+          <v-btn variant="plain" to="/"> Home </v-btn>
+          <v-btn variant="plain" to="/wordle"> Wordle </v-btn>
+          <v-btn variant="plain" to="/leaderboard"> Leader Board </v-btn>
           <v-btn variant="plain" @click="setInverseTheme"> Inverse Theme </v-btn>
           <v-btn variant="plain" @click="setDarkTheme"> Dark Theme </v-btn>
         </v-tool-bar>
