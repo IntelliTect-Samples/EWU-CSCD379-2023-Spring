@@ -61,7 +61,7 @@ watch(
       clearInterval(timerInterval)
     }
     // axios
-    //   .post('http://localhost:5006/Leaderboard', {
+    //   .post('/api/Leaderboard', {
     //     //Placeholders for now
     //     name: 'guest',
     //     attempts: 1,
