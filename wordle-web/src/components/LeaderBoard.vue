@@ -19,6 +19,10 @@
 </template>
 
 <script setup lang="ts">
+import Axios from 'axios'
+import { ref } from 'vue'
+import type { LeaderBoardData } from '@/types/LeaderBoardData'
+
 const desserts = [
   { name: 'ben', averageGuesses: '5', gameCount: '2' },
   { name: 'ben', averageGuesses: '5', gameCount: '2' },
@@ -26,10 +30,6 @@ const desserts = [
   { name: 'ben', averageGuesses: '5', gameCount: '2' },
   { name: 'ben', averageGuesses: '5', gameCount: '2' }
 ]
-
-import Axios from 'axios'
-import { ref } from 'vue'
-import type { LeaderBoardData } from '@/types/LeaderBoardData'
 
 const leaderboardData = ref<LeaderBoardData[]>()
 
