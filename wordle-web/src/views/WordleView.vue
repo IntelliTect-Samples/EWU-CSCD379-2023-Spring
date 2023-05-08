@@ -1,10 +1,11 @@
 <template>
-  <div class="d-flex justify-end">
-    <div>Time: {{ duration }}</div>
-    <ActiveUser />
-  </div>
+  <ActiveUser />
+
   <h1 class="justify">Wordle Mind Bender</h1>
   <GameBoard :game="game" @letterClick="addChar" />
+  <div class="d-flex justify-end">
+    <div>Time: {{ duration }}</div>
+  </div>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
