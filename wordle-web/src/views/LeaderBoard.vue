@@ -8,10 +8,8 @@
           :key="`${score.score} + ${index}`"
           class="border my-2"
         >
-          <div class="d-flex justify-center bg-secondary text-h8">
-            #{{ index + 1 }} - {{ score.playerName }}
-          </div>
-          <v-card-text class="d-flex flex-column align-center">
+          <div class="text-h8">#{{ index + 1 }} - {{ score.playerName }}</div>
+          <v-card-text class="align-center">
             <v-row dense>
               <v-col cols="5" class="text-end">Score -</v-col>
               <v-col cols="5">{{ score.score }}</v-col>
