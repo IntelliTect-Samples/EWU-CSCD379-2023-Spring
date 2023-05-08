@@ -95,7 +95,7 @@ function changeUsername() {
 
 function setUsername() {
   namePrompt.value = false
-  Axios.post('Player', {
+  Axios.post('https://wordlewebassignment.azurewebsites.net/player', {
     name: userName.value,
     attempts: attempts,
     secondsInGame: 0
@@ -111,7 +111,7 @@ function setUsername() {
 
 function addWord() {
   overlay.value = true
-  Axios.post('word/AddWordFromBody', {
+  Axios.post('https://wordlewebassignment.azurewebsites.net/word', {
     text: 'tests',
     isCommon: true,
     isUsed: false
