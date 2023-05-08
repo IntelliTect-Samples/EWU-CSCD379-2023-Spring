@@ -1,11 +1,10 @@
-import Axios from 'axios';
-
+import Axios from 'axios'
 
 export class LeaderboardService {
   static async GetLeaderboard() {
     try {
-      const response = await Axios.get('/Leaderboard/0');
-      const Leaderboard = response.data;
+      const response = await Axios.get('/Leaderboard/0')
+      const Leaderboard = response.data
 
       return Leaderboard.map((player: any) => {
         return {
@@ -13,12 +12,12 @@ export class LeaderboardService {
           name: player.name,
           score: player.score,
           gameCount: player.gameCount,
-          averageAttempts: player.averageAttempts,
+          averageAttempts: player.averageAttempts
           // averageTime: player.averageTime,
-        };
-      });
+        }
+      })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 }

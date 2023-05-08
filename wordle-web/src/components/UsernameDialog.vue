@@ -16,37 +16,37 @@
 </template>
 
 <script lang="ts">
-import { ref, defineComponent, watchEffect } from 'vue';
+import { ref, defineComponent, watchEffect } from 'vue'
 
 export default defineComponent({
   props: {
     dialogOpen: {
       type: Boolean,
-      required: true,
-    },
+      required: true
+    }
   },
   emits: ['update:dialogOpen', 'username-submitted', 'close-dialog', 'update-input'],
   setup(props, { emit }) {
-    const playerName = ref('');
+    const playerName = ref('')
 
     watchEffect(() => {
-      emit('update-input', playerName.value);
-    });
+      emit('update-input', playerName.value)
+    })
 
     function submitName() {
-      emit('username-submitted', playerName.value);
-      emit('update:dialogOpen', false);
+      emit('username-submitted', playerName.value)
+      emit('update:dialogOpen', false)
     }
 
     function onUsernameInput(event: KeyboardEvent) {
-      event.stopPropagation();
+      event.stopPropagation()
     }
 
     function closeDialog() {
-      emit('update:dialogOpen', false);
+      emit('update:dialogOpen', false)
     }
 
-    return { playerName, submitName, onUsernameInput, closeDialog };
-  },
-});
+    return { playerName, submitName, onUsernameInput, closeDialog }
+  }
+})
 </script>
