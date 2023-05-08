@@ -1,5 +1,4 @@
 <template>
-  <main>
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
       <v-progress-circular color="primary" indeterminate size="64" />
     </v-overlay>
@@ -41,13 +40,11 @@
         <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
       </v-col>
     </v-row>
-
     <v-row class="justify-center mt-10">
       <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
     </v-row>
     <!-- <h2>{{ guess }}</h2> -->
     <!-- <h3>{{ game.secretWord }}</h3> -->
-  </main>
 </template>
 
 <script setup lang="ts">

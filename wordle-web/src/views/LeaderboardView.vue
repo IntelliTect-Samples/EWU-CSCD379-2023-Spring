@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .leaderboard-container {
   display: flex;
   flex-direction: column;
