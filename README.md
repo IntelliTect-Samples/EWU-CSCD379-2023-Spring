@@ -1,7 +1,7 @@
 # Link to running webpage
 * https://jolly-cliff-0cffb8a1e.3.azurestaticapps.net
 # Link to Api
-* wordlewebapp2023.azurewebsites.net
+* https://wordlewebapp2023.azurewebsites.net/word
 
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
