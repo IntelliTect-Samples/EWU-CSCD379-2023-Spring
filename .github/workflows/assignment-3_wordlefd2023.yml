@@ -28,6 +28,10 @@ jobs:
         working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
 
+      - name: Test
+        working-directory: ./Wordle.Api.Tests
+        run: dotnet test --no-restore --verbosity normal
+
       - name: dotnet publish
         working-directory: ./Wordle.Api
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
