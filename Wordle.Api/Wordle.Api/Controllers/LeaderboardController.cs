@@ -28,5 +28,4 @@ namespace Wordle.Api.Controllers
             return await _leaderboardService.AddPlayer(player.Name, player.Attempts, player.secondsPerGame);
         }
     }
-    // hi
 }
