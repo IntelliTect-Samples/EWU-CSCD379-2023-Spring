@@ -18,7 +18,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Player>> Get()
+        public async Task<IEnumerable<PlayerDto>> Get()
         {
             return await _playerService.GetTopTenScores();
         }

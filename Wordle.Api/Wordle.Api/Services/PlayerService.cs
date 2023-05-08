@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -12,24 +13,30 @@ namespace Wordle.Api.Services
             _db = db;
         }
 
-        public async Task<IEnumerable<Player>> GetTopTenScores()
+        public async Task<IEnumerable<PlayerDto>> GetTopTenScores()
+    {
+        int count = 10;
+        var totalCount = await _db.Players.CountAsync(player => player.GameCount > 6);
+        if (count > totalCount)
         {
-            int count = 10;
-            var totalCount = await _db.Players.CountAsync(player => player.GameCount > 6);
-            if (count > totalCount)
-            {
-                count = totalCount;
-            }
-            var players = await _db.Players
-                .Where(player => player.GameCount > 6)
-                .ToListAsync();
-
-            var topPlayers = players
-                .OrderBy(player => player.AverageAttempts)
-                .Take(count);
-
-            return topPlayers;
+            count = totalCount;
         }
+        var players = await _db.Players
+            .Where(player => player.GameCount > 6)
+            .ToListAsync();
+
+        var topPlayers = players
+            .OrderBy(player => player.AverageAttempts)
+            .Take(count)
+            .Select(player => new PlayerDto
+            {
+                Name = player.Name,
+                GameCount = player.GameCount,
+                AverageAttempts = player.AverageAttempts,
+                AverageSecondsPerGame = player.AverageSecondsPerGame
+            });
+        return topPlayers;
+    }
 
         public async Task<Player> AddPlayer(string newPlayerName, int attempts, int? SecondsInGame)
         {

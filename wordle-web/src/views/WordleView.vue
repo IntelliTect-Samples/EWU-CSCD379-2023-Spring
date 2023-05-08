@@ -1,51 +1,53 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
+  <main>
+    <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+    <div class="text-h4 text-center">Wordle Mind Bender</div>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+    <GameBoard :game="game" @letterClick="addChar" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+    <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
 
-  <v-row class="justify-center">
-    <v-btn
-      @click="checkGuess"
-      @keyup.enter="checkGuess"
-      color="primary"
-      size="x-large"
-      v-if="game.status == WordleGameStatus.Active"
-    >
-      Check
-    </v-btn>
-    <v-btn
-      @click="newGame"
-      @keyup.enter="checkGuess"
-      color="secondary"
-      size="x-large"
-      v-if="game.status !== WordleGameStatus.Active"
-    >
-      New Game
-    </v-btn>
-  </v-row>
+    <v-row class="justify-center">
+      <v-btn
+        @click="checkGuess"
+        @keyup.enter="checkGuess"
+        color="primary"
+        size="x-large"
+        v-if="game.status == WordleGameStatus.Active"
+      >
+        Check
+      </v-btn>
+      <v-btn
+        @click="newGame"
+        @keyup.enter="checkGuess"
+        color="secondary"
+        size="x-large"
+        v-if="game.status !== WordleGameStatus.Active"
+      >
+        New Game
+      </v-btn>
+    </v-row>
 
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
-    Better Luck Next Time
-  </div>
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
+      Better Luck Next Time
+    </div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
-  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col cols="3">
-      <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
-    </v-col>
-  </v-row>
+    <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
+      <v-col cols="3">
+        <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
+      </v-col>
+    </v-row>
 
-  <v-row class="justify-center mt-10">
-    <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
-  </v-row>
-  <!-- <h2>{{ guess }}</h2> -->
-  <!-- <h3>{{ game.secretWord }}</h3> -->
+    <v-row class="justify-center mt-10">
+      <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
+    </v-row>
+    <!-- <h2>{{ guess }}</h2> -->
+    <!-- <h3>{{ game.secretWord }}</h3> -->
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -90,7 +92,7 @@ function addWord() {
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  Axios.get('/word')
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)

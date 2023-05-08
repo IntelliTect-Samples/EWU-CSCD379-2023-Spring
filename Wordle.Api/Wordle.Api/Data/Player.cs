@@ -16,7 +16,7 @@ namespace Wordle.Api.Data
             {
                 if (GameCount == 0)
                 {
-                    return 0; // Avoid division by zero
+                    return 0;
                 }
                 else
                 {
@@ -31,7 +31,7 @@ namespace Wordle.Api.Data
             {
                 if (GameCount == 0 || TotalSeconds == null)
                 {
-                    return null; // Avoid division by zero
+                    return null; 
                 }
                 else
                 {
