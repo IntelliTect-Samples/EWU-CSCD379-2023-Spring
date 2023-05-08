@@ -1,19 +1,20 @@
 <template>
-  <v-dialog v-model="dialog" persistent>
-    <v-carousel>
-      <v-carousel-item>
+  <h1>LeaderBoard</h1>
+  <div>
+    <v-carousel >
+      <v-carousel-item width="700px">
         <v-card class="text-center">
           <v-card-title class="display-1"> LeaderBoard </v-card-title>
         </v-card>
       </v-carousel-item>
-      <v-carousel-item>
+      <v-carousel-item width="700px">
         <v-card class="text-center">
           <v-card-title class="display-1"> Personal Stats </v-card-title>
           <v-card-item> Username: {{ username }} </v-card-item>
         </v-card>
       </v-carousel-item>
     </v-carousel>
-  </v-dialog>
+  </div>
 </template>
 
 <script setup lang="ts">

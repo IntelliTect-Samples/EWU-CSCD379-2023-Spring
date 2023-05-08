@@ -11,6 +11,8 @@
       <v-icon size="large">{{ isPaused ? 'mdi-volume-high' : 'mdi-volume-mute' }}</v-icon>
     </v-btn>
 
+    <v-btn icon="mdi-align-vertical-bottom" to="/leaderboard"></v-btn>
+
     <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
 
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
@@ -85,6 +87,10 @@
 
         <v-list-item>
           <v-btn to="/wordle">Play Game</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/leaderboard">Leaderboard</v-btn>
         </v-list-item>
       </v-list>
     </v-card>
