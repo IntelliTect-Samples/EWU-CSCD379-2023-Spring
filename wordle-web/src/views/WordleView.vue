@@ -21,6 +21,7 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import UserName from '@/components/UserName.vue'
 import GameScore from '@/components/GameScore.vue'
+import Axios from 'axios'
 
 const guess = ref('')
 const game = reactive(new WordleGame())

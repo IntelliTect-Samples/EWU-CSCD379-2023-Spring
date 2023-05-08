@@ -28,7 +28,7 @@ function setCurrentWeather(weather: WeatherData) {
   isDialogOpen.value = true
 }
 
-Axios.get('/api/Leaderboard')
+Axios.get('/Leaderboard')
   .then((response) => {
     console.log(response.data)
     weatherData.value = response.data

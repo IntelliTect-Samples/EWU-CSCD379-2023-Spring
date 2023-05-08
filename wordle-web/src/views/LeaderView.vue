@@ -12,7 +12,12 @@ import type { LeaderData } from '@/types/LeaderData'
 
 const LeaderData = ref<LeaderData[]>()
 
-Axios.get('http://localhost:5006/Leaderboard')
+Axios.defaults.baseURL = 'https://kind-stone-01ab5711e.3.azurestaticapps.net'
+if (window.location.hostname === 'localhost') {
+  Axios.defaults.baseURL = 'http://localhost:7053'
+}
+
+Axios.get(Axios.defaults.baseURL + '/Leaderboard')
   .then((response) => {
     console.log(response.data)
     LeaderData.value = response.data

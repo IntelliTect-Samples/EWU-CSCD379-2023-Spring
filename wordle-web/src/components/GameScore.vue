@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { ref, watch, defineProps } from 'vue'
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import axios from 'axios'
+import Axios from 'axios'
 
 const startDialog = ref(true)
 const dialog = ref(false)
@@ -46,6 +46,12 @@ const props = defineProps({
   }
 })
 
+Axios.defaults.baseURL = 'https://kind-stone-01ab5711e.3.azurestaticapps.net'
+if (window.location.hostname === 'localhost') {
+  Axios.defaults.baseURL = 'http://localhost:7053'
+}
+
+
 watch(
   () => props.gameState,
   (newStatus) => {
@@ -60,18 +66,18 @@ watch(
       dialog.value = true
       clearInterval(timerInterval)
     }
-    // axios
-    //   .post('/api/Leaderboard', {
-    //     //Placeholders for now
-    //     name: 'guest',
-    //     attempts: 1,
-    //   })
-    //   .then((response) => {
-    //     console.log(response)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error)
-    //   })
+    Axios
+      .post(Axios.defaults.baseURL + '/Leaderboard', {
+        //Placeholders for now
+        name: 'guest',
+        attempts: 1,
+      })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 )
 
