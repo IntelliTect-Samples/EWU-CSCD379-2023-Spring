@@ -12,7 +12,7 @@ namespace Wordle.Api.Services
         {
             _db = db;
         }
-        
+        /*In Progress
         public async Task<IEnumerable<Player>> GetTopTen()
         {
             var count = 10;
@@ -26,8 +26,9 @@ namespace Wordle.Api.Services
                 .OrderByDescending(p => p.AverageAttempts)
                 .ToListAsync();
             return topTen;
+
         }
-        
+        */
         public async Task<Player> AddPlayer(string? newName, int? playTime, int? guesses)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
@@ -37,8 +38,8 @@ namespace Wordle.Api.Services
                 player.GameCount++;
                 player.TotalAttempts += guesses;
                 player.AverageAttempts = player.TotalAttempts / player.GameCount;
-                player.TotalSecoundsPlayed += playTime;
-                player.AverageSecondsPerGame = player.TotalSecoundsPlayed / player.GameCount;
+                player.TotalSecondsPlayed += playTime;
+                player.AverageSecondsPerGame = player.TotalSecondsPlayed / player.GameCount;
             }
             else
             {
@@ -48,7 +49,7 @@ namespace Wordle.Api.Services
                     GameCount = 1,
                     TotalAttempts = guesses,
                     AverageAttempts = 1,
-                    TotalSecoundsPlayed = playTime,
+                    TotalSecondsPlayed = playTime,
                     AverageSecondsPerGame = playTime
                 };
                 db.Players.Add(player);
