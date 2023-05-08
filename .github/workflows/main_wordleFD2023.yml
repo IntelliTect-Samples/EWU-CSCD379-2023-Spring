@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: "WordleFD2023"
           slot-name: "Production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_6a3cec51ab6c432889326a02d90d74f3 }}
           package: .
