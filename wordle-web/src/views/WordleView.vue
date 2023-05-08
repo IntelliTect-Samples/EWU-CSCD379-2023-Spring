@@ -45,7 +45,7 @@ import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
-import type { Letter } from '@/scripts/letter'
+import { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
 
@@ -88,10 +88,9 @@ function newGame() {
   Axios.get('word')
     .then((response) => {
       game.restartGame(response.data)
-      console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 500)
     })
     .catch((error) => {
       console.log(error)
@@ -105,15 +104,11 @@ function checkGuess() {
   if (guess.value.length < 5) return
   if (guess.value.length > 5) guess.value = guess.value.slice(0, 5)
   game.submitGuess()
-  if (game.status === WordleGameStatus.Won) {
-    // change the value of a model
-    // alert('You Win!')
-    // game.restartGame()
-  }
   guess.value = ''
 }
 
 function addChar(letter: Letter) {
+  if (game.status !== WordleGameStatus.Active) return
   game.guess.push(letter.char)
   guess.value += letter.char
 }
@@ -125,10 +120,9 @@ function keyPress(event: KeyboardEvent) {
   } else if (event.key === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
-    console.log('Back')
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+    addChar(new Letter(event.key.toLowerCase()))
   }
 }
 </script>
