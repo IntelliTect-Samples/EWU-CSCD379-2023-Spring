@@ -10,10 +10,10 @@ namespace Wordle.Api.Data
         public int GameCount { get; set; }
         public int TotalAttempts { get; set; }
         public double AverageAttempts { get; set; }
-        public int TotalSecoundsPlayed { get; set; }
+        public int TotalSecondsPlayed { get; set; }
         public int AverageSecondsPerGame { get; set; }
 
-        public static void SeedPlayers(Players db)
+        public static void SeedPlayers(PlayersDbContext db)
         {
             if (!db.Players.Any())
             {
@@ -24,12 +24,12 @@ namespace Wordle.Api.Data
                     var player = new Player()
                     {
                         name = parts[0],
-                        GameCount = int.Parse(parts[1])
-                        TotalAttempts = int.Parse(parts[2])
-                        AverageAttempts = double.Parse(parts[3])
-                        TotalSecoundsPlayed = int.Parse(parts[4])
-                        AverageSecoundsPerGame = int.Parse(parts[5])
-                    }
+                        GameCount = int.Parse(parts[1]),
+                        TotalAttempts = int.Parse(parts[2]),
+                        AverageAttempts = double.Parse(parts[3]),
+                        TotalSecondsPlayed = int.Parse(parts[4]),
+                        AverageSecondsPerGame = int.Parse(parts[5])
+                    };
                     db.Players.Add(player);
                 }
                 db.SaveChanges();

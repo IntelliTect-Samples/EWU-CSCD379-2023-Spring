@@ -6,39 +6,40 @@ namespace Wordle.Api.Services
     public class PlayerService
     {
         
-        private readonly Players _db;
+        private readonly PlayersDbContext _db;
 
-        public PlayerService(Players db)
+        public PlayerService(PlayersDbContext db)
         {
             _db = db;
         }
-        
+        /*In Progress
         public async Task<IEnumerable<Player>> GetTopTen()
         {
-            var count ??= 10;
+            var count = 10;
             var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
             totalCount -= count.Value;
-            int index = ;
+            int index = totalCount.playerId;
             var topTen = await _db.Players
                 .Where(player => player.AverageAttempts)
                 .Skip(index)
-                .Take(count.name, count.AverageAttempts, count.GameCount, count.AverageSecondsPerGame)
+                .Take(totalCount.name, totalCount.AverageAttempts, totalCount.GameCount, totalCount.AverageSecondsPerGame)
                 .OrderByDescending(p => p.AverageAttempts)
                 .ToListAsync();
             return topTen;
+
         }
-        
-        public async Task<Player> AddPlayer(string? newName, int? playTime)
+        */
+        public async Task<Player> AddPlayer(string newName, int playTime, int guesses)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
-            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.Name == newName);
+            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.name == newName);
             if(player != null) 
             {
                 player.GameCount++;
-                player.TotalAttempts++;
+                player.TotalAttempts += guesses;
                 player.AverageAttempts = player.TotalAttempts / player.GameCount;
-                player.TotalSecoundsPlayed += playTime;
-                player.AverageSecondsPerGame = player.TotalSecoundsPlayed / player.GameCount;
+                player.TotalSecondsPlayed += playTime;
+                player.AverageSecondsPerGame = player.TotalSecondsPlayed / player.GameCount;
             }
             else
             {
@@ -46,12 +47,12 @@ namespace Wordle.Api.Services
                 {
                     name = newName,
                     GameCount = 1,
-                    TotalAttempts = 1,
+                    TotalAttempts = guesses,
                     AverageAttempts = 1,
-                    TotalSecoundsPlayed = playTime,
+                    TotalSecondsPlayed = playTime,
                     AverageSecondsPerGame = playTime
                 };
-                db.Players.Add(player);
+                _db.Players.Add(player);
             }
             await _db.SaveChangesAsync();
             return player;

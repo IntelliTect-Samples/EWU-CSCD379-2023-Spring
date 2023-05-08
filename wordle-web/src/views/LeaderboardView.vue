@@ -32,8 +32,36 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+//import Axios from 'axios'
+//Axios stuff to be fixed later
 
 const progress = ref([100,80,60,40,20,18,16,14,18,10])
+
+//const overlay = ref(true)
+/*
+var num1;
+var num2;
+var num3;
+var num4;
+var num5;
+var num6;
+var num7;
+var num8;
+var num9;
+var num10;
+
+Axios.get('topTen')
+  .then((response) => {
+    
+    setTimeout(() => {
+      overlay.value = false
+    }, 502)
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+*/
+
 
 </script>
 

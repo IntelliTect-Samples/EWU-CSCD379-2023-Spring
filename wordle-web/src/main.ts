@@ -11,6 +11,9 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+/*
+//Axios stuff to be fixed later
 import Axios from 'axios'
 
 //Check if the app is running on localhost
@@ -19,7 +22,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 } else {
   Axios.defaults.baseURL = 'wordletest2023.azurewebsites.net/'
 }
-
+*/
 const vuetify = createVuetify({
   components,
   directives,
