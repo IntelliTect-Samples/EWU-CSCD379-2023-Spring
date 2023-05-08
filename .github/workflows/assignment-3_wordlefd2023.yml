@@ -29,7 +29,6 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Test
-        working-directory: ./Wordle.Api.Tests
         run: dotnet test --no-restore --verbosity normal
 
       - name: dotnet publish
