@@ -6,15 +6,16 @@
   <div style="padding-top: 3em">
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" :result="result" />
   </div>
-
-  <v-dialog v-model="result"
+  {{ dialog() }}
+  <v-dialog v-model="showDialog"
     ><v-card>
       <v-card-text> Enter Name Below </v-card-text>
-      <v-text-field label="Name" required></v-text-field>
+      <v-text-field v-model="name" label="First name"></v-text-field>
       <v-card-actions>
         <v-btn
           :onclick="
             () => {
+              setName()
               result = false
             }
           "
@@ -40,6 +41,20 @@ import type { Letter } from '@/scripts/letter'
 const guess = ref('')
 const result = ref()
 const game = reactive(new WordleGame())
+const name = ref(localStorage.getItem('name') || '')
+const showDialog = ref<boolean>(false)
+
+const dialog = () => {
+  if (result.value === true && localStorage.getItem('name') === null) {
+    return (showDialog.value = true)
+  } else {
+    return (showDialog.value = false)
+  }
+}
+
+const setName = () => {
+  localStorage.setItem('name', JSON.stringify(name.value))
+}
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -62,7 +77,7 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
+  if (result.value) return
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
