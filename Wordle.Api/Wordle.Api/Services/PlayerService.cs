@@ -1,8 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -15,12 +13,12 @@ namespace Wordle.Api.Services
             _db = db;
         }
 
-        public async Task<Player?> GetPlayerById(int id) // ✅
+        public async Task<Player?> GetPlayerById(int id) 
         {
             return await _db.Players.FindAsync(id);
         }
 
-        public async Task<bool> RemovePlayer(int id) // ✅
+        public async Task<bool> RemovePlayer(int id) 
         {
             var player = await _db.Players.FindAsync(id);
             if (player == null) return false;
@@ -30,44 +28,72 @@ namespace Wordle.Api.Services
             return true;
         }
 
-        public async Task<Player> AddOrUpdatePlayerScore(string name, int score)
+        public async Task<Player> AddOrUpdatePlayerScore(PlayerDto playerDto)
         {
-            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
+            int Id = playerDto.PlayerId;
+            int score = playerDto.Score;
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.PlayerId == Id);
 
             if (player != null)
             {
                 player.Score += score;
                 player.GameCount += 1;
-                player.AverageAttempts = (int)Math.Round((double)player.Score / player.GameCount);
             }
             else
             {
-                player = new Player
-                {
-                    Name = name,
-                    Score = score,
-                    GameCount = 1,
-                    AverageAttempts = score // Since it's the first game
-                };
-                _db.Players.Add(player);
+                throw new ArgumentException("Player not found!");
             }
 
             await _db.SaveChangesAsync();
             return player;
         }
 
-        public async Task<bool> UpdatePlayerName(string currentName, string newName)
+        public async Task<Player> UpdatePlayerName(UpdateNameDto UpdateNameDto)
         {
-            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == currentName);
+
+            int Id = UpdateNameDto.Id;
+            string newName = UpdateNameDto.NewName;
+
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.PlayerId == Id);
+            bool nameTaken = await _db.Players.AnyAsync(p => p.Name == newName);
+
             if (player == null)
             {
-                return false;
+                await CreateNewPlayer(newName);
+                return player;
+            } 
+            else if (nameTaken) 
+            {
+                throw new ArgumentException("New name already taken!, try a different name");
             }
-
-            player.Name = newName;
-            await _db.SaveChangesAsync();
-            return true;
+            else 
+            {
+                player.Name = newName;
+                await _db.SaveChangesAsync();
+                return player;
+            }
         }
 
+        public async Task<Player> CreateNewPlayer(string newName)
+        {
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == newName);
+            if (player == null)
+            {
+                player = new Player
+                {
+                    Name = newName,
+                    Score = 0,
+                    GameCount = 0,
+                    AverageAttempts = 0
+                };
+                _db.Players.Add(player);
+                await _db.SaveChangesAsync();
+                return player;
+            }
+            else
+            {
+                return player;
+            }
+        }
     }
 }

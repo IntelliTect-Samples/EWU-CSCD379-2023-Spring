@@ -27,6 +27,7 @@ namespace Wordle.Api.Controllers
             return Ok(player);
         }
 
+
         [HttpDelete("{id}")] // ✅
         public async Task<ActionResult> RemovePlayer(int id)
         {
@@ -35,23 +36,28 @@ namespace Wordle.Api.Controllers
             return NoContent();
         }
 
+
         [HttpPost("AddOrUpdatePlayerScore")]// ✅
         public async Task<ActionResult<Player>> AddOrUpdatePlayerScore([FromBody] PlayerDto playerDto)
         {
-            var updatedPlayer = await _playerService.AddOrUpdatePlayerScore(playerDto.Name, playerDto.Score);
-            return Ok(updatedPlayer);
+            Player updatedPlayer = await _playerService.AddOrUpdatePlayerScore(playerDto);
+            return updatedPlayer;
         }
 
-        [HttpPost("UpdatePlayerName")]
-        public async Task<IActionResult> UpdatePlayerName([FromBody] UpdateNameDto updateNameDto)
+
+        [HttpPost("CreateNewPlayer")]
+        public async Task<ActionResult<Player>> CreateNewPlayer(string name)
         {
-            bool isUpdated = await _playerService.UpdatePlayerName(updateNameDto.CurrentName, updateNameDto.NewName);
-            if (!isUpdated)
-            {
-                return NotFound($"Player with name '{updateNameDto.CurrentName}' not found.");
-            }
-            return Ok($"Player name successfully updated from '{updateNameDto.CurrentName}' to '{updateNameDto.NewName}'.");
+            Player player = await _playerService.CreateNewPlayer(name);
+            return player;
         }
 
+
+        [HttpPut("UpdatePlayerName")] // ✅
+        public async Task<ActionResult<Player>> UpdatePlayerName([FromBody] UpdateNameDto updateNameDto)
+        {
+            Player updatedPlayer = await _playerService.UpdatePlayerName(updateNameDto);
+            return updatedPlayer;
+        }
     }
 }

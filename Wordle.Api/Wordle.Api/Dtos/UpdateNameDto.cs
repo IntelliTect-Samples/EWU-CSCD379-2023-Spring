@@ -1,4 +1,4 @@
 ﻿namespace Wordle.Api.Dtos
 {
-    public record UpdateNameDto(string CurrentName, string NewName);
+    public record UpdateNameDto( string NewName, int Id);
 }
