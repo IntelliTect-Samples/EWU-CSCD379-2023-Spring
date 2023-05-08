@@ -12,6 +12,7 @@ import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import Axios from 'axios'
+import { Player } from './scripts/playerService'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -19,6 +20,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 } else {
   Axios.defaults.baseURL = 'wordle2023.azurewebsites.net/'
 }
+Player.SetupAsync()
 
 const vuetify = createVuetify({
   components,

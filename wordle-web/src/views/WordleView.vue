@@ -4,7 +4,11 @@
   </v-overlay>
 
   <div class="text-h4 text-center">Wordle Mind Bender</div>
-
+  <div class="d-flex justify-end">
+    <div class="text-h4 text-center">Time Passed: {{ duration }}</div>
+    <ActiveUser />
+  </div>
+  <h1 class="justify">Wordle Mind Bender</h1>
   <GameBoard :game="game" @letterClick="addChar" />
 
   <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
@@ -36,7 +40,7 @@
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
   <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col cols="3">
+    <v-col xs="11" sm="9" md="6" lg="4">
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
@@ -44,6 +48,7 @@
   <v-row class="justify-center mt-10">
     <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
   </v-row>
+  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
   <!-- <h2>{{ guess }}</h2> -->
   <!-- <h3>{{ game.secretWord }}</h3> -->
 </template>
@@ -52,24 +57,47 @@
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import type { Letter } from '@/scripts/letter'
+import type { PlayerResult } from '@/scripts/wordleGame'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
-import WordleSolver from '../components/WordleSolver.vue'
+
 import { WordsService } from '@/scripts/wordsService'
+import { Player } from '@/scripts/playerService'
+import ActiveUser from '@/components/CurrentUser.vue'
+import ScoreDialog from '@/components/ScoreDialog.vue'
+import { watch } from 'vue'
+import { formatTime } from '@/scripts/timer'
+import { computed } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
 
+game.onGameEnd = onGameEnd
+restartGame()
+const time = ref(0)
+const duration = computed(() => formatTime(time.value))
+const showScoreDialog = ref(false)
+const lastGameResult = ref<PlayerResult>()
+watch(showScoreDialog, (value) => {
+  if (!value) {
+    restartGame()
+  }
+})
+let interval: any
 // Start a new game
 newGame()
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
+  interval = setInterval(() => {
+    time.value = Date.now() - game.startTime
+  }, 1000)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
+  clearInterval(interval)
 })
 
 function addWord() {
@@ -120,14 +148,34 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
+  console.log(event.key)
+  if (Player.TypingName.value) {
+    return
+  }
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
     guess.value = guess.value.slice(0, -1)
     game.guess.pop()
+    console.log('Back')
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+async function restartGame() {
+  Axios.get('word')
+    .then((response) => {
+      game.restartGame(response.data)
+      console.log(game.secretWord)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
+function onGameEnd(result: PlayerResult) {
+  console.log('result', result)
+  lastGameResult.value = result
+  showScoreDialog.value = true
 }
 </script>

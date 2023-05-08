@@ -12,43 +12,33 @@
 </template>
 
 <script setup lang="ts">
-import { Letter } from '@/scripts/letter'
 import LetterButton from '@/components/LetterButton.vue'
+import { Letter } from '@/scripts/letter'
 import { computed } from 'vue'
-
 const props = defineProps<{
   guessedLetters: Letter[]
 }>()
-
 const keyboardLetters = computed(() => {
+  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
-
   const keyboardKeys = [
-    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
+    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
+    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
   ]
-
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
     for (let key of keyboardKey) {
-      //console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
-      keyboardRow.push(
-        props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()) ??
-          new Letter(key)
-      )
+      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
     }
     keyboardLetters.push(keyboardRow)
   }
-
   return keyboardLetters
 })
-
-const emit = defineEmits<{
-  (e: 'letterClick', value: Letter): void
+const emits = defineEmits<{
+  (event: 'letterClick', value: Letter): void
 }>()
-
 function letterClick(letter: Letter) {
-  emit('letterClick', letter)
+  emits('letterClick', letter)
 }
 </script>
