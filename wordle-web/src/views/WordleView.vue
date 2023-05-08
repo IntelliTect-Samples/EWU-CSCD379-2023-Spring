@@ -2,6 +2,15 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
+  <v-overlay :model-value="namePrompt" class="align-center justify-center" persistent>
+    <v-sheet width="300" class="mx-auto">
+      <v-form @submit.prevent>
+        <v-text-field v-model="userName" label="Username"></v-text-field>
+        <v-btn type="submit" block class="mt-2" @click="setUsername">Submit</v-btn>
+      </v-form>
+    </v-sheet>
+  </v-overlay>
+  <v-btn @click="changeUsername"> {{ userName }} </v-btn>
 
   <div class="text-h4 text-center">Wordle Mind Bender</div>
 
@@ -11,8 +20,8 @@
 
   <v-row class="justify-center">
     <v-btn
-      @click="checkGuess"
-      @keyup.enter="checkGuess"
+      @click="checkGuess()"
+      @keyup.enter="checkGuess()"
       color="primary"
       size="x-large"
       v-if="game.status == WordleGameStatus.Active"
@@ -59,7 +68,10 @@ import { WordsService } from '@/scripts/wordsService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const namePrompt = ref(false)
 const overlay = ref(true)
+let userName = ref('Guest')
+let attempts = 0
 
 // Start a new game
 newGame()
@@ -70,6 +82,32 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function promptUser() {
+  if (game.status == WordleGameStatus.Won) {
+    namePrompt.value = true
+  }
+}
+
+function changeUsername() {
+  namePrompt.value = true
+}
+
+function setUsername() {
+  namePrompt.value = false
+  Axios.post('Player', {
+    name: userName.value,
+    attempts: attempts,
+    secondsInGame: 0
+  })
+    .then((response) => {
+      namePrompt.value = false
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+}
 
 function addWord() {
   overlay.value = true
@@ -89,6 +127,7 @@ function addWord() {
 
 function newGame() {
   overlay.value = true
+  attempts = 0
   Axios.get('/word')
     .then((response) => {
       game.restartGame(response.data)
@@ -110,6 +149,8 @@ function checkGuess(word?: string) {
     game.guess.set(word)
   }
   game.submitGuess()
+  attempts++
+  promptUser()
   guess.value = ''
 }
 
@@ -119,14 +160,16 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+  if (namePrompt.value === false) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
 }
 </script>
