@@ -11,7 +11,6 @@ export abstract class WordsService {
     // Make axios call to get the word from
     const response = await Axios.get(this.wordUrl)
 
-    console.log(response.data)
     return response.data
   }
 
