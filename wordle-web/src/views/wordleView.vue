@@ -18,6 +18,9 @@
   <v-container id="list">
     <ValidWords @fillGuess="autoComplete" :game="game"></ValidWords>
   </v-container>
+
+  <v-btn @click="testApi">API</v-btn>
+  <NameCardDialog :playerName="game.currentPlayer" @enterChar="setName"></NameCardDialog>
 </template>
 
 <script setup lang="ts">
@@ -27,6 +30,7 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import ValidWords from '../components/ValidWords.vue'
 import type { Letter } from '@/scripts/letter'
+import NameCardDialog from '@/components/NameCardDialog.vue'
 const guess = ref('')
 const game = reactive(new WordleGame())
 console.log(game.secretWord)
@@ -66,5 +70,12 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+
+function testApi() {
+  game.postPlayerToApi('Dan', 4)
+}
+function setName(name: string) {
+  game.setPlayerName(name)
 }
 </script>
