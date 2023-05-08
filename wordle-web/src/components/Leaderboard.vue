@@ -33,7 +33,7 @@ import type { LeaderBoardData } from '@/types/LeaderBoardData'
 
 const leaderboardData = ref<LeaderBoardData[]>()
 
-Axios.get('https://localhost:7053/api/Leaderboard')
+Axios.get('/api/Leaderboard')
   .then((response) => {
     console.log(response.data)
     leaderboardData.value = response.data
