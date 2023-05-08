@@ -1,7 +1,8 @@
 <template>
   <header>
     <div class="wrapper">
-      <nav>
+      <nav style="display: flex; align-items: center; gap: 4px">
+        <img src="./assets/fdLogo.png " style="width: 50px" />
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
         <RouterLink to="/about">About</RouterLink> |
         <RouterLink to="/leaderboard">Leaderboard</RouterLink>
