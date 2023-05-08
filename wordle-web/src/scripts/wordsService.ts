@@ -10,8 +10,6 @@ export abstract class WordsService {
   static async getWordFromApi(): Promise<string> {
     // Make axios call to get the word from
     const response = await Axios.get(this.wordUrl)
-
-    console.log(response.data)
     return response.data
   }
 

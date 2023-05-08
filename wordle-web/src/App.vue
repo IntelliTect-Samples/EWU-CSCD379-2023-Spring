@@ -1,13 +1,15 @@
 <template>
   <header>
     <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink> |
-        <RouterLink to="/leaderboard">Leaderboard</RouterLink>
-      </nav>
-      <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
+      <v-card>
+        <v-tool-bar>
+          <v-btn variant="plain" to="/"> Home </v-btn>
+          <v-btn variant="plain" to="/wordle"> Wordle </v-btn>
+          <v-btn variant="plain" to="/leaderboard"> Leaderboard </v-btn>
+          <v-btn variant="plain" @click="setInverseTheme"> Inverse Theme </v-btn>
+          <v-btn variant="plain" @click="setDarkTheme"> Dark Theme </v-btn>
+        </v-tool-bar>
+      </v-card>
     </div>
   </header>
 
