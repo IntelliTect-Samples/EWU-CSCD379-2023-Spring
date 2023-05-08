@@ -6,12 +6,14 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(options =>
+    builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
                       {
                           policy.WithOrigins("*");
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
                       });
 });
 
@@ -42,7 +44,7 @@ using (var scope = app.Services.CreateScope())
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwagger", false))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -57,3 +59,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
