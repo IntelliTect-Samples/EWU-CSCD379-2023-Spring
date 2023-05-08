@@ -11,7 +11,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230508020728_InitialCreate")]
+    [Migration("20230508082553_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace Wordle.Api.Migrations
 
                     b.Property<double>("AverageAttempts")
                         .HasColumnType("float");
+
+                    b.Property<int>("AverageSeconds")
+                        .HasColumnType("int");
 
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
