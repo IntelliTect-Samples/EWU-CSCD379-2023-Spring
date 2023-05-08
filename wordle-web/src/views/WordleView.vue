@@ -1,5 +1,7 @@
 <template>
-  <v-btn @click="nameDialog = !nameDialog">{{ displayName }}</v-btn>
+  <div class="d-flex justify-end mb-6">
+    <v-btn @click="nameDialog = !nameDialog">{{ displayName }}</v-btn>
+  </div>
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -17,7 +19,7 @@
 
   <template>
     <v-dialog v-model="nameDialog" width="500px" persistent>
-      <v-card height="500px" width="500px" title="Name:">
+      <v-card height="200px" width="500px" title="Name:">
         <v-text-field label="UserName" @input="nameUpdater($event.target.value)"></v-text-field>
         <v-btn @click="nameDialog = false">Confirm Name</v-btn>
       </v-card>
@@ -25,7 +27,7 @@
   </template>
   <template>
     <v-dialog v-model="endScreen" width="500px" persistent>
-      <v-card height="500px" width="500px" title="Score:">
+      <v-card height="200px" width="500px" title="Score:">
         <v-row>
           <v-col> Name: </v-col>
           <v-col> Attempts: </v-col>
