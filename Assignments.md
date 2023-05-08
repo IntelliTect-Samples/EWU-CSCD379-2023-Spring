@@ -83,6 +83,33 @@ gantt
 ```
 
 ---
+# How To Submit (Starting 5/4/23)
+### Option 1: Start with the assignment branch
+- Only make changes relevant to the homework.
+- Do not merge in additional/custom changes that are unrelated to the homework.
+- Create a PR from your asssignment in YOUR repo branch to the assignment branch in the class repo (as you typically would)
+- On the PR against the class repo, be sure to add the following information to the description: 
+  - A link to your deployed website & API page
+- Your git diff should only show changes relevant to the assignment criteria, any changes outside of that will cause you to lose points for messy code 
+
+### Option 2: Make a PR in your own repo
+- Branch from your own main and only make homework changes in that branch
+- If you want to make other changes, make them in main and merge them into your assignment branch before submitting your PR
+- When you are ready to make your initial PR, create a pull request against YOUR main branch in YOUR repo
+- After creating your PR in YOUR repo... Submit a pull request from your assignment branch into the class repo (as you typically would)
+- On the PR against the class repo, be sure to add the following information to the description: 
+  - A message saying you want your PR reviewed in YOUR repo
+  - A link to the PR in YOUR repo 
+  - A link to your deployed website & API page
+- Your git diff in YOUR pr in YOUR repo (not the PR against the class repo) should only show changes relevant to the assignment criteria, any changes outside of that will cause you to lose points for messy code 
+  - We know the repo against the class will be messy, that code will not be reviewed. The PR in your repo is the one that will be reviewed
+- Here is an example! https://github.com/IntelliTect-Samples/EWU-CSCD379-2023-Spring/pull/70
+
+### PR Reviews:
+You will review PRs like normal, the only difference is if you are reviewing a PR that was created in someone elses repo... you will do the review in their repo, and just add a comment on the PR the class repo with a link to your review
+
+
+---
 # Grading Breakdown
 _The below is subject to change._
 ```
