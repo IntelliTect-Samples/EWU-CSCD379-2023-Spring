@@ -6,7 +6,7 @@ using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
     {
