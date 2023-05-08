@@ -17,7 +17,7 @@ import { useDisplay } from 'vuetify'
 
 const display = ref(useDisplay())
 
-export interface Props {
+interface Props {
   letter: Letter
 }
 
