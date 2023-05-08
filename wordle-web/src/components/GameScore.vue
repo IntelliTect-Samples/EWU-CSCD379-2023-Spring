@@ -51,7 +51,6 @@ if (window.location.hostname === 'localhost') {
   Axios.defaults.baseURL = 'http://localhost:7053'
 }
 
-
 watch(
   () => props.gameState,
   (newStatus) => {
@@ -66,12 +65,11 @@ watch(
       dialog.value = true
       clearInterval(timerInterval)
     }
-    Axios
-      .post(Axios.defaults.baseURL + '/Leaderboard', {
-        //Placeholders for now
-        name: 'guest',
-        attempts: 1,
-      })
+    Axios.post(Axios.defaults.baseURL + '/Leaderboard', {
+      //Placeholders for now
+      name: 'guest',
+      attempts: 1
+    })
       .then((response) => {
         console.log(response)
       })
