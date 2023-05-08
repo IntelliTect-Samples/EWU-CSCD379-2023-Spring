@@ -12,6 +12,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("*");
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
                       });
 });
 
@@ -38,6 +40,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     Word.SeedWords(db);
+    Player.SeedPlayers(db);
 }
 
 

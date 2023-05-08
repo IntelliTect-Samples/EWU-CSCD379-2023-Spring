@@ -1,23 +1,21 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Wordle.Api.Data
+namespace Wordle.Api.Data;
+
+public class Player
 {
-    public class Player
-    {
-        [Key]
-        public int PlayerId { get; set; }
-        public required string Name { get; set; }
-        public int GameCount { get; set; }
-        public double AverageAttempts { get; set; }
+    public int PlayerId { get; set; }
+    public required string Name { get; set; }
+    public int GameCount { get; set; }
+    public double AverageAttempts { get; set; }
 
-        [SetsRequiredMembers]
-        public Player(string name, int gameCount, double averageAttempts)
+    public static void SeedPlayers(AppDbContext db)
+    {
+        if (!db.Players.Any())
         {
-            Name = name;
-            GameCount = gameCount;
-            AverageAttempts = averageAttempts;
+            Player player = new() { Name = "User" };
+            db.Players.Add(player);
+            db.SaveChanges();
         }
     }
 }

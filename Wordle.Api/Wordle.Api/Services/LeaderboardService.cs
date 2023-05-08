@@ -45,9 +45,9 @@ namespace Wordle.Api.Services
 
         public void InsertPlayer(string Name, double Attempts)
         {
-            var player = new Player(Name, 1, Attempts);
-            _db.Players.Add(player);
             
+            _db.Players.Add(new Player() { Name=Name, AverageAttempts=Attempts, GameCount=1 });
+
         }
 
         public void UpdatePlayer(Player player, double Attempts)

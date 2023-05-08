@@ -1,19 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 namespace Wordle.Api.Data
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Player>()
-            .Property(f => f.PlayerId)
-            .ValueGeneratedOnAdd();
         }
 
         public DbSet<Word> Words => Set<Word>();
