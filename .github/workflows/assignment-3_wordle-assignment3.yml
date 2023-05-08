@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - Assignment-3
+    paths:
+      - Wordle.Api/**
   workflow_dispatch:
 
 jobs:
@@ -19,13 +21,15 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.x'
+          dotnet-version: "7.x"
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./Wordle.Api
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
@@ -33,12 +37,13 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+          working-directory: ./Wordle.Api
 
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -51,7 +56,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Wordle-Assignment3'
-          slot-name: 'Production'
+          app-name: "Wordle-Assignment3"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1FC55B4CDDE8469799ED3713D476D4E6 }}
           package: .
