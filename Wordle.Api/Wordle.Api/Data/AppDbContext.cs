@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Numerics;
+using Microsoft.EntityFrameworkCore;
 
 namespace Wordle.Api.Data
 {
@@ -6,9 +8,10 @@ namespace Wordle.Api.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
         }
 
         public DbSet<Word> Words => Set<Word>();
+        public DbSet<Player> Players => Set<Player>();
+        public DbSet<GameResult> GameResults => Set<GameResult>();
     }
 }

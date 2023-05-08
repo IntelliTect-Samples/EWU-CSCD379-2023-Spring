@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import type { WeatherData } from '@/types/WeatherData'
 
-const props = defineProps<{
+defineProps<{
   weather: WeatherData
 }>()
 </script>

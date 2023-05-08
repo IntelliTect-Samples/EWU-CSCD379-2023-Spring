@@ -22,23 +22,5 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.GetRandomWord();
         }
-
-        [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int? count)
-        {
-            return await _wordService.GetSeveralWords(count);
-        }
-
-        [HttpPost]
-        public async Task<Word> AddWord(string newWord, bool isCommon)
-        {
-            return await _wordService.AddWord(newWord, isCommon);
-        }
-
-        [HttpPost("AddWordFromBody")]
-        public async Task<Word> AddWordFromBody([FromBody] WordDto word)
-        {
-            return await _wordService.AddWord(word.Text, word.IsCommon);
-        }
     }
 }    

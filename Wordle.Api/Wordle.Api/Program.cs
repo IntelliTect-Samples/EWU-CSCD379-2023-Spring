@@ -6,14 +6,14 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
                       {
                           policy.WithOrigins("*");
-                          policy.AllowAnyMethod();
-                          policy.AllowAnyHeader();
+                          policy.WithMethods("GET", "POST", "DELETE", "PUT");
+                          policy.WithHeaders("Content-Type", "Authorization");
                       });
 });
 
@@ -31,6 +31,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<WordService>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<GameResultService>();
 
 var app = builder.Build();
 
@@ -39,6 +41,7 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     Word.SeedWords(db);
+    Player.SeedPlayers(db);
 }
 
 

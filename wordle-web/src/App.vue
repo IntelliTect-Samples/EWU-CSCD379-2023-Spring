@@ -1,9 +1,10 @@
 <template>
-  <header>
+  <header class="d-flex justify-space-between">
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/about">About</RouterLink> |
+        <RouterLink to="/leaderboard">Leader Board</RouterLink>
       </nav>
       <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
       <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
