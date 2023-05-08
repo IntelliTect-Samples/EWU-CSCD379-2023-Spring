@@ -1,28 +1,12 @@
 <template>
-  <v-btn
-    :color="letter.color"
-    label
-    outlined
-    :height="display.xs ? '30' : display.sm ? '40' : '50'"
-    :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
-  >
-    {{ letter.char.toUpperCase() }}
-  </v-btn>
+  <LetterBase :char="props.letter.char" :color="props.letter.color"></LetterBase>
 </template>
 
 <script setup lang="ts">
 import type { Letter } from '@/scripts/letter'
-import { ref } from 'vue'
-import { useDisplay } from 'vuetify'
-const display = ref(useDisplay())
+import LetterBase from './LetterBase.vue'
 export interface Props {
   letter: Letter
 }
-defineProps<Props>()
+const props = defineProps<Props>()
 </script>
-
-<style scoped>
-.v-btn {
-  font-size: 1.2rem;
-}
-</style>
