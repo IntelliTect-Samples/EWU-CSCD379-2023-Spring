@@ -20,13 +20,6 @@
       </template>
     </v-app-bar>
     <v-main>
-      <!-- <nav>
-        <RouterLink to="/">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
-
-        <v-btn @click="setInverseTheme"> Light Theme </v-btn>
-        <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
-      </nav> -->
       <RouterView />
     </v-main>
   </v-app>
@@ -48,11 +41,11 @@ function switchTheme() {
   if (theme.global.name.value === 'light') {
     setDarkTheme()
   } else {
-    setInverseTheme()
+    setLightTheme()
   }
 }
 
-function setInverseTheme() {
+function setLightTheme() {
   theme.global.name.value = 'light'
 }
 

@@ -8,7 +8,7 @@
           class="mr-1 letter-large"
           v-for="(letter, index) in solver.getLetterUsages().summary().correctLetters"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'grey-darken-3'"
+          :color="letter == 'X' ? 'wrong' : letter !== '?' ? 'correct' : 'unknown'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
@@ -31,7 +31,7 @@
           class="mx-0 letter-small"
           v-for="(letter, index) in item.locations"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'grey-darken-3'"
+          :color="letter == 'X' ? 'wrong' : letter !== '?' ? 'correct' : 'unknown'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
@@ -47,7 +47,7 @@
             v-for="word in solver.availableWords()"
             :key="word"
             class="mr-1"
-            color="grey-darken-3"
+            color="unknown"
             @click="wordClick(word)"
           >
             {{ word }}
@@ -58,7 +58,14 @@
 
     <v-card-actions v-if="game.status === WordleGameStatus.Active">
       Next Guess:
-      <v-btn size="small" class="ml-1" @click="wordClick(solver.bestGuessOfValidWords())">
+      <v-btn
+        size="small"
+        class="ml-1"
+        @click="wordClick(solver.bestGuessOfValidWords())"
+        color="green-darken-2"
+        elevation="4"
+        variant="tonal"
+      >
         {{ solver.bestGuessOfValidWords() }}
       </v-btn>
     </v-card-actions>
