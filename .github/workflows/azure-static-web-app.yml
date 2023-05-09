@@ -1,0 +1,52 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  workflow_dispatch:
+  push:
+    paths: 
+      - wordle-web/**
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build_and_deploy_job:
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - name: Checkout Code 
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install Packages
+        run: npm ci
+        working-directory: ./wordle-web
+      - name: Lint Code
+        working-directory: ./wordle-web
+        run: npm run lint
+      - name: Prettier Check
+        working-directory: ./wordle-web
+        run: npm run format:check
+      - name: Build Vue App 
+        working-directory: ./wordle-web
+        run: npm run build
+      - name: Run Vitest Unit Tests
+        run: npm run test:unit
+        working-directory: ./wordle-web
+     
+      - name: Deploy
+        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          action: "upload"
+          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
+          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+          app_location: "/wordle-web/dist" # App source code path
+          skip_app_build: true
+          output_location: "" # Built app content directory - optional
+          api_location: "" # Api source code path - optional
+          ###### End of Repository/Build Configurations ######
