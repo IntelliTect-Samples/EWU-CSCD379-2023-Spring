@@ -6,12 +6,7 @@ name: Wordle 2023 API CI/CD
 on:
   push:
     branches:
-<<<<<<<< HEAD:.github/workflows/Assignment3_wordle2023.yml
-      - myAssignment-3
-      - Assignment-3
-========
       - main
->>>>>>>> ngraham:.github/workflows/azure-app-service-api.yml
     paths: 
       - Wordle.Api/**
   workflow_dispatch:
