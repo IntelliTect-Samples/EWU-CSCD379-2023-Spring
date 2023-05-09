@@ -2,9 +2,7 @@
   <v-overlay :model-value="overlay" class="align-center justify-center">
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-
-  <h1>Wordle Mind Bender</h1>
-  <h1>{{ timer }}</h1>
+  <h1 style="text-align: center">Timer: {{ timer }}</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -102,9 +100,11 @@ function newGame() {
     })
 
   timer.value = 0
-  setInterval(() => {
+  let startTimer = setInterval(() => {
     if (game.status == WordleGameStatus.Active) {
       timer.value++
+    } else {
+      clearInterval(startTimer)
     }
   }, 1000)
 }
