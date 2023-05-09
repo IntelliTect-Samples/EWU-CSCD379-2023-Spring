@@ -72,7 +72,7 @@ function submitGame() {
   const username = $cookies?.get('username')
   Axios.post('https://wordlemindbender.azurewebsites.net/Player/AddPlayerFromBody', {
     name: username,
-    numberOfAttempts: game.guesses.length,
+    numberOfAttempts: game.guesses.indexOf(game.guess),
     elapsedSeconds: timer.value
   }).catch((error) => {
     console.log(error)
