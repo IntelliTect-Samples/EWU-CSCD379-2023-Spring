@@ -34,7 +34,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("topscores")]
-        public async Task<IEnumerable<GameResultDto>> GetTopScores(int count = 10)
+        public async Task<IEnumerable<GameResultDto>> GetTopScores(int count = 50)
         {
             return await _grs.GetTopScores(count);
         }
