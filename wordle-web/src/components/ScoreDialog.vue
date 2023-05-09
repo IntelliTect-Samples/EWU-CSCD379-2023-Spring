@@ -1,9 +1,7 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>
-      <div class="test-h2">
-        You {{ gameResult?.success ? 'Win' : 'Loose' }}
-      </div>
+      <div class="test-h2">You {{ gameResult?.success ? 'Win' : 'Loose' }}</div>
       <v-card-text class="flex-column align-center">
         <v-row dense>
           <v-col cols="5" class="">Score -</v-col>
