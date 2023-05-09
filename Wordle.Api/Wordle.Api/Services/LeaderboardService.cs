@@ -47,7 +47,7 @@ namespace Wordle.Api.Services
         {
             var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
             player!.GameCount++;
-            player.AverageAttempts = ((player.AverageAttempts * player.GameCount - 1) + attempts) / player.GameCount;
+            player.AverageAttempts = ((player.AverageAttempts * (player.GameCount - 1)) + attempts) / player.GameCount;
             return player;
         }
     }

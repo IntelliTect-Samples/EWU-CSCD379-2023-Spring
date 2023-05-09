@@ -21,6 +21,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
+  attempts = 0
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -38,6 +39,7 @@ export class WordleGame {
     }
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
+    this.attempts = 0
   }
 
   submitGuess() {
@@ -61,5 +63,6 @@ export class WordleGame {
       // The game is over
       this.status = WordleGameStatus.Lost
     }
+    this.attempts++
   }
 }

@@ -66,7 +66,7 @@ watch(
       params: {
         //Placeholders for now
         name: props.username,
-        attempts: props.game?.guesses.indexOf(props.game.guess)
+        attempts: props.game?.attempts
       }
     })
       .then((response) => {
