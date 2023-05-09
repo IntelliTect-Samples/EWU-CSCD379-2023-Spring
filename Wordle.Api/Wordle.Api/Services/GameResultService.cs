@@ -34,7 +34,7 @@ namespace Wordle.Api.Services
             return null;
         }
 
-        public async Task<IEnumerable<GameResultDto>> GetTopScores(int count = 10)
+        public async Task<IEnumerable<GameResultDto>> GetTopScores(int count = 50)
         {
             IEnumerable<GameResult> gameResults = await _db.GameResults
                 .Where(gr => gr.Success)
