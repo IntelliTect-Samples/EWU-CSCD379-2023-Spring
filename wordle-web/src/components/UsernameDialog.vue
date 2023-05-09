@@ -9,7 +9,7 @@
             <v-btn @click="submitName"> Submit </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn @click="closeDialog"> Cancel </v-btn>
+            <v-btn @click="dialog.value = false"> Cancel </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -24,33 +24,42 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import {onMounted, onUnmounted, ref, watch} from 'vue'
 import { eventBus } from '@/scripts/eventBus'
 
 let dialog = ref()
 let username = ref('')
 let submitted = ref(false)
+
+// Define emits for the component.
 const emits = defineEmits<{
   // Emits new name value to parent component.
   (event: 'updateNameValue', value: string): void
 }>()
+// Use the value emitted from 'WordleView.vue' close or open the dialog.
 const updateModelValue = (newValue: unknown) => {
   dialog.value = newValue
 }
 
 onMounted(() => {
+  // Listen for 'updateDialogValue' event from 'WordleView.vue'.
   eventBus.on('updateDialogValue', updateModelValue)
 })
 onUnmounted(() => {
+  // Stop listening for 'updateDialogValue' event from 'WordleView.vue'.
   eventBus.off('updateDialogValue', updateModelValue)
 })
 
+// Watch for changes to the username value and emit the new value to 'WordleView.vue'.
+watch (
+    () => username.value,
+    (newValue) => {
+      emits('updateNameValue', newValue)
+    }
+)
+
 if (!localStorage.getItem('username')) {
   updateModelValue(true)
-}
-
-function closeDialog() {
-  dialog.value = false
 }
 
 function submitName() {
@@ -60,8 +69,7 @@ function submitName() {
     setTimeout(() => {
       submitted.value = false
     }, 1500)
-    closeDialog()
+    dialog.value = false
   }
-  emits('updateNameValue', username.value)
 }
 </script>
