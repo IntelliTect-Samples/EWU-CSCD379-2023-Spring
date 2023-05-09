@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import WordleView from '../views/WordleView.vue'
 
 const router = createRouter({
@@ -7,11 +6,6 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/wordle',
       name: 'wordle',
       component: WordleView
     },
