@@ -60,5 +60,5 @@ jobs:
         with:
           app-name: "Wordle-Assignment3"
           slot-name: "Production"
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1FC55B4CDDE8469799ED3713D476D4E6 }}
           package: .
