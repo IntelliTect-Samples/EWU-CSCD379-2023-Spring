@@ -15,17 +15,17 @@
     <div class="wrapper">
       <v-card class="rounded-0">
         <v-toolbar flat>
-          <v-toolbar-title>Wordle Mind Bender</v-toolbar-title>
+          <v-toolbar-title class="text-h4">Wordle Mind Bender</v-toolbar-title>
           <v-btn-toggle>
-            <v-btn variant="plain" to="/"> Home </v-btn>
-            <v-btn variant="plain" to="/wordle"> Wordle </v-btn>
-            <v-btn variant="plain" to="/leaderboard"> Leaderboard </v-btn>
-            <v-btn variant="plain" @click="setInverseTheme"> Inverse Theme </v-btn>
-            <v-btn variant="plain" @click="setDarkTheme"> Dark Theme </v-btn>
+            <v-btn class="text-h5" variant="plain" to="/"> Home </v-btn>
+            <v-btn class="text-h5" variant="plain" to="/wordle"> Wordle </v-btn>
+            <v-btn class="text-h5" variant="plain" to="/leaderboard"> Leaderboard </v-btn>
+            <v-btn class="text-h5" variant="plain" @click="setInverseTheme"> Inverse Theme </v-btn>
+            <v-btn class="text-h5" variant="plain" @click="setDarkTheme"> Dark Theme </v-btn>
           </v-btn-toggle>
           <v-spacer></v-spacer>
-          <v-btn-toggle>
-            <v-btn class="me-2" variant="plain" @click="promptUsername = true">
+          <v-btn-toggle class="me-2">
+            <v-btn class="text-h5" variant="plain" @click="promptUsername = true">
               {{ username }}
             </v-btn>
           </v-btn-toggle>
