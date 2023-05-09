@@ -14,14 +14,18 @@
 
     <div class="wrapper">
       <v-card class="rounded-0">
-        <v-btn-toggle>
+        <v-toolbar flat>
+          <v-toolbar-title>Wordle Mind Bender</v-toolbar-title>
           <v-btn variant="plain" to="/"> Home </v-btn>
           <v-btn variant="plain" to="/wordle"> Wordle </v-btn>
           <v-btn variant="plain" to="/leaderboard"> Leaderboard </v-btn>
           <v-btn variant="plain" @click="setInverseTheme"> Inverse Theme </v-btn>
           <v-btn variant="plain" @click="setDarkTheme"> Dark Theme </v-btn>
-          <v-btn variant="plain" @click="promptUsername = true"> {{ username }} </v-btn>
-        </v-btn-toggle>
+          <v-spacer></v-spacer>
+          <v-btn-toggle>
+            <v-btn variant="plain" @click="promptUsername = true"> {{ username }} </v-btn>
+          </v-btn-toggle>
+        </v-toolbar>
       </v-card>
     </div>
   </header>

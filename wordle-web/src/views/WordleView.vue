@@ -4,6 +4,7 @@
   </v-overlay>
 
   <h1>Wordle Mind Bender</h1>
+  <h1>{{ game.timer }}</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
