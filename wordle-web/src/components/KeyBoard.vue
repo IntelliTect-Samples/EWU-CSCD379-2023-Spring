@@ -1,9 +1,12 @@
 <template>
-  <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
-    <v-col v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
-    </v-col>
-  </v-row>
+  <div class="keyboard">
+    <br />
+    <v-row class="justify-center key-row" v-for="(key, i) in keyboardLetters" :key="i">
+      <v-col class="key-column" v-for="(letter, j) in key" :key="j">
+        <LetterButton class="letter-button" :letter="letter" @click="letterClick(letter)" />
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -46,3 +49,22 @@ function letterClick(letter: Letter) {
   emits('letterClick', letter)
 }
 </script>
+
+<style scoped>
+.keyboard {
+  padding: 8px;
+}
+
+.key-row {
+  margin-bottom: 8px;
+}
+
+.key-column {
+  padding: 0 4px;
+  flex-grow: 0;
+}
+
+.letter-button {
+  padding: 6px;
+}
+</style>
