@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  <UsernameDialog @updateNameValue="updateNameValue"/>
+  <UsernameDialog @updateNameValue="updateNameValue" />
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
@@ -77,7 +77,7 @@
 </template>
 
 <script setup lang="ts">
-import {WordleGame, WordleGameStatus} from '@/scripts/wordleGame'
+import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
@@ -107,16 +107,16 @@ onUnmounted(() => {
 function newGames() {
   /* Perform axios call to get new word and start game. */
   Axios.get('word')
-      .then((response) => {
-        game.startNewGame(response.data)
-        console.log("Secret word: " + game.secretWord)
-        setTimeout(() => {
-          overlay.value = false
-        }, 502)
-      })
-      .catch((error) => {
-        console.log("Axios error: " + error)
-      })
+    .then((response) => {
+      game.startNewGame(response.data)
+      console.log('Secret word: ' + game.secretWord)
+      setTimeout(() => {
+        overlay.value = false
+      }, 502)
+    })
+    .catch((error) => {
+      console.log('Axios error: ' + error)
+    })
 
   /* Start timer. */
   timer.value = 0
