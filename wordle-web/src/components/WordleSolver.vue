@@ -35,7 +35,9 @@
         >
           {{ letter.toUpperCase() }}
         </v-btn>
-        {{ item.count }} {{ item.isMaxKnown ? '' : 'or more' }}
+        <span class="ml-2 text-caption">
+          {{ item.count }} {{ item.isMaxKnown ? '' : 'or more' }}
+        </span>
       </v-list-item>
     </v-list>
     <v-card-text>
@@ -98,8 +100,9 @@ const solver = reactive<WordleSolver>(new WordleSolver(props.game))
   width: 28px;
 }
 .letter-small {
+  padding-left: 0;
+  padding-right: 0;
   min-width: 20px;
-  width: 20px;
 }
 
 .v-list-item {
