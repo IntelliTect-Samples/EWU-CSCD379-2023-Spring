@@ -51,7 +51,7 @@ export class Word {
     // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
-        letter.char = char
+        letter.char = char.toLowerCase()
         return
       }
     }
