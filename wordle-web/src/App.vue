@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-dialog v-model="promptUsername" persistent>
+    <v-dialog v-model="promptUsername" :persistent="persistentPrompt">
       <v-card>
         <v-card-title>Enter Your Username</v-card-title>
         <v-card-text>
@@ -39,6 +39,7 @@ import type { VueCookies } from 'vue-cookies'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 const $cookies = inject<VueCookies>('$cookies')
 const promptUsername = ref(false)
+const persistentPrompt = ref(false)
 const username = ref('')
 
 // Get the username from the cookies
@@ -46,6 +47,7 @@ username.value = $cookies?.get('username')
 if (!username.value) {
   $cookies?.set('username', 'Guest')
   username.value = $cookies?.get('username')
+  persistentPrompt.value = true
   promptUsername.value = true
 }
 
@@ -63,6 +65,7 @@ function saveUsername() {
   if (username.value) {
     $cookies?.set('username', username.value)
     promptUsername.value = false
+    persistentPrompt.value = false
   }
 }
 </script>
