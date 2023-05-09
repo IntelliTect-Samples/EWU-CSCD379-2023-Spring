@@ -30,7 +30,7 @@ function setCurrentWeather(weather: WeatherData) {
   isDialogOpen.value = true
 }
 
-Axios.get('https://localhost:7053/WeatherForecast')
+Axios.get('/WeatherForecast')
   .then((response) => {
     console.log(response.data)
     weatherData.value = response.data
