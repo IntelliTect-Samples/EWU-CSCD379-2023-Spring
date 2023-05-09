@@ -1,7 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
-import { ref } from 'vue'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -21,7 +20,6 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-  timer = ref(0)
 
   async restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || (await WordsService.getWordFromApi())
@@ -34,13 +32,6 @@ export class WordleGame {
     }
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
-    setInterval(() => {
-      if (this.status == WordleGameStatus.Active) {
-        this.timer.value++
-      } else {
-        this.timer.value = 0
-      }
-    }, 1000)
   }
 
   submitGuess() {

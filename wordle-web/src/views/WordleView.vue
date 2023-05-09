@@ -4,7 +4,7 @@
   </v-overlay>
 
   <h1>Wordle Mind Bender</h1>
-  <h1>{{ game.timer }}</h1>
+  <h1>{{ timer }}</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -53,6 +53,7 @@ import { WordsService } from '@/scripts/wordsService'
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
+let timer = ref(0)
 
 // Start a new game
 newGame()
@@ -99,6 +100,13 @@ function newGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
+
+  timer.value = 0
+  setInterval(() => {
+    if (game.status == WordleGameStatus.Active) {
+      timer.value++
+    }
+  }, 1000)
 }
 
 function checkGuess() {
