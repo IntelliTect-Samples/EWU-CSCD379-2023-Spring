@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
 
-//Comment to test workflow, More comment
+//Comment to test workflow, More comment, more tests
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
