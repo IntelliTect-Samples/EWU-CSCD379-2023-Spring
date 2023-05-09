@@ -1,17 +1,17 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>
-      <div class="d-flex justify-center pa-2 bg-primary text-h6">
+      <div class="test-h2">
         You {{ gameResult?.success ? 'Win' : 'Loose' }}
       </div>
-      <v-card-text class="d-flex flex-column align-center">
+      <v-card-text class="flex-column align-center">
         <v-row dense>
-          <v-col cols="6" class="text-end">Score -</v-col>
-          <v-col cols="6">{{ gameResult?.score }}</v-col>
-          <v-col cols="6" class="text-end">Attempts -</v-col>
-          <v-col cols="6">{{ gameResult?.attempts }}</v-col>
-          <v-col cols="6" class="text-end">Duration -</v-col>
-          <v-col cols="6">{{ duration }}</v-col>
+          <v-col cols="5" class="">Score -</v-col>
+          <v-col cols="5">{{ gameResult?.score }}</v-col>
+          <v-col cols="5" class="">Attempts -</v-col>
+          <v-col cols="5">{{ gameResult?.attempts }}</v-col>
+          <v-col cols="5" class="">Duration -</v-col>
+          <v-col cols="5">{{ duration }}</v-col>
         </v-row>
       </v-card-text>
       <v-card-actions>
