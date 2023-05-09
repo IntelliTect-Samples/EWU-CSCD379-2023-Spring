@@ -1,13 +1,17 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - Wordle2023
+name: Wordle 2023 API CI/CD
 
 on:
   push:
     branches:
+<<<<<<<< HEAD:.github/workflows/Assignment3_wordle2023.yml
       - myAssignment-3
       - Assignment-3
+========
+      - main
+>>>>>>>> ngraham:.github/workflows/azure-app-service-api.yml
     paths: 
       - Wordle.Api/**
   workflow_dispatch:
