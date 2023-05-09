@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Wordle.Api.Migrations.PlayersDb
+namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Players : Migration
+    public partial class PUpdate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,9 +14,9 @@ namespace Wordle.Api.Migrations.PlayersDb
                 name: "Players",
                 columns: table => new
                 {
-                    playerId = table.Column<int>(type: "int", nullable: false)
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameCount = table.Column<int>(type: "int", nullable: false),
                     TotalAttempts = table.Column<int>(type: "int", nullable: false),
                     AverageAttempts = table.Column<double>(type: "float", nullable: false),
@@ -25,7 +25,7 @@ namespace Wordle.Api.Migrations.PlayersDb
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.playerId);
+                    table.PrimaryKey("PK_Players", x => x.PlayerId);
                 });
         }
 

@@ -2,17 +2,20 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wordle.Api.Data;
 
 #nullable disable
 
-namespace Wordle.Api.Migrations.PlayersDb
+namespace Wordle.Api.Migrations
 {
-    [DbContext(typeof(PlayersDbContext))]
-    partial class PlayersDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20230509224012_PUpdate")]
+    partial class PUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,11 +26,11 @@ namespace Wordle.Api.Migrations.PlayersDb
 
             modelBuilder.Entity("Wordle.Api.Data.Player", b =>
                 {
-                    b.Property<int>("playerId")
+                    b.Property<int>("PlayerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("playerId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
 
                     b.Property<double>("AverageAttempts")
                         .HasColumnType("float");
@@ -38,19 +41,42 @@ namespace Wordle.Api.Migrations.PlayersDb
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TotalAttempts")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalSecondsPlayed")
                         .HasColumnType("int");
 
-                    b.Property<string>("name")
+                    b.HasKey("PlayerId");
+
+                    b.ToTable("Players");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.Word", b =>
+                {
+                    b.Property<int>("WordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"));
+
+                    b.Property<bool>("IsCommon")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("playerId");
+                    b.HasKey("WordId");
 
-                    b.ToTable("Players");
+                    b.ToTable("Words");
                 });
 #pragma warning restore 612, 618
         }
