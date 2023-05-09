@@ -3,6 +3,8 @@ name: Azure Static Web Apps CI/CD - vicdotexe
 on:
   workflow_dispatch:
   push:
+    branches:
+      - Assignment-3(off-A3-IntelliTS)
     paths:
     - wordle-web/**
   pull_request:
