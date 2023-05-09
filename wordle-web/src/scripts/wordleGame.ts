@@ -11,9 +11,9 @@ export enum WordleGameStatus {
 
 export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
-    if (!secretWord) secretWord = WordsService.getRandomWord()
+    //if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
-    this.restartGame(secretWord)
+    this.restartGame('defal')
   }
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
