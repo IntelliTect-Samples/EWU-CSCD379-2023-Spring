@@ -8,6 +8,9 @@
         alt="Description of the image"
       />
       <h1>Assignment 3 was challenging. May this picture provide you some relief.</h1>
+      <router-link to="/leaderboard">
+        <v-btn color="primary"> View Leaderboard </v-btn>
+      </router-link>
     </div>
   </main>
 </template>
