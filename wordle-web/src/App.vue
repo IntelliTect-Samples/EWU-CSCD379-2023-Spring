@@ -25,7 +25,9 @@
           </v-btn-toggle>
           <v-spacer></v-spacer>
           <v-btn-toggle>
-            <v-btn class="me-2" variant="plain" @click="promptUsername = true"> {{ username }} </v-btn>
+            <v-btn class="me-2" variant="plain" @click="promptUsername = true">
+              {{ username }}
+            </v-btn>
           </v-btn-toggle>
         </v-toolbar>
       </v-card>
