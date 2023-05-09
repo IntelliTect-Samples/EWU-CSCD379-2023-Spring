@@ -1,10 +1,10 @@
 <template>
   <header>
-    <v-dialog class="col-12 col-xl-3" v-model="promptUsername" :persistent="persistentPrompt">
-      <v-card>
+    <v-dialog v-model="promptUsername" :persistent="isPersistant">
+      <v-card class="mx-auto" min-width="30rem">
         <v-card-title>Enter Your Username</v-card-title>
         <v-card-text>
-          <v-text-field v-model="username" label="Username" />
+          <v-text-field v-model="username" maxlength="20" label="Username" />
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="saveUsername">Save</v-btn>
@@ -43,7 +43,7 @@ import type { VueCookies } from 'vue-cookies'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 const $cookies = inject<VueCookies>('$cookies')
 const promptUsername = ref(false)
-const persistentPrompt = ref(false)
+const isPersistant = ref(false)
 const username = ref('')
 
 // Get the username from the cookies
@@ -51,7 +51,7 @@ username.value = $cookies?.get('username')
 if (!username.value) {
   $cookies?.set('username', 'Guest')
   username.value = $cookies?.get('username')
-  persistentPrompt.value = true
+  isPersistant.value = true
   promptUsername.value = true
 }
 
@@ -66,10 +66,11 @@ function setDarkTheme() {
 }
 
 function saveUsername() {
+  username.value = username.value.trim()
   if (username.value) {
     $cookies?.set('username', username.value)
     promptUsername.value = false
-    persistentPrompt.value = false
+    isPersistant.value = false
   }
 }
 </script>
