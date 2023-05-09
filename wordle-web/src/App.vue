@@ -1,6 +1,6 @@
 <template>
   <header>
-    <v-dialog v-model="promptUsername">
+    <v-dialog v-model="promptUsername" persistent>
       <v-card>
         <v-card-title>Enter Your Username</v-card-title>
         <v-card-text>
