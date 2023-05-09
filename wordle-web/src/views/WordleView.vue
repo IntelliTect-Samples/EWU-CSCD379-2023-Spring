@@ -1,55 +1,59 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center">
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
-  <h1 style="text-align: center">Timer: {{ timer }}</h1>
+  <main class="px-4">
+    <v-overlay :model-value="overlay" class="align-center justify-center">
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
+    <h1 class="text-center">Timer: {{ timer }}</h1>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+    <GameBoard :game="game" @letterClick="addChar" />
 
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-row class="justify-center pa-3">
-    <v-btn variant="plain" disabled>{{ game.secretWord }}</v-btn>
-  </v-row>
+    <v-row class="justify-center pa-3">
+      <v-btn variant="plain" disabled>{{ game.secretWord }}</v-btn>
+    </v-row>
 
-  <v-row class="justify-center">
-    <v-btn
-      @click="checkGuess"
-      @keyup.enter="checkGuess"
-      color="primary"
-      size="x-large"
-      v-if="game.status == WordleGameStatus.Active"
-    >
-      Check
-    </v-btn>
-    <v-btn
-      @click="newGame"
-      @keyup.enter="checkGuess"
-      color="secondary"
-      size="x-large"
-      v-if="game.status !== WordleGameStatus.Active"
-    >
-      New Game
-    </v-btn>
-  </v-row>
+    <v-row class="justify-center">
+      <v-btn
+        @click="checkGuess"
+        @keyup.enter="checkGuess"
+        color="primary"
+        size="x-large"
+        v-if="game.status == WordleGameStatus.Active"
+      >
+        Check
+      </v-btn>
+      <v-btn
+        @click="newGame"
+        @keyup.enter="checkGuess"
+        color="secondary"
+        size="x-large"
+        v-if="game.status !== WordleGameStatus.Active"
+      >
+        New Game
+      </v-btn>
+    </v-row>
 
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
-    Better Luck Next Time
-  </div>
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
+      Better Luck Next Time
+    </div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+  </main>
 </template>
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, inject } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
+import type { VueCookies } from 'vue-cookies'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+const $cookies = inject<VueCookies>('$cookies')
 const overlay = ref(true)
 let timer = ref(0)
 
@@ -63,29 +67,22 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
-// Not being used just yet, possible relocation
-// function addPlayer() {
-//   overlay.value = true
-//   Axios.post('https://wordlemindbender.azurewebsites.net/Player/AddPlayerFromBody', {
-//     name: 'Jacob',
-//     gameCount: 5,
-//     averageAttempts: 5,
-//     averageSecondsPerGame: 600
-//   })
-//     .then((response) => {
-//       setTimeout(() => {
-//         overlay.value = false
-//       }, 502)
-//       console.log(response.data)
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
-// }
+function submitGame() {
+  const username = $cookies?.get('username')
+  console.log(username)
+
+  Axios.post('https://wordlemindbender.azurewebsites.net/Player/AddPlayerFromBody', {
+    name: username,
+    numberOfAttempts: game.guesses.length,
+    elapsedSeconds: timer.value
+  }).catch((error) => {
+    console.log(error)
+  })
+}
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  Axios.get('https://wordlemindbender.azurewebsites.net/Word')
     .then((response) => {
       game.restartGame(response.data)
       setTimeout(() => {
@@ -114,6 +111,9 @@ function checkGuess() {
   if (guess.value.length > 5) guess.value = guess.value.slice(0, 5)
   game.submitGuess()
   guess.value = ''
+  if (game.status !== WordleGameStatus.Active) {
+    submitGame()
+  }
 }
 
 function addChar(letter: Letter) {

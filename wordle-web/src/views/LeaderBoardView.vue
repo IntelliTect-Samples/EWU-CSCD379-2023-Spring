@@ -1,29 +1,31 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
+  <main class="px-4">
+    <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
 
-  <h1>Leaderboard</h1>
-  <v-table striped class="text-no-wrap">
-    <thead>
-      <tr>
-        <th class="text-left">Name</th>
-        <th class="text-left">Games Played</th>
-        <th class="text-left">Average Attempts</th>
-        <th class="text-left">Average Time</th>
-        <th class="w-100"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in leaderboardData" :key="item.playerId">
-        <td>{{ item.name }}</td>
-        <td>{{ item.gameCount }}</td>
-        <td>{{ item.averageAttempts }}</td>
-        <td>{{ item.averageSecondsPerGame }}</td>
-        <td class="w-100"></td>
-      </tr>
-    </tbody>
-  </v-table>
+    <h1>Leaderboard</h1>
+    <v-table striped class="text-no-wrap rounded">
+      <thead>
+        <tr>
+          <th class="text-left">Name</th>
+          <th class="text-left">Games Played</th>
+          <th class="text-left">Average Attempts</th>
+          <th class="text-left">Average Time</th>
+          <th class="w-100"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in leaderboardData" :key="item.playerId">
+          <td>{{ item.name }}</td>
+          <td>{{ item.gameCount }}</td>
+          <td>{{ item.averageAttempts.toFixed(3) }}</td>
+          <td>{{ item.averageSecondsPerGame.toFixed(3) }}</td>
+          <td class="w-100"></td>
+        </tr>
+      </tbody>
+    </v-table>
+  </main>
 </template>
 
 <script setup lang="ts">
