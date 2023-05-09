@@ -8,7 +8,7 @@
           <RouterLink to="/leaderboard">Leader Board</RouterLink>
         </nav>
       </div>
-      <div class="player-name" @click="showDialog = true">{{ playerName }}</div>
+      <div class="player-name" @click="dialogVisible = true">{{ playerName }}</div>
     </div>
   </header>
   <div class="theme-buttons">
@@ -43,8 +43,6 @@ import { ref } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()
-const showDialog = ref(false)
-const inputName = ref('')
 const playerName = ref('Guest')
 const dialogVisible = ref(true)
 
@@ -56,13 +54,8 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 
-function setPlayerName() {
-  playerName.value = inputName.value || 'Guest'
-  showDialog.value = false
-}
-
 if (!playerName.value) {
-  showDialog.value = true
+  dialogVisible.value = true
 }
 </script>
 
