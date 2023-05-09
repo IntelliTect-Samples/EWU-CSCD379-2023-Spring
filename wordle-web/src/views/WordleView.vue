@@ -12,9 +12,6 @@
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
-
-  <h2>{{ guess }}</h2>
-  <h3>{{ game.secretWord }}</h3>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +33,6 @@ let keyInput: boolean = true
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
   await game.restartGame()
-  console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
