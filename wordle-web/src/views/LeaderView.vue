@@ -15,7 +15,7 @@ import type { LeaderData } from '@/types/LeaderData'
 
 const leaderData = ref<LeaderData[]>()
 
-Axios.get('leaderboard/GetTopTenScores')
+Axios.get('/Leaderboard/GetTopTenScores')
   .then((response) => {
     console.log(response.data)
     leaderData.value = response.data
