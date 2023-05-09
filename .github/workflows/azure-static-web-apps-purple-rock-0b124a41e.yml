@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD - vicdotexe
+name: Azure Static Web Apps CI/CD - Wordle2023Dillon
 
 on:
   workflow_dispatch:
