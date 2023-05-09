@@ -6,9 +6,9 @@ namespace Wordle.Api.Services
     public class PlayerService
     {
         
-        private readonly PlayersDbContext _db;
+        private readonly AppDbContext _db;
 
-        public PlayerService(PlayersDbContext db)
+        public PlayerService(AppDbContext db)
         {
             _db = db;
         }
@@ -18,11 +18,11 @@ namespace Wordle.Api.Services
             var count = 10;
             var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
             totalCount -= count.Value;
-            int index = totalCount.playerId;
+            int index = totalCount.PlayerId;
             var topTen = await _db.Players
                 .Where(player => player.AverageAttempts)
                 .Skip(index)
-                .Take(totalCount.name, totalCount.AverageAttempts, totalCount.GameCount, totalCount.AverageSecondsPerGame)
+                .Take(totalCount.Name, totalCount.AverageAttempts, totalCount.GameCount, totalCount.AverageSecondsPerGame)
                 .OrderByDescending(p => p.AverageAttempts)
                 .ToListAsync();
             return topTen;
@@ -32,7 +32,7 @@ namespace Wordle.Api.Services
         public async Task<Player> AddPlayer(string newName, int playTime, int guesses)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
-            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.name == newName);
+            var player = await _db.Players.FirstOrDefaultAsync(p =>  p.Name == newName);
             if(player != null) 
             {
                 player.GameCount++;
@@ -45,7 +45,7 @@ namespace Wordle.Api.Services
             {
                 player = new()
                 {
-                    name = newName,
+                    Name = newName,
                     GameCount = 1,
                     TotalAttempts = guesses,
                     AverageAttempts = 1,
