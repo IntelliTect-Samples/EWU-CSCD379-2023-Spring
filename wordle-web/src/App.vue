@@ -13,8 +13,7 @@
     </v-dialog>
 
     <v-toolbar :elevation="7">
-      <v-toolbar-title class="text-h5"> Wordle Mind Bender </v-toolbar-title>
-      <v-btn-toggle class="justify-center">
+      <v-btn-toggle class="ms-2">
         <v-btn class="text-h5" variant="plain" to="/"> Home </v-btn>
         <v-btn class="text-h5" variant="plain" to="/wordle"> Wordle </v-btn>
         <v-btn class="text-h5" variant="plain" to="/leaderboard"> Leaderboard </v-btn>
