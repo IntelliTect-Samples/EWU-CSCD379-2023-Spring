@@ -1,7 +1,7 @@
 <template>
   <h1>LeaderBoard</h1>
   <div>
-    <v-carousel >
+    <v-carousel>
       <v-carousel-item width="700px">
         <v-card class="text-center">
           <v-card-title class="display-1"> LeaderBoard </v-card-title>
@@ -29,7 +29,7 @@ let username = ref(localStorage.getItem('username') || 'Guest')
 let players = new Array<string>()
 
 Axios.get('leaderboard/GetTopTenScores')
-  .then(response => {
+  .then((response) => {
     players[0] = response.data[0]
     players[1] = response.data[1]
     players[2] = response.data[2]

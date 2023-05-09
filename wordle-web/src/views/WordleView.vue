@@ -72,7 +72,6 @@
   </div>
 
   <UsernameDialog />
-  
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
