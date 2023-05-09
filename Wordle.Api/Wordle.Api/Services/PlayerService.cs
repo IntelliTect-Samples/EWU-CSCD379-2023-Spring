@@ -19,7 +19,7 @@ namespace Wordle.Api.Services
                 .ToListAsync();
             return await players;
         }
-        public async Task<Player> AddPlayer(string? name, int gameCount, double averageAttempts, int averageSecondsPerGame)
+        public async Task<Player> AddPlayer(string? name, double numberOfAttempts, int elapsedSeconds)
         {
 
             if (name is null)
@@ -30,25 +30,37 @@ namespace Wordle.Api.Services
             var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
             if (player != null)
             {
-                player.GameCount = gameCount;
-                player.AverageAttempts = averageAttempts;
-                player.AverageSecondsPerGame = averageSecondsPerGame;
-                player.WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame);
+                player.GameCount++;
+                player.AverageAttempts = CalculateAverageAttempts(player.GameCount, player.AverageAttempts, numberOfAttempts);
+                player.AverageSecondsPerGame = CalculateAverageSecondsPerGame(player.GameCount, player.AverageSecondsPerGame, elapsedSeconds);
+                player.WeightedScore = CalculateWeightedScore(player.GameCount, player.AverageAttempts, player.AverageSecondsPerGame);
             }
             else
             {
                 player = new Player()
                 {
                     Name = name,
-                    GameCount = gameCount,
-                    AverageAttempts = averageAttempts,
-                    AverageSecondsPerGame = averageSecondsPerGame,
-                    WeightedScore = CalculateWeightedScore(gameCount, averageAttempts, averageSecondsPerGame)
+                    GameCount = 1,
+                    AverageAttempts = numberOfAttempts,
+                    AverageSecondsPerGame = elapsedSeconds,
+                    WeightedScore = CalculateWeightedScore(1, numberOfAttempts, elapsedSeconds)
                 };
                 _db.Players.Add(player);
             }
             await _db.SaveChangesAsync();
             return player;
+        }
+
+        private double CalculateAverageAttempts(int gameCount, double oldAverage, double currentAttempts)
+        {
+            double totalAttempts = (oldAverage * (gameCount - 1)) + currentAttempts;
+            return totalAttempts / (gameCount);
+        }
+
+        private int CalculateAverageSecondsPerGame(int gameCount, int oldAverage, int currentAttempts)
+        {
+            double totalAttempts = (oldAverage * (gameCount - 1)) + currentAttempts;
+            return (int)(totalAttempts / gameCount);
         }
 
         private double CalculateWeightedScore(int gameCount, double averageAttempts, int averageSecondsPerGame)
