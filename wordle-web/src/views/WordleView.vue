@@ -123,7 +123,7 @@ Axios.get('word')
   })
 
 function checkGuess() {
-  localStorage.name = playerName.value;
+  localStorage.name = playerName.value
   if (game.submitGuess(count.value)) {
     clearInterval(timerInterval)
   }

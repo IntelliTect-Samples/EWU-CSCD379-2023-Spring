@@ -20,7 +20,7 @@
           <td>{{ item.name }}</td>
           <td>{{ item.gamesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
-          <td>{{item.avgSeconds}}</td>
+          <td>{{ item.avgSeconds }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -51,7 +51,6 @@ Axios.get('player/GetTopTenPlayers')
         gamesPlayed: `${player.GameCount}`,
         avgAttempts: `${player.AverageAttempts}`,
         avgSeconds: `${player.AverageSecondsPerGame}`
-
       })
 
       overlay.value = false
