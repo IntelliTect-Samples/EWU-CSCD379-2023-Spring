@@ -11,8 +11,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230506222757_PlayerAndGameResult")]
-    partial class PlayerAndGameResult
+    [Migration("20230507071141_Score")]
+    partial class Score
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,9 @@ namespace Wordle.Api.Migrations
 
                 b.Property<int>("PlayerId")
                     .HasColumnType("int");
+
+                b.Property<double>("Score")
+                    .HasColumnType("float");
 
                 b.Property<bool>("Success")
                     .HasColumnType("bit");

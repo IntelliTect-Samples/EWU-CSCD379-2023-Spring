@@ -15,7 +15,7 @@ public class Player
     {
         if (!db.Players.Any())
         {
-            Player player = new() { Name = "Victor" };
+            Player player = new() { Name = "Dillon" };
             db.Players.Add(player);
             db.SaveChanges();
         }
