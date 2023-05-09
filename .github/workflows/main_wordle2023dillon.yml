@@ -6,14 +6,14 @@ name: Build and deploy ASP.Net Core app to Azure Web App - Wordle2023Dillon
 on:
   push:
     branches:
-      - Assignment-3(off-A3-IntelliTS)
-    paths:
+      - main
+    paths: 
       - Wordle.Api/**
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -37,9 +37,10 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+          working-directory: ./Wordle.Api
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: build
     environment:
       name: 'Production'
