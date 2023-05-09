@@ -40,12 +40,6 @@
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
-
-  <v-row class="justify-center mt-10">
-    <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
-  </v-row>
-  <!-- <h2>{{ guess }}</h2> -->
-  <!-- <h3>{{ game.secretWord }}</h3> -->
 </template>
 
 <script setup lang="ts">
@@ -78,22 +72,6 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function addWord() {
-  overlay.value = true
-  Axios.post('word/AddWordFromBody', {
-    text: 'tests',
-    isCommon: true,
-    isUsed: false
-  })
-    .then((response) => {
-      overlay.value = false
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
 
 function newGame() {
   overlay.value = true
