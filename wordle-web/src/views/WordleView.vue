@@ -48,7 +48,7 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <v-card>once game is won or lost, go to leader board to see time {{ count }}</v-card>
+  <v-card> Time:{{ count }}</v-card>
 </template>
 
 <script setup lang="ts">
@@ -123,8 +123,8 @@ Axios.get('word')
   })
 
 function checkGuess() {
-  localStorage.name
-  if (game.submitGuess()) {
+  localStorage.name = playerName.value;
+  if (game.submitGuess(count.value)) {
     clearInterval(timerInterval)
   }
 

@@ -49,7 +49,7 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
-  submitGuess(): boolean {
+  submitGuess(time : any): boolean {
     let gameOver: boolean = false
     // put logic to win here.
     this.guess.check(this.secretWord)
@@ -72,10 +72,11 @@ export class WordleGame {
       localStorage.endTime = Date.now()
 
       localStorage.total_time = localStorage.endTime - localStorage.startTime
-
-      Axios.post('player/InsertScore', {
+      console.log("Inserting Score");
+      Axios.post('Player/InsertScore', {
         Name: localStorage.name,
-        NumAttempts: index + 1
+        NumAttempts: index + 1,
+        AverageSecondsPerGame: time
       })
         .then((response) => {
           console.log(response.data)

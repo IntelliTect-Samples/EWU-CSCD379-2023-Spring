@@ -5,7 +5,6 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-  <v-card> Time to complete last game = {{ totalTime }} seconds </v-card>
   <v-card v-if="!overlay && players.length">
     <v-table>
       <thead>
@@ -13,6 +12,7 @@
           <th class="text-left">Player Name</th>
           <th class="text-left">Games Played</th>
           <th class="text-left">Average Attempts</th>
+          <th class="text-left">Average Seconds</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +20,7 @@
           <td>{{ item.name }}</td>
           <td>{{ item.gamesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
+          <td>{{item.avgSeconds}}</td>
         </tr>
       </tbody>
     </v-table>
@@ -48,7 +49,9 @@ Axios.get('player/GetTopTenPlayers')
       players.push({
         name: `${player.Name}`,
         gamesPlayed: `${player.GameCount}`,
-        avgAttempts: `${player.AverageAttempts}`
+        avgAttempts: `${player.AverageAttempts}`,
+        avgSeconds: `${player.AverageSecondsPerGame}`
+
       })
 
       overlay.value = false

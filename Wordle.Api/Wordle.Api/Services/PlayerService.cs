@@ -23,7 +23,7 @@ namespace Wordle.Api.Services
 
 
 
-        public async Task<Player> AddPlayer(string? newPlayerName, int attempts)
+        public async Task<Player> AddPlayer(string? newPlayerName, int attempts, double secondsToComplete)
         {
             if (newPlayerName is null)
             {
@@ -33,7 +33,9 @@ namespace Wordle.Api.Services
             if (player != null)
             {
                 player.GameCount = 1;
-                player.AverageAttempts = attempts; 
+                player.AverageAttempts = attempts;
+                player.AverageSecondsPerGame = secondsToComplete;
+
             }
             else
             {
@@ -41,7 +43,8 @@ namespace Wordle.Api.Services
                 {
                     Name = newPlayerName,
                     GameCount = 1,
-                    AverageAttempts = attempts
+                    AverageAttempts = attempts,
+                    AverageSecondsPerGame = secondsToComplete
                 };
                 _db.Players.Add(player);
             }
@@ -50,7 +53,7 @@ namespace Wordle.Api.Services
         }
 
 
-        public async Task<Player> InsertScore(string? newPlayerName, int numAttempts)
+        public async Task<Player> InsertScore(string? newPlayerName, int numAttempts, double secondsToComplete)
         {
             if (newPlayerName is null)
             {
@@ -59,7 +62,7 @@ namespace Wordle.Api.Services
             // First we check if the player is in the game
             bool playerExists = _db.Players.AnyAsync((player) => player.Name.Equals(newPlayerName)).Result;
             if (!playerExists) {
-                return await AddPlayer(newPlayerName, numAttempts);
+                return await AddPlayer(newPlayerName, numAttempts, secondsToComplete);
 
             }
       
@@ -68,14 +71,22 @@ namespace Wordle.Api.Services
 
             // Access its avgAttemtps and numGames
             double avgAttempts = player.AverageAttempts;
+            double avgSeconds = player.AverageSecondsPerGame; 
             int numGames = player.GameCount;
+            
+           
 
             // Update its avgAttempts and numGames
             double totalScore = avgAttempts * numGames;
+            double totalSeconds = avgSeconds * numGames;
+            totalSeconds += secondsToComplete; 
             totalScore += numAttempts;
             numGames++;
 
+
+
             player.AverageAttempts = totalScore / numGames;
+            player.AverageSecondsPerGame = totalSeconds / numGames;
             player.GameCount = numGames;
             await _db.SaveChangesAsync();
 

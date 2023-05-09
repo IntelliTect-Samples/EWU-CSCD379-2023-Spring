@@ -17,7 +17,8 @@
                 {
                     Name = "bob",
                     GameCount = 5,
-                    AverageAttempts = 2
+                    AverageAttempts = 2,
+                    AverageSecondsPerGame = 120
 
                 };
                 db.Players.Add(player1);
@@ -25,7 +26,8 @@
                 {
                     Name = "phil",
                     GameCount = 7,
-                    AverageAttempts = 4
+                    AverageAttempts = 4,
+                    AverageSecondsPerGame = 75
 
                 };
                 db.Players.Add(player2);
@@ -34,7 +36,8 @@
                 {
                     Name = "joe",
                     GameCount = 13,
-                    AverageAttempts = 6
+                    AverageAttempts = 6,
+                    AverageSecondsPerGame = 90
                 };
                 db.Players.Add(player3);
 
@@ -42,7 +45,8 @@
                 {
                     Name = "kevin",
                     GameCount = 9,
-                    AverageAttempts = 3
+                    AverageAttempts = 3,
+                    AverageSecondsPerGame = 600
                 };
                 db.Players.Add(player4);
 
@@ -50,7 +54,8 @@
                 {
                     Name = "samuel",
                     GameCount = 4,
-                    AverageAttempts = 2
+                    AverageAttempts = 2,
+                    AverageSecondsPerGame = 555.4
                 };
                 db.Players.Add(player5);
 
@@ -58,7 +63,8 @@
                 {
                     Name = "karen",
                     GameCount = 3212,
-                    AverageAttempts = 1
+                    AverageAttempts = 1,
+                    AverageSecondsPerGame = 69.42
                 };
                 db.Players.Add(player6);
 
@@ -66,7 +72,8 @@
                 {
                     Name = "elise",
                     GameCount = 8,
-                    AverageAttempts = 4.4
+                    AverageAttempts = 4.4,
+                    AverageSecondsPerGame = 33
                 };
                 db.Players.Add(player7);
 
@@ -74,7 +81,8 @@
                 {
                     Name = "Mathew Hageland",
                     GameCount = 1000,
-                    AverageAttempts = 6
+                    AverageAttempts = 6,
+                    AverageSecondsPerGame = 500000
                 };
                 db.Players.Add(player8);
 
@@ -84,7 +92,8 @@
                 {
                     Name = "Grant Erickson",
                     GameCount = 500,
-                    AverageAttempts = 1
+                    AverageAttempts = 1,
+                    AverageSecondsPerGame = 2
                 };
                 db.Players.Add(player9);
 
@@ -92,7 +101,8 @@
                 {
                     Name = "Meg",
                     GameCount = 800,
-                    AverageAttempts = 1
+                    AverageAttempts = 1,
+                    AverageSecondsPerGame = 0.5
                 };
                 db.Players.Add(player10);
 
