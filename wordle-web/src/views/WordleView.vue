@@ -1,15 +1,16 @@
 <template>
-  <main class="px-4">
-    <v-overlay :model-value="overlay" class="align-center justify-center">
+  <main class="px-4 mt-4">
+    <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
       <v-progress-circular color="primary" indeterminate size="64" />
     </v-overlay>
+
     <h1 class="text-center">Timer: {{ timer }}</h1>
 
     <GameBoard :game="game" @letterClick="addChar" />
 
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-    <v-row class="justify-center pa-3">
+    <v-row class="justify-center pa-3 mt-0">
       <v-btn variant="plain" disabled>{{ game.secretWord }}</v-btn>
     </v-row>
 
@@ -69,8 +70,6 @@ onUnmounted(() => {
 
 function submitGame() {
   const username = $cookies?.get('username')
-  console.log(username)
-
   Axios.post('https://wordlemindbender.azurewebsites.net/Player/AddPlayerFromBody', {
     name: username,
     numberOfAttempts: game.guesses.length,
@@ -87,7 +86,7 @@ function newGame() {
       game.restartGame(response.data)
       setTimeout(() => {
         overlay.value = false
-      }, 500)
+      }, 200)
     })
     .catch((error) => {
       console.log(error)
