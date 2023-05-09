@@ -12,7 +12,7 @@ The purpose of this assignment is to solidify your learning of:
 
 - Make all pages responsive ❌✅
   - 1080p desktop ❌✅
-  - iPad Air
+  - iPad Air ❌✅
   - Samsung Galaxy S20 Ultra Super Mega Excellent ❌✅
   - IPhone SE ❌✅
 - Create a improved landing page and site theme (Background, make it look attractive to play) ❌✅

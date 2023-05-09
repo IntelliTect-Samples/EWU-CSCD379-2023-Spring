@@ -6,7 +6,6 @@
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
     :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
     :elevation="letter.status == LetterStatus.NotGuessed ? 0 : 4"
-    :style="display.xs ? '  min-width: 20px; padding: 0;' : ''"
   >
     {{ letter.char.toUpperCase() }}
   </v-btn>

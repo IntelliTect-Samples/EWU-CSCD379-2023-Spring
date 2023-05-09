@@ -1,16 +1,33 @@
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-      <v-btn @click="setInverseTheme"> Inverse Theme </v-btn>
-      <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
-    </div>
-  </header>
+  <v-app>
+    <v-app-bar :elevation="3">
+      <template v-slot>
+        <v-app-bar-title>
+          <RouterLink to="/">
+            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
+            Wordle
+          </RouterLink>
+        </v-app-bar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
-  <RouterView />
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item>
+              <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
+    </v-app-bar>
+    <v-main>
+      <RouterView />
+    </v-main>
+  </v-app>
 </template>
 
 <script setup lang="ts">
@@ -25,8 +42,16 @@ provide('display', display)
 
 const theme = useTheme()
 
-function setInverseTheme() {
-  theme.global.name.value = 'inverse'
+function switchTheme() {
+  if (theme.global.name.value === 'light') {
+    setDarkTheme()
+  } else {
+    setLightTheme()
+  }
+}
+
+function setLightTheme() {
+  theme.global.name.value = 'light'
 }
 
 function setDarkTheme() {

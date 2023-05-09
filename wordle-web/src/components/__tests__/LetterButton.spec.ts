@@ -17,7 +17,7 @@ describe('LetterButton', () => {
       }
     })
     expect(wrapper.text()).toContain('A')
-    expect(wrapper.attributes('color')).toBe('darkgrey')
+    expect(wrapper.attributes('color')).toBe('unknown')
   })
 
   it('renders properly with passed params', () => {

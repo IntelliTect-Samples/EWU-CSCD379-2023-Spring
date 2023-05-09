@@ -14,7 +14,7 @@
       @click="checkGuess"
       @keyup.enter="checkGuess"
       color="primary"
-      size="x-large"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status == WordleGameStatus.Active"
     >
       Check
@@ -23,7 +23,7 @@
       @click="newGame"
       @keyup.enter="checkGuess"
       color="secondary"
-      size="x-large"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status !== WordleGameStatus.Active"
     >
       New Game
@@ -40,27 +40,28 @@
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
-
-  <v-row class="justify-center mt-10">
-    <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
-  </v-row>
-  <!-- <h2>{{ guess }}</h2> -->
-  <!-- <h3>{{ game.secretWord }}</h3> -->
 </template>
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, inject } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
+import { useDisplay } from 'vuetify'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
+
+// Add this to make testing work because useDisplay() throws an error when testing
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 
 // Start a new game
 newGame()
@@ -71,22 +72,6 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function addWord() {
-  overlay.value = true
-  Axios.post('word/AddWordFromBody', {
-    text: 'tests',
-    isCommon: true,
-    isUsed: false
-  })
-    .then((response) => {
-      overlay.value = false
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
 
 function newGame() {
   overlay.value = true

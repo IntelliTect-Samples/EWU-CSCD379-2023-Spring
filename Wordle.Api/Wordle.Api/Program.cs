@@ -54,6 +54,9 @@ app.UseHttpsRedirection();
 
 app.UseCors(MyAllowAllOrigins);
 
+// Add Google site verification.
+app.MapGet("/google5b827f426094db3f.html", () => "google-site-verification: google5b827f426094db3f.html");
+
 app.UseAuthorization();
 
 app.MapControllers();
