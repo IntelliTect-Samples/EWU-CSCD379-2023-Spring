@@ -22,6 +22,12 @@ public class LeaderboardController : ControllerBase
     {
         return await _leaderboardService.GetTopTenScores();
     }
+    
+    [HttpGet("GetPlayerStats")]
+    public async Task<Player> GetPlayerStats(string playerName)
+    {
+        return await _leaderboardService.GetPlayerStats(playerName);
+    }
 
     [HttpPost("AddNewPlayer")]
     public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts)
