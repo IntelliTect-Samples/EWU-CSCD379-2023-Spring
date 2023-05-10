@@ -1,7 +1,7 @@
 <template>
   <h1>Wordle Redux</h1> 
   <v-col class="text-right">
-  <h1>Time: {{ min }} : {{ timer }}</h1>
+  <h1>Time: {{ min }} : {{ sec }}</h1>
   <setUsername/> 
   </v-col>
 
@@ -43,6 +43,7 @@ const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
 const timer = ref(0)
+const sec = ref(0)
 const min = ref(0)
 startGame()
 //const overlay = ref(true)
@@ -61,11 +62,13 @@ onUnmounted(() => {
 function startGame() {
   //should restart game here
   timer.value = 0
+  sec.value = 0
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
     } else {
       timer.value += 1
+      sec.value += 1
     }
   }, 1000)
 }
@@ -110,10 +113,10 @@ watch(
   { flush: 'post' }
 )
 watch(
-  timer, 
+  sec, 
   (newVal) => {
-    if (timer.value > 59) {
-      timer.value = 0
+    if (sec.value > 59) {
+      sec.value = 0
       min.value += 1
     }
   }
