@@ -55,3 +55,5 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C6B6B20176624E78B427D412FBF4BF30 }}
           package: .
+          app_location: "/wordle-web"
+          api_location: "/Wordle.Api"
