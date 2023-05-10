@@ -12,6 +12,11 @@ public class Player
     public int GameCount { get; set; }
     public double AverageAttempts { get; set; }
 
+    public Player()
+    { 
+        Name = string.Empty;
+    }
+
     public Player(string name, int attempts)
     {
         Name = name;
