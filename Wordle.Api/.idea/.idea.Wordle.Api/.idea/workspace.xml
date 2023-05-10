@@ -8,7 +8,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="" />
+    <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/BoardDisplay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/BoardDisplay.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +38,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Assignment-3",
+    "git-widget-placeholder": "azure-assignment-deployment",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -95,7 +100,7 @@
       <workItem from="1683391596795" duration="3225000" />
       <workItem from="1683435630067" duration="1735000" />
       <workItem from="1683609360951" duration="893000" />
-      <workItem from="1683664624696" duration="679000" />
+      <workItem from="1683664624696" duration="1488000" />
     </task>
     <servers />
   </component>
