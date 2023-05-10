@@ -1,6 +1,7 @@
 <template>
-  <h1>Wordle Redux</h1>
-  <setUsername /> 
+  <h1>Wordle Redux</h1> 
+  <TimerItem/>
+  <setUsername/> 
 
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">Better Luck Next Time</div>
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
@@ -33,6 +34,7 @@ import guess_button from '@/assets/guess_button_sound.mp3'
 //import Axios from 'axios'
 //Axios stuff to be fixed later
 import setUsername from '@/components/SetUsername.vue'
+import TimerItem from '@/components/TimerItem.vue'
 
 
 const guess = ref('')
@@ -51,6 +53,9 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+
+
 /*
 function addWord() {
   overlay.value = true
@@ -119,6 +124,8 @@ function UpdateSelect(g: string) {
 }
 
 function addChar(letter: Letter) {
+  
+
   if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
     return
   }
