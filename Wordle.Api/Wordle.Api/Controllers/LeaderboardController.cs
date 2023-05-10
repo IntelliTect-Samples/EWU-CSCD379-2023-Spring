@@ -24,8 +24,8 @@ public class LeaderboardController : ControllerBase
     }
 
     [HttpPost("AddNewPlayer")]
-    public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts)
+    public async Task<Player> AddNewPlayer([FromBody] PlayerDto player)
     {
-        return await _leaderboardService.AddNewPlayer(playerName, timeInSeconds, attempts);
+        return await _leaderboardService.AddNewPlayer(player.Name, player.TimeInSeconds, player.Attempts);
     }
 }

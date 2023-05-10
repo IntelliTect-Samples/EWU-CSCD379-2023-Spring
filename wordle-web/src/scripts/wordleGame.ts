@@ -11,6 +11,7 @@ export enum WordleGameStatus {
 export class WordleGame {
   guessedLetters: Letter[] = []
   guesses: Word[] = new Array<Word>()
+  guessAttempts: number = 0
   secretWord: string = ''
   status: WordleGameStatus = WordleGameStatus.Active
   guess!: Word
@@ -42,7 +43,7 @@ export class WordleGame {
 
   submitGuess() {
     const correctlyGuessed: boolean = this.guess.checkWord(this.secretWord)
-
+    this.guessAttempts++
     // TODO: Go back and fix possible problems pointed out by Meg in Assignment 1 or 2...
     // Update the guessed letters.
     for (const guessLetter of this.guess.letters) {

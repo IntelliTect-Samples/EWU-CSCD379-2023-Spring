@@ -183,6 +183,9 @@ function checkGuess() {
   game.submitGuess()
   guess.value = ''
   getValidGuesses()
+  if(game.status !== WordleGameStatus.Active){
+    submitPlayerResults()
+  }
 }
 
 function getValidGuesses() {
@@ -208,5 +211,20 @@ function keyPress(event: KeyboardEvent) {
     game.guess.push(event.key.toLowerCase())
   }
   //event.preventDefault()
+}
+
+function submitPlayerResults()
+{
+  console.log(username.value)
+  console.log(game.guessAttempts)
+  console.log(timer.value)
+
+ Axios.post('leaderboard/AddNewPlayer', {
+  name: username.value,
+  attempts: game.guessAttempts,
+  timeInSeconds: timer.value
+ })
+ .then(response => console.log(response))
+ .catch(error => console.log(error))
 }
 </script>
