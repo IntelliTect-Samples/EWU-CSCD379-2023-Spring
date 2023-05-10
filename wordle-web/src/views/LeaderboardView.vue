@@ -3,5 +3,5 @@
 </template>
 
 <script setup lang="ts">
-import BoardDisplay from '@/components/DisplayBoards.vue'
+import BoardDisplay from '@/components/DisplayBoards/DisplayBoards.vue'
 </script>
