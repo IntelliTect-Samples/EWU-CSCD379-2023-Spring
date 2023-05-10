@@ -1,0 +1,26 @@
+<template>
+  <h1>LeaderBoard</h1>
+  <div>
+    <v-carousel>
+      <v-carousel-item>
+        <v-card class="text-center">
+          <Leaderboard />
+        </v-card>
+      </v-carousel-item>
+      <v-carousel-item width="700px">
+        <PersonalStats />
+      </v-carousel-item>
+    </v-carousel>
+  </div>
+</template>
+
+<script setup lang="ts">
+import PersonalStats from "@/components/DisplayBoards/PersonalStats.vue";
+import Leaderboard from "@/components/DisplayBoards/Leaderboard.vue";
+</script>
+
+<style>
+.v-card {
+  height: 100%;
+}
+</style>
