@@ -1,12 +1,18 @@
 <template>
   <h1>Wordle Redux</h1>
-  <setUsername />
+  <setUsername /> 
+
+  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">Better Luck Next Time</div>
+  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+
   <GameBoard :game="game" @letterClick="addChar" />
 
   <p>Guess: {{ guess }}</p>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
-  <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+  <v-row class="justify-center">
+    <v-btn @click="checkGuess" @keyup.enter="checkGuess" color="primary" > Check </v-btn>
+  </v-row>
 
   <!-- <h2>{{ guess }}</h2> -->
   <h3>{{ game.secretWord }}</h3>
@@ -15,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { WordleGame } from '@/scripts/wordleGame'
+import { WordleGame, WordleGameStatus,  } from '@/scripts/wordleGame'
 import { ref, reactive, computed } from 'vue';
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
@@ -26,7 +32,7 @@ import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
 //import Axios from 'axios'
 //Axios stuff to be fixed later
-import SetUsername from '@/components/SetUsername.vue';
+import setUsername from '@/components/SetUsername.vue'
 
 
 const guess = ref('')
@@ -84,7 +90,15 @@ watch(
   { flush: 'post' }
 )
 
+
+
+
+
+
 function checkGuess() {
+  if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
+    return
+  }
   guessSound.play()
   game.submitGuess()
   guess.value = ''
@@ -105,6 +119,9 @@ function UpdateSelect(g: string) {
 }
 
 function addChar(letter: Letter) {
+  if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
+    return
+  }
   clickSound.play()
   game.guess.push(letter.char)
   guess.value += letter.char
@@ -112,7 +129,9 @@ function addChar(letter: Letter) {
 
 function keyPress(event: KeyboardEvent) {
   console.log(event.key)
-  
+  if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
+    return
+  }
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
