@@ -3,7 +3,7 @@
     <v-card>
       <v-card-title>Weather or Not</v-card-title>
       <v-card-text>
-        {{ weather.date }} - {{ weather.temperatureC }} - {{ weather.summary }}</v-card-text
+        {{ props.weather.date }} - {{ weather.temperatureC }} - {{ weather.summary }}</v-card-text
       >
     </v-card>
   </v-dialog>
