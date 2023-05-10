@@ -88,7 +88,7 @@ function keyPress(event: KeyboardEvent) {
 }
 
 async function restartGame() {
-  Axios.get('word')
+  Axios.get('/word')
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)
