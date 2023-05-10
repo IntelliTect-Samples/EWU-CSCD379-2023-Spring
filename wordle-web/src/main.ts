@@ -20,7 +20,6 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 } else {
   // Axios.defaults.baseURL = 'cscd-379-spring-2023dillon.database.windows.net/'
   Axios.defaults.baseURL = 'https://vicwwapp.azurewebsites.net/'
-
 }
 
 Player.SetupAsync()
