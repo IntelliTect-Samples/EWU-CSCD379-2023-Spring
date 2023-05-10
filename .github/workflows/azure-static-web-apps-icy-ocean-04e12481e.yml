@@ -1,7 +1,6 @@
 name: Azure Static Web Apps CI/CD
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - assignment3
@@ -12,21 +11,19 @@ on:
 
 jobs:
   build_and_deploy_job:
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+        with:
+            submodules: true
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Build Vue App 
-        working-directory: ./wordle-web
-        run: npm run build
 
-      - name: Deploy
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+      - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
