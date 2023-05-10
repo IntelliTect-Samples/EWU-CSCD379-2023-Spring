@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+
     <v-app-bar>
       <v-app-bar-nav-icon icon="mdi-air-horn" to="/"></v-app-bar-nav-icon>
       <RouterLink to="/wordle">
@@ -8,6 +8,7 @@
 
       <v-spacer></v-spacer>
 
+      
       <v-app-bar-nav-icon>
         <v-icon icon="mdi-cog" />
         <v-menu activator="parent">
@@ -16,22 +17,22 @@
             <v-list-item @click="setInverseTheme"> Inverse Theme </v-list-item>
           </v-list>
         </v-menu>
-
-        <v-app-bar-nav-icon>
-          <v-icon icon="$menu" />
-          <v-menu activator="parent">
-            <v-list>
-              <v-list-item to="/leaderboard"> Leaderboard </v-list-item>
-              <v-list-item to="/about"> About </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-app-bar-nav-icon>
+      </v-app-bar-nav-icon>
+      
+      <v-app-bar-nav-icon>
+        <v-icon icon="$menu" />
+        <v-menu activator="parent">
+          <v-list>
+            <v-list-item to="/leaderboard"> Leaderboard </v-list-item>
+            <v-list-item to="/about"> About </v-list-item>
+          </v-list>
+        </v-menu>
       </v-app-bar-nav-icon>
     </v-app-bar>
     <div class="content">
       <RouterView />
     </div>
-  </v-layout>
+ 
 </template>
 
 <script setup lang="ts">
@@ -47,9 +48,9 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 </script>
-
 <style>
 .content {
   margin-top: 64px;
 }
 </style>
+
