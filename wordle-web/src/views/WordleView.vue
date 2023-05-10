@@ -130,7 +130,7 @@ function newGames() {
 }
 
 /** Emits boolean value used in 'UsernameDialog.vue' to open or close the Username Dialog. */
-function updateDialogValue(newValue: boolean) {
+function updateDialogValue(newValue: unknown) {
   eventBus.emit('updateDialogValue', newValue)
 }
 
