@@ -40,12 +40,7 @@ interface Player {
   averageAttempts: number
 }
 
-let username = ref(localStorage.getItem('username') || 'Guest')
 const players = ref<Player[]>()
-// store the index at which the current user is in the array, into variable
-let currentUserIndex = players.value?.findIndex((player) => player.playerName === username.value)
-
-console.log(currentUserIndex)
 
 Axios.get('leaderboard/GetTopTenScores')
   .then((response) => {
