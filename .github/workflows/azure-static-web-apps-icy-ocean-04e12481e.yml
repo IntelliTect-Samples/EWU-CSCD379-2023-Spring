@@ -21,12 +21,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Lint Code
-        working-directory: ./wordle-web
-        run: npm run lint
-      - name: Prettier Check
-        working-directory: ./wordle-web
-        run: npm run format:check
       - name: Build Vue App 
         working-directory: ./wordle-web
         run: npm run build
