@@ -23,15 +23,18 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
+        working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
 
       - name: dotnet publish
+        working-directory: ./Wordle.Api
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
+          working-directory: ./Wordle.Api
           path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
