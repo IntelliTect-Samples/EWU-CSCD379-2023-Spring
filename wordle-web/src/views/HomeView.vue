@@ -1,7 +1,5 @@
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <TheWelcome />
 </template>
 
 <script setup lang="ts">

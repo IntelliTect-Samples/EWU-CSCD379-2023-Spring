@@ -95,7 +95,7 @@ function changeUsername() {
 
 function setUsername() {
   namePrompt.value = false
-  Axios.post('https://wordlewebassignment.azurewebsites.net/Player', {
+  Axios.post('/Player', {
     name: userName.value,
     attempts: attempts,
     secondsInGame: 0
@@ -111,7 +111,7 @@ function setUsername() {
 
 function addWord() {
   overlay.value = true
-  Axios.post('https://wordlewebassignment.azurewebsites.net/word/AddWordFromBody', {
+  Axios.post('/word/AddWordFromBody', {
     text: 'tests',
     isCommon: true,
     isUsed: false
@@ -128,7 +128,7 @@ function addWord() {
 function newGame() {
   overlay.value = true
   attempts = 0
-  Axios.get('https://wordlewebassignment.azurewebsites.net/word')
+  Axios.get('/word')
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)

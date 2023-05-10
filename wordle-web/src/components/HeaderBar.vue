@@ -9,16 +9,6 @@
       <v-spacer></v-spacer>
 
       <v-app-bar-nav-icon>
-        <v-icon icon="$menu" />
-        <v-menu activator="parent">
-          <v-list>
-            <v-list-item to="/leaderboard"> Leaderboard </v-list-item>
-            <v-list-item to="/about"> About </v-list-item>
-          </v-list>
-        </v-menu>
-      </v-app-bar-nav-icon>
-
-      <v-app-bar-nav-icon>
         <v-icon icon="mdi-cog" />
         <v-menu activator="parent">
           <v-list>
@@ -26,6 +16,16 @@
             <v-list-item @click="setInverseTheme"> Inverse Theme </v-list-item>
           </v-list>
         </v-menu>
+
+        <v-app-bar-nav-icon>
+          <v-icon icon="$menu" />
+          <v-menu activator="parent">
+            <v-list>
+              <v-list-item to="/leaderboard"> Leaderboard </v-list-item>
+              <v-list-item to="/about"> About </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-app-bar-nav-icon>
       </v-app-bar-nav-icon>
     </v-app-bar>
     <div class="content">
