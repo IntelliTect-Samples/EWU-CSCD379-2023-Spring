@@ -18,7 +18,7 @@ import { Player } from './scripts/userService'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'https://vicwwapp.azurewebsites.net/'
+  Axios.defaults.baseURL = 'wordle2023dillon.azurewebsites.net'
 }
 
 Player.SetupAsync()
