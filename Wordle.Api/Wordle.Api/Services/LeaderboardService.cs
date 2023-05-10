@@ -19,6 +19,19 @@ public class LeaderboardService
                             .ToListAsync();
         return highScore;
     }
+    
+    // Retrieve a the stats of a specified player, passed by name as parameter
+    public async Task<Player> GetPlayerStats(string playerName)
+    {
+        var player = await _db.Players.FirstOrDefaultAsync(p => p.PlayerName == playerName);
+        
+        if (player == null)
+        {
+            throw new ArgumentException("Player not found");
+        }
+        
+        return player;
+    }
 
     public async Task<Player> AddNewPlayer(string? playerName, int timeInSeconds, double attempts)
     {
