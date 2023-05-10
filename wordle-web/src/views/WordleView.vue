@@ -1,6 +1,9 @@
 <template>
-  <h1>Wordle Redux</h1>
-  <setUsername /> 
+  <h1>Wordle Redux</h1> 
+  <v-col class="text-right">
+  <h1>Time: {{ min }} : {{ timer }}</h1>
+  <setUsername/> 
+  </v-col>
 
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">Better Luck Next Time</div>
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
@@ -39,7 +42,9 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
-
+const timer = ref(0)
+const min = ref(0)
+startGame()
 //const overlay = ref(true)
 
 
@@ -51,6 +56,21 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+
+function startGame() {
+  //should restart game here
+  timer.value = 0
+  let check = setInterval(() => {
+    if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
+      clearInterval(check)
+    } else {
+      timer.value += 1
+    }
+  }, 1000)
+}
+
+
 /*
 function addWord() {
   overlay.value = true
@@ -89,7 +109,15 @@ watch(
   },
   { flush: 'post' }
 )
-
+watch(
+  timer, 
+  (newVal) => {
+    if (timer.value > 59) {
+      timer.value = 0
+      min.value += 1
+    }
+  }
+)
 
 
 
@@ -119,6 +147,8 @@ function UpdateSelect(g: string) {
 }
 
 function addChar(letter: Letter) {
+  
+
   if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
     return
   }

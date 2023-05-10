@@ -51,8 +51,4 @@ function setUsername() {
   localStorage.setItem('username', username.value)
 }
 
-
-
-
-
 </script>
