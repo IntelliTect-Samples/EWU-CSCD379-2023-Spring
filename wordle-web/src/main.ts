@@ -18,12 +18,7 @@ import { Player } from './scripts/userService'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-<<<<<<< HEAD
-  Axios.defaults.baseURL = 'cscd-379-spring-2023dillon.database.windows.net/'
-=======
-  // Axios.defaults.baseURL = 'cscd-379-spring-2023dillon.database.windows.net/'
-  Axios.defaults.baseURL = 'https://vicwwapp.azurewebsites.net/'
->>>>>>> Assignment-3(off-A3-IntelliTS)
+  Axios.defaults.baseURL = 'wordle2023dillon.azurewebsites.net'
 }
 
 Player.SetupAsync()
