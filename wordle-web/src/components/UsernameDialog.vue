@@ -9,7 +9,7 @@
             <v-btn @click="submitName"> Submit </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn @click="dialog.value = false"> Cancel </v-btn>
+            <v-btn @click="closeDialog"> Cancel </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref, watch} from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { eventBus } from '@/scripts/eventBus'
 
 let dialog = ref()
@@ -51,15 +51,19 @@ onUnmounted(() => {
 })
 
 // Watch for changes to the username value and emit the new value to 'WordleView.vue'.
-watch (
-    () => username.value,
-    (newValue) => {
-      emits('updateNameValue', newValue)
-    }
+watch(
+  () => username.value,
+  (newValue) => {
+    emits('updateNameValue', newValue)
+  }
 )
 
 if (!localStorage.getItem('username')) {
   updateModelValue(true)
+}
+
+function closeDialog() {
+  dialog.value = false
 }
 
 function submitName() {
@@ -69,7 +73,7 @@ function submitName() {
     setTimeout(() => {
       submitted.value = false
     }, 1500)
-    dialog.value = false
+    closeDialog()
   }
 }
 </script>
