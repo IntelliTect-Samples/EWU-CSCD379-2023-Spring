@@ -8,7 +8,7 @@ on:
     branches:
       - assignment3
     paths:
-      - ../Wordle.Api/**
+      - ./Wordle.Api**
   workflow_dispatch:
 
 jobs:
@@ -25,11 +25,11 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        working-directory: ../Wordle.Api
+        working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        working-directory: ../Wordle.Api
+        working-directory: ./Wordle.Api
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
@@ -37,7 +37,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
-          working-directory: ../Wordle.Api
+          working-directory: ./Wordle.Api
 
   deploy:
     runs-on: ubuntu-latest
