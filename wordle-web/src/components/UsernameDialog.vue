@@ -9,7 +9,7 @@
             <v-btn @click="submitName"> Submit </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn @click="dialog.value = false"> Cancel </v-btn>
+            <v-btn @click="closeDialog"> Cancel </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -62,6 +62,10 @@ if (!localStorage.getItem('username')) {
   updateModelValue(true)
 }
 
+function closeDialog() {
+  dialog.value = false
+}
+
 function submitName() {
   if (username.value.length > 0) {
     localStorage.setItem('username', username.value)
@@ -69,7 +73,7 @@ function submitName() {
     setTimeout(() => {
       submitted.value = false
     }, 1500)
-    dialog.value = false
+    closeDialog()
   }
 }
 </script>
