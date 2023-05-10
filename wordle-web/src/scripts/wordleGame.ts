@@ -73,10 +73,9 @@ export class WordleGame {
     if (index === this.numberOfGuesses - 1 && this.status !== WordleGameStatus.Won) {
       this.status = WordleGameStatus.Lost
     }
+  }
 
-
-
-
-
-}
+  getNumOfGuesses() {
+    return this.numberOfGuesses;   
+  }
 }

@@ -33,10 +33,9 @@ import { watch, onMounted, onUnmounted } from 'vue'
 import ValidWordList from '../components/ValidWordList.vue'
 import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
-//import Axios from 'axios'
-//Axios stuff to be fixed later
+import Axios from 'axios'
 import setUsername from '@/components/SetUsername.vue'
-
+import username from '@/components/SetUsername.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -46,7 +45,7 @@ const timer = ref(0)
 const sec = ref(0)
 const min = ref(0)
 startGame()
-//const overlay = ref(true)
+const overlay = ref(true)
 
 
 console.log(game.secretWord)
@@ -66,6 +65,16 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
+      overlay.value = true
+      Axios.post(username.value, timer.value, <any>game.numberOfGuesses)
+        .then((response) => {
+        overlay.value = false
+        console.log(response.data)
+      })
+      
+        .catch((error) => {
+        console.log(error)
+      })
     } else {
       timer.value += 1
       sec.value += 1

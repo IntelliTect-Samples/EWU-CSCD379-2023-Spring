@@ -12,9 +12,10 @@ namespace Wordle.Api.Services
         {
             _db = db;
         }
-        /*In Progress
+
         public async Task<IEnumerable<Player>> GetTopTen()
         {
+            /*
             var count = 10;
             var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
             totalCount -= count.Value;
@@ -26,9 +27,16 @@ namespace Wordle.Api.Services
                 .OrderByDescending(p => p.AverageAttempts)
                 .ToListAsync();
             return topTen;
+            */
+
+            var topTen = await _db.Players
+                .OrderBy(p => p.AverageAttempts)
+                .Take(10)
+                .ToListAsync();
+            return topTen;
 
         }
-        */
+        
         public async Task<Player> AddPlayer(string newName, int playTime, int guesses)
         {
             if(newName == null) { throw new ArgumentException("Name can't be null"); }
