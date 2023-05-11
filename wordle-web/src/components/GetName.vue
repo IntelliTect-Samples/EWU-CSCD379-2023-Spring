@@ -1,5 +1,5 @@
 <template>
-  <v-btn flat @click="setOverlay">{{ name }}</v-btn>
+  <v-btn flat @click="setOverlay">{{ thisName }}</v-btn>
   <v-dialog v-model="overlay" persistent class="w-25">
     <v-card>
       <v-text-field v-model="thisName" label="Name" />
@@ -21,7 +21,7 @@ const props = withDefaults(
 )
 
 const overlay = ref(false)
-const thisName = ref(props.name)
+const thisName = ref('guest')
 
 const emits = defineEmits<{
   (event: 'overlay', value: string): void
@@ -29,6 +29,6 @@ const emits = defineEmits<{
 
 function setOverlay() {
   overlay.value = !overlay.value
-  emits('overlay', props.name)
+  emits('overlay', thisName.value)
 }
 </script>
