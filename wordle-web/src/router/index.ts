@@ -3,7 +3,7 @@ import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import HomeView from '../views/HomeView.vue'
 import LeaderBoardView from '../views/LeaderBoardView.vue'
-
+//
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
