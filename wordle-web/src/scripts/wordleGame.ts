@@ -29,6 +29,7 @@ export class WordleGame {
 
   async startNewGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || (await WordsService.getWordFromApi())
+    await WordsService.getWordListFromApi()
     this.guesses.splice(0)
 
     // Create a word for each guess.

@@ -58,8 +58,8 @@ public class WordService
     //     return word;
     // }
 
-    public async Task<IEnumerable<Word>> GetWordList()
+    public async Task<List<string>> GetWordList()
     {
-        return await _db.Words.ToListAsync();
+        return await _db.Words.Select(word => word.Text).ToListAsync();
     }
 }

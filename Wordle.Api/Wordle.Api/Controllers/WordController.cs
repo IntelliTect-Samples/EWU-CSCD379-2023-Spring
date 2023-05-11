@@ -48,7 +48,7 @@ public class WordController : ControllerBase
     // }
 
     [HttpGet("GetWordList")]
-    public async Task<IEnumerable<Word>> GetWordList()
+    public async Task<List<string>> GetWordList()
     {
         return await _wordService.GetWordList();
     }
