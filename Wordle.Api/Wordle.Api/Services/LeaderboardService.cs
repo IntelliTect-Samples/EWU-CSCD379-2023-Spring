@@ -20,15 +20,16 @@ public class LeaderboardService
                             .ToListAsync();
         return highScore;
     }
-    
+
     // Retrieve a the stats of a specified player, passed by name as parameter
     public async Task<IEnumerable<Player>> GetPlayerStats(string playerName)
     {
-        var player = await _db.Players.Select(p => p).Where(p => p.PlayerName == playerName).ToListAsync();
+        var player =
+            await _db.Players.Select(p => p).Where(p => p.PlayerName == playerName).ToListAsync();
 
-        if (player == null) 
+        if (player == null)
         {
-            throw new ArgumentNullException("Player is null");           
+            throw new ArgumentNullException("Player is null");
         }
 
         return player;

@@ -22,7 +22,7 @@ public class LeaderboardController : ControllerBase
     {
         return await _leaderboardService.GetTopTenScores();
     }
-    
+
     [HttpGet("GetPlayerStats")]
     public async Task<IEnumerable<Player>> GetPlayerStats(string playerName)
     {
@@ -32,6 +32,7 @@ public class LeaderboardController : ControllerBase
     [HttpPost("AddNewPlayer")]
     public async Task<Player> AddNewPlayer([FromBody] PlayerDto player)
     {
-        return await _leaderboardService.AddNewPlayer(player.Name, player.TimeInSeconds, player.Attempts);
+        return await _leaderboardService.AddNewPlayer(player.Name, player.TimeInSeconds,
+                                                      player.Attempts);
     }
 }
