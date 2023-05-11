@@ -45,7 +45,6 @@ const timer = ref(0)
 const sec = ref(0)
 const min = ref(0)
 startGame()
-const overlay = ref(true)
 
 
 console.log(game.secretWord)
@@ -65,17 +64,13 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
-      overlay.value = true
       Axios.post(username.value, timer.value, <any>game.numberOfGuesses)
-        /*
        .then((response) => {
-        overlay.value = false
         console.log(response.data)
       }) 
         .catch((error) => {
         console.log(error)
       })
-      */
     } else {
       timer.value += 1
       sec.value += 1

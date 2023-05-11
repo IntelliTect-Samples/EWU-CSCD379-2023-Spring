@@ -15,22 +15,9 @@ namespace Wordle.Api.Services
 
         public async Task<IEnumerable<Player>> GetTopTen()
         {
-            /*
-            var count = 10;
-            var totalCount = await _db.Players.CountAsync(player => player.AverageAttempts);
-            totalCount -= count.Value;
-            int index = totalCount.PlayerId;
-            var topTen = await _db.Players
-                .Where(player => player.AverageAttempts)
-                .Skip(index)
-                .Take(totalCount.Name, totalCount.AverageAttempts, totalCount.GameCount, totalCount.AverageSecondsPerGame)
-                .OrderByDescending(p => p.AverageAttempts)
-                .ToListAsync();
-            return topTen;
-            */
 
             var topTen = await _db.Players
-                .OrderBy(p => p.AverageAttempts)
+                .OrderByDescending(p => p.AverageAttempts)
                 .Take(10)
                 .ToListAsync();
             return topTen;
