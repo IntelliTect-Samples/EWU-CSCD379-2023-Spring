@@ -114,8 +114,8 @@ let timer = ref(0)
 const guess = ref('')
 const overlay = ref(true)
 const game = reactive(new WordleGame())
-let gameWon = ref(false)
-let gameLost = ref(false)
+const gameWon = ref(false)
+const gameLost = ref(false)
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
