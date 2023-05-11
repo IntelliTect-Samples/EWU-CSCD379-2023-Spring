@@ -13,7 +13,6 @@ builder.Services.AddCors(options =>
                                                                             policy.WithOrigins("*");
                                                                             policy.AllowAnyMethod();
                                                                             policy.AllowAnyHeader();
-                                                                            policy.AllowAnyOrigin();
                                                                         });
                          });
 
