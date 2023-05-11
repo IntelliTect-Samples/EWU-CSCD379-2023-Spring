@@ -38,7 +38,7 @@ namespace Wordle.Api.Services
         return topPlayers;
     }
 
-        public async Task<Player> AddPlayer(string newPlayerName, int attempts, int? SecondsInGame)
+        public async Task<Player> AddPlayer(string newPlayerName, int attempts, int? SecondsInGame, int gameCount)
         {
             if (newPlayerName is null || newPlayerName.Length < 3)
             {
@@ -48,7 +48,7 @@ namespace Wordle.Api.Services
             if (player != null)
             {
                 player.TotalAttempts += attempts;
-                player.GameCount += 1;
+                player.GameCount += gameCount;
                 player.TotalSeconds += SecondsInGame;
             }
             else
@@ -57,7 +57,7 @@ namespace Wordle.Api.Services
                 {
                     Name = newPlayerName,
                     TotalAttempts = attempts,
-                    GameCount = 1,
+                    GameCount = gameCount,
                     TotalSeconds = SecondsInGame
 
                 };

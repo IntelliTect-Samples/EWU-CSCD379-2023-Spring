@@ -5,5 +5,6 @@
         public required string Name { get; set; }
         public int Attempts { get; set; }
         public int SecondsInGame { get; set; }
+        public int GameCount { get; set; }
     }
 }
