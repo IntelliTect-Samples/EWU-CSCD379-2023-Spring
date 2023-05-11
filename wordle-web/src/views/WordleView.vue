@@ -31,7 +31,7 @@
     >
       Check
     </v-btn>
-    <h1 class="text-center">Count: {{ count }}</h1>
+    <h1 class="text-center">GameTime: {{ count }}</h1>
     <v-btn
       @click="newGame"
       @keyup.enter="checkGuess"
@@ -155,8 +155,8 @@ function newGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
-    count.value = -2
-    let startTimer = setInterval(() => {
+  count.value = -1
+  let startTimer = setInterval(() => {
     if (game.status == WordleGameStatus.Active) {
       count.value++
     } else {
