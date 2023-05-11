@@ -59,6 +59,7 @@ import { Services } from '@/scripts/services'
 import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
+import { watch } from 'vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -128,6 +129,13 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 
+// Watch showScoreDialog and when it changes to true, call newGame()
+watch(showScoreDialog, (value) => {
+  if (!value) {
+    newGame()
+  }
+})
+
 function sendGameResult() {
   const gameResult = new GameResult()
   gameResult.playerId = playerService.player.playerId
@@ -137,6 +145,9 @@ function sendGameResult() {
   gameResult.wordPlayed = game.secretWord
 
   console.log(gameResult)
+
+  lastGameResult.value = gameResult
+  showScoreDialog.value = true
 
   Axios.post('/Player/AddGameResult', gameResult).then((response) => {
     console.log(response.data)
