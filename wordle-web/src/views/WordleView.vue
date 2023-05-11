@@ -2,7 +2,9 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-  <ActiveUser />
+  <div class="d-flex justify-end">
+    <ActiveUser />
+  </div>
   <div class="text-h4 text-center">Wordle Mind Bender</div>
 
   <GameBoard :game="game" @letterClick="addChar" />
