@@ -20,6 +20,7 @@ namespace Wordle.Api.Services
             var players = await _db.Players
                 .Where(player => player.GameCount > 10)
                 .OrderBy(p => p.AverageAttempts)//Lowest average attempts
+                .ThenBy(p => p.AverageSecondsPerGame)//then by amount of time spent per game
                 .ThenByDescending(p => p.GameCount)//Then by highest number of games played
                 .Take(count.Value)
                 .ToListAsync();
