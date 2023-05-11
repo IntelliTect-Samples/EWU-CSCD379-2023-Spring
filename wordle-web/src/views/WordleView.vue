@@ -139,7 +139,7 @@ function newGames() {
       console.log('Axios error: ' + error)
     })
 
-  //Reset Win/Lose dialogs
+  // Reset Win/Lose dialogs.
   gameWon.value = false
   gameLost.value = false
 

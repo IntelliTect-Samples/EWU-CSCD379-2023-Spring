@@ -1,16 +1,16 @@
 <template>
   <v-row rows="auto" class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
-      <v-btn @click="enterClick" class="elevation-10" style="background-image: var(--btn-gradient)">
+      <v-btn @click="emitEnterClick" class="elevation-10" style="background-image: var(--btn-gradient)">
         Check
       </v-btn>
     </v-col>
     <v-col cols="auto" v-for="(letter, j) in key" :key="j">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+      <LetterButton :letter="letter" @click="emitLetterClick(letter)" />
     </v-col>
     <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
       <v-btn
-        @click="backspaceClick"
+        @click="emitBackspaceClick"
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
       >
@@ -30,14 +30,14 @@ const props = defineProps<{
 }>()
 
 const keyboardLetters = computed(() => {
-  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
-
   const keyboardKeys = [
     ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
     ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
     ['z', 'x', 'c', 'v', 'b', 'n', 'm']
   ]
+
+  console.log(props.guessedLetters.length)
 
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
@@ -58,15 +58,15 @@ const emits = defineEmits<{
   (event: 'backspaceClick'): void
 }>()
 
-function letterClick(letter: Letter) {
+function emitLetterClick(letter: Letter) {
   emits('letterClick', letter)
 }
 
-function enterClick() {
+function emitEnterClick() {
   emits('enterClick')
 }
 
-function backspaceClick() {
+function emitBackspaceClick() {
   emits('backspaceClick')
 }
 </script>

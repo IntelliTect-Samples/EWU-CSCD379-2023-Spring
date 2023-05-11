@@ -31,23 +31,22 @@ let dialog = ref()
 let username = ref('')
 let submitted = ref(false)
 
-// Define emits for the component.
 const emits = defineEmits<{
   // Emits new name value to parent component.
   (event: 'updateNameValue', value: string): void
 }>()
 // Use the value emitted from 'WordleView.vue' close or open the dialog.
-const updateModelValue = (newValue: unknown) => {
+const updateDialogValue = (newValue: unknown) => {
   dialog.value = newValue
 }
 
 onMounted(() => {
   // Listen for 'updateDialogValue' event from 'WordleView.vue'.
-  eventBus.on('updateDialogValue', updateModelValue)
+  eventBus.on('updateDialogValue', updateDialogValue)
 })
 onUnmounted(() => {
   // Stop listening for 'updateDialogValue' event from 'WordleView.vue'.
-  eventBus.off('updateDialogValue', updateModelValue)
+  eventBus.off('updateDialogValue', updateDialogValue)
 })
 
 // Watch for changes to the username value and emit the new value to 'WordleView.vue'.
@@ -59,7 +58,7 @@ watch(
 )
 
 if (!localStorage.getItem('username')) {
-  updateModelValue(true)
+  updateDialogValue(true)
 }
 
 function closeDialog() {
