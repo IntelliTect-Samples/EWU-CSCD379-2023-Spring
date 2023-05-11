@@ -52,6 +52,9 @@ import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import { useDisplay } from 'vuetify'
+import { Player } from '@/scripts/player'
+import { Services } from '@/scripts/services'
+import type { PlayerService } from '@/scripts/playerService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -62,11 +65,12 @@ const overlay = ref(true)
 const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
-
-// Start a new game
-newGame()
+const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
+  await playerService.setupPlayerAsync()
+  // Start a new game
+  newGame()
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
@@ -96,6 +100,9 @@ function checkGuess(word?: string) {
     game.guess.set(word)
   }
   game.submitGuess()
+  if (game.status !== WordleGameStatus.Active) {
+    sendGameResult()
+  }
   guess.value = ''
 }
 
@@ -114,5 +121,21 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+
+function sendGameResult() {
+  const gameResult = {
+    PlayerId: playerService.player.playerId,
+    Attempts: game.guesses.filter((f) => f.isFilled).length,
+    Duration: game.duration(),
+    Success: game.status == WordleGameStatus.Won
+  }
+
+  Axios.post('/gameresult', gameResult).then((response) => {
+    console.log(response)
+  })
+  // if (this.onGameEnd) {
+  //   this.onGameEnd(response.data as GameResult)
+  // }
 }
 </script>

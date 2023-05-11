@@ -25,4 +25,8 @@ namespace Wordle.Api.Dtos
         
     }
 
+    public class CreatePlayerDto
+    {
+        public required string Name { get; set; }
+    }
 }

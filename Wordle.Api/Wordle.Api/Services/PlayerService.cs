@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Runtime.InteropServices;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
@@ -24,14 +25,14 @@ namespace Wordle.Api.Services
                 .ToListAsync();
         }
 
-        public async Task<Player?> GetPlayerAsync(Guid playerId)
+        public async Task<Player?> GetAsync(Guid playerId)
         {
             return await _db.Players
                 .Where(p => p.PlayerId == playerId)
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Player> CreatePlayerAsync(string name)
+        public async Task<Player> CreateAsync(string name)
         {
             Player player = new()
             {
@@ -43,30 +44,29 @@ namespace Wordle.Api.Services
             return player;
         }
 
-        //public async Task<Player?> ChangeNameAsync(int playerId, string playerName)
-        //{
-        //    var player = await _db.Players.FindAsync(playerId);
-        //    if (player is not null)
-        //    {
-        //        player.Name = playerName;
-        //        await _db.SaveChangesAsync();
-        //        return player;
-        //    }
-        //    throw new ArgumentException("Player Id not found");
-        //}
-
-        public async Task<Player?> UpdateAsync(GameResultDto dto)
+        public async Task<Player?> AddGameResultAsync(GameResultDto dto)
         {
             var player = await _db.Players.FindAsync(dto.PlayerId);
             if (player is not null)
             {
                 if (dto.WasGameWon)
                 {
-
                     player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
                     player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.DurationInSeconds) / (player.GameCount + 1);
                     await _db.SaveChangesAsync();
                 }
+                return player;
+            }
+            throw new ArgumentException("Player Id not found");
+        }
+
+        public async Task<Player> UpdateAsync(Guid playerId, string name)
+        {
+            var player = await _db.Players.FindAsync(playerId);
+            if (player is not null)
+            {
+                player.Name = name;
+                await _db.SaveChangesAsync();
                 return player;
             }
             throw new ArgumentException("Player Id not found");

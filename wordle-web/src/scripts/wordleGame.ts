@@ -20,6 +20,12 @@ export class WordleGame {
   status = WordleGameStatus.Active
   numberOfGuesses = 6
   guessIndex = 0
+  startTime = Date.now()
+  endTime: number | null = null
+
+  duration(): number {
+    return (this.endTime || Date.now()) - this.startTime
+  }
 
   get guess(): Word {
     return this.guesses[this.guessIndex]
@@ -33,6 +39,8 @@ export class WordleGame {
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     this.secretWord = secretWord
+    this.startTime = Date.now()
+    this.endTime = null
     this.guesses.splice(0)
 
     for (let i = 0; i < numberOfGuesses; i++) {
@@ -59,8 +67,10 @@ export class WordleGame {
 
     if (correctGuess) {
       this.status = WordleGameStatus.Won
+      this.endTime = Date.now()
     } else if (this.guessIndex + 1 == this.guesses.length) {
       this.status = WordleGameStatus.Lost
+      this.endTime = Date.now()
     } else {
       this.guessIndex++
     }

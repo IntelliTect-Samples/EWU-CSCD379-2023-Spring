@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using System.Numerics;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
@@ -7,7 +8,7 @@ using Wordle.Api.Services;
 namespace Wordle.Api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("Player")]
 public class PlayerController : ControllerBase
 {
     private readonly PlayerService _PlayerService;
@@ -17,9 +18,9 @@ public class PlayerController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PlayerDto>> Get(Guid id)
+    public async Task<ActionResult<PlayerDto>> Get(Guid playerId)
     {
-        Player? player = await _PlayerService.GetPlayerAsync(id);
+        Player? player = await _PlayerService.GetAsync(playerId);
 
         if (player is not null)
         {
@@ -31,13 +32,33 @@ public class PlayerController : ControllerBase
     [HttpGet("TopPlayers")]
     public async Task<IEnumerable<PlayerDto>> GetTopPlayers()
     {
-        return (await _PlayerService.GetTopPlayersAsync()).Select(player=>new PlayerDto(player));
+        return (await _PlayerService.GetTopPlayersAsync()).Select(player => new PlayerDto(player));
     }
 
-    [HttpPost]
-    public async Task<PlayerDto> Post([FromBody] string name)
+    [HttpPost("CreatePlayer")]
+    public async Task<PlayerDto> CreatePlayer([FromBody] string name)
     {
-        return new PlayerDto(await _PlayerService.CreatePlayerAsync(name));
+        return new PlayerDto(await _PlayerService.CreateAsync(name));
     }
 
+    [HttpPost("RenamePlayer")]
+    public async Task<ActionResult<PlayerDto>> RenamePlayer([FromBody] PlayerDto player)
+    {
+        if (player.PlayerId is null || player.PlayerId == Guid.Empty)
+        {
+            return BadRequest();
+        }
+        if (string.IsNullOrWhiteSpace(player.Name))
+        {
+            return BadRequest();
+        }
+        var result = await _PlayerService.UpdateAsync(player.PlayerId.Value, player.Name.Trim());
+        return new PlayerDto(result);
+    }
+
+    [HttpPost("AddGameResult")]
+    public async Task<PlayerDto> AddGameResultAsync(GameResultDto dto)
+    {
+        return new PlayerDto(await _PlayerService.AddGameResultAsync(dto));
+    }
 }
