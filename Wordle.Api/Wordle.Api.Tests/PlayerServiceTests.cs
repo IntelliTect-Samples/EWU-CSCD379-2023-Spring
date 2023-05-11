@@ -33,8 +33,8 @@ namespace Wordle.Api.Tests
             Seeder.Seed(context);
             var service = new PlayerService(context);
 
-            var guid = (await service.CreatePlayerAsync("Grant")).PlayerId;
-            var player = await service.GetPlayerAsync(guid);
+            var guid = (await service.CreateAsync("Grant")).PlayerId;
+            var player = await service.GetAsync(guid);
                         
             Assert.IsNotNull(player);
             Assert.AreEqual(guid, player.PlayerId);

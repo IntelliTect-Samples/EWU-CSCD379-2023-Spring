@@ -49,7 +49,7 @@ import ActiveUser from './components/ActiveUser.vue'
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
-const playerService = reactive(new PlayerService())
+const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
 

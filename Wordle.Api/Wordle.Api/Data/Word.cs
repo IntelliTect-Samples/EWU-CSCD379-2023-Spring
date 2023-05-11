@@ -10,7 +10,7 @@ namespace Wordle.Api.Data
         public bool IsCommon { get; set; }
 
         public bool IsUsed { get; set; }
-        
+        public IList<DateWord> DateWords { get; set; } = new List<DateWord>();
 
     }
 }
