@@ -96,15 +96,31 @@
 
 
 ### Lecture 8. 4/27: 
-- More ASP.NET and EF
+- More ASP.NET and EF and homework 3 material
 
 
 ## Week 5
 ### Lecture 9. 5/2: 
-
+- API unit testing: database, services, integration.
+- App Refactor:
+  - Add game features like end and restart
+  - Add solver and componentize
+  - Handle the word API not responding
+  - API configuration: Swagger in production
+  - Action updates, versioning, file names, warnings
+  - Sizing of letters/buttons with useDisplay
+  - Unit testing letters with DI on useDisplay
+  - New App bar and UI cleanup
+  - New starting page and default route
+  - Theme update and add of 'Unknown' color
+  - Split LetterResult from LetterButton
+  - Move AddWordTest to about page
+  - Custom icon and favicon
+  - Google Search Console and 
 
 ### Lecture 10. 5/4: 
-
+- EF Parent-Child relationships
+- Querying with Includes
 
 ## Week 6
 ### Lecture 11. 5/9: 
