@@ -2,9 +2,9 @@
   <v-app>
     <v-app-bar :elevation="3">
       <template v-slot>
+        <img src="./assets/logo.svg" width="35" style="margin-left: 15px" />
         <v-app-bar-title>
           <RouterLink to="/">
-            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
             Wordle
           </RouterLink>
         </v-app-bar-title>

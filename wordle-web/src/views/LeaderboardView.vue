@@ -4,7 +4,7 @@
       <div class="bg-primary text-h5 pa-3 text-center">Leader Board</div>
       <v-card-text>
         <div v-for="(player, index) in players" :key="player.playerId" class="border my-3">
-          <div class="d-flex justify-center bg-secondary text-h6">
+          <div class="d-flex justify-center bg-secondary text-h6 tile-top">
             #{{ index + 1 }} - {{ player.name }}
           </div>
           <v-card-text class="d-flex flex-column align-center">
@@ -22,6 +22,21 @@
     </v-card>
   </v-container>
 </template>
+
+<style>
+.tile-top {
+  border-bottom: 5px solid grey;
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes pulse {
+  0%   {border-color: #ff5900;}
+  50%  {border-color: maroon;}
+  100% {border-color: #ff5900;}
+}
+</style>
 
 <script lang="ts" setup>
 import Axios from 'axios'
