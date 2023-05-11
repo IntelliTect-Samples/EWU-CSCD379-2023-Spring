@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -17,7 +18,8 @@ namespace Wordle.Api.Services
         {
 
             var topTen = await _db.Players
-                .OrderByDescending(p => p.AverageAttempts)
+                .OrderBy(p => p.AverageAttempts)
+                .ThenByDescending(p => p.GameCount)
                 .Take(10)
                 .ToListAsync();
             return topTen;

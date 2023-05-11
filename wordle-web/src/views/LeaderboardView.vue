@@ -2,16 +2,14 @@
   <v-sheet>
     <v-card>
       <v-card-title>Leader Board</v-card-title>
-        
-      <template v-for=" player in playerData" :key="player.PlayerID">
         <v-progress-linear 
-          v-model="progress[player.PlayerID]"
+          v-model="progress[0]"
           color="#757575"
           height="25"
         >
-        <strong>{{ player.Name }}</strong>>
+        <strong>{{ playerData }}</strong>>
         </v-progress-linear>
-      </template>
+    
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
@@ -24,17 +22,17 @@ import type { PlayerData } from '@/types/PlayerData'
 
 const progress = ref([100,80,60,40,20,18,16,14,18,10])
 
-const playerData = ref<PlayerData[]>([])
 
-Axios.get('topTen')
+var playerData = ref<PlayerData[]>([])
+
+Axios.get('Player/GetTopTen')
   .then((response) => {
+    console.log(response.data)
     playerData.value = response.data
   })
   .catch((error) => {
     console.log(error)
   })
-
-
 
 </script>
 
