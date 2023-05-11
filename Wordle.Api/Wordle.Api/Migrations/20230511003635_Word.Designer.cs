@@ -11,7 +11,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230427222812_Word")]
+    [Migration("20230511003635_Word")]
     partial class Word
     {
         /// <inheritdoc />
@@ -24,6 +24,35 @@ namespace Wordle.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Wordle.Api.Data.Player", b =>
+                {
+                    b.Property<int>("PlayerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerId"));
+
+                    b.Property<double>("AverageAttempts")
+                        .HasColumnType("float");
+
+                    b.Property<int>("AverageSecondsPerGame")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GameCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("WeightedScore")
+                        .HasColumnType("float");
+
+                    b.HasKey("PlayerId");
+
+                    b.ToTable("Players");
+                });
+
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>
                 {
                     b.Property<int>("WordId")
@@ -33,6 +62,9 @@ namespace Wordle.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"));
 
                     b.Property<bool>("IsCommon")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")
