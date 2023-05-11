@@ -16,6 +16,7 @@
           <template v-else>
             <p>Game Count: {{ player.gameCount }}</p>
             <p>Average Attempts: {{ player.averageAttempts }}</p>
+            <p>Average GameTime: {{ player.averageSecondsPerGame }}</p>
           </template>
         </v-card-text>
       </v-card>
@@ -36,6 +37,7 @@ interface Player {
   name: string
   gameCount: number
   averageAttempts: number
+  averageSecondsPerGame: number
   revealStats: boolean
 }
 
