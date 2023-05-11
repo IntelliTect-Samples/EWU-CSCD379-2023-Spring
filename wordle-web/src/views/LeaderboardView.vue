@@ -3,17 +3,31 @@
     <v-card>
       <v-card-title>Leader Board</v-card-title>
         <v-progress-linear 
-        v-for="(player, index) in playerData"
-      :key="player.PlayerID"
-      cols="auto"
-          v-model="progress[index + 1]"
+          v-model="progress[0]"
           color="amber"
           height="25"
         >
-        <strong>{{ index + 1 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} 
-          Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
+        <strong>First: {{ playerData[0].Name }} Number of Games: {{ playerData[0].GameCount }} 
+          Average Guesses: {{ playerData[0].AverageAttempts }} Average Time: {{ playerData[0].AverageSecondsPerGame }} </strong> 
       </v-progress-linear>
-      
+      <v-progress-linear 
+          v-model="progress[1]"
+          color="#CD7F32S"
+          height="25"
+        >
+        <strong>Second: {{ playerData[1].Name }} Number of Games: {{ playerData[1].GameCount }} 
+          Average Guesses: {{ playerData[1].AverageAttempts }} Average Time: {{ playerData[1].AverageSecondsPerGame }} </strong> 
+      </v-progress-linear>
+      <template v-for="i in 8" :key="i.id">
+        <v-progress-linear 
+          v-model="progress[i+3]"
+          color="#757575"
+          height="25"
+        >
+        <strong>{{ i+3 }}: {{ playerData[i+3].Name }} Number of Games: {{ playerData[i+3].GameCount }} 
+          Average Guesses: {{ playerData[i+3].AverageAttempts }} Average Time: {{ playerData[i+3].AverageSecondsPerGame }}</strong>
+        </v-progress-linear>
+      </template>
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
