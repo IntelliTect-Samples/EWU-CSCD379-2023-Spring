@@ -44,6 +44,7 @@ import { Services } from './scripts/services'
 const display = reactive(useDisplay())
 provide(Services.Display, display)
 const playerService = reactive(new PlayerService())
+playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
 
 const theme = useTheme()

@@ -21,6 +21,7 @@ import { Letter } from '@/scripts/letter'
 import LetterButton from '@/components/LetterButton.vue'
 import { computed, inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
+import { Services } from '@/scripts/services'
 
 const props = defineProps<{
   guessedLetters: Letter[]
@@ -28,7 +29,7 @@ const props = defineProps<{
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
-const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
 
