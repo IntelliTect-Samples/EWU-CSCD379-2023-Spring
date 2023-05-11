@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { Player } from '@/scripts/playerService'
+import { Player } from '@/scripts/Service'
 import { onMounted } from 'vue'
 import { watch } from 'vue'
 import { ref } from 'vue'
