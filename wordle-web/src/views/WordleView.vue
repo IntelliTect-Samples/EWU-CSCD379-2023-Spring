@@ -10,7 +10,10 @@
       </v-form>
     </v-sheet>
   </v-overlay>
-  <v-btn @click="changeUsername"> {{ userName }} </v-btn>
+
+  <v-container class="d-flex flex-row-reverse">
+    <v-btn @click="changeUsername"> {{ userName }} </v-btn>
+  </v-container>
 
   <div class="text-h4 text-center">Wordle Mind Bender</div>
 
@@ -70,8 +73,10 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 const namePrompt = ref(false)
 const overlay = ref(true)
-let userName = ref('Guest')
-let attempts = 0
+let name = 'Guest'
+const userName = ref(name)
+const attempts = ref()
+const gameCount = ref(0)
 
 // Start a new game
 newGame()
@@ -95,23 +100,29 @@ function changeUsername() {
 
 function setUsername() {
   namePrompt.value = false
-  Axios.post('/player', {
-    name: userName.value,
-    attempts: attempts,
-    secondsInGame: 0
-  })
-    .then((response) => {
-      namePrompt.value = false
-      console.log(response.data)
+  name = userName.value
+  if (game.status == WordleGameStatus.Won) {
+    Axios.post('/player', {
+      name: userName.value,
+      attempts: attempts.value,
+      secondsInGame: 0,
+      gameCount: gameCount.value
     })
-    .catch((error) => {
-      console.log(error)
-    })
+      .then((response) => {
+        namePrompt.value = false
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    attempts.value = 0
+    gameCount.value = 0
+  }
 }
 
 function addWord() {
   overlay.value = true
-  Axios.post('/word/AddWordFromBody', {
+  Axios.post('/word', {
     text: 'tests',
     isCommon: true,
     isUsed: false
@@ -127,7 +138,8 @@ function addWord() {
 
 function newGame() {
   overlay.value = true
-  attempts = 0
+  attempts.value = 0
+  gameCount.value = 0
   Axios.get('/word')
     .then((response) => {
       game.restartGame(response.data)
@@ -149,7 +161,12 @@ function checkGuess(word?: string) {
     game.guess.set(word)
   }
   game.submitGuess()
-  attempts++
+
+  if (game.status == WordleGameStatus.Won) {
+    gameCount.value = 1
+  }
+
+  attempts.value++
   promptUser()
   guess.value = ''
 }
