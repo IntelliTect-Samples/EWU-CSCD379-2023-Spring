@@ -3,85 +3,17 @@
     <v-card>
       <v-card-title>Leader Board</v-card-title>
         <v-progress-linear 
-          v-model="progress[0]"
+        v-for="(player, index) in playerData"
+      :key="player.PlayerID"
+      cols="auto"
+          v-model="progress[index + 1]"
           color="amber"
           height="25"
-          v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 1 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-        </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[1]"
-        color="#AFAFAF"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 2 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
+        >
+        <strong>{{ index + 1 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} 
+          Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
       </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[2]"
-        color="#CD7F32"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 3 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[3]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 4 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[4]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 5 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[5]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 6 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[6]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 7 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[7]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 8 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[8]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 9 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
-      <v-progress-linear 
-        v-model="progress[9]"
-        color="#757575"
-        height="25"
-        v-for="(player, index) in playerData"
-    :key="player.PlayerID"
-        ><strong>{{ index + 10 }}: {{ player.Name }} Number of Games: {{ player.GameCount }} Average Guesses: {{ player.AverageAttempts }} Average Time: {{ player.AverageSecondsPerGame }} </strong> 
-    </v-progress-linear>
+      
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>

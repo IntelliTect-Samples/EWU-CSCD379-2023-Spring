@@ -64,7 +64,9 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
-      Axios.post(username.value, timer.value, <any>game.numberOfGuesses)
+      Axios.post(username.value, timer.value, {
+        data: game.numberOfGuesses
+      })
        .then((response): void => {
         console.log(response.data)
       }) 
