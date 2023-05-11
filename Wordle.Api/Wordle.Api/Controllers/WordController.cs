@@ -23,23 +23,29 @@ public class WordController : ControllerBase
         return await _wordService.GetRandomWord();
     }
 
-    [HttpGet("GetManyWords")]
-    public async Task<IEnumerable<Word>> GetManyWords(int? count)
-    {
-        return await _wordService.GetSeveralWords(count);
-    }
+    // NOTE: Disabled because unused. Respective service method and UI components are also disabled.
+    //       (Disabled group set => Set 1)
+    // [HttpGet("GetManyWords")]
+    // public async Task<IEnumerable<Word>> GetManyWords(int? count)
+    // {
+    //     return await _wordService.GetSeveralWords(count);
+    // }
+    
+    // NOTE: Disabled because unused. Respective service method and UI components are also disabled.
+    //       (Disabled group set => Set 1)
+    // [HttpPost]
+    // public async Task<Word> AddWord(string newWord, bool isCommon)
+    // {
+    //     return await _wordService.AddWord(newWord, isCommon);
+    // }
 
-    [HttpPost]
-    public async Task<Word> AddWord(string newWord, bool isCommon)
-    {
-        return await _wordService.AddWord(newWord, isCommon);
-    }
-
-    [HttpPost("AddWordFromBody")]
-    public async Task<Word> AddWordFromBody([FromBody] WordDto word)
-    {
-        return await _wordService.AddWord(word.Text, word.IsCommon);
-    }
+    // NOTE: Disabled because unused. Respective service method and UI components are also disabled.
+    //       (Disabled group set => Set 1)
+    // [HttpPost("AddWordFromBody")]
+    // public async Task<Word> AddWordFromBody([FromBody] WordDto word)
+    // {
+    //     return await _wordService.AddWord(word.Text, word.IsCommon);
+    // }
 
     [HttpGet("GetWordList")]
     public async Task<IEnumerable<Word>> GetWordList()

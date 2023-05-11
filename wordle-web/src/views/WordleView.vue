@@ -58,14 +58,18 @@
             >{{ buttonText }}</v-btn
           >
         </v-col>
-        <v-col cols="auto">
-          <v-btn
-            @click="addWordToDatabase()"
-            class="elevation-10"
-            style="background-image: var(--btn-gradient)"
-            >Add Strin</v-btn
-          >
-        </v-col>
+        <!-------------------------------------------------------------------------------->
+        <!-- NOTE: Disabled because unused. Respective API end-points is also disabled. -->
+        <!--       (Disabled group set => Set 1)                                        -->
+        <!-------------------------------------------------------------------------------->
+        <!-- <v-col cols="auto">-->
+        <!--   <v-btn-->
+        <!--     @click="addWordToDatabase()"-->
+        <!--     class="elevation-10"-->
+        <!--     style="background-image: var(&#45;&#45;btn-gradient)"-->
+        <!--   >Add Strin</v-btn-->
+        <!--   >-->
+        <!-- </v-col>-->
       </v-row>
     </div>
   </div>
@@ -170,21 +174,23 @@ function toggleSecretWordText() {
 }
 
 // TODO: Update method to add word from body, instead of attempting add hardcoded word in method.
-function addWordToDatabase() {
-  overlay.value = true
-  Axios.post('word/AddWordFromBody', {
-    text: 'strin',
-    isCommon: true,
-    isUsed: false
-  })
-    .then((response) => {
-      overlay.value = false
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
+// NOTE: Disabled because unused. Respective API end-point is also disabled.
+//       (Disabled group set => Set 1)
+// function addWordToDatabase() {
+//   overlay.value = true
+//   Axios.post('word/AddWordFromBody', {
+//     text: 'strin',
+//     isCommon: true,
+//     isUsed: false
+//   })
+//     .then((response) => {
+//       overlay.value = false
+//       console.log(response.data)
+//     })
+//     .catch((error) => {
+//       console.log(error)
+//     })
+// }
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
