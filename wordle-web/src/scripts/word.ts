@@ -60,11 +60,9 @@ export class Word {
         this.letters[i].status = LetterStatus.Correct
         guessChars[i] = '_'
         secretChars[i] = '_'
-        console.log(`Letter ${i} is correct`)
       } else {
         isCorrect = false
         this.letters[i].status = LetterStatus.Wrong
-        console.log(`Letter ${i} is incorrect`)
       }
     }
 
@@ -75,16 +73,12 @@ export class Word {
             this.letters[i].status = LetterStatus.Misplaced
             guessChars[i] = '_'
             secretChars[j] = '_'
-            console.log(`Letter ${i} is misplaced`)
             break
           }
         }
       }
     }
 
-    console.log(guessChars)
-    console.log(secretChars)
-    console.log(isCorrect)
     return isCorrect
     // check if the letters are in the right place
   }

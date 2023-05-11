@@ -20,6 +20,13 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
+  numberOfSeconds = 0
+  finalTime = 0
+  finalGuesses = 0
+  userName = ''
+  displayName = 'Guest'
+  interval = setInterval(() => this.secondsPassed(), 1000)
+
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -38,23 +45,42 @@ export class WordleGame {
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
   }
+  changeName(newName: string){
+    this.userName = newName
+    localStorage.setItem('name', JSON.stringify(newName))
+    if(this.userName == ''){
+      this.displayName = 'Guest'
+    } else{
+      this.displayName = this.userName
+    }
+  }
+  secondsPassed(){
+    this.numberOfSeconds += 1
+  }
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    const isCorrect = this.guess.check(this.secretWord)
+    if(isCorrect){
+      this.status = WordleGameStatus.Won
+    } else{
+      this.status = WordleGameStatus.Active
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
       this.guessedLetters.push(letter)
     }
-
-    console.log(this.guessedLetters)
-
     const index = this.guesses.indexOf(this.guess)
-    if (index < this.guesses.length - 1) {
+    if (index < this.guesses.length - 1 && this.status == WordleGameStatus.Active) {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      if(this.status != WordleGameStatus.Won){
+        this.status = WordleGameStatus.Lost
+      }
+      this.finalGuesses = index + 1
+      this.finalTime = this.numberOfSeconds
     }
   }
 }
