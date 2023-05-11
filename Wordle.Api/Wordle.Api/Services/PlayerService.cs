@@ -16,17 +16,17 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<PlayerDto>> GetTopTenScores()
     {
         int count = 10;
-        var totalCount = await _db.Players.CountAsync(player => player.GameCount > 6);
+        var totalCount = await _db.Players.CountAsync(player => player.GameCount > 3);
         if (count > totalCount)
         {
             count = totalCount;
         }
         var players = await _db.Players
-            .Where(player => player.GameCount > 6)
+            .Where(player => player.GameCount > 3)
             .ToListAsync();
 
         var topPlayers = players
-            .OrderBy(player => player.AverageAttempts)
+            .OrderBy(player => (player.GameCount / (player.AverageAttempts * 10 + player.AverageSecondsPerGame)))
             .Take(count)
             .Select(player => new PlayerDto
             {

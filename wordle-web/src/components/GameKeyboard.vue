@@ -32,7 +32,6 @@ const keyboardLetters = computed(() => {
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
     for (let key of keyboardKey) {
-      //console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
       keyboardRow.push(
         props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()) ??
           new Letter(key)
