@@ -12,7 +12,7 @@
         <strong>{{ player.name }}</strong>
         </v-progress-linear>
         <div class="text-center">
-          Game Count: {{ player.gameCount }}, Total Attempts: {{ player.totalAttempts }}, Average Attempts: {{ player.averageAttempts }}, Total Seconds Played: {{ player.totalSecondsPlayed }}, Average Time Per Game: {{ player.averageSecondsPerGame }} </div>
+          Game Count: {{ player.gameCount }}, Average Attempts: {{ player.averageAttempts }}, Average Time Per Game: {{ player.averageSecondsPerGame }} </div>
       </template>
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
