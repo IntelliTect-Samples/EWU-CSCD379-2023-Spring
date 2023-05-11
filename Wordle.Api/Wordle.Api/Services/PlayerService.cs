@@ -20,7 +20,6 @@ namespace Wordle.Api.Services
             var topTen = await _db.Players
                 .OrderBy(p => p.AverageAttempts)
                 .ThenByDescending(p => p.GameCount)
-                .ThenBy(p => p.AverageSecondsPerGame)
                 .Take(10)
                 .ToListAsync();
             return topTen;
