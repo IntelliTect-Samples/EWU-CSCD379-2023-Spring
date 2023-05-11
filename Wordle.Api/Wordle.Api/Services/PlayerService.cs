@@ -26,7 +26,7 @@ namespace Wordle.Api.Services
             .ToListAsync();
 
         var topPlayers = players
-            .OrderByDescending(player => (player.GameCount / (player.AverageAttempts * 10 + player.AverageSecondsPerGame)))
+            .OrderByDescending(player => (player.GameCount / ((player.AverageAttempts * 10) + (player.AverageSecondsPerGame / 2))))
             .Take(count)
             .Select(player => new PlayerDto
             {
