@@ -1,6 +1,6 @@
 <template>
   <div class="text-right">
-    <GetName :name="name" @overlay="onOverlay" />
+    <GetName :name="playerName" @overlay="onOverlay" />
   </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -39,11 +39,11 @@ let validWords = ref(['?????'])
 let guesses: string[] = []
 const selection = ref(null)
 const input = ref(true)
-const name = ref(undefined)
+const playerName = ref('guest')
 
 Axios.get('player')
   .then((response) => {
-    name.value = response.data
+    playerName.value = response.data
   })
   .catch((error) => {
     console.log(error)
@@ -129,6 +129,7 @@ function keyPress(event: KeyboardEvent) {
 
 function onOverlay(name: string) {
   input.value = !input.value
+  playerName.value = name
   Axios.post('player', {
     name: name
   })
