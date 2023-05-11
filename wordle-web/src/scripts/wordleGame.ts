@@ -24,8 +24,8 @@ export class WordleGame {
   numberOfGuesses = 6
   finalTime = 0
   finalGuesses = 0
-  useName = ''
-  displayName = 'Guest'
+  //useName = ''
+  //displayName = 'Guest'
   interval = setInterval(() => this.secondsPassed(), 1000)
 
   // // check length of guess
@@ -34,14 +34,6 @@ export class WordleGame {
   //     return
   //   }
 
-  changeName(newName: string) {
-    this.useName = newName
-    if (this.useName == '') {
-      this.displayName = 'Guest'
-    } else {
-      this.displayName = this.useName
-    }
-  }
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     //this.secretWord = secretWord
