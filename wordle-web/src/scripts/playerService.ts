@@ -1,6 +1,6 @@
 import Axios from 'axios'
 import { Player } from './player'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 
 export class PlayerService {
   // This is a reactive type, don't assign, update properties
@@ -9,7 +9,7 @@ export class PlayerService {
   isOnline = ref(false)
 
   constructor() {
-    this.player = new Player()
+    this.player = reactive(new Player())
     this.player.playerId = localStorage.getItem('userId') ?? ''
     this.player.name = localStorage.getItem('userName') ?? 'Guest'
   }
