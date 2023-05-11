@@ -7,6 +7,10 @@
 
     <v-spacer></v-spacer>
 
+    <RouterLink to="/leaderboard">
+      <v-app-bar-title> Leaderboard </v-app-bar-title>
+    </RouterLink>
+
     <v-app-bar-nav-icon>
       <v-icon icon="mdi-cog" />
       <v-menu activator="parent">
