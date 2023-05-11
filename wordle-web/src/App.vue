@@ -16,9 +16,7 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-//Delete this later doing for commit & push
 const theme = useTheme()
-
 function setInverseTheme() {
   theme.global.name.value = 'inverse'
 }
