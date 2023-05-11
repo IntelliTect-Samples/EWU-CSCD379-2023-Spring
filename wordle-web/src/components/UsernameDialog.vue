@@ -9,7 +9,7 @@
             <v-btn @click="submitName"> Submit </v-btn>
           </v-col>
           <v-col cols="auto">
-            <v-btn @click="closeDialog"> Cancel </v-btn>
+            <v-btn @click="continueAsGuest"> Continue as Guest </v-btn>
           </v-col>
         </v-row>
       </v-card-text>
@@ -61,8 +61,9 @@ if (!localStorage.getItem('username')) {
   updateDialogValue(true)
 }
 
-function closeDialog() {
-  dialog.value = false
+function continueAsGuest() {
+  username.value = 'Guest'
+  submitName()
 }
 
 function submitName() {
@@ -72,7 +73,7 @@ function submitName() {
     setTimeout(() => {
       submitted.value = false
     }, 1500)
-    closeDialog()
+    dialog.value = false
   }
 }
 </script>
