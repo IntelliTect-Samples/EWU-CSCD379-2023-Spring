@@ -15,7 +15,7 @@ namespace Wordle.Api.Services
 
         public async Task<IEnumerable<Player>> GetTopTenScores()
         {
-            return await _db.Players.OrderBy(player => player.AverageAttempts).Take(10).ToListAsync();
+            return await _db.Players.OrderBy(player => player.AverageAttempts/(-15.0/(player.GameCount+15.0/5.0) + 6.0)).Take(10).ToListAsync();
         }
 
         public async Task<Player> AddNewScore(string? name, double attempts)
