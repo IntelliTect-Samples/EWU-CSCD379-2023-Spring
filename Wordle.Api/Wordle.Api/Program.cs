@@ -31,17 +31,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<WordService>();
+builder.Services.AddScoped<PlayerService>();
 
+// Actually build the app so we can configure the pipeline next
 var app = builder.Build();
 
+
+
+// Create and see the database
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-    Word.SeedWords(db);
+    Seeder.SeedWords(db);
+    Seeder.SeedPlayers(db);
 }
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwagger", false))

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Numerics;
 
 namespace Wordle.Api.Data
 {
@@ -10,5 +11,6 @@ namespace Wordle.Api.Data
         }
 
         public DbSet<Word> Words => Set<Word>();
+        public DbSet<Player> Players => Set<Player>();
     }
 }
