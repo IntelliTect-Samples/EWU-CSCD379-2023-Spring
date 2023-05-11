@@ -125,19 +125,19 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
-function newGames() {
+async function newGames() {
   /* Perform axios call to get new word and start game. */
-  Axios.get('word')
-    .then((response) => {
-      game.startNewGame(response.data)
-      console.log('Secret word: ' + game.secretWord)
-      setTimeout(() => {
-        overlay.value = false
-      }, 502)
-    })
-    .catch((error) => {
-      console.log('Axios error: ' + error)
-    })
+  await Axios.get('word')
+      .then((response) => {
+        game.startNewGame(response.data)
+        console.log('Secret word: ' + game.secretWord)
+        setTimeout(() => {
+          overlay.value = false
+        }, 502)
+      })
+      .catch((error) => {
+        console.log('Axios error: ' + error)
+      })
 
   // Reset Win/Lose dialogs.
   gameWon.value = false
