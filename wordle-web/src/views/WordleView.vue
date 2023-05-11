@@ -123,7 +123,7 @@ const gameLost = ref(false)
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
-  newGames()
+  await newGames()
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
