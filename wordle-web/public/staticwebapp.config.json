@@ -1,5 +1,5 @@
 {
-  "navigationFallbak": {
+  "navigationFallback": {
     "rewrite": "index.html"
   },
   "mimeTypes": {
