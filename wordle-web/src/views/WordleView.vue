@@ -109,7 +109,6 @@ function setUsername() {
       gameCount: gameCount.value
     })
       .then((response) => {
-        namePrompt.value = false
         console.log(response.data)
       })
       .catch((error) => {
