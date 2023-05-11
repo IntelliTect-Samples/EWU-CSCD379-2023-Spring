@@ -34,7 +34,6 @@ export class WordleGame {
   //     return
   //   }
 
-
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
     //this.secretWord = secretWord
     this.secretWord = await WordsService.getWordFromApi()
