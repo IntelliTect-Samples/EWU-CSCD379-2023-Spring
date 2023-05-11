@@ -10,7 +10,7 @@
     <h2 class="pt-2 pe-5 ps-5 pb-2">Player name: {{ props.playerName }}</h2>
   </v-card>
   <div class="text-center">
-    <v-dialog v-model="dialog" activator="parent" width="auto">
+    <v-dialog v-model="dialog" activator="parent" width="auto" persistent>
       <v-card title="Please enter Player name:" subtitle="If no name is enter will play as Guest:">
         <v-text-field
           class="ps-5 pe-5 pt-5"
