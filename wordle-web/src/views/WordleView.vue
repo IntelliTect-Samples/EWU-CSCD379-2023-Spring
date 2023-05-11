@@ -107,8 +107,6 @@ function handleSubmit() {
 
 async function submitToLeaderboard() {
   overlay.value = true
-  console.log(game.finalGuesses)
-  console.log(game.finalTime)
   await Axios.post('Leaderboard/InsertScore', {
     name: displayName.value,
     averageAttempts: game.finalGuesses,
