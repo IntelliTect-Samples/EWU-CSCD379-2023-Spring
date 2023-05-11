@@ -103,7 +103,7 @@ function setUsername() {
   name = userName.value
   if (game.status == WordleGameStatus.Won) {
     Axios.post('/player', {
-      name: userName.value,
+      name: userName.value.trim(),
       attempts: attempts.value,
       secondsInGame: 0,
       gameCount: gameCount.value
