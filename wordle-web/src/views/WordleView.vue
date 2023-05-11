@@ -1,5 +1,5 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <br />
 
   <GameBoard :game="game" @letterClick="addChar" />
 

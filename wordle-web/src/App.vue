@@ -4,7 +4,6 @@
       <div class="nav-bar">
         <nav>
           <RouterLink to="/">Home</RouterLink> | <RouterLink to="/wordle">Wordle</RouterLink> |
-          <RouterLink to="/about">About</RouterLink> |
           <RouterLink to="/leaderboard">Leader Board</RouterLink>
         </nav>
       </div>

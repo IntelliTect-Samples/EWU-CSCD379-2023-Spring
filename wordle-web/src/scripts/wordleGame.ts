@@ -21,15 +21,10 @@ export class WordleGame {
   guess!: Word
   numberOfGuesses = 6
 
-  // // check length of guess
-  //   if (this.letters.length !== secretWord.length) {
-  //     console.log('wrong length')
-  //     return
-  //   }
-
   async restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
     this.secretWord = secretWord || (await WordsService.getWordFromApi())
     this.guesses.splice(0)
+    this.guessedLetters.splice(0)
 
     for (let i = 0; i < numberOfGuesses; i++) {
       const word = new Word()
@@ -41,7 +36,9 @@ export class WordleGame {
 
   submitGuess() {
     // put logic to win here.
-    this.guess.check(this.secretWord)
+    if (this.guess.check(this.secretWord)) {
+      this.status = WordleGameStatus.Won
+    }
 
     // Update the guessed letters
     for (const letter of this.guess.letters) {
@@ -55,6 +52,7 @@ export class WordleGame {
       this.guess = this.guesses[index + 1]
     } else {
       // The game is over
+      this.status = WordleGameStatus.Lost
     }
   }
 }
