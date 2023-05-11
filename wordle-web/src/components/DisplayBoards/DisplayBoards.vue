@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import PersonalStats from '@/components/DisplayBoards/PersonalStats.vue'
-import Leaderboard from '@/components/DisplayBoards/Leaderboard.vue'
+import PersonalStats from '@/components/DisplayBoards/PersonalStatsCard.vue'
+import Leaderboard from '@/components/DisplayBoards/LeaderboardCard.vue'
 </script>
 
 <style>
