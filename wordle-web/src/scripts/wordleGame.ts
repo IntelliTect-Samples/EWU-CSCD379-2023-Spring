@@ -22,7 +22,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   validWords = new Array<String>()
-
+  guessNum = 0
   
 
   // // check length of guess
@@ -41,13 +41,14 @@ export class WordleGame {
     }
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
+    this.guessNum = 0
   }
 
   submitGuess() {
     // put logic to win here.
     this.validWords = WordsService.validWords(this.guess, this.secretWord)
     this.guess.check(this.secretWord)
-
+    this.guessNum++
     // Update the guessed letters
     for (const letter of this.guess.letters) {
       this.guessedLetters.push(letter)
@@ -73,9 +74,5 @@ export class WordleGame {
     if (index === this.numberOfGuesses - 1 && this.status !== WordleGameStatus.Won) {
       this.status = WordleGameStatus.Lost
     }
-  }
-
-  getNumOfGuesses() {
-    return this.numberOfGuesses;   
   }
 }
