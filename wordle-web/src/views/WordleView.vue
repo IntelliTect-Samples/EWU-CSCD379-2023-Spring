@@ -40,11 +40,13 @@
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
+
+  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted, inject } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
@@ -52,21 +54,28 @@ import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import { useDisplay } from 'vuetify'
+import { Player } from '@/scripts/player'
+import { Services } from '@/scripts/services'
+import type { PlayerService } from '@/scripts/playerService'
+import { GameResult } from '@/scripts/gameResult'
+import ScoreDialog from '@/components/ScoreDialog.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
+const showScoreDialog = ref(false)
+const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
-const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
-
-// Start a new game
-newGame()
+const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
+  // Start a new game
+  await newGame()
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
@@ -96,6 +105,9 @@ function checkGuess(word?: string) {
     game.guess.set(word)
   }
   game.submitGuess()
+  if (game.status !== WordleGameStatus.Active) {
+    sendGameResult()
+  }
   guess.value = ''
 }
 
@@ -114,5 +126,23 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
+}
+
+function sendGameResult() {
+  const gameResult = new GameResult()
+  gameResult.playerId = playerService.player.playerId
+  gameResult.attempts = game.guesses.filter((f) => f.isFilled).length
+  gameResult.durationInSeconds = Math.round(game.duration() / 1000)
+  gameResult.wasGameWon = game.status == WordleGameStatus.Won
+  gameResult.wordPlayed = game.secretWord
+
+  console.log(gameResult)
+
+  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+    console.log(response.data)
+  })
+  // if (this.onGameEnd) {
+  //   this.onGameEnd(response.data as GameResult)
+  // }
 }
 </script>

@@ -17,7 +17,7 @@ namespace Wordle.Api.Tests
         {
             using var context = new AppDbContext(Options);
             var service = new WordService(context);
-            Word.SeedWords(context);
+            Seeder.Seed(context);
 
             var word = await service.GetRandomWord();
 
