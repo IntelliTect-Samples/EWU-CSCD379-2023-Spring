@@ -6,7 +6,7 @@
 
   <v-dialog v-model="dialog" transition="dialog-bottom-transition" width="auto" persistent>
     <v-card class="justify-center text-center" width="520px" height="280px">
-      <v-text-field>Please login or continue as Guest</v-text-field>
+      <v-text-field>Please enter a user name</v-text-field>
       You are currently logged in as: {{ usersName }}
       <v-text-field
         label="Enter a User Name"
@@ -30,6 +30,10 @@ const dialog = ref(true)
 const usersName = ref('guest')
 const inputUserName = ref('')
 
+if(localStorage.getItem !== null) {
+  usersName.value = localStorage.getItem('usersName')!
+}
+
 function updateUserName() {
   usersName.value = inputUserName.value
 }
@@ -38,10 +42,10 @@ function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
   sendUsername()
+  localStorage.setItem('usersName', usersName.value)
 }
 
 function cancelUserName() {
-  usersName.value = 'Guest'
   dialog.value = false
 }
 
