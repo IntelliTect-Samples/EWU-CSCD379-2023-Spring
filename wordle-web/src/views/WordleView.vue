@@ -67,14 +67,15 @@ function startGame() {
       clearInterval(check)
       overlay.value = true
       Axios.post(username.value, timer.value, <any>game.numberOfGuesses)
-        .then((response) => {
+        /*
+       .then((response) => {
         overlay.value = false
         console.log(response.data)
-      })
-      
+      }) 
         .catch((error) => {
         console.log(error)
       })
+      */
     } else {
       timer.value += 1
       sec.value += 1
