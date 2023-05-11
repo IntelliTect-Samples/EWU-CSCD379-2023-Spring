@@ -16,9 +16,9 @@ import Axios from 'axios'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-  Axios.defaults.baseURL = 'https://localhost:7053/'
+  Axios.defaults.baseURL = 'http://localhost:5006/'
 } else {
-  Axios.defaults.baseURL = 'wordle2023-nparkman.azurewebsites.net/'
+  Axios.defaults.baseURL = 'cscd-379-spring-2023-nparkman.database.windows.net'
 }
 
 const vuetify = createVuetify({

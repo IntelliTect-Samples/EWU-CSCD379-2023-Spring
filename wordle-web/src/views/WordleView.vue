@@ -6,7 +6,7 @@
   </v-col>
 
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">Better Luck Next Time</div>
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You win!</div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -35,7 +35,6 @@ import clicking_button from '@/assets/clicking_button_sound.mp3'
 import guess_button from '@/assets/guess_button_sound.mp3'
 import Axios from 'axios'
 import setUsername from '@/components/SetUsername.vue'
-import username from '@/components/SetUsername.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -44,6 +43,7 @@ const clickSound = new Audio(clicking_button)
 const timer = ref(0)
 const sec = ref(0)
 const min = ref(0)
+
 startGame()
 
 
@@ -64,9 +64,8 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
-      Axios.post(username.value, timer.value, {
-        data: game.numberOfGuesses
-      })
+      
+      Axios.post(`Player/AddPlayer?newName=${localStorage.getItem('username')}&playTime=${timer.value}&guesses=${game.numberOfGuesses}`)
        .then((response): void => {
         console.log(response.data)
       }) 

@@ -23,7 +23,7 @@ namespace Wordle.Api.Controllers
             return await _playerService.GetTopTen();
         }
 
-        [HttpPost]
+        [HttpPost("AddPlayer")]
         public async Task<Player> AddPlayer(string newName, int playTime, int guesses)
         {
             return await _playerService.AddPlayer(newName, playTime, guesses);

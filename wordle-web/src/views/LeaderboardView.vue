@@ -2,28 +2,38 @@
   <v-sheet>
     <v-card>
       <v-card-title>Leader Board</v-card-title>
+      <template v-for="player in playerData" v-bind:key="player.name">
         <v-progress-linear 
-          v-model="progress[0]"
+          v-model="player.averageAttempts"
+          max = "6"
           color="#757575"
           height="25"
         >
-        <strong>{{ playerData }}</strong>>
+        <strong>{{ player.name }}</strong>
         </v-progress-linear>
-    
+        <div class="text-center">
+          Game Count: {{ player.gameCount }}, Total Attempts: {{ player.totalAttempts }}, Average Attempts: {{ player.averageAttempts }}, Total Seconds Played: {{ player.totalSecondsPlayed }}, Average Time Per Game: {{ player.averageSecondsPerGame }} </div>
+      </template>
       <v-btn @click="$router.back()">Back</v-btn>
     </v-card>
   </v-sheet>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue';
 import Axios from 'axios'
-import type { PlayerData } from '@/types/PlayerData'
-
-const progress = ref([100,80,60,40,20,18,16,14,18,10])
-
 
 var playerData = ref<PlayerData[]>([])
+
+interface PlayerData {
+  name: string
+  gameCount: number
+  totalAttempts: number
+  averageAttempts: number
+  totalSecondsPlayed: number
+  averageSecondsPerGame: number
+}
+
 
 Axios.get('Player/GetTopTen')
   .then((response) => {

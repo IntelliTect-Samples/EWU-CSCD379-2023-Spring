@@ -31,6 +31,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 
+
+
 const user = ref(true)
 const username = ref("Guest")
 
@@ -50,5 +52,8 @@ function setUsername() {
   user.value = false
   localStorage.setItem('username', username.value)
 }
+
+
+
 
 </script>

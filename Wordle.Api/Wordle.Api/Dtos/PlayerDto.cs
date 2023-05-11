@@ -8,5 +8,6 @@ namespace Wordle.Api.Dtos
         public double AverageAttempts { get; set; }
         public int TotalSecondsPlayed { get; set; }
         public int AverageSecondsPerGame { get; set; }
+
     }
 }
