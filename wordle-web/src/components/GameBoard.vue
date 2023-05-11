@@ -6,13 +6,13 @@
     dense
   >
     <v-col v-for="(letter, colIndex) in word.letters" :key="`col-${colIndex}`" cols="auto">
-      <LetterButton :letter="letter" @click="letterClick(letter)" />
+      <LetterResult :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
+import LetterResult from '@/components/LetterResult.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
 

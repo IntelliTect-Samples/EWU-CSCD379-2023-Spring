@@ -1,47 +1,54 @@
-import { computed, ref } from 'vue'
 import Axios from 'axios'
+import { Player } from './player'
+import { reactive, ref } from 'vue'
 
-const Id = ref<string | null>(localStorage.getItem('userId'))
-const Name = ref<string>(localStorage.getItem('userName') ?? 'Guest')
+export class PlayerService {
+  // This is a reactive type, don't assign, update properties
+  readonly player: Player
+  isLoaded: boolean = false
+  isOnline = ref(false)
 
-const createPlayer = async () => {
-  const response = await Axios.post('/player')
-  const { playerId, name } = response.data
-  Id.value = playerId
-  Name.value = name
-  localStorage.setItem('userId', playerId)
-  localStorage.setItem('userName', name)
-}
-
-const getPlayer = async () => {
-  Axios.get(`/player?id=${Id.value}`)
-    .then((response) => {
-      Name.value = response.data.name
-      localStorage.setItem('userName', response.data.name ?? 'Guest')
-    })
-    .catch(() => {
-      createPlayer()
-    })
-}
-
-const ChangeNameAsync = async (name: string) => {
-  Name.value = name
-  localStorage.setItem('userName', name ?? 'Guest')
-  return Axios.put(`/player`, { playerId: Id.value, name: name })
-}
-
-export const SetupAsync = async () => {
-  if (!Id.value) {
-    await createPlayer()
-  } else {
-    await getPlayer()
+  constructor() {
+    this.player = reactive(new Player())
+    this.player.playerId = localStorage.getItem('userId') ?? ''
+    this.player.name = localStorage.getItem('userName') ?? 'Guest'
   }
-}
 
-export const Player = {
-  Id: computed(() => Id.value),
-  Name: computed(() => Name.value),
-  SetupAsync,
-  ChangeNameAsync,
-  TypingName: ref(false)
+  setupPlayerAsync = async () => {
+    if (!this.player.playerId) {
+      try {
+        const response = await Axios.post('/Player/CreatePlayer', this.player.name, {
+          headers: { 'Content-Type': 'application/json' }
+        })
+        this.player.playerId = response.data.playerId
+        localStorage.setItem('userId', this.player.playerId)
+        localStorage.setItem('userName', this.player.name)
+        this.isOnline.value = true
+      } catch (error) {
+        this.isOnline.value = false
+      }
+    } else if (!this.isLoaded) {
+      await this.refreshPlayerFromServerAsync()
+    }
+  }
+
+  refreshPlayerFromServerAsync = async () => {
+    try {
+      const response = await Axios.get(`/Player?playerId=${this.player.playerId}`)
+      this.player.name = response.data.name
+      this.player.gameCount = response.data.gameCount
+      this.player.averageAttempts = response.data.averageAttempts
+      this.player.averageSecondsPerGame = response.data.averageSecondsPerGame
+      localStorage.setItem('userName', this.player.name)
+    } catch (error) {
+      this.isOnline.value = false
+    }
+  }
+
+  ChangeNameAsync = async (name: string) => {
+    if (!this.isOnline) return
+    this.player.name = name
+    localStorage.setItem('userName', name ?? 'Guest')
+    return Axios.post(`/Player/RenamePlayer`, this.player)
+  }
 }

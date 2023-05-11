@@ -5,40 +5,63 @@
     :key="rowIndex"
     dense
   >
-    <v-col v-for="key in keyboardRow" :key="key.char" cols="auto">
+    <v-col
+      v-for="key in keyboardRow"
+      :key="key.char"
+      cols="auto"
+      :class="{ 'ml-1 px-0': display.xs }"
+    >
       <LetterButton :letter="key" @click="letterClick(key)" />
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
-import { computed } from 'vue'
+import LetterButton from '@/components/LetterButton.vue'
+import { computed, inject, reactive } from 'vue'
+import { useDisplay } from 'vuetify'
+import { Services } from '@/scripts/services'
+
 const props = defineProps<{
   guessedLetters: Letter[]
 }>()
+
+// Add this to make testing work because useDisplay() throws an error when testing
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
+
 const keyboardLetters = computed(() => {
-  console.log(props.guessedLetters.length)
   const keyboardLetters: Letter[][] = []
+
   const keyboardKeys = [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
   ]
+
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
     for (let key of keyboardKey) {
-      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
+      //console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
+      keyboardRow.push(
+        props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()) ??
+          new Letter(key)
+      )
     }
     keyboardLetters.push(keyboardRow)
   }
+
   return keyboardLetters
 })
-const emits = defineEmits<{
-  (event: 'letterClick', value: Letter): void
+
+const emit = defineEmits<{
+  (e: 'letterClick', value: Letter): void
 }>()
+
 function letterClick(letter: Letter) {
-  emits('letterClick', letter)
+  emit('letterClick', letter)
 }
 </script>
