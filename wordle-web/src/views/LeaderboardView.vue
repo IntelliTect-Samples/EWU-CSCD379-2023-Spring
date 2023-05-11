@@ -26,10 +26,34 @@
 <script lang="ts" setup>
 import Axios from 'axios'
 import { ref } from 'vue'
-import type { Player } from '@/scripts/player'
+import { Player } from '@/scripts/player'
 import { formatTime } from '@/scripts/helpers'
-
 const players = ref<Player[]>([])
+const playerD = new Player()
+playerD.name = "Mildly"
+playerD.gameCount = 42
+playerD.averageAttempts = 1.8
+players.value.push(playerD)
+const playerE = new Player()
+playerE.name = "Pointless"
+playerE.gameCount = 3
+playerE.averageAttempts = 5.5
+players.value.push(playerE)
+const playerA = new Player()
+playerA.name = "Illusion"
+playerA.gameCount = 5
+playerA.averageAttempts = 2.5
+players.value.push(playerA)
+const playerB = new Player()
+playerB.name = "Of_A"
+playerB.gameCount = 75
+playerB.averageAttempts = 1.2
+players.value.push(playerB)
+const playerC = new Player()
+playerC.name = "Leaderboard"
+playerC.gameCount = 19
+playerC.averageAttempts = 5.7
+players.value.push(playerC)
 
 Axios.get('/player/TopPlayers').then((result) => {
   players.value = result.data as Player[]

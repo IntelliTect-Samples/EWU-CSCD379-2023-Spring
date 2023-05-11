@@ -51,4 +51,8 @@ export class PlayerService {
     localStorage.setItem('userName', name ?? 'Guest')
     return Axios.post(`/Player/RenamePlayer`, this.player)
   }
+
+  ChangeNameSadVersion(name:string){
+    localStorage.setItem('userName', name ?? 'Guest')
+  }
 }

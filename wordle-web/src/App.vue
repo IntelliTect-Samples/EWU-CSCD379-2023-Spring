@@ -10,11 +10,20 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
+        <v-dialog v-model="nameDialog" width="555" persistent>
+          <template v-slot:activator="{ props }">
+            <v-btn color="primary" v-bind="props">{{ user }}</v-btn>
+          </template>
+          <v-card>
+            <v-text-field label="Player Name" variant="underlined" v-model="user"></v-text-field>
+              <v-btn color="secondary" block @click="nameDialog = false">Cancel</v-btn>
+              <v-btn color="primary" block @click="saveUser(user)">Save</v-btn>
+          </v-card>
+        </v-dialog>
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
         <v-menu>
           <template v-slot:activator="{ props }">
-            {{ playerService.player.name }}
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
 
@@ -24,21 +33,7 @@
             </v-list-item>
           </v-list>
         </v-menu>
-
-        <v-dialog v-model="dialog" persistent width="auto">
-          <template v-slot:activator="{ props }">
-            <v-btn color="primary" v-bind="props">WHAT THE FUCK</v-btn>
-          </template>
-          <v-card>
-            <v-card-title class="text-h5">HELLLOOOOO</v-card-title>
-              <v-card-text>Fuck off and fuck this</v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="green-darken-1" variant="text" @click="dialog = false">FUCK THIS</v-btn>
-              <v-btn color="green-darken-1" variant="text" @click="dialog = false">FUCK THAT</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-btn icon="mdi-trophy" to="/leaderboard"></v-btn>
       </template>
     </v-app-bar>
     <v-main>
@@ -46,10 +41,9 @@
     </v-main>
   </v-app>
 </template>
-
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
@@ -80,5 +74,17 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 
-var dialog = true
+function saveUser(name: string){
+  playerService.ChangeNameSadVersion(name)
+  nameDialog.value = false
+}
+
+var user = ref(playerService.player.name)
+var nameDialog = ref(true)
+
+if(playerService.player.name == null || playerService.player.name == 'Guest'){
+  nameDialog.value = true
+} else {
+  nameDialog.value = false
+}
 </script>
