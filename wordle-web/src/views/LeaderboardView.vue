@@ -1,7 +1,7 @@
 <template>
   <v-sheet>
     <v-card width="700px">
-      <v-card-title>Leaderboard</v-card-title>
+      <v-card-title>Leaderboard:</v-card-title>
       <v-row>
         <v-col><v-card-title>Player Name:</v-card-title></v-col>
         <v-col><v-card-title>Average Attempts:</v-card-title></v-col>
