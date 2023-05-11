@@ -66,6 +66,10 @@ function continueAsGuest() {
   submitName()
 }
 
+function closeDialog() {
+  dialog.value = false
+}
+
 function submitName() {
   if (username.value.length > 0) {
     localStorage.setItem('username', username.value)
@@ -73,7 +77,7 @@ function submitName() {
     setTimeout(() => {
       submitted.value = false
     }, 1500)
-    dialog.value = false
+    closeDialog()
   }
 }
 </script>
