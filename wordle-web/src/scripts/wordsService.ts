@@ -25,6 +25,10 @@ export abstract class WordsService {
   static validWords(word: string): Array<string> {
     const validWords: Array<string> = []
 
+    if (word == '') {
+      return validWords
+    }
+
     this.words.forEach((wordObj) => {
       if (wordObj.startsWith(word)) {
         validWords.push(wordObj)
