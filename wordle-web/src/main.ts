@@ -26,6 +26,7 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
+          primary: '#000000',
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'

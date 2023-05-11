@@ -1,7 +1,7 @@
 ## Static WebApp link ##
 https://thankful-sand-0e6efa31e.3.azurestaticapps.net
 ## Api Endpoints ##
-https://calvarezassignment-3.azurewebsites.net/LeaderBoard/Leaderboard
+https://calvarezassignment-3.azurewebsites.net/LeaderBoard/Leaderboard <br />
 https://calvarezassignment-3.azurewebsites.net/Word
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)

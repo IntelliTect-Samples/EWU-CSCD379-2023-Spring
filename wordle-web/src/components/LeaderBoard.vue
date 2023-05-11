@@ -25,7 +25,7 @@ import type { LeaderBoardData } from '@/types/LeaderBoardData'
 
 const leaderboardData = ref<LeaderBoardData[]>()
 
-Axios.get('https://localhost:7053/Leaderboard/Leaderboard')
+Axios.get('https://calvarezassignment-3.azurewebsites.net/Leaderboard/Leaderboard')
   .then((response) => {
     console.log(response.data)
     leaderboardData.value = response.data

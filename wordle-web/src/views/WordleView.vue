@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; justify-content: space-between">
-    <h1>Wordle</h1>
+    <h1></h1>
     <div class="d-flex justify-end mb-6">
       <v-btn @click="showDialog = !showDialog">User: {{ name || 'guest' }}</v-btn>
     </div>
@@ -22,7 +22,7 @@
     <v-dialog v-model="showDialog" width="400px" persistent>
       <v-card title="Name:">
         <v-text-field label="Name" @input="updateName($event.target.value)"></v-text-field>
-        <v-btn @click="showDialog = false">Confirm Name</v-btn>
+        <v-btn @click="showDialog = false" rounded>Confirm Name</v-btn>
       </v-card>
     </v-dialog>
   </template>
@@ -49,13 +49,7 @@
       </v-card>
     </v-dialog>
   </template>
-  <v-btn
-    :onclick="
-      () => {
-        game.restartGame()
-      }
-    "
-    >Restart Game</v-btn
+  <v-btn rounded :onclick="() => {game.restartGame()}">Restart Game</v-btn
   >
 </template>
 
@@ -87,7 +81,7 @@ function handleSubmit() {
 
 async function submitToLeaderboard() {
   overlay.value = true
-  await Axios.post('https://localhost:7053/Leaderboard/AddPlayer', {
+  await Axios.post('https://calvarezassignment-3.azurewebsites.net/Leaderboard/AddPlayer', {
     name: game.displayName,
     attempts: game.finalGuesses,
     secondsPerGame: game.finalTime
