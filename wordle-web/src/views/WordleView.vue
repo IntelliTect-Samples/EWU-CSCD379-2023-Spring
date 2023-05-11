@@ -60,6 +60,7 @@ import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
+import ActiveUser from '@/components/ActiveUser.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
