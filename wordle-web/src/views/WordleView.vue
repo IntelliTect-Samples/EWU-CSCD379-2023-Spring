@@ -90,7 +90,6 @@ function changeName(newName: string) {
 }
 
 function nameUpdater(newName: string) {
-  console.log(newName)
   let str = newName
   changeName(str)
 }
@@ -107,10 +106,6 @@ function handleSubmit() {
 }
 
 async function submitToLeaderboard() {
-  console.log('PlayerInfo')
-  console.log(displayName.value)
-  console.log(game.finalGuesses)
-  console.log(game.finalTime)
   overlay.value = true
   await Axios.post('Leaderboard/InsertScore', {
     name: displayName.value,
@@ -171,14 +166,12 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
   if (!nameDialog.value) {
     if (event.key === 'Enter') {
       checkGuess()
     } else if (event.key === 'Backspace') {
       guess.value = guess.value.slice(0, -1)
       game.guess.pop()
-      console.log('Back')
     } else if (event.key.length === 1 && event.key !== ' ') {
       guess.value += event.key.toLowerCase()
       game.guess.push(event.key.toLowerCase())
