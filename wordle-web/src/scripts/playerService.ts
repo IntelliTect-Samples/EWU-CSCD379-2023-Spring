@@ -1,11 +1,12 @@
 import Axios from 'axios'
 import { Player } from './player'
+import { ref } from 'vue'
 
 export class PlayerService {
   // This is a reactive type, don't assign, update properties
   readonly player: Player
   isLoaded: boolean = false
-  isOffline: boolean = true
+  isOnline = ref(false)
 
   constructor() {
     this.player = new Player()
@@ -22,9 +23,9 @@ export class PlayerService {
         this.player.playerId = response.data.playerId
         localStorage.setItem('userId', this.player.playerId)
         localStorage.setItem('userName', this.player.name)
-        this.isOffline = true
+        this.isOnline.value = true
       } catch (error) {
-        this.isOffline = true
+        this.isOnline.value = false
       }
     } else if (!this.isLoaded) {
       await this.refreshPlayerFromServerAsync()
@@ -40,13 +41,12 @@ export class PlayerService {
       this.player.averageSecondsPerGame = response.data.averageSecondsPerGame
       localStorage.setItem('userName', this.player.name)
     } catch (error) {
-      this.isOffline = true
+      this.isOnline.value = false
     }
   }
 
   ChangeNameAsync = async (name: string) => {
-    await this.setupPlayerAsync()
-    if (this.isOffline) return
+    if (!this.isOnline) return
     this.player.name = name
     localStorage.setItem('userName', name ?? 'Guest')
     return Axios.post(`/Player/RenamePlayer`, this.player)

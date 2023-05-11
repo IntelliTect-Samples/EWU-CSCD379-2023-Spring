@@ -9,8 +9,9 @@
         <v-text-field v-model="newName" />
       </v-card-text>
       <v-card-actions>
+        <v-spacer> </v-spacer>
+        <v-btn @click="confirm">OK</v-btn>
         <v-btn @click="close">Cancel</v-btn>
-        <v-btn @click="confirm">Confirm</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
