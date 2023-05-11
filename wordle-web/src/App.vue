@@ -22,6 +22,21 @@
             </v-list-item>
           </v-list>
         </v-menu>
+
+        <v-dialog v-model="dialog" persistent width="auto">
+          <template v-slot:activator="{ props }">
+            <v-btn color="primary" v-bind="props">WHAT THE FUCK</v-btn>
+          </template>
+          <v-card>
+            <v-card-title class="text-h5">HELLLOOOOO</v-card-title>
+              <v-card-text>Fuck off and fuck this</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green-darken-1" variant="text" @click="dialog = false">FUCK THIS</v-btn>
+              <v-btn color="green-darken-1" variant="text" @click="dialog = false">FUCK THAT</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </template>
     </v-app-bar>
     <v-main>
@@ -57,4 +72,6 @@ function setLightTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
+
+var dialog = true
 </script>
