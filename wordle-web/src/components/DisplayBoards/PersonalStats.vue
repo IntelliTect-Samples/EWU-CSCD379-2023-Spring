@@ -1,9 +1,10 @@
 <template>
-  <v-card class="text-center">
+  <div class="text-center align-center justify-center">
     <v-card-title class="display-1"> Personal Stats </v-card-title>
-    <v-table>
+    <v-table class="align-center justify-center">
       <thead>
         <tr>
+          <th class="text-center">Username</th>
           <th class="text-center">Games Played</th>
           <th class="text-center">Total Time Taken</th>
           <th class="text-center">Average Time Taken</th>
@@ -22,7 +23,7 @@
       </tr>
       </tbody>
     </v-table>
-  </v-card>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -40,9 +41,13 @@ interface Player {
 }
 
 let username = ref(localStorage.getItem('username') || 'Guest')
-const players = ref<Player[]>()
+let players = ref<Player[]>()
 
-Axios.get('leaderboard/GetPlayerStats?playerName=' + username.value)
+Axios.get('leaderboard/GetPlayerStats', {
+  params: {
+    playerName: username.value
+  }
+})
   .then((response) => {
     setTimeout(() => {}, 100)
     players.value = response.data

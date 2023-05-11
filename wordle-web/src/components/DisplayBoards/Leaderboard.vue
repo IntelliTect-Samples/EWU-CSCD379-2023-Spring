@@ -1,5 +1,5 @@
 <template>
-  <v-card-title class="display-1"> LeaderBoard </v-card-title>
+  <v-card-title class="display-1"> Top Ten Scores </v-card-title>
   <v-card-item>
     <v-table>
       <thead>

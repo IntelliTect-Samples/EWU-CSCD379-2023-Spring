@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Services;
@@ -21,15 +22,15 @@ public class LeaderboardService
     }
     
     // Retrieve a the stats of a specified player, passed by name as parameter
-    public async Task<Player> GetPlayerStats(string playerName)
+    public async Task<IEnumerable<Player>> GetPlayerStats(string playerName)
     {
-        var player = await _db.Players.FirstOrDefaultAsync(p => p.PlayerName == playerName);
-        
-        if (player == null)
+        var player = await _db.Players.Select(p => p).Where(p => p.PlayerName == playerName).ToListAsync();
+
+        if (player == null) 
         {
-            throw new ArgumentException("Player not found");
+            throw new ArgumentNullException("Player is null");           
         }
-        
+
         return player;
     }
 

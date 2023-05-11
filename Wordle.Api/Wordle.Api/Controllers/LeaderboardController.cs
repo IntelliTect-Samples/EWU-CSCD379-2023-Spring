@@ -24,7 +24,7 @@ public class LeaderboardController : ControllerBase
     }
     
     [HttpGet("GetPlayerStats")]
-    public async Task<Player> GetPlayerStats(string playerName)
+    public async Task<IEnumerable<Player>> GetPlayerStats(string playerName)
     {
         return await _leaderboardService.GetPlayerStats(playerName);
     }

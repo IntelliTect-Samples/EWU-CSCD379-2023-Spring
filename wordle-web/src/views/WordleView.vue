@@ -47,6 +47,7 @@
         @backspaceClick="removeLastChar"
         @enterClick="checkGuess"
         :guessedLetters="game.guessedLetters"
+        v-if="game.status === WordleGameStatus.Active"
       />
       <v-row dense class="justify-center" cols="auto">
         <v-col cols="auto">
@@ -70,6 +71,24 @@
   </div>
 
   <UsernameDialog @updateNameValue="updateNameValue" />
+  
+  <v-dialog class="w-25 align-center" v-model="gameLost" persistent>
+    <v-card class="align-center">
+      <v-card-title class="text-h4 text-center mt-10"> Better Luck Next Time... </v-card-title>
+      <v-card-actions>
+        <v-btn @Click="newGames()">Play Again?</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <v-dialog class="w-25 align-center" v-model="gameWon" persistent>
+    <v-card class="align-center">
+      <v-card-title class="text-h4 text-center mt-10"> You Won! </v-card-title>
+      <v-card-actions>
+        <v-btn @Click="newGames()">Play Again?</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
@@ -95,6 +114,8 @@ let timer = ref(0)
 const guess = ref('')
 const overlay = ref(true)
 const game = reactive(new WordleGame())
+let gameWon = ref(false)
+let gameLost = ref(false)
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -117,6 +138,10 @@ function newGames() {
     .catch((error) => {
       console.log('Axios error: ' + error)
     })
+
+  //Reset Win/Lose dialogs
+  gameWon.value = false
+  gameLost.value = false
 
   /* Start timer. */
   timer.value = 0
@@ -185,6 +210,11 @@ function checkGuess() {
   getValidGuesses()
   if(game.status !== WordleGameStatus.Active){
     submitPlayerResults()
+    if(game.status === WordleGameStatus.Won){
+      gameWon.value = true
+    }else{
+      gameLost.value = true
+    }
   }
 }
 
