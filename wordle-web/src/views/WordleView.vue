@@ -1,87 +1,87 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
+  <main class="px-4 mt-4">
+    <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+    <h1 class="text-center">Timer: {{ timer }}</h1>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+    <GameBoard :game="game" @letterClick="addChar" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+    <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
-  <v-row class="justify-center">
-    <v-btn
-      @click="checkGuess"
-      @keyup.enter="checkGuess"
-      color="primary"
-      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
-      v-if="game.status == WordleGameStatus.Active"
-    >
-      Check
-    </v-btn>
-    <v-btn
-      @click="newGame"
-      @keyup.enter="checkGuess"
-      color="secondary"
-      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
-      v-if="game.status !== WordleGameStatus.Active"
-    >
-      New Game
-    </v-btn>
-  </v-row>
+    <v-row class="justify-center pa-3 mt-0">
+      <v-btn variant="plain" disabled>{{ game.secretWord }}</v-btn>
+    </v-row>
 
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
-    Better Luck Next Time
-  </div>
-  <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+    <v-row class="justify-center">
+      <v-btn
+        @click="checkGuess"
+        @keyup.enter="checkGuess"
+        color="primary"
+        size="x-large"
+        v-if="game.status == WordleGameStatus.Active"
+      >
+        Check
+      </v-btn>
+      <v-btn
+        @click="newGame"
+        @keyup.enter="checkGuess"
+        color="secondary"
+        size="x-large"
+        v-if="game.status !== WordleGameStatus.Active"
+      >
+        New Game
+      </v-btn>
+    </v-row>
 
-  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col xs="11" sm="9" md="6" lg="4">
-      <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
-    </v-col>
-  </v-row>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
+      Better Luck Next Time
+    </div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+  </main>
 </template>
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, inject } from 'vue'
-import type { Letter } from '@/scripts/letter'
-import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
-import GameKeyboard from '../components/GameKeyboard.vue'
-import WordleSolver from '../components/WordleSolver.vue'
+import KeyBoard from '../components/GameKeyboard.vue'
+import { Letter } from '@/scripts/letter'
+import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
-import { useDisplay } from 'vuetify'
-
+import type { VueCookies } from 'vue-cookies'
 const guess = ref('')
 const game = reactive(new WordleGame())
+const $cookies = inject<VueCookies>('$cookies')
 const overlay = ref(true)
-
-// Add this to make testing work because useDisplay() throws an error when testing
-// Wrap useDisplay in a function so that it doesn't get called during testing.
-const display = inject('display', () => reactive(useDisplay())) as unknown as ReturnType<
-  typeof useDisplay
->
-
+let timer = ref(0)
 // Start a new game
 newGame()
-
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
+function submitGame() {
+  const username = $cookies?.get('username')
+  Axios.post('https://wurdle.azurewebsites.net/Player/AddPlayerFromBody', {
+    name: username,
+    numberOfAttempts: game.guesses.indexOf(game.guess),
+    elapsedSeconds: timer.value
+  }).catch((error) => {
+    console.log(error)
+  })
+}
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  Axios.get('https://wurdle.azurewebsites.net/Word')
     .then((response) => {
       game.restartGame(response.data)
-      console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 200)
     })
     .catch((error) => {
       console.log(error)
@@ -89,22 +89,31 @@ function newGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
+  timer.value = 0
+  let startTimer = setInterval(() => {
+    if (game.status == WordleGameStatus.Active) {
+      timer.value++
+    } else {
+      clearInterval(startTimer)
+    }
+  }, 1000)
 }
-
-function checkGuess(word?: string) {
-  if (typeof word === 'string') {
-    game.guess.set(word)
-  }
+function checkGuess() {
+  if (guess.value.length < 5) return
+  if (guess.value.length > 5) guess.value = guess.value.slice(0, 5)
   game.submitGuess()
   guess.value = ''
+  if (game.status !== WordleGameStatus.Active) {
+    submitGame()
+  }
 }
-
 function addChar(letter: Letter) {
+  if (game.status !== WordleGameStatus.Active) return
   game.guess.push(letter.char)
   guess.value += letter.char
 }
-
 function keyPress(event: KeyboardEvent) {
+  console.log(event.key)
   if (event.key === 'Enter') {
     checkGuess()
   } else if (event.key === 'Backspace') {
@@ -112,7 +121,7 @@ function keyPress(event: KeyboardEvent) {
     game.guess.pop()
   } else if (event.key.length === 1 && event.key !== ' ') {
     guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+    addChar(new Letter(event.key.toLowerCase()))
   }
 }
 </script>

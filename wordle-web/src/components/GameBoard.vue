@@ -1,4 +1,5 @@
 <template>
+  <h1 class="text-center">Timer: {{ timer }}</h1>
   <v-row
     class="justify-center"
     v-for="(word, rowIndex) in game.guesses"
@@ -15,6 +16,8 @@
 import LetterResult from '@/components/LetterResult.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
+import Axios from 'axios'
+import type { VueCookies } from 'vue-cookies'
 
 defineProps<{
   game: WordleGame

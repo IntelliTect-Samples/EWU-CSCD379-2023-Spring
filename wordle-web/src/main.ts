@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import VueCookies from 'vue-cookies'
 import { mdi } from 'vuetify/iconsets/mdi'
 
 import './assets/main.css'
@@ -17,7 +18,7 @@ import Axios from 'axios'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'https://wordle2023.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://wurdle.azurewebsites.net/'
 }
 
 const vuetify = createVuetify({
@@ -55,6 +56,8 @@ const vuetify = createVuetify({
 const app = createApp(App)
 
 app.use(vuetify)
+
+app.use(VueCookies)
 
 app.use(router)
 
