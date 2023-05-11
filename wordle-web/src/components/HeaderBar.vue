@@ -10,7 +10,7 @@
           </v-app-bar-title>
 
           <template v-slot:append>
-            <v-btn to = '/leaderboard' icon = "mdi-format-list-numbered"></v-btn>
+            <v-btn to="/leaderboard" icon="mdi-format-list-numbered"></v-btn>
             <v-app-bar-nav-icon @click.stop="settings = !settings">
               <v-icon>mdi-cog</v-icon>
             </v-app-bar-nav-icon>

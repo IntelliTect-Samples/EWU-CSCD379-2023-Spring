@@ -83,7 +83,6 @@ function newGame() {
       game.restartGame(WordsService.getRandomWord())
       console.log(game.secretWord)
     })
-  
 }
 
 function checkGuess(word?: string) {

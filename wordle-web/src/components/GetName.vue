@@ -11,11 +11,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const props = withDefaults(defineProps<{
-  name: string
-}>(), {
-  name: 'guest'
-})
+const props = withDefaults(
+  defineProps<{
+    name: string
+  }>(),
+  {
+    name: 'guest'
+  }
+)
 
 const overlay = ref(false)
 const thisName = ref(props.name)
