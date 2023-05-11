@@ -2,6 +2,7 @@
   <main>
     <TheWelcome />
   </main>
+  <RouterLink to="/leaderboard">Leaderboard</RouterLink>
 </template>
 
 <script setup lang="ts">

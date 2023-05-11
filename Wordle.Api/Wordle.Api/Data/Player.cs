@@ -16,19 +16,7 @@ namespace Wordle.Api.Data
         {
             if (!db.Players.Any())
             {
-                /*var playerLine = System.IO.File.ReadAllLines("Content/Players.csv");
-                foreach (var line in playerLine)
-                {
-                    var parts = line.Split(',');
-                    var player = new Player()
-                    {
-                        Name = parts[0],
-                        GameCount = int.Parse(parts[1]),
-                        AverageAttempts = double.Parse(parts[2]),
-                        AverageSecondsPerGame = int.Parse(parts[3])
-                    };
-                    db.Players.Add(player);
-                }*/
+                
                 var player = new Player()
                 {
                     Name = "Theoretical Best",

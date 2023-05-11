@@ -22,6 +22,7 @@
       <v-card height="200px" width="500px" title="Name:">
         <v-text-field label="UserName" @input="nameUpdater($event.target.value)"></v-text-field>
         <v-btn @click="nameDialog = false">Confirm Name</v-btn>
+        <v-btn @click="handleLogout()">Logout</v-btn>
       </v-card>
     </v-dialog>
   </template>
@@ -57,15 +58,20 @@ import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
+import { useStorage } from '@vueuse/core'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 
 const overlay = ref(true)
-let nameDialog = ref(false)
-let endScreen = ref(false)
-let displayName = ref(game.displayName)
-let curStatus = game.status
+const nameDialog = ref(false)
+const endScreen = ref(false)
+const rawName = useStorage('vue-use-local-storage', '')
+const displayName = ref(rawName)
+
+if (rawName.value == '' || rawName.value == 'Guest') {
+  nameDialog.value = true
+}
 
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
@@ -74,11 +80,24 @@ onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
 
+function changeName(newName: string) {
+  rawName.value = newName
+  if (rawName.value == '') {
+    displayName.value = 'Guest'
+  } else {
+    displayName.value = rawName.value
+  }
+}
+
 function nameUpdater(newName: string) {
   console.log(newName)
   let str = newName
-  game.changeName(str)
-  displayName.value = game.displayName
+  changeName(str)
+}
+
+function handleLogout() {
+  nameDialog.value = false
+  nameUpdater('')
 }
 
 function handleSubmit() {
@@ -89,24 +108,15 @@ function handleSubmit() {
 
 async function submitToLeaderboard() {
   console.log('PlayerInfo')
-  console.log(game.displayName)
+  console.log(displayName.value)
   console.log(game.finalGuesses)
   console.log(game.finalTime)
   overlay.value = true
-  await Axios.post(
-    'Leaderboard/InsertScore?name='
-      .concat(game.displayName)
-      .concat('&numAttempts=')
-      .concat(String(game.finalGuesses))
-      .concat('&seconds=')
-      .concat(String(game.finalTime)),
-    {
-      //for some reason, these aren't working correctly, will investigate later
-      /*name: game.displayName,
-      numAttempts: game.finalGuesses,
-      seconds: game.finalTime*/
-    }
-  )
+  await Axios.post('Leaderboard/InsertScore', {
+    name: displayName.value,
+    numAttempts: game.finalGuesses,
+    seconds: game.finalTime
+  })
     .then((response) => {
       overlay.value = false
       console.log(response.data)

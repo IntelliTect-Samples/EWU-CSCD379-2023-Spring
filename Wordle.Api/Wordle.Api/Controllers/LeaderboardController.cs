@@ -24,9 +24,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("InsertScore")]
-        public async Task<Player> AddScore(string name, int numAttempts, int seconds)
+        public async Task<Player> AddScore([FromBody] PlayerDto player)
         {
-            return await _leaderboardService.AddScore(name, numAttempts, seconds);
+            return await _leaderboardService.AddScore(player.Name, player.AverageAttempts, player.AverageSecondsPerGame);
         }
 
     }

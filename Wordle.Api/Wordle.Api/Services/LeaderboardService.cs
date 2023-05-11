@@ -26,7 +26,7 @@ namespace Wordle.Api.Services
             return players;
         }
 
-        public async Task<Player> AddScore(string? name, int numAttempts, int seconds)
+        public async Task<Player> AddScore(string? name, double numAttempts, int seconds)
         {
             if (name is null)
             {
