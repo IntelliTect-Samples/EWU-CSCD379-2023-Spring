@@ -10,7 +10,7 @@ on:
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - Assignment-1
+      - Assignment-3(off-A3-IntelliTS)
 
 jobs:
   build_and_deploy_job:
