@@ -22,6 +22,7 @@ namespace Wordle.Api.Services
                 .FirstAsync();
             return word.Text;
         }
+
         public async Task<IEnumerable<Word>> GetSeveralWords(int? count)
         {
             count ??= 10;

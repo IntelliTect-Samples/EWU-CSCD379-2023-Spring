@@ -5,7 +5,7 @@
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class PlayerResult : Migration
+    public partial class GameResult : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

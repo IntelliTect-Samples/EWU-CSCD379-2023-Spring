@@ -12,8 +12,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("*");
-                          policy.WithMethods("GET", "POST", "DELETE", "PUT");
-                          policy.WithHeaders("Content-Type", "Authorization");
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
                       });
 });
 
@@ -32,22 +32,23 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddScoped<WordService>();
 builder.Services.AddScoped<PlayerService>();
-builder.Services.AddScoped<PlayerResultService>();
 
+// Actually build the app so we can configure the pipeline next
 var app = builder.Build();
 
+
+
+// Create and see the database
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-    Word.SeedWords(db);
-    Player.SeedPlayers(db);
+    Seeder.SeedWords(db);
+    Seeder.SeedPlayers(db);
 }
 
-
-
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwagger", false))
 {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -57,8 +58,13 @@ app.UseHttpsRedirection();
 
 app.UseCors(MyAllowAllOrigins);
 
+// Add Google site verification.
+app.MapGet("/google5b827f426094db3f.html", () => "google-site-verification: google5b827f426094db3f.html");
+
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }

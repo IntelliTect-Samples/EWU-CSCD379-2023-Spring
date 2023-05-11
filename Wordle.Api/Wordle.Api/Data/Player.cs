@@ -1,25 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using Wordle.Api.Dtos;
+﻿namespace Wordle.Api.Data;
 
-namespace Wordle.Api.Data
+public class Player
 {
-    public class Player
+    public Guid PlayerId { get; set; }
+    public required string Name { get; set; }
+    public int GameCount { get; set; }
+    public double AverageAttempts { get; set; }
+    public int AverageSecondsPerGame { get; set; }
+
+    public static void SeedPlayers(AppDbContext db)
     {
-        public int PlayerId { get; set; }
-        public required string Name { get; set; }
-        public int GameCount { get; set; }
-        public double AverageAttempts { get; set; }
-        public int AverageSecondsPerGame { get; set; }
-        public ICollection<PlayerResult> PlayerResults { get; set; } = new List<PlayerResult>();
-        public static void SeedPlayers(AppDbContext db)
+        if (!db.Players.Any())
         {
-            if (!db.Players.Any())
-            {
-                Player player = new() { Name = "Joshua" };
-                db.Players.Add(player);
-                db.SaveChanges();
-            }
+            Player player = new() { Name = "Inigo" };
+            db.Players.Add(player);
+            db.SaveChanges();
         }
     }
 }
