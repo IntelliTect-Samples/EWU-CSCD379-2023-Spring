@@ -1,7 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
 import type { Letter } from './letter'
-import { ref } from 'vue'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -22,6 +21,7 @@ export class WordleGame {
   guess!: Word
   numberOfGuesses = 6
   attempts = 0
+  username = 'Guest'
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {

@@ -24,8 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
-import { ref } from 'vue'
+import { watch, ref } from 'vue'
 
 const dialog = ref(true)
 const usersName = ref('guest')
@@ -42,38 +41,30 @@ function saveUserName() {
 }
 
 function cancelUserName() {
-  inputUserName.value = 'guest'
+  usersName.value = 'Guest'
   dialog.value = false
 }
 
 const emits = defineEmits<{
-  (event: 'disableKeyboard'): void
-  (event: 'enableKeyboard'): void
+  (event: 'setKeyboard', toggle: boolean): void
   (event: 'sendUsername', value: string): void
 }>()
 
-function disableKeyboard() {
-  emits('disableKeyboard')
-}
-
-function enableKeyboard() {
-  emits('enableKeyboard')
+function setKeyboard(toggle: boolean) {
+  emits('setKeyboard', toggle)
 }
 
 function sendUsername() {
   emits('sendUsername', usersName.value)
 }
 
-watch(
-  () => dialog.value,
-  (newStatus) => {
-    if (newStatus) {
-      disableKeyboard()
-    } else {
-      enableKeyboard()
-    }
+watch(dialog, async (newStatus) => {
+  if (newStatus) {
+    setKeyboard(false)
+  } else {
+    setKeyboard(true)
   }
-)
+})
 </script>
 
 <style scoped>
