@@ -31,6 +31,7 @@
     >
       Check
     </v-btn>
+    <h1 class="text-center">GameTime: {{ count }}</h1>
     <v-btn
       @click="newGame"
       @keyup.enter="checkGuess"
@@ -73,10 +74,11 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 const namePrompt = ref(false)
 const overlay = ref(true)
-let name = 'Guest'
+const name = ref('Guest')
 const userName = ref(name)
 const attempts = ref()
 const gameCount = ref(0)
+let count = ref(0)
 
 // Start a new game
 newGame()
@@ -100,12 +102,12 @@ function changeUsername() {
 
 function setUsername() {
   namePrompt.value = false
-  name = userName.value
+  name.value = userName.value
   if (game.status == WordleGameStatus.Won) {
     Axios.post('/player', {
-      name: userName.value,
+      name: userName.value.trim(),
       attempts: attempts.value,
-      secondsInGame: 0,
+      secondsInGame: count.value,
       gameCount: gameCount.value
     })
       .then((response) => {
@@ -153,6 +155,14 @@ function newGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
+  count.value = -1
+  let startTimer = setInterval(() => {
+    if (game.status == WordleGameStatus.Active) {
+      count.value++
+    } else {
+      clearInterval(startTimer)
+    }
+  }, 1000)
 }
 
 function checkGuess(word?: string) {

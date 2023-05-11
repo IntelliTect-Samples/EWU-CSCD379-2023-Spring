@@ -26,7 +26,7 @@ namespace Wordle.Api.Services
             .ToListAsync();
 
         var topPlayers = players
-            .OrderBy(player => (player.GameCount / (player.AverageAttempts * 10 + player.AverageSecondsPerGame)))
+            .OrderByDescending(player => (player.GameCount / ((player.AverageAttempts * 10) + (player.AverageSecondsPerGame / 2))))
             .Take(count)
             .Select(player => new PlayerDto
             {
@@ -38,7 +38,7 @@ namespace Wordle.Api.Services
         return topPlayers;
     }
 
-        public async Task<Player> AddPlayer(string newPlayerName, int attempts, int? SecondsInGame, int gameCount)
+        public async Task<Player> AddPlayer(string newPlayerName, int attempts, int SecondsInGame, int gameCount)
         {
             if (newPlayerName is null || newPlayerName.Length < 3)
             {
@@ -49,6 +49,9 @@ namespace Wordle.Api.Services
             {
                 player.TotalAttempts += attempts;
                 player.GameCount += gameCount;
+                if (player.TotalSeconds == null) {
+                    player.TotalSeconds = 0;
+                }
                 player.TotalSeconds += SecondsInGame;
             }
             else

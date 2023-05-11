@@ -25,19 +25,18 @@ namespace Wordle.Api.Data
             }
         }
 
-        public double? AverageSecondsPerGame
+        public double AverageSecondsPerGame
         {
             get
             {
-                if (GameCount == 0 || TotalSeconds == null)
+                if (TotalSeconds == null || GameCount == 0)
                 {
-                    return null; 
+                    TotalSeconds = 0;
+                    return 0;
                 }
-                else
-                {
-                    return (double)TotalSeconds / GameCount;
-                }
+                return (double) TotalSeconds / GameCount;
             }
+            
         }
         
     }
