@@ -36,9 +36,9 @@
     </v-row>
 
     <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
-      Better Luck Next Time
+      Oh noo you lost...
     </div>
-    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You did it! You Won!</div>
   </main>
 </template>
 
