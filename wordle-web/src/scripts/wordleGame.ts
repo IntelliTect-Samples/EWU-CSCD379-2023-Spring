@@ -50,8 +50,6 @@ export class WordleGame {
 
   secondsPassed() {
     this.numberOfSeconds += 1
-    console.log('Second passed')
-    console.log(this.numberOfSeconds)
   }
 
   submitGuess() {
