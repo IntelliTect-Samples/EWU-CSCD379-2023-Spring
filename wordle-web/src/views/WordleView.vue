@@ -12,7 +12,6 @@
   <WinCard :ifWon="game.status === WordleGameStatus.Won" @restartGame="restartGame"> </WinCard>
   <WordList :game="game"></WordList>
 
-  <v-btn @click="testApi">asd</v-btn>
   <h3>Current secret word: {{ game.secretWord }}</h3>
   <PlayerNameCard :playerName="game.currentPlayer" @enterChar="setName"></PlayerNameCard>
 </template>
@@ -44,10 +43,6 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
-
-function testApi() {
-  game.getTopPlayers()
-}
 
 function checkGuess() {
   if (game.guess.text.length === 5) {

@@ -15,6 +15,7 @@ export class WordleGame {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
     this.restartGame(secretWord)
+    this.currentPlayer = localStorage.getItem('playerName') || 'Guest'
   }
   currentPlayer = 'Guest'
   guessedLetters: Letter[] = []
@@ -79,11 +80,13 @@ export class WordleGame {
   }
 
   setPlayerName(name: string) {
-    if (name != '' || name != null) {
+    if (name != '' && name != null) {
       this.currentPlayer = name
     } else {
       this.currentPlayer = 'Guest'
     }
+
+    localStorage.setItem('playerName', name)
   }
 
   removeGuess() {
