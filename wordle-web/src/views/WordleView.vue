@@ -71,7 +71,7 @@
   </div>
 
   <UsernameDialog @updateNameValue="updateNameValue" />
-  
+
   <v-dialog class="w-25 align-center" v-model="gameLost" persistent>
     <v-card class="align-center">
       <v-card-title class="text-h4 text-center mt-10"> Better Luck Next Time... </v-card-title>
@@ -208,11 +208,11 @@ function checkGuess() {
   game.submitGuess()
   guess.value = ''
   getValidGuesses()
-  if(game.status !== WordleGameStatus.Active){
+  if (game.status !== WordleGameStatus.Active) {
     submitPlayerResults()
-    if(game.status === WordleGameStatus.Won){
+    if (game.status === WordleGameStatus.Won) {
       gameWon.value = true
-    }else{
+    } else {
       gameLost.value = true
     }
   }
@@ -243,18 +243,17 @@ function keyPress(event: KeyboardEvent) {
   //event.preventDefault()
 }
 
-function submitPlayerResults()
-{
+function submitPlayerResults() {
   console.log(username.value)
   console.log(game.guessAttempts)
   console.log(timer.value)
 
- Axios.post('leaderboard/AddNewPlayer', {
-  name: username.value,
-  attempts: game.guessAttempts,
-  timeInSeconds: timer.value
- })
- .then(response => console.log(response))
- .catch(error => console.log(error))
+  Axios.post('leaderboard/AddNewPlayer', {
+    name: username.value,
+    attempts: game.guessAttempts,
+    timeInSeconds: timer.value
+  })
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error))
 }
 </script>

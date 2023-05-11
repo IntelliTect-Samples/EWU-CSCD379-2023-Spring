@@ -7,7 +7,7 @@
           <Leaderboard />
         </v-card>
       </v-carousel-item>
-      <v-carousel-item >
+      <v-carousel-item>
         <v-card class="px-16 text-center">
           <PersonalStats />
         </v-card>
@@ -17,8 +17,8 @@
 </template>
 
 <script setup lang="ts">
-import PersonalStats from "@/components/DisplayBoards/PersonalStats.vue";
-import Leaderboard from "@/components/DisplayBoards/Leaderboard.vue";
+import PersonalStats from '@/components/DisplayBoards/PersonalStats.vue'
+import Leaderboard from '@/components/DisplayBoards/Leaderboard.vue'
 </script>
 
 <style>

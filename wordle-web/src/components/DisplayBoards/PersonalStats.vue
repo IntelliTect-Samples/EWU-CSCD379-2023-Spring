@@ -13,14 +13,14 @@
         </tr>
       </thead>
       <tbody>
-      <tr v-for="player in players" :key="player.playerId">
+        <tr v-for="player in players" :key="player.playerId">
           <td>{{ player.playerName }}</td>
           <td>{{ player.gameCount }}</td>
           <td>{{ player.totalTimeInSeconds }}</td>
           <td>{{ player.averageTimeInSeconds }}</td>
           <td>{{ player.totalAttempts }}</td>
           <td>{{ player.averageAttempts }}</td>
-      </tr>
+        </tr>
       </tbody>
     </v-table>
   </div>
