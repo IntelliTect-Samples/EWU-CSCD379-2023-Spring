@@ -1,7 +1,11 @@
 <template>
   <v-row rows="auto" class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
     <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
-      <v-btn @click="emitEnterClick" class="elevation-10" style="background-image: var(--btn-gradient)">
+      <v-btn
+        @click="emitEnterClick"
+        class="elevation-10"
+        style="background-image: var(--btn-gradient)"
+      >
         Check
       </v-btn>
     </v-col>
