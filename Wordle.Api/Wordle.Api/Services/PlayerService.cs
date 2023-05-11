@@ -43,7 +43,6 @@ namespace Wordle.Api.Services
             await _db.SaveChangesAsync();
             return player;
         }
-        ///
         public async Task<Player?> AddGameResultAsync(GameResultDto dto)
         {
             var player = await _db.Players.FindAsync(dto.PlayerId);
