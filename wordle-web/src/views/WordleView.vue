@@ -1,10 +1,10 @@
 <template>
-  <ActiveUser />
-
-  <h1 class="justify">Wordle Mind Bender</h1>
+  <h1 class="justify-center">Wordle But Better</h1>
   <GameBoard :game="game" @letterClick="addChar" />
-  <div class="d-flex justify-end">
-    <div>Time: {{ duration }}</div>
+
+  <ActiveUser />
+  <div class="justify-right">
+    <div color="wrong">Round's Time: {{ duration }}</div>
   </div>
 
   <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
