@@ -6,7 +6,7 @@
 
   <v-dialog v-model="dialog" transition="dialog-bottom-transition" width="auto" persistent>
     <v-card class="justify-center text-center" width="520px" height="280px">
-      <v-text-field>Please enter a user name</v-text-field>
+      <v-card class="mt-2 mb-3">Please enter a user name</v-card>
       You are currently logged in as: {{ usersName }}
       <v-text-field
         label="Enter a User Name"
@@ -27,10 +27,11 @@
 import { watch, ref } from 'vue'
 
 const dialog = ref(true)
+const localName = localStorage.getItem('usersName')
 const usersName = ref('guest')
 const inputUserName = ref('')
 
-if(localStorage.getItem !== null) {
+if(localName !== null) {
   usersName.value = localStorage.getItem('usersName')!
 }
 
@@ -41,8 +42,8 @@ function updateUserName() {
 function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
-  sendUsername()
   localStorage.setItem('usersName', usersName.value)
+  sendUsername()
 }
 
 function cancelUserName() {
