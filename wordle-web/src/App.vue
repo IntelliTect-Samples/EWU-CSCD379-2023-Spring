@@ -30,7 +30,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" block @click="dialogVisible = false">Save</v-btn>
+          <v-btn color="primary" block @click="saveName">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -40,9 +40,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import { useCookies } from 'vue3-cookies'
 
 const theme = useTheme()
-const playerName = ref('Guest')
+const { cookies } = useCookies()
+const playerName = ref(cookies.get('playerName') || 'Guest')
 const dialogVisible = ref(true)
 
 function setInverseTheme() {
@@ -55,6 +57,11 @@ function setDarkTheme() {
 
 if (!playerName.value) {
   dialogVisible.value = true
+}
+
+function saveName() {
+  cookies.set('playerName', playerName.value)
+  dialogVisible.value = false
 }
 </script>
 

@@ -38,6 +38,7 @@ export class WordleGame {
     // put logic to win here.
     if (this.guess.check(this.secretWord)) {
       this.status = WordleGameStatus.Won
+      console.log('YOU WON!')
     }
 
     // Update the guessed letters

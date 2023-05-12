@@ -12,12 +12,16 @@
 </template>
 
 <script setup lang="ts">
-import { WordleGame } from '@/scripts/wordleGame'
+import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
+import { useCookies } from 'vue3-cookies'
+import axios from 'axios'
 
+const { cookies } = useCookies()
+const playerName = ref(cookies.get('playerName') || 'Guest')
 const guess = ref('')
 const game = reactive(new WordleGame())
 
@@ -31,8 +35,26 @@ onUnmounted(() => {
 })
 
 function checkGuess() {
+  submitGame()
   game.submitGuess()
   guess.value = ''
+  if (game.status === WordleGameStatus.Won) {
+    console.log('You won!')
+  }
+}
+
+function submitGame() {
+  let AverageAttempts = parseFloat((Math.random() * 4 + 1).toFixed(2))
+
+  axios
+    .post('https://wordle-assignment3.azurewebsites.net/leaderboard', {
+      Name: playerName.value,
+      GameCount: 1,
+      AverageAttempts: AverageAttempts
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 
 function addChar(letter: Letter) {
