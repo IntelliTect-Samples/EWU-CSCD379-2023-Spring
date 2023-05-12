@@ -1,9 +1,5 @@
 <template>
-  <GameScore
-    :username="game.username"
-    :gameState="gameState"
-    :game="game"
-  />
+  <GameScore :username="game.username" :gameState="gameState" :game="game" />
 
   <UserName @sendUsername="setUsername" @setKeyboard="toggleKeyboard" />
   <h1>Wordle Mind Bender</h1>

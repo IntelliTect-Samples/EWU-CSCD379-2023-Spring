@@ -14,7 +14,6 @@
         <v-card-actions>
           <v-btn @click.stop="$router.push('/')"> Home </v-btn>
           <v-btn @click.stop="$router.push('/Leaderboard')"> Leaderboard </v-btn>
-
         </v-card-actions>
       </v-card>
     </v-dialog>
