@@ -71,17 +71,17 @@ import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
-import { useStorage } from '@vueuse/core'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const namePromptOverlay = ref(false)
 const overlay = ref(true)
-const localUserName = useStorage('localUser', 'Guest')
-const userName = ref(localUserName.value)
 const attempts = ref()
 const gameCount = ref(0)
 let count = ref(0)
+
+const prevName = localStorage.playerName || 'Guest'
+const userName = ref(prevName)
 
 // Start a new game
 newGame()
@@ -110,7 +110,7 @@ function changeUsername() {
 
 function setUsername() {
   namePromptOverlay.value = false
-  localUserName.value = userName.value
+  localStorage.setItem('playerName', userName.value)
   if (game.status == WordleGameStatus.Won) {
     Axios.post('/player', {
       name: userName.value.trim(),
