@@ -1,8 +1,10 @@
 <template>
   <v-sheet>
     <v-card>
-
-      <v-card-title class="text-center"><strong>Leader Board</strong></v-card-title>
+      <div class="text-center">
+      <img src="../assets/golden-cup.png" alt="goldcup" height="100" />
+      <v-card-title><strong>Leader Board</strong></v-card-title>
+      </div>
       <template v-for="player in playerData" v-bind:key="player.name">
         <v-progress-linear 
           :model-value="getScore(player.averageAttempts)"
@@ -14,9 +16,11 @@
         <strong>{{ player.name }}</strong>
         </v-progress-linear>
         <div class="text-center">
-          Game Count: {{ player.gameCount }}, Average Attempts: {{ player.averageAttempts }}, Average Time Per Game: {{ player.averageSecondsPerGame }} </div>
+          Game Count: {{ player.gameCount }}, Average Attempts: {{ player.averageAttempts }}, Average Time To Win: {{ player.averageSecondsPerGame }} </div>
       </template>
-      <v-btn @click="$router.back()">Back</v-btn>
+      <div class="text-center">
+      <v-btn @click="$router.back()" color="primary">Back</v-btn>
+      </div>
     </v-card>
   </v-sheet>
 </template>
