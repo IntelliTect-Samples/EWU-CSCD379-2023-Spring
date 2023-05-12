@@ -23,6 +23,7 @@
       <v-card title="Name:">
         <v-text-field label="Name" @input="updateName($event.target.value)"></v-text-field>
         <v-btn @click="showDialog = false" rounded>Confirm Name</v-btn>
+        <v-btn @click="showDialog = !showDialog">Close</v-btn>
       </v-card>
     </v-dialog>
   </template>
