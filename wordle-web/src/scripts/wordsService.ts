@@ -30,7 +30,14 @@ export abstract class WordsService {
     }
 
     this.words.forEach((wordObj) => {
-      if (wordObj.startsWith(word)) {
+      let valid: boolean = true
+      for (let i = 0; i < word.length; i++) {
+        if (word[i] != '?' && word[i] != wordObj[i]) {
+          valid = false
+        }
+      }
+
+      if (valid) {
         validWords.push(wordObj)
       }
     })

@@ -38,7 +38,6 @@
     </div>
 
     <v-divider></v-divider>
-
     <br />
 
     <div>
@@ -230,7 +229,12 @@ function getValidGuesses() {
 
 function inputFromValidGuesses() {
   const index = game.guess.word.length
-  for (let i = index; i < 5; i++) {
+
+  for (let i = 0; i < index; i++) {
+    game.guess.pop()
+  }
+
+  for (let i = 0; i < 5; i++) {
     game.guess.push(guess.value[i])
   }
 }
