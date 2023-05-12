@@ -7,6 +7,7 @@
   />
 
   <UserName @sendUsername="setUsername" @setKeyboard="toggleKeyboard" />
+  <v-btn @click="restartGame" :disabled="!restartBool"> Restart </v-btn>
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -18,7 +19,7 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
@@ -28,7 +29,7 @@ import GameScore from '@/components/GameScore.vue'
 const guess = ref('')
 const game = reactive(new WordleGame())
 const gameState = ref(game.status)
-let username: string = game.username
+const restartBool = ref(false)
 let keyInput: boolean = false
 
 onMounted(async () => {
@@ -36,6 +37,14 @@ onMounted(async () => {
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
+})
+
+watch(gameState, (newStatus) => {
+  if (newStatus === 1 || newStatus === 2) {
+    restartBool.value = true
+  } else {
+    restartBool.value = false
+  }
 })
 
 function checkGuess() {
@@ -66,10 +75,6 @@ function keyPress(event: KeyboardEvent) {
 
 function restartGame() {
   game.restartGame()
-  guess.value = ''
-  game.status = 0
-  gameState.value = game.status
-  username = game.username
 }
 
 function setUsername(name: string) {

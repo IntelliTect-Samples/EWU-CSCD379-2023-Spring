@@ -34,6 +34,8 @@
           {{ index + 1 }}: {{ leader.name }} - {{ leader.gameCount }} games,
           {{ leader.averageAttempts }} average attempts
           <v-icon v-if="index === 0" color="yellow" size="25">mdi-crown</v-icon>
+          <v-icon v-if="index === 1" color="silver" size="25">mdi-crown</v-icon>
+          <v-icon v-if="index === 2" color="brown" size="25">mdi-crown</v-icon>
         </v-card>
       </v-col>
     </v-row>

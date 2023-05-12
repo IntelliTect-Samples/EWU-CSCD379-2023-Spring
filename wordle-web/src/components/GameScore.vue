@@ -9,19 +9,17 @@
           {{ dialogTitle }}
         </v-card-title>
         <v-card-text>
-          You {{ gameState === WordleGameStatus.Won ? 'won' : 'lost' }} in {{ timer }} seconds. Your
-          score is {{ score }}
+          You {{ gameState === WordleGameStatus.Won ? 'won' : 'lost' }} in {{ timer }} seconds.
         </v-card-text>
         <v-card-actions>
           <v-btn @click="dialog = false"> Done </v-btn>
-          <v-btn @click="startGame"> Play Again </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
 
     <v-chip v-if="timerVisible">
       <v-progress-circular indeterminate color="green" :size="20"></v-progress-circular>
-      Time: {{ timer }} Score: {{ score }}
+      Time: {{ timer }}
     </v-chip>
   </div>
 </template>
@@ -34,7 +32,6 @@ import Axios from 'axios'
 const startDialog = ref(true)
 const dialog = ref(false)
 const dialogTitle = ref('Game Over')
-const score = ref(1000)
 const timerVisible = ref(false)
 const timer = ref(0)
 let timerInterval: any
@@ -53,12 +50,10 @@ watch(
   (newStatus) => {
     if (newStatus === WordleGameStatus.Won) {
       dialogTitle.value = 'You Won!'
-      score.value += 500
       dialog.value = true
       clearInterval(timerInterval)
     } else if (newStatus === WordleGameStatus.Lost) {
       dialogTitle.value = 'Game Over'
-      score.value -= 500
       dialog.value = true
       clearInterval(timerInterval)
     }
@@ -86,7 +81,6 @@ function startGame() {
   clearInterval(timerInterval)
   timerInterval = setInterval(() => {
     timer.value += 1
-    score.value -= 2
   }, 1000)
 }
 </script>
