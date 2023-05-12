@@ -35,6 +35,7 @@ onUnmounted(() => {
 })
 
 function checkGuess() {
+  console.log('Submitting game')
   submitGame()
   game.submitGuess()
   guess.value = ''
@@ -44,13 +45,22 @@ function checkGuess() {
 }
 
 function submitGame() {
-  let AverageAttempts = parseFloat((Math.random() * 4 + 1).toFixed(2))
+  const GameCount = 1
+  const AverageAttempts = parseFloat((Math.random() * 4 + 1).toFixed(2))
+
+  const player = {
+    Name: playerName.value,
+    GameCount: GameCount,
+    AverageAttempts: AverageAttempts
+  }
+
+  console.log('Submitting game')
+  console.log(player)
 
   axios
-    .post('https://wordle-assignment3.azurewebsites.net/leaderboard', {
-      Name: playerName.value,
-      GameCount: 1,
-      AverageAttempts: AverageAttempts
+    .post('https://wordle-assignment3.azurewebsites.net/leaderboard', player)
+    .then((response) => {
+      console.log(response.data)
     })
     .catch((error) => {
       console.log(error)
