@@ -31,6 +31,7 @@ namespace Wordle.Api.Services
         {
             if (name is null)
             {
+                //should be marked as guest
                 throw new ArgumentException("Passed name is null");
             }
             var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
