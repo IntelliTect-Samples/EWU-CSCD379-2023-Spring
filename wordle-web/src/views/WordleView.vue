@@ -18,7 +18,7 @@
   </v-container>
 
   <div class="text-center">
-    <img :src="logo" />
+    <img :src="logo2" />
   </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -74,6 +74,7 @@ import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import logo from '../assets/logo.png'
+import logo2 from '../assets/proto9.png'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
