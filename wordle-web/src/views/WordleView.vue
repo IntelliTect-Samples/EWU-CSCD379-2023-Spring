@@ -23,7 +23,6 @@ import GameScore from '@/components/GameScore.vue'
 const guess = ref('')
 const game = reactive(new WordleGame())
 const gameState = ref(game.status)
-let keyInput: boolean = false
 
 onMounted(async () => {
   await game.restartGame()
@@ -39,7 +38,6 @@ function checkGuess() {
 }
 
 function addChar(letter: Letter) {
-  if (keyInput == false) return
   game.guess.push(letter.char)
   guess.value += letter.char
 }
