@@ -1,13 +1,11 @@
 <template>
   <GameScore
     :username="game.username"
-    @restartGame="restartGame"
     :gameState="gameState"
     :game="game"
   />
 
   <UserName @sendUsername="setUsername" @setKeyboard="toggleKeyboard" />
-  <v-btn @click="restartGame" :disabled="!restartBool"> Restart </v-btn>
   <h1>Wordle Mind Bender</h1>
 
   <GameBoard :game="game" @letterClick="addChar" />
@@ -29,7 +27,6 @@ import GameScore from '@/components/GameScore.vue'
 const guess = ref('')
 const game = reactive(new WordleGame())
 const gameState = ref(game.status)
-const restartBool = ref(false)
 let keyInput: boolean = false
 
 onMounted(async () => {
@@ -37,14 +34,6 @@ onMounted(async () => {
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
-})
-
-watch(gameState, (newStatus) => {
-  if (newStatus === 1 || newStatus === 2) {
-    restartBool.value = true
-  } else {
-    restartBool.value = false
-  }
 })
 
 function checkGuess() {
@@ -71,10 +60,6 @@ function keyPress(event: KeyboardEvent) {
     guess.value += event.key.toLowerCase()
     game.guess.push(event.key.toLowerCase())
   }
-}
-
-function restartGame() {
-  game.restartGame()
 }
 
 function setUsername(name: string) {

@@ -12,7 +12,9 @@
           You {{ gameState === WordleGameStatus.Won ? 'won' : 'lost' }} in {{ timer }} seconds.
         </v-card-text>
         <v-card-actions>
-          <v-btn @click="dialog = false"> Done </v-btn>
+          <v-btn @click.stop="$router.push('/')"> Home </v-btn>
+          <v-btn @click.stop="$router.push('/Leaderboard')"> Leaderboard </v-btn>
+
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,6 +30,7 @@
 import { ref, watch, defineProps } from 'vue'
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import Axios from 'axios'
+import { RouterLink } from 'vue-router'
 
 const startDialog = ref(true)
 const dialog = ref(false)
