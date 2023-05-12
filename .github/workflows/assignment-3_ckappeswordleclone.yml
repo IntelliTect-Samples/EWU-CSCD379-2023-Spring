@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'CKappesWordleClone'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2DA3D9F5A4AB4A339FFC12D19747F4D4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
           package: .
