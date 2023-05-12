@@ -77,10 +77,10 @@ const playerService = inject(Services.PlayerService) as PlayerService
 onMounted(async () => {
   // Start a new game
   await newGame()
-  window.addEventListener('keyup', keyPress)
+  window.addEventListener('keyup', keyUp)
 })
 onUnmounted(() => {
-  window.removeEventListener('keyup', keyPress)
+  window.removeEventListener('keyup', keyUp)
 })
 
 function newGame() {
@@ -117,15 +117,20 @@ function addChar(letter: Letter) {
   guess.value += letter.char
 }
 
-function keyPress(event: KeyboardEvent) {
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+function keyUp(event: KeyboardEvent) {
+  if (
+    document.activeElement?.tagName !== 'INPUT' &&
+    document.activeElement?.tagName !== 'TEXTAREA'
+  ) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
 }
 
