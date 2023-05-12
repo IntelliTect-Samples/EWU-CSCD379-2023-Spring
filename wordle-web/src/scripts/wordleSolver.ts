@@ -136,7 +136,7 @@ export class WordleSolver {
 
   bestGuessOfAllWords() {
     const availableWords = this.availableWords()
-    if (availableWords.length == 1) return availableWords[0]
+    if (availableWords.length <= 2) return availableWords[0]
     // Count all the letters in the available words
     const letterCounts = new Map<string, number>()
     'abcedfgihjklmnopqrstuvwxyz'.split('').forEach((char) => letterCounts.set(char, 0))
@@ -179,7 +179,7 @@ export class WordleSolver {
         }
       }
       if (validWords.length > 0) {
-        console.log(`Found at ${i} letters`)
+        console.log(`Found ${validWords.length} words at ${i} letters`)
         // We found a word that contains all the letters, now find the word that will eliminate the most words
         break
       }
