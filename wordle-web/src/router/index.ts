@@ -12,7 +12,7 @@ const router = createRouter({
       component: WordleView
     },
     {
-      path: '/',
+      path: '/about',
       name: 'about',
       component: AboutView
     },
