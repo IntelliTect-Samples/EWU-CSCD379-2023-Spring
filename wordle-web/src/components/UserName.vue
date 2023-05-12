@@ -27,11 +27,10 @@
 import { watch, ref } from 'vue'
 
 const dialog = ref(true)
-const localName = localStorage.getItem('usersName')
 const usersName = ref('guest')
 const inputUserName = ref('')
 
-if (localName !== null) {
+if (localStorage.getItem !== null) {
   usersName.value = localStorage.getItem('usersName')!
 }
 
@@ -42,8 +41,8 @@ function updateUserName() {
 function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
-  localStorage.setItem('usersName', usersName.value)
   sendUsername()
+  localStorage.setItem('usersName', usersName.value)
 }
 
 function cancelUserName() {
