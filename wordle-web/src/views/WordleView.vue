@@ -21,7 +21,7 @@ import { useCookies } from 'vue3-cookies'
 import axios from 'axios'
 
 const { cookies } = useCookies()
-const playerName = ref(cookies.get('playerName') || 'Guest')
+const playerName = ref(cookies.get('playerName'))
 const guess = ref('')
 const game = reactive(new WordleGame())
 
