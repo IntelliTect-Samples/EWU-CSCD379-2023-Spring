@@ -34,6 +34,9 @@ export default defineComponent({
     })
 
     function submitName() {
+      if (playerName.value === '') {
+        return false
+      }
       emit('username-submitted', playerName.value)
       emit('update:dialogOpen', false)
     }
