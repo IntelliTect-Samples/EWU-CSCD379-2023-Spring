@@ -23,6 +23,18 @@
       </div>
     </v-card>
   </v-sheet>
+
+  <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center"
+    >
+      <v-progress-circular
+        color="primary"
+        indeterminate
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+
 </template>
 
 <script setup lang="ts">
@@ -30,6 +42,7 @@ import { ref } from 'vue';
 import Axios from 'axios'
 
 var playerData = ref<PlayerData[]>([])
+const overlay = ref(true)
 
 interface PlayerData {
   name: string
@@ -53,6 +66,7 @@ Axios.get('Player/GetTopTen')
   .then((response) => {
     console.log(response.data)
     playerData.value = response.data
+    overlay.value = false
   })
   .catch((error) => {
     console.log(error)
