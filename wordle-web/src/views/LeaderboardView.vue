@@ -8,7 +8,7 @@
       <template v-for="player in playerData" v-bind:key="player.name">
         <v-progress-linear 
           :model-value="getScore(player.averageAttempts)"
-          max="6"
+          max="5"
           color="#757575"
           height="25"
           striped
@@ -53,14 +53,9 @@ interface PlayerData {
   TotalAttempts: number
 }
 
-
-
 function getScore(i: number) {
     return (6  - i)
 }
-
-
-
 
 Axios.get('Player/GetTopTen')
   .then((response) => {
