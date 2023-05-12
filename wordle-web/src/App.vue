@@ -14,6 +14,7 @@
 
     <v-toolbar :elevation="7">
       <v-btn-toggle class="ms-2">
+        <img alt="Wordle Logo" src="./assets/icon.png" class="mr-3" />
         <v-btn class="text-h5" variant="plain" to="/"> Home </v-btn>
         <v-btn class="text-h5" variant="plain" to="/wordle"> Wordle </v-btn>
         <v-btn class="text-h5" variant="plain" to="/leaderboard"> Leaderboard </v-btn>
