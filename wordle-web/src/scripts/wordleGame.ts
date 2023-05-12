@@ -18,8 +18,18 @@ export class WordleGame {
   guesses = new Array<Word>()
   secretWord = ''
   status = WordleGameStatus.Active
-  guess!: Word
   numberOfGuesses = 6
+  guessIndex = 0
+  startTime = Date.now()
+  endTime: number | null = null
+
+  duration(): number {
+    return (this.endTime || Date.now()) - this.startTime
+  }
+
+  get guess(): Word {
+    return this.guesses[this.guessIndex]
+  }
 
   // // check length of guess
   //   if (this.letters.length !== secretWord.length) {
@@ -27,34 +37,42 @@ export class WordleGame {
   //     return
   //   }
 
-  async restartGame(secretWord?: string | null, numberOfGuesses: number = 6) {
-    this.secretWord = secretWord || (await WordsService.getWordFromApi())
+  async restartGame(secretWord: string, numberOfGuesses: number = 6) {
+    this.secretWord = secretWord
+    this.startTime = Date.now()
+    this.endTime = null
     this.guesses.splice(0)
 
     for (let i = 0; i < numberOfGuesses; i++) {
       const word = new Word()
       this.guesses.push(word)
     }
-    this.guess = this.guesses[0]
+    this.guessIndex = 0
+    this.guessedLetters = []
     this.status = WordleGameStatus.Active
   }
 
   submitGuess() {
+    if (!this.guess.isFilled) return
+    if (!WordsService.isValidWord(this.guess.text)) {
+      this.guess.clear()
+      return
+    }
     // put logic to win here.
-    this.guess.check(this.secretWord)
-
+    const correctGuess = this.guess.check(this.secretWord)
     // Update the guessed letters
     for (const letter of this.guess.letters) {
       this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters)
-
-    const index = this.guesses.indexOf(this.guess)
-    if (index < this.guesses.length - 1) {
-      this.guess = this.guesses[index + 1]
+    if (correctGuess) {
+      this.status = WordleGameStatus.Won
+      this.endTime = Date.now()
+    } else if (this.guessIndex + 1 == this.guesses.length) {
+      this.status = WordleGameStatus.Lost
+      this.endTime = Date.now()
     } else {
-      // The game is over
+      this.guessIndex++
     }
   }
 }
