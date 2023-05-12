@@ -64,7 +64,6 @@ watch(
     }
     Axios.post('Leaderboard/AddNewScore', null, {
       params: {
-        //Placeholders for now
         name: props.username,
         attempts: props.game?.attempts
       }

@@ -32,6 +32,7 @@ const inputUserName = ref('')
 
 if (localStorage.getItem !== null) {
   usersName.value = localStorage.getItem('usersName')!
+  inputUserName.value = usersName.value
 }
 
 function updateUserName() {
@@ -41,8 +42,8 @@ function updateUserName() {
 function saveUserName() {
   usersName.value = inputUserName.value
   dialog.value = false
-  sendUsername()
   localStorage.setItem('usersName', usersName.value)
+  sendUsername()
 }
 
 function cancelUserName() {
