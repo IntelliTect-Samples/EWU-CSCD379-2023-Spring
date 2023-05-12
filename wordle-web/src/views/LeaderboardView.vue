@@ -9,12 +9,12 @@
           </div>
           <v-card-text class="d-flex flex-column align-center">
             <v-row dense>
-              <v-col cols="6" class="text-end">Count -</v-col>
+              <v-col cols="6" class="text-end">Total Games -</v-col>
               <v-col cols="6">{{ player.gameCount }}</v-col>
-              <v-col cols="6" class="text-end">Attempts -</v-col>
+              <v-col cols="6" class="text-end">Average Attempts -</v-col>
               <v-col cols="6">{{ player.averageAttempts }}</v-col>
-              <v-col cols="6" class="text-end">Duration -</v-col>
-              <v-col cols="6">{{ formatTime(player.averageSecondsPerGame) }} sec</v-col>
+              <v-col cols="6" class="text-end">Average Duration -</v-col>
+              <v-col cols="6">{{ formatTime(player.averageSecondsPerGame) }}</v-col>
             </v-row>
           </v-card-text>
         </div>
@@ -32,6 +32,7 @@ import { formatTime } from '@/scripts/helpers'
 const players = ref<Player[]>([])
 
 Axios.get('/player/TopPlayers').then((result) => {
+  console.log(result.data)
   players.value = result.data as Player[]
 })
 </script>

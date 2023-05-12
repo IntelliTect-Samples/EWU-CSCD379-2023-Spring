@@ -20,6 +20,7 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<Player>> GetTopPlayersAsync(int count = 10)
         {
             return await _db.Players
+                .Where(p=>p.GameCount > 0)
                 .OrderBy(f=>f.AverageAttempts)
                 .Take(count)
                 .ToListAsync();
@@ -53,6 +54,7 @@ namespace Wordle.Api.Services
                 {
                     player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
                     player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.DurationInSeconds) / (player.GameCount + 1);
+                    player.GameCount++;
                     await _db.SaveChangesAsync();
                 }
                 return player;
