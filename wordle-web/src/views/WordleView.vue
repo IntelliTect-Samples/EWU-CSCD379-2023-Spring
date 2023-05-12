@@ -25,7 +25,7 @@
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus,  } from '@/scripts/wordleGame'
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive } from 'vue';
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'

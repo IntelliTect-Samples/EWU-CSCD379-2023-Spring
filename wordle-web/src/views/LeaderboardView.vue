@@ -1,13 +1,15 @@
 <template>
   <v-sheet>
     <v-card>
-      <v-card-title>Leader Board</v-card-title>
+
+      <v-card-title class="text-center"><strong>Leader Board</strong></v-card-title>
       <template v-for="player in playerData" v-bind:key="player.name">
         <v-progress-linear 
-          v-model="player.averageAttempts"
-          max = "6"
+          :model-value="getScore(player.averageAttempts)"
+          max="6"
           color="#757575"
           height="25"
+          striped
         >
         <strong>{{ player.name }}</strong>
         </v-progress-linear>
@@ -20,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import Axios from 'axios'
 
 var playerData = ref<PlayerData[]>([])
@@ -30,7 +32,17 @@ interface PlayerData {
   gameCount: number
   averageAttempts: number
   averageSecondsPerGame: number
+  TotalSecondsPlayed: number
+  TotalAttempts: number
 }
+
+
+
+function getScore(i: number) {
+    return (6  - i)
+}
+
+
 
 
 Axios.get('Player/GetTopTen')
@@ -41,6 +53,10 @@ Axios.get('Player/GetTopTen')
   .catch((error) => {
     console.log(error)
   })
+
+
+
+
 
 </script>
 
