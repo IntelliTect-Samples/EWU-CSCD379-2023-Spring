@@ -70,6 +70,16 @@
       >
         {{ solver.bestGuessOfValidWords() }}
       </v-btn>
+      <v-btn
+        size="small"
+        class="ml-1"
+        @click="wordClick(solver.bestGuessOfAllWords())"
+        color="yellow-darken-2"
+        elevation="4"
+        variant="tonal"
+      >
+        {{ solver.bestGuessOfAllWords() }}
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
