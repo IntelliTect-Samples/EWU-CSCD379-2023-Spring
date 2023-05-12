@@ -131,7 +131,61 @@ export class WordleSolver {
         }
       }
     }
-
     return bestWord
+  }
+
+  bestGuessOfAllWords() {
+    const availableWords = this.availableWords()
+    if (availableWords.length == 1) return availableWords[0]
+    // Count all the letters in the available words
+    const letterCounts = new Map<string, number>()
+    'abcedfgihjklmnopqrstuvwxyz'.split('').forEach((char) => letterCounts.set(char, 0))
+    for (const word of availableWords) {
+      for (const char of word) {
+        letterCounts.set(char, letterCounts.get(char)! + 1)
+      }
+    }
+
+    const usages = this.getLetterUsages()
+    //Remove letters that are already guessed
+    for (const [letter, count] of letterCounts) {
+      if (usages.filter((u) => u.char == letter).length > 0) {
+        letterCounts.delete(letter)
+      }
+    }
+
+    // Convert to array so we can sort it
+    const unusedLetters = Array.from(letterCounts, ([char, count]) => ({ char, count })).sort(
+      (a, b) => b.count - a.count
+    )
+
+    const maxLength = unusedLetters.length >= 5 ? 5 : unusedLetters.length
+
+    // Grab the top 5, 4, 3, 2, 1 letters and see if we have words that will eliminate the most letters
+    const validWords = new Array<string>()
+    for (let i = maxLength; i > 0; i--) {
+      const letters = unusedLetters.slice(0, i).map((l) => l.char)
+      // Iterate all words and see if a word contains them all
+      for (const word of WordsService.allWords()) {
+        let hasAllLetters = true
+        for (const letter of letters) {
+          if (word.indexOf(letter) == -1) {
+            hasAllLetters = false
+            break
+          }
+        }
+        if (hasAllLetters) {
+          validWords.push(word)
+        }
+      }
+      if (validWords.length > 0) {
+        console.log(`Found at ${i} letters`)
+        // We found a word that contains all the letters, now find the word that will eliminate the most words
+        break
+      }
+      validWords.length = 0
+    }
+    if (validWords.length == 0) return '-----'
+    return validWords[0]
   }
 }
