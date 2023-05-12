@@ -31,7 +31,7 @@ const localName = localStorage.getItem('usersName')
 const usersName = ref('guest')
 const inputUserName = ref('')
 
-if(localName !== null) {
+if (localName !== null) {
   usersName.value = localStorage.getItem('usersName')!
 }
 
