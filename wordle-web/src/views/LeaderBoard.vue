@@ -1,12 +1,12 @@
 <template>
   <v-container class="d-flex justify-center align-center">
-    <v-card color="brown-darken-2">
+    <v-card >
       <div class="text-h2 text-center">LeaderBoard</div>
       <v-card-text>
         <div
           v-for="(score, index) in scores"
           :key="`${score.score} + ${index}`"
-          class="border my-8"
+          class="border-bottom border-solid my-8"
         >
           <div class="text-h8">{{ index + 1 }}'s Place: {{ score.playerName }}</div>
           <v-card-text class="align-center">
