@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-app-bar :elevation="3">
+    <v-app-bar color="yellow" :elevation="3">
       <template v-slot>
         <v-app-bar-title>
-          <RouterLink to="/wordle">
+          <RouterLink to="/">
             <v-icon class="mdi mdi-cellphone-settings" color="blue"></v-icon>
             Wordle
           </RouterLink>

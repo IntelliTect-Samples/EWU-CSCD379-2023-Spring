@@ -34,11 +34,7 @@
   </div>
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
-  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col xs="11" sm="9" md="6" lg="4">
-      <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
-    </v-col>
-  </v-row>
+  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active"> </v-row>
 
   <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
@@ -50,32 +46,25 @@ import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
-import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import { useDisplay } from 'vuetify'
-import { Player } from '@/scripts/player'
 import { Services } from '@/scripts/services'
 import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
-import ActiveUser from '@/components/ActiveUser.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
-
-// Add this to make testing work because useDisplay() throws an error when testing
-// Wrap useDisplay in a function so that it doesn't get called during testing.
 const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
 const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
-  // Start a new game
   await newGame()
   window.addEventListener('keyup', keyPress)
 })
@@ -129,7 +118,6 @@ function keyPress(event: KeyboardEvent) {
   }
 }
 
-// Watch showScoreDialog and when it changes to true, call newGame()
 watch(showScoreDialog, (value) => {
   if (!value) {
     newGame()
@@ -152,8 +140,5 @@ function sendGameResult() {
   Axios.post('/Player/AddGameResult', gameResult).then((response) => {
     console.log(response.data)
   })
-  // if (this.onGameEnd) {
-  //   this.onGameEnd(response.data as GameResult)
-  // }
 }
 </script>
