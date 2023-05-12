@@ -1,7 +1,7 @@
 <template>
-  <div style="text-align:right;"><ActiveUser /></div>
-    
-  <h1 style="text-align:center;">Wordle But Better</h1>
+  <div style="text-align: right"><ActiveUser /></div>
+
+  <h1 style="text-align: center">Wordle But Better</h1>
   <GameBoard :game="game" @letterClick="addChar" />
 
   <div class="justify-right">

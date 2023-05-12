@@ -1,6 +1,6 @@
 <template>
   <v-container class="d-flex justify-center align-center">
-    <v-card >
+    <v-card>
       <div class="text-h2 text-center">LeaderBoard</div>
       <v-card-text>
         <div
@@ -12,11 +12,11 @@
           <v-card-text class="align-center">
             <v-row dense>
               <v-col cols="2">Score: </v-col>
-              <v-col >{{ score.score }}</v-col>
+              <v-col>{{ score.score }}</v-col>
               <v-col cols="4">Attempts: </v-col>
-              <v-col >{{ score.attempts }}</v-col>
+              <v-col>{{ score.attempts }}</v-col>
               <v-col cols="4">Duration:</v-col>
-              <v-col >{{ formatTime(score.duration) }}</v-col>
+              <v-col>{{ formatTime(score.duration) }}</v-col>
             </v-row>
           </v-card-text>
         </div>
