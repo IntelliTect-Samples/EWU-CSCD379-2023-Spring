@@ -1,6 +1,6 @@
 <template>
   <div class="leaderboard">
-    <h1>Leaderboard</h1>
+    <h1>Leaderboard: Top 10</h1>
     <v-table>
       <thead>
         <tr>

@@ -28,7 +28,10 @@ export class Word {
     return this.letters.map((l) => l.char).join('')
   }
 
-  push(char: string) {
+  push(char: string, nameSaved: boolean) {
+    if (!nameSaved) {
+      return // Do not modify letters if the name is not saved
+    }
     // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
@@ -39,7 +42,11 @@ export class Word {
   }
 
   // Remove the last letter
-  pop() {
+  pop(nameSaved: boolean) {
+    if (!nameSaved) {
+      return // Do not modify letters if the name is not saved
+    }
+
     for (let i = this.letters.length - 1; i >= 0; i--) {
       if (this.letters[i].char !== '') {
         this.letters[i].char = ''
@@ -82,9 +89,6 @@ export class Word {
       }
     }
 
-    console.log(guessChars)
-    console.log(secretChars)
-    console.log(isCorrect)
     return isCorrect
     // check if the letters are in the right place
   }

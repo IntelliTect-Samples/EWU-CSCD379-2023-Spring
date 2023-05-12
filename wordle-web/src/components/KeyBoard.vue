@@ -3,7 +3,12 @@
     <br />
     <v-row class="justify-center key-row" v-for="(key, i) in keyboardLetters" :key="i">
       <v-col class="key-column" v-for="(letter, j) in key" :key="j">
-        <LetterButton class="letter-button" :letter="letter" @click="letterClick(letter)" />
+        <LetterButton
+          class="letter-button"
+          :letter="letter"
+          :disabled="!game.nameSaved"
+          @click="letterClick(letter)"
+        />
       </v-col>
     </v-row>
   </div>
@@ -12,11 +17,16 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
+  game: {
+    nameSaved: boolean
+  }
   guessedLetters: Letter[]
 }>()
+
+const game = ref(props.game)
 
 const keyboardLetters = computed(() => {
   console.log(props.guessedLetters.length)

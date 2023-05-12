@@ -7,7 +7,6 @@
           <RouterLink to="/leaderboard">Leader Board</RouterLink>
         </nav>
       </div>
-      <div class="player-name" @click="dialogVisible = true">{{ playerName }}</div>
     </div>
   </header>
   <div class="theme-buttons">
@@ -15,26 +14,7 @@
     <v-btn @click="setDarkTheme"> Dark Theme </v-btn>
   </div>
 
-  <RouterView :playerName="playerName" />
-
-  <div class="text-center">
-    <v-dialog v-model="dialogVisible" persistent width="auto">
-      <v-card>
-        <v-card-title class="headline">Enter your name</v-card-title>
-        <v-card-text>
-          <v-text-field
-            label="Player name"
-            v-model="playerName"
-            @keyup.enter="dialogVisible = false"
-          />
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" block @click="saveName">Save</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
-  </div>
+  <RouterView />
 </template>
 
 <script setup lang="ts">

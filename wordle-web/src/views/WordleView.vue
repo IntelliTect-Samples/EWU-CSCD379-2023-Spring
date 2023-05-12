@@ -1,11 +1,30 @@
 <template>
   <br />
 
+  <div class="playerName">
+    <v-btn v-if="game.nameSaved" @click="editName">{{ playerName }}</v-btn>
+    <input v-else type="text" v-model="playerName" @keyup.enter="saveName" />
+  </div>
+
   <GameBoard :game="game" @letterClick="addChar" />
 
-  <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
+  <KeyBoard :game="game" @letterClick="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
+
+  <v-dialog v-model="dialog" persistent max-width="500px">
+    <v-card>
+      <v-card-title>
+        <span class="headline">Enter Your Name</span>
+      </v-card-title>
+      <v-card-text>
+        <v-text-field v-model="playerName" label="Name" placeholder="Guest"></v-text-field>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="primary" @click="saveName">Save</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 
   <h2>{{ guess }}</h2>
   <h3>{{ game.secretWord }}</h3>
@@ -17,11 +36,11 @@ import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
-import { useCookies } from 'vue3-cookies'
 import axios from 'axios'
 
-const { cookies } = useCookies()
-const playerName = ref(cookies.get('playerName'))
+const dialog = ref(true)
+const playerName = ref('Guest')
+
 const guess = ref('')
 const game = reactive(new WordleGame())
 
@@ -42,6 +61,18 @@ function checkGuess() {
   if (game.status === WordleGameStatus.Won) {
     console.log('You won!')
   }
+}
+
+function saveName() {
+  if (playerName.value !== '') {
+    dialog.value = false
+    game.nameSaved = true
+  }
+}
+
+function editName() {
+  game.nameSaved = false
+  dialog.value = true
 }
 
 function submitGame() {
@@ -68,21 +99,36 @@ function submitGame() {
 }
 
 function addChar(letter: Letter) {
-  game.guess.push(letter.char)
-  guess.value += letter.char
+  if (game.nameSaved) {
+    game.guess.push(letter.char, game.nameSaved)
+    guess.value += letter.char
+  }
 }
 
 function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-    console.log('Back')
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+  if (game.nameSaved) {
+    console.log(event.key)
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop(game.nameSaved)
+      console.log('Back')
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase(), game.nameSaved)
+    }
   }
 }
 </script>
+
+<style scoped>
+.playerName {
+  align-self: flex-start;
+  text-align: right;
+  z-index: 1;
+  margin-top: -70px;
+  padding: 0 20px;
+  margin-bottom: 100px;
+}
+</style>
