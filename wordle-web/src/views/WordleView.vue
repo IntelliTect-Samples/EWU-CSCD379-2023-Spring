@@ -17,7 +17,9 @@
     <v-btn @click="deleteUserLocal"> Reset Username </v-btn>
   </v-container>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div class="text-center">
+    <img :src="logo" />
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -71,6 +73,7 @@ import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
+import logo from '../assets/logo.png'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
