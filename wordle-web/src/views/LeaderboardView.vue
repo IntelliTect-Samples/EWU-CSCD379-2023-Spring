@@ -28,9 +28,7 @@ var playerData = ref<PlayerData[]>([])
 interface PlayerData {
   name: string
   gameCount: number
-  totalAttempts: number
   averageAttempts: number
-  totalSecondsPlayed: number
   averageSecondsPerGame: number
 }
 

@@ -38,6 +38,8 @@ const username = ref("Guest")
 
 if (localStorage.getItem('username') === 'Guest') {
   user.value = true
+} else if (localStorage.getItem('username') === null){
+  localStorage.setItem('username', username.value)
 } else {
   user.value = false
 }
