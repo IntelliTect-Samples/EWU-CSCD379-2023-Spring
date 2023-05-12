@@ -2,7 +2,7 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-  <v-overlay :model-value="namePrompt" class="align-center justify-center" persistent>
+  <v-overlay :model-value="namePromptOverlay" class="align-center justify-center" persistent>
     <v-sheet width="300" class="mx-auto">
       <v-form @submit.prevent>
         <v-text-field v-model="userName" label="Username"></v-text-field>
@@ -11,8 +11,10 @@
     </v-sheet>
   </v-overlay>
 
-  <v-container class="d-flex flex-row-reverse">
-    <v-btn @click="changeUsername"> {{ userName }} </v-btn>
+  <v-container class="d-flex flex-row-reverse mr-2 pt-1">
+    <v-btn @click="changeUsername" class="ml-1"> {{ userName }} </v-btn>
+    <v-btn class="ml-1">GameTime: {{ count }}</v-btn>
+    <v-btn @click="deleteUserLocal"> Reset Username </v-btn>
   </v-container>
 
   <div class="text-h4 text-center">Wordle Mind Bender</div>
@@ -31,7 +33,7 @@
     >
       Check
     </v-btn>
-    <h1 class="text-center">GameTime: {{ count }}</h1>
+
     <v-btn
       @click="newGame"
       @keyup.enter="checkGuess"
@@ -69,13 +71,14 @@ import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
+import { useStorage } from '@vueuse/core'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-const namePrompt = ref(false)
+const namePromptOverlay = ref(false)
 const overlay = ref(true)
-const name = ref('Guest')
-const userName = ref(name)
+const localUserName = useStorage('localUser', 'Guest')
+const userName = ref(localUserName.value)
 const attempts = ref()
 const gameCount = ref(0)
 let count = ref(0)
@@ -92,17 +95,22 @@ onUnmounted(() => {
 
 function promptUser() {
   if (game.status == WordleGameStatus.Won) {
-    namePrompt.value = true
+    namePromptOverlay.value = true
   }
 }
 
+function deleteUserLocal() {
+  localStorage.clear()
+  userName.value = 'Guest'
+}
+
 function changeUsername() {
-  namePrompt.value = true
+  namePromptOverlay.value = true
 }
 
 function setUsername() {
-  namePrompt.value = false
-  name.value = userName.value
+  namePromptOverlay.value = false
+  localUserName.value = userName.value
   if (game.status == WordleGameStatus.Won) {
     Axios.post('/player', {
       name: userName.value.trim(),
@@ -186,7 +194,7 @@ function addChar(letter: Letter) {
 }
 
 function keyPress(event: KeyboardEvent) {
-  if (namePrompt.value === false) {
+  if (namePromptOverlay.value === false) {
     if (event.key === 'Enter') {
       checkGuess()
     } else if (event.key === 'Backspace') {
