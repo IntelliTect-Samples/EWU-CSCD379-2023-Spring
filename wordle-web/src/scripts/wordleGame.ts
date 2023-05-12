@@ -20,6 +20,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
+  attempts = 0
   startTime!: number
   currentTime!: number
   startingPoints = 60
@@ -47,6 +48,7 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
     this.startTime = Date.now()
     this.startingPoints = 60
+    this.numberOfGuesses = 6
     if (this.timerInterval) {
       this.stopTimer()
     }
@@ -62,9 +64,6 @@ export class WordleGame {
       const finalTime = (Date.now() - this.startTime) / 1000
       const remainingGuesses = this.numberOfGuesses - this.guesses.indexOf(this.guess) - 1
       this.finalScore = this.getScore(finalTime, remainingGuesses)
-      console.log('final score = ' + this.finalScore)
-
-      // this.gameResult = { finalScore: finalScore, finalTime: finalTime, remainingGuesses: remainingGuesses, secretWord: this.secretWord }
       this.status = WordleGameStatus.Won
       this.stopTimer()
     }
@@ -73,10 +72,10 @@ export class WordleGame {
       this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters)
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
+      this.attempts = index + 1
     } else {
       // the game is over, restart it.
       console.log('game over')
@@ -87,7 +86,7 @@ export class WordleGame {
 
   getScore(finalTime: number, remainingGuesses: number) {
     const baseScore = this.startingPoints - (6 - remainingGuesses) * 10
-    const finalScore = baseScore * remainingGuesses - finalTime
+    const finalScore = Math.floor(baseScore * remainingGuesses - finalTime)
     return finalScore
   }
 

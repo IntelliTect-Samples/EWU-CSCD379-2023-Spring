@@ -1,25 +1,32 @@
 <template>
   <div>
     <v-card>
-      <h1>Leaderboard</h1>
-      <table>
+      <v-card-title>
+        <div class="text-h4">Leaderboard</div>
+      </v-card-title>
+      <v-table dense>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Score</th>
-            <th>Game Count</th>
-            <th>Average Attempts</th>
+            <th class="text-center">Rank</th>
+            <th class="text-center">Name</th>
+            <th class="text-center">Score</th>
+            <th class="text-center">Game Count</th>
+            <th class="text-center">Average Attempts</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="player in players" :key="player.playerId">
-            <td>{{ player.name }}</td>
-            <td>{{ player.score }}</td>
-            <td>{{ player.gameCount }}</td>
-            <td>{{ player.averageAttempts }}</td>
+          <tr v-for="(player, index) in players" :key="player.playerId">
+            <td class="text-center">{{ index + 1 }}</td>
+            <td class="text-center">
+              <v-icon v-if="index === 0" small class="mr-1">mdi-crown</v-icon>
+              {{ player.name }}
+            </td>
+            <td class="text-center">{{ player.score }}</td>
+            <td class="text-center">{{ player.gameCount }}</td>
+            <td class="text-center">{{ player.averageAttempts }}</td>
           </tr>
         </tbody>
-      </table>
+      </v-table>
     </v-card>
   </div>
 </template>
@@ -37,7 +44,7 @@ export default {
   async created() {
     try {
       const leaderboardData = await LeaderboardService.GetLeaderboard()
-      this.players = leaderboardData.map((playerData: any) => {
+      this.players = leaderboardData.map((playerData: Player) => {
         return new Player(
           playerData.playerId,
           playerData.name,
@@ -53,4 +60,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.mr-1 {
+  margin-right: 0.5rem;
+}
+</style>

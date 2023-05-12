@@ -54,20 +54,19 @@ Add leaderboard to the application
   - Clicking on this allows for preemptive setting of the name before the end of the game ✅
 - Dialog must be persistent, doesn't close by clicking off the dialog ✅
 
-**3. Save the Score and Seconds to complete** ❌✅
+**3. Save the Score and Seconds to complete** ✅
 - Save the score and time to complete in seconds at the end of the game if we have a name. ✅
 - If the user hasn't set a name, save the score and seconds as "Guest". (Be sure to prompt first) ✅
-- Save should be done with an Axios Post ❌✅
+- Save should be done with an Axios Post ✅
 
 **4. Create a Leaderboard Page** ✅
 - Create a /leaderboard page in the application that shows the top scores ✅
 - Use Axios to call the leaderboard API ✅
 - Make a nice display of the returned data ❌✅
-- Add a link on the front page to access the leaderboard ❌✅
+- Add a link on the front page to access the leaderboard ✅
 - Add a link to the app bar to access the leaderboard ✅
 
 **6. Deploy site to Azure** ❌✅
 - Deploy API site with Github Action to Azure Web App ✅
-- Unit Tests should run on build ❌✅
 - Add API Base URL replacement to front end project via secret ❌✅
 

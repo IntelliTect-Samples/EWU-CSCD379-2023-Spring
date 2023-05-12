@@ -5,8 +5,7 @@
       <v-btn @click="updateNameDialog" prepend-icon="mdi-account-circle">{{
         currentPlayerName
       }}</v-btn>
-      <v-chip>{{ game.elapsedTime }}s</v-chip>
-      <v-chip>{{ game.status }}</v-chip>
+      <v-chip prepend-icon="mdi-clock">{{ game.elapsedTime }}s</v-chip>
     </div>
   </v-row>
 
@@ -31,16 +30,17 @@
     @update-input="handleUpdateInput"
   ></UsernameDialog>
 
-  <v-dialog :model-value="game.status === 1" persistent max-width="400">
+  <v-dialog :model-value="game.status === 1" max-width="400">
     <v-card>
-      <v-card-title class="text-h5">Congratulations!</v-card-title>
+      <v-card-title class="text-h5">Congratulations, {{ currentPlayerName }}</v-card-title>
       <v-card-text>
-        <p>Player: {{ currentPlayerName }}</p>
-        <p>Final Score: {{ game.finalScore }}</p>
+        <p>You Scored {{ game.finalScore }} in {{ game.elapsedTime }} seconds!</p>
+        <p>Attempts: {{ game.attempts }}</p>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="primary" @click="submitScore">Submit Score</v-btn>
+        <v-btn color="primary" @click="submitScore"> Submit Score </v-btn>
+        <v-btn to="/Leaderboard/0">Leaderboard</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -86,34 +86,21 @@ function handleUpdateInput(inputValue: string) {
 }
 
 async function submitScore() {
-  try {
-    user.score = game.finalScore
-    console.log('Submitting score for player' + ' ' + user.name + ' with score ' + game.finalScore)
-    console.log(user)
-
-    user = await PlayerService.AddOrUpdatePlayerScore(user) //broken
-    console.log(user)
-  } catch (error) {
-    console.error('Error in submitScore:', error)
-  }
+  user.score = game.finalScore
+  console.log('Submitting score for player' + ' ' + user.name + ' with score ' + game.finalScore)
+  const response = await PlayerService.AddOrUpdatePlayerScore(user)
+  console.log(response)
+  game.restartGame()
 }
 
 async function handleUsernameSubmitted(name: string) {
   if (user.playerId == 0) {
-    console.log('Username submitted:', name)
     currentPlayerName.value = name
-
     window.addEventListener('keydown', keyPress)
-
-    console.log('Adding new player' + ' ' + name)
     user = await PlayerService.AddNewPlayer(name)
-    console.log(user)
   } else {
-    console.log('Username update submitted:', name)
     currentPlayerName.value = name
-    console.log('Updating player' + ' ' + user.name + ' to ' + name)
     user = await PlayerService.UpdatePlayerName(name, user.playerId)
-    console.log(user) // THIS IS BROKEN :(
   }
 }
 
@@ -121,7 +108,6 @@ async function handleUsernameSubmitted(name: string) {
 Axios.get('word')
   .then((response) => {
     game.restartGame(response.data)
-    console.log(game.secretWord)
     setTimeout(() => {
       overlay.value = false
     }, 502)

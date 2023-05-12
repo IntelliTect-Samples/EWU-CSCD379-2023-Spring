@@ -1,23 +1,22 @@
 import Axios from 'axios'
+import type { AxiosResponse } from 'axios'
+import type { Player } from '@/scripts/player' // Assuming you have a Player type defined
 
 export class LeaderboardService {
-  static async GetLeaderboard() {
+  static async GetLeaderboard(count?: number): Promise<Player[]> {
     try {
-      const response = await Axios.get('/Leaderboard/0')
-      const Leaderboard = response.data
+      const url = 'Leaderboard/'
+      const _count = count || 0
+      const response: AxiosResponse = await Axios.get(`${url}${_count}`)
+      let Leaderboard: Player[] = response.data
 
-      return Leaderboard.map((player: any) => {
-        return {
-          playerId: player.playerId,
-          name: player.name,
-          score: player.score,
-          gameCount: player.gameCount,
-          averageAttempts: player.averageAttempts
-          // averageTime: player.averageTime,
-        }
-      })
+      // Sort the leaderboard by score in descending order
+      Leaderboard = Leaderboard.sort((a: Player, b: Player) => b.score - a.score)
+
+      return Leaderboard
     } catch (error) {
-      console.log(error)
+      console.error(error)
+      return []
     }
   }
 }

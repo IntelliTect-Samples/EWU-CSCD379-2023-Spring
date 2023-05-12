@@ -25,6 +25,7 @@ namespace Wordle.Api.Controllers
             if (count < 1)
             {
                 count = 50;
+
             }
 
             var topPlayers = await _leaderboardService.GetTopPlayers(count);
@@ -35,6 +36,7 @@ namespace Wordle.Api.Controllers
         public async Task<ActionResult<Player>> AddPlayerToLeaderboard([FromBody] PlayerDto player)
         {
             var addedPlayer = await _leaderboardService.AddPlayerToLeaderboard(player);
+
             return CreatedAtAction(nameof(GetTopPlayers), new { count = 10 }, addedPlayer);
         }
 

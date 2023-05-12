@@ -49,26 +49,15 @@ export abstract class PlayerService {
 
   // takes playerId and score -> returns Player Object
   static async AddOrUpdatePlayerScore(user: Player) {
-    // Broken :()
-    try {
-      const playerDto = {
-        PlayerId: user.playerId,
-        Name: user.name,
-        Score: user.score,
-        GameCount: user.gameCount,
-        AverageAttempts: user.averageAttempts
-      }
-      const response = await Axios.post<Player>(`Player/AddOrUpdatePlayerScore`, playerDto)
-      return new Player(
-        response.data.playerId,
-        response.data.name,
-        response.data.score,
-        response.data.gameCount,
-        response.data.averageAttempts
-      )
-    } catch (error) {
-      console.error('Error in AddOrUpdatePlayerScore:', error)
-      throw error
+    const playerDto = {
+      PlayerId: user.playerId,
+      Name: user.name,
+      Score: user.score,
+      GameCount: user.gameCount,
+      AverageAttempts: user.averageAttempts
     }
+    return await Axios.post(`Player/AddOrUpdatePlayerScore`, playerDto)
+      .then((response) => response.data)
+      .catch((_) => undefined)
   }
 }
