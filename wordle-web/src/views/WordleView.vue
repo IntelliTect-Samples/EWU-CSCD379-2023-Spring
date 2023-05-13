@@ -5,7 +5,7 @@
         <v-card class="text-left">
           <v-list>
             <v-list-item>
-              <v-btn v-model="username" @click="updateDialogValue(true)" elevation="0">
+              <v-btn v-model="username" @click="updateUsernameDialog(true)" elevation="0">
                 Username: {{ username }}
               </v-btn>
             </v-list-item>
@@ -158,8 +158,8 @@ async function newGames() {
 }
 
 /** Emits boolean value used in 'UsernameDialog.vue' to open or close the Username Dialog. */
-function updateDialogValue(newValue: boolean) {
-  eventBus.emit('updateDialogValue', newValue)
+function updateUsernameDialog(newValue: boolean) {
+  eventBus.emit('updateUsernameDialog', newValue)
 }
 
 /** When 'UsernameDialog.vue' emits a change to the username, this function updates the username value. */
