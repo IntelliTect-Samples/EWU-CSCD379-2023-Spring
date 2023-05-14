@@ -148,17 +148,35 @@
 ## Week 7
 ### Lecture 13. 5/16: 
 - Word of the day controller
+- Service mocks in .NET
+- Parsing query parameters to determine game type
+- Load Word of the day in App
 - 
 
-### Lecture 14. 5/18: 
-
+### Lecture 14. 5/18:
+- Responsive Design Patterns
+- IsOnline flag
+- Client unit testing
+- Mocking API calls on the client
+- 
 
 ## Week 8
 ### Lecture 15. 5/23: 
-
+- The problem of security and how to handle it
+- Identity in a web project (not just API)
+- Scaffolding EF
+- Adding Identity to the API
+- Scaffolding EF
+- Cookies
+- JWTs, validation, claims (UserId, Name)
 
 ### Lecture 16. 5/25: 
-
+- Create login component
+- Managing state around logins, existing GUID, etc.
+- Managing auth flow and various login cases
+- Remembering login
+- Refreshing the token
+- Authorizing specific API calls
 
 ## Week 9
 ### Lecture 17. 5/30: 
