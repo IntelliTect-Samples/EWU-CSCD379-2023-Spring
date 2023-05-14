@@ -101,6 +101,22 @@
 
 ## Week 5
 ### Lecture 9. 5/2: 
+- Initial EF Context
+- Word object
+- Word migration
+- Word Controller that returns a word
+- Word Service
+- Service Dependency Injection
+
+### Lecture 10. 5/4: 
+- API Post
+- DTOs
+- EF Migration Deltas to a table
+- Basic EF Querying
+- Axios using Post
+
+## Week 6
+### Lecture 11. 5/9: 
 - API unit testing: database, services, integration.
 - App Refactor:
   - Add game features like end and restart
@@ -118,20 +134,21 @@
   - Custom icon and favicon
   - Google Search Console and 
 
-### Lecture 10. 5/4: 
+### Lecture 12. 5/11: 
+- Troubleshooting Azure
+- Vue services
 - EF Parent-Child relationships
 - Querying with Includes
-
-## Week 6
-### Lecture 11. 5/9: 
-
-
-### Lecture 12. 5/11: 
-
+- EF unit testing
+- Model builder cascade deletes
+- Adding of DateWord and Migration
+- 
+- 
 
 ## Week 7
 ### Lecture 13. 5/16: 
-
+- Word of the day controller
+- 
 
 ### Lecture 14. 5/18: 
 
