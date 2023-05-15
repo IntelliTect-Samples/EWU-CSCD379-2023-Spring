@@ -142,8 +142,6 @@
 - EF unit testing
 - Model builder cascade deletes
 - Adding of DateWord and Migration
-- 
-- 
 
 ## Week 7
 ### Lecture 13. 5/16: 
