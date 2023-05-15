@@ -145,6 +145,7 @@
 
 ## Week 7
 ### Lecture 13. 5/16: 
+- Redirecting root on API to the Wordle site
 - Word of the day controller
 - Service mocks in .NET
 - Parsing query parameters to determine game type
