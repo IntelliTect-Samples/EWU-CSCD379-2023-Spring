@@ -151,14 +151,13 @@
 - Service mocks in .NET
 - Parsing query parameters to determine game type
 - Load Word of the day in App
-- 
+- Integration testing
 
 ### Lecture 14. 5/18:
 - Responsive Design Patterns
 - IsOnline flag
 - Client unit testing
 - Mocking API calls on the client
-- 
 
 ## Week 8
 ### Lecture 15. 5/23: 
