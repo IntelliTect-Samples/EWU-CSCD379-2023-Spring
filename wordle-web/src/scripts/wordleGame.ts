@@ -13,9 +13,8 @@ export class WordleGame {
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
-    this.restartGame(secretWord)
     this.solver = new WordleSolver(this)
-    this.solver.calculate()
+    this.restartGame(secretWord)
   }
   guessedLetters: Letter[] = []
   guesses = new Array<Word>()
