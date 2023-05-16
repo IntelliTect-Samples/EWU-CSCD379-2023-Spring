@@ -142,23 +142,21 @@
 - EF unit testing
 - Model builder cascade deletes
 - Adding of DateWord and Migration
-- 
-- 
 
 ## Week 7
 ### Lecture 13. 5/16: 
+- Redirecting root on API to the Wordle site
 - Word of the day controller
 - Service mocks in .NET
 - Parsing query parameters to determine game type
 - Load Word of the day in App
-- 
+- Integration testing
 
 ### Lecture 14. 5/18:
 - Responsive Design Patterns
 - IsOnline flag
 - Client unit testing
 - Mocking API calls on the client
-- 
 
 ## Week 8
 ### Lecture 15. 5/23: 
