@@ -22,12 +22,27 @@
           <v-list>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/">Play Again</RouterLink>
+                <RouterLink to="/">Play Game</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/dailywordle">Todays Word</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/previouswordles">Daily Words</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/instructions">How to Play</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
