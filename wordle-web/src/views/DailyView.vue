@@ -61,8 +61,12 @@ import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
 
+/*const props = withDefaults(defineProps<{}>(), {
+  Date: Date.now(),
+})*/
+const word = ref('tests')
 const guess = ref('')
-const game = reactive(new WordleGame())
+const game = reactive(new WordleGame(word.value))
 const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
@@ -85,20 +89,7 @@ onUnmounted(() => {
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
-    .then((response) => {
-      game.restartGame(response.data)
-      console.log(game.secretWord)
-      setTimeout(() => {
-        overlay.value = false
-      }, 502)
-    })
-    .catch((error) => {
-      console.log(error)
-      game.restartGame(WordsService.getRandomWord())
-      console.log(game.secretWord)
-      overlay.value = false
-    })
+  game.restartGame(word.value)
 }
 
 function checkGuess(word?: string) {
