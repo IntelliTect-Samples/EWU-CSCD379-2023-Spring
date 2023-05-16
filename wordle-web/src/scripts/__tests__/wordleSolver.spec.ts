@@ -1,22 +1,20 @@
 import { describe, it, expect } from 'vitest'
-import { WordleGame, WordleGameStatus } from '../wordleGame'
-import { WordleSolver } from '../wordleSolver'
+import { WordleGame } from '../wordleGame'
 import { WordsService } from '../wordsService'
-import GameKeyboardVue from '@/components/GameKeyboard.vue'
+import { GuessingStrategy, WordlePlayer } from '../wordlePlayer'
 
 // TODO: make this test better
 describe('Solve Simple', () => {
   it('Gets Correct Words', () => {
     const game = new WordleGame('apple')
-    const solver = new WordleSolver(game)
     game.guess.set('peach')
     game.submitGuess()
-    expect(solver.availableWords()).length(60)
-    expect(solver.bestGuessOfValidWords()).toBe('apers')
+    expect(game.solver.availableWords).length(60)
+    expect(game.solver.bestGuessOfValidWords).toBe('apers')
     game.guess.set('paper')
     game.submitGuess()
-    expect(solver.availableWords()).length(1)
-    expect(solver.availableWords()[0]).toBe('apple')
+    expect(game.solver.availableWords).length(1)
+    expect(game.solver.availableWords[0]).toBe('apple')
   })
 })
 
@@ -25,10 +23,12 @@ describe('Best Solver Technique', () => {
   it('on 100 words guessing outside the word is faster', () => {
     let totalInWordGuesses = 0
     let totalOutWordGuesses = 0
+    //let totalAlternatingGuesses = 0
     for (let i = 0; i < 100; i++) {
       const word = WordsService.getRandomWord()
-      totalInWordGuesses += playGame(word, true)
-      totalOutWordGuesses += playGame(word, false)
+      totalInWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.ValidWordsOnly)
+      totalOutWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.InvalidWordsOnly)
+      //totalAlternatingGuesses += WordlePlayer.playGame(word, GuessingStrategy.Alternating)
     }
 
     // This is not what I expected. I thought that picking words that were
@@ -37,20 +37,7 @@ describe('Best Solver Technique', () => {
     // (unless logic is wrong, which is totally possible)
     //expect(totalOutWordGuesses).toBeLessThan(totalInWordGuesses)
     expect(totalInWordGuesses).toBeLessThan(totalOutWordGuesses)
+    //expect(totalAlternatingGuesses).toBeLessThan(totalOutWordGuesses)
+    //expect(totalAlternatingGuesses).toBeLessThan(totalInWordGuesses)
   })
 })
-
-// Play a game based on a strategy and return the number of guesses
-function playGame(word: string, useInWord: boolean): number {
-  const game = new WordleGame(word, 25)
-  const solver = new WordleSolver(game)
-
-  let totalGuesses = 0
-  while (game.status == WordleGameStatus.Active) {
-    const guess = useInWord ? solver.bestGuessOfValidWords() : solver.bestGuessOfAllWords()
-    game.guess.set(guess)
-    game.submitGuess()
-    totalGuesses++
-  }
-  return totalGuesses
-}
