@@ -9,12 +9,23 @@ export class WordleSolver {
     this.game = game
   }
   game: WordleGame
+  availableWords: string[] = []
+  letterUsages: LetterUsages = new LetterUsages()
+  bestGuessOfValidWords: string = ''
+  bestGuessOfInvalidWords: string = ''
+
+  calculate() {
+    this.letterUsages = this.getLetterUsages()
+    this.availableWords = this.getAvailableWords()
+    this.bestGuessOfValidWords = this.getBestGuessOfValidWords()
+    this.bestGuessOfInvalidWords = this.getBestGuessOfInvalidWords()
+  }
 
   // Calculate the available words based on the current state of the game
-  availableWords(testWord?: Word, wordList?: string[]): string[] {
+  getAvailableWords(testWord?: Word, wordList?: string[]): string[] {
     // Get a letter map which is map of each letter that has been guessed with an array
     // of locations the letter either is absolutely 'C', can't be 'X', or might be '?'.
-    const map = this.getLetterUsages(testWord)
+    const map = testWord ? this.getLetterUsages(testWord) : this.letterUsages
     const availableWords = new Array<string>()
 
     const wordsToCheck = wordList || WordsService.allWords()
@@ -96,8 +107,8 @@ export class WordleSolver {
     return letterUsages
   }
 
-  bestGuessOfValidWords() {
-    const availableWords = this.availableWords()
+  getBestGuessOfValidWords() {
+    const availableWords = this.availableWords
     // Count all the letters in the available words
     const letterCounts = new Map<string, number>()
     'abcedfgihjklmnopqrstuvwxyz'.split('').forEach((char) => letterCounts.set(char, 0))
@@ -134,8 +145,8 @@ export class WordleSolver {
     return bestWord
   }
 
-  bestGuessOfAllWords() {
-    const availableWords = this.availableWords()
+  getBestGuessOfInvalidWords() {
+    const availableWords = this.availableWords
     if (availableWords.length <= 2) return availableWords[0]
     // Count all the letters in the available words
     const letterCounts = new Map<string, number>()
