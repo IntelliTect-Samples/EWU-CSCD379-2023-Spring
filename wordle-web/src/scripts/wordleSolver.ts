@@ -19,7 +19,6 @@ export class WordleSolver {
     this.availableWords = this.getAvailableWords()
     this.bestGuessOfValidWords = this.getBestGuessOfValidWords()
     this.bestGuessOfInvalidWords = this.getBestGuessOfInvalidWords()
-    console.log('Calculated')
   }
 
   // Calculate the available words based on the current state of the game
