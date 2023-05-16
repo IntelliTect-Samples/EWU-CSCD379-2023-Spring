@@ -27,6 +27,7 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * [Vitest](https://vitest.dev/)
 * [npm](https://docs.npmjs.com/)
 * [Axios](https://axios-http.com/docs/intro) (Calling APIs)
+* Interesting reading about creating a front-end framework: https://18alan.space/posts/how-hard-is-it-to-build-a-frontend-framework.html#reactivity
 
 ### Back End
 * [.NET](https://dotnet.microsoft.com/en-us/)
@@ -79,3 +80,6 @@ The course work will be cross-platform. However, in class the instructors will b
 - Make sure all the extensions are installed
 - Restart VS Code
 - Pull the repo again and see if the unmodified version works
+
+### Azure Issues
+If you are having issues gettig Azure setup correctly and everything working, please check out this document: https://github.com/IntelliTect-Samples/EWU-CSCD379-2023-Spring/blob/main/SettingUpAzure.md
