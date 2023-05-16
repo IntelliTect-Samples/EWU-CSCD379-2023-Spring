@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: Azure wordle-web Assignment-3 CI/CD
 
 on:
   workflow_dispatch:
