@@ -1,4 +1,4 @@
-name: Azure wordle-web Assignment-3 CI/CD
+name: Wordle 2023 Static Site CI/CD
 
 on:
   workflow_dispatch:
