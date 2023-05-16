@@ -60,12 +60,14 @@ import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
+const route = useRoute()
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -85,20 +87,36 @@ onUnmounted(() => {
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
-    .then((response) => {
-      game.restartGame(response.data)
-      console.log(game.secretWord)
-      setTimeout(() => {
+  // Based on URL find a word to play
+  if (route.query.word) {
+    console.log(route.query.word)
+    game.restartGame(route.query.word as string)
+    overlay.value = false
+  } else if (route.params.wordId) {
+    // Get the word based on the ID in the URL.
+    console.log(route.params.wordId)
+    game.restartGame('tests')
+    overlay.value = false
+  } else if (route.path === '/wordoftheday') {
+    console.log('word of the day')
+    game.restartGame('words')
+    overlay.value = false
+  } else {
+    Axios.get('word')
+      .then((response) => {
+        game.restartGame(response.data)
+        console.log(game.secretWord)
+        setTimeout(() => {
+          overlay.value = false
+        }, 502)
+      })
+      .catch((error) => {
+        console.log(error)
+        game.restartGame(WordsService.getRandomWord())
+        console.log(game.secretWord)
         overlay.value = false
-      }, 502)
-    })
-    .catch((error) => {
-      console.log(error)
-      game.restartGame(WordsService.getRandomWord())
-      console.log(game.secretWord)
-      overlay.value = false
-    })
+      })
+  }
 }
 
 function checkGuess(word?: string) {
