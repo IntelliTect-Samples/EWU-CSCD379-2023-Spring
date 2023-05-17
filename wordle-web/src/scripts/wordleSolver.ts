@@ -9,12 +9,23 @@ export class WordleSolver {
     this.game = game
   }
   game: WordleGame
+  availableWords: string[] = []
+  letterUsages: LetterUsages = new LetterUsages()
+  bestGuessOfValidWords: string = ''
+  bestGuessOfInvalidWords: string = ''
+
+  calculate() {
+    this.letterUsages = this.getLetterUsages()
+    this.availableWords = this.getAvailableWords()
+    this.bestGuessOfValidWords = this.getBestGuessOfValidWords()
+    this.bestGuessOfInvalidWords = this.getBestGuessOfInvalidWords()
+  }
 
   // Calculate the available words based on the current state of the game
-  availableWords(testWord?: Word, wordList?: string[]): string[] {
+  getAvailableWords(testWord?: Word, wordList?: string[]): string[] {
     // Get a letter map which is map of each letter that has been guessed with an array
     // of locations the letter either is absolutely 'C', can't be 'X', or might be '?'.
-    const map = this.getLetterUsages(testWord)
+    const map = testWord ? this.getLetterUsages(testWord) : this.letterUsages
     const availableWords = new Array<string>()
 
     const wordsToCheck = wordList || WordsService.allWords()
@@ -96,8 +107,8 @@ export class WordleSolver {
     return letterUsages
   }
 
-  bestGuessOfValidWords() {
-    const availableWords = this.availableWords()
+  getBestGuessOfValidWords() {
+    const availableWords = this.availableWords
     // Count all the letters in the available words
     const letterCounts = new Map<string, number>()
     'abcedfgihjklmnopqrstuvwxyz'.split('').forEach((char) => letterCounts.set(char, 0))
@@ -131,7 +142,61 @@ export class WordleSolver {
         }
       }
     }
-
     return bestWord
+  }
+
+  getBestGuessOfInvalidWords() {
+    const availableWords = this.availableWords
+    if (availableWords.length <= 2) return availableWords[0]
+    // Count all the letters in the available words
+    const letterCounts = new Map<string, number>()
+    'abcedfgihjklmnopqrstuvwxyz'.split('').forEach((char) => letterCounts.set(char, 0))
+    for (const word of availableWords) {
+      for (const char of word) {
+        letterCounts.set(char, letterCounts.get(char)! + 1)
+      }
+    }
+
+    const usages = this.getLetterUsages()
+    //Remove letters that are already guessed
+    for (const [letter, count] of letterCounts) {
+      if (usages.filter((u) => u.char == letter).length > 0) {
+        letterCounts.delete(letter)
+      }
+    }
+
+    // Convert to array so we can sort it
+    const unusedLetters = Array.from(letterCounts, ([char, count]) => ({ char, count })).sort(
+      (a, b) => b.count - a.count
+    )
+
+    const maxLength = unusedLetters.length >= 5 ? 5 : unusedLetters.length
+
+    // Grab the top 5, 4, 3, 2, 1 letters and see if we have words that will eliminate the most letters
+    const validWords = new Array<string>()
+    for (let i = maxLength; i > 0; i--) {
+      const letters = unusedLetters.slice(0, i).map((l) => l.char)
+      // Iterate all words and see if a word contains them all
+      for (const word of WordsService.allWords()) {
+        let hasAllLetters = true
+        for (const letter of letters) {
+          if (word.indexOf(letter) == -1) {
+            hasAllLetters = false
+            break
+          }
+        }
+        if (hasAllLetters) {
+          validWords.push(word)
+        }
+      }
+      if (validWords.length > 0) {
+        console.log(`Found ${validWords.length} words at ${i} letters`)
+        // We found a word that contains all the letters, now find the word that will eliminate the most words
+        break
+      }
+      validWords.length = 0
+    }
+    if (validWords.length == 0) return '-----'
+    return validWords[0]
   }
 }
