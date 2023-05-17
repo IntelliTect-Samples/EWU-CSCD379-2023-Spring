@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -50,7 +51,40 @@ namespace Wordle.Api.Services
             return player;
         }
 
+        public async Task<Play> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer(PlayDto playDto) {
 
+            string name = playDto.Name; 
+            if (name is null)
+            {
+                name = "Guest";
+            }
+
+            // If the player doesn't exist, add player to DB
+            User? newUser = await _db.Users.FirstOrDefaultAsync(user => user.Name == name);
+            // If the player does not exist
+            if (newUser == null)
+            {
+                newUser!.Name = name;
+                _db.Users.Add(newUser);
+            }
+            await _db.SaveChangesAsync();
+
+            // Attain the players id 
+            int userId = (await _db.Users.Where(user => user.Name == name).FirstAsync()).UserId;
+            int wordId = (await _db.Words.Where(word => word.Text == playDto.Word).FirstAsync()).WordId;
+
+            // Add a play into the play database
+            Play newPlay = new Play(userId, wordId, playDto.Attempts, playDto.Seconds);
+            _db.Plays.Add(newPlay); 
+            await _db.SaveChangesAsync();
+            return newPlay;
+
+            // Get the players id 
+            // Insert a play into the database
+
+
+            return null; 
+        }
         public async Task<Player> InsertScore(string? newPlayerName, int numAttempts, double secondsToComplete)
         {
 
