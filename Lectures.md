@@ -145,14 +145,16 @@
 
 ## Week 7
 ### Lecture 13. 5/16: 
+- Classes in C#/Java and TS/JS
 - Redirecting root on API to the Wordle site
-- Word of the day controller
+- Word of the day controller and tests
+- Handling multi-threading issues with creating the word of the day.
+
+### Lecture 14. 5/18:
 - Service mocks in .NET
 - Parsing query parameters to determine game type
 - Load Word of the day in App
 - Integration testing
-
-### Lecture 14. 5/18:
 - Responsive Design Patterns
 - IsOnline flag
 - Client unit testing
