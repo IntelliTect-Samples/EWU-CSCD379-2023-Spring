@@ -20,7 +20,7 @@ namespace Wordle.Api.Controllers
         [HttpGet]
         public async Task<string> Get()
         {
-            return await _wordService.GetRandomWord();
+            return (await _wordService.GetRandomWord()).Text;
         }
 
         [HttpGet("GetManyWords")]

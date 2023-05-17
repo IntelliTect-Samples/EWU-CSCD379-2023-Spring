@@ -22,7 +22,23 @@ namespace Wordle.Api.Tests
             var word = await service.GetRandomWord();
 
             Assert.IsNotNull(word);
-            Assert.AreEqual(5, word.Length);
+            Assert.AreEqual(5, word.Text.Length);
+        }
+
+        [TestMethod]
+        public async Task GetWordOfTheDay()
+        {
+            using var context = new AppDbContext(Options);
+            var service = new WordService(context);
+            Seeder.Seed(context);
+
+            var date = DateTime.UtcNow;
+            
+            var word = await service.GetWordOfTheDay(TimeSpan.FromHours(0), date);
+            
+            var word2 = await service.GetWordOfTheDay(TimeSpan.FromHours(0), date);
+
+            Assert.AreEqual(word, word2);
         }
     }
 }
