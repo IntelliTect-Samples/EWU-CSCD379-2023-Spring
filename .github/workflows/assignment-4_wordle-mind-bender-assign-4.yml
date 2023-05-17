@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'Wordle-Mind-Bender-Assign-4'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_00B20944091B4647BFA6C823DF78C037 }}
+          publish-profile: ${{ secrets.ASSIGNMENT4WEBAPI }}
           package: .
