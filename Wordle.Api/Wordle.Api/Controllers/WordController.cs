@@ -23,6 +23,12 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetRandomWord();
         }
 
+        [HttpGet("GetPreviousWords")]
+        public string[] GetPreviousWords()
+        {
+            return _wordService.GetPreviousWords();
+        }
+
         [HttpGet("GetManyWords")]
         public async Task<IEnumerable<Word>> GetManyWords(int? count)
         {
