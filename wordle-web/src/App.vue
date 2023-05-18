@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar :elevation="3">
       <template v-slot>
-        <v-app-bar-title>
+        <v-app-bar-title style="flex: auto">
           <RouterLink to="/">
             <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
             Wordle
@@ -32,6 +32,11 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title
+                ><RouterLink to="/instructions">Instructions</RouterLink></v-list-item-title
+              >
             </v-list-item>
           </v-list>
         </v-menu>
