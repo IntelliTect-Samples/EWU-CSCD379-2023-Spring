@@ -3,7 +3,7 @@
     <v-card>
       <div class="bg-primary text-h5 pa-3 text-center">Last 10 Words</div>
       <v-card-text>
-        <div v-for="(dailyWord, index) in dailyWords" :key="dailyWord.word" class="border my-3">
+        <div v-for="dailyWord in dailyWords" :key="dailyWord.word" class="border my-3">
           <div class="d-flex justify-center bg-secondary text-h6">Date: {{ dailyWord.date }}</div>
           <v-card-text class="d-flex flex-column align-center">
             <v-row dense>
