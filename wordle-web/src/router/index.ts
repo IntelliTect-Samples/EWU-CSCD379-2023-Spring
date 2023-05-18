@@ -2,7 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
-import InstructionsViewVue from '@/views/InstructionsView.vue'
+import InstructionsView from '../views/InstructionsView.vue'
+import DailyWordleView from '../views/DailyWordleView.vue'
+import LastTenWordsView from '../views/LastTenWordsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +27,17 @@ const router = createRouter({
     {
       path: '/instructions',
       name: 'instructions',
-      component: InstructionsViewVue
+      component: InstructionsView
+    },
+    {
+      path: '/daily-wordle',
+      name: 'daily-wordle',
+      component: DailyWordleView
+    },
+    {
+      path: '/last-ten-words',
+      name: 'last-ten-words',
+      component: LastTenWordsView
     }
   ]
 })
