@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import { previousWords } from '@/scripts/previousWords';
+
 const today = Date.now()
 const previous = Array<Date>(10)
 
