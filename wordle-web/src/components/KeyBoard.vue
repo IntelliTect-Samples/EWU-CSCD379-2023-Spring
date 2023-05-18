@@ -1,22 +1,28 @@
 <template>
-  <v-row rows="auto" class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i">
+  <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i" :class="{ 'ml-1 px-0': display.xs }">
     <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
       <v-btn
         @click="emitEnterClick"
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
+        :height="display.xs ? '30' : display.sm ? '40' : '50'"
+        :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
+        :class="display.xs ? 'letter-small' : ''"
       >
         Check
       </v-btn>
     </v-col>
-    <v-col cols="auto" v-for="(letter, j) in key" :key="j">
+    <v-col cols="auto" v-for="(letter, j) in key" :key="j" :class="{ 'ml-1 px-0': display.xs }">
       <LetterButton :letter="letter" @click="emitLetterClick(letter)" />
     </v-col>
-    <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
+    <v-col cols="auto" v-if="i === keyboardLetters.length - 1" :class="{ 'ml-1 px-0': display.xs }">
       <v-btn
         @click="emitBackspaceClick"
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
+        :height="display.xs ? '30' : display.sm ? '40' : '50'"
+        :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
+        :class="display.xs ? 'letter-small' : ''"
       >
         <v-icon color="white">mdi-backspace</v-icon>
       </v-btn>
@@ -27,7 +33,13 @@
 <script setup lang="ts">
 import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
-import { computed } from 'vue'
+import { Services } from '@/scripts/services'
+import { computed, inject, reactive } from 'vue'
+import { useDisplay } from 'vuetify/lib/framework.mjs'
+
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 
 const props = defineProps<{
   guessedLetters: Letter[]
@@ -74,3 +86,14 @@ function emitBackspaceClick() {
   emits('backspaceClick')
 }
 </script>
+
+<style scoped>
+.v-btn {
+  font-size: 12pt;
+}
+
+.letter-small {
+  min-width: 20px;
+  padding: 0;
+}
+</style>
