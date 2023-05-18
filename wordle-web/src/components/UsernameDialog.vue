@@ -36,17 +36,17 @@ const emits = defineEmits<{
   (event: 'updateNameValue', value: string): void
 }>()
 // Use the value emitted from 'WordleView.vue' close or open the dialog.
-const updateDialogValue = (newValue: unknown) => {
+const updateUsernameDialog = (newValue: unknown) => {
   dialog.value = newValue
 }
 
 onMounted(() => {
   // Listen for 'updateDialogValue' event from 'WordleView.vue'.
-  eventBus.on('updateDialogValue', updateDialogValue)
+  eventBus.on('updateUsernameDialog', updateUsernameDialog)
 })
 onUnmounted(() => {
   // Stop listening for 'updateDialogValue' event from 'WordleView.vue'.
-  eventBus.off('updateDialogValue', updateDialogValue)
+  eventBus.off('updateUsernameDialog', updateUsernameDialog)
 })
 
 // Watch for changes to the username value and emit the new value to 'WordleView.vue'.
@@ -58,7 +58,7 @@ watch(
 )
 
 if (!localStorage.getItem('username')) {
-  updateDialogValue(true)
+  updateUsernameDialog(true)
 }
 
 function continueAsGuest() {
