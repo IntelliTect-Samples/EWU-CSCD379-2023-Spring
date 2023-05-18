@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
@@ -53,6 +54,13 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
+if (string.IsNullOrEmpty(redirectRootUrl))
+{
+    redirectRootUrl = "";
+}
+var options = new RewriteOptions().AddRedirect("^$", redirectRootUrl, 302);
 
 app.UseHttpsRedirection();
 
