@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest'
 import { WordleGame, WordleGameStatus } from '../wordleGame'
 import { WordleSolver } from '../wordleSolver'
 import { WordsService } from '../wordsService'
-import GameKeyboardVue from '@/components/GameKeyboard.vue'
 
 // TODO: make this test better
 describe('Solve Simple', () => {

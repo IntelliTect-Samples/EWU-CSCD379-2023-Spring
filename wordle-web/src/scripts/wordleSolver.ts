@@ -121,8 +121,6 @@ export class WordleSolver {
           if (chars.indexOf(char) == -1) {
             chars += char
             count += letterCounts.get(char)!
-          } else {
-            //count += letterCounts.get(char)! * 0.25
           }
         }
         if (bestWordCount < count) {
@@ -148,7 +146,7 @@ export class WordleSolver {
 
     const usages = this.getLetterUsages()
     //Remove letters that are already guessed
-    for (const [letter, count] of letterCounts) {
+    for (const [letter] of letterCounts) {
       if (usages.filter((u) => u.char == letter).length > 0) {
         letterCounts.delete(letter)
       }

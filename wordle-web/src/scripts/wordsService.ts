@@ -1,5 +1,3 @@
-import Axios from 'axios'
-
 export abstract class WordsService {
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
