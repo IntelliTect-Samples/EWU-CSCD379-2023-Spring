@@ -44,7 +44,6 @@ function goBack() {
 Axios.get('GetTopTenPlayers')
   .then((response) => {
     response.data.forEach((player: any) => {
-
       players.push({
         name: `${player.UserName}`,
         gamesPlayed: `${player.GameCount}`,
