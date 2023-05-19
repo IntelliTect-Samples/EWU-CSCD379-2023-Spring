@@ -1,7 +1,11 @@
+<!--
+---- Displays the personal stats of the current player on a v-card.
+--->
+
 <template>
   <div class="text-center align-center justify-center">
     <v-card-title class="display-1"> Personal Stats </v-card-title>
-    <v-table class="align-center justify-center" v-model="player">
+    <v-table class="align-center justify-center">
       <thead>
         <tr>
           <th class="text-center">Username</th>
@@ -12,10 +16,10 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ player.name }}</td>
-          <td>{{ player.gameCount }}</td>
-          <td>{{ player.averageAttempts }}</td>
-          <td>{{ player.averageSecondsPerGame }}</td>
+          <td>{{ playerService.player.name }}</td>
+          <td>{{ playerService.player.gameCount }}</td>
+          <td>{{ playerService.player.averageAttempts }}</td>
+          <td>{{ playerService.player.averageSecondsPerGame }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -23,25 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import Axios from 'axios'
+import {inject} from 'vue'
+import {Services} from "@/scripts/Services/services";
+import type {PlayerService} from "@/scripts/Services/playerService";
 
-let userId = ref(localStorage.getItem('userId') || null)
-let name = ref(localStorage.getItem('userName') || 'Guest')
-let player = ref({
-  playerId: userId.value,
-  name: name.value,
-  gameCount: 0,
-  averageAttempts: 0,
-  averageSecondsPerGame: 0
-})
-
-Axios.get(`/Player?playerId=${userId.value}`)
-    .then((response) => {
-      setTimeout(() => {}, 100)
-      player.value = response.data
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+const playerService = inject(Services.PlayerService) as PlayerService
 </script>

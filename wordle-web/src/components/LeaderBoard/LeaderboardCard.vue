@@ -1,3 +1,7 @@
+<!--
+---- Displays the top ten players from the database on a v-card.
+--->
+
 <template>
   <v-card-title class="display-1"> Top Ten Scores </v-card-title>
   <v-card-item>
