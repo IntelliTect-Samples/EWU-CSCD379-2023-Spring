@@ -37,6 +37,8 @@ export abstract class WordsService {
   static validWords(word: string): Array<string> {
     const validWords: Array<string> = []
 
+    word = word.toLowerCase()
+
     if (word == '') {
       return validWords
     }
