@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -7,12 +8,16 @@ namespace Wordle.Api.Controllers
     {
         private readonly PlayService _playService;
 
+        public PlayController(PlayService playService)
+        {
+            _playService = playService;
+        }
+
         [HttpGet("GetTopTenPlayers")]
         public async Task<string> GetTopTenPlayers()
         {
             return await _playService.GetTopTenPlayers();
         }
-        private readonly PlayService _playService;
 
         [HttpGet("GetLastTenDays")]
         public async Task<string> GetLast10Days()
@@ -20,10 +25,10 @@ namespace Wordle.Api.Controllers
             return await _playService.GetLastTenDays();
         }
 
-        [HttpGet("InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer")]
-        public async Task<string> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer()
+        [HttpPost("InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer")]
+        public async Task<string> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer([FromBody] PlayDto play)
         {
-            return await _playService.InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer();
+            return await _playService.InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer(play);
         }
 
     }

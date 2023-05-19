@@ -73,10 +73,11 @@ export class WordleGame {
 
       localStorage.total_time = localStorage.endTime - localStorage.startTime
       console.log('Inserting Score')
-      Axios.post('Player/InsertScore', {
-        Name: localStorage.name,
-        NumAttempts: index + 1,
-        AverageSecondsPerGame: time
+      Axios.post('InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer', {
+        name: localStorage.name,
+        attempts: index + 1,
+        seconds: time,
+        word: this.secretWord
       })
         .then((response) => {
           console.log(response.data)

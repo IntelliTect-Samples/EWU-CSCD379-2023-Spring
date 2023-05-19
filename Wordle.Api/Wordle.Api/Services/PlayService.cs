@@ -12,48 +12,15 @@ namespace Wordle.Api.Services
     {
         private readonly AppDbContext _db;
 
-        private record PlayerStatistics(string UserName, int GameCount, double AvgAttempts, double AvgSeconds); 
+        private record PlayerStatistics(string UserName, int GameCount, double AvgAttempts, double AvgSeconds);
 
         public PlayService(AppDbContext db)
         {
             _db = db;
         }
+        public async Task<string> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer(PlayDto playDto) {
 
-
-
-
-        public async Task<Player> AddPlayer(string? newPlayerName, int attempts, double secondsToComplete)
-        {
-            if (newPlayerName is null)
-            {
-                newPlayerName = "Guest";
-            }
-            var player = await _db.Players.FirstOrDefaultAsync(w => w.Name == newPlayerName);
-            if (player != null)
-            {
-                player.GameCount = 1;
-                player.AverageAttempts = attempts;
-                player.AverageSecondsPerGame = secondsToComplete;
-
-            }
-            else
-            {
-                player = new()
-                {
-                    Name = newPlayerName,
-                    GameCount = 1,
-                    AverageAttempts = attempts,
-                    AverageSecondsPerGame = secondsToComplete
-                };
-                _db.Players.Add(player);
-            }
-            await _db.SaveChangesAsync();
-            return player;
-        }
-
-        public async Task<Play> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer(PlayDto playDto) {
-
-            string name = playDto.Name; 
+            string name = playDto.Name;
             if (name is null)
             {
                 name = "Guest";
@@ -64,7 +31,8 @@ namespace Wordle.Api.Services
             // If the player does not exist
             if (newUser == null)
             {
-                newUser!.Name = name;
+
+                newUser = new User() { Name = name }; 
                 _db.Users.Add(newUser);
             }
             await _db.SaveChangesAsync();
@@ -74,62 +42,61 @@ namespace Wordle.Api.Services
             int wordId = (await _db.Words.Where(word => word.Text == playDto.Word).FirstAsync()).WordId;
 
             // Add a play into the play database
-            Play newPlay = new Play(userId, wordId, playDto.Attempts, playDto.Seconds);
-            _db.Plays.Add(newPlay); 
-            await _db.SaveChangesAsync();
-            return newPlay;
-
-            // Get the players id 
-            // Insert a play into the database
-
-
-            return null; 
-        }
-        public async Task<Player> InsertScore(string? newPlayerName, int numAttempts, double secondsToComplete)
-        {
-
-            if (newPlayerName is null)
+            _db.Plays.Add(new Play()
             {
-                newPlayerName = "Guest";
-            }
-            // First we check if the player is in the game
-            bool playerExists = _db.Players.AnyAsync((player) => player.Name.Equals(newPlayerName)).Result;
-            if (!playerExists) {
-                return await AddPlayer(newPlayerName, numAttempts, secondsToComplete);
-
-            }
-      
-            // Retrieve the player from the database
-            Player player = await _db.Players.FirstAsync(w => w.Name == newPlayerName);
-
-            // Access its avgAttemtps and numGames
-            double avgAttempts = player.AverageAttempts;
-            double avgSeconds = player.AverageSecondsPerGame; 
-            int numGames = player.GameCount;
-            
-           
-
-            // Update its avgAttempts and numGames
-            double totalScore = avgAttempts * numGames;
-            double totalSeconds = avgSeconds * numGames;
-            totalSeconds += secondsToComplete; 
-            totalScore += numAttempts;
-            numGames++;
-
-
-
-            player.AverageAttempts = totalScore / numGames;
-            player.AverageSecondsPerGame = totalSeconds / numGames;
-            player.GameCount = numGames;
+                User = Play.StringToUser(name, _db),
+                Word = Play.StringToWord(playDto.Word, _db),
+                Attempts = playDto.Attempts,
+                Seconds = playDto.Seconds
+            }); 
             await _db.SaveChangesAsync();
-
-            return player;
-
-         
+            return ""; 
+       
         }
+
 
         public async Task<string> GetTopTenPlayers()
         {
+
+            // First, create a list to store the player statistics
+            List<PlayerStatistics> playerStatistics = new List<PlayerStatistics>();
+
+            // Retrieve all users from the database
+            List<User> users = await _db.Users.ToListAsync();
+
+            // Iterate over the users and retrieve their associated plays
+            foreach (User user in users)
+            {
+                int id = user.UserId;
+                string userName = user.Name;
+
+                // Retrieve the player's plays
+                List<Play> plays = await _db.Plays.Where(play => play.UserId == id).ToListAsync();
+
+                int gameCount = plays.Count;
+                if (gameCount > 0)
+                {
+                    double avgAttempts = plays.Average(play => play.Attempts);
+                    double avgSeconds = plays.Average(play => play.Seconds);
+
+                    playerStatistics.Add(new PlayerStatistics(userName, gameCount, avgAttempts, avgSeconds));
+                }
+            }
+
+            // Sort the player statistics and return the top 10 as a JSON string
+            return JsonConvert.SerializeObject(
+                playerStatistics
+                    .OrderBy((stats) => stats.AvgAttempts)
+                    .OrderByDescending((stats) => stats.GameCount)
+                    .Take(10)
+                    .ToList()
+            );
+
+        }
+
+        // Get last 10 days method
+        public async Task<String> GetLastTenDays() {
+            /*          BY GEORGE! DELETE THIS LATER!!!   */
             // First, create an array of records 
             PlayerStatistics[] playerStatistics = new PlayerStatistics[_db.Users.Count()];
 
@@ -147,16 +114,14 @@ namespace Wordle.Api.Services
                 // 4) Compute average seconds
                 double avgSeconds = await _db.Plays.Where(play => play.UserId == id).AverageAsync(play => play.Seconds);
 
-                playerStatistics.Append(new PlayerStatistics(userName, gameCount, avgAttempts, avgSeconds)); 
+                playerStatistics.Append(new PlayerStatistics(userName, gameCount, avgAttempts, avgSeconds));
 
 
             }
-            return JsonConvert.SerializeObject 
+            return JsonConvert.SerializeObject
             (playerStatistics.OrderBy((stats) => stats.AvgAttempts)
-                .OrderByDescending((stats) => stats.GameCount).Take(10).ToList()); 
-
+                .OrderByDescending((stats) => stats.GameCount).Take(10).ToList());
         }
-
     }
 }
 

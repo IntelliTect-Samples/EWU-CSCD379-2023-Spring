@@ -41,16 +41,15 @@ function goBack() {
   $router.go(-1)
 }
 
-Axios.get('player/GetTopTenPlayers')
+Axios.get('GetTopTenPlayers')
   .then((response) => {
     response.data.forEach((player: any) => {
-      console.log(`${player.Name}, ${player.GameCount}, ${player.AverageAttempts}`)
 
       players.push({
-        name: `${player.Name}`,
+        name: `${player.UserName}`,
         gamesPlayed: `${player.GameCount}`,
-        avgAttempts: `${player.AverageAttempts}`,
-        avgSeconds: `${player.AverageSecondsPerGame}`
+        avgAttempts: `${player.AvgAttempts.toFixed(2)}`,
+        avgSeconds: `${player.AvgSeconds.toFixed(2)}`
       })
 
       overlay.value = false

@@ -31,17 +31,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<WordService>();
-builder.Services.AddScoped<PlayerService>(); 
+builder.Services.AddScoped<PlayService>();
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-    Word.SeedWords(db);
-
     // Initialize some default players 
-    Player.SeedPlayers(db); 
+    Word.SeedWords(db);
+    User.SeedUsers(db);
+    Play.SeedPlays(db);
 }
 
 
