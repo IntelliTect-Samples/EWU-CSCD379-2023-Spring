@@ -22,6 +22,11 @@ namespace Wordle.Api.Data
                 .HasOne(e => e.Word)
                 .WithMany(f => f.DateWords)
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder
+                .Entity<DateWord>()
+                .HasIndex(f => f.Date)
+                .IsUnique();
         }
     }
 }

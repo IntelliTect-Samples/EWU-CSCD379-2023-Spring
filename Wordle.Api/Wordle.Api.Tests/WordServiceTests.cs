@@ -34,9 +34,9 @@ namespace Wordle.Api.Tests
 
             var date = DateTime.UtcNow;
             
-            var word = await service.GetWordOfTheDay(TimeSpan.FromHours(0), date);
+            var word = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
             
-            var word2 = await service.GetWordOfTheDay(TimeSpan.FromHours(0), date);
+            var word2 = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
 
             Assert.AreEqual(word, word2);
         }
