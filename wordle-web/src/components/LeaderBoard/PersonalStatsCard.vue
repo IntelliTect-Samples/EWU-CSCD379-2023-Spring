@@ -1,7 +1,7 @@
 <template>
   <div class="text-center align-center justify-center">
     <v-card-title class="display-1"> Personal Stats </v-card-title>
-    <v-table class="align-center justify-center">
+    <v-table class="align-center justify-center" v-model="player">
       <thead>
         <tr>
           <th class="text-center">Username</th>
@@ -11,7 +11,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="player in players" :key="player.playerId">
+        <tr>
           <td>{{ player.name }}</td>
           <td>{{ player.gameCount }}</td>
           <td>{{ player.averageAttempts }}</td>
@@ -26,29 +26,22 @@
 import { ref } from 'vue'
 import Axios from 'axios'
 
-interface Player {
-  playerId: number
-  name: string
-  gameCount: number
-  averageAttempts: number
-  averageSecondsPerGame: number
-}
-
 let userId = ref(localStorage.getItem('userId') || null)
-let players = ref<Player[]>()
-
-Axios.get('Player', {
-  params: {
-    playerId: userId.value
-  }
+let name = ref(localStorage.getItem('userName') || 'Guest')
+let player = ref({
+  playerId: userId.value,
+  name: name.value,
+  gameCount: 0,
+  averageAttempts: 0,
+  averageSecondsPerGame: 0
 })
-  .then((response) => {
-    setTimeout(() => {}, 100)
-    players.value = response.data
-  })
-  .catch((err) => {
-    console.log(err)
-  })
 
-console.log(players)
+Axios.get(`/Player?playerId=${userId.value}`)
+    .then((response) => {
+      setTimeout(() => {}, 100)
+      player.value = response.data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 </script>
