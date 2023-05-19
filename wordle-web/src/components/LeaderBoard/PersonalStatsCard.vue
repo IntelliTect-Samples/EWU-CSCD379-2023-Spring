@@ -34,13 +34,12 @@ interface Player {
   averageSecondsPerGame: number
 }
 
-let username = ref(localStorage.getItem('username') || 'Guest')
 let userId = ref(localStorage.getItem('userId') || null)
 let players = ref<Player[]>()
 
-Axios.get('https://localhost:7053/Player?playerId=' + userId.value, {
+Axios.get('Player', {
   params: {
-    playerName: username.value
+    playerId: userId.value
   }
 })
   .then((response) => {

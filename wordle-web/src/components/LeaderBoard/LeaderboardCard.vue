@@ -36,7 +36,7 @@ interface Player {
 
 const players = ref<Player[]>()
 
-Axios.get('/Player/TopPlayers')
+Axios.get('Player/TopPlayers')
   .then((response) => {
     setTimeout(() => {}, 100)
     players.value = response.data
