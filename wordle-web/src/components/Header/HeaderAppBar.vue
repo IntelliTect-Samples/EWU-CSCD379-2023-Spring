@@ -1,3 +1,7 @@
+<!--
+---- Main vue file for the header of the website.
+--->
+
 <template>
   <v-app-bar id="toolbar">
     <v-toolbar-title>
@@ -12,6 +16,7 @@
     </v-btn>
 
     <v-btn icon="mdi-align-vertical-bottom" to="/leaderboard"></v-btn>
+    <ActiveUser />
     <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
 
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
@@ -25,20 +30,23 @@
 import { ref, watch, onMounted } from 'vue'
 import router from '@/router'
 import nightInKyoto from '@/assets/music/nightInKyoto.mp3'
-import SettingsCard from '@/components/AppBar/SettingsCard.vue'
-import MenuDrawer from '@/components/AppBar/MenuDrawer.vue'
+import SettingsCard from '@/components/Header/SettingsCard.vue'
+import MenuDrawer from '@/components/Header/MenuDrawer.vue'
+import ActiveUser from '@/components/Header/ActiveUser.vue'
 
 let menu = ref(false)
 let settings = ref(false)
 const isPaused = ref(true)
 const audio = ref(new Audio(nightInKyoto))
 
+/// Set menu to false when settings value is changed.
 watch(settings, (val) => {
   if (val) {
     menu.value = false
   }
 })
 
+/// TODO: Add comment for watch function purpose.
 watch(
   () => settings.value,
   (newValue) => {
@@ -73,10 +81,6 @@ function toggleMusic() {
   font-weight: bold;
   border-bottom: 1px solid #656464;
   min-height: 65px;
-}
-
-#card-title {
-  border-bottom: 1px solid;
 }
 
 #toolbar-title {

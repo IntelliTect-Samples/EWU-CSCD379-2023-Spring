@@ -1,3 +1,7 @@
+<!--
+---- Component to 'HeaderAppBar.vue', responsible for the menu drawer UI.
+--->
+
 <template>
   <v-navigation-drawer location="right" temporary>
     <v-card rounded="lg" class="mt-6" elevation="0">

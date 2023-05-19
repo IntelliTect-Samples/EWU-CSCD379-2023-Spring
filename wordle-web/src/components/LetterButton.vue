@@ -1,8 +1,15 @@
+<!--
+---- Responsible for the design of the letter buttons, and the logic behind them.
+--->
+
 <template>
+  <!-- TODO: Figure out why size is throwing error. -->
   <v-btn
-    :color="letter.color"
     label
     outlined
+    style="background-image: var(--btn-gradient) !important"
+    @click="playButtonSound"
+    :color="letter.color"
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
     :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
     :elevation="letter.status == LetterStatus.NotGuessed ? 2 : 4"
@@ -18,6 +25,9 @@ import { Services } from '@/scripts/Services/services'
 import { inject } from 'vue'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'
+// import FastPlastic1 from '@/assets/sounds/FastPlastic1.mp3'
+// import Bright1 from '@/assets/sounds/Bright1.mp3'
+import Bright2 from '@/assets/sounds/Bright2.mp3'
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -30,15 +40,10 @@ interface Props {
 }
 
 defineProps<Props>()
+
+function playButtonSound() {
+  const audio = new Audio(Bright2)
+  audio.volume = 0.5
+  audio.play()
+}
 </script>
-
-<style scoped>
-.v-btn {
-  font-size: 1.2rem;
-}
-
-.letter-small {
-  min-width: 20px;
-  padding: 0;
-}
-</style>

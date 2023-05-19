@@ -1,7 +1,6 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './Services/wordsService'
 import type { Letter } from '@/scripts/letter'
-import { WordleSolver } from './wordleSolver'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -18,12 +17,10 @@ export class WordleGame {
   guessIndex: number = 0
   startTime: number = Date.now()
   endTime: number | null = null
-  solver: WordleSolver
 
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
     if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
-    this.solver = new WordleSolver(this)
     this.startNewGame(secretWord)
   }
 
@@ -58,7 +55,6 @@ export class WordleGame {
     this.guessIndex = 0
     this.guessedLetters.splice(0)
     this.status = WordleGameStatus.Active
-    this.solver.calculate()
   }
 
   submitGuess() {
@@ -83,6 +79,5 @@ export class WordleGame {
     } else {
       this.guessIndex++
     }
-    if (this.solver) this.solver.calculate()
   }
 }

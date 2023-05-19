@@ -6,20 +6,16 @@
         <tr>
           <th class="text-center">Username</th>
           <th class="text-center">Games Played</th>
-          <th class="text-center">Total Time Taken</th>
-          <th class="text-center">Average Time Taken</th>
-          <th class="text-center">Total Guess Attempts</th>
-          <th class="text-center">Average Guess Attempts</th>
+          <th class="text-center">Average Number of Guesses</th>
+          <th class="text-center">Average Time to Finish</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="player in players" :key="player.playerId">
-          <td>{{ player.playerName }}</td>
+          <td>{{ player.name }}</td>
           <td>{{ player.gameCount }}</td>
-          <td>{{ player.totalTimeInSeconds }}</td>
-          <td>{{ player.averageTimeInSeconds }}</td>
-          <td>{{ player.totalAttempts }}</td>
           <td>{{ player.averageAttempts }}</td>
+          <td>{{ player.averageSecondsPerGame }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -32,18 +28,17 @@ import Axios from 'axios'
 
 interface Player {
   playerId: number
-  playerName: string
+  name: string
   gameCount: number
-  totalTimeInSeconds: number
-  averageTimeInSeconds: number
-  totalAttempts: number
   averageAttempts: number
+  averageSecondsPerGame: number
 }
 
 let username = ref(localStorage.getItem('username') || 'Guest')
+let userId = ref(localStorage.getItem('userId') || null)
 let players = ref<Player[]>()
 
-Axios.get('leaderboard/GetPlayerStats', {
+Axios.get('https://localhost:7053/Player?playerId=' + userId.value, {
   params: {
     playerName: username.value
   }

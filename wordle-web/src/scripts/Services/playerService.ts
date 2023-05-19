@@ -3,7 +3,7 @@ import { Player } from '../player'
 import { reactive, ref } from 'vue'
 
 export class PlayerService {
-  // This is a reactive type, don't assign, update properties
+  // This is a reactive type, don't assign, update properties.
   readonly player: Player
   isLoaded: boolean = false
   isOnline = ref(false)

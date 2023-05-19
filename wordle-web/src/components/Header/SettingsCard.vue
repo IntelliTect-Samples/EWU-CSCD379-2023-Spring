@@ -1,3 +1,7 @@
+<!--
+---- Component to 'HeaderAppBar.vue', responsible for the settings card UI.
+--->
+
 <template>
   <v-dialog transition="fab-transition" width="350px" title="Settings" temporary>
     <v-card rounded="lg">
@@ -55,13 +59,13 @@
 import { useTheme } from 'vuetify/lib/framework.mjs'
 
 const theme = useTheme()
-const emits = defineEmits<{
+const emit = defineEmits<{
   // Emits new name value to parent component.
   (event: 'updateSettingsCardValue', value: boolean): void
 }>()
 
 function emitSettingsCardValue(newValue: boolean) {
-  emits('updateSettingsCardValue', newValue)
+  emit('updateSettingsCardValue', newValue)
 }
 
 function toggleDarkMode() {
@@ -81,3 +85,9 @@ function toggleAquaMode() {
   localStorage.setItem('theme', 'aqua')
 }
 </script>
+
+<style>
+#card-title {
+  border-bottom: 1px solid;
+}
+</style>

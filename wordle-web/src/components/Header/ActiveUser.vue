@@ -1,17 +1,27 @@
+<!--
+---- Component to 'HeaderAppBar.vue', responsible displaying username along with keeping it up to date...
+--->
+
 <template>
-  <v-btn @click="showDialog = true">
+  <v-btn @click="toggleDialog = true">
     {{ playerService.player.name }}
   </v-btn>
-  <v-dialog :model-value="showDialog" @update:model-value="close" persistent>
+  <!-- TODO: Figure out why why do ':model-value="toggleDialog" @update:model-value="close"' over 'v-model="toggleDialog"' -->
+  <v-dialog
+    :model-value="toggleDialog"
+    @update:model-value="close"
+    max-width="600px"
+    title="Name dialog"
+    persistent
+  >
     <v-card>
       <v-card-text>
         Set or change your username:
         <v-text-field ref="$input" v-model="newName" @keyup.enter="confirm" />
       </v-card-text>
-      <v-card-actions>
-        <v-spacer> </v-spacer>
-        <v-btn @click="confirm">OK</v-btn>
-        <v-btn @click="close">Cancel</v-btn>
+      <v-card-actions class="justify-center">
+        <v-btn elevation="6" @click="confirm">OK</v-btn>
+        <v-btn elevation="6" @click="close">Cancel</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -28,10 +38,11 @@ import { ref } from 'vue'
 const playerService = inject(Services.PlayerService) as PlayerService
 let newName = playerService.player.name
 
-const showDialog = ref(false)
+const toggleDialog = ref(false)
 const $input = ref<HTMLInputElement>()
 
-watch(showDialog, (value) => {
+// TODO: Understand what nextTick does and the $input values.
+watch(toggleDialog, (value) => {
   if (value) {
     nextTick(() => {
       $input.value!.focus()
@@ -45,6 +56,6 @@ const confirm = async () => {
   close()
 }
 const close = () => {
-  showDialog.value = false
+  toggleDialog.value = false
 }
 </script>

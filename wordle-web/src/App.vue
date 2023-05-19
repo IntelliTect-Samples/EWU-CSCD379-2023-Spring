@@ -17,7 +17,7 @@ import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/Services/playerService'
 import { Services } from './scripts/Services/services'
-import AppBar from './components/AppBar/AppBar.vue'
+import AppBar from '@/components/Header/HeaderAppBar.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())

@@ -20,11 +20,11 @@ defineProps<{
   game: WordleGame
 }>()
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (event: 'letterClick', value: Letter): void
 }>()
 
 function emitLetterClick(letter: Letter) {
-  emits('letterClick', letter)
+  emit('letterClick', letter)
 }
 </script>

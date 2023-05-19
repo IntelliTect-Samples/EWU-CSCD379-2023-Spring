@@ -1,8 +1,14 @@
+<!--
+---- Responsible for the design and logic of the buttons populated by entered characters, inside
+---- the game board.
+--->
+
 <template>
   <v-btn
-    :color="letter.color"
     label
     outlined
+    style="background-image: var(--btn-gradient) !important"
+    :color="letter.color"
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
     :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
     :elevation="letter.status == LetterStatus.NotGuessed ? 0 : 4"
