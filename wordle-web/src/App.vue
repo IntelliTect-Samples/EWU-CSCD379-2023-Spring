@@ -12,12 +12,17 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { reactive } from 'vue'
+import { useDisplay } from 'vuetify'
+import { provide } from 'vue'
+import { PlayerService } from './scripts/playerService'
+import { Services } from './scripts/services'
 import AppBar from './components/AppBar/AppBar.vue'
-import { reactive, provide } from 'vue';
-import { useDisplay } from 'vuetify/lib/framework.mjs';
-import { Services } from './scripts/services';
 
+// Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
+const playerService = new PlayerService()
+playerService.setupPlayerAsync()
+provide(Services.PlayerService, playerService)
 </script>

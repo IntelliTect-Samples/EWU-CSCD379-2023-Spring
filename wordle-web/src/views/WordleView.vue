@@ -18,11 +18,12 @@
   <div class="align-center">
     <h1>The Good Word</h1>
     <br />
+    <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+      <v-progress-circular color="primary" indeterminate size="64" />
+    </v-overlay>
 
-    <div>
-      <GameBoard :game="game" @letterClick="addChar" />
-      <br />
-    </div>
+    <GameBoard :game="game" @letterClick="addChar" />
+    <br />
 
     <div>
       <v-responsive class="mx-auto" max-width="300">
@@ -37,17 +38,17 @@
       </v-responsive>
     </div>
 
+    <GameKeyboard
+      :guessedLetters="game.guessedLetters"
+      @letterClick="addChar"
+      @backspaceClick="removeLastChar"
+      @enterClick="checkGuess"
+    />
+
     <v-divider></v-divider>
     <br />
 
     <div>
-      <KeyBoard
-        @letterClick="addChar"
-        @backspaceClick="removeLastChar"
-        @enterClick="checkGuess"
-        :guessedLetters="game.guessedLetters"
-        v-if="game.status === WordleGameStatus.Active"
-      />
       <v-row dense class="justify-center" cols="auto">
         <v-col cols="auto">
           <v-btn
@@ -79,7 +80,7 @@
     <v-card class="align-center">
       <v-card-title class="text-h4 text-center mt-10"> Better Luck Next Time... </v-card-title>
       <v-card-actions>
-        <v-btn @Click="newGames()">Play Again?</v-btn>
+        <v-btn @Click="newGame()">Play Again?</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -88,7 +89,7 @@
     <v-card class="align-center">
       <v-card-title class="text-h4 text-center mt-10"> You Won! </v-card-title>
       <v-card-actions>
-        <v-btn @Click="newGames()">Play Again?</v-btn>
+        <v-btn @Click="newGame()">Play Again?</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -100,14 +101,19 @@
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import GameBoard from '../components/GameBoard.vue'
-import KeyBoard from '../components/KeyBoard.vue'
+import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
 import { eventBus } from '@/scripts/eventBus'
 import UsernameDialog from '@/components/UsernameDialog.vue'
+import GameBoard from '../components/GameBoard.vue'
+import GameKeyboard from '../components/GameKeyboard.vue'
+import { useDisplay } from 'vuetify'
+import { Services } from '@/scripts/services'
+import type { PlayerService } from '@/scripts/playerService'
+import { GameResult } from '@/scripts/gameResult'
+import { watch } from 'vue'
 
 let validGuesses = new Array<string>()
 
@@ -119,42 +125,45 @@ const overlay = ref(true)
 const game = reactive(new WordleGame())
 const gameWon = ref(false)
 const gameLost = ref(false)
+const showScoreDialog = ref(false)
+const lastGameResult: Ref<GameResult> = ref({} as GameResult)
+
+// Add this to make testing work because useDisplay() throws an error when testing
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
+const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
-  window.addEventListener('keyup', keyPress)
-  await newGames()
+  // Start a new game
+  await newGame()
+  window.addEventListener('keyup', keyUp)
 })
 onUnmounted(() => {
-  window.removeEventListener('keyup', keyPress)
+  window.removeEventListener('keyup', keyUp)
 })
 
-async function newGames() {
-  /* Perform axios call to get new word and start game. */
-  await Axios.get('word')
+function newGame() {
+  overlay.value = true
+  Axios.get('word')
     .then((response) => {
       game.startNewGame(response.data)
-      console.log('Secret word: ' + game.secretWord)
+      console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
       }, 502)
     })
     .catch((error) => {
-      console.log('Axios error: ' + error)
+      console.log(error)
+      game.startNewGame(WordsService.getRandomWord())
+      console.log(game.secretWord)
+      overlay.value = false
     })
 
   // Reset Win/Lose dialogs.
   gameWon.value = false
   gameLost.value = false
-
-  /* Start timer. */
-  timer.value = 0
-  let startTimer = setInterval(() => {
-    if (game.status === WordleGameStatus.Active) {
-      timer.value++
-    } else {
-      clearInterval(startTimer)
-    }
-  }, 1000)
 }
 
 /** Emits boolean value used in 'UsernameDialog.vue' to open or close the Username Dialog. */
@@ -171,25 +180,6 @@ function toggleSecretWordText() {
   buttonText.value =
     buttonText.value === `${game.secretWord}` ? 'Display correct word' : `${game.secretWord}`
 }
-
-// TODO: Update method to add word from body, instead of attempting add hardcoded word in method.
-// NOTE: Disabled because unused. Respective API end-point is also disabled.
-//       (Disabled group set => Set 1)
-// function addWordToDatabase() {
-//   overlay.value = true
-//   Axios.post('word/AddWordFromBody', {
-//     text: 'strin',
-//     isCommon: true,
-//     isUsed: false
-//   })
-//     .then((response) => {
-//       overlay.value = false
-//       console.log(response.data)
-//     })
-//     .catch((error) => {
-//       console.log(error)
-//     })
-// }
 
 function addChar(letter: Letter) {
   game.guess.push(letter.char)
@@ -223,6 +213,17 @@ function checkGuess() {
   }
 }
 
+// function checkGuess(word?: string) {
+//   if (typeof word === 'string') {
+//     game.guess.set(word)
+//   }
+//   game.submitGuess()
+//   if (game.status !== WordleGameStatus.Active) {
+//     sendGameResult()
+//   }
+//   guess.value = ''
+// }
+
 function getValidGuesses() {
   validGuesses = WordsService.validWords(guess.value)
 }
@@ -239,18 +240,49 @@ function inputFromValidGuesses() {
   }
 }
 
-function keyPress(event: KeyboardEvent) {
-  console.log(event.key)
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    removeLastChar()
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    getValidGuesses()
-    game.guess.push(event.key.toLowerCase())
+function keyUp(event: KeyboardEvent) {
+  if (
+    document.activeElement?.tagName !== 'INPUT' &&
+    document.activeElement?.tagName !== 'TEXTAREA'
+  ) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
-  //event.preventDefault()
+}
+
+// Watch showScoreDialog and when it changes to true, call newGame()
+watch(showScoreDialog, (value) => {
+  if (!value) {
+    newGame()
+  }
+})
+
+function sendGameResult() {
+  const gameResult = new GameResult()
+  gameResult.playerId = playerService.player.playerId
+  gameResult.attempts = game.guesses.filter((f) => f.isFilled).length
+  gameResult.durationInSeconds = Math.round(game.duration() / 1000)
+  gameResult.wasGameWon = game.status == WordleGameStatus.Won
+  gameResult.wordPlayed = game.secretWord
+
+  console.log(gameResult)
+
+  lastGameResult.value = gameResult
+  showScoreDialog.value = true
+
+  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+    console.log(response.data)
+  })
+  // if (this.onGameEnd) {
+  //   this.onGameEnd(response.data as GameResult)
+  // }
 }
 
 function submitPlayerResults() {

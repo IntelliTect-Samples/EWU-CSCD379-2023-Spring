@@ -39,7 +39,7 @@ const vuetify = createVuetify({
           correct: '#4CAF50',
           misplaced: '#EF6C00',
           wrong: '#D50000',
-          stale: '#9E9E9E'
+          unknown: '#9E9E9E'
         }
       },
       light: {
@@ -47,7 +47,7 @@ const vuetify = createVuetify({
           correct: '#4CAF50',
           misplaced: '#EF6C00',
           wrong: '#D50000',
-          stale: '#9E9E9E'
+          unknown: '#9E9E9E'
         }
       },
       cowboy: {
@@ -58,7 +58,7 @@ const vuetify = createVuetify({
           correct: '#01579B',
           misplaced: '#FF7043',
           wrong: '#263238',
-          stale: '#A1887F'
+          unknown: '#A1887F'
         }
       },
       aqua: {
@@ -69,7 +69,7 @@ const vuetify = createVuetify({
           correct: '#009688',
           misplaced: '#CDDC39',
           wrong: '#C51162',
-          stale: '#4FC3F7'
+          unknown: '#4FC3F7'
         }
       }
     }

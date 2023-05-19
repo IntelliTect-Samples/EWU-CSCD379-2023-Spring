@@ -30,7 +30,7 @@ public class WordController : ControllerBase
     // {
     //     return await _wordService.GetSeveralWords(count);
     // }
-    
+
     // NOTE: Disabled because unused. Respective service method and UI components are also disabled.
     //       (Disabled group set => Set 1)
     // [HttpPost]

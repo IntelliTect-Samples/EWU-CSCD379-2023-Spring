@@ -9,8 +9,69 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../SettingUpAzure.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/ApiIntegrationTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/Content/WordsTest.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/DatabaseTestBase.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/PlayerServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/Usings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/WordServiceTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/WordTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api.Tests/Wordle.Api.Tests.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api/Data/DateWord.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api/Data/Seeder.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api/Dtos/GameResultDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Wordle.Api/Services/PlayerService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/public/wordle.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/assets/test" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/ActiveUser.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/LetterResult.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/ScoreDialog.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/components/WordleSolver.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/__tests__/wordleSolver.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/gameResult.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/helpers.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/letterUsage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/letterUsages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/player.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/playerService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/usageSummary.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordlePlayer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleSolver.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment3.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment3.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Assignment4.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Assignment4.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lectures.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Lectures.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/UsernameDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/LeaderboardController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Data/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Data/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Data/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Data/Word.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Data/Word.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Dtos/PlayerDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Dtos/PlayerDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/LeaderboardService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/public/staticwebapp.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/public/staticwebapp.config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/GameBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/GameBoard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/KeyBoard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/GameKeyboard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/LetterBase.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/LetterBase.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/LetterButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/LetterButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/__tests__/LetterBase.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/components/__tests__/LetterButton.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/components/__tests__/LetterButton.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/letter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/letter.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/services.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/services.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/word.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/word.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordleGame.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/wordsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/wordsService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +98,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "Merging Assignment-4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",

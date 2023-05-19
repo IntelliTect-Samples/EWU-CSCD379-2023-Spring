@@ -1,6 +1,7 @@
 import { Word } from '@/scripts/word'
 import { WordsService } from './wordsService'
-import { Letter, LetterStatus } from '@/scripts/letter'
+import type { Letter } from '@/scripts/letter'
+import { WordleSolver } from './wordleSolver'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -11,26 +12,42 @@ export enum WordleGameStatus {
 export class WordleGame {
   guessedLetters: Letter[] = []
   guesses: Word[] = new Array<Word>()
-  guessAttempts: number = 0
   secretWord: string = ''
   status: WordleGameStatus = WordleGameStatus.Active
-  guess!: Word
   numberOfGuesses: number = 6
+  guessIndex: number = 0
+  startTime: number = Date.now()
+  endTime: number | null = null
+  solver: WordleSolver
 
   constructor(secretWord?: string, numberOfGuesses: number = 6) {
+    if (!secretWord) secretWord = WordsService.getRandomWord()
     this.numberOfGuesses = numberOfGuesses
-
-    if (!secretWord) {
-      secretWord = 'null'
-    }
-
+    this.solver = new WordleSolver(this)
     this.startNewGame(secretWord)
   }
 
+  duration(): number {
+    return (this.endTime || Date.now()) - this.startTime
+  }
+
+  get guess(): Word {
+    return this.guesses[this.guessIndex]
+  }
+
+  // // check length of guess
+  //   if (this.letters.length !== secretWord.length) {
+  //     console.log('wrong length')
+  //     return
+  //   }
+
   async startNewGame(secretWord: string, numberOfGuesses: number = 6) {
-    this.secretWord = secretWord || (await WordsService.getWordFromApi())
-    await WordsService.getWordListFromApi()
+    this.secretWord = secretWord
+    this.startTime = Date.now()
+    this.endTime = null
     this.guesses.splice(0)
+
+    await WordsService.getWordListFromApi()
 
     // Create a word for each guess.
     for (let i = 0; i < numberOfGuesses; i++) {
@@ -38,66 +55,34 @@ export class WordleGame {
       this.guesses.push(word)
     }
 
-    this.guess = this.guesses[0]
+    this.guessIndex = 0
+    this.guessedLetters.splice(0)
     this.status = WordleGameStatus.Active
+    this.solver.calculate()
   }
 
   submitGuess() {
-    const correctlyGuessed: boolean = this.guess.checkWord(this.secretWord)
-    this.guessAttempts++
-    // TODO: Go back and fix possible problems pointed out by Meg in Assignment 1 or 2...
-    // Update the guessed letters.
-    for (const guessLetter of this.guess.letters) {
-      for (const guessedLetter of this.guessedLetters) {
-        if (guessLetter.char === guessedLetter.char) {
-          if (guessedLetter.status === LetterStatus.Correct) {
-            /* empty */
-          } else if (
-            guessedLetter.status === LetterStatus.Misplaced &&
-            guessLetter.status === LetterStatus.Correct
-          ) {
-            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          } else if (
-            guessedLetter.status === LetterStatus.Misplaced &&
-            guessLetter.status === LetterStatus.Wrong
-          ) {
-            /* empty */
-          } else if (
-            guessedLetter.status === LetterStatus.Wrong &&
-            guessLetter.status === LetterStatus.Misplaced
-          ) {
-            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          } else if (
-            guessedLetter.status === LetterStatus.Wrong &&
-            guessLetter.status === LetterStatus.Correct
-          ) {
-            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          } else {
-            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
-          }
-        }
-      }
-      this.guessedLetters.push(guessLetter)
+    if (!this.guess.isFilled) return
+    if (!WordsService.isValidWord(this.guess.text)) {
+      this.guess.clear()
+      return
+    }
+    // put logic to win here.
+    const correctGuess = this.guess.checkWord(this.secretWord)
+    // Update the guessed letters
+    for (const letter of this.guess.letters) {
+      this.guessedLetters.push(letter)
     }
 
-    console.log(this.guessedLetters)
-
-    const index: number = this.guesses.indexOf(this.guess)
-    if (index < this.guesses.length - 1 && !correctlyGuessed) {
-      this.guess = this.guesses[index + 1]
-    } else {
-      this.gameOver(correctlyGuessed)
-    }
-  }
-
-  // TODO: Find a way to disable not just input, but the ability to backspace.
-  gameOver(correctlyGuessed: boolean) {
-    if (correctlyGuessed) {
+    if (correctGuess) {
       this.status = WordleGameStatus.Won
-      console.log('You Win!')
-    } else {
+      this.endTime = Date.now()
+    } else if (this.guessIndex + 1 == this.guesses.length) {
       this.status = WordleGameStatus.Lost
-      console.log('You Lose!')
+      this.endTime = Date.now()
+    } else {
+      this.guessIndex++
     }
+    if (this.solver) this.solver.calculate()
   }
 }

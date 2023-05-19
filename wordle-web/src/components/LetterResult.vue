@@ -4,9 +4,8 @@
     label
     outlined
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
-    :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
-    :elevation="letter.status == LetterStatus.NotGuessed ? 2 : 4"
-    :class="display.xs ? 'letter-small' : ''"
+    :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
+    :elevation="letter.status == LetterStatus.NotGuessed ? 0 : 4"
   >
     {{ letter.char.toUpperCase() }}
   </v-btn>
@@ -35,10 +34,5 @@ defineProps<Props>()
 <style scoped>
 .v-btn {
   font-size: 1.2rem;
-}
-
-.letter-small {
-  min-width: 20px;
-  padding: 0;
 }
 </style>

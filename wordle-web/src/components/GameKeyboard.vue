@@ -1,27 +1,39 @@
 <template>
-  <v-row class="justify-center" dense v-for="(key, i) in keyboardLetters" :key="i" :class="{ 'ml-1 px-0': display.xs }">
-    <v-col cols="auto" v-if="i === keyboardLetters.length - 1">
+  <v-row
+    class="justify-center"
+    v-for="(keyboardRow, rowIndex) in keyboardLetters"
+    :key="rowIndex"
+    dense
+  >
+    <v-col cols="auto" v-if="rowIndex === keyboardLetters.length - 1">
       <v-btn
         @click="emitEnterClick"
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
         :height="display.xs ? '30' : display.sm ? '40' : '50'"
-        :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
         :class="display.xs ? 'letter-small' : ''"
       >
         Check
       </v-btn>
     </v-col>
-    <v-col cols="auto" v-for="(letter, j) in key" :key="j" :class="{ 'ml-1 px-0': display.xs }">
-      <LetterButton :letter="letter" @click="emitLetterClick(letter)" />
+    <v-col
+      v-for="key in keyboardRow"
+      :key="key.char"
+      cols="auto"
+      :class="{ 'ml-1 px-0': display.xs }"
+    >
+      <LetterButton :letter="key" @click="emitLetterClick(key)" />
     </v-col>
-    <v-col cols="auto" v-if="i === keyboardLetters.length - 1" :class="{ 'ml-1 px-0': display.xs }">
+    <v-col
+      cols="auto"
+      v-if="rowIndex === keyboardLetters.length - 1"
+      :class="{ 'ml-1 px-0': display.xs }"
+    >
       <v-btn
         @click="emitBackspaceClick"
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
         :height="display.xs ? '30' : display.sm ? '40' : '50'"
-        :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
         :class="display.xs ? 'letter-small' : ''"
       >
         <v-icon color="white">mdi-backspace</v-icon>
@@ -31,59 +43,63 @@
 </template>
 
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
-import { Services } from '@/scripts/services'
+import LetterButton from '@/components/LetterButton.vue'
 import { computed, inject, reactive } from 'vue'
-import { useDisplay } from 'vuetify/lib/framework.mjs'
-
-const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
-  typeof useDisplay
->
+import { useDisplay } from 'vuetify'
+import { Services } from '@/scripts/services'
 
 const props = defineProps<{
   guessedLetters: Letter[]
 }>()
 
+// Add this to make testing work because useDisplay() throws an error when testing
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
+
 const keyboardLetters = computed(() => {
   const keyboardLetters: Letter[][] = []
   const keyboardKeys = [
-    ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'],
-    ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'],
-    ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
   ]
 
   console.log(props.guessedLetters.length)
 
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
-
     for (let key of keyboardKey) {
-      keyboardRow.push(props.guessedLetters.find((l) => l.char === key) ?? new Letter(key))
+      //console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
+      keyboardRow.push(
+        props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()) ??
+          new Letter(key)
+      )
     }
-
     keyboardLetters.push(keyboardRow)
   }
 
   return keyboardLetters
 })
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (event: 'letterClick', value: Letter): void
   (event: 'enterClick'): void
   (event: 'backspaceClick'): void
 }>()
 
 function emitLetterClick(letter: Letter) {
-  emits('letterClick', letter)
+  emit('letterClick', letter)
 }
 
 function emitEnterClick() {
-  emits('enterClick')
+  emit('enterClick')
 }
 
 function emitBackspaceClick() {
-  emits('backspaceClick')
+  emit('backspaceClick')
 }
 </script>
 
