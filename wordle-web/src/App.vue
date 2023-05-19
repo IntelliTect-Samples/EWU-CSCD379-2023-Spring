@@ -33,6 +33,9 @@
             <v-list-item>
               <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title><RouterLink to="/tutorial">Tutorial</RouterLink></v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
