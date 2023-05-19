@@ -59,6 +59,7 @@ import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
 import HintDialog from '../components/HintDialog.vue'
 import Axios from 'axios'
+import { useRoute } from 'vue-router'
 
 localStorage.startTime = Date.now()
 
@@ -70,6 +71,8 @@ var dialog = ref(true)
 
 let timerInterval: any = null
 let count: Ref<number> = ref(0)
+
+const route = useRoute()
 
 onMounted(async () => {
   if (!dialog.value) {
@@ -110,7 +113,15 @@ function addWord() {
     })
 }
 
-Axios.get('word')
+let apiPath = 'word'
+if (route.path == '/wordoftheday') {
+  apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+  if (route.query.date) {
+    apiPath += `&date=${route.query.date}`
+  }
+}
+
+Axios.get(apiPath)
   .then((response) => {
     game.restartGame(response.data)
     console.log(game.secretWord)
