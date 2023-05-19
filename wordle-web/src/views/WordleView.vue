@@ -167,10 +167,12 @@ function keyUp(event: KeyboardEvent) {
       checkGuess()
     } else if (event.key === 'Backspace') {
       guess.value = guess.value.slice(0, -1)
+      getValidGuesses()
       game.guess.pop()
     } else if (event.key.length === 1 && event.key !== ' ') {
       guess.value += event.key.toLowerCase()
       game.guess.push(event.key.toLowerCase())
+      getValidGuesses()
     }
   }
 }
