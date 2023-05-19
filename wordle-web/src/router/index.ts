@@ -20,6 +20,11 @@ const router = createRouter({
       path: '/leaderboard',
       name: 'leaderboard',
       component: LeaderboardView
+    },
+    {
+      path: '/wordoftheday',
+      name: 'wordoftheday',
+      component: WordleView
     }
   ]
 })
