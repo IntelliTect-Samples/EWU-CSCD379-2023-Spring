@@ -40,5 +40,11 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.AddWord(word.Text, word.IsCommon);
         }
+
+        [HttpGet("WordOfTheDay")]
+        public async Task<string> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
+        {
+            return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
+        }
     }
 }    

@@ -52,12 +52,24 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Add a redirect for the root URL
+var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://brave-forest-08291851e.3.azurestaticapps.net/";
+var options = new RewriteOptions()
+        .AddRedirect("^$", redirectRootUrl, 302);
+app.UseRewriter(options);
+
 app.UseHttpsRedirection();
 
 app.UseCors(MyAllowAllOrigins);
+
+// Add Google site verification.
+app.MapGet("/google5b827f426094db3f.html", () => "google-site-verification: google5b827f426094db3f.html");
 
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+public partial class Program { }
