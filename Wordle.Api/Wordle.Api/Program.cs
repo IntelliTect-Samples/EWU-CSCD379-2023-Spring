@@ -27,7 +27,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("NolansConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
                                             { options.UseSqlServer(connectionString); });
 builder.Services.AddScoped<WordService>();
