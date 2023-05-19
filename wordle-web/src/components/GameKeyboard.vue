@@ -47,7 +47,7 @@ import { Letter } from '@/scripts/letter'
 import LetterButton from '@/components/LetterButton.vue'
 import { computed, inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
-import { Services } from '@/scripts/services'
+import { Services } from '@/scripts/Services/services'
 
 const props = defineProps<{
   guessedLetters: Letter[]

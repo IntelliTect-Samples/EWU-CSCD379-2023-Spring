@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { WordsService } from '@/scripts/wordsService'
+import { WordsService } from '../Services/wordsService'
 
 describe('wordsService', () => {
   it('Makes list of valid words, 1 char(s)', () => {

@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { Player } from './player'
+import { Player } from '../player'
 import { reactive, ref } from 'vue'
 
 export class PlayerService {

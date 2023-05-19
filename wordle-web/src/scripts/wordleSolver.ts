@@ -2,7 +2,7 @@ import { LetterStatus } from './letter'
 import { LetterUsages } from './letterUsages'
 import type { Word } from './word'
 import type { WordleGame } from './wordleGame'
-import { WordsService } from './wordsService'
+import { WordsService } from './Services/wordsService'
 
 export class WordleSolver {
   constructor(game: WordleGame) {

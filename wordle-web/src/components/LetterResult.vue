@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { Letter, LetterStatus } from '@/scripts/letter'
-import { Services } from '@/scripts/services'
+import { Services } from '@/scripts/Services/services'
 import { inject } from 'vue'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'

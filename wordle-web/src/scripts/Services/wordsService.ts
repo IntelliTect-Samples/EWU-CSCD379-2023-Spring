@@ -2,7 +2,7 @@ import Axios from 'axios'
 
 export abstract class WordsService {
   private static words: string[] = []
-  private static wordUrl: string = 'https://wordleweb2023.azurewebsites.net/word'
+  private static wordUrl: string = 'https://wordleweb2023.azurewebsites.net/Word'
 
   static getRandomWord(): string {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
@@ -15,7 +15,7 @@ export abstract class WordsService {
   }
 
   static async getWordListFromApi() {
-    Axios.get('word/GetWordList')
+    Axios.get('Word/GetWordList')
       .then((response) => {
         setTimeout(() => {}, 100)
         this.words = response.data

@@ -104,14 +104,14 @@ import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
-import { WordsService } from '@/scripts/wordsService'
+import { WordsService } from '@/scripts/Services/wordsService'
 import { eventBus } from '@/scripts/eventBus'
 import UsernameDialog from '@/components/UsernameDialog.vue'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import { useDisplay } from 'vuetify'
-import { Services } from '@/scripts/services'
-import type { PlayerService } from '@/scripts/playerService'
+import { Services } from '@/scripts/Services/services'
+import type { PlayerService } from '@/scripts/Services/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import { watch } from 'vue'
 
@@ -146,7 +146,7 @@ onUnmounted(() => {
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  Axios.get('Word')
     .then((response) => {
       game.startNewGame(response.data)
       console.log(game.secretWord)

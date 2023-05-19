@@ -1,5 +1,5 @@
 import { Word } from '@/scripts/word'
-import { WordsService } from './wordsService'
+import { WordsService } from './Services/wordsService'
 import type { Letter } from '@/scripts/letter'
 import { WordleSolver } from './wordleSolver'
 

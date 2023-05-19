@@ -5,7 +5,7 @@ export class LetterUsage {
   public maximumOccurrences: number | null = null
   // This field is used during the calculation to hold the number of letters found in the word for this guess
   public currentCount: number | null = null
-  // If we hit an wrong letter, we know the max count.
+  // If we hit a wrong letter, we know the max count.
   public wasMaxCountFound: boolean = false
 
   public constructor(char: string, lengthOrArray: number | string[]) {

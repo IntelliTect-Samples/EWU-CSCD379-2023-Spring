@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { WordleGame } from '../wordleGame'
-import { WordsService } from '../wordsService'
+import { WordsService } from '../Services/wordsService'
 import { GuessingStrategy, WordlePlayer } from '../wordlePlayer'
 
 // TODO: make this test better
@@ -20,14 +20,14 @@ describe('Solve Simple', () => {
 
 // This is a bad test because it will likely fail at some point because of the random words
 describe('Best Solver Technique', () => {
-  it('on 100 words guessing outside the word is faster', async () => {
+  it('on 100 words guessing outside the word is faster', () => {
     let totalInWordGuesses = 0
     let totalOutWordGuesses = 0
     //let totalAlternatingGuesses = 0
     for (let i = 0; i < 100; i++) {
-      const word = WordsService.getWordFromApi()
-      totalInWordGuesses += WordlePlayer.playGame(await word, GuessingStrategy.ValidWordsOnly)
-      totalOutWordGuesses += WordlePlayer.playGame(await word, GuessingStrategy.InvalidWordsOnly)
+      const word = WordsService.getRandomWord()
+      totalInWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.ValidWordsOnly)
+      totalOutWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.InvalidWordsOnly)
       //totalAlternatingGuesses += WordlePlayer.playGame(word, GuessingStrategy.Alternating)
     }
 

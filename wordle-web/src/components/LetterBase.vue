@@ -21,7 +21,7 @@ export interface Props {
 // import FastPlastic1 from '@/assets/sounds/FastPlastic1.mp3'
 // import Bright1 from '@/assets/sounds/Bright1.mp3'
 import Bright2 from '@/assets/sounds/Bright2.mp3'
-import { Services } from '@/scripts/services'
+import { Services } from '@/scripts/Services/services'
 import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify/lib/framework.mjs'
 

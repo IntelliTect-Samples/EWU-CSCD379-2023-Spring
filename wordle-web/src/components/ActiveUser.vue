@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlayerService } from '@/scripts/playerService'
-import { Services } from '@/scripts/services'
+import type { PlayerService } from '@/scripts/Services/playerService'
+import { Services } from '@/scripts/Services/services'
 import { nextTick } from 'vue'
 import { watch } from 'vue'
 import { inject } from 'vue'
