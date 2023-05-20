@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Runtime.InteropServices;
+﻿using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 

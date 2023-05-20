@@ -1,6 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
-using System.Reflection.Metadata;
 
 namespace Wordle.Api.Data;
 
@@ -20,5 +18,7 @@ public class AppDbContext : DbContext
             .HasOne(e => e.Word)
             .WithMany(f => f.DateWords)
             .OnDelete(DeleteBehavior.ClientCascade);
+
+        modelBuilder.Entity<DateWord>().HasIndex(f => f.Date).IsUnique();
     }
 }
