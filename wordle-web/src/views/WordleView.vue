@@ -47,7 +47,13 @@
     </v-col>
   </v-row>
 
-  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
+  <WordOfTheDayScoreDialog
+    v-if="isWordOfTheDay"
+    v-model="showScoreDialog"
+    :game-result="lastGameResult"
+    :playerId="playerService.player.playerId"
+  />
+  <ScoreDialog v-else v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
 
 <script setup lang="ts">
@@ -65,6 +71,7 @@ import { Services } from '@/scripts/services'
 import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
+import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -103,7 +110,6 @@ function newGame() {
   isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
   overlay.value = true
   let apiPath = 'word'
-  console.log(isWordOfTheDay.value)
   if (isWordOfTheDay.value) {
     apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
@@ -115,6 +121,8 @@ function newGame() {
       const word = isWordOfTheDay.value ? response.data.word : response.data
       if (isWordOfTheDay.value) {
         wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        wordOfTheDayDate.value = null
       }
       game.restartGame(word)
       console.log(game.secretWord)
@@ -177,14 +185,15 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
+  gameResult.wordOfTheDayDate = wordOfTheDayDate.value
 
   console.log(gameResult)
 
   lastGameResult.value = gameResult
-  showScoreDialog.value = true
 
   Axios.post('/Player/AddGameResult', gameResult).then((response) => {
     console.log(response.data)
+    showScoreDialog.value = true
   })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)

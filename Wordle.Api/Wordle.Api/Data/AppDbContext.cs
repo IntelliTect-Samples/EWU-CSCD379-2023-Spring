@@ -28,6 +28,7 @@ namespace Wordle.Api.Data
                 .Entity<DateWord>()
                 .HasIndex(f => f.Date)
                 .IsUnique();
+           
         }
     }
 }

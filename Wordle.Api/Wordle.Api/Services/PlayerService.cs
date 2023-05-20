@@ -63,7 +63,7 @@ public class PlayerService
             }
             // See if this was a word of the day
             var dateWord = await _db.DateWords
-                .FirstOrDefaultAsync(f => f.Date == dto.WordOfTheDayDate && f.WordId == word.WordId);
+                .FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && f.Date == dto.WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
             // Add a PlayerGame
             PlayerGame playerGame = new()
             {

@@ -160,6 +160,7 @@ public class WordService
         //        AverageAttempts = g.Average(f => f.Attempts),
         //        NumberOfPlays = g.Sum(f => f.PlayerGameId),
         //        HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
+
         //    })
         //    .ToListAsync();
 

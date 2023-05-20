@@ -197,6 +197,7 @@ export class WordleSolver {
       validWords.length = 0
     }
     if (validWords.length == 0) return '-----'
-    return validWords[0]
+    // Pick a random word to try.
+    return validWords[Math.floor(Math.random() * validWords.length)]
   }
 }
