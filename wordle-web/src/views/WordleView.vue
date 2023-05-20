@@ -7,7 +7,7 @@
     <br />
 
     <div>
-      <v-responsive class="mx-auto" max-width="300">
+      <v-responsive class="mx-auto" max-width="350">
         <v-select
           v-model="guess"
           :items="validGuesses"
