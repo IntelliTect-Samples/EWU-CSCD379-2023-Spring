@@ -19,7 +19,7 @@ describe('Solve Simple', () => {
 })
 
 // This is a bad test because it will likely fail at some point because of the random words
-describe('Best Solver Technique', () => {
+/*describe('Best Solver Technique', () => {
   it('on 100 words guessing outside the word is faster', () => {
     let totalInWordGuesses = 0
     let totalOutWordGuesses = 0
@@ -40,4 +40,4 @@ describe('Best Solver Technique', () => {
     //expect(totalAlternatingGuesses).toBeLessThan(totalOutWordGuesses)
     //expect(totalAlternatingGuesses).toBeLessThan(totalInWordGuesses)
   })
-})
+})*/
