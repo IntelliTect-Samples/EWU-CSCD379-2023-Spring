@@ -68,7 +68,7 @@ public class PlayerServiceTests : DatabaseTestBase
 
         // Check the stats
         var stats = await wordService.GetWordOfTheDayStatsAsync();
-        Assert.AreEqual(1, stats.Count());
+        Assert.AreEqual(10, stats.Count());
         Assert.AreEqual(1, stats.First().NumberOfPlays);
         Assert.AreEqual(10, stats.First().AverageDurationInSeconds);
         Assert.AreEqual(3, stats.First().AverageAttempts);
