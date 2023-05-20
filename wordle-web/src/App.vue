@@ -19,10 +19,15 @@
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
 
-          <v-list>
+          <v-list width="200">
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/">Play Again</RouterLink>
+                <RouterLink to="/WordOfTheDay">Play Word of the Day</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/">Play Random Word</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>

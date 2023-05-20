@@ -3,7 +3,13 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div class="text-h4 text-center">
+    <span v-if="isWordOfTheDay"
+      >Wordle of the Day
+      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+    </span>
+    <span v-else>Wordle Mind Bender</span>
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -68,6 +74,8 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const isWordOfTheDay = ref(false)
+const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -80,15 +88,23 @@ onMounted(async () => {
   // Start a new game
   await newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
 })
 
 function newGame() {
+  isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
   overlay.value = true
   let apiPath = 'word'
-  if (route.path == '/wordoftheday') {
+  console.log(isWordOfTheDay.value)
+  if (isWordOfTheDay.value) {
     apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
@@ -96,7 +112,11 @@ function newGame() {
   }
   Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data)
+      const word = isWordOfTheDay.value ? response.data.word : response.data
+      if (isWordOfTheDay.value) {
+        wordOfTheDayDate.value = new Date(response.data.date)
+      }
+      game.restartGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
