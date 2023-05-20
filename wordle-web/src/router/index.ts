@@ -37,7 +37,6 @@ const router = createRouter({
       name: 'wordoftheday',
       component: WordleView
     }
-    
   ]
 })
 
