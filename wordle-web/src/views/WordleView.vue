@@ -65,9 +65,7 @@ localStorage.startTime = Date.now()
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-//don not commmit---------
-const overlay = ref(false)
-//-------------------------
+const overlay = ref(true)
 var dialog = ref(true)
 
 let timerInterval: any = null
