@@ -38,7 +38,10 @@
             <v-card-item>
                 <v-card-text>
                     The Valid-Guesses tool is used to help you find valid words based on the letters
-                    that are input. 
+                    that are input. Once one or more letters are input into a guess, you can click the
+                    valid guesses bar. The valid guesses bar will then display all the possible valid words
+                    based off of the letters that were input. If you select one of the words it will
+                    automatically input it as your guess but it will NOT submit it. 
                 </v-card-text>
             </v-card-item>
 
