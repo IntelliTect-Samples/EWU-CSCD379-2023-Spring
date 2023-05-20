@@ -9,24 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/20230518213241_DateWordUniqueDate.Designer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/20230518213241_DateWordUniqueDate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Lectures.md" beforeDir="false" afterPath="$PROJECT_DIR$/../Lectures.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api.Tests/ApiIntegrationTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api.Tests/ApiIntegrationTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api.Tests/PlayerServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api.Tests/PlayerServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api.Tests/WordServiceTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api.Tests/WordServiceTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api.Tests/WordTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api.Tests/WordTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Data/AppDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Data/Word.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Data/Word.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/PlayerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Services/PlayerService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/WordService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Services/WordService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +35,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging Assignment-4",
+    "git-widget-placeholder": "Assignment-4",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
