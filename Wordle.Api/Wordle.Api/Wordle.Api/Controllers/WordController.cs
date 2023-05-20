@@ -20,5 +20,11 @@ namespace Wordle.Api.Controllers
             return (await _wordService.GetRandomWord()).Text;
         }
 
+        [HttpGet("WordOfTheDay")]
+        public async Task<string> GetWordOfTheDay(double offsetInHours) 
+        {
+            return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours));
+        }
+
     }
 }

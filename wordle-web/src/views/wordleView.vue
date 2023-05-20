@@ -31,17 +31,43 @@ import KeyBoard from '../components/KeyBoard.vue'
 import ValidWords from '../components/ValidWords.vue'
 import type { Letter } from '@/scripts/letter'
 import NameCardDialog from '@/components/NameCardDialog.vue'
+import { useRoute } from 'vue-router'
+import Axios from 'axios'
+import { WordsService } from '@/scripts/wordsService'
+
 const guess = ref('')
 const game = reactive(new WordleGame())
+const route = useRoute()
+
 console.log(game.secretWord)
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
-  await game.restartGame()
-  console.log(game.secretWord)
+  await newGame()
+  //console.log(game.secretWord)
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyPress)
 })
+
+function newGame() {
+  let apiPath = 'word'
+  if (route.path == '/wordoftheday') {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    if (route.query.date) {
+      apiPath += `&date=${route.query.date}`
+    }
+  }
+  Axios.get(apiPath)
+    .then((response) => {
+      game.restartGame(response.data)
+      console.log(game.secretWord)
+    })
+    .catch((error) => {
+      console.log(error)
+      game.restartGame(WordsService.getRandomWord())
+      console.log(game.secretWord)
+    })
+}
 function autoComplete(fill: string) {
   while (game.guess.text !== '') {
     game.guess.pop()

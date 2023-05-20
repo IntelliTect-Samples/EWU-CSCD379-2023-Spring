@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 
@@ -26,7 +27,7 @@ namespace Wordle.Api.Services
             { 
                 date = DateTime.UtcNow; 
             }
-            var localDateTime = new DateTimeOffset(date.Value, offset);
+            var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
             var localDate = localDateTime.Date;
             var todaysWord = await _db.DateWords
                 .Include(f => f.Word)
@@ -56,7 +57,20 @@ namespace Wordle.Api.Services
                         Word = word
                     };
                     _db.DateWords.Add(dateWord);
-                    _db.SaveChanges();
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (SqlException ex) // Might be wronge exception
+                    {
+                        if (ex.Message.Contains("duplicate"))
+                        {
+                            return _db.DateWords
+                                .Include(f => f.Word)
+                                .First(f => f.Date == localDate)
+                                .Word.Text;
+                        }
+                    }
 
                     return word.Text;
                 }
