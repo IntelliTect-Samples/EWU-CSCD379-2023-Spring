@@ -32,7 +32,7 @@ export class WordleGame {
   //   }
 
   async restartGame(secretWord: string, numberOfGuesses: number = 6) {
-    this.secretWord = secretWord || WordsService.getRandomWord()
+    this.secretWord = secretWord
     this.guesses.splice(0)
     // create a word for each guess
     for (let iWord = 0; iWord < numberOfGuesses; iWord++) {
@@ -42,7 +42,9 @@ export class WordleGame {
     this.guess = this.guesses[0]
     this.status = WordleGameStatus.Active
     this.guessNum = 0
-  }
+    this.guessedLetters.splice(0)
+    this.validWords.splice(0)
+    }
 
   submitGuess() {
     // put logic to win here.
