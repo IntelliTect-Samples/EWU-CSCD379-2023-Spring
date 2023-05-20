@@ -1,6 +1,8 @@
 <template>
+  
   <v-app>
-    <v-app-bar :elevation="3">
+    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+    <v-app-bar :elevation="3" color="yellow-lighten-1">
       <template v-slot>
         <v-app-bar-title>
           <RouterLink to="/">
@@ -31,6 +33,9 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
+                <RouterLink to="/instructions">Instructions</RouterLink>
+            </v-list-item>
+            <v-list-item>
               <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
           </v-list>
@@ -41,7 +46,9 @@
     <v-main>
       <RouterView />
     </v-main>
+  </v-parallax>
   </v-app>
+  
 </template>
 
 <script setup lang="ts">
@@ -51,6 +58,7 @@ import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
+import { ref } from 'vue'
 import ActiveUser from './components/ActiveUser.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
@@ -59,8 +67,10 @@ provide(Services.Display, display)
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
+const gameGuide = ref(true)
 
 const theme = useTheme()
+
 
 function switchTheme() {
   if (theme.global.name.value === 'light') {

@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex justify-center align-center">
     <v-card>
-      <div class="bg-primary text-h5 pa-3 text-center">Leader Board</div>
+      <div class="bg-yellow text-h5 pa-3 text-center">Leader Board</div>
       <v-card-text>
         <div v-for="(player, index) in players" :key="player.playerId" class="border my-3">
           <div class="d-flex justify-center bg-secondary text-h6">
