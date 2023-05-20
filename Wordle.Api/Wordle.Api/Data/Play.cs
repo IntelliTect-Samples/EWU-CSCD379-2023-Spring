@@ -17,7 +17,7 @@ namespace Wordle.Api.Data
         public int Attempts { get; set; }
         public int Seconds { get; set; }
 
-        public static async void SeedPlays(AppDbContext db)
+        public static void SeedPlays(AppDbContext db)
         {
             if (!db.Plays.Any())
             {
