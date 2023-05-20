@@ -31,7 +31,13 @@ const router = createRouter({
       path: '/statistics',
       name: 'statistics',
       component: StatisticsView
+    },
+    {
+      path: '/wordoftheday',
+      name: 'wordoftheday',
+      component: WordleView
     }
+    
   ]
 })
 
