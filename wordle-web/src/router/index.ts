@@ -27,6 +27,16 @@ const router = createRouter({
       path: '/leaderBoard',
       name: 'leaderBoard',
       component: () => import('../views/LeaderBoard.vue')
+    },
+    {
+      path: '/days',
+      name: 'LastTenDays',
+      component: () => import('../views/DaysView.vue')
+    },
+    {
+      path: '/wordoftheday',
+      name: 'wordoftheday',
+      component: WordleView
     }
   ]
 })
