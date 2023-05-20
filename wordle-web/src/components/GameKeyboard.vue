@@ -11,6 +11,7 @@
         class="elevation-10"
         style="background-image: var(--btn-gradient)"
         :height="display.xs ? '30' : display.sm ? '40' : '50'"
+        :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
         :class="display.xs ? 'letter-small' : ''"
       >
         Check

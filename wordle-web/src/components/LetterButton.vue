@@ -11,7 +11,7 @@
     @click="playButtonSound"
     :color="letter.color"
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
-    :size="display.xs ? 'x-small' : display.sm ? 'small' : undefined"
+    :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
     :elevation="letter.status == LetterStatus.NotGuessed ? 2 : 4"
     :class="display.xs ? 'letter-small' : ''"
   >
