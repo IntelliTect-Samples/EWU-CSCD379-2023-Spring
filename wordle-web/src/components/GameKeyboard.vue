@@ -104,13 +104,3 @@ function emitBackspaceClick() {
 }
 </script>
 
-<style scoped>
-.v-btn {
-  font-size: 12pt;
-}
-
-.letter-small {
-  min-width: 20px;
-  padding: 0;
-}
-</style>

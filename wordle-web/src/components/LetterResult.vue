@@ -36,9 +36,3 @@ interface Props {
 
 defineProps<Props>()
 </script>
-
-<style scoped>
-.v-btn {
-  font-size: 1.2rem;
-}
-</style>
