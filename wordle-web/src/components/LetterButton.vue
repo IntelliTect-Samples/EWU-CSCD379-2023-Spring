@@ -25,9 +25,9 @@ import { Services } from '@/scripts/Services/services'
 import { inject } from 'vue'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'
+import Bright2 from '@/assets/sounds/Bright2.mp3'
 // import FastPlastic1 from '@/assets/sounds/FastPlastic1.mp3'
 // import Bright1 from '@/assets/sounds/Bright1.mp3'
-import Bright2 from '@/assets/sounds/Bright2.mp3'
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.

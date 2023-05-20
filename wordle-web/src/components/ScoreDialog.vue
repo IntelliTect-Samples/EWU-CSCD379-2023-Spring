@@ -1,3 +1,7 @@
+<!--
+---- The dialog box that displays the score after the game is over.
+--->
+
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>

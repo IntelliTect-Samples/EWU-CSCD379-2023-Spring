@@ -1,3 +1,7 @@
+<!--
+---- The area of the screen where the user's guesses are displayed.
+--->
+
 <template>
   <v-row
     class="justify-center"

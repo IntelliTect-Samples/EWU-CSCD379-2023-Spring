@@ -27,9 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import {inject} from 'vue'
-import {Services} from "@/scripts/Services/services";
-import type {PlayerService} from "@/scripts/Services/playerService";
+import { inject } from 'vue'
+import { Services } from '@/scripts/Services/services'
+import type { PlayerService } from '@/scripts/Services/playerService'
 
 const playerService = inject(Services.PlayerService) as PlayerService
 </script>
