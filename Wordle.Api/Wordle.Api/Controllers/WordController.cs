@@ -25,4 +25,10 @@ public class WordController : ControllerBase
     {
         return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
     }
+    
+    [HttpGet("GetWordList")]
+    public async Task<List<string>> GetWordList()
+    {
+        return await _wordService.GetWordList();
+    }
 }
