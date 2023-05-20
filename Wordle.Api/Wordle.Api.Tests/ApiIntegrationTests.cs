@@ -53,8 +53,9 @@ namespace Wordle.Api.Tests
             var client = _factory.CreateClient();
             var response = await client.GetAsync("word/wordoftheday?offsetinhours=-8");
 
-            var word = await response.Content.ReadAsStringAsync();
-            Assert.AreEqual(5, word.Length);
+            var json = await response.Content.ReadAsStringAsync();
+            Assert.IsTrue(json.Contains("word"));
+            Assert.IsTrue(json.Contains("date"));
         }
 
         [ClassCleanup]

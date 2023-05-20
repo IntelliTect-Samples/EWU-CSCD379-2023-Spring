@@ -6,6 +6,8 @@
         public DateTime Date { get; set; }
         public int WordId { get; set; }
         public Word Word { get; set; } = null!;
+
+        public List<PlayerGame> PlayerGames { get; set; } = new();
     }
 }
 

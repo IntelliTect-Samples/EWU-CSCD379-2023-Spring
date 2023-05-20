@@ -19,7 +19,7 @@ namespace Wordle.Api.Tests
             var service = new WordService(context);
             Seeder.Seed(context);
 
-            var word = await service.GetRandomWord();
+            var word = await service.GetRandomWordAsync();
 
             Assert.IsNotNull(word);
             Assert.AreEqual(5, word.Text.Length);
@@ -34,9 +34,9 @@ namespace Wordle.Api.Tests
 
             var date = DateTime.UtcNow;
             
-            var word = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
+            var word = await service.GetWordOfTheDayAsync(TimeSpan.FromHours(-8), date);
             
-            var word2 = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
+            var word2 = await service.GetWordOfTheDayAsync(TimeSpan.FromHours(-8), date);
 
             Assert.AreEqual(word, word2);
         }
