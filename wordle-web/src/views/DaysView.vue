@@ -40,7 +40,7 @@ function goBack() {
   $router.go(-1)
 }
 
-Axios.get('GetLastTenDays')
+Axios.get('GetWordOfDayTenDays')//might be wrong api call, should call Word/GetWordOfDayTenDays, i.e. wordController's GetWordOfDayTenDays method
   .then((response) => {
     response.data.forEach((day: any) => {
       Days.push({
