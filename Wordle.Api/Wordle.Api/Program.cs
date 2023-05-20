@@ -62,7 +62,7 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
 var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
 if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://green-sea-09672851e.3.azurestaticapps.net/";
 var options = new RewriteOptions()
-        .AddRedirect("^$", redirectRootUrl);
+        .AddRedirect("^$", redirectRootUrl, 302);
 app.UseRewriter(options);
 
 app.UseHttpsRedirection();
