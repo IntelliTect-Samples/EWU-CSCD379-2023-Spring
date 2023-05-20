@@ -29,18 +29,6 @@
         New Game
       </v-btn>
     </v-row>
-  
-    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
-      Better Luck Next Time
-    </div>
-    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
-  
-    <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-      <v-col xs="11" sm="9" md="6" lg="4">
-        <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
-      </v-col>
-    </v-row>
-  
     <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
   </template>
   
@@ -51,7 +39,6 @@
   import Axios from 'axios'
   import GameBoard from '../components/GameBoard.vue'
   import GameKeyboard from '../components/GameKeyboard.vue'
-  import WordleSolver from '../components/WordleSolver.vue'
   import { WordsService } from '@/scripts/wordsService'
   import { useDisplay } from 'vuetify'
   import { Player } from '@/scripts/player'
