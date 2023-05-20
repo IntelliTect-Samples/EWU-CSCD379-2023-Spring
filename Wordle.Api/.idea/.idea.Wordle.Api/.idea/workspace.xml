@@ -10,6 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/Services/wordsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/Services/wordsService.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +23,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Wordle.Api.Tests/ApiIntegrationTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api.Tests/WordServiceTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Data/AppDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Data/DateWord.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Dtos/PlayerDto.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/Services/WordService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Wordle.Api/appsettings.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aacc74311ca994f12b71cddb22241be9d6654c65e94f5985c5488dee396916f/DbContext.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
