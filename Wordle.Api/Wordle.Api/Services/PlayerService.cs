@@ -40,6 +40,7 @@ namespace Wordle.Api.Services
             }
             else
             {
+
                 player = new()
                 {
                     Name = playerName,
