@@ -67,4 +67,16 @@ public class PlayerController : ControllerBase
         return BadRequest();
 
     }
+
+    [HttpGet("GetTopPlayers")]
+    public async Task<IEnumerable<Player>> TopPlayers()
+    {
+        return await _PlayerService.GetTopPlayers(10);
+    }
+
+    [HttpPost]
+    public async Task<Player> AddPlayer([FromBody] PlayerDto player)
+    {
+        return await _PlayerService.AddPlayer(player.Name, (int)player.GameCount, (double)player.AverageAttempts);
+    }
 }
