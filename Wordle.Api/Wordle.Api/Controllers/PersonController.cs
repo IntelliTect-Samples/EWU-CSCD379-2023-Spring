@@ -70,7 +70,7 @@ public class PlayerController : ControllerBase
 
     [HttpGet("GetTopPlayers")]
     public async Task<IEnumerable<Player>> TopPlayers()
-    {
+    { 
         return await _PlayerService.GetTopPlayers(10);
     }
 
