@@ -22,7 +22,7 @@
     <v-btn
       @click="newGame"
       @keyup.enter="checkGuess"
-      color="secondary"
+      color="cyan"
       :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status !== WordleGameStatus.Active"
     >

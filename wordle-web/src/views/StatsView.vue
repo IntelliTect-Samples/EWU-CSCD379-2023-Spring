@@ -1,11 +1,11 @@
 <template>
 <v-card class="mx-auto mt-9" width="475px" color="cyan">
-    <v-card color="yellow-lighten-1">
+    <v-card color="yellow-lighten-1" style="border: 1px solid red">
         <v-card-title>Statistics</v-card-title>
     </v-card>
 
     <v-card v-for="i in 10" >
-        <v-card color = cyan>
+        <v-card color=cyan style="border: 3px solid red">
             <v-card-title>Date: {{ date }}</v-card-title>
         </v-card>
             <v-list>
