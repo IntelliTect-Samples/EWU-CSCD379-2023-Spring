@@ -92,36 +92,7 @@ namespace Wordle.Api.Services
                     .ToList()
             );
 
-        }
-
-        // Get last 10 days method
-        public async Task<String> GetLastTenDays() {
-            /*          BY GEORGE! DELETE THIS LATER!!!   */
-            // First, create an array of records 
-            PlayerStatistics[] playerStatistics = new PlayerStatistics[_db.Users.Count()];
-
-            // Second, initialize that array of records
-            foreach (User user in _db.Users)
-            {
-                // 0) Get the players id based on their name 
-                int id = user.UserId;
-                // 1) Get each player name 
-                string userName = user.Name;
-                // 2) Compute games played 
-                int gameCount = await _db.Plays.Where(play => play.UserId == id).CountAsync();
-                // 3) Compute average attempts
-                double avgAttempts = await _db.Plays.Where(play => play.UserId == id).AverageAsync(play => play.Attempts);
-                // 4) Compute average seconds
-                double avgSeconds = await _db.Plays.Where(play => play.UserId == id).AverageAsync(play => play.Seconds);
-
-                playerStatistics.Append(new PlayerStatistics(userName, gameCount, avgAttempts, avgSeconds));
-
-
-            }
-            return JsonConvert.SerializeObject
-            (playerStatistics.OrderBy((stats) => stats.AvgAttempts)
-                .OrderByDescending((stats) => stats.GameCount).Take(10).ToList());
-        }
+        }     
     }
 }
 
