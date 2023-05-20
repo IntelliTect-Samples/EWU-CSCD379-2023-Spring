@@ -51,7 +51,6 @@ import type { PlayerService } from '@/scripts/Services/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import { watch } from 'vue'
 import ScoreDialog from '@/components/ScoreDialog.vue'
-import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 let validGuesses = new Array<string>()
