@@ -32,4 +32,5 @@ import { Services } from '@/scripts/Services/services'
 import type { PlayerService } from '@/scripts/Services/playerService'
 
 const playerService = inject(Services.PlayerService) as PlayerService
+playerService.refreshPlayerFromServerAsync()
 </script>
