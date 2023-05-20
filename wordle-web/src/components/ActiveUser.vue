@@ -1,12 +1,12 @@
 <template>
-  <v-btn @click="showDialog = true">
+  <v-btn @click="showDialog = true" color="cyan-darken-3">
     {{ playerService.player.name }}
   </v-btn>
   <v-dialog :model-value="showDialog" @update:model-value="close" persistent>
     <v-card>
       <v-card-text>
         Set or change your username:
-        <v-text-field ref="$input" v-model="newName" @keyup.enter="confirm" />
+        <v-text-field ref="$input" v-model="newName" @keyup.enter="confirm" color="cyan" />
       </v-card-text>
       <v-card-actions>
         <v-spacer> </v-spacer>
