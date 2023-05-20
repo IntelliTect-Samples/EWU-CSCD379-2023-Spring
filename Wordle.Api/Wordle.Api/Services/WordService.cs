@@ -9,15 +9,51 @@ namespace Wordle.Api.Services
     {
         private readonly AppDbContext _db;
 
+        private record WordStatistics(
+            string Date, 
+            string Word, 
+            bool IsPlayed, 
+            int GameCount, 
+            double AvgAttempts, 
+            double AvgSeconds
+            );
+
         public WordService(AppDbContext db)
         {
             _db = db;
         }
 
-        public async Task<string> GetWordOfDayLastTenDays() {
-            List<string> wordOfDayTenDays = new ();  
+        private async Task<WordStatistics> GetWordStats(string userName, DateTime date) {
+            string word = await GetWordOfDay(date); 
+            // Take a word as input and return the following: # of games that have been played
+            int wordId = _db.Words.Where((w) => w.Text.Equals(word)).First().WordId;
+            int userId = _db.Users.Where((u) => u.Name.Equals(userName)).First().UserId;
+            IQueryable<Play> play = _db.Plays.Where(p => wordId == p.WordId);
+            bool playExists = play.Any(); 
+            WordStatistics wordStatistics = new(
+                    // Date
+                    date.ToString(),
+                    // Word
+                    word,
+                    //IsPlayed: If Exists a row in which the playerId
+                    _db.Plays.Any((p) => p.UserId == userId && p.WordId == wordId),
+                    // GameCount
+                    playExists ? play.Count() : 0,
+                    // AvgAttempts 
+                    playExists ? play.Average(p => p.Attempts) : 0,
+                    playExists ? play.Average(p => p.Attempts) : 0
+                ) ; 
+            return wordStatistics;
+            
+
+        
+        }
+
+        public async Task<string> GetWordOfDayLastTenDays(string userName) {
+            List<WordStatistics> wordOfDayTenDays = new ();  
             for (int i = 0; i > -10; i--) {
-                wordOfDayTenDays.Add(await GetWordOfDay(DateTime.Now.AddDays(i)));
+      
+                wordOfDayTenDays.Add(await GetWordStats("Mickey Mouse", DateTime.Now.AddDays(i)));
 
 
             }

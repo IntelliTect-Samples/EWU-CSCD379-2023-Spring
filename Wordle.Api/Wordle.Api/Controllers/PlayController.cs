@@ -19,12 +19,6 @@ namespace Wordle.Api.Controllers
             return await _playService.GetTopTenPlayers();
         }
 
-        [HttpGet("GetLastTenDays")]
-        public async Task<string> GetLast10Days()
-        {
-            return await _playService.GetLastTenDays();
-        }
-
         [HttpPost("InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer")]
         public async Task<string> InsertPlay_AndIfPlayerDoesNotExist_InsertPlayer([FromBody] PlayDto play)
         {
