@@ -3,7 +3,7 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center" style="font-weight:900">Wordle Mind Bender</div>
+  <div class="text-h4 text-center" style="font-weight:900">Wordle Practice</div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -89,7 +89,7 @@ function newGame() {
   overlay.value = true
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
-    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    apiPath = `/Word/WordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
