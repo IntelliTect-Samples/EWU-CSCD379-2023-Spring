@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="800">
+  <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="400">
     <v-card>
       <div class="d-flex justify-center pa-2 bg-primary text-h6">
         You {{ gameResult?.wasGameWon ? 'Won' : 'Lost' }} Word of the Day
@@ -12,35 +12,45 @@
           <v-col cols="3">{{ duration }}</v-col>
         </v-row>
         <hr />
-        <v-row>
-          <v-col cols="3">Date</v-col>
-          <v-col cols="1"> </v-col>
-          <v-col cols="2">Plays</v-col>
-          <v-col cols="2"> Guesses </v-col>
-          <v-col cols="4">Time </v-col>
-        </v-row>
-        <v-row v-for="stat in stats" :key="stat.date.toString()" dense>
-          <v-col cols="3">{{ stat.date.getMonth() + 1 }}/{{ stat.date.getDate() }}</v-col>
-          <v-col cols="1">
-            <v-icon v-if="stat.hasUserPlayed" icon="mdi-check" color="green"></v-icon>
-            <v-icon v-if="stat.hasUserPlayed" icon="mdi-circle" color="green"></v-icon>
-          </v-col>
-          <v-col cols="2">{{ stat.numberOfPlays }}</v-col>
-          <v-col cols="2">
-            <span v-if="stat.numberOfPlays > 0">
-              {{ stat.averageAttempts }}
-            </span>
-          </v-col>
-          <v-col cols="4">
-            <span v-if="stat.numberOfPlays > 0">
-              {{ formatTime(stat.averageDurationInSeconds) }}
-            </span>
-          </v-col>
-        </v-row>
+        <v-table density="compact">
+          <thead>
+            <tr>
+              <td class="text-left" cols="2">Date</td>
+              <td class="text-center">Plays</td>
+              <td class="text-center">Guesses</td>
+              <td class="text-right">Time</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              @click="() => playDay(stat.date)"
+              v-for="stat in stats"
+              :key="stat.date.toString()"
+              dense
+            >
+              <td>
+                <v-icon v-if="stat.hasUserPlayed" icon="mdi-check-decagram" color="green"></v-icon>
+                <v-icon v-else icon="mdi-decagram-outline" color="gray"></v-icon>
+                <span class="ml-2">{{ stat.date.getMonth() + 1 }}/{{ stat.date.getDate() }}</span>
+              </td>
+              <td class="text-center">{{ stat.numberOfPlays }}</td>
+              <td class="text-center">
+                <span v-if="stat.numberOfPlays > 0">
+                  {{ stat.averageAttempts.toFixed(1) }}
+                </span>
+              </td>
+              <td class="text-right">
+                <span v-if="stat.numberOfPlays > 0">
+                  {{ formatTime(stat.averageDurationInSeconds) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn @click="close" variant="elevated" color="primary"> Play Again </v-btn>
+        <v-btn @click="playRandom" variant="elevated" color="primary"> Play Random </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -52,6 +62,8 @@ import { computed, ref, type Ref } from 'vue'
 import { formatTime } from '@/scripts/helpers'
 import Axios from 'axios'
 import { watch } from 'vue'
+import router from '@/router'
+import type { WordOfTheDayStats } from '@/scripts/wordOfTheDayStats'
 
 const props = defineProps<{
   modelValue: boolean
@@ -68,6 +80,11 @@ watch(
   }
 )
 
+function playDay(date: Date) {
+  router.push({ name: 'wordOfTheDay', query: { date: date.toLocaleDateString() } })
+  close()
+}
+
 const stats: Ref<Array<WordOfTheDayStats>> = ref([])
 
 const duration = computed(() => {
@@ -77,6 +94,11 @@ const duration = computed(() => {
 const emit = defineEmits<{
   (e: 'update:model-value', value: boolean): void
 }>()
+
+function playRandom() {
+  router.push({ name: 'wordle' })
+  close()
+}
 
 function close() {
   emit('update:model-value', false)
@@ -92,12 +114,11 @@ function refreshStats() {
     console.log(stats.value)
   })
 }
-
-interface WordOfTheDayStats {
-  date: Date
-  averageDurationInSeconds: number
-  averageAttempts: number
-  numberOfPlays: number
-  hasUserPlayed: boolean
-}
 </script>
+
+<style scoped>
+/*Cursor on row should be pointer*/
+tbody tr:hover {
+  cursor: pointer;
+}
+</style>

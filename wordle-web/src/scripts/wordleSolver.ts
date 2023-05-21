@@ -190,7 +190,7 @@ export class WordleSolver {
         }
       }
       if (validWords.length > 0) {
-        console.log(`Found ${validWords.length} words at ${i} letters`)
+        //console.log(`Found ${validWords.length} words at ${i} letters`)
         // We found a word that contains all the letters, now find the word that will eliminate the most words
         break
       }
