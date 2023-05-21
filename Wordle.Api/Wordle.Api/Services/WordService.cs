@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -63,6 +64,65 @@ namespace Wordle.Api.Services
             await _db.SaveChangesAsync();
             return word;
         }
+
+        public async Task<IEnumerable<DayResultsDto>> GetLastTenDays(TimeSpan offset, Guid playerId, DateTime? date = null)
+        {
+            
+            date = DateTime.UtcNow;//force date = now
+            
+            var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);//local date
+            
+            List<DayResultsDto> lastTenDays = new List<DayResultsDto>();//list of days to be returned
+
+            for (var i = 0; i < 10; i++)//for the last ten days
+            {
+                var localDate = localDateTime.Date.AddDays(-i);//day minus days to check backwards
+
+                //Was there a word on that day
+                var wordOfThatDay = await _db.DateWords
+                    .Include(f => f.Word)
+                    .FirstOrDefaultAsync(f => f.Date == localDate);
+
+                if (wordOfThatDay != null)
+                {//if there was a game played, get the results
+                    var dayPlays = await _db.Plays
+                        .Where(plays => plays.Date == localDate)
+                        .ToListAsync();
+                    
+                    var didPlay = await _db.Plays
+                        .AnyAsync(plays => plays.PlayerId == playerId);
+                    if(dayPlays.Count > 0)
+                    {
+                        var dayResults = new DayResultsDto()
+                        {//word exists and has plays
+                            NumPlays = dayPlays.Count,
+                            AvgSeconds = (int)dayPlays.Average(plays => plays.Seconds),
+                            AvgAttempts = (int)dayPlays.Average(plays => plays.Attempts),
+                            Date = localDate,
+                            DidPlay = true
+                        };
+                        lastTenDays.Add(dayResults);
+                    } else
+                    {//word existed but nobody played it
+                        var dayResults = new DayResultsDto()
+                        {
+                            Date = localDate
+                        };
+                        lastTenDays.Add(dayResults);
+                    }
+                    
+                }else
+                {//game was not played this day
+                    var dayResults = new DayResultsDto()
+                    {
+                        Date = localDate
+                    };
+                    lastTenDays.Add(dayResults);
+                }
+            }
+            return lastTenDays;
+        }
+
 
         public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {

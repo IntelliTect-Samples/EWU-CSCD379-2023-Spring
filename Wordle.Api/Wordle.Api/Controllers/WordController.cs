@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Wordle.Api.Controllers
 {
@@ -45,6 +46,12 @@ namespace Wordle.Api.Controllers
         public async Task<string> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
         {
             return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
+        }
+
+        [HttpGet("LastTenDays")]
+        public async Task<IEnumerable<DayResultsDto>> GetLastTenDays(double offsetInHours, Guid playerId, DateTime? date = null)
+        {
+            return await _wordService.GetLastTenDays(TimeSpan.FromHours(offsetInHours), playerId);
         }
     }
 }    
