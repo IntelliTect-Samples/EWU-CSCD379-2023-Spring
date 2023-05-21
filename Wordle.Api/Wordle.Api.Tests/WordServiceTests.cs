@@ -22,7 +22,7 @@ namespace Wordle.Api.Tests
             var word = await service.GetRandomWord();
 
             Assert.IsNotNull(word);
-            Assert.AreEqual(5, word.Length);
+            Assert.AreEqual(5, word.Text.Length);
         }
     }
 }
