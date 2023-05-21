@@ -66,7 +66,7 @@ import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
-import { ref } from 'vue'
+//import { ref } from 'vue'
 import ActiveUser from './components/ActiveUser.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
@@ -75,7 +75,7 @@ provide(Services.Display, display)
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
-const gameGuide = ref(true)
+//const gameGuide = ref(true)
 
 const theme = useTheme()
 
