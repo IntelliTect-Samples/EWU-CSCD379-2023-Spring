@@ -4,6 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import LandingPageView from '../views/LandingPageView.vue'
 import HowToPlayViewVue from '@/views/HowToPlayView.vue'
+import DailyWordListView from '../views/DailyWordListView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,7 +35,12 @@ const router = createRouter({
       component: LeaderboardView
     },
     {
-      path: '/wordoftheday',
+      path: '/dailyWordList',
+      name: 'dailyWordList',
+      component: DailyWordListView
+    },
+    {
+      path: '/wordOfTheDay',
       name: 'wordoftheday',
       component: WordleView
     }
