@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar :elevation="3">
+    <v-app-bar :elevation="3" v-if="route.path != '/'">
       <template v-slot>
         <v-app-bar-title>
           <RouterLink to="/">
@@ -38,7 +38,7 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="animated-background">
       <RouterView />
     </v-main>
   </v-app>
@@ -52,6 +52,9 @@ import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
+import { useRoute } from 'vue-router'
+
+let route = useRoute()
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())

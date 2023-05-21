@@ -9,6 +9,29 @@ a,
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+    background-color: hsla(160, 100%, 37%, 0.98);
+  }
+}
+
+.text-shadow {
+  text-shadow: 0px 0px 10px #ffffff66;
+  color: white;
+}
+
+.animated-background {
+  background: linear-gradient(-45deg, #ee7752aa, #e73c7eaa, #23a6d5aa, #23d5abaa);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
