@@ -1,6 +1,6 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
+  <v-overlay :model-value="overlay" class="align-center justify-center" scrim="black" persistent>
+    <WordleFlippingLetters></WordleFlippingLetters>
   </v-overlay>
 
   <div class="text-h4 text-center">
@@ -73,6 +73,7 @@ import ScoreDialog from '@/components/ScoreDialog.vue'
 import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
+import WordleFlippingLetters from '@/components/WordleFlippingLetters.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -127,7 +128,7 @@ function newGame() {
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 2000)
     })
     .catch((error) => {
       console.log(error)
