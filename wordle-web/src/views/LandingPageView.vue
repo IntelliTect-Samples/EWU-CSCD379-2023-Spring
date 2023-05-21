@@ -3,10 +3,21 @@
     <v-row align="center" justify="center">
       <transition name="fade">
         <v-col cols="12" sm="8" md="6" lg="4" xl="3" v-if="showContent">
-          <h1 :class="[{'fade-in': fadeIn, 'fade-out': fadeOut}, 'h1', 'text-center']">Welcome to a Wordle Clone Website</h1>
-          <img src="../assets/eastern-washington-eagles-logo@logotyp.us.svg" alt="Logo" :class="[{'fade-in': fadeIn, 'fade-out': fadeOut}, 'logo', 'mx-auto']">
+          <h1 :class="[{ 'fade-in': fadeIn, 'fade-out': fadeOut }, 'h1', 'text-center']">
+            Welcome to a Wordle Clone Website
+          </h1>
+          <img
+            src="../assets/eastern-washington-eagles-logo@logotyp.us.svg"
+            alt="Logo"
+            :class="[{ 'fade-in': fadeIn, 'fade-out': fadeOut }, 'logo', 'mx-auto']"
+          />
           <a href="/howToPlay">
-            <v-btn v-if="showContent" color="primary" :class="[{'fade-in': fadeIn, 'fade-out': fadeOut}, 'fade-in']">How to Play</v-btn>
+            <v-btn
+              v-if="showContent"
+              color="primary"
+              :class="[{ 'fade-in': fadeIn, 'fade-out': fadeOut }, 'fade-in']"
+              >How to Play</v-btn
+            >
           </a>
         </v-col>
       </transition>
@@ -15,34 +26,34 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 
 export default {
   setup() {
-    const showContent = ref(false);
-    const fadeIn = ref(false);
-    const fadeOut = ref(false);
+    const showContent = ref(false)
+    const fadeIn = ref(false)
+    const fadeOut = ref(false)
 
     onMounted(() => {
       setTimeout(() => {
-        showContent.value = true;
-        fadeIn.value = true;
+        showContent.value = true
+        fadeIn.value = true
         setTimeout(() => {
-          fadeOut.value = true;
+          fadeOut.value = true
           setTimeout(() => {
-            window.location.href = '/wordle';
-          }, 2000);
-        }, 7000); 
-      }); 
-    });
+            window.location.href = '/wordle'
+          }, 2000)
+        }, 7000)
+      })
+    })
 
     return {
       showContent,
       fadeIn,
-      fadeOut,
-    };
-  },
-};
+      fadeOut
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -86,7 +97,8 @@ export default {
   font-size: 3em; /* Set the base font size for the heading */
 }
 
-@media (max-width: 600px) { /* Adjust the font size for smaller screens */
+@media (max-width: 600px) {
+  /* Adjust the font size for smaller screens */
   .h1 {
     font-size: 1.3em;
   }
