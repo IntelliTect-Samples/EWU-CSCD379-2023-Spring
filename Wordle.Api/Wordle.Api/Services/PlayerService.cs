@@ -57,6 +57,30 @@ namespace Wordle.Api.Services
                     player.GameCount++;
                     await _db.SaveChangesAsync();
                 }
+
+                if(dto.WasWordOfTheDay) 
+                {
+                    DateWord wordPlayed = await _db.DateWords
+                        .OrderBy(w => w.Date)
+                        .FirstAsync(w => w.Word.Text == dto.WordPlayed);
+
+                    int wordId = wordPlayed.WordId;
+                    int dateWordId = wordPlayed.DateWordId;
+
+                    Plays plays = new()
+                    {
+                        PlayerId = dto.PlayerId,
+                        WordId = wordId,
+                        DateWordId = dateWordId,
+                        Seconds = dto.DurationInSeconds,
+                        Attempts = dto.Attempts,
+                        Date = dto.WordDate
+                    };
+                    _db.Plays.Add(plays);
+                    await _db.SaveChangesAsync();
+                }
+                
+
                 return player;
             }
             throw new ArgumentException("Player Id not found");

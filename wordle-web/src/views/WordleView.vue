@@ -3,7 +3,8 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div v-if="route.path == '/wordoftheday'" class="text-h4 text-center">Today's Wordle</div>
+  <div v-else class="text-h4 text-center">Wordle Mind Bender</div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -151,12 +152,22 @@ watch(showScoreDialog, (value) => {
 })
 
 function sendGameResult() {
+  console.log('Send Game Results')
+  console.log(localStorage.getItem('userId'))
   const gameResult = new GameResult()
   gameResult.playerId = playerService.player.playerId
   gameResult.attempts = game.guesses.filter((f) => f.isFilled).length
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
+  if (route.path == '/wordoftheday') {
+    gameResult.wasWordOfTheDay = true
+    if (route.query.date) {
+      gameResult.wordDate = new Date(`${route.query.date}`)
+    } else {
+      gameResult.wordDate = new Date()
+    }
+  }
 
   console.log(gameResult)
 
