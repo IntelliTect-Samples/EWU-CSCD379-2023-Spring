@@ -1,7 +1,35 @@
 <template>
   <v-card>
     <v-card-title>
-      <h3>Wordle Helper</h3>
+      <v-row>
+        <v-col cols="auto">
+          <h3>Wordle Helper</h3>
+        </v-col>
+        <v-spacer />
+        <v-col cols="auto">
+          <v-btn
+            size="small"
+            class="ml-1"
+            @click="wordClick(game.solver.bestGuessOfValidWords)"
+            color="green-darken-2"
+            elevation="4"
+            variant="tonal"
+          >
+            {{ game.solver.bestGuessOfValidWords }}
+          </v-btn>
+          <v-btn
+            size="small"
+            class="ml-1"
+            @click="wordClick(game.solver.bestGuessOfInvalidWords)"
+            color="yellow-darken-2"
+            elevation="4"
+            variant="tonal"
+          >
+            {{ game.solver.bestGuessOfInvalidWords }}
+          </v-btn>
+        </v-col>
+      </v-row>
+
       <div v-if="game.solver.getLetterUsages().length > 0">
         <v-btn
           size="small"
