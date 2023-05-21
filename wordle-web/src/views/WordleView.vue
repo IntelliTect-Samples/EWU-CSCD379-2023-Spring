@@ -11,9 +11,9 @@
     <span v-else>Wordle Mind Bender</span>
   </div>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+  <GameBoard :game="game" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+  <GameKeyboard :guessedLetters="game.guessedLetters" />
 
   <v-row class="justify-center">
     <v-btn
