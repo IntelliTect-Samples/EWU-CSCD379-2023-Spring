@@ -22,42 +22,27 @@
           <v-list>
             <v-list-item>
               <v-list-item-title
-                ><RouterLink to="/instructions">How To Play</RouterLink>
-                </v-list-item-title
+                ><RouterLink to="/instructions">How To Play</RouterLink></v-list-item-title
               >
-
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/">Play Again</RouterLink>
               </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
               <v-list-item-title
                 ><RouterLink to="/statistics">Statistics</RouterLink></v-list-item-title
               >
             </v-list-item>
-
             <v-list-item>
-              <v-list-item-title>
-                <RouterLink to="/about">About</RouterLink>
-              </v-list-item-title>
+              <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
-
-            <v-list-item>
-              <v-list-item-title>
-                <RouterLink to="/wordstats">Word Stats</RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-
-
           </v-list>
         </v-menu>
       </template>
