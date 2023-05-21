@@ -151,11 +151,14 @@
 - Handling multi-threading issues with creating the word of the day.
 
 ### Lecture 14. 5/18:
-- Service mocks in .NET
+- Unique indexes
+- Reusing a view for multiple routes
 - Parsing query parameters to determine game type
+- Get method query parameters on API endpoints
 - Load Word of the day in App
 - Integration testing
-- Responsive Design Patterns
+
+### Holdover Topics: 
 - IsOnline flag
 - Client unit testing
 - Mocking API calls on the client

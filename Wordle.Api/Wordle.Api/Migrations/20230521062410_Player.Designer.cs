@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230518213241_DateWordUniqueDate")]
-    partial class DateWordUniqueDate
+    [Migration("20230521062410_Player")]
+    partial class Player
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
