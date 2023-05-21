@@ -1,5 +1,5 @@
 <template>
-  <h1>{{gameName}}</h1>
+  <h1>{{ gameName }}</h1>
 
   <div class="text-right">
     <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition">
@@ -114,10 +114,10 @@ function addWord() {
     })
 }
 
-let gameName = "Wordle Mind Bender"
+let gameName = 'Wordle Mind Bender'
 let apiPath = 'word'
 if (route.path == '/wordoftheday') {
-  gameName = "wordle of the day"
+  gameName = 'wordle of the day'
   apiPath = `word/GetWordOfDay`
 }
 

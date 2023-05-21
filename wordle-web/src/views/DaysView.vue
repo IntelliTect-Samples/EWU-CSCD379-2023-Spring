@@ -18,7 +18,11 @@
       </thead>
       <tbody>
         <tr v-for="item in Days" :key="item.name">
-          <td><router-link to="/wordoftheday"><v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn></router-link></td>
+          <td>
+            <router-link to="/wordoftheday"
+              ><v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn></router-link
+            >
+          </td>
           <td>{{ item.isPlayed }}</td>
           <td>{{ item.timesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
@@ -35,13 +39,12 @@ import Axios from 'axios'
 import { ref } from 'vue'
 import $router from '../router/index'
 
-
 const overlay = ref(true)
 
 var Days: any[] = []
 
-if(localStorage.name == null){
-  localStorage.name = "Guest"
+if (localStorage.name == null) {
+  localStorage.name = 'Guest'
 }
 
 function goBack() {
@@ -52,8 +55,7 @@ function saveDate(date: any) {
   localStorage.date = date
 }
 
-
-Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`) 
+Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`)
   .then((response) => {
     response.data.forEach((day: any) => {
       Days.push({
