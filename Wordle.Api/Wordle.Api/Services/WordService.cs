@@ -51,6 +51,9 @@ public class WordService
         return await previousGames.Take(10).ToArrayAsync();
     }
 
+    public bool CheckIfPlayed(DateTime date, int id)
+        => _db.PlayedGames.Where(i => i.Date == date).Select(i => i.PlayerId).Contains(id);
+
     private void StartTimer()
     {
         TimeSpan day = new TimeSpan(24, 00, 00);

@@ -23,10 +23,16 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetRandomWord();
         }
 
-        [HttpGet("GetPreviousWords")]
+        [HttpGet("GetPreviousGames")]
         public async Task<WordService.PreviousGame[]> GetPreviousGamesAsync()
         {
             return await _wordService.GetPreviousGamesAsync();
+        }
+
+        [HttpGet("CheckIfPlayed")]
+        public bool CheckIfPlayed(DateTime date, int id)
+        {
+            return _wordService.CheckIfPlayed(date, id);
         }
 
         [HttpGet("GetManyWords")]
