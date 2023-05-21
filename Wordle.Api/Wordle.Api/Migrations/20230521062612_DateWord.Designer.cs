@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230511040657_Player")]
-    partial class Player
+    [Migration("20230521062612_DateWord")]
+    partial class DateWord
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,30 @@ namespace Wordle.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
+                {
+                    b.Property<int>("DateWordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateWordId"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("WordId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DateWordId");
+
+                    b.HasIndex("Date")
+                        .IsUnique();
+
+                    b.HasIndex("WordId");
+
+                    b.ToTable("DateWords");
+                });
 
             modelBuilder.Entity("Wordle.Api.Data.Player", b =>
                 {
@@ -70,6 +94,22 @@ namespace Wordle.Api.Migrations
                     b.HasKey("WordId");
 
                     b.ToTable("Words");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
+                {
+                    b.HasOne("Wordle.Api.Data.Word", "Word")
+                        .WithMany("DateWords")
+                        .HasForeignKey("WordId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.Word", b =>
+                {
+                    b.Navigation("DateWords");
                 });
 #pragma warning restore 612, 618
         }

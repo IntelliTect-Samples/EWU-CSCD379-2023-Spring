@@ -9,7 +9,10 @@
       v-for="key in keyboardRow"
       :key="key.char"
       cols="auto"
-      :class="{ 'ml-1 px-0': display.xs }"
+      :class="{
+        'ml-1 px-0': display.xs,
+        'ml-1 px-1': display.sm
+      }"
     >
       <LetterButton :letter="key" @click="letterClick(key)" />
     </v-col>

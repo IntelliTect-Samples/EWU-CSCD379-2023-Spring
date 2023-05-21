@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class DateWord : Migration
+    public partial class Player : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,27 @@ namespace Wordle.Api.Migrations
                         principalColumn: "WordId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Players",
+                columns: table => new
+                {
+                    PlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GameCount = table.Column<int>(type: "int", nullable: false),
+                    AverageAttempts = table.Column<double>(type: "float", nullable: false),
+                    AverageSecondsPerGame = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Players", x => x.PlayerId);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DateWords_Date",
+                table: "DateWords",
+                column: "Date",
+                unique: true);
+
             migrationBuilder.CreateIndex(
                 name: "IX_DateWords_WordId",
                 table: "DateWords",
@@ -41,6 +62,9 @@ namespace Wordle.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DateWords");
+
+            migrationBuilder.DropTable(
+                name: "Players");
         }
     }
 }
