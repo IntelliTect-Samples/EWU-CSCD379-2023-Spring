@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Services
@@ -6,13 +7,14 @@ namespace Wordle.Api.Services
     public class WordService
     {
         private readonly AppDbContext _db;
+        private static readonly object _WordOfTheDayLock = new object();
 
         public WordService(AppDbContext db)
         {
             _db = db;
         }
 
-        public async Task<string> GetRandomWord()
+        public async Task<Word> GetRandomWord()
         {
             var count = await _db.Words.CountAsync(word => word.IsCommon);
             var index = new Random().Next(count);
@@ -20,7 +22,7 @@ namespace Wordle.Api.Services
                 .Where(word => word.IsCommon)
                 .Skip(index)
                 .FirstAsync();
-            return word.Text;
+            return word;
         }
 
         public async Task<IEnumerable<Word>> GetSeveralWords(int? count)
@@ -91,7 +93,7 @@ namespace Wordle.Api.Services
                     {
                         return todaysLatestWord.Word.Text;
                     }
-                    var word = GetRandomWord().Result;
+                    Word word = GetRandomWord().Result;
 
                     var dateWord = new DateWord
                     {
