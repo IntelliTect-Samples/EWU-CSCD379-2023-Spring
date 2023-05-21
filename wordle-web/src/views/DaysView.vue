@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th class="text-left">Date</th>
+          <th class="text-left">Is Played</th>
           <th class="text-left">Times Played</th>
           <th class="text-left">Average Attempts</th>
           <th class="text-left">Average Seconds</th>
@@ -18,6 +19,7 @@
       <tbody>
         <tr v-for="item in Days" :key="item.name">
           <td><router-link to="/wordoftheday"><v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn></router-link></td>
+          <td>{{ item.isPlayed }}</td>
           <td>{{ item.timesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
           <td>{{ item.avgSeconds }}</td>
@@ -50,11 +52,13 @@ function saveDate(date: any) {
   localStorage.date = date
 }
 
-Axios.get('GetWordOfDayTenDays') 
+
+Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`) 
   .then((response) => {
     response.data.forEach((day: any) => {
       Days.push({
         date: `${day.Date}`,
+        isPlayed: `${day.IsPlayed}`,
         timesPlayed: `${day.GameCount}`,
         avgAttempts: `${day.AvgAttempts.toFixed(2)}`,
         avgSeconds: `${day.AvgSeconds.toFixed(2)}`
