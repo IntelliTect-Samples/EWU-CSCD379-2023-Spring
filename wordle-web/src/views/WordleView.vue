@@ -119,7 +119,7 @@ let OldDate = localStorage.date
 if (route.path == `/wordoftheday`) {
   gameName = 'wordle of the day'
   apiPath = `word/GetWordOfDay`
-}else if(route.path == '/pastwordoftheday'){
+} else if (route.path == '/pastwordoftheday') {
   gameName = 'wordle of the day'
   let date: Date = new Date()
   offset = OldDate.getDay() - date.getDay()
