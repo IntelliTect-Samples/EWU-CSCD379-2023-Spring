@@ -3,7 +3,6 @@ import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import InstructionsView from '../views/InstructionsView.vue'
-import DailyWordleView from '../views/DailyWordleView.vue'
 import LastTenWordsView from '../views/LastTenWordsView.vue'
 
 const router = createRouter({
@@ -30,9 +29,9 @@ const router = createRouter({
       component: InstructionsView
     },
     {
-      path: '/daily-wordle',
-      name: 'daily-wordle',
-      component: DailyWordleView
+      path: '/wordoftheday',
+      name: 'wordoftheday',
+      component: WordleView
     },
     {
       path: '/last-ten-words',
