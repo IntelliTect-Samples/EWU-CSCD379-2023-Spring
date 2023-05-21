@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref } from 'vue'
-// hi
+
 let overlay = ref(false)
 
 function addWord() {
