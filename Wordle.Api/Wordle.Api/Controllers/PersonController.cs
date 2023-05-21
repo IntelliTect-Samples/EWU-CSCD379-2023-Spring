@@ -20,7 +20,6 @@ public class PlayerController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<PlayerDto>> Get(Guid playerId)
     {
-        // hi
         Player? player = await _PlayerService.GetAsync(playerId);
 
         if (player is not null)
