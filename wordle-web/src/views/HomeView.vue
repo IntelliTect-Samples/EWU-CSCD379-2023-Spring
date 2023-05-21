@@ -16,8 +16,8 @@
           :min-width="150"
           :min-height="50"
           class="text-h6 rounded-xl elevation-0"
-          to="/leaderboard"
-          >Guide</v-btn
+          to="/wordoftheday"
+          >Today's Puzzle</v-btn
         >
         <v-divider vertical :thickness="20" v-if="!display.xs"></v-divider>
         <v-col cols="12" v-if="display.xs"></v-col>
