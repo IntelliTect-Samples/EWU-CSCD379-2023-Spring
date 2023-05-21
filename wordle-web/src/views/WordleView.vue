@@ -86,12 +86,12 @@ onUnmounted(() => {
 
 function newGame() {
   overlay.value = true
-  let apiPath = "word"
-  if ( route.path == "/wordoftheday" ) {
-     apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
-     if ( route.query.date ) {
+  let apiPath = 'word'
+  if (route.path == '/wordoftheday') {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    if (route.query.date) {
       apiPath += `&date=${route.query.date}`
-     }
+    }
   }
   Axios.get(apiPath)
     .then((response) => {
