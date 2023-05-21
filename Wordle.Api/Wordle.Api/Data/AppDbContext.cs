@@ -13,6 +13,7 @@ namespace Wordle.Api.Data
 
         public DbSet<Word> Words => Set<Word>();
         public DbSet<Player> Players => Set<Player>();
+        public DbSet<PlayedGame> PlayedGames => Set<PlayedGame>();
         public DbSet<DateWord> DateWords => Set<DateWord>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

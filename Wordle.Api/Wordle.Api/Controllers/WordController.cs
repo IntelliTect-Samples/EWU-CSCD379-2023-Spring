@@ -24,9 +24,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetPreviousWords")]
-        public string[] GetPreviousWords()
+        public async Task<WordService.PreviousGame[]> GetPreviousGamesAsync()
         {
-            return _wordService.GetPreviousWords();
+            return await _wordService.GetPreviousGamesAsync();
         }
 
         [HttpGet("GetManyWords")]
