@@ -69,14 +69,12 @@ public class WordService
     {
         if (date is null)
         {
-            date = DateTime.UtcNow;
+            date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
         }
 
-        var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
-        var localDate = localDateTime.Date;
         var todaysWord = await _db.DateWords
             .Include(f => f.Word)
-            .FirstOrDefaultAsync(f => f.Date == localDate);
+            .FirstOrDefaultAsync(f => f.Date == date);
 
         if (todaysWord != null)
         {
@@ -88,7 +86,7 @@ public class WordService
             {
                 var todaysLatestWord = _db.DateWords
                     .Include(f => f.Word)
-                    .FirstOrDefault(f => f.Date == localDate);
+                    .FirstOrDefault(f => f.Date == date.Value);
 
                 if (todaysLatestWord != null)
                 {
@@ -98,7 +96,7 @@ public class WordService
 
                 var dateWord = new DateWord
                 {
-                    Date = localDate,
+                    Date = date.Value,
                     Word = word
                 };
                 _db.DateWords.Add(dateWord);
@@ -112,7 +110,7 @@ public class WordService
                     {
                         return _db.DateWords
                             .Include(f => f.Word)
-                            .First(f => f.Date == localDate);
+                            .First(f => f.Date == date.Value);
                     }
                 }
                 return dateWord;
