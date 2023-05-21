@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th class="text-left">Date</th>
+          <th class="text-left">Is Played</th>
           <th class="text-left">Times Played</th>
           <th class="text-left">Average Attempts</th>
           <th class="text-left">Average Seconds</th>
@@ -18,6 +19,7 @@
       <tbody>
         <tr v-for="item in Days" :key="item.name">
           <td>{{ item.date }}</td>
+          <td>{{ item.isPlayed }}</td>
           <td>{{ item.timesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
           <td>{{ item.avgSeconds }}</td>
@@ -33,6 +35,10 @@ import Axios from 'axios'
 import { ref } from 'vue'
 import $router from '../router/index'
 
+if (localStorage.name === null) {
+  localStorage.name = 'Guest'
+}
+
 const overlay = ref(true)
 var Days: any[] = []
 
@@ -40,11 +46,12 @@ function goBack() {
   $router.go(-1)
 }
 
-Axios.get('GetWordOfDayTenDays') //might be wrong api call, should call Word/GetWordOfDayTenDays, i.e. wordController's GetWordOfDayTenDays method
+Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`) //might be wrong api call, should call Word/GetWordOfDayTenDays, i.e. wordController's GetWordOfDayTenDays method
   .then((response) => {
     response.data.forEach((day: any) => {
       Days.push({
         date: `${day.Date}`,
+        isPlayed: `${day.IsPlayed}`,
         timesPlayed: `${day.GameCount}`,
         avgAttempts: `${day.AvgAttempts.toFixed(2)}`,
         avgSeconds: `${day.AvgSeconds.toFixed(2)}`

@@ -23,9 +23,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetWordOfDayLastTenDays")]
-        public async Task<string> GetWordOfDayTenDays()
+        public async Task<string> GetWordOfDayTenDays(string userName)
         {
-            return await _wordService.GetWordOfDayLastTenDays("Mickey Mouse");
+            return await _wordService.GetWordOfDayLastTenDays(userName);
         }
 
         [HttpGet]

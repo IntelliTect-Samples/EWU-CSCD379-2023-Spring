@@ -53,7 +53,7 @@ namespace Wordle.Api.Services
             List<WordStatistics> wordOfDayTenDays = new ();  
             for (int i = 0; i > -10; i--) {
       
-                wordOfDayTenDays.Add(await GetWordStats("Mickey Mouse", DateTime.Now.AddDays(i)));
+                wordOfDayTenDays.Add(await GetWordStats(userName, DateTime.Now.AddDays(i)));
 
 
             }
