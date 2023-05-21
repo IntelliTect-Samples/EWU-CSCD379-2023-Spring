@@ -42,6 +42,8 @@ function data() {
     toggleTheme3Dark: () => (theme.global.name.value = 'forestdark')
   }
 }
+
+
 </script>
 
 <style>

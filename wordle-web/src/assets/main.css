@@ -10,3 +10,9 @@ a,
   a:hover {
   }
 }
+
+body {
+  background-image: url('https://c4.wallpaperflare.com/wallpaper/582/155/806/space-space-art-nebula-stars-wallpaper-preview.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
