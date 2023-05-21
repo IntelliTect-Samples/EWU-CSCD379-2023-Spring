@@ -32,9 +32,9 @@
 </template>
 
 <script setup lang="ts">
-import LetterButton from '@/components/LetterButton.vue'
-import { Letter } from '@/scripts/letter'
-import { LetterStatus } from '@/scripts/letter'
+import LetterButton from '../components/LetterButton.vue'
+import { Letter } from '../scripts/letter'
+import { LetterStatus } from '../scripts/letter'
 
 const correct = new Letter('w', LetterStatus.Correct)
 const misplaced = new Letter('i', LetterStatus.Misplaced)
