@@ -14,18 +14,24 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn @click="close" variant="elevated" color="cyan" v-if="gameType === 'word'"> Play Again </v-btn>
-        <v-btn 
-          @click.stop="$router.push('/leaderboard')" 
-          variant="elevated" 
-          color="cyan"
-          v-if="gameType === 'wordoftheday'" > Leaderboard 
+        <v-btn @click="close" variant="elevated" color="cyan" v-if="gameType === 'word'">
+          Play Again
         </v-btn>
-        <v-btn 
-          @click.stop="$router.push('/stats')" 
-          variant="elevated" 
+        <v-btn
+          @click.stop="$router.push('/leaderboard')"
+          variant="elevated"
           color="cyan"
-          v-if="gameType === 'wordoftheday'" > Statistics
+          v-if="gameType === 'wordoftheday'"
+        >
+          Leaderboard
+        </v-btn>
+        <v-btn
+          @click.stop="$router.push('/stats')"
+          variant="elevated"
+          color="cyan"
+          v-if="gameType === 'wordoftheday'"
+        >
+          Statistics
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -59,5 +65,4 @@ const emit = defineEmits<{
 function close() {
   emit('update:model-value', false)
 }
-
 </script>
