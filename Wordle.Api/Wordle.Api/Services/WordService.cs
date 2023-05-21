@@ -38,6 +38,12 @@ public class WordService
 
     }
 
+    public void PlayedAGame(int id, int attempts)
+    {
+        PlayedGame game = new(DateTime.Today, TodaysWord.Text, id, attempts);
+        _db.PlayedGames.Add(game);
+    }
+
     public async Task<PreviousGame[]> GetPreviousGamesAsync()
     {
         IQueryable<PreviousGame> previousGames = 
