@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr v-for="item in Days" :key="item.name">
-          <td>{{ item.date }}</td>
+          <td><router-link to="/wordoftheday"><v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn></router-link></td>
           <td>{{ item.timesPlayed }}</td>
           <td>{{ item.avgAttempts }}</td>
           <td>{{ item.avgSeconds }}</td>
@@ -33,14 +33,24 @@ import Axios from 'axios'
 import { ref } from 'vue'
 import $router from '../router/index'
 
+
 const overlay = ref(true)
+
 var Days: any[] = []
+
+if(localStorage.name == null){
+  localStorage.name = "Guest"
+}
 
 function goBack() {
   $router.go(-1)
 }
 
-Axios.get('GetWordOfDayTenDays') //might be wrong api call, should call Word/GetWordOfDayTenDays, i.e. wordController's GetWordOfDayTenDays method
+function saveDate(date: any) {
+  localStorage.date = date
+}
+
+Axios.get('GetWordOfDayTenDays') 
   .then((response) => {
     response.data.forEach((day: any) => {
       Days.push({

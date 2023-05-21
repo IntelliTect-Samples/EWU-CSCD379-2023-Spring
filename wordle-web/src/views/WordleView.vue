@@ -1,5 +1,5 @@
 <template>
-  <h1>Wordle Mind Bender</h1>
+  <h1>{{gameName}}</h1>
 
   <div class="text-right">
     <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition">
@@ -65,7 +65,9 @@ localStorage.startTime = Date.now()
 
 const guess = ref('')
 const game = reactive(new WordleGame())
+
 const overlay = ref(true)
+
 var dialog = ref(true)
 
 let timerInterval: any = null
@@ -112,8 +114,10 @@ function addWord() {
     })
 }
 
+let gameName = "Wordle Mind Bender"
 let apiPath = 'word'
 if (route.path == '/wordoftheday') {
+  gameName = "wordle of the day"
   apiPath = `word/GetWordOfDay`
 }
 
