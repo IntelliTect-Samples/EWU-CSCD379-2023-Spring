@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Wordle.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class PlayController : ControllerBase
     {
@@ -17,8 +17,8 @@ namespace Wordle.Api.Controllers
             _PlayService = playService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Play>>> GetLastTenDates(DateTime GameDate)
+        [HttpGet("GetLastTenDates")]
+        public async Task<ActionResult<List<Play>>> GetLastTenDates()
         {
             return (await _PlayService.GetLastTenDates());
         }
