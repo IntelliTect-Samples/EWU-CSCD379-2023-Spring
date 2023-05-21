@@ -21,6 +21,9 @@
 
           <v-list width="200">
             <v-list-item>
+              <v-list-item-title><RouterLink to="/instructions">How To Play</RouterLink></v-list-item-title>
+            </v-list-item>
+            <v-list-item>
               <v-list-item-title>
                 <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink>
               </v-list-item-title>
@@ -34,6 +37,10 @@
               <v-list-item-title>
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
+              <v-list-item-title><RouterLink to="/statistics">Statistics</RouterLink></v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
