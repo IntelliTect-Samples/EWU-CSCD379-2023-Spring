@@ -105,7 +105,7 @@ namespace Wordle.Api.Services
                     } else
                     {//word existed but nobody played it
                         var dayResults = new DayResultsDto()
-                        {
+                        {//defaults to 0 and false for all other data
                             Date = localDate
                         };
                         lastTenDays.Add(dayResults);
