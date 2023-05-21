@@ -38,5 +38,5 @@ import { LetterStatus } from '@/scripts/letter'
 
 const correct = new Letter('w', LetterStatus.Correct)
 const misplaced = new Letter('i', LetterStatus.Misplaced)
-const incorrect = new Letter('c', LetterStatus.Wrong)
+const incorrect = new Letter('U', LetterStatus.Wrong)
 </script>
