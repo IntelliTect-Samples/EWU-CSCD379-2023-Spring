@@ -32,7 +32,7 @@ onMounted(() => {
   for (const [index, letter] of letters.entries()) {
     setTimeout(() => {
       letter.classList.push('square2')
-      if (Math.random() > 0.03) {
+      if (Math.random() > 0.33) {
         letter.classList.push('green')
       } else {
         letter.classList.push('yellow')
@@ -111,6 +111,20 @@ div {
 
 .green-switch {
   background-color: green;
-  transition: background-color 0.2s linear;
+  transition: background-color 0.2s ease-in-out;
+  animation: pulse 0.4s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
