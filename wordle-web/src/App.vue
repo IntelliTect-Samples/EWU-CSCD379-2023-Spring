@@ -45,17 +45,16 @@
             </v-list-item>
 
             <v-list-item>
-            <v-list-item-title>
-              <RouterLink :to="{ name: 'statistics' }"> Statistics </RouterLink>
-            </v-list-item-title>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'statistics' }"> Statistics </RouterLink>
+              </v-list-item-title>
             </v-list-item>
-            
+
             <v-list-item>
               <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
-
           </v-list>
         </v-menu>
       </template>

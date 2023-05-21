@@ -1,3 +1,3 @@
 <template>
-    <h1>Add stats here!!</h1>
+  <h1>Add stats here!!</h1>
 </template>
