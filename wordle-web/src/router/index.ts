@@ -26,6 +26,11 @@ const router = createRouter({
       path: '/tutorial',
       name: 'tutorial',
       component: TutorialView
+    },
+    {
+      path: '/wordOfTheDay',
+      name: 'wordOfTheDay',
+      component: WordleView
     }
   ]
 })
