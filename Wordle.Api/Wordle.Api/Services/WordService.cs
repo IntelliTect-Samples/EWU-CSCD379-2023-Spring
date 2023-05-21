@@ -71,6 +71,7 @@ namespace Wordle.Api.Services
             date = DateTime.UtcNow;//force date = now
             
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);//local date
+
             
             List<DayResultsDto> lastTenDays = new List<DayResultsDto>();//list of days to be returned
 
@@ -86,7 +87,7 @@ namespace Wordle.Api.Services
                 if (wordOfThatDay != null)
                 {//if there was a game played, get the results
                     var dayPlays = await _db.Plays
-                        .Where(plays => plays.Date == localDate)
+                        .Where(plays => plays.Date.Date == localDate.Date)
                         .ToListAsync();
                     
                     var didPlay = await _db.Plays
@@ -98,7 +99,7 @@ namespace Wordle.Api.Services
                             NumPlays = dayPlays.Count,
                             AvgSeconds = (int)dayPlays.Average(plays => plays.Seconds),
                             AvgAttempts = (int)dayPlays.Average(plays => plays.Attempts),
-                            Date = localDate,
+                            Date = localDate.Date,
                             DidPlay = true
                         };
                         lastTenDays.Add(dayResults);
@@ -106,7 +107,8 @@ namespace Wordle.Api.Services
                     {//word existed but nobody played it
                         var dayResults = new DayResultsDto()
                         {//defaults to 0 and false for all other data
-                            Date = localDate
+                            NumPlays = dayPlays.Count,
+                            Date = localDate.Date
                         };
                         lastTenDays.Add(dayResults);
                     }
@@ -115,7 +117,8 @@ namespace Wordle.Api.Services
                 {//game was not played this day
                     var dayResults = new DayResultsDto()
                     {//defaults to 0 and false for all other data
-                        Date = localDate
+                        NumPlays = 50,
+                        Date = localDate.Date
                     };
                     lastTenDays.Add(dayResults);
                 }
