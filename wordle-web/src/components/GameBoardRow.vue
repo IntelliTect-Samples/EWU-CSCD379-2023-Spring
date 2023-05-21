@@ -27,26 +27,36 @@ onMounted(() => {
   for (const letter of props.word.letters) {
     letters.push(new DelayedLetter(letter.char, letter.color, letter.status))
   }
-  console.log('Mounted')
 })
 
-watch(
-  () => props.word.isScored,
-  () => {
-    console.log('Watch')
-    props.word.letters.forEach((letter, index) => {
-      setTimeout(() => {
-        letters[index].char = letter.char
-        letters[index].color = letter.color
-        letters[index].status = letter.status
-      }, index * 100)
-    })
-  }
-)
-watch(props.word.letters, () => {
-  console.log('List changed')
-  props.word.letters.forEach((letter, index) => {
-    letters[index].char = letter.char
-  })
+watch(props.word, () => {
+  setupWatches()
 })
+
+function setupWatches() {
+  // When the word is scored, set the colors of the letters for delayed display
+  watch(
+    () => props.word.isScored,
+    () => {
+      console.log('Is Scored Changed')
+      props.word.letters.forEach((letter, index) => {
+        setTimeout(() => {
+          letters[index].char = letter.char
+          letters[index].color = letter.color
+          letters[index].status = letter.status
+        }, index * 100)
+      })
+    }
+  )
+
+  // When the letters change make sure we update them
+  watch(props.word.letters, () => {
+    console.log('List changed')
+    props.word.letters.forEach((letter, index) => {
+      letters[index].char = letter.char
+    })
+  })
+}
+
+setupWatches()
 </script>

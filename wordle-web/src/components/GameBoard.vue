@@ -1,5 +1,5 @@
 <template>
-  <GameBoardRow v-for="(word, rowIndex) in game.guesses" :key="`row-${rowIndex}`" :word="word" />
+  <GameBoardRow v-for="word in game.guesses" :key="word.key" :word="word" />
 </template>
 
 <script setup lang="ts">
