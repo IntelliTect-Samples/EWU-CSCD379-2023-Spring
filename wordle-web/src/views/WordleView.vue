@@ -1,4 +1,6 @@
 <template>
+  <LandingDialog :game="game"></LandingDialog>
+
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
@@ -50,6 +52,7 @@ import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
+import LandingDialog from '../components/LandingDialog.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
