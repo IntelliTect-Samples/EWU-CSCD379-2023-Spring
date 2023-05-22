@@ -65,7 +65,7 @@ import {WordsService} from '@/scripts/wordsService'
 import { useRoute } from 'vue-router'
 
 
-  const guess = ref('')
+const guess = ref('')
 const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
@@ -78,11 +78,10 @@ const wordOfTheDayDate = ref<Date | null>(null)
 const route = useRoute()
 const pat = ref<string>(route.path)
 
-startGame()
-
 console.log(game.secretWord)
 
 onMounted(async () => {
+  startGame()
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
