@@ -163,11 +163,11 @@ function sendGameResult() {
   lastGameResult.value = gameResult
   showScoreDialog.value = true
 
-  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+  const apiPath =
+    route.path == '/wordoftheday' ? '/Player/AddDailyGameResult' : '/Player/AddGameResult'
+
+  Axios.post(apiPath, gameResult).then((response) => {
     console.log(response.data)
   })
-  // if (this.onGameEnd) {
-  //   this.onGameEnd(response.data as GameResult)
-  // }
 }
 </script>
