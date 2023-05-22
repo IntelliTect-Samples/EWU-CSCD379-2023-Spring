@@ -25,9 +25,9 @@
 
             <v-list>
               <router-link to="/wordle"><v-list-item-title>Play</v-list-item-title></router-link>
-              <router-link :to="{ path: '/wordoftheday', query: { forceRefresh: 'true' } }"
+              <router-link to="/wordoftheday"
                 ><v-list-item-title
-                  ><v-btn onclick="refresh();">Word Of Day</v-btn></v-list-item-title
+                  >Wordle of Day</v-list-item-title
                 ></router-link
               >
               <router-link to="/leaderBoard"
@@ -55,7 +55,5 @@ import { RouterLink } from 'vue-router'
 import SettingsDialogVue from './SettingsDialog.vue'
 
 import { useRoute } from 'vue-router'
-function refresh() {
-  window.location.reload()
-}
+
 </script>
