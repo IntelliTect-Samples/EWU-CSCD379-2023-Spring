@@ -43,6 +43,11 @@ const router = createRouter({
       path: '/wordoftheday',
       name: 'wordoftheday',
       component: WordleView
+    },
+    {
+      path: '/pastwordoftheday',
+      name: 'pastwordoftheday',
+      component: WordleView
     }
   ]
 })

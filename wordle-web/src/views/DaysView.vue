@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <main>-- Last Ten Wordle Days --</main>
+    <h1>{{ name }}</h1>
   </v-card>
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
@@ -19,9 +20,9 @@
       <tbody>
         <tr v-for="item in Days" :key="item.name">
           <td>
-            <router-link to="/wordoftheday"
-              ><v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn></router-link
-            >
+            <router-link to="/pastwordoftheday">
+              <v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn>
+            </router-link>
           </td>
           <td>{{ item.isPlayed }}</td>
           <td>{{ item.timesPlayed }}</td>
@@ -42,9 +43,10 @@ import $router from '../router/index'
 const overlay = ref(true)
 
 var Days: any[] = []
-
+let name = localStorage.name
 if (localStorage.name == null) {
   localStorage.name = 'Guest'
+  name = 'Guest'
 }
 
 function goBack() {
@@ -52,7 +54,7 @@ function goBack() {
 }
 
 function saveDate(date: any) {
-  localStorage.date = date
+  localStorage.date = new Date(date) //might not be correct usage of Date
 }
 
 Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`)
