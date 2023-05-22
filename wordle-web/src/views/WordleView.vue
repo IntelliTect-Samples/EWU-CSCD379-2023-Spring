@@ -118,15 +118,13 @@ function addWord() {
 let gameName = 'Wordle Mind Bender'
 let apiPath = 'word'
 let offset = 0
-let OldDate = localStorage.date
 if (route.path == `/wordoftheday`) {
-  gameName = 'wordle of the day'
-  apiPath = `word/GetWordOfDay`
+  gameName = 'Wordle Of The Day'
+  apiPath = `word/GetWordOfDay?offset=${offset}`
 } else if (route.path == '/pastwordoftheday') {
-  gameName = 'wordle of the day'
-  let date: Date = new Date()
-  offset = OldDate.getDay() - date.getDay()
-  apiPath = `word/GetWordOfDay?userName=${offset}`
+  gameName = 'Wordle Of The Day'
+  offset = localStorage.offset
+  apiPath = `word/GetWordOfDay?offset=${offset}`
 }
 
 Axios.get(apiPath)

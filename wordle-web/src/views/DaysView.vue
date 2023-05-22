@@ -18,10 +18,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in Days" :key="item.name">
+        <tr v-for="(item, index) in Days" :key="item.name">
           <td>
             <router-link to="/pastwordoftheday">
-              <v-btn @click="saveDate(item.date)">{{ item.date }}</v-btn>
+              <v-btn @click="saveDate(index)">{{ item.date }}</v-btn>
             </router-link>
           </td>
           <td>{{ item.isPlayed }}</td>
@@ -53,8 +53,8 @@ function goBack() {
   $router.go(-1)
 }
 
-function saveDate(date: any) {
-  localStorage.date = new Date(date) //might not be correct usage of Date
+function saveDate(index: number) {
+  localStorage.offset = -index;//might not be correct usage of Date
 }
 
 Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`)

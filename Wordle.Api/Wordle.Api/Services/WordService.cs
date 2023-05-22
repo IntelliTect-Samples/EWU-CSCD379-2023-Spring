@@ -29,10 +29,18 @@ namespace Wordle.Api.Services
             int wordId = _db.Words.Where((w) => w.Text.Equals(word)).First().WordId;
             int userId = _db.Users.Where((u) => u.Name.Equals(userName)).First().UserId;
             IQueryable<Play> play = _db.Plays.Where(p => wordId == p.WordId);
+            // Get the current date
+            DateTime currentDate = date;
+            int day = currentDate.Day;
+            int month = currentDate.Month;
+            int year = currentDate.Year;
+
+            // Convert to a string
+            string dateString = string.Format("{0}/{1}/{2}", month, day, year);
             bool playExists = play.Any(); 
             WordStatistics wordStatistics = new(
                     // Date
-                    date.ToString(),
+                    dateString,
                     // Word
                     word,
                     //IsPlayed: If Exists a row in which the playerId
