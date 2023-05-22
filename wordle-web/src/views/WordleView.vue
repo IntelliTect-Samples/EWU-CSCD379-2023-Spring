@@ -5,7 +5,7 @@
   <div class="text-h4 text-center">
     <span v-if="isWordOfTheDay"
       >Daily Wordle
-      <span v-if="wordOfTheDayDate">{{ wordOfTheDayDate.toLocaleDateString }}</span>
+      <span v-if="wordOfTheDayDate">{{ wordOfTheDayDate.toLocaleDateString() }}</span>
     </span>
     <span v-else>Wordle Mind Bender</span>
   </div>
