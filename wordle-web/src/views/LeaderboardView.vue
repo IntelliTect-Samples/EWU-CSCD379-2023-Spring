@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" v-for="(item, i) in daily" :key="item">
+        <tr class="text-center" v-for="item in daily" :key="item">
           <td>{{ item.split(',')[0] }}</td>
           <td>{{ item.split(',')[1] }}</td>
           <td>{{ item.split(',')[2] }}</td>
