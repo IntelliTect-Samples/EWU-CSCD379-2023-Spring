@@ -90,24 +90,36 @@ namespace Wordle.Api.Services
                         .Where(plays => plays.Date.Date == localDate.Date)
                         .ToListAsync();
                     
-                    var didPlay = await _db.Plays
-                        .AnyAsync(plays => plays.PlayerId == playerId);
+                    var firstPlayed = await _db.Plays
+                        .Where(plays => plays.PlayerId == playerId)
+                        .FirstOrDefaultAsync();
+                    var didPlay = true;
+                    if(firstPlayed != null)
+                    {
+                        didPlay = true;
+                    }
+                    else
+                    {
+                        didPlay = false;
+                    }
+
                     if(dayPlays.Count > 0)
                     {
                         var dayResults = new DayResultsDto()
                         {//word exists and has plays
+                            DaysAgo = i,
                             NumPlays = dayPlays.Count,
                             AvgSeconds = (int)dayPlays.Average(plays => plays.Seconds),
                             AvgAttempts = (int)dayPlays.Average(plays => plays.Attempts),
                             Date = localDate.Date,
-                            DidPlay = true
+                            DidPlay = didPlay
                         };
                         lastTenDays.Add(dayResults);
                     } else
                     {//word existed but nobody played it
                         var dayResults = new DayResultsDto()
                         {//defaults to 0 and false for all other data
-                            NumPlays = dayPlays.Count,
+                            DaysAgo = i,
                             Date = localDate.Date
                         };
                         lastTenDays.Add(dayResults);
@@ -117,7 +129,7 @@ namespace Wordle.Api.Services
                 {//game was not played this day
                     var dayResults = new DayResultsDto()
                     {//defaults to 0 and false for all other data
-                        NumPlays = 50,
+                        DaysAgo = i,
                         Date = localDate.Date
                     };
                     lastTenDays.Add(dayResults);

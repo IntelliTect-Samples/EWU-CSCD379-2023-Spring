@@ -31,6 +31,11 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
+              <v-list-item-title
+                ><RouterLink to="/previouswordles">Previous Wordles</RouterLink></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
               <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
           </v-list>

@@ -152,8 +152,6 @@ watch(showScoreDialog, (value) => {
 })
 
 function sendGameResult() {
-  console.log('Send Game Results')
-  console.log(localStorage.getItem('userId'))
   const gameResult = new GameResult()
   gameResult.playerId = playerService.player.playerId
   gameResult.attempts = game.guesses.filter((f) => f.isFilled).length
