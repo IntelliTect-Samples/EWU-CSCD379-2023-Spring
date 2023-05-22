@@ -5,7 +5,7 @@
 
   <div class="text-h4 text-center">
     <span v-if="isWordOfTheDay"
-      >Wordle Redux of the Day
+      > Word of the Day
       <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
     </span>
     <span v-else>Wordle Redux</span>
@@ -64,7 +64,8 @@ import setUsername from '@/components/SetUsername.vue'
 import {WordsService} from '@/scripts/wordsService'
 import { useRoute } from 'vue-router'
 
-const guess = ref('')
+
+  const guess = ref('')
 const game = reactive(new WordleGame())
 const guessSound = new Audio(guess_button)
 const clickSound = new Audio(clicking_button)
@@ -75,7 +76,7 @@ const overlay = ref(true)
 const isWordOfTheDay = ref(false)
 const wordOfTheDayDate = ref<Date | null>(null)
 const route = useRoute()
-
+const pat = ref<string>(route.path)
 
 startGame()
 
@@ -91,7 +92,12 @@ onUnmounted(() => {
 
 function startGame() {
   //should restart game here
-  isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
+  if(pat.value == '/worldoftheday'){
+    isWordOfTheDay.value = true
+  } else {
+    isWordOfTheDay.value = false
+  }
+  
   overlay.value = true
   let apiPath = 'word'
   if (isWordOfTheDay.value) {
@@ -160,7 +166,15 @@ watch(
     }
   }
 )
-
+watch(
+  () => route.path,
+  (newPath, oldPath) => {
+    if (newPath !== pat.value) {
+      pat.value = newPath;
+      startGame();
+    }
+  }
+)
 
 
 
