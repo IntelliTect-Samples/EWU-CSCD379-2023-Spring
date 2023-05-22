@@ -108,17 +108,11 @@ function startGame() {
   }
   Axios.get(apiPath)
     .then((response) => {
-      const word = isWordOfTheDay.value ? response.data.word : response.data
-      if (isWordOfTheDay.value) {
-        wordOfTheDayDate.value = new Date(response.data.date)
-      } else {
-        wordOfTheDayDate.value = null
-      }
-      game.restartGame(word)
+      game.restartGame(response.data)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 2000)
+      }, 502)
     })
     .catch((error) => {
       console.log(error)
