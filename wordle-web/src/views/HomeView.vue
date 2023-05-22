@@ -8,11 +8,10 @@
         </div>
       </v-col>
       <v-col cols="12" style="display: flex; flex-direction: column; max-width: 16em; gap: 6px">
-        <v-btn variant="elevated" class="text-h6 button" to="/wordoftheday"> Wordle </v-btn>
-        <v-col cols="12" v-if="display.xs"></v-col>
-        <v-btn variant="elevated" class="text-h6 button" to="/wordle"> Playground </v-btn>
-        <v-col cols="12" v-if="display.xs"></v-col>
+        <v-btn variant="elevated" class="text-h6 button" to="/wordoftheday"> Daily Wordle </v-btn>
+        <v-btn variant="elevated" class="text-h6 button" to="/wordle"> Wordle Mind Bender </v-btn>
         <v-btn variant="elevated" class="text-h6 button" to="/leaderboard"> Leaderboard </v-btn>
+        <v-btn variant="elevated" class="text-h6 button" to="/instructions"> Instructions </v-btn>
       </v-col>
     </v-row>
   </v-container>
