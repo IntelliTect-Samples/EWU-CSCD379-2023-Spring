@@ -41,6 +41,9 @@ namespace Wordle.Api.Migrations
                     b.HasIndex("Date")
                         .IsUnique();
 
+                    b.HasIndex("Date")
+                        .IsUnique();
+
                     b.HasIndex("WordId");
 
                     b.ToTable("DateWords");
