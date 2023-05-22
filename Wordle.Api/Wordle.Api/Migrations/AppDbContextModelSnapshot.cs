@@ -58,7 +58,10 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("AvgTime")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("GameDate")
+                    b.Property<int?>("DailyWordDateWordId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("GameDate")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("HasPlayed")
@@ -70,10 +73,9 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("PlayerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("WordId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("DailyWordDateWordId");
 
                     b.ToTable("Plays");
                 });
@@ -134,6 +136,15 @@ namespace Wordle.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.Play", b =>
+                {
+                    b.HasOne("Wordle.Api.Data.DateWord", "DailyWord")
+                        .WithMany()
+                        .HasForeignKey("DailyWordDateWordId");
+
+                    b.Navigation("DailyWord");
                 });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>

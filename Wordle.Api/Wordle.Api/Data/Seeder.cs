@@ -6,6 +6,7 @@
         {
             SeedPlayers(context);
             SeedWords(context);
+            SeedDates(context);
         }
  
         public static void SeedWords(AppDbContext db)
@@ -38,6 +39,21 @@
                 db.SaveChanges();
             }
         }
+
+        public static void SeedDates (AppDbContext db)
+        {
+            if (!db.Plays.Any())
+            {
+                DateTime currentDate = DateTime.Now.Date;
+                for (int i = 1; i <= 10; i++)
+                {
+                    DateTime gameDate = currentDate.AddDays(-i);
+                    gameDate = gameDate.Date;
+                    db.Plays.Add(new Play { GameDate = gameDate, PlayerId = 1, Id = Guid.NewGuid() });
+                }
+                db.SaveChanges();
+            }
+        }   
 
    }
 }

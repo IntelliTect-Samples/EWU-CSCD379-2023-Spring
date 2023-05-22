@@ -17,7 +17,7 @@ import Axios from 'axios'
 import { ref } from 'vue'
 
 let overlay = ref(false)
-
+debugger
 function addWord() {
   overlay.value = true
   Axios.post('word/AddWordFromBody', {

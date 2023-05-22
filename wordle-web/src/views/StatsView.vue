@@ -3,10 +3,9 @@
     <v-card color="yellow-lighten-1" style="border: 1px solid red">
       <v-card-title>Statistics</v-card-title>
     </v-card>
-
     <v-card v-for="play in plays" :key="play.playId">
       <v-card color="cyan" style="border: 3px solid red">
-        <v-card-title>Date: {{ play.date }}</v-card-title>
+        <v-card-title>Date: {{ play.gameDate }}</v-card-title>
       </v-card>
       <v-list>
         <v-list-item>
@@ -27,7 +26,6 @@
 import type { Play } from '@/scripts/play'
 import Axios from 'axios'
 import { ref } from 'vue'
-
 const plays = ref<Play[]>([])
 
 Axios.get('/Play/GetLastTenDates').then((result) => {
