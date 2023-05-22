@@ -26,9 +26,7 @@
             <v-list>
               <router-link to="/wordle"><v-list-item-title>Play</v-list-item-title></router-link>
               <router-link to="/wordoftheday"
-                ><v-list-item-title
-                  >Wordle of Day</v-list-item-title
-                ></router-link
+                ><v-list-item-title>Wordle of Day</v-list-item-title></router-link
               >
               <router-link to="/leaderBoard"
                 ><v-list-item-title>Leader Board</v-list-item-title></router-link
@@ -55,5 +53,4 @@ import { RouterLink } from 'vue-router'
 import SettingsDialogVue from './SettingsDialog.vue'
 
 import { useRoute } from 'vue-router'
-
 </script>
