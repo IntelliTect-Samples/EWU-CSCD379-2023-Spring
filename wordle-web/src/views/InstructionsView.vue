@@ -48,10 +48,16 @@
             <v-card-item>
                 <v-card-text>
                     Wildcards, otherwise know as a question mark (?), are used to substitute for letters you
-                    are uncertain about. For example,  
+                    are uncertain about. For example, if you know the correct location of 3 letters but are 
+                    not sure what the last two letters are, you can input a question mark (?) for the two letters
+                    thats are uncertain. From there you can use the Valid-Guesses tool in order to determine what
+                    the secret word is.
                 </v-card-text>
             </v-card-item>
         </v-card>
+
+       
+
     </v-responsive>
 </template>
 
