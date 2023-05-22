@@ -53,7 +53,7 @@ namespace Wordle.Api.Services
                 if (dto.WasGameWon)
                 {
                     player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
-                    player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.DurationInSeconds) / (player.GameCount + 1);
+                    player.AverageSecondsPerGame = (int)(player.GameCount * player.AverageSecondsPerGame + dto.DurationInSeconds) / (player.GameCount + 1);
                     player.GameCount++;
                     await _db.SaveChangesAsync();
                 }
