@@ -82,7 +82,7 @@ namespace Wordle.Api.Services
                 //Was there a word on that day
                 var wordOfThatDay = await _db.DateWords
                     .Include(f => f.Word)
-                    .FirstOrDefaultAsync(f => f.Date == localDate);
+                    .FirstOrDefaultAsync(f => f.Date == localDate);//grab the first matching date
 
                 if (wordOfThatDay != null)
                 {//if there was a game played, get the results
