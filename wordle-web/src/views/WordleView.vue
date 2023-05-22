@@ -60,12 +60,14 @@ import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
+const route = useRoute()
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -85,7 +87,14 @@ onUnmounted(() => {
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  let apiPath = 'word'
+  if (route.path == '/wordoftheday') {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    if (route.query.date) {
+      apiPath += `&date=${route.query.date}`
+    }
+  }
+  Axios.get(apiPath)
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)

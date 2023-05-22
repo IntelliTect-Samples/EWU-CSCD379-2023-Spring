@@ -47,6 +47,16 @@ namespace Wordle.Api.Tests
             Assert.IsTrue(json.Contains("Susan"));
         }
 
+        [TestMethod]
+        public async Task WordOfTheDay()
+        {
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync("word/wordoftheday?offsetinhours=-8");
+
+            var word = await response.Content.ReadAsStringAsync();
+            Assert.AreEqual(5, word.Length);
+        }
+
         [ClassCleanup]
         public static void ClassCleanup()
         {
