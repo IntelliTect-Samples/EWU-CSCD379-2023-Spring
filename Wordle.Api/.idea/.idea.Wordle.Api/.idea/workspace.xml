@@ -10,7 +10,14 @@
   <component name="ChangeListManager">
     <list default="true" id="4f9556bf-8518-4edb-8075-5daad116b840" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Wordle.Api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/PersonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Controllers/WordController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/20230520054154_DateWordUniqueDate.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/20230520054154_DateWordUniqueDate.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/20230520054154_DateWordUniqueDate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/20230520054154_DateWordUniqueDate.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/PlayerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Services/PlayerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Wordle.Api/Services/WordService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Wordle.Api/Services/WordService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/src/scripts/Services/wordsService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/scripts/Services/wordsService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../wordle-web/src/views/WordleView.vue" afterDir="false" />
     </list>
@@ -53,7 +60,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.smartKeys_rider",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -113,6 +120,8 @@
       <workItem from="1683791772757" duration="391000" />
       <workItem from="1683829175498" duration="1074000" />
       <workItem from="1683837012718" duration="3622000" />
+      <workItem from="1684601914697" duration="129000" />
+      <workItem from="1684778616326" duration="5339000" />
     </task>
     <servers />
   </component>

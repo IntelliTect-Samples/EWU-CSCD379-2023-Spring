@@ -9,17 +9,17 @@ namespace Wordle.Api.Controllers;
 [Route("Player")]
 public class PlayerController : ControllerBase
 {
-    private readonly PlayerService _PlayerService;
+    private readonly PlayerService _playerService;
 
     public PlayerController(PlayerService playerService)
     {
-        _PlayerService = playerService;
+        _playerService = playerService;
     }
 
     [HttpGet]
     public async Task<ActionResult<PlayerDto>> Get(Guid playerId)
     {
-        Player? player = await _PlayerService.GetAsync(playerId);
+        Player? player = await _playerService.GetAsync(playerId);
 
         if (player is not null)
         {
@@ -31,13 +31,13 @@ public class PlayerController : ControllerBase
     [HttpGet("TopPlayers")]
     public async Task<IEnumerable<PlayerDto>> GetTopPlayers()
     {
-        return (await _PlayerService.GetTopPlayersAsync()).Select(player => new PlayerDto(player));
+        return (await _playerService.GetTopPlayersAsync()).Select(player => new PlayerDto(player));
     }
 
     [HttpPost("CreatePlayer")]
     public async Task<PlayerDto> CreatePlayer([FromBody] string name)
     {
-        return new PlayerDto(await _PlayerService.CreateAsync(name));
+        return new PlayerDto(await _playerService.CreateAsync(name));
     }
 
     [HttpPost("RenamePlayer")]
@@ -51,14 +51,14 @@ public class PlayerController : ControllerBase
         {
             return BadRequest();
         }
-        var result = await _PlayerService.UpdateAsync(player.PlayerId.Value, player.Name.Trim());
+        var result = await _playerService.UpdateAsync(player.PlayerId.Value, player.Name.Trim());
         return new PlayerDto(result);
     }
 
     [HttpPost("AddGameResult")]
     public async Task<ActionResult<PlayerDto>> AddGameResultAsync(GameResultDto dto)
     {
-        var player = await _PlayerService.AddGameResultAsync(dto);
+        var player = await _playerService.AddGameResultAsync(dto);
         if (player is not null)
         {
             return new PlayerDto(player);

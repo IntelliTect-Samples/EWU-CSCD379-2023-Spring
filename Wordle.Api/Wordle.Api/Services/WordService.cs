@@ -7,7 +7,7 @@ namespace Wordle.Api.Services;
 public class WordService
 {
     private readonly AppDbContext _db;
-    private static readonly object _WordOfTheDayLock = new object();
+    private static readonly object s_wordOfTheDayLock = new object();
 
     public WordService(AppDbContext db)
     {
@@ -24,10 +24,7 @@ public class WordService
 
     public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
     {
-        if (date is null)
-        {
-            date = DateTime.UtcNow;
-        }
+        date ??= DateTime.UtcNow;
 
         var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
         var localDate = localDateTime.Date;
@@ -38,36 +35,33 @@ public class WordService
         {
             return todaysWord.Word.Text;
         }
-        else
+        lock (s_wordOfTheDayLock)
         {
-            lock (_WordOfTheDayLock)
+            var todaysLatestWord =
+                _db.DateWords.Include(f => f.Word).FirstOrDefault(f => f.Date == localDate);
+
+            if (todaysLatestWord != null)
             {
-                var todaysLatestWord =
-                    _db.DateWords.Include(f => f.Word).FirstOrDefault(f => f.Date == localDate);
-
-                if (todaysLatestWord != null)
-                {
-                    return todaysLatestWord.Word.Text;
-                }
-                var word = GetRandomWord().Result;
-
-                var dateWord = new DateWord { Date = localDate, Word = word };
-                _db.DateWords.Add(dateWord);
-                try
-                {
-                    _db.SaveChanges();
-                }
-                catch (SqlException e)  // this is probably not the right error to catch
-                {
-                    if (e.Message.Contains("duplicate"))
-                    {
-                        return _db.DateWords.Include(f => f.Word)
-                            .First(f => f.Date == localDate)
-                            .Word.Text;
-                    }
-                }
-                return word.Text;
+                return todaysLatestWord.Word.Text;
             }
+            var word = GetRandomWord().Result;
+
+            var dateWord = new DateWord { Date = localDate, Word = word };
+            _db.DateWords.Add(dateWord);
+            try
+            {
+                _db.SaveChanges();
+            }
+            catch (SqlException e)  // this is probably not the right error to catch
+            {
+                if (e.Message.Contains("duplicate"))
+                {
+                    return _db.DateWords.Include(f => f.Word)
+                        .First(f => f.Date == localDate)
+                        .Word.Text;
+                }
+            }
+            return word.Text;
         }
     }
 
