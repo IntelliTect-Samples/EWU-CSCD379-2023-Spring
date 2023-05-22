@@ -22,7 +22,12 @@
           <v-list>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/">Play Again</RouterLink>
+                <RouterLink to="/wordle">Play Again</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/wordoftheday">Play Daily</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
