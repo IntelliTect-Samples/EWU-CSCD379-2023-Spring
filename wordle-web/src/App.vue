@@ -54,6 +54,7 @@ import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
+//Still adding stuff
 const display = reactive(useDisplay())
 provide(Services.Display, display)
 const playerService = new PlayerService()
