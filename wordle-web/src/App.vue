@@ -10,6 +10,8 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
+        <v-btn><RouterLink to="/wordOfTheDay">Word Of The Day</RouterLink></v-btn>
+
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
         <ActiveUser></ActiveUser>
@@ -28,6 +30,11 @@
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/dailyWordList">Recent Words Of The Day</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
