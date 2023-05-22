@@ -4,9 +4,6 @@
   </v-container>
 
   <v-container>
-    <RouterLink to="/instructions">
-      <h2>Instructions</h2>
-    </RouterLink>
     <RouterLink to="/wordle">
       <h2>Play</h2>
     </RouterLink>

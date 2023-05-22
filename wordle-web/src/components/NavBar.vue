@@ -28,6 +28,12 @@
           value="about"
           to="/about"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-question"
+          title="Instructions"
+          value="instructions"
+          to="/instructions"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-layout>
