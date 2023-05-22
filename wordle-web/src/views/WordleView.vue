@@ -78,8 +78,6 @@ const wordOfTheDayDate = ref<Date | null>(null)
 const route = useRoute()
 const pat = ref<string>(route.path)
 
-startGame()
-
 console.log(game.secretWord)
 
 onMounted(async () => {
