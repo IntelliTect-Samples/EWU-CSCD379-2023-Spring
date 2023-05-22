@@ -13,29 +13,38 @@ namespace Wordle.Api.Services
             _db = db;
         }
 
-        public async Task<DateWordStats?> AddDailyGameResultAsync(DateWordDto dto)
+        public async Task<DateWord?> AddDailyGameResultAsync(DateWordDto dto)
         {
-            var added = await _db.DailyStats.FindAsync(dto.WordPlayed);
+            var added = await _db.DateWords.FindAsync(dto.DateWordId);
             if (added is not null)
             {
-                if (dto.WasGameWon)
-                {
-                    added.numberOfPlays++;
-                    added.totalTime += dto.DurationInSeconds;
-                    added.averageTime = added.totalTime / added.numberOfPlays;
-                    added.averageScore = 1;
-
-                    await _db.SaveChangesAsync();
-                }
+                added.TotalSeconds += dto.TotalSeconds;
+                added.TotalAttempts += dto.TotalAttempts;
+                added.TotalGames += dto.TotalGames;
+                await _db.SaveChangesAsync();
+                
                 return added;
             }
-            throw new ArgumentException("game lost");
+            else
+            {
+                DateWord dateWord = new()
+                {
+                    DateWordId = dto.DateWordId,
+                    Date = dto.Date,
+                    WordId = dto.WordId,
+                    Word = dto.Word,
+                    TotalAttempts = dto.TotalAttempts,
+                    TotalSeconds = dto.TotalSeconds,
+                    TotalGames = dto.TotalGames,
+                };
+                return dateWord;
+            }
         }
 
-        public async Task<IEnumerable<DateWordStats>> GetLastTenWords(int count = 10)
+        public async Task<IEnumerable<DateWord>> GetLastTenWords(int count = 10)
         {
-            return await _db.DailyStats
-                .OrderBy(f => f.DateWordStatsId)
+            return await _db.DateWords
+                .OrderBy(f => f.Date)
                 .Take(count)
                 .ToListAsync();
         }

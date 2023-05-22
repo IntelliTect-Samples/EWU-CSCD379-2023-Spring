@@ -16,18 +16,18 @@ namespace Wordle.Api.Controllers;
         }
 
     [HttpPost("AddDailyGameResult")]
-    public async Task<ActionResult<DateWordStatsDto>> AddDailyGameResultAsync(DateWordDto dto)
+    public async Task<ActionResult<DateWordDto>> AddDailyGameResultAsync(DateWordDto dto)
     {
         var added = await _DailyStatsService.AddDailyGameResultAsync(dto);
         if (added is not null)
         {
-            return new DateWordStatsDto(added);
+            return new DateWordDto(added);
         }
         return BadRequest();
     }
 
     [HttpGet("GetLastTenWords")]
-    public async Task<IEnumerable<DateWordStats>> GetLastTenWords()
+    public async Task<IEnumerable<DateWord>> GetLastTenWords()
     {
         return await _DailyStatsService.GetLastTenWords();
     }
