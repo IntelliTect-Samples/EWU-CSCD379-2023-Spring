@@ -1,111 +1,150 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
-namespace Wordle.Api.Services
+namespace Wordle.Api.Services;
+
+public class WordService
 {
-    public class WordService
+    private readonly AppDbContext _db;
+    private static readonly object _WordOfTheDayLock = new object();
+
+    public WordService(AppDbContext db)
     {
-        private readonly AppDbContext _db;
-        private readonly object _WordOfTheDayLock = new object();
+        _db = db;
+    }
 
-        public WordService(AppDbContext db)
+    public async Task<Word> GetRandomWord()
+    {
+        var count = await _db.Words.CountAsync(word => word.IsCommon);
+        var index = new Random().Next(count);
+        var word = await _db.Words
+            .Where(word => word.IsCommon)
+            .Skip(index)
+            .FirstAsync();
+        return word;
+    }
+
+    public async Task<IEnumerable<Word>> GetSeveralWords(int? count)
+    {
+        count ??= 10;
+        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
+        totalCount -= count.Value;
+        int index = new Random().Next(totalCount);
+        var words = await _db.Words
+            .Where(word => word.IsCommon)
+            .Skip(index)
+            .Take(count.Value)
+            .OrderByDescending(w => w.Text)
+            .ToListAsync();
+        return words;
+    }
+
+    public async Task<Word> AddWord(string? newWord, bool isCommon)
+    {
+        if (newWord is null || newWord.Length != 5)
         {
-            _db = db;
+            throw new ArgumentException("Word must be 5 characters long");
+        }
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
+        if (word != null)
+        {
+            word.IsCommon = isCommon;
+        }
+        else
+        {
+            word = new()
+            {
+                Text = newWord,
+                IsCommon = isCommon
+            };
+            _db.Words.Add(word);
+        }
+        await _db.SaveChangesAsync();
+        return word;
+    }
+
+    public async Task<DateWord> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
+    {
+        if (date is null)
+        {
+            date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
         }
 
-        public async Task<Word> GetRandomWord()
-        {
-            var count = await _db.Words.CountAsync(word => word.IsCommon);
-            var index = new Random().Next(count);
-            var word = await _db.Words
-                .Where(word => word.IsCommon)
-                .Skip(index)
-                .FirstAsync();
-            return word;
-        }
+        var todaysWord = await _db.DateWords
+            .Include(f => f.Word)
+            .FirstOrDefaultAsync(f => f.Date == date);
 
-        public async Task<IEnumerable<Word>> GetSeveralWords(int? count)
+        if (todaysWord != null)
         {
-            count ??= 10;
-            var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-            totalCount -= count.Value;
-            int index = new Random().Next(totalCount);
-            var words = await _db.Words
-                .Where(word => word.IsCommon)
-                .Skip(index)
-                .Take(count.Value)
-                .OrderByDescending(w => w.Text)
-                .ToListAsync();
-            return words;
+            return todaysWord;
         }
-
-        public async Task<Word> AddWord(string? newWord, bool isCommon)
+        else
         {
-            if (newWord is null || newWord.Length != 5)
+            lock (_WordOfTheDayLock)
             {
-                throw new ArgumentException("Word must be 5 characters long");
-            }
-            var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
-            if (word != null)
-            {
-                word.IsCommon = isCommon;
-            }
-            else
-            {
-                word = new()
+                var todaysLatestWord = _db.DateWords
+                    .Include(f => f.Word)
+                    .FirstOrDefault(f => f.Date == date.Value);
+
+                if (todaysLatestWord != null)
                 {
-                    Text = newWord,
-                    IsCommon = isCommon
-                };
-                _db.Words.Add(word);
-            }
-            await _db.SaveChangesAsync();
-            return word;
-        }
-        public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
-        {
-            if(date is null)
-            {
-                date = DateTime.UtcNow;
-            }
-
-            var localTime = new DateTimeOffset(date.Value, offset);
-            var localDate = localTime.Date;
-            var todaysWord = await _db.DateWords
-                .Include(f => f.Word)
-                .FirstOrDefaultAsync(f => f.Date == localDate);
-
-            if (todaysWord != null)
-            {
-                return todaysWord.Word.Text;
-            }
-            else
-            {
-                lock (_WordOfTheDayLock)
-                {
-                    var todaysLatestWord = _db.DateWords
-                     .Include(f => f.Word)
-                     .FirstOrDefaultAsync(f => f.Date == localDate);
-
-                    if (todaysWord != null)
-                    {
-                        return todaysWord.Word.Text;
-                    }
-                    var word = GetRandomWord().Result;
-
-                    var dateWord = new DateWord
-                    {
-                        Date = localDate,
-                        Word = word
-
-                    };
-                    _db.DateWords.Add(dateWord);
-                    _db.SaveChanges();
-
-                    return word.Text;
+                    return todaysLatestWord;
                 }
-            }
+                var word = GetRandomWord().Result;
 
+                var dateWord = new DateWord
+                {
+                    Date = date.Value,
+                    Word = word
+                };
+                _db.DateWords.Add(dateWord);
+                try
+                {
+                    _db.SaveChanges();
+                }
+                catch (SqlException e) // this is probably not the right error to catch
+                {
+                    if (e.Message.Contains("duplicate"))
+                    {
+                        return _db.DateWords
+                            .Include(f => f.Word)
+                            .First(f => f.Date == date.Value);
+                    }
+                }
+                return dateWord;
+            }
         }
+    }
+
+    public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+    {
+        if (daysBack < 1 || daysBack > 100) daysBack = 10;
+        var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
+        var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
+
+        var result = await _db.DateWords
+            .Include(f => f.PlayerGames)
+            .Where(f => f.Date <= startDate && f.Date > endDate)
+            .OrderByDescending(f => f.Date)
+            .Select(f => new WordOfTheDayStatsDto
+            {
+                Date = f.Date,
+                AverageDurationInSeconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
+                AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
+                NumberOfPlays = f.PlayerGames.Count(),
+                HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
+            })
+            .ToListAsync();
+        if (result.Count != daysBack)
+        {
+            for (int i = 0; i > (daysBack + 1) * -1; i--)
+            {
+                await this.GetWordOfTheDay(TimeSpan.FromHours(12), startDate.AddDays(i));
+            }
+            result = await GetWordOfTheDayStats(date, daysBack);
+        }
+        return result;
     }
 }
