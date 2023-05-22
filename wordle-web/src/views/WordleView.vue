@@ -2,7 +2,15 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-  <div class="text-h4 text-center">Wordle Redux </div>
+
+  <div class="text-h4 text-center">
+    <span v-if="isWordOfTheDay"
+      >Wordle Redux of the Day
+      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+    </span>
+    <span v-else>Wordle Redux</span>
+  </div>
+
   <v-col class="text-right">
   <h1>Time: {{ min }} : {{ sec }}</h1>
   <setUsername/> 
@@ -54,6 +62,7 @@ import guess_button from '@/assets/guess_button_sound.mp3'
 import Axios from 'axios'
 import setUsername from '@/components/SetUsername.vue'
 import {WordsService} from '@/scripts/wordsService'
+import { useRoute } from 'vue-router'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -63,16 +72,16 @@ const timer = ref(0)
 const sec = ref(0)
 const min = ref(0)
 const overlay = ref(true)
-
+const isWordOfTheDay = ref(false)
+const wordOfTheDayDate = ref<Date | null>(null)
+const route = useRoute()
 
 
 startGame()
 
-
 console.log(game.secretWord)
 
 onMounted(async () => {
-  await startGame()
   window.addEventListener('keyup', keyPress)
 })
 onUnmounted(() => {
@@ -82,14 +91,28 @@ onUnmounted(() => {
 
 function startGame() {
   //should restart game here
+  isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
   overlay.value = true
-  Axios.get('word')
+  let apiPath = 'word'
+  if (isWordOfTheDay.value) {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    if (route.query.date) {
+      apiPath += `&date=${route.query.date}`
+    }
+  }
+  Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data)
+      const word = isWordOfTheDay.value ? response.data.word : response.data
+      if (isWordOfTheDay.value) {
+        wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        wordOfTheDayDate.value = null
+      }
+      game.restartGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 2000)
     })
     .catch((error) => {
       console.log(error)

@@ -23,6 +23,11 @@ const router = createRouter({
     }
     ,
     {
+      path: '/worldoftheday',
+      name: 'wordOfTheDay',
+      component: WordleView
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

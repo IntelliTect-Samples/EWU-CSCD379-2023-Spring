@@ -27,6 +27,9 @@
           <v-list-item prepend-icon="mdi-star" to="/wordle">
             Wordle
           </v-list-item>
+          <v-list-item prepend-icon="mdi-star-box" to="/worldoftheday" >
+            World Of the Day
+          </v-list-item>
           <v-list-item prepend-icon="mdi-star-box" to="/leaderboard">
             Leader Board
           </v-list-item>
