@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
-import InstructionsView from '../views/InstructionsView.vue'
+import InstructionsViewVue from '@/views/InstructionsView.vue'
+import HomeViewVue from '@/views/HomeView.vue'
 import LastTenWordsView from '../views/LastTenWordsView.vue'
 
 const router = createRouter({
@@ -10,6 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: HomeViewVue
+    },
+    {
+      path: '/wordle',
       name: 'wordle',
       component: WordleView
     },
@@ -26,7 +32,7 @@ const router = createRouter({
     {
       path: '/instructions',
       name: 'instructions',
-      component: InstructionsView
+      component: InstructionsViewVue
     },
     {
       path: '/wordoftheday',
