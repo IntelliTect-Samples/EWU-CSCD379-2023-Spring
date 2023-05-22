@@ -2,7 +2,9 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-  <GameBoard :game="game" @letterClick="addChar" />
+  <div class="mt-5">
+    <GameBoard :game="game" @letterClick="addChar" />
+  </div>
 
   <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
 

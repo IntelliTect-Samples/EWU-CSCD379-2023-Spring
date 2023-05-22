@@ -1,6 +1,6 @@
 <template>
   <v-row
-    class="justify-center mt-5"
+    class="justify-center"
     v-for="(word, rowIndex) in game.guesses"
     :key="`row-${rowIndex}`"
     dense
