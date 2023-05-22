@@ -8,7 +8,7 @@
       min-width="25%"
       rounded
     >
-      <v-card-title class="titleText">Word Of The Day Games!</v-card-title>
+      <v-card-title class="titleText">Word Of The Day Games! (Dummy Data)</v-card-title>
       <v-card-text>
         <v-row justify="center">
           <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
@@ -54,9 +54,9 @@ export default {
     }
   },
   methods: {
-    isDatePlayed(date : string) : boolean {
+    isDatePlayed(date: string): boolean {
       return this.playedDates.includes(date)
-    },
+    }
   }
 }
 </script>
