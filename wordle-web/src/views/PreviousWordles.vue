@@ -3,7 +3,7 @@
     <v-card>
       <div class="bg-primary text-h5 pa-3 text-center">Past Ten Days</div>
       <v-card-text>
-        <div v-for="(dayGame, index) in playedGames" :key="dayGame.daysAgo" class="border my-3">
+        <div v-for="dayGame in playedGames" :key="dayGame.daysAgo" class="border my-3">
           <div class="d-flex justify-center bg-secondary text-h6">
             <RouterLink v-bind:to="'/wordoftheday?date=' + String(dayGame.date)">{{
               String(dayGame.date).split('T')[0]
