@@ -23,7 +23,6 @@
             </v-col>
             <v-col>
                 <RouterLink to="/wordoftheday" class="d-flex justify-center">
-                    <RouterLink to="/wordle">
                     <v-card style="min-width: 350px; margin: 16px;">
                         <v-card-title>Daily Wordle</v-card-title>
                         <v-row style="margin: 8px;">
@@ -36,7 +35,6 @@
                             <v-card-text style="padding: 8px;">- Also Mostly For Fun</v-card-text>
                         </v-row>
                     </v-card>
-                </RouterLink>
                 </RouterLink>
             </v-col>
               
