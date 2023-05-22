@@ -3,7 +3,9 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div style="padding: 20px 0px 20px 0px" class="text-h4 text-center">
+    {{ route.path == '/wordoftheday' ? 'Wordle of the Day' : 'Wordle Mind Bender' }}
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 

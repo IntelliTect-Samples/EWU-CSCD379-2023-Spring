@@ -1,15 +1,13 @@
 <template>
-  <v-sheet color="blue" height="170px" class="pt-10 my-5">
-    <v-card color="indigo-darken-3" class="ma-5" elevation="5" rounded="xl">
-      <v-card-title>About Wordle</v-card-title>
-      <v-card-actions>
-        <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-          <v-progress-circular color="primary" indeterminate size="64" />
-        </v-overlay>
-        <v-btn @click="addWord()" variant="tonal">Test Add Word</v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-sheet>
+  <v-card class="ma-5" elevation="5" rounded="xl" width="300px">
+    <v-card-title>About Wordle</v-card-title>
+    <v-card-actions>
+      <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+        <v-progress-circular color="primary" indeterminate size="64" />
+      </v-overlay>
+      <v-btn @click="addWord()" variant="tonal">Test Add Word</v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script setup lang="ts">

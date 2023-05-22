@@ -4,25 +4,25 @@
       <template v-slot>
         <v-app-bar-title style="flex: auto">
           <RouterLink to="/">
-            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
+            <v-icon icon="mdi-alpha-w-box" />
             Wordle
           </RouterLink>
         </v-app-bar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
 
-        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
+        <v-btn icon="mdi-brightness-7" @click="switchTheme" />
 
-        <ActiveUser></ActiveUser>
+        <ActiveUser />
 
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+            <v-btn icon="mdi-menu" v-bind="props" />
           </template>
 
           <v-list>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/wordle">Play Again</RouterLink>
+                <RouterLink to="/wordle">Play Wordle</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
