@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ gameName }}</h1>
+  <h1 class="text-center">{{ gameName }}</h1>
 
   <div class="text-right">
     <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition">
@@ -30,9 +30,9 @@
     </v-dialog>
   </div>
 
-  <GameBoard class="ma-10 p-10" :game="game" @letterClick="addChar" />
+  <GameBoard class="ma-8 p-10" :game="game" @letterClick="addChar" />
   <KeyBoard
-    class="ma-10 p-10"
+    class="ma-2 p-10"
     @keyPress="keyPress"
     @letterClick="addChar"
     :guessedLetters="game.guessedLetters"
@@ -48,7 +48,10 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <v-card> Time:{{ count }}</v-card>
+  <div class="d-flex align-center flex-column">
+    <div class="text-subtitle-2">Time: {{count}}</div>
+    </div>
+
 </template>
 
 <script setup lang="ts">
@@ -117,7 +120,7 @@ function addWord() {
 let gameName = 'Wordle Mind Bender'
 let apiPath = 'word'
 if (route.path == '/wordoftheday') {
-  gameName = 'wordle of the day'
+  gameName = 'Wordle Of The Day'
   apiPath = `word/GetWordOfDay`
 }
 

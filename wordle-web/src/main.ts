@@ -50,9 +50,9 @@ const vuetify = createVuetify({
         dark: true,
         colors: {
           background: '#0277BD',
-          surface: '#26C6DA',
-          primary: '#FFFF8D',
-          secondary: '#9FA8DA',
+          surface: '#1565C0',
+          //primary: '#FFFF8D',
+          //secondary: '#9FA8DA',
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336'
@@ -86,7 +86,7 @@ const vuetify = createVuetify({
         dark: true,
         colors: {
           background: '#2E7D32',
-          surface: '#B2FF59',
+          surface: '#2E7D32',
           primary: '#C0CA33',
           secondary: '#6D4C41',
           correct: '#4CAF50',
@@ -98,6 +98,8 @@ const vuetify = createVuetify({
   }
 })
 
+
+
 const app = createApp(App)
 
 app.use(vuetify)
@@ -105,3 +107,5 @@ app.use(vuetify)
 app.use(router)
 
 app.mount('#app')
+document.documentElement.style.overflow = 'hidden';
+document.body.style.overflow = 'hidden';

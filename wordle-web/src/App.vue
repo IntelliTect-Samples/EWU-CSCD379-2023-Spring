@@ -2,7 +2,7 @@
   <header>
     <div class="wrapper"></div>
   </header>
-  <div class="ma-16"><NavigationBar /></div>
+  <div class="ma-8"><NavigationBar /></div>
   <div><RouterView /></div>
 </template>
 

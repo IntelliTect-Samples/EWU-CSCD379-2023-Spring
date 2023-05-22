@@ -22,14 +22,14 @@ namespace Wordle.Api.Data
             if (!db.Plays.Any())
             {
 
-                int numPlays = 150;
+                int numPlays = 1000;
                 int numUsers = db.Users.Count();
                 int minUserId = db.Users.Min(u => u.UserId);
                 int maxUserId = db.Users.Max(u => u.UserId);
                 var words = db.Words.ToList();
 
                 List<Word> wordOptions = new();
-                for (int i = 0; i > -10; i--) { 
+                for (int i = 30; i > -10; i--) { 
                     wordOptions.Add(DateToWord(DateTime.Now.AddDays(i), words));
                 }
 
@@ -48,7 +48,7 @@ namespace Wordle.Api.Data
                     db.Plays.Add(new Play()
                     {
                         User = db.Users.Where(u => u.UserId == userId).First(),
-                        Word = wordOptions.ElementAt(r.Next(10)),
+                        Word = wordOptions.ElementAt(r.Next(40)),
                         Seconds = seconds,
                         Attempts = attempts
                     }); 

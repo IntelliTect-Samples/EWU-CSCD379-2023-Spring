@@ -1,5 +1,10 @@
 @import './base.css';
 
+:root {
+  --background-image: url('https://c4.wallpaperflare.com/wallpaper/582/155/806/space-space-art-nebula-stars-wallpaper-preview.jpg');
+}
+
+
 a,
 .green {
   text-decoration: none;
@@ -12,7 +17,7 @@ a,
 }
 
 body {
-  background-image: url('https://c4.wallpaperflare.com/wallpaper/582/155/806/space-space-art-nebula-stars-wallpaper-preview.jpg');
+  background-image: var(--background-image); 
   background-repeat: no-repeat;
   background-size: cover;
 }
