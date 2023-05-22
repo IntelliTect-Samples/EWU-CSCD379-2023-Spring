@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Numerics;
+using System.Reflection.Metadata;
 
 namespace Wordle.Api.Data
 {
