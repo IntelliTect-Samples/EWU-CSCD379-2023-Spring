@@ -3,19 +3,19 @@
     <v-card color="yellow-lighten-1" style="border: 1px solid red">
       <v-card-title>Statistics</v-card-title>
     </v-card>
-    <v-card v-for="play in plays" :key="play.playId">
+    <v-card v-for="play in plays">
       <v-card color="cyan" style="border: 3px solid red">
-        <v-card-title>Date: {{ play.gameDate }}</v-card-title>
+        <v-card-title>Date: {{ play.date }}</v-card-title>
       </v-card>
       <v-list>
         <v-list-item>
           <v-list-item-title>Games Played: {{ play.numberOfPlays }}</v-list-item-title>
         </v-list-item>
         <v-list-item>
-          <v-list-item-title>Average Score: {{ play.avgScore }}</v-list-item-title>
+          <v-list-item-title>Average Score: {{ play.averageAttempts }}</v-list-item-title>
         </v-list-item>
         <v-list-item>
-          <v-list-item-title>Average Time: {{ play.avgTime }}</v-list-item-title>
+          <v-list-item-title>Average Time: {{ play.averageTime }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-card>
@@ -23,12 +23,19 @@
 </template>
 
 <script setup lang="ts">
-import type { Play } from '@/scripts/play'
+import type { WordOfTheDayStats } from '@/scripts/wordOfTheDayStats'
 import Axios from 'axios'
 import { ref } from 'vue'
-const plays = ref<Play[]>([])
+const plays = ref<WordOfTheDayStats[]>([])
 
-Axios.get('/Play/GetLastTenDates').then((result) => {
-  plays.value = result.data as Play[]
+const props = defineProps<{
+  playerId: string
+}>()
+
+Axios.get('/Play/GetLastTenDates?playerId=' + props.playerId).then((response) => {
+  for (let stat of response.data as WordOfTheDayStats[]) {
+    stat.date = new Date(stat.date)
+  }
+  plays.value = response.data as WordOfTheDayStats[]
 })
 </script>

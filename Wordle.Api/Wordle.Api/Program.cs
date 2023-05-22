@@ -50,7 +50,7 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
-    Seeder.SeedDates(db);
+    //Seeder.SeedDates(db);
 }
 
 // Configure the HTTP request pipeline.

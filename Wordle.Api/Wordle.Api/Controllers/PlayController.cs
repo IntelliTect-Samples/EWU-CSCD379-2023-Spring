@@ -18,15 +18,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetLastTenDates")]
-        public async Task<ActionResult<List<Play>>> GetLastTenDates()
+        public async Task<List<WordOfTheDayStatsDto>> GetLastTenDates()
         {
-            return (await _PlayService.GetLastTenDates());
-        }
-
-        [HttpPost("PostDailyResult")]
-        public async Task<ActionResult<Play>> PostDailyResult(PlayDto playDto)
-        {
-            return (await _PlayService.PostDailyResult(playDto));
+            return await _PlayService.GetWordOfTheDayStats();
         }
 
     }

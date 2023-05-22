@@ -16,8 +16,6 @@ namespace Wordle.Api.Data
         public DbSet<DateWord> DateWords => Set<DateWord>();
         public DbSet<Play> Plays => Set<Play>();
 
-        public object GameDate { get; internal set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder

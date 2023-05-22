@@ -2,14 +2,17 @@
 {
     public class Play
     {
-        public Guid Id { get; set; }
-        public bool HasPlayed { get; set; }
-        public int PlayerId { get; set; }
+        public int Id { get; set; }
+        public Guid PlayerId { get; set; }
+        public required Player Player { get; set; }
+        public int WordId { get; set; }
+        public required Word Word { get; set; }
+        public int DailyWordId { get; set; }
         public DateWord? DailyWord { get; set; }
+        public int Attempts { get; set; }
+        public int Score { get; set; }
+        public int DurationInSeconds { get; set; }
         public DateTime? GameDate { get; set; }
-        public int NumberOfPlays { get; set; }
-        public int AvgScore { get; set; }
-        public int AvgTime { get; set; }
-
+        public bool WasGameWon { get; set; }
     }
 }

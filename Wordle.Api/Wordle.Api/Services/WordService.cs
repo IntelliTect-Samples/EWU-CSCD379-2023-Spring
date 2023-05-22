@@ -1,13 +1,14 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
     public class WordService
     {
         private readonly AppDbContext _db;
-        private static readonly object _WordOfTheDayLock = new object();
+        private static readonly object _WordOfTheDayLock = new();
 
         public WordService(AppDbContext db)
         {
@@ -64,39 +65,33 @@ namespace Wordle.Api.Services
             return word;
         }
 
-        public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
+        public async Task<DateWord> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {
-            if (date is null)
-            {
-                date = DateTime.UtcNow;
-            }
-            
-            var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
-            var localDate = localDateTime.Date;
+            date ??= DateTime.UtcNow.AddHours(offset.TotalHours).Date;
             var todaysWord = await _db.DateWords
                 .Include(f => f.Word)
-                .FirstOrDefaultAsync(f => f.Date == localDate);
+                .FirstOrDefaultAsync(f => f.Date == date);
 
             if (todaysWord != null)
             {
-                return todaysWord.Word.Text;
+                return todaysWord;
             } else
             {
                 lock (_WordOfTheDayLock)
                 {
                     var todaysLatestWord = _db.DateWords
                         .Include(f => f.Word)
-                        .FirstOrDefault(f => f.Date == localDate);
+                        .FirstOrDefault(f => f.Date == date.Value);
 
                     if (todaysLatestWord != null)
                     {
-                        return todaysLatestWord.Word.Text;
+                        return todaysLatestWord;
                     }
                     var word = GetRandomWord().Result;
 
                     var dateWord = new DateWord
                     {
-                        Date = localDate,
+                        Date = date.Value,
                         Word = word
                     };
                     _db.DateWords.Add(dateWord);
@@ -110,11 +105,10 @@ namespace Wordle.Api.Services
                         {
                             return _db.DateWords
                                 .Include(f => f.Word)
-                                .First(f => f.Date == localDate)
-                                .Word.Text;
+                                .First(f => f.Date == date.Value);
                         }
                     }
-                    return word.Text;
+                    return dateWord;
                 }
             }
         }
