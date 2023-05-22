@@ -2,7 +2,7 @@
   <v-container class="fill-height" fluid>
     <v-row justify="center">
       <v-col cols="12" style="display: flex; justify-content: center">
-        <div style="display: flex; align-items: center">
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap">
           <v-icon icon="mdi-alpha-w-box-outline" :size="130"></v-icon>
           <h1 class="text-h1">Wordle</h1>
         </div>
