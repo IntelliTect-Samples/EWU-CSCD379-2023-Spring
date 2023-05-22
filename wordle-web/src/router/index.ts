@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WordleView from '../views/WordleView.vue'
-import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import HomeView from '../views/HomeView.vue'
 
@@ -16,11 +15,6 @@ const router = createRouter({
       path: '/play',
       name: 'play',
       component: WordleView
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: AboutView
     },
     {
       path: '/leaderboard',

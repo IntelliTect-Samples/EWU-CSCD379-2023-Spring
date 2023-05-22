@@ -2,9 +2,6 @@
   <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
-
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
-
   <GameBoard :game="game" @letterClick="addChar" />
 
   <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
@@ -13,7 +10,6 @@
     <v-btn
       @click="checkGuess"
       @keyup.enter="checkGuess"
-      color="primary"
       :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status == WordleGameStatus.Active"
     >
@@ -35,7 +31,7 @@
   </div>
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
-  <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
+  <v-row class="justify-center mb-3" v-if="game.status == WordleGameStatus.Active">
     <v-col xs="11" sm="9" md="6" lg="4">
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>

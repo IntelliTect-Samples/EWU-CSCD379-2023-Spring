@@ -4,8 +4,9 @@
       <template v-slot>
         <v-app-bar-title>
           <RouterLink to="/">
-            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
-            Wordle
+            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3" class="mr-2"></v-icon>
+            <span v-if="route.path == '/wordoftheday'"> Wordle Of The Day </span>
+            <span v-else> Wordle Playground </span>
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
@@ -66,15 +67,12 @@
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item>
-              <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
-            </v-list-item>
           </v-list>
         </v-menu>
       </template>
     </v-app-bar>
 
-    <v-main class="animated-background">
+    <v-main class="animated-background mt-5">
       <RouterView />
     </v-main>
   </v-app>

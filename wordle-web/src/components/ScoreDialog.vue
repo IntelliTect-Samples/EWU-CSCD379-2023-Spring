@@ -1,8 +1,8 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>
-      <div class="d-flex justify-center pa-2 bg-primary text-h6">
-        You {{ gameResult?.wasGameWon ? 'Win' : 'Loose' }}
+      <div class="d-flex justify-center pa-2 text-h6">
+        You {{ gameResult?.wasGameWon ? 'Won!' : 'Lost :(' }}
       </div>
       <v-card-text class="d-flex flex-column align-center">
         <v-row dense>
@@ -12,9 +12,8 @@
           <v-col cols="6">{{ duration }}</v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions>
-        <v-spacer />
-        <v-btn @click="close" variant="elevated" color="primary"> Play Again </v-btn>
+      <v-card-actions class="align-center justify-center">
+        <v-btn @click="close" variant="tonal"> Play Again </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

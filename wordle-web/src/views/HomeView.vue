@@ -12,33 +12,30 @@
       </v-col>
       <v-col cols="12" align="center">
         <v-btn
-          color="success"
-          :min-width="150"
-          :min-height="50"
-          class="text-h6 rounded-xl elevation-0"
+          variant="outlined"
+          class="text-h6 rounded-xl elevation-0 text-shadow button-theme"
           to="/wordoftheday"
-          >Today's Puzzle</v-btn
         >
+          Today's Puzzle
+        </v-btn>
         <v-divider vertical :thickness="20" v-if="!display.xs"></v-divider>
         <v-col cols="12" v-if="display.xs"></v-col>
         <v-btn
-          color="primary"
-          :min-width="150"
-          :min-height="50"
-          class="text-h6 rounded-xl elevation-0"
+          variant="outlined"
+          class="text-h6 rounded-xl elevation-0 text-shadow button-theme"
           to="/play"
-          >Play</v-btn
         >
+          Playground
+        </v-btn>
         <v-divider vertical :thickness="20" v-if="!display.xs"></v-divider>
         <v-col cols="12" v-if="display.xs"></v-col>
         <v-btn
-          color="info"
-          :min-width="150"
-          :min-height="50"
-          class="text-h6 rounded-xl elevation-0"
+          variant="outlined"
+          class="text-h6 rounded-xl elevation-0 text-shadow button-theme"
           to="/leaderboard"
-          >Leaderboard</v-btn
         >
+          Leaderboard
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -55,3 +52,12 @@ const display = inject(Services.Display, () => reactive(useDisplay())) as unknow
   typeof useDisplay
 >
 </script>
+
+<style scoped>
+.button-theme {
+  color: white;
+  border: 2px solid white;
+  min-width: 150px;
+  min-height: 50px;
+}
+</style>
