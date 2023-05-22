@@ -15,15 +15,26 @@ namespace Wordle.Api.Controllers
             _leaderboardService = leaderboardService;
         }
         [HttpGet]
-        public async Task<string[]> Get() 
+        public async Task<string[]> Get()
         {
             return await _leaderboardService.GetTopScores();
+        }
+
+        [HttpGet("daily")]
+        public async Task<string[]> GetLastTenDays()
+        {
+            return await _leaderboardService.GetLastTenDays();
         }
 
         [HttpPost]
         public async Task<Player> UpdatePlayers(string name, int attempts)
         {
             return await _leaderboardService.UpdatePlayer(name, attempts);
+        }
+        [HttpPost("daily")]
+        public async Task<DateWord?> UpdateDateWord(string word, int attempts) 
+        {
+            return await _leaderboardService.UpdateDateWord(word, attempts);
         }
     }
 }

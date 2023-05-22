@@ -1,10 +1,13 @@
 import Axios from 'axios'
 
 export abstract class LeaderboardService {
-  static leaderboardUrl = 'https://wordleweb.azurewebsites.net/leaderboard'
-
   static async getLeaderboardFromApi(): Promise<string[]> {
-    const result = await Axios.get(this.leaderboardUrl)
+    const result = await Axios.get('/leaderboard')
+    console.log(result.data)
+    return result.data
+  }
+  static async getDailyLeaderboard(): Promise<string[]> {
+    const result = await Axios.get('/leaderboard/daily')
     console.log(result.data)
     return result.data
   }

@@ -5,9 +5,8 @@ export abstract class WordsService {
     return this.#words[Math.floor(Math.random() * this.#words.length)]
   }
 
-  static wordUrl = 'https://wordleweb.azurewebsites.net/word'
   static async getWordFromApi(): Promise<string> {
-    const result = await Axios.get(this.wordUrl)
+    const result = await Axios.get('/word')
     console.log(result.data)
     return result.data
   }

@@ -7,6 +7,9 @@
     <RouterLink to="/wordle">
       <h2>Play</h2>
     </RouterLink>
+    <RouterLink to="/wordoftheday">
+      <h2>Daily Word</h2>
+    </RouterLink>
     <RouterLink to="/leaderboard">
       <h2>Leaderboard</h2>
     </RouterLink>

@@ -2,7 +2,7 @@
   <v-layout>
     <v-app-bar class="custom-app-bar" color="primary" density="compact">
       <template v-slot:prepend>
-        <RouterLink to="/wordle">
+        <RouterLink to="/">
           <h1 class="titleClass">Wordle Web</h1>
         </RouterLink>
         <RouterLink to="/">

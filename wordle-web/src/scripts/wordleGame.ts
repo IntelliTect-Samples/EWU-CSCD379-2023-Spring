@@ -44,11 +44,15 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
-  submitGuess() {
+  submitGuess(route: string) {
     // put logic to win here.
     this.amountOfGuesses++
     if (this.guess.check(this.secretWord)) {
-      this.postPlayerToApi(this.currentPlayer, this.amountOfGuesses)
+      if (route === '/wordoftheday') {
+        this.postScoreToDaily()
+      } else {
+        this.postPlayerToApi(this.currentPlayer, this.amountOfGuesses)
+      }
     }
 
     // Update the guessed letters
@@ -76,12 +80,19 @@ export class WordleGame {
 
   postPlayerToApi(name: string, attempts: number) {
     Axios.post(
-      'https://wordleweb.azurewebsites.net/leaderboard?name='.concat(
-        name,
-        '&attempts=',
-        attempts.toString()
-      ),
+      '/leaderboard?name='.concat(name, '&attempts=', attempts.toString()),
       name.concat(',', attempts.toString(), ',', attempts.toString())
+    )
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+  }
+  postScoreToDaily() {
+    Axios.post(
+      '/leaderboard/daily?word=' + this.secretWord + '&attempts=' + this.amountOfGuesses.toString()
     )
       .then(function (response) {
         console.log(response)

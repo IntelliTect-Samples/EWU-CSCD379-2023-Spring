@@ -1,5 +1,7 @@
 <template>
-  <h1>WORDLE</h1>
+  <v-row class="justify-center"
+    ><h1>{{ titleRef }}</h1></v-row
+  >
   <v-container>
     <GameBoard :game="game" @letterClick="addChar" />
   </v-container>
@@ -35,6 +37,7 @@ import { useRoute } from 'vue-router'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
 
+const titleRef = ref('Wordle')
 const guess = ref('')
 const game = reactive(new WordleGame())
 const route = useRoute()
@@ -53,9 +56,12 @@ function newGame() {
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
     apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    titleRef.value = 'Word Of The Day'
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
+  } else {
+    titleRef.value = 'Wordle'
   }
   Axios.get(apiPath)
     .then((response) => {
@@ -77,7 +83,7 @@ function autoComplete(fill: string) {
   }
 }
 function checkGuess() {
-  game.submitGuess()
+  game.submitGuess(route.path)
   guess.value = ''
 }
 function addChar(letter: Letter) {
