@@ -72,7 +72,7 @@
       </template>
     </v-app-bar>
 
-    <v-main class="animated-background mt-5">
+    <v-main class="animated-background">
       <RouterView />
     </v-main>
   </v-app>

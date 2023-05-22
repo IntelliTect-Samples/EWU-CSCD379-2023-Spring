@@ -16,7 +16,7 @@
           class="text-h6 rounded-xl elevation-0 text-shadow button-theme"
           to="/wordoftheday"
         >
-          Today's Puzzle
+          Daily Puzzle
         </v-btn>
         <v-divider vertical :thickness="20" v-if="!display.xs"></v-divider>
         <v-col cols="12" v-if="display.xs"></v-col>
@@ -57,7 +57,7 @@ const display = inject(Services.Display, () => reactive(useDisplay())) as unknow
 .button-theme {
   color: white;
   border: 2px solid white;
-  min-width: 150px;
+  min-width: 155px;
   min-height: 50px;
 }
 </style>
