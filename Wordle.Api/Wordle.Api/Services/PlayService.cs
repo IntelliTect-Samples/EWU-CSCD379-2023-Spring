@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -20,6 +21,19 @@ namespace Wordle.Api.Services
                 .OrderByDescending(d => d.GameDate)
                 .Take(10)
                 .ToListAsync();
+        }
+
+        //post the daily result
+        public async Task<Play> PostDailyResult(PlayDto playDto)
+        {
+            var play = new Play
+            {
+                GameDate = DateTime.Now
+                //need to add the rest of the properties
+            };
+            _db.Plays.Add(play);
+            await _db.SaveChangesAsync();
+            return play;
         }
         
     
