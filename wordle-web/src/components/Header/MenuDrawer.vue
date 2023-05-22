@@ -11,19 +11,23 @@
         <br />
 
         <v-list-item>
-          <v-btn to="/">Home</v-btn>
+          <v-btn to="/" elevation="24">Home</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/about">About</v-btn>
+          <v-btn to="/about" elevation="24">About</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/wordle">Play Game</v-btn>
+          <v-btn to="/wordle" elevation="24">Play Game</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/leaderboard">Leaderboard</v-btn>
+          <v-btn to="/leaderboard" elevation="24">Leaderboard</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/instructions" elevation="24">How To Play</v-btn>
         </v-list-item>
       </v-list>
     </v-card>
