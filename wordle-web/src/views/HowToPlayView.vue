@@ -1,13 +1,13 @@
 <template>
   <v-card
-    class="align-center text-center mx-auto"
+    class="lign-center text-center mx-auto"
     max-height="100%"
     max-width="90%"
     min-height="90%"
     min-width="25%"
     rounded
-    title="How to Play Wordle"
   >
+    <v-card-title class="titleText">How to Play Wordle</v-card-title>
     <v-card-text class="bodyText">
       The rules of Wordle are elegantly simple. Your objective is to guess a secret five-letter word
       in as few guesses as possible. To submit a guess, type any five-letter word and press enter.
@@ -68,6 +68,9 @@
   .subText {
     font-size: 10px;
   }
+  .titleText {
+    font-size: 20px;
+  }
 }
 
 @media (min-width: 601px) {
@@ -77,6 +80,9 @@
   .subText {
     font-size: 14px;
   }
+  .titleText {
+    font-size: 28px;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -85,6 +91,9 @@
   }
   .subText {
     font-size: 18px;
+  }
+  .titleText {
+    font-size: 30px;
   }
 }
 </style>

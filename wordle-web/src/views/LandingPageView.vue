@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .fade-in {
-  animation: fadeIn 2s;
+  animation: fadeIn 2.5s;
 }
 
 @keyframes fadeIn {
@@ -71,7 +71,7 @@ export default {
 }
 
 .fade-out {
-  animation: fadeOut 3s;
+  animation: fadeOut 2.5s;
 }
 
 @keyframes fadeOut {
@@ -94,11 +94,10 @@ export default {
 }
 
 .h1 {
-  font-size: 3em; /* Set the base font size for the heading */
+  font-size: 3em;
 }
 
 @media (max-width: 600px) {
-  /* Adjust the font size for smaller screens */
   .h1 {
     font-size: 1.3em;
   }
