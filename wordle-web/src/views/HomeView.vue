@@ -1,78 +1,69 @@
 <template>
   <v-card>
     <v-carousel height="800px">
-      <v-carousel-item
-        :src="image1"
-        cover
-      >
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
-        <v-card class="mx-auto" max-width="344" variant="outlined" vertical-align="bottom">
-          <v-card-item>
-            <div>
-              <div class="text-overline mb-1">Wordle</div>
-              <div class="text-h6 mb-1">Overview</div>
-              <div class="text-caption">
-                Wordle Is A Challenging, Brain-Bending Game, Click for More
+      <v-carousel-item :src="image1" cover>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
+          <v-card class="mx-auto" max-width="344" variant="outlined" vertical-align="bottom">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">Wordle</div>
+                <div class="text-h6 mb-1">Overview</div>
+                <div class="text-caption">
+                  Wordle Is A Challenging, Brain-Bending Game, Click for More
+                </div>
               </div>
-            </div>
-          </v-card-item>
+            </v-card-item>
 
-          <v-card-actions>
-            <v-btn to="/about" variant="outlined"> About </v-btn>
-            <v-btn variant="outlined"> Instructions </v-btn>
-          </v-card-actions>
-        </v-card>
-      </div>
+            <v-card-actions>
+              <v-btn to="/about" variant="outlined"> About </v-btn>
+              <v-btn variant="outlined"> Instructions </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
       </v-carousel-item>
 
-      <v-carousel-item
-        :src="image2"
-        cover
-      >
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
-        <v-card class="mx-auto" max-width="344" variant="outlined">
-          <v-card-item>
-            <div>
-              <div class="text-overline mb-1">Wordle</div>
-              <div class="text-h6 mb-1">Game</div>
-              <div class="text-caption">
-                Each day, a new word is chosen based on the date, alternatively, you can choose a
-                random word
+      <v-carousel-item :src="image2" cover>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
+          <v-card class="mx-auto" max-width="344" variant="outlined">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">Wordle</div>
+                <div class="text-h6 mb-1">Game</div>
+                <div class="text-caption">
+                  Each day, a new word is chosen based on the date, alternatively, you can choose a
+                  random word
+                </div>
               </div>
-            </div>
-          </v-card-item>
+            </v-card-item>
 
-          <v-card-actions>
-            <v-btn to="/wordle" variant="outlined"> Play </v-btn>
-            <v-btn to="/wordoftheday" variant="outlined"> Wordle of Day </v-btn>
-          </v-card-actions>
-        </v-card>
-      </div>
+            <v-card-actions>
+              <v-btn to="/wordle" variant="outlined"> Play </v-btn>
+              <v-btn to="/wordoftheday" variant="outlined"> Wordle of Day </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
       </v-carousel-item>
 
-      <v-carousel-item
-        :src="image3"
-        cover
-      >
-      <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
-        <v-card class="mx-auto" max-width="344" variant="outlined">
-          <v-card-item>
-            <div>
-              <div class="text-overline mb-1">Wordle</div>
-              <div class="text-h6 mb-1">Leaderboard</div>
-              <div class="text-caption">
-                Results are stored and those whom have played exceptionally will be displayed. The
-                wordle of the day statistics too will be displayed
+      <v-carousel-item :src="image3" cover>
+        <div style="display: flex; justify-content: center; align-items: center; height: 100vh">
+          <v-card class="mx-auto" max-width="344" variant="outlined">
+            <v-card-item>
+              <div>
+                <div class="text-overline mb-1">Wordle</div>
+                <div class="text-h6 mb-1">Leaderboard</div>
+                <div class="text-caption">
+                  Results are stored and those whom have played exceptionally will be displayed. The
+                  wordle of the day statistics too will be displayed
+                </div>
               </div>
-            </div>
-          </v-card-item>
+            </v-card-item>
 
-          <v-card-actions>
-            <v-btn to="/leaderBoard" variant="outlined"> Leaderboard </v-btn>
-            <v-btn to="/days" variant="outlined"> Wordle Stats </v-btn>
-          </v-card-actions>
-        </v-card>
-      </div>
+            <v-card-actions>
+              <v-btn to="/leaderBoard" variant="outlined"> Leaderboard </v-btn>
+              <v-btn to="/days" variant="outlined"> Wordle Stats </v-btn>
+            </v-card-actions>
+          </v-card>
+        </div>
       </v-carousel-item>
     </v-carousel>
   </v-card>
@@ -85,8 +76,7 @@ import { useTheme } from 'vuetify'
 const theme = useTheme()
 
 console.log(theme.name)
-const themeName = ref((theme.name.value == "useTheme") ? "space": theme.name.value)
-
+const themeName = ref(theme.name.value == 'useTheme' ? 'space' : theme.name.value)
 
 function getImage1(): string {
   switch (themeName.value) {
@@ -155,23 +145,24 @@ function updateImages() {
 
 // Listen to theme changes
 onMounted(() => {
-  const root = document.documentElement;
+  const root = document.documentElement
 
   themeName.value = theme.global.name.value
-  root.style.setProperty('--background-image', `url("${image1}")`);
-  watch(() => theme.global.name.value, (newValue:string) => {
-    // Update the value of the CSS variable
-    //root.style.setProperty('--background-image', `url("${image1}")`);
-  themeName.value = newValue
+  root.style.setProperty('--background-image', `url("${image1}")`)
+  watch(
+    () => theme.global.name.value,
+    (newValue: string) => {
+      // Update the value of the CSS variable
+      //root.style.setProperty('--background-image', `url("${image1}")`);
+      themeName.value = newValue
 
-  // Update the value of the CSS variable
-  root.style.setProperty('--background-image', `url("${getImage1()}")`);
-  updateImages()
-})
+      // Update the value of the CSS variable
+      root.style.setProperty('--background-image', `url("${getImage1()}")`)
+      updateImages()
+    }
+  )
 })
 // Access the root element of the document
-
-
 
 // Export the variables to be used in the template
 </script>

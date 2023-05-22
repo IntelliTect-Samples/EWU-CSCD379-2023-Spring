@@ -98,8 +98,6 @@ const vuetify = createVuetify({
   }
 })
 
-
-
 const app = createApp(App)
 
 app.use(vuetify)
@@ -107,5 +105,5 @@ app.use(vuetify)
 app.use(router)
 
 app.mount('#app')
-document.documentElement.style.overflow = 'hidden';
-document.body.style.overflow = 'hidden';
+document.documentElement.style.overflow = 'hidden'
+document.body.style.overflow = 'hidden'

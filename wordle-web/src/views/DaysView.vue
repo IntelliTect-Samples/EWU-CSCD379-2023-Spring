@@ -54,7 +54,7 @@ function goBack() {
 }
 
 function saveDate(index: number) {
-  localStorage.offset = -index;//might not be correct usage of Date
+  localStorage.offset = -index //might not be correct usage of Date
 }
 
 Axios.get(`/Word/GetWordOfDayLastTenDays?userName=${localStorage.name}`)

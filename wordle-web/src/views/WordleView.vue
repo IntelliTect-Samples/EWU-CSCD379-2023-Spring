@@ -49,9 +49,8 @@
   </v-overlay>
 
   <div class="d-flex align-center flex-column">
-    <div class="text-subtitle-2">Time: {{count}}</div>
-    </div>
-
+    <div class="text-subtitle-2">Time: {{ count }}</div>
+  </div>
 </template>
 
 <script setup lang="ts">
