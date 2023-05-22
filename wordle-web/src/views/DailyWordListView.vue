@@ -14,16 +14,16 @@
           <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
             <v-btn
               height="100%"
-              :to="`/wordOfTheDay/${date}`"
+              :to="`/wordOfTheDay/${stats.date}`"
               outlined
               :color="isDatePlayed(stats.date) ? 'green' : 'red'"
             >
               <span class="bodyText"
                 >{{ stats.date }}
                 <div class="stats">
-                  <div>Avg Guesses: {{ getAverageGuesses(date) }}</div>
-                  <div>Avg Seconds per Game: {{ getAverageSeconds(date) }}</div>
-                  <div>Total Games: {{ getTotalGames(date) }}</div>
+                  <div>Avg Guesses: {{ stats.avgGuesses }}</div>
+                  <div>Avg Seconds per Game: {{ stats.avgSeconds }}</div>
+                  <div>Total Games: {{ stats.totalGames }}</div>
                 </div>
               </span>
             </v-btn>
@@ -34,7 +34,7 @@
   </v-col>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
@@ -54,18 +54,9 @@ export default {
     }
   },
   methods: {
-    isDatePlayed(date) {
+    isDatePlayed(date : string) : boolean {
       return this.playedDates.includes(date)
     },
-    getAverageGuesses(date) {
-      return this.gameStats[date] ? this.gameStats[date].avgGuesses : 0
-    },
-    getAverageSeconds(date) {
-      return this.gameStats[date] ? this.gameStats[date].avgSeconds : 0
-    },
-    getTotalGames(date) {
-      return this.gameStats[date] ? this.gameStats[date].totalGames : 0
-    }
   }
 }
 </script>
