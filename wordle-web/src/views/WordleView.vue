@@ -166,14 +166,6 @@ function sendGameResult() {
     console.log(response.data)
   })
 
-  Axios.post('/DailyStats/AddDailyGameResult', {
-    PlayerId: gameResult.playerId,
-    WasGameWon: true,
-    Attempts: 1,
-    DurationInSeconds: 1
-  }).then((response) => {
-    console.log(response.data)
-  })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)
   // }

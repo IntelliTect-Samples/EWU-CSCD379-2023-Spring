@@ -16,7 +16,7 @@ namespace Wordle.Api.Controllers;
         }
 
     [HttpPost("AddDailyGameResult")]
-    public async Task<ActionResult<DateWordStatsDto>> AddDailyGameResultAsync(DailyGameResultDto dto)
+    public async Task<ActionResult<DateWordStatsDto>> AddDailyGameResultAsync(DateWordDto dto)
     {
         var added = await _DailyStatsService.AddDailyGameResultAsync(dto);
         if (added is not null)

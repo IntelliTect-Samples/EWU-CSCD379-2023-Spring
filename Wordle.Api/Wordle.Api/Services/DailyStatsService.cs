@@ -13,9 +13,9 @@ namespace Wordle.Api.Services
             _db = db;
         }
 
-        public async Task<DateWordStats?> AddDailyGameResultAsync(DailyGameResultDto dto)
+        public async Task<DateWordStats?> AddDailyGameResultAsync(DateWordDto dto)
         {
-            var added = await _db.DailyStats.FindAsync(dto.dateWord);
+            var added = await _db.DailyStats.FindAsync(dto.WordPlayed);
             if (added is not null)
             {
                 if (dto.WasGameWon)
@@ -35,6 +35,7 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<DateWordStats>> GetLastTenWords(int count = 10)
         {
             return await _db.DailyStats
+                .OrderBy(f => f.DateWordStatsId)
                 .Take(count)
                 .ToListAsync();
         }
