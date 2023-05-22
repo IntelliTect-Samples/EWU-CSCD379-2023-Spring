@@ -165,6 +165,7 @@ function sendGameResult() {
   Axios.post('/Player/AddGameResult', gameResult).then((response) => {
     console.log(response.data)
   })
+
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)
   // }

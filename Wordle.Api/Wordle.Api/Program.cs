@@ -36,7 +36,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddScoped<WordService>();
 builder.Services.AddScoped<PlayerService>();
-
+builder.Services.AddScoped<DailyStatsService>();
 // Actually build the app so we can configure the pipeline next
 var app = builder.Build();
 
