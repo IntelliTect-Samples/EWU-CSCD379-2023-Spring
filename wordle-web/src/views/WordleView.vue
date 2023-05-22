@@ -170,10 +170,10 @@ function sendGameResult() {
     PlayerId: gameResult.playerId,
     WasGameWon: true,
     Attempts: 1,
-    DurationInSeconds: 1,
-  } ).then((response) => {
-        console.log(response.data)
-      })
+    DurationInSeconds: 1
+  }).then((response) => {
+    console.log(response.data)
+  })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)
   // }
