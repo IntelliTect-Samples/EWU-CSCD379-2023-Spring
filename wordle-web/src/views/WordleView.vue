@@ -65,9 +65,7 @@ localStorage.startTime = Date.now()
 
 const guess = ref('')
 const game = reactive(new WordleGame())
-
 const overlay = ref(true)
-
 var dialog = ref(true)
 
 let timerInterval: any = null
@@ -116,9 +114,16 @@ function addWord() {
 
 let gameName = 'Wordle Mind Bender'
 let apiPath = 'word'
-if (route.path == '/wordoftheday') {
+let offset = 0
+let OldDate = localStorage.date
+if (route.path == `/wordoftheday`) {
   gameName = 'wordle of the day'
   apiPath = `word/GetWordOfDay`
+} else if (route.path == '/pastwordoftheday') {
+  gameName = 'wordle of the day'
+  let date: Date = new Date()
+  offset = OldDate.getDay() - date.getDay()
+  apiPath = `word/GetWordOfDay?userName=${offset}`
 }
 
 Axios.get(apiPath)
