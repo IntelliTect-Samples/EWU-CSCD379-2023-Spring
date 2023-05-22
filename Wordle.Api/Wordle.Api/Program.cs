@@ -2,13 +2,13 @@ using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
 
-var MyAllowAllOrigins = "_myAllowAllOrigins";
+var myAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
                          {
-                             options.AddPolicy(name: MyAllowAllOrigins, policy =>
+                             options.AddPolicy(name: myAllowAllOrigins, policy =>
                                                                         {
                                                                             policy.WithOrigins("*");
                                                                             policy.AllowAnyMethod();
@@ -57,7 +57,7 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowAllOrigins);
+app.UseCors(myAllowAllOrigins);
 
 app.UseAuthorization();
 

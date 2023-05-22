@@ -59,13 +59,11 @@ public class PlayerService
     public async Task<Player> UpdateAsync(Guid playerId, string name)
     {
         var player = await _db.Players.FindAsync(playerId);
-        if (player is not null)
-        {
-            player.Name = name;
-            await _db.SaveChangesAsync();
-            return player;
-        }
-        throw new ArgumentException("Player Id not found");
+        if (player is null)
+            throw new ArgumentException("Player Id not found");
+        player.Name = name;
+        await _db.SaveChangesAsync();
+        return player;
     }
 }
 }
