@@ -350,3 +350,5 @@ MigrationBackup/
 .ionide/
 
 .DS_Store
+
+Wordle.Api/.idea/.idea.Wordle.Api/.idea/workspace.xml
