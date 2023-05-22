@@ -39,14 +39,5 @@
             }
         }
 
-        public static void SeedPlays(AppDbContext db)
-        {
-            if (!db.Plays.Any())
-            {
-                db.Plays.Add(new Plays { PlayerId = Guid.Parse("052A7AF7-4FCF-489D-9CB8-214E08B64EBF"), WordId = 5, DateWordId = 1, Seconds = 25, Attempts = 3, Date = DateTime.UtcNow, PlayId = Guid.NewGuid() });
-                db.SaveChanges();
-            }
-        }
-
     }
 }
