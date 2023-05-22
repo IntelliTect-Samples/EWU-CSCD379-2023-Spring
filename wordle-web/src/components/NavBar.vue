@@ -11,11 +11,12 @@
         <v-btn to="/leaderboard">Leader Board</v-btn>
         <v-btn to="/about">About</v-btn>
         <v-btn to="/worldoftheday">World of the Day</v-btn>
+        <GameInstruction/>
         <v-app-bar-nav-icon @click="setTheme('default')" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="setting = true" icon="mdi-cog"></v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-toolbar-items>
-    </v-toolbar>
+    </v-toolbar>  
 
     <v-navigation-drawer location="right" @click.stop="drawer = !drawer" v-model="drawer" temporary>
       <v-list-item >
@@ -41,6 +42,8 @@
       </v-list-item>
     </v-navigation-drawer>
   </nav>
+
+
   <v-dialog v-model="setting" width="auto">
     <v-card>
       <v-list-item>
@@ -68,15 +71,20 @@
       </v-list-item>
     </v-card>
   </v-dialog>
+
+
+
 </template>
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import { ref } from 'vue'
+import GameInstruction from './GameInstruction.vue'
 
 const theme = useTheme()
 const drawer = ref (false)
 const setting = ref (false)
+
 
 function setTheme(themecolor: string){
   if(themecolor === "light" )
