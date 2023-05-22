@@ -27,6 +27,11 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
+                <RouterLink to="/wordoftheday">Daily Wordle</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>

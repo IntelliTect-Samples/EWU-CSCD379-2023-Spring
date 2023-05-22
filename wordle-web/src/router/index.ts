@@ -25,7 +25,6 @@ const router = createRouter({
       path: '/wordoftheday',
       name: 'wordoftheday',
       component: WordleView,
-      props: {wordOfTheDay: true}
     }
   ]
 })
