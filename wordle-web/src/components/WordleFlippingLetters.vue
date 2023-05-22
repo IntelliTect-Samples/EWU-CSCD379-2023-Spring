@@ -32,7 +32,7 @@ onMounted(() => {
   for (const [index, letter] of letters.entries()) {
     setTimeout(() => {
       letter.classList.push('square2')
-      if (Math.random() > 0.33) {
+      if (Math.random() > 0.03) {
         letter.classList.push('green')
       } else {
         letter.classList.push('yellow')
