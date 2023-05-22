@@ -88,7 +88,7 @@ function newGame() {
   overlay.value = true
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
-    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    apiPath = `word/wordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
