@@ -84,7 +84,7 @@ All instructions assume you are logged into the portal at https://portal.azure.c
     2. If you want to access the server from your computer, click Add your client IPv4 address
     4. Check the Allow Azure services and resources to access this server
     5. Click Save
-    6. If you do this, you will be back at the SQL Server level and will need to click SQL Databases and then the database name to navigate back to the actual database
+    6. You will be back at the SQL Server level and will need to click SQL Databases and then the database name to navigate back to the actual database
 
 ## Set the App Service database connection string
 1. Navigate to your Azure SQL database and the Overview page (default)
