@@ -49,10 +49,10 @@
 
 <script setup lang="ts">
 import { Letter } from '@/scripts/letter'
-import LetterButton from '@/components/LetterButton.vue'
+import LetterButton from '@/components/WordlePage/LetterButton.vue'
 import { computed, inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
-import { Services } from '@/scripts/Services/services'
+import { Services } from '@/scripts/services/services'
 
 const props = defineProps<{
   guessedLetters: Letter[]
@@ -72,12 +72,12 @@ const keyboardLetters = computed(() => {
     ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '?']
   ]
 
-  console.log(props.guessedLetters.length)
+  // console.log(props.guessedLetters.length)
 
   for (let keyboardKey of keyboardKeys) {
     let keyboardRow: Letter[] = []
     for (let key of keyboardKey) {
-      //console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
+      // console.log(props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()))
       keyboardRow.push(
         props.guessedLetters.find((l) => l.char.toLowerCase() === key.toLowerCase()) ??
           new Letter(key)
@@ -107,4 +107,3 @@ function emitBackspaceClick() {
   emit('backspaceClick')
 }
 </script>
-

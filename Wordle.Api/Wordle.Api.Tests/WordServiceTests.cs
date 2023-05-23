@@ -2,8 +2,8 @@ using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
-namespace Wordle.Api.Tests
-{
+namespace Wordle.Api.Tests;
+
 [TestClass]
 public class WordServiceTests : DatabaseTestBase
 {
@@ -44,8 +44,8 @@ public class WordServiceTests : DatabaseTestBase
             var playerService = new PlayerService(context);
             var wordService = new WordService(context);
 
-            var PlayerId1 = (await playerService.CreateAsync("Tester1")).PlayerId;
-            var PlayerId2 = (await playerService.CreateAsync("Tester2")).PlayerId;
+            var playerId1 = (await playerService.CreateAsync("Tester1")).PlayerId;
+            var playerId2 = (await playerService.CreateAsync("Tester2")).PlayerId;
             var wordOfTheDay1 = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7), DateTime.UtcNow);
             var wordOfTheDay2 = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7), DateTime.UtcNow.AddDays(-1));
             var wordOfTheDay3 = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7), DateTime.UtcNow.AddDays(-2));
@@ -53,7 +53,7 @@ public class WordServiceTests : DatabaseTestBase
 
             GameResultDto dto = new()
             {
-                PlayerId = PlayerId1,
+                PlayerId = playerId1,
                 WordPlayed = wordOfTheDay1.Word.Text,
                 WasGameWon = true,
                 Attempts = 3,
@@ -65,7 +65,7 @@ public class WordServiceTests : DatabaseTestBase
 
             dto = new()
             {
-                PlayerId = PlayerId2,
+                PlayerId = playerId2,
                 WordPlayed = wordOfTheDay1.Word.Text,
                 WasGameWon = true,
                 Attempts = 1,
@@ -76,7 +76,7 @@ public class WordServiceTests : DatabaseTestBase
 
             dto = new()
             {
-                PlayerId = PlayerId1,
+                PlayerId = playerId1,
                 WordPlayed = wordOfTheDay2.Word.Text,
                 WasGameWon = true,
                 Attempts = 3,
@@ -86,7 +86,7 @@ public class WordServiceTests : DatabaseTestBase
             await playerService.AddGameResultAsync(dto);
             dto = new()
             {
-                PlayerId = PlayerId1,
+                PlayerId = playerId1,
                 WordPlayed = wordOfTheDay3.Word.Text,
                 WasGameWon = true,
                 Attempts = 3,
@@ -115,5 +115,3 @@ public class WordServiceTests : DatabaseTestBase
 
         }
     }
-}
-}

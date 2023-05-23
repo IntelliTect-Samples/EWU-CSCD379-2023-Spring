@@ -1,6 +1,7 @@
 import { Word } from '@/scripts/word'
-import { WordsService } from './Services/wordsService'
+import { WordsService } from '@/scripts/services/wordsService'
 import type { Letter } from '@/scripts/letter'
+import { LetterStatus } from '@/scripts/letter'
 
 export enum WordleGameStatus {
   Active = 0,
@@ -61,10 +62,46 @@ export class WordleGame {
     if (!this.guess.isFilled) return
     if (!WordsService.isValidWord(this.guess.text)) {
       this.guess.clear()
+      console.log('Invalid word was entered')
       return
     }
     // put logic to win here.
     const correctGuess = this.guess.checkWord(this.secretWord)
+
+    // TODO: Possibly find a better place to do this, and find a more efficient way of doing it...
+    /// Updates the colors of the Game Keyboard...
+    for (const guessLetter of this.guess.letters) {
+      for (const guessedLetter of this.guessedLetters) {
+        if (guessLetter.char === guessedLetter.char) {
+          if (guessedLetter.status === LetterStatus.Correct) {
+            /* empty */
+          } else if (
+            guessedLetter.status === LetterStatus.Misplaced &&
+            guessLetter.status === LetterStatus.Correct
+          ) {
+            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
+          } else if (
+            guessedLetter.status === LetterStatus.Misplaced &&
+            guessLetter.status === LetterStatus.Wrong
+          ) {
+            /* empty */
+          } else if (
+            guessedLetter.status === LetterStatus.Wrong &&
+            guessLetter.status === LetterStatus.Misplaced
+          ) {
+            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
+          } else if (
+            guessedLetter.status === LetterStatus.Wrong &&
+            guessLetter.status === LetterStatus.Correct
+          ) {
+            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
+          } else {
+            this.guessedLetters.splice(this.guessedLetters.indexOf(guessedLetter), 1)
+          }
+        }
+      }
+    }
+
     // Update the guessed letters
     for (const letter of this.guess.letters) {
       this.guessedLetters.push(letter)

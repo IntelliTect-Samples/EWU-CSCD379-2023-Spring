@@ -28,8 +28,8 @@
 
 <script setup lang="ts">
 import { inject } from 'vue'
-import { Services } from '@/scripts/Services/services'
-import type { PlayerService } from '@/scripts/Services/playerService'
+import { Services } from '@/scripts/services/services'
+import type { PlayerService } from '@/scripts/services/playerService'
 
 const playerService = inject(Services.PlayerService) as PlayerService
 playerService.refreshPlayerFromServerAsync()

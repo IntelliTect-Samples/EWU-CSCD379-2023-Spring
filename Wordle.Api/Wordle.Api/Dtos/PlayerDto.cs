@@ -1,7 +1,7 @@
 using Wordle.Api.Data;
 
-namespace Wordle.Api.Dtos
-{
+namespace Wordle.Api.Dtos;
+
 public class PlayerDto
 {
     public PlayerDto()
@@ -27,5 +27,4 @@ public class PlayerDto
 public class CreatePlayerDto
 {
     public required string Name { get; set; }
-}
 }

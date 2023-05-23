@@ -1,5 +1,5 @@
-﻿namespace Wordle.Api.Data
-{
+﻿namespace Wordle.Api.Data;
+
 public static class Seeder
 {
     public static void Seed(AppDbContext context)
@@ -12,7 +12,7 @@ public static class Seeder
     {
         if (!db.Words.Any())
         {
-            var wordLines = System.IO.File.ReadAllLines("Content/Words.csv");
+            var wordLines = File.ReadAllLines("Content/Words.csv");
             foreach (var line in wordLines)
             {
                 var parts = line.Split(',');
@@ -42,5 +42,4 @@ public static class Seeder
             db.SaveChanges();
         }
     }
-}
 }

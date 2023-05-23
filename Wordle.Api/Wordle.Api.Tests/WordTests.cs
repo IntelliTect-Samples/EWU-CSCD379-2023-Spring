@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 
-namespace Wordle.Api.Tests
-{
+namespace Wordle.Api.Tests;
+
 [TestClass]
 public class WordTests : DatabaseTestBase
 {
@@ -27,5 +27,4 @@ public class WordTests : DatabaseTestBase
         Assert.AreEqual(1, wordSelect.Count());
         Assert.AreEqual(2, wordSelect.First().DateWords.Count());
     }
-}
 }

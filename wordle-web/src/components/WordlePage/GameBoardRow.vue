@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import LetterResult from '@/components/LetterResult.vue'
+import LetterResult from '@/components/WordlePage/LetterResult.vue'
 import type { LetterStatus } from '@/scripts/letter'
 import type { Word } from '@/scripts/word'
 import { onMounted } from 'vue'

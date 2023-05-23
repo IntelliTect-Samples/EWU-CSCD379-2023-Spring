@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import type { WordleGame } from '@/scripts/wordleGame'
-import GameBoardRow from '@/components/GameBoardRow.vue'
+import GameBoardRow from '@/components/WordlePage/GameBoardRow.vue'
 
 defineProps<{
   game: WordleGame

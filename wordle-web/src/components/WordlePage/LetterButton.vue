@@ -3,7 +3,6 @@
 --->
 
 <template>
-  <!-- TODO: Figure out why size is throwing error. -->
   <v-btn
     label
     outlined
@@ -21,7 +20,7 @@
 
 <script setup lang="ts">
 import { Letter, LetterStatus } from '@/scripts/letter'
-import { Services } from '@/scripts/Services/services'
+import { Services } from '@/scripts/services/services'
 import { inject } from 'vue'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'

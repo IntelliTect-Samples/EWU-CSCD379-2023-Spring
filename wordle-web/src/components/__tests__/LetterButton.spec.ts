@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import LetterButton from '../LetterButton.vue'
+import LetterButton from '../WordlePage/LetterButton.vue'
 import { Letter, LetterStatus } from '@/scripts/letter'
 
 describe('LetterButton', () => {

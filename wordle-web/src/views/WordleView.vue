@@ -1,18 +1,32 @@
 <template>
   <div class="text-center">
+    <div class="text-h4 text-center">
+      <span v-if="isWordOfTheDay"
+        >Wordle of the Day
+        <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+      </span>
+      <span v-else>The Good Word</span>
+    </div>
+    <br />
 
-  <div class="text-h4 text-center">
-    <span v-if="isWordOfTheDay"
-      >Wordle of the Day
-      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
-    </span>
-    <span v-else>The Good Word</span>
-  </div>
-  <br />
+    <GameBoard :game="game" />
+    <br />
 
-  <GameBoard :game="game" />
+    <div>
+      <v-responsive class="mx-auto" max-width="350">
+        <v-select
+          v-model="guess"
+          :items="validGuesses"
+          :label="'Valid Guesses: ' + validGuesses.length"
+          @update:model-value="inputFromValidGuesses"
+        >
+          <v-hover></v-hover>
+        </v-select>
+      </v-responsive>
+    </div>
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" />
+    <v-divider></v-divider>
+    <br />
 
     <GameKeyboard
       :guessedLetters="game.guessedLetters"
@@ -40,21 +54,19 @@ import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
-import { WordsService } from '@/scripts/Services/wordsService'
-import GameBoard from '../components/GameBoard.vue'
-import GameKeyboard from '../components/GameKeyboard.vue'
+import { WordsService } from '@/scripts/services/wordsService'
+import GameBoard from '../components/WordlePage/GameBoard.vue'
+import GameKeyboard from '../components/WordlePage/GameKeyboard.vue'
 import { useDisplay } from 'vuetify'
-import { Services } from '@/scripts/Services/services'
-import type { PlayerService } from '@/scripts/Services/playerService'
+import { Services } from '@/scripts/services/services'
+import type { PlayerService } from '@/scripts/services/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import { watch } from 'vue'
-import ScoreDialog from '@/components/ScoreDialog.vue'
-import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
+import ScoreDialog from '@/components/WordlePage/ScoreDialog.vue'
+import WordOfTheDayScoreDialog from '@/components/WordlePage/WordOfTheDayScoreDialog.vue'
 import { useRoute } from 'vue-router'
 
 let validGuesses = new Array<string>()
-let username = ref(localStorage.getItem('username') || 'Guest')
-let timer = ref(0)
 
 const guess = ref('')
 const overlay = ref(true)
@@ -71,6 +83,12 @@ const display = inject(Services.Display, () => reactive(useDisplay())) as unknow
   typeof useDisplay
 >
 const playerService = inject(Services.PlayerService) as PlayerService
+
+watch(guess, (newValue) => {
+  if (newValue.length > 5) {
+    guess.value = newValue.slice(0, 5)
+  }
+})
 
 onMounted(async () => {
   // Start a new game

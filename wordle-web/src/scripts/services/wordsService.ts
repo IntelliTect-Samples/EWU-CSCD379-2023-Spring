@@ -23,7 +23,7 @@ export abstract class WordsService {
       .catch((err) => {
         console.log(err)
       })
-    console.log(this.words)
+    // console.log(this.words)
   }
 
   static isValidWord(word: string): boolean {

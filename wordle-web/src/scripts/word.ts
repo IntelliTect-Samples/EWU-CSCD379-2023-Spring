@@ -42,6 +42,7 @@ export class Word {
       letter.char = ''
     }
   }
+
   set(word: string) {
     this.clear()
     for (const letter of word) {
@@ -103,6 +104,9 @@ export class Word {
       }
     }
 
+    // console.log(guessChars)
+    // console.log(secretChars)
+    // console.log(isCorrect)
     this.isScored = true
     return isCorrect
   }
