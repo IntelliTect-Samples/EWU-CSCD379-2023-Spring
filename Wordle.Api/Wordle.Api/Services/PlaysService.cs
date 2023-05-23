@@ -58,10 +58,12 @@ namespace Wordle.Api.Services
             }
             else
             {
-                var player = await _db.Player.FirstOrDefaultAsync(p => p.PlayerId == PlayerId)
+                var player = await _db.Player.FirstOrDefaultAsync(p => p.PlayerId == PlayerId);
+                var date = await _db.DateWord.FirstOrDefaultAsync(d => d.WordId == WordId)
                 word = new()
                 {
                     WordId = WordId,
+                    Date = date.Date,
                     PlayerIds(0) = PlayerId,
                     GrandTotalGames = player.GameCount,
                     GrandTotalAttempts = player.TotalAttempts,

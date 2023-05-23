@@ -8,6 +8,7 @@ namespace Wordle.Api.Data
         //saved data
         public int PlaysId { get; set; }
         public int WordId { get; set; }
+        public DateTime Date { get; set; }
         public IList<int> PlayerIds { get; set; } = new List<int>();
 
         //calculations
