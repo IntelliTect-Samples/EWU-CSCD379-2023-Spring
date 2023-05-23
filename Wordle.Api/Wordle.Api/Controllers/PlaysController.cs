@@ -18,9 +18,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<Plays> AddPlay()
+        public async Task<Plays> AddPlay(int WordId, int PlayerId)
         {
-            return await _playsService.AddPlay();
+            return await _playsService.AddPlay(WordId, PlayerId);
         }
 
         [HttpGet]
