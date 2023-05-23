@@ -10,7 +10,7 @@
         public int TotalSeconds { get; set; } = 0;
         public int TotalGames { get; set; } = 0;
 
-        public ICollection<Guid> PlayerParticipants { get; } = null!;
+        public IList<Player> PreviousPlayers { get; set; } = new List<Player>();
     }
 }
 

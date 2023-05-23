@@ -26,6 +26,7 @@
 </template>
 
 <script lang="ts">
+import router from '@/router'
 import { ref, onMounted } from 'vue'
 
 export default {
@@ -41,9 +42,9 @@ export default {
         setTimeout(() => {
           fadeOut.value = true
           setTimeout(() => {
-            window.location.href = '/wordle'
+            router.push('wordle')
           }, 2000)
-        }, 7000)
+        }, 4500)
       })
     })
 

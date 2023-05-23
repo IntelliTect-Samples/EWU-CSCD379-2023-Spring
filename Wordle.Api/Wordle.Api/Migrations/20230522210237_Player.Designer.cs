@@ -12,7 +12,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230521062410_Player")]
+    [Migration("20230522210237_Player")]
     partial class Player
     {
         /// <inheritdoc />
@@ -35,6 +35,15 @@ namespace Wordle.Api.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalSeconds")
+                        .HasColumnType("int");
 
                     b.Property<int>("WordId")
                         .HasColumnType("int");
@@ -61,6 +70,9 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("AverageSecondsPerGame")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DateWordId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
 
@@ -69,6 +81,8 @@ namespace Wordle.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PlayerId");
+
+                    b.HasIndex("DateWordId");
 
                     b.ToTable("Players");
                 });
@@ -105,6 +119,18 @@ namespace Wordle.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.Player", b =>
+                {
+                    b.HasOne("Wordle.Api.Data.DateWord", null)
+                        .WithMany("PreviousPlayers")
+                        .HasForeignKey("DateWordId");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
+                {
+                    b.Navigation("PreviousPlayers");
                 });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>

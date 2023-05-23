@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230521213331_DateWordStats")]
-    partial class DateWordStats
+    [Migration("20230522210218_Word")]
+    partial class Word
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,39 +36,26 @@ namespace Wordle.Api.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("TotalAttempts")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalGames")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalSeconds")
+                        .HasColumnType("int");
+
                     b.Property<int>("WordId")
                         .HasColumnType("int");
 
                     b.HasKey("DateWordId");
 
+                    b.HasIndex("Date")
+                        .IsUnique();
+
                     b.HasIndex("WordId");
 
                     b.ToTable("DateWords");
-                });
-
-            modelBuilder.Entity("Wordle.Api.Data.DateWordStats", b =>
-                {
-                    b.Property<int>("DateWordStatsId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateWordStatsId"));
-
-                    b.Property<double>("averageScore")
-                        .HasColumnType("float");
-
-                    b.Property<double>("averageTime")
-                        .HasColumnType("float");
-
-                    b.Property<int>("numberOfPlays")
-                        .HasColumnType("int");
-
-                    b.Property<int>("totalTime")
-                        .HasColumnType("int");
-
-                    b.HasKey("DateWordStatsId");
-
-                    b.ToTable("DailyStats");
                 });
 
             modelBuilder.Entity("Wordle.Api.Data.Player", b =>
@@ -83,6 +70,9 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("AverageSecondsPerGame")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DateWordId")
+                        .HasColumnType("int");
+
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
 
@@ -91,6 +81,8 @@ namespace Wordle.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("PlayerId");
+
+                    b.HasIndex("DateWordId");
 
                     b.ToTable("Players");
                 });
@@ -127,6 +119,18 @@ namespace Wordle.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Word");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.Player", b =>
+                {
+                    b.HasOne("Wordle.Api.Data.DateWord", null)
+                        .WithMany("PreviousPlayers")
+                        .HasForeignKey("DateWordId");
+                });
+
+            modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
+                {
+                    b.Navigation("PreviousPlayers");
                 });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>

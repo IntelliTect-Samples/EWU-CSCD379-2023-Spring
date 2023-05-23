@@ -25,8 +25,8 @@ const router = createRouter({
       component: AboutView
     },
     {
-      path: '/howToPlay',
-      name: 'howToPlay',
+      path: '/howtoplay',
+      name: 'howtoplay',
       component: HowToPlayViewVue
     },
     {
@@ -35,8 +35,8 @@ const router = createRouter({
       component: LeaderboardView
     },
     {
-      path: '/dailyWordList',
-      name: 'dailyWordList',
+      path: '/dailywordlist',
+      name: 'dailywordlist',
       component: DailyWordListView
     },
     {

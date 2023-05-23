@@ -66,13 +66,20 @@ namespace Wordle.Api.Services
 
         public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {
+            var temp = DateTime.UtcNow;
             if (date is null)
             {
-                date = DateTime.UtcNow;
+                date = temp;
             }
             
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
+            var tempDateTime = new DateTimeOffset(temp.Ticks, offset);
             var localDate = localDateTime.Date;
+            var tempDate = tempDateTime.Date;
+            if (localDate > tempDate)
+            {
+                localDate = tempDate;
+            }
             var todaysWord = await _db.DateWords
                 .Include(f => f.Word)
                 .FirstOrDefaultAsync(f => f.Date == localDate);
