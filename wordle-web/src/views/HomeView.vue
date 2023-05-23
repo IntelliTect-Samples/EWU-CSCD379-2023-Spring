@@ -16,7 +16,7 @@
 
             <v-card-actions>
               <v-btn to="/about" variant="outlined"> About </v-btn>
-              <v-btn variant="outlined"> Instructions </v-btn>
+              <v-btn to="/description" variant="outlined"> Instructions </v-btn>
             </v-card-actions>
           </v-card>
         </div>
