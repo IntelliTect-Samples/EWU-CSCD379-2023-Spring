@@ -19,7 +19,7 @@
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
 
-          <v-list>
+          <v-list width="200px">
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/wordle">Play Again</RouterLink>
@@ -38,6 +38,11 @@
             <v-list-item>
               <v-list-item-title
                 ><RouterLink to="/previouswordles">Previous Wordles</RouterLink></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title
+                ><RouterLink to="/howtoplay">How To Wordle</RouterLink></v-list-item-title
               >
             </v-list-item>
             <v-list-item>
