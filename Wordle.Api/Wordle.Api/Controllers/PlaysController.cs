@@ -23,10 +23,10 @@ namespace Wordle.Api.Controllers
             return await _playsService.AddPlay(WordId, PlayerId);
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Plays>> GetDailyWordStatistics()
+        [HttpGet("GetDailyWordStatistics")]
+        public async Task<IEnumerable<Plays>> GetDailyWordStatistics(int? count)
         {
-            return _playsService.GetDailyWordStatistics();
+            return await _playsService.GetDailyWordStatistics(count);
         }
     }
 }

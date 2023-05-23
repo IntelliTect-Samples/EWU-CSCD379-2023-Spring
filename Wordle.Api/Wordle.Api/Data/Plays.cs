@@ -16,6 +16,6 @@ namespace Wordle.Api.Data
         public int GrandTotalAttempts { get; set; }
         public int GrandAverageAttempts { get; set; }
         public int GrandTotalTime { get; set; }
-        public int GrantAverageTime { get; set; }
+        public int GrandAverageTime { get; set; }
     }
 }
