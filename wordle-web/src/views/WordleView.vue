@@ -1,13 +1,19 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
+  <v-overlay :model-value="overlay" class="align-center justify-center" scrim="black" persistent>
+    <WordleFlippingLetters></WordleFlippingLetters>
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div class="text-h4 text-center">
+    <span v-if="isWordOfTheDay"
+      >Wordle of the Day
+      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+    </span>
+    <span v-else>Wordle Mind Bender</span>
+  </div>
 
-  <GameBoard :game="game" @letterClick="addChar" />
+  <GameBoard :game="game" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+  <GameKeyboard :guessedLetters="game.guessedLetters" />
 
   <v-row class="justify-center">
     <v-btn
@@ -36,12 +42,18 @@
   <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You Won!</div>
 
   <v-row class="justify-center" v-if="game.status == WordleGameStatus.Active">
-    <v-col xs="11" sm="9" md="6" lg="4">
+    <v-col xs="12" sm="9" md="6" lg="4">
       <WordleSolver :game="game" @wordClick="(value: string) => checkGuess(value)"></WordleSolver>
     </v-col>
   </v-row>
 
-  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
+  <WordOfTheDayScoreDialog
+    v-if="isWordOfTheDay"
+    v-model="showScoreDialog"
+    :game-result="lastGameResult"
+    :playerId="playerService.player.playerId"
+  />
+  <ScoreDialog v-else v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
 
 <script setup lang="ts">
@@ -54,13 +66,14 @@ import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import { useDisplay } from 'vuetify'
-import { Player } from '@/scripts/player'
 import { Services } from '@/scripts/services'
 import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
+import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
+import WordleFlippingLetters from '@/components/WordleFlippingLetters.vue'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -68,6 +81,8 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const isWordOfTheDay = ref(false)
+const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -80,15 +95,22 @@ onMounted(async () => {
   // Start a new game
   await newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
 })
 
 function newGame() {
+  isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
   overlay.value = true
   let apiPath = 'word'
-  if (route.path == '/wordoftheday') {
+  if (isWordOfTheDay.value) {
     apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
@@ -96,11 +118,17 @@ function newGame() {
   }
   Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data)
+      const word = isWordOfTheDay.value ? response.data.word : response.data
+      if (isWordOfTheDay.value) {
+        wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        wordOfTheDayDate.value = null
+      }
+      game.restartGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 2000)
     })
     .catch((error) => {
       console.log(error)
@@ -157,14 +185,12 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
-
-  console.log(gameResult)
+  gameResult.wordOfTheDayDate = wordOfTheDayDate.value
 
   lastGameResult.value = gameResult
-  showScoreDialog.value = true
 
-  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
-    console.log(response.data)
+  Axios.post('/Player/AddGameResult', gameResult).then(() => {
+    showScoreDialog.value = true
   })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)

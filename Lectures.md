@@ -151,17 +151,23 @@
 - Handling multi-threading issues with creating the word of the day.
 
 ### Lecture 14. 5/18:
-- Service mocks in .NET
+- Unique indexes
+- Reusing a view for multiple routes
 - Parsing query parameters to determine game type
+- Get method query parameters on API endpoints
 - Load Word of the day in App
 - Integration testing
-- Responsive Design Patterns
-- IsOnline flag
-- Client unit testing
-- Mocking API calls on the client
 
 ## Week 8
 ### Lecture 15. 5/23: 
+- EF multiple table queries (Getting Word of the Day stats)
+- Using GroupBy, Sort
+- CSS animations using transition
+- Creating revealing letters
+- API testing with service mocks and interfaces
+- Graceful error handling when API is missing
+
+### Next Topics
 - The problem of security and how to handle it
 - Identity in a web project (not just API)
 - Scaffolding EF
@@ -169,8 +175,6 @@
 - Scaffolding EF
 - Cookies
 - JWTs, validation, claims (UserId, Name)
-
-### Lecture 16. 5/25: 
 - Create login component
 - Managing state around logins, existing GUID, etc.
 - Managing auth flow and various login cases

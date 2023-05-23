@@ -1,6 +1,4 @@
-﻿// Ignore Spelling: Dto Wordle Api Dtos
-
-using Wordle.Api.Data;
+﻿using Wordle.Api.Data;
 
 namespace Wordle.Api.Dtos
 {
