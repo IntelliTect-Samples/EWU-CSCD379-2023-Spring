@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
@@ -17,7 +17,7 @@ public class PlayerController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<PlayerDto>> Get(Guid playerId)
+    public async Task<ActionResult<PlayerDto>> GetAsync(Guid playerId)
     {
         Player? player = await _playerService.GetAsync(playerId);
 
@@ -29,19 +29,19 @@ public class PlayerController : ControllerBase
     }
 
     [HttpGet("TopPlayers")]
-    public async Task<IEnumerable<PlayerDto>> GetTopPlayers()
+    public async Task<IEnumerable<PlayerDto>> GetTopPlayersAsync()
     {
         return (await _playerService.GetTopPlayersAsync()).Select(player => new PlayerDto(player));
     }
 
     [HttpPost("CreatePlayer")]
-    public async Task<PlayerDto> CreatePlayer([FromBody] string name)
+    public async Task<PlayerDto> CreatePlayerAsync([FromBody] string name)
     {
         return new PlayerDto(await _playerService.CreateAsync(name));
     }
 
     [HttpPost("RenamePlayer")]
-    public async Task<ActionResult<PlayerDto>> RenamePlayer([FromBody] PlayerDto player)
+    public async Task<ActionResult<PlayerDto>> RenamePlayerAsync([FromBody] PlayerDto player)
     {
         if (player.PlayerId is null || player.PlayerId == Guid.Empty)
         {
@@ -58,10 +58,10 @@ public class PlayerController : ControllerBase
     [HttpPost("AddGameResult")]
     public async Task<ActionResult<PlayerDto>> AddGameResultAsync(GameResultDto dto)
     {
-        var player = await _playerService.AddGameResultAsync(dto);
-        if (player is not null)
+        var playerGame = await _PlayerService.AddGameResultAsync(dto);
+        if (playerGame is not null)
         {
-            return new PlayerDto(player);
+            return new PlayerDto(playerGame.Player);
         }
         return BadRequest();
     }

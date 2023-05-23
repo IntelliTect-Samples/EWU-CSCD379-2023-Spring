@@ -1,26 +1,18 @@
 <template>
   <div class="text-center">
-    <h1>The Good Word</h1>
-    <br />
 
-    <GameBoard :game="game" @letterClick="addChar" />
-    <br />
+  <div class="text-h4 text-center">
+    <span v-if="isWordOfTheDay"
+      >Wordle of the Day
+      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+    </span>
+    <span v-else>The Good Word</span>
+  </div>
+  <br />
 
-    <div>
-      <v-responsive class="mx-auto" max-width="350">
-        <v-select
-          v-model="guess"
-          :items="validGuesses"
-          :label="'Valid Guesses: ' + validGuesses.length"
-          @update:model-value="inputFromValidGuesses"
-        >
-          <v-hover></v-hover>
-        </v-select>
-      </v-responsive>
-    </div>
+  <GameBoard :game="game" />
 
-    <v-divider></v-divider>
-    <br />
+  <GameKeyboard :guessedLetters="game.guessedLetters" />
 
     <GameKeyboard
       :guessedLetters="game.guessedLetters"
@@ -34,7 +26,13 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
+  <WordOfTheDayScoreDialog
+    v-if="isWordOfTheDay"
+    v-model="showScoreDialog"
+    :game-result="lastGameResult"
+    :playerId="playerService.player.playerId"
+  />
+  <ScoreDialog v-else v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
 
 <script setup lang="ts">
@@ -51,6 +49,7 @@ import type { PlayerService } from '@/scripts/Services/playerService'
 import { GameResult } from '@/scripts/gameResult'
 import { watch } from 'vue'
 import ScoreDialog from '@/components/ScoreDialog.vue'
+import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
 import { useRoute } from 'vue-router'
 
 let validGuesses = new Array<string>()
@@ -63,6 +62,8 @@ const game = reactive(new WordleGame())
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const isWordOfTheDay = ref(false)
+const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -75,29 +76,40 @@ onMounted(async () => {
   // Start a new game
   newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
 })
 
 function newGame() {
+  isWordOfTheDay.value = route.path.toLowerCase() == '/wordoftheday'
   overlay.value = true
-  let apiPath = 'Word'
-  
-  if (route.path == '/wordoftheday') {
-    apiPath = `Word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+  let apiPath = 'word'
+  if (isWordOfTheDay.value) {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
   }
-  
   Axios.get(apiPath)
     .then((response) => {
-      game.startNewGame(response.data)
+      const word = isWordOfTheDay.value ? response.data.word : response.data
+      if (isWordOfTheDay.value) {
+        wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        wordOfTheDayDate.value = null
+      }
+      game.startNewGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 2000)
     })
     .catch((error) => {
       console.log(error)
@@ -202,14 +214,12 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
-
-  console.log(gameResult)
+  gameResult.wordOfTheDayDate = wordOfTheDayDate.value
 
   lastGameResult.value = gameResult
-  showScoreDialog.value = true
 
-  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
-    console.log(response.data)
+  Axios.post('/Player/AddGameResult', gameResult).then(() => {
+    showScoreDialog.value = true
   })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)

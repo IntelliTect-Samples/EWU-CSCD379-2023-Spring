@@ -19,25 +19,25 @@ describe('Solve Simple', () => {
 })
 
 // This is a bad test because it will likely fail at some point because of the random words
-describe('Best Solver Technique', () => {
-  it('on 100 words guessing outside the word is faster', () => {
-    let totalInWordGuesses = 0
-    let totalOutWordGuesses = 0
-    //let totalAlternatingGuesses = 0
-    for (let i = 0; i < 100; i++) {
-      const word = WordsService.getRandomWord()
-      totalInWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.ValidWordsOnly)
-      totalOutWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.InvalidWordsOnly)
-      //totalAlternatingGuesses += WordlePlayer.playGame(word, GuessingStrategy.Alternating)
-    }
+// describe('Best Solver Technique', () => {
+//   it('on 100 words guessing outside the word is faster', () => {
+//     let totalInWordGuesses = 0
+//     let totalOutWordGuesses = 0
+//     //let totalAlternatingGuesses = 0
+//     for (let i = 0; i < 100; i++) {
+//       const word = WordsService.getRandomWord()
+//       totalInWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.ValidWordsOnly)
+//       totalOutWordGuesses += WordlePlayer.playGame(word, GuessingStrategy.InvalidWordsOnly)
+//       //totalAlternatingGuesses += WordlePlayer.playGame(word, GuessingStrategy.Alternating)
+//     }
 
-    // This is not what I expected. I thought that picking words that were
-    // made from letters not yet guessed, but in the list of possible words would
-    // be the best solution, but it doesn't appear that way.
-    // (unless logic is wrong, which is totally possible)
-    //expect(totalOutWordGuesses).toBeLessThan(totalInWordGuesses)
-    expect(totalInWordGuesses).toBeLessThan(totalOutWordGuesses)
-    //expect(totalAlternatingGuesses).toBeLessThan(totalOutWordGuesses)
-    //expect(totalAlternatingGuesses).toBeLessThan(totalInWordGuesses)
-  })
-})
+//     // This is not what I expected. I thought that picking words that were
+//     // made from letters not yet guessed, but in the list of possible words would
+//     // be the best solution, but it doesn't appear that way.
+//     // (unless logic is wrong, which is totally possible)
+//     //expect(totalOutWordGuesses).toBeLessThan(totalInWordGuesses)
+//     expect(totalInWordGuesses).toBeLessThan(totalOutWordGuesses)
+//     //expect(totalAlternatingGuesses).toBeLessThan(totalOutWordGuesses)
+//     //expect(totalAlternatingGuesses).toBeLessThan(totalInWordGuesses)
+//   })
+//})

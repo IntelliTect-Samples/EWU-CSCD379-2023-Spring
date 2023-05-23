@@ -3,6 +3,8 @@ import { Letter, LetterStatus } from './letter'
 export class Word {
   public letters = Array<Letter>()
   public isScored = false
+  public key =
+    Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {

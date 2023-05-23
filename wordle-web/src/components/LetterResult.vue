@@ -5,21 +5,22 @@
 
 <template>
   <v-btn
+    :color="color"
     label
     outlined
     style="background-image: var(--btn-gradient) !important"
     :color="letter.color"
     :height="display.xs ? '30' : display.sm ? '40' : '50'"
     :size="display.xs ? 'x-small' : display.sm ? 'small' : 'large'"
-    :elevation="letter.status == LetterStatus.NotGuessed ? 0 : 4"
+    :elevation="status == LetterStatus.NotGuessed ? 0 : 4"
   >
-    {{ letter.char.toUpperCase() }}
+    {{ char.toUpperCase() }}
   </v-btn>
 </template>
 
 <script setup lang="ts">
-import { Letter, LetterStatus } from '@/scripts/letter'
-import { Services } from '@/scripts/Services/services'
+import { LetterStatus } from '@/scripts/letter'
+import { Services } from '@/scripts/services'
 import { inject } from 'vue'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'
@@ -31,7 +32,9 @@ const display = inject(Services.Display, () => reactive(useDisplay())) as unknow
 >
 
 interface Props {
-  letter: Letter
+  char: string
+  color: string
+  status: LetterStatus
 }
 
 defineProps<Props>()
