@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
 
-const string myAllowAllOrigins = "_myAllowAllOrigins";
+var myAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
