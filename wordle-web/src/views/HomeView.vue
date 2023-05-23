@@ -91,7 +91,7 @@ function getImage1(): string {
     case 'forestlight':
       return 'https://img.freepik.com/premium-vector/autumn-forest-landscape-with-grass-land-mid-autumn-fall-season-panoramic-illustration_288411-1838.jpg'
     case 'forestdark':
-      return 'https://img.freepik.com/free-photo/landscape-tropical-green-forest_181624-30814.jpg'
+      return 'https://img.freepik.com/free-vector/watercolor-enchanted-forest-illustration_52683-84111.jpg'
   }
   return ''
 }
@@ -127,7 +127,7 @@ function getImage3(): string {
     case 'forestlight':
       return 'https://img.freepik.com/free-vector/cartoon-forest-background-nature-scenery-landscape_107791-7791.jpg'
     case 'forestdark':
-      return 'https://img.freepik.com/free-vector/watercolor-enchanted-forest-illustration_52683-84111.jpg'
+      return 'https://img.freepik.com/free-photo/landscape-tropical-green-forest_181624-30814.jpg'
   }
   return ''
 }
