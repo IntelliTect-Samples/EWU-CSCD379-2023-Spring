@@ -80,6 +80,12 @@ onMounted(async () => {
   // Start a new game
   await newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
