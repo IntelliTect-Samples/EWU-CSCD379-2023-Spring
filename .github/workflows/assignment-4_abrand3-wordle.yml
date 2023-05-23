@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - Assignment-4
-    paths:
-      - Wordle.Api/**
   workflow_dispatch:
 
 jobs:
@@ -16,24 +14,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '7.x'
           include-prerelease: true
 
-      - name: Build with 
-        working-directory: ./Wordle.Api
+      - name: Build with dotnet
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        working-directory: ./Wordle.Api
-        run: dotnet publish Wordle.Api -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
@@ -47,7 +43,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: .net-app
 
