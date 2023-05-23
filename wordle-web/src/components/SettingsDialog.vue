@@ -51,7 +51,7 @@ function toggleShallowOcean() {
   theme.global.name.value = 'oceanlight'
   root.style.setProperty(
     '--background-image',
-    'url(https://img.freepik.com/free-vector/sea-background-video-conferencing_23-2148630091.jpg)'
+    'url(https://img.freepik.com/premium-vector/underwater-ocean-sandy-bottom-sunrays_87720-3706.jpg?size=626&ext=jpg)'
   )
 }
 

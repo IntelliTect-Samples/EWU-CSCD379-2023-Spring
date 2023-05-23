@@ -85,7 +85,7 @@ function getImage1(): string {
     case 'dark':
       return 'https://c4.wallpaperflare.com/wallpaper/582/155/806/space-space-art-nebula-stars-wallpaper-preview.jpg'
     case 'oceanlight':
-      return 'https://img.freepik.com/free-vector/sea-background-video-conferencing_23-2148630091.jpg'
+      return 'https://img.freepik.com/premium-vector/underwater-ocean-sandy-bottom-sunrays_87720-3706.jpg?size=626&ext=jpg'
     case 'oceandark':
       return 'https://img.freepik.com/free-photo/lovely-blue-paint-water_23-2147798302.jpg'
     case 'forestlight':
@@ -121,7 +121,7 @@ function getImage3(): string {
     case 'dark':
       return 'https://c4.wallpaperflare.com/wallpaper/990/589/239/death-valley-sky-wallpaper-preview.jpg'
     case 'oceanlight':
-      return 'https://img.freepik.com/premium-vector/underwater-ocean-sandy-bottom-sunrays_87720-3706.jpg?size=626&ext=jpg'
+      return 'https://img.freepik.com/free-vector/sea-background-video-conferencing_23-2148630091.jpg'
     case 'oceandark':
       return 'https://img.freepik.com/premium-photo/abstract-background-with-motion-shining-blinking-particles-blue-background-with-rays-light-3d-illustration_250994-2010.jpg'
     case 'forestlight':
