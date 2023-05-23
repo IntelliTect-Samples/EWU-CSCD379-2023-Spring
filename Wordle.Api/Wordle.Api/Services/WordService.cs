@@ -68,7 +68,7 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<DayResultsDto>> GetLastTenDays(TimeSpan offset, Guid playerId, DateTime? date = null)
         {
             
-            date = DateTime.UtcNow;//force date = now
+            date = DateTime.UtcNow.AddHours(offset.TotalHours);//force date = now
             
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);//local date
 
@@ -143,7 +143,7 @@ namespace Wordle.Api.Services
         {
             if (date is null)
             {
-                date = DateTime.UtcNow;
+                date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
             }
             
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
