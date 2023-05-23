@@ -90,9 +90,7 @@ namespace Wordle.Api.Services
                         .Where(plays => plays.Date.Date == localDate.Date)
                         .ToListAsync();
                     
-                    var firstPlayed = await _db.Plays
-                        .Where(plays => plays.PlayerId == playerId)
-                        .FirstOrDefaultAsync();
+                    var firstPlayed = dayPlays.FirstOrDefault(plays => plays.PlayerId == playerId);
                     var didPlay = true;
                     if(firstPlayed != null)
                     {
