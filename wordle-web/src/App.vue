@@ -37,6 +37,11 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
+                <RouterLink :to="{ name: 'instructions' }"> Instructions </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
@@ -45,7 +50,7 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main style="v-main">
       <RouterView />
     </v-main>
   </v-app>
@@ -85,3 +90,12 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 </script>
+
+<style scoped>
+.v-main {
+  background-image: url('https://cdnb.artstation.com/p/assets/images/images/043/163/227/original/augustin-cart-gif-lofi-final.gif?1636484521');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+</style>
