@@ -79,12 +79,12 @@ All instructions assume you are logged into the portal at https://portal.azure.c
 14. Click Create
 15. Deployment will take a few minutes
 16. Navigate to the database once it is created
-17. If you want to connect to the database from your local system, click Set server Firewall
+17. Click Set server Firewall
    1. Public network access: Selected Networks
-   2. Click Add your client IPv4 address
-   3. Check the Allow Azure services and resources to access this server
-   4. Click Save
-   5. If you do this, you will be back at the SQL Server level and will need to click SQL Databases and then the database name to navigate back to the actual database
+   2. If you want to access the server from your computer, click Add your client IPv4 address
+   4. Check the Allow Azure services and resources to access this server
+   5. Click Save
+   6. If you do this, you will be back at the SQL Server level and will need to click SQL Databases and then the database name to navigate back to the actual database
 
 ## Set the App Service database connection string
 1. Navigate to your Azure SQL database and the Overview page (default)
