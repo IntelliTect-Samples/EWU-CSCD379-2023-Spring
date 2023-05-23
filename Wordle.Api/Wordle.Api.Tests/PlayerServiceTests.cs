@@ -35,7 +35,6 @@ public class PlayerServiceTests : DatabaseTestBase
         Assert.AreEqual(guid, player.PlayerId);
     }
 
-
     [TestMethod]
     public async Task AddGameResult()
     {
@@ -47,16 +46,9 @@ public class PlayerServiceTests : DatabaseTestBase
         var guid = (await playerService.CreateAsync("Tester")).PlayerId;
         var wordOfTheDay = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7));
 
-
-        GameResultDto dto = new()
-        {
-            PlayerId = guid,
-            WordPlayed = wordOfTheDay.Word.Text,
-            WasGameWon = true,
-            Attempts = 3,
-            DurationInSeconds = 10,
-            WordOfTheDayDate = wordOfTheDay.Date
-        };
+        GameResultDto dto = new() { PlayerId = guid,        WordPlayed = wordOfTheDay.Word.Text,
+                                    WasGameWon = true,      Attempts = 3,
+                                    DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay.Date };
 
         var playerGame = await playerService.AddGameResultAsync(dto);
         Assert.IsNotNull(playerGame.DateWord);
@@ -67,6 +59,5 @@ public class PlayerServiceTests : DatabaseTestBase
         Assert.AreEqual(1, stats.First().NumberOfPlays);
         Assert.AreEqual(10, stats.First().AverageDurationInSeconds);
         Assert.AreEqual(3, stats.First().AverageAttempts);
-
     }
 }
