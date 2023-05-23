@@ -1,36 +1,66 @@
 import { Letter, LetterStatus } from './letter'
 
 export class Word {
-  public letters: Letter[] = Array<Letter>()
+  public letters = Array<Letter>()
+  public isScored = false
+  public key =
+    Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
-      // Add word letters to array.
-      for (const letter of word) {
-        this.letters.push(new Letter(letter))
+      if (typeof word == 'number') {
+        // Add one letter for each number. With blank spots
+        for (let i = 0; i < word; i++) {
+          this.letters.push(new Letter(''))
+        }
+      } else {
+        // add word letters to array
+        for (const letter of word) {
+          this.letters.push(new Letter(letter))
+        }
       }
     } else {
-      // Add empty letters to array.
+      // add empty letters to array
       for (let i = this.letters.length; i < numberOfLetters; i++) {
         this.letters.push(new Letter())
       }
     }
   }
 
-  get word() {
-    return this.letters.map((l: Letter) => l.char).join('')
+  get text() {
+    return this.letters.map((l) => l.char).join('')
+  }
+
+  // See if every letter is filled
+  get isFilled() {
+    return this.letters.every((l) => l.char !== '')
+  }
+
+  // Clear the guess
+  clear() {
+    for (const letter of this.letters) {
+      letter.char = ''
+    }
+  }
+
+  set(word: string) {
+    this.clear()
+    for (const letter of word) {
+      this.push(letter)
+    }
   }
 
   push(char: string) {
-    // Find the first empty letter and replace it.
+    // Find the first empty letter and replace it
     for (const letter of this.letters) {
       if (letter.char === '') {
-        letter.char = char
+        letter.char = char.toLowerCase()
         return
       }
     }
   }
 
+  // Remove the last letter
   pop() {
     for (let i = this.letters.length - 1; i >= 0; i--) {
       if (this.letters[i].char !== '') {
@@ -41,27 +71,25 @@ export class Word {
   }
 
   checkWord(secretWord: string): boolean {
-    const guessChars: string[] = this.letters.map((l) => l.char)
-    const secretChars: string[] = secretWord.split('')
-    let isCorrect: boolean = true
-
-    console.log(this.word)
-
-    // Check if the letters are valid.
+    //console.log(this.text)
+    // check if the letters are valid
+    //const results = new Word()
+    const guessChars = this.letters.map((l) => l.char)
+    const secretChars = secretWord.split('')
+    let isCorrect = true
     for (let i = 0; i < 5; i++) {
       if (this.letters[i].char === secretWord[i]) {
         this.letters[i].status = LetterStatus.Correct
         guessChars[i] = '_'
         secretChars[i] = '_'
-        console.log(`Letter ${i} is correct`)
+        //console.log(`Letter ${i} is correct`)
       } else {
         isCorrect = false
         this.letters[i].status = LetterStatus.Wrong
-        console.log(`Letter ${i} is incorrect`)
+        //console.log(`Letter ${i} is incorrect`)
       }
     }
 
-    // Check if the letters are in the right place.
     for (let i = 0; i < 5; i++) {
       if (guessChars[i] !== '_') {
         for (let j = 0; j < 5; j++) {
@@ -69,16 +97,17 @@ export class Word {
             this.letters[i].status = LetterStatus.Misplaced
             guessChars[i] = '_'
             secretChars[j] = '_'
-            console.log(`Letter ${i} is misplaced`)
+            //console.log(`Letter ${i} is misplaced`)
             break
           }
         }
       }
     }
 
-    console.log(guessChars)
-    console.log(secretChars)
-    console.log(isCorrect)
+    // console.log(guessChars)
+    // console.log(secretChars)
+    // console.log(isCorrect)
+    this.isScored = true
     return isCorrect
   }
 }

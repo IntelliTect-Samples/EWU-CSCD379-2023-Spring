@@ -1,8 +1,8 @@
 export enum LetterStatus {
   NotGuessed = 0,
-  Correct,
-  Misplaced,
-  Wrong
+  Correct = 1,
+  Misplaced = 2,
+  Wrong = 3
 }
 
 export class Letter {
@@ -23,7 +23,7 @@ export class Letter {
       case LetterStatus.Wrong:
         return 'wrong'
       default:
-        return 'stale'
+        return 'unknown'
     }
   }
 }

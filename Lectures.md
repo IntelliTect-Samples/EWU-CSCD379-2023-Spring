@@ -96,36 +96,91 @@
 
 
 ### Lecture 8. 4/27: 
-- More ASP.NET and EF
+- More ASP.NET and EF and homework 3 material
 
 
 ## Week 5
 ### Lecture 9. 5/2: 
-
+- Initial EF Context
+- Word object
+- Word migration
+- Word Controller that returns a word
+- Word Service
+- Service Dependency Injection
 
 ### Lecture 10. 5/4: 
-
+- API Post
+- DTOs
+- EF Migration Deltas to a table
+- Basic EF Querying
+- Axios using Post
 
 ## Week 6
 ### Lecture 11. 5/9: 
-
+- API unit testing: database, services, integration.
+- App Refactor:
+  - Add game features like end and restart
+  - Add solver and componentize
+  - Handle the word API not responding
+  - API configuration: Swagger in production
+  - Action updates, versioning, file names, warnings
+  - Sizing of letters/buttons with useDisplay
+  - Unit testing letters with DI on useDisplay
+  - New App bar and UI cleanup
+  - New starting page and default route
+  - Theme update and add of 'Unknown' color
+  - Split LetterResult from LetterButton
+  - Move AddWordTest to about page
+  - Custom icon and favicon
+  - Google Search Console and 
 
 ### Lecture 12. 5/11: 
-
+- Troubleshooting Azure
+- Vue services
+- EF Parent-Child relationships
+- Querying with Includes
+- EF unit testing
+- Model builder cascade deletes
+- Adding of DateWord and Migration
 
 ## Week 7
 ### Lecture 13. 5/16: 
+- Classes in C#/Java and TS/JS
+- Redirecting root on API to the Wordle site
+- Word of the day controller and tests
+- Handling multi-threading issues with creating the word of the day.
 
-
-### Lecture 14. 5/18: 
-
+### Lecture 14. 5/18:
+- Unique indexes
+- Reusing a view for multiple routes
+- Parsing query parameters to determine game type
+- Get method query parameters on API endpoints
+- Load Word of the day in App
+- Integration testing
 
 ## Week 8
 ### Lecture 15. 5/23: 
+- EF multiple table queries (Getting Word of the Day stats)
+- Using GroupBy, Sort
+- CSS animations using transition
+- Creating revealing letters
+- API testing with service mocks and interfaces
+- Graceful error handling when API is missing
 
-
-### Lecture 16. 5/25: 
-
+### Next Topics
+- The problem of security and how to handle it
+- Identity in a web project (not just API)
+- Scaffolding EF
+- Adding Identity to the API
+- Scaffolding EF
+- Cookies
+- JWTs, validation, claims (UserId, Name)
+- Create login component
+- Managing state around logins, existing GUID, etc.
+- Managing auth flow and various login cases
+- Remembering login
+- Refreshing the token
+- Authorizing specific API calls
 
 ## Week 9
 ### Lecture 17. 5/30: 
