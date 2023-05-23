@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 
-namespace Wordle.Api.Tests
-{
+namespace Wordle.Api.Tests;
+
 [TestClass]
 public class ApiIntegrationTests
 {
@@ -58,5 +58,4 @@ public class ApiIntegrationTests
     {
         s_factory.Dispose();
     }
-}
 }

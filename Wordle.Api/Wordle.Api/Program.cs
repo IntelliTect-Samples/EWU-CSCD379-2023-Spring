@@ -1,8 +1,9 @@
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
 
-const string myAllowAllOrigins = "_myAllowAllOrigins";
+var myAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,12 +49,12 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
     app.UseSwaggerUI();
 }
 
-// TODO: Check if this is something that I need to include...
 // Add a redirect for the root URL
-// var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-// if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl =
-// "https://purple-rock-0b124a41e.3.azurestaticapps.net/"; var options = new
-// RewriteOptions().AddRedirect("^$", redirectRootUrl); app.UseRewriter(options);
+var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
+if (string.IsNullOrEmpty(redirectRootUrl))
+    redirectRootUrl = "https://proud-desert-02a266210.3.azurestaticapps.net/";
+var options = new RewriteOptions().AddRedirect("^$", redirectRootUrl, 302);
+app.UseRewriter(options);
 
 app.UseHttpsRedirection();
 

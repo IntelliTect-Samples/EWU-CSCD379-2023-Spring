@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -23,6 +24,9 @@ public partial class DateWord : Migration
                 table.ForeignKey(name: "FK_DateWords_Words_WordId", column: x => x.WordId,
                                  principalTable: "Words", principalColumn: "WordId");
             });
+
+        migrationBuilder.CreateIndex(name: "IX_DateWords_WordId", table: "DateWords",
+                                     column: "WordId");
     }
 
     /// <inheritdoc />

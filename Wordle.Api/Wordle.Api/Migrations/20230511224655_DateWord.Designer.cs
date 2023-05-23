@@ -12,7 +12,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
 [DbContext(typeof(AppDbContext))]
-[Migration("20230519170228_DateWord")]
+[Migration("20230511224655_DateWord")]
 partial class DateWord
 {
     /// <inheritdoc />
@@ -87,16 +87,13 @@ partial class DateWord
                             b =>
                             {
                                 b.HasOne("Wordle.Api.Data.Word", "Word")
-                                    .WithMany("DateWords")
+                                    .WithMany()
                                     .HasForeignKey("WordId")
                                     .OnDelete(DeleteBehavior.ClientCascade)
                                     .IsRequired();
 
                                 b.Navigation("Word");
                             });
-
-        modelBuilder.Entity("Wordle.Api.Data.Word", b =>
-                                                    { b.Navigation("DateWords"); });
 #pragma warning restore 612, 618
     }
 }

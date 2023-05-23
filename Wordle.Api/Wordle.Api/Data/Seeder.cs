@@ -12,7 +12,7 @@ public static class Seeder
     {
         if (!db.Words.Any())
         {
-            var wordLines = File.ReadAllLines("Content/Words.csv");
+            var wordLines = System.IO.File.ReadAllLines("Content/Words.csv");
             foreach (var line in wordLines)
             {
                 var parts = line.Split(',');
