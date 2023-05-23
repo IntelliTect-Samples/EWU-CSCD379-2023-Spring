@@ -89,7 +89,7 @@ function getImage1(): string {
     case 'oceandark':
       return 'https://img.freepik.com/free-photo/lovely-blue-paint-water_23-2147798302.jpg'
     case 'forestlight':
-      return 'https://img.freepik.com/free-vector/gradient-nature-background_52683-2433.jpg'
+      return 'https://img.freepik.com/premium-vector/autumn-forest-landscape-with-grass-land-mid-autumn-fall-season-panoramic-illustration_288411-1838.jpg'
     case 'forestdark':
       return 'https://img.freepik.com/free-photo/landscape-tropical-green-forest_181624-30814.jpg'
   }
@@ -107,7 +107,7 @@ function getImage2(): string {
     case 'oceandark':
       return 'https://img.freepik.com/premium-photo/rays-sun-make-their-way-depths-through-surface-water-underwater-background_250994-844.jpg'
     case 'forestlight':
-      return 'https://img.freepik.com/premium-vector/autumn-forest-landscape-with-grass-land-mid-autumn-fall-season-panoramic-illustration_288411-1838.jpg'
+      return 'https://img.freepik.com/free-vector/gradient-nature-background_52683-2433.jpg'
     case 'forestdark':
       return 'https://img.freepik.com/premium-photo/beautiful-landscape-green-forest_23-2148215269.jpg'
   }

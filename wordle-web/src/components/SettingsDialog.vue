@@ -66,7 +66,7 @@ function toggleForestDay() {
   theme.global.name.value = 'forestlight'
   root.style.setProperty(
     '--background-image',
-    'url(https://img.freepik.com/free-vector/cartoon-forest-background-nature-scenery-landscape_107791-7791.jpg'
+    'url(https://img.freepik.com/premium-vector/autumn-forest-landscape-with-grass-land-mid-autumn-fall-season-panoramic-illustration_288411-1838.jpg'
   )
 }
 function toggleForestNight() {
