@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import WordleView from '../views/WordleView.vue'
 import DescriptionView from '../views/DescriptionView.vue'
+import WordDay from '@/views/WordDay.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,12 +43,12 @@ const router = createRouter({
     {
       path: '/wordoftheday',
       name: 'wordoftheday',
-      component: WordleView
+      component: WordDay
     },
     {
       path: '/pastwordoftheday',
       name: 'pastwordoftheday',
-      component: WordleView
+      component: WordDay
     }
   ]
 })
