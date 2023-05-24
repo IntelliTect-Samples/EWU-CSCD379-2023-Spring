@@ -17,16 +17,10 @@ namespace Wordle.Api.Controllers
             _playsService = playsService;
         }
 
-        [HttpPost]
-        public async Task<Plays> AddPlay(int WordId, int PlayerId)
+        [HttpPost("AddGameResult")]
+        public async Task<Plays> AddGameResult(PlaysDto dto)
         {
-            return await _playsService.AddPlay(WordId, PlayerId);
-        }
-
-        [HttpGet("GetDailyWordStatistics")]
-        public async Task<IEnumerable<Plays>> GetDailyWordStatistics(int? count)
-        {
-            return await _playsService.GetDailyWordStatistics(count);
+            return await _playsService.AddGameResult(dto);
         }
     }
 }

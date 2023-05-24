@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -118,6 +119,39 @@ namespace Wordle.Api.Services
                     return word.Text;
                 }
             }
+        }
+
+        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+        {
+            if (daysBack < 1 || daysBack > 100) daysBack = 10;
+
+            var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
+            var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
+
+            var result = await _db.DateWords
+                .Include(f => f.Plays)
+                .Where(f => f.Date <= startDate && f.Date > endDate)
+                .OrderByDescending(f => f.Date)
+                .Select(f => new WordOfTheDayStatsDto
+                {
+                    Date = f.Date,
+                    AverageSecondsPerGame = f.Plays.Any() ? f.Plays.Average(a => a.TimeInSeconds) : -1,
+                    AverageAttempts = f.Plays.Any() ? f.Plays.Average(a => a.Attempts) : -1,
+                    NumberOfPlays = f.Plays.Count(),
+                    HasUserPlayed = playerId.HasValue ? f.Plays.Any(f => f.PlayerId == playerId.Value) : false
+                })
+                .ToListAsync();
+
+            if (result.Count != daysBack)
+            {
+                for (int i = 0; i > (daysBack + 1) * -1; i--)
+                {
+                    await this.GetWordOfTheDay(TimeSpan.FromHours(12), startDate.AddDays(i));
+                }
+
+                result = await GetDailyWordStatistics(date, daysBack);
+            }
+            return result;
         }
     }
 }

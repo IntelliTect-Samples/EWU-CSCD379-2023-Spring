@@ -7,15 +7,16 @@ namespace Wordle.Api.Data
     {
         //saved data
         public int PlaysId { get; set; }
+        public Guid PlayerId { get; set; }
+        public required Player Player { get; set; }
         public int WordId { get; set; }
+        public required Word Word { get; set; }
+        public int? DateWordId { get; set; }
+        public DateWord? DateWord { get; set; }
+        
+        public int Attempts { get; set; }
+        public int TimeInSeconds { get; set; }
         public DateTime Date { get; set; }
-        public IList<int> PlayerIds { get; set; } = new List<int>();
-
-        //calculations
-        public int GrandTotalGames { get; set; }
-        public int GrandTotalAttempts { get; set; }
-        public int GrandAverageAttempts { get; set; }
-        public int GrandTotalTime { get; set; }
-        public int GrandAverageTime { get; set; }
+        public bool WasGameWon { get; set; }
     }
 }

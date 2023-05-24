@@ -47,5 +47,11 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
         }
+
+        [HttpGet("GetDailyWordStatistics")]
+        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+        {
+            return await _wordService.GetDailyWordStatistics(date, daysBack, playerId);
+        }
     }
 }    
