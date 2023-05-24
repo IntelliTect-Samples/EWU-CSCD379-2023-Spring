@@ -24,8 +24,7 @@
             </template>
 
             <v-list>
-              <router-link to="/wordle"
-                ><v-list-item-title>Play</v-list-item-title></router-link>
+              <router-link to="/wordle"><v-list-item-title>Play</v-list-item-title></router-link>
               <router-link to="/wordoftheday"
                 ><v-list-item-title>Wordle of Day</v-list-item-title></router-link
               >

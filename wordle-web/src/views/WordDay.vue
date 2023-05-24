@@ -1,8 +1,7 @@
 <template>
-  <GameComponent/>
+  <GameComponent />
 </template>
 
-
 <script setup lang="ts">
-    import GameComponent from '../components/GameComponent.vue'
+import GameComponent from '../components/GameComponent.vue'
 </script>
