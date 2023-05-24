@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import WordleView from '../views/WordleView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
+import LastTenWords from '@/views/LastTenWords.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +23,11 @@ const router = createRouter({
       component: LeaderboardView
     }
     ,
+    {
+      path: '/lasttenwords',
+      name: 'lastTenWords',
+      component: LastTenWords
+    },
     {
       path: '/worldoftheday',
       name: 'wordOfTheDay',
