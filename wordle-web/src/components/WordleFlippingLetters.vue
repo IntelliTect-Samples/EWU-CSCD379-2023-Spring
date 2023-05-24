@@ -11,7 +11,7 @@ import { onBeforeUnmount, reactive } from 'vue'
 import { onMounted } from 'vue'
 
 // Represents the letters
-class Letter {
+class LogoLetter {
   constructor(public letter: string) {}
   classList = ['square']
   get classes() {
@@ -20,12 +20,12 @@ class Letter {
 }
 
 const letters = reactive([
-  new Letter('W'),
-  new Letter('O'),
-  new Letter('R'),
-  new Letter('D'),
-  new Letter('L'),
-  new Letter('E')
+  new LogoLetter('W'),
+  new LogoLetter('O'),
+  new LogoLetter('R'),
+  new LogoLetter('D'),
+  new LogoLetter('L'),
+  new LogoLetter('E')
 ])
 
 onMounted(() => {
