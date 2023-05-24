@@ -47,11 +47,12 @@ public class PlayerController : ControllerBase
         {
             return BadRequest();
         }
-        if (string.IsNullOrWhiteSpace(player.Name))
+        if (string.IsNullOrWhiteSpace(player.PlayerName))
         {
             return BadRequest();
         }
-        var result = await _playerService.UpdateAsync(player.PlayerId.Value, player.Name.Trim());
+        var result =
+            await _playerService.UpdateAsync(player.PlayerId.Value, player.PlayerName.Trim());
         return new PlayerDto(result);
     }
 

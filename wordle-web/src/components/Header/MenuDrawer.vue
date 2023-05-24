@@ -15,11 +15,15 @@
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/about" elevation="24">About</v-btn>
+          <v-btn to="/wordle" elevation="24">Free Play</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/wordle" elevation="24">Play Game</v-btn>
+          <v-btn to="/wordle" elevation="24">Daily Word</v-btn>
+        </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/about" elevation="24">About</v-btn>
         </v-list-item>
 
         <v-list-item>

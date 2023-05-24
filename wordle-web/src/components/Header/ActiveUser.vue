@@ -4,7 +4,7 @@
 
 <template>
   <v-btn @click="toggleDialog = true">
-    {{ playerService.player.name }}
+    {{ playerService.player.playerName }}
   </v-btn>
   <!-- TODO: Figure out why why do ':model-value="toggleDialog" @update:model-value="close"' over 'v-model="toggleDialog"' -->
   <v-dialog
@@ -36,7 +36,7 @@ import { inject } from 'vue'
 import { ref } from 'vue'
 
 const playerService = inject(Services.PlayerService) as PlayerService
-let newName = playerService.player.name
+let newName = playerService.player.playerName
 
 const toggleDialog = ref(false)
 const $input = ref<HTMLInputElement>()

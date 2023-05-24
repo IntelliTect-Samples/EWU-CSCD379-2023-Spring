@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 
 namespace Wordle.Api.Tests;
@@ -46,7 +46,7 @@ public class ApiIntegrationTests
     public async Task WordOfTheDay()
     {
         var client = s_factory.CreateClient();
-        var response = await client.GetAsync("word/wordoftheday?offsetinhours=-8");
+        var response = await client.GetAsync("Word/WordOfTheDay?offsetinhours=-8");
 
         var json = await response.Content.ReadAsStringAsync();
         Assert.IsTrue(json.Contains("word"));

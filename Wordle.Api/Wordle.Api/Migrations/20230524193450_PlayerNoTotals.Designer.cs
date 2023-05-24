@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
 [DbContext(typeof(AppDbContext))]
-[Migration("20230520151247_PlayerGame")]
-partial class PlayerGame
+[Migration("20230524193450_PlayerNoTotals")]
+partial class PlayerNoTotals
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,26 +45,26 @@ partial class PlayerGame
                 b.ToTable("DateWords");
             });
 
-        modelBuilder.Entity("Wordle.Api.Data.Player",
-                            b =>
-                            {
-                                b.Property<Guid>("PlayerId")
-                                    .ValueGeneratedOnAdd()
-                                    .HasColumnType("uniqueidentifier");
+        modelBuilder.Entity(
+            "Wordle.Api.Data.Player",
+            b =>
+            {
+                b.Property<Guid>("PlayerId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                                b.Property<double>("AverageAttempts").HasColumnType("float");
+                b.Property<double>("AverageAttempts").HasColumnType("float");
 
-                                b.Property<int>("AverageSecondsPerGame").HasColumnType("int");
+                b.Property<int>("AverageSecondsPerGame").HasColumnType("int");
 
-                                b.Property<int>("GameCount").HasColumnType("int");
+                b.Property<int>("GameCount").HasColumnType("int");
 
-                                b.Property<string>("Name").IsRequired().HasColumnType(
-                                    "nvarchar(max)");
+                b.Property<string>("PlayerName").IsRequired().HasColumnType("nvarchar(max)");
 
-                                b.HasKey("PlayerId");
+                b.HasKey("PlayerId");
 
-                                b.ToTable("Players");
-                            });
+                b.ToTable("Players");
+            });
 
         modelBuilder.Entity(
             "Wordle.Api.Data.PlayerGame",

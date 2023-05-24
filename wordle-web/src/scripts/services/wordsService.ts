@@ -15,7 +15,7 @@ export abstract class WordsService {
   }
 
   static async getWordListFromApi() {
-    Axios.get('Word/GetWordList')
+    Axios.get('Word/WordList')
       .then((response) => {
         setTimeout(() => {}, 100)
         this.words = response.data
@@ -37,7 +37,7 @@ export abstract class WordsService {
   static validWords(word: string): Array<string> {
     const validWords: Array<string> = []
 
-    word = word.toLowerCase()
+    const guessedLetters = word.toLowerCase()
 
     if (word == '') {
       return validWords
@@ -45,8 +45,8 @@ export abstract class WordsService {
 
     this.words.forEach((wordObj) => {
       let valid: boolean = true
-      for (let i = 0; i < word.length; i++) {
-        if (word[i] != '?' && word[i] != wordObj[i]) {
+      for (let i = 0; i < guessedLetters.length; i++) {
+        if (guessedLetters[i] != '?' && guessedLetters[i] != wordObj[i]) {
           valid = false
         }
       }

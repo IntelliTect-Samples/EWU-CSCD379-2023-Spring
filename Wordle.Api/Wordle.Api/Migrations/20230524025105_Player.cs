@@ -15,10 +15,12 @@ public partial class Player : Migration
             name: "Players",
             columns: table =>
                 new { PlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                      Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                      PlayerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                       GameCount = table.Column<int>(type: "int", nullable: false),
-                      AverageAttempts = table.Column<double>(type: "float", nullable: false),
-                      AverageSecondsPerGame = table.Column<int>(type: "int", nullable: false) },
+                      TotalSecondsPerGame = table.Column<int>(type: "int", nullable: false),
+                      AverageSecondsPerGame = table.Column<int>(type: "int", nullable: false),
+                      TotalAttempts = table.Column<double>(type: "float", nullable: false),
+                      AverageAttempts = table.Column<double>(type: "float", nullable: false) },
             constraints: table =>
             { table.PrimaryKey("PK_Players", x => x.PlayerId); });
     }

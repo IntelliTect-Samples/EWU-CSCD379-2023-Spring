@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wordle.Api.Data;
 
@@ -11,9 +12,11 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
 [DbContext(typeof(AppDbContext))]
-partial class AppDbContextModelSnapshot : ModelSnapshot
+[Migration("20230524031605_DateWord")]
+partial class DateWord
 {
-    protected override void BuildModel(ModelBuilder modelBuilder)
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
 #pragma warning disable 612, 618
         modelBuilder.HasAnnotation("ProductVersion", "7.0.5")
@@ -39,7 +42,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
                 b.HasIndex("WordId");
 
-                b.ToTable("DateWords", (string)null);
+                b.ToTable("DateWords");
             });
 
         modelBuilder.Entity(
@@ -58,9 +61,13 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
                 b.Property<string>("PlayerName").IsRequired().HasColumnType("nvarchar(max)");
 
+                b.Property<double>("TotalAttempts").HasColumnType("float");
+
+                b.Property<int>("TotalSecondsPerGame").HasColumnType("int");
+
                 b.HasKey("PlayerId");
 
-                b.ToTable("Players", (string)null);
+                b.ToTable("Players");
             });
 
         modelBuilder.Entity(
@@ -94,7 +101,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
                 b.HasIndex("WordId");
 
-                b.ToTable("PlayerGames", (string)null);
+                b.ToTable("PlayerGames");
             });
 
         modelBuilder.Entity(
@@ -113,7 +120,7 @@ partial class AppDbContextModelSnapshot : ModelSnapshot
 
                 b.HasKey("WordId");
 
-                b.ToTable("Words", (string)null);
+                b.ToTable("Words");
             });
 
         modelBuilder.Entity("Wordle.Api.Data.DateWord",

@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>{{ playerService.player.name }}</td>
+          <td>{{ playerService.player.playerName }}</td>
           <td>{{ playerService.player.gameCount }}</td>
           <td>{{ playerService.player.averageAttempts }}</td>
           <td>{{ playerService.player.averageSecondsPerGame }}</td>
