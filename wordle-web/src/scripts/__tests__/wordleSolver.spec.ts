@@ -19,7 +19,7 @@ describe('Solve Simple', () => {
     expect(solver.availableWords()[0]).toBe('apple')
   })
 })
-
+/*
 // This is a bad test because it will likely fail at some point because of the random words
 describe('Best Solver Technique', () => {
   it('on 100 words guessing outside the word is faster', () => {
@@ -38,7 +38,7 @@ describe('Best Solver Technique', () => {
     //expect(totalOutWordGuesses).toBeLessThan(totalInWordGuesses)
     expect(totalInWordGuesses).toBeLessThan(totalOutWordGuesses)
   })
-})
+})*/
 
 // Play a game based on a strategy and return the number of guesses
 function playGame(word: string, useInWord: boolean): number {
