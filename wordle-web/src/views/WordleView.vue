@@ -1,17 +1,15 @@
 <template>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
   <div class="text-h4 text-center">
     <span v-if="isWordOfTheDay"
-      >Daily Wordle
-      <span v-if="wordOfTheDayDate">{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+      >Wordle of the Day
+      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
     </span>
     <span v-else>Wordle Mind Bender</span>
   </div>
-  <GameBoard :game="game" @letterClick="addChar" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" @letterClick="addChar" />
+  <GameBoard :game="game" />
+
+  <GameKeyboard :guessedLetters="game.guessedLetters" />
 
   <v-row class="justify-center">
     <v-btn
@@ -56,7 +54,6 @@ import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
 import { useDisplay } from 'vuetify'
-import { Player } from '@/scripts/player'
 import { Services } from '@/scripts/services'
 import type { PlayerService } from '@/scripts/playerService'
 import { GameResult } from '@/scripts/gameResult'
@@ -72,6 +69,7 @@ const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
 const isWordOfTheDay = ref(false)
 const wordOfTheDayDate: Ref<Date | null> = ref(null)
+
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
 const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
@@ -83,6 +81,12 @@ onMounted(async () => {
   // Start a new game
   await newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
@@ -106,7 +110,7 @@ function newGame() {
       } else {
         wordOfTheDayDate.value = null
       }
-      game.restartGame(response.data)
+      game.restartGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
@@ -168,13 +172,10 @@ function sendGameResult() {
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
 
-  console.log(gameResult)
-
   lastGameResult.value = gameResult
-  showScoreDialog.value = true
 
-  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
-    console.log(response.data)
+  Axios.post('/Player/AddGameResult', gameResult).then(() => {
+    showScoreDialog.value = true
   })
   // if (this.onGameEnd) {
   //   this.onGameEnd(response.data as GameResult)

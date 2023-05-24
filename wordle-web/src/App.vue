@@ -3,7 +3,7 @@
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
-          <RouterLink to="/">
+          <RouterLink to="/wordle">
             <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
             Wordle
           </RouterLink>
@@ -22,12 +22,12 @@
           <v-list>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/">Play Again</RouterLink>
+                <RouterLink to="/wordle">Play Random Wordle</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/wordoftheday">Daily Wordle</RouterLink>
+                <RouterLink to="/wordoftheday">Play Daily Wordle</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
@@ -45,7 +45,7 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main class="background">
       <RouterView />
     </v-main>
   </v-app>
