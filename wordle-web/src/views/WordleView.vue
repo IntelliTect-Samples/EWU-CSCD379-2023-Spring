@@ -3,7 +3,7 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div class="text-h4 text-center">{{ msg }}</div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -60,6 +60,7 @@ import { GameResult } from '@/scripts/gameResult'
 import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
+import router from '@/router'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -67,6 +68,10 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const msg = ref('Wordle Mind Bender')
+
+const wordOfTheDayFlag = ref(false)
+const listOfPlayers = ref()
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -88,10 +93,24 @@ function newGame() {
   overlay.value = true
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
+    let dateWordPath = 'DateWord'
     apiPath = `word/wordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
+      dateWordPath += `&date=${route.query.date}`
     }
+    wordOfTheDayFlag.value = true
+    msg.value = 'Wordle Of The Day'
+    Axios.get(dateWordPath).then((response) => {
+      console.log(response)
+      listOfPlayers.value = response.data
+      console.log(game.secretWord)
+      setTimeout(() => {
+        overlay.value = false
+      }, 502)
+    })
+  } else {
+    msg.value = 'Wordle Mind Bender'
   }
   Axios.get(apiPath)
     .then((response) => {
@@ -116,6 +135,8 @@ function checkGuess(word?: string) {
   game.submitGuess()
   if (game.status !== WordleGameStatus.Active) {
     sendGameResult()
+    guess.value = ''
+    router.push('wordle')
   }
   guess.value = ''
 }
@@ -159,14 +180,32 @@ function sendGameResult() {
 
   console.log(gameResult)
 
+  console.log(listOfPlayers)
+
   lastGameResult.value = gameResult
   showScoreDialog.value = true
 
-  Axios.post('/Player/AddGameResult', gameResult).then((response) => {
-    console.log(response.data)
-  })
-  // if (this.onGameEnd) {
-  //   this.onGameEnd(response.data as GameResult)
-  // }
+  var flag = false
+
+  if (wordOfTheDayFlag.value) {
+    // for (let i = 0; i < listOfPlayers.value.length; i++) {
+    //   const player = listOfPlayers[i];
+    //   if (player.playerId == gameResult.playerId){         this is not working
+    //     flag = true
+    //   }
+    // }
+    if (flag) {
+      Axios.post('/DateWord/AddDailyGameResult', gameResult).then((response) => {
+        console.log(response.data)
+      })
+      Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+        console.log(response.data)
+      })
+    }
+  } else {
+    Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+      console.log(response.data)
+    })
+  }
 }
 </script>

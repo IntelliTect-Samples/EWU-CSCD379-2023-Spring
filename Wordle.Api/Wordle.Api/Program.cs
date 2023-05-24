@@ -29,14 +29,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection2");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
 builder.Services.AddScoped<WordService>();
 builder.Services.AddScoped<PlayerService>();
-
+builder.Services.AddScoped<DateWordService>();
 // Actually build the app so we can configure the pipeline next
 var app = builder.Build();
 

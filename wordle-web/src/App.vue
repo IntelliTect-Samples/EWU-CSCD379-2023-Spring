@@ -10,7 +10,7 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
-        <v-btn><RouterLink to="/wordOfTheDay">Word Of The Day</RouterLink></v-btn>
+        <v-btn @click="reload"><RouterLink to="/wordoftheday">Word Of The Day</RouterLink></v-btn>
 
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
@@ -34,12 +34,12 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/dailyWordList">Recent Words Of The Day</RouterLink>
+                <RouterLink to="/dailywordlist">Recent Words Of The Day</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/howToPlay">How to Play</RouterLink>
+                <RouterLink to="/howtoplay">How to Play</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
@@ -64,6 +64,8 @@ import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
+import router from './router'
+import { createRouterMatcher } from 'vue-router'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
@@ -73,6 +75,10 @@ playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
 
 const theme = useTheme()
+
+function reload() {
+  location.replace('wordoftheday')
+}
 
 function switchTheme() {
   if (theme.global.name.value === 'light') {
