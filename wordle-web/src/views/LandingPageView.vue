@@ -11,7 +11,9 @@
                 <v-card-text class="text-h6" style="padding: 8px">-Words are random</v-card-text>
               </v-row>
               <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px">-Boost yourself up the leaderboard</v-card-text>
+                <v-card-text class="text-h6" style="padding: 8px"
+                  >-Boost yourself up the leaderboard</v-card-text
+                >
               </v-row>
               <v-row style="margin: 8px">
                 <v-card-text class="text-h6" style="padding: 8px">-Unlimted attempts</v-card-text>
@@ -27,7 +29,9 @@
                 <v-card-text class="text-h6" style="padding: 8px">-One word a day </v-card-text>
               </v-row>
               <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px">-See your daily results</v-card-text>
+                <v-card-text class="text-h6" style="padding: 8px"
+                  >-See your daily results</v-card-text
+                >
               </v-row>
               <v-row style="margin: 8px">
                 <v-card-text class="text-h6" style="padding: 8px"
