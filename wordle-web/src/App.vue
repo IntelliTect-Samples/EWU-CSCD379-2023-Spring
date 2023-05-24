@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar :elevation="3">
       <template v-slot>
-        <v-app-bar-title>
+        <v-app-bar-title style="flex: auto">
           <RouterLink to="/wordle">
             <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
             Wordle

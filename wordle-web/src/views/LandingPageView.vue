@@ -1,50 +1,43 @@
 <template>
-  <v-container>
-    <div class="justify-center text-h4 text-center" style="color: #272727">
-      Lets Play Wordle!
-      <v-row style="text-align: center; margin: 16px">
-        <v-col>
-          <RouterLink to="/wordle" class="d-flex justify-center">
-            <v-card class="bg-primary" style="min-width: 350px; margin: 16px">
-              <v-card-title class="text-h5">Play Random Wordle</v-card-title>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px">-Words are random</v-card-text>
-              </v-row>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px"
-                  >-Boost yourself up the leaderboard</v-card-text
-                >
-              </v-row>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px">-Unlimted attempts</v-card-text>
-              </v-row>
-            </v-card>
-          </RouterLink>
-        </v-col>
-        <v-col>
-          <RouterLink to="/wordoftheday" class="d-flex justify-center">
-            <v-card class="bg-primary" style="min-width: 350px; margin: 16px">
-              <v-card-title class="text-h5">Daily Wordle</v-card-title>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px">-One word a day </v-card-text>
-              </v-row>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px"
-                  >-See your daily results</v-card-text
-                >
-              </v-row>
-              <v-row style="margin: 8px">
-                <v-card-text class="text-h6" style="padding: 8px"
-                  >-Can you guess the word 10 days in a row?</v-card-text
-                >
-              </v-row>
-            </v-card>
-          </RouterLink>
-        </v-col>
-      </v-row>
-    </div>
+  <v-container class="fill-height" fluid>
+    <v-row justify="center">
+      <v-col cols="12" style="display: flex; justify-content: center">
+        <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap">
+          <h1 class="text-h2">Lets Play Wordle!</h1>
+        </div>
+      </v-col>
+      <v-col cols="12" style="display: flex; flex-direction: column; max-width: 16em; gap: 10px">
+        <v-btn
+          variant="outlined"
+          class="text-h6"
+          style="min-height: 60px; min-width: 140px"
+          to="/wordoftheday"
+          >Daily Wordle</v-btn
+        >
+        <v-btn
+          variant="outlined"
+          class="text-h6"
+          style="min-height: 60px; min-width: 140px"
+          to="/wordle"
+          >Random Wordle</v-btn
+        >
+        <v-btn
+          variant="outlined"
+          class="text-h6"
+          style="min-height: 60px; min-width: 140px"
+          to="/instructions"
+          >Instructions</v-btn
+        >
+      </v-col>
+    </v-row>
   </v-container>
 </template>
-<script lang="ts" setup>
-import { RouterLink } from 'vue-router'
+
+<script setup lang="ts">
+import { Services } from '@/scripts/services'
+import { inject, reactive } from 'vue'
+import { useDisplay } from 'vuetify/lib/framework.mjs'
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 </script>
