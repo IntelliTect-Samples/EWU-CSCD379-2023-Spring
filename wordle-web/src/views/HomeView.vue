@@ -16,7 +16,7 @@
         <v-card-text> Log on daily to play our word of the day in this game mode! </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn rounded="xl" elevation="16">Daily Word</v-btn>
+          <v-btn to="/wordoftheday" rounded="xl" elevation="16">Daily Word</v-btn>
         </v-card-actions>
       </v-card-item>
 
