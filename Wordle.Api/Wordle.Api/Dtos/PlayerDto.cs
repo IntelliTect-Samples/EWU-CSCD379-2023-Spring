@@ -4,14 +4,10 @@ namespace Wordle.Api.Dtos;
 
 public class PlayerDto
 {
-    public PlayerDto()
-    {
-    }
-
     public PlayerDto(Player player)
     {
         PlayerId = player.PlayerId;
-        Name = player.Name;
+        Name = player.PlayerName;
         GameCount = player.GameCount;
         AverageAttempts = player.AverageAttempts;
         AverageSecondsPerGame = player.AverageSecondsPerGame;
@@ -22,9 +18,4 @@ public class PlayerDto
     public int? GameCount { get; set; }
     public double? AverageAttempts { get; set; }
     public int? AverageSecondsPerGame { get; set; }
-}
-
-public class CreatePlayerDto
-{
-    public required string Name { get; set; }
 }

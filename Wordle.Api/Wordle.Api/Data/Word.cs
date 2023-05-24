@@ -1,4 +1,4 @@
-namespace Wordle.Api.Data;
+﻿namespace Wordle.Api.Data;
 
 public class Word
 {

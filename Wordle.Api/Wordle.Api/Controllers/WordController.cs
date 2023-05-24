@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
@@ -21,24 +21,6 @@ public class WordController : ControllerBase
         return (await _wordService.GetRandomWordAsync()).Text;
     }
 
-    // [HttpGet("GetManyWords")]
-    // public async Task<IEnumerable<Word>> GetManyWords(int? count)
-    // {
-    //     return await _wordService.GetSeveralWordsAsync(count);
-    // }
-
-    // [HttpPost]
-    // public async Task<Word> AddWord(string newWord, bool isCommon)
-    // {
-    //     return await _wordService.AddWordAsync(newWord, isCommon);
-    // }
-
-    // [HttpPost("AddWordFromBody")]
-    // public async Task<Word> AddWordFromBody([FromBody] WordDto word)
-    // {
-    //     return await _wordService.AddWordAsync(word.Text, word.IsCommon);
-    // }
-
     [HttpGet("WordOfTheDay")]
     public async Task<WordOfTheDayDto> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
     {
@@ -54,7 +36,7 @@ public class WordController : ControllerBase
         return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
     }
 
-    [HttpGet("GetWordList")]
+    [HttpGet("WordList")]
     public async Task<List<string>> GetWordList()
     {
         return await _wordService.GetWordList();

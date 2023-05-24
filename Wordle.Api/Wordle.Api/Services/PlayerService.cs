@@ -28,7 +28,7 @@ public class PlayerService
 
     public async Task<Player> CreateAsync(string name)
     {
-        Player player = new() { Name = name, PlayerId = Guid.NewGuid() };
+        Player player = new() { PlayerName = name, PlayerId = Guid.NewGuid() };
         _db.Players.Add(player);
         await _db.SaveChangesAsync();
         return player;
@@ -80,7 +80,7 @@ public class PlayerService
         var player = await _db.Players.FindAsync(playerId);
         if (player is not null)
         {
-            player.Name = name;
+            player.PlayerName = name;
             await _db.SaveChangesAsync();
             return player;
         }

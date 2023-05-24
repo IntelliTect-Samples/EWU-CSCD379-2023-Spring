@@ -1,4 +1,4 @@
-using Wordle.Api.Data;
+﻿using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
@@ -10,9 +10,9 @@ public class WordServiceTests : DatabaseTestBase
     [TestMethod]
     public async Task GetWord()
     {
-        using var context = new AppDbContext(Options);
+        await using var context = new AppDbContext(Options);
         var service = new WordService(context);
-        Seeder.Seed(context);
+        Seeder.SeedWords(context);
 
         var word = await service.GetRandomWordAsync();
 
@@ -49,28 +49,28 @@ public class WordServiceTests : DatabaseTestBase
         var wordOfTheDay1 =
             await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7), DateTime.UtcNow);
         var wordOfTheDay2 = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7),
-                                                                   DateTime.UtcNow.AddDays(-1));
+            DateTime.UtcNow.AddDays(-1));
         var wordOfTheDay3 = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7),
-                                                                   DateTime.UtcNow.AddDays(-2));
+            DateTime.UtcNow.AddDays(-2));
 
         GameResultDto dto = new() { PlayerId = playerId1,   WordPlayed = wordOfTheDay1.Word.Text,
-                                    WasGameWon = true,      Attempts = 3,
-                                    DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay1.Date };
+            WasGameWon = true,      Attempts = 3,
+            DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay1.Date };
         var playerGame = await playerService.AddGameResultAsync(dto);
         Assert.IsNotNull(playerGame.DateWord);
 
         dto = new() { PlayerId = playerId2,  WordPlayed = wordOfTheDay1.Word.Text,
-                      WasGameWon = true,     Attempts = 1,
-                      DurationInSeconds = 4, WordOfTheDayDate = wordOfTheDay1.Date };
+            WasGameWon = true,     Attempts = 1,
+            DurationInSeconds = 4, WordOfTheDayDate = wordOfTheDay1.Date };
         await playerService.AddGameResultAsync(dto);
 
         dto = new() { PlayerId = playerId1,   WordPlayed = wordOfTheDay2.Word.Text,
-                      WasGameWon = true,      Attempts = 3,
-                      DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay2.Date };
+            WasGameWon = true,      Attempts = 3,
+            DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay2.Date };
         await playerService.AddGameResultAsync(dto);
         dto = new() { PlayerId = playerId1,   WordPlayed = wordOfTheDay3.Word.Text,
-                      WasGameWon = true,      Attempts = 3,
-                      DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay3.Date };
+            WasGameWon = true,      Attempts = 3,
+            DurationInSeconds = 10, WordOfTheDayDate = wordOfTheDay3.Date };
         await playerService.AddGameResultAsync(dto);
 
         // Check the stats

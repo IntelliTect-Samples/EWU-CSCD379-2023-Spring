@@ -6,11 +6,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wordle.Api.Migrations
 {
 /// <inheritdoc />
-public partial class PlayerGame : Migration
+public partial class DateWord : Migration
 {
     /// <inheritdoc />
     protected override void Up(MigrationBuilder migrationBuilder)
     {
+        migrationBuilder.CreateTable(
+            name: "DateWords",
+            columns: table =>
+                new { DateWordId = table.Column<int>(type: "int", nullable: false)
+                                       .Annotation("SqlServer:Identity", "1, 1"),
+                      Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                      WordId = table.Column<int>(type: "int", nullable: false) },
+            constraints: table =>
+            {
+                table.PrimaryKey("PK_DateWords", x => x.DateWordId);
+                table.ForeignKey(name: "FK_DateWords_Words_WordId", column: x => x.WordId,
+                                 principalTable: "Words", principalColumn: "WordId");
+            });
+
         migrationBuilder.CreateTable(
             name: "PlayerGames",
             columns: table =>
@@ -37,6 +51,12 @@ public partial class PlayerGame : Migration
                                  onDelete: ReferentialAction.Cascade);
             });
 
+        migrationBuilder.CreateIndex(name: "IX_DateWords_Date", table: "DateWords", column: "Date",
+                                     unique: true);
+
+        migrationBuilder.CreateIndex(name: "IX_DateWords_WordId", table: "DateWords",
+                                     column: "WordId");
+
         migrationBuilder.CreateIndex(name: "IX_PlayerGames_DateWordId", table: "PlayerGames",
                                      column: "DateWordId");
 
@@ -51,6 +71,8 @@ public partial class PlayerGame : Migration
     protected override void Down(MigrationBuilder migrationBuilder)
     {
         migrationBuilder.DropTable(name: "PlayerGames");
+
+        migrationBuilder.DropTable(name: "DateWords");
     }
 }
 }
