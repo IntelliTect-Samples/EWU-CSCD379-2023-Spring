@@ -9,7 +9,7 @@
 
   <GameBoard :game="game" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" />
+  <GameKeyboard @letter-click="addChar" :guessedLetters="game.guessedLetters" />
 
   <v-row class="justify-center">
     <v-btn
