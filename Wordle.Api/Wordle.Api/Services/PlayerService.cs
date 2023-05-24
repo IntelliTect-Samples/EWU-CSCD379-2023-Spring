@@ -55,5 +55,71 @@ namespace Wordle.Api.Services
             return player;
         }
 
+        public async Task<Player?> GetAsync(Guid playerId)
+        {
+            return await _db.Players
+                .Where(p => p.PlayerId == playerId)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<Player> CreateAsync(string name)
+        {
+            Player player = new()
+            {
+                Name = name,
+                PlayerId = Guid.NewGuid()
+            };
+            _db.Players.Add(player);
+            await _db.SaveChangesAsync();
+            return player;
+        }
+
+        public async Task<Plays> AddGameResult(PlaysDto dto)
+        {
+            var player = await _db.Players.FindAsync(dto.PlayerId);
+            var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
+            if (player is not null && word != null)
+            {
+                if (dto.WasGameWon)
+                {
+                    player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
+                    player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.TimeInSeconds) / (player.GameCount + 1);
+                    player.GameCount++;
+                }
+
+                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && f.Date == dto.WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
+
+                Plays play = new()
+                {
+                    Player = player,
+                    Word = word,
+                    Attempts = dto.Attempts,
+                    TimeInSeconds = dto.TimeInSeconds,
+                    WasGameWon = dto.WasGameWon,
+                    DateWord = dateWord,
+                    Date = DateTime.UtcNow
+                };
+                _db.Plays.Add(play);
+                await _db.SaveChangesAsync();
+
+                return play;
+            }
+
+            throw new ArgumentException("Player Id or Word not found");
+        }
+    
+
+        public async Task<Player> UpdateAsync(Guid playerId, string name)
+        {
+            var player = await _db.Players.FindAsync(playerId);
+            if (player is not null)
+            {
+                player.Name = name;
+                await _db.SaveChangesAsync();
+                return player;
+            }
+            throw new ArgumentException("Player Id not found");
+        }
+
     }
 }

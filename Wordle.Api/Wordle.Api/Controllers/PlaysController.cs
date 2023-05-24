@@ -16,11 +16,5 @@ namespace Wordle.Api.Controllers
         {
             _playsService = playsService;
         }
-
-        [HttpPost("AddGameResult")]
-        public async Task<Plays> AddGameResult(PlaysDto dto)
-        {
-            return await _playsService.AddGameResult(dto);
-        }
     }
 }
