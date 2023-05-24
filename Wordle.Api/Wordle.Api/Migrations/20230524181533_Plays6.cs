@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Plays3 : Migration
+    public partial class Plays6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

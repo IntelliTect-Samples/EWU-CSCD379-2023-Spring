@@ -55,6 +55,7 @@ namespace Wordle.Api.Services
             return player;
         }
 
+        
         public async Task<Player?> GetAsync(Guid playerId)
         {
             return await _db.Players
@@ -73,6 +74,19 @@ namespace Wordle.Api.Services
             await _db.SaveChangesAsync();
             return player;
         }
+
+        public async Task<Player> UpdateAsync(Guid playerId, string name)
+        {
+            var player = await _db.Players.FindAsync(playerId);
+            if (player is not null)
+            {
+                player.Name = name;
+                await _db.SaveChangesAsync();
+                return player;
+            }
+            throw new ArgumentException("Player Id not found");
+        }
+        
 
         public async Task<Plays> AddGameResult(PlaysDto dto)
         {
@@ -106,19 +120,6 @@ namespace Wordle.Api.Services
             }
 
             throw new ArgumentException("Player Id or Word not found");
-        }
-    
-
-        public async Task<Player> UpdateAsync(Guid playerId, string name)
-        {
-            var player = await _db.Players.FindAsync(playerId);
-            if (player is not null)
-            {
-                player.Name = name;
-                await _db.SaveChangesAsync();
-                return player;
-            }
-            throw new ArgumentException("Player Id not found");
         }
 
     }

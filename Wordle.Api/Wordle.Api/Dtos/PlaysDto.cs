@@ -3,6 +3,7 @@
     public class PlaysDto
     {
         public Guid PlayerId { get; set; }
+        //public int PlayerId { get; set; }
         public bool WasGameWon { get; set; }
         public int Attempts { get; set; }
         public int TimeInSeconds { get; set; }

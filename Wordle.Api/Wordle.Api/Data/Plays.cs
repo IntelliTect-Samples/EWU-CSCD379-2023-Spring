@@ -7,6 +7,7 @@ namespace Wordle.Api.Data
     {
         //saved data
         public int PlaysId { get; set; }
+        //public int PlayerId { get; set; }
         public Guid PlayerId { get; set; }
         public required Player Player { get; set; }
         public int WordId { get; set; }
