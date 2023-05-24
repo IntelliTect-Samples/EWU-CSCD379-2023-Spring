@@ -4,7 +4,7 @@
       <template v-slot>
         <v-app-bar-title>
           <RouterLink to="/">
-            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
+            <v-icon icon="mdi-leaf" color="orange-darken-3"></v-icon>
             Wordle
           </RouterLink>
         </v-app-bar-title>

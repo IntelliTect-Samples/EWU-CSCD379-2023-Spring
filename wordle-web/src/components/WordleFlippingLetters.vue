@@ -20,12 +20,12 @@ class Letter {
 }
 
 const letters = reactive([
-  new Letter('W'),
-  new Letter('O'),
-  new Letter('R'),
-  new Letter('D'),
-  new Letter('L'),
-  new Letter('E')
+  new Letter('A'),
+  new Letter('U'),
+  new Letter('T'),
+  new Letter('U'),
+  new Letter('M'),
+  new Letter('N')
 ])
 
 onMounted(() => {
@@ -33,12 +33,12 @@ onMounted(() => {
     setTimeout(() => {
       letter.classList.push('square2')
       if (Math.random() > 0.03) {
-        letter.classList.push('green')
+        letter.classList.push('orangered')
       } else {
-        letter.classList.push('yellow')
+        letter.classList.push('orange')
         setTimeout(() => {
           letter.classList.pop()
-          letter.classList.push('green-switch')
+          letter.classList.push('orangered-switch')
         }, 1300)
       }
     }, index * 100)
@@ -101,16 +101,16 @@ div {
     border-radius 1s linear, opacity 1s linear, background-color 2s ease-out;
 }
 
-.green {
-  background-color: green;
+.orangered {
+  background-color: orangered;
 }
 
-.yellow {
-  background-color: yellow;
+.orange {
+  background-color: orange;
 }
 
-.green-switch {
-  background-color: green;
+.orangered-switch {
+  background-color: orangered;
   transition: background-color 0.2s ease-in-out;
   animation: pulse 0.4s ease-in-out;
 }
