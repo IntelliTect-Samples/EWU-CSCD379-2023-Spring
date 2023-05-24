@@ -27,7 +27,9 @@ namespace Wordle.Api.Services
             string word = await GetWordOfDay(date); 
             // Take a word as input and return the following: # of games that have been played
             int wordId = _db.Words.Where((w) => w.Text.Equals(word)).First().WordId;
-            int userId = _db.Users.Where((u) => u.Name.Equals(userName)).First().UserId;
+            IQueryable<User> user = _db.Users.Where(u => u.Name.Equals(userName));
+            bool userExists = user.Any();
+            
             IQueryable<Play> play = _db.Plays.Where(p => wordId == p.WordId);
             // Get the current date
             DateTime currentDate = date;
@@ -44,7 +46,7 @@ namespace Wordle.Api.Services
                     // Word
                     word,
                     //IsPlayed: If Exists a row in which the playerId
-                    _db.Plays.Any((p) => p.UserId == userId && p.WordId == wordId),
+                    (userExists) ? _db.Plays.Any((p) => p.UserId == user.First().UserId && p.WordId == wordId) : false,
                     // GameCount
                     playExists ? play.Count() : 0,
                     // AvgAttempts 
