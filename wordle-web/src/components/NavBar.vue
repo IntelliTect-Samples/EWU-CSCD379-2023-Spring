@@ -29,20 +29,25 @@
           <v-list-item prepend-icon="mdi-star" to="/wordle">
             Wordle
           </v-list-item>
-          <v-list-item prepend-icon="mdi-star-box" to="/worldoftheday" >
-            World Of the Day
+          <v-list-item prepend-icon="mdi-calendar-today" to="/worldoftheday" >
+            Wordle Of the Day
           </v-list-item>
           <v-list-item prepend-icon="mdi-star-box" to="/leaderboard">
             Leader Board
           </v-list-item>
+          <v-list-item prepend-icon="mdi-star-box" to="/lasttenwords">
+            Last 10 Wordle of the day
+          </v-list-item>
+          <v-list-item prepend-icon="mdi-cog" @click.stop="setting = true" @click="drawer = !drawer">
+            Setting
+          </v-list-item>
           <v-list-item prepend-icon="mdi-information" to="/about">
-            About</v-list-item
-          >
+            About 
+          </v-list-item>
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
   </nav>
-
 
   <v-dialog v-model="setting" width="auto">
     <v-card>
@@ -72,8 +77,6 @@
     </v-card>
   </v-dialog>
 
-
-
 </template>
 
 <script setup lang="ts">
@@ -84,7 +87,6 @@ import GameInstruction from './GameInstruction.vue'
 const theme = useTheme()
 const drawer = ref (false)
 const setting = ref (false)
-
 
 function setTheme(themecolor: string){
   if(themecolor === "light" )
@@ -106,4 +108,7 @@ function setTheme(themecolor: string){
       theme.global.name.value = 'light'
     } else theme.global.name.value = 'light'
     }  
+
+
+  
 </script>
