@@ -20,7 +20,7 @@ export class PlayerService {
         const response = await Axios.post('/Player/CreatePlayer', this.player.playerName, {
           headers: { 'Content-Type': 'application/json' }
         })
-        this.player.playerId = response.data.playerName
+        this.player.playerId = response.data.playerId
         localStorage.setItem('userId', this.player.playerId)
         localStorage.setItem('userName', this.player.playerName)
         this.isOnline.value = true
