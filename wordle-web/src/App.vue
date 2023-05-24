@@ -3,7 +3,7 @@
       <v-card class="mx-auto" min-width="30rem">
         <v-card-title>Enter Your Username</v-card-title>
         <v-card-text>
-          <v-text-field v-model="username" maxlength="20" label="Username" />
+          <v-text-field v-model="username" maxlength="20" label="Username"/>
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary" @click="saveUsername">Save</v-btn>
@@ -25,10 +25,21 @@
         <v-btn class="text-h5" variant="plain" @click="promptUsername = true">
           {{ username }}
         </v-btn>
+
       </v-btn-toggle>
       <RouterLink to="/leaderboard">
             <v-btn icon="mdi-podium-gold" color="orange-darken-3"></v-btn>
       </RouterLink>
+       
+
+      <RouterLink to="/game">
+            <v-btn icon="mdi-controller-classic-outline" color="orange-darken-3"></v-btn>
+      </RouterLink>
+      
+      <RouterLink to="/help">
+            <v-btn icon="mdi-help-box" color="orange-darken-3"></v-btn>
+      </RouterLink>
+
         <v-btn icon="mdi-brightness-7" color="orange-darken-3" @click="switchTheme" ></v-btn>
 
         <v-menu>
@@ -51,12 +62,14 @@
       </template>
     </v-app-bar>
     <v-main>
+      <FallingLetters />
       <RouterView />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
+import FallingLetters from "@/components/FallingLetters.vue";
 import { inject, ref } from 'vue'
 import type { VueCookies } from 'vue-cookies'
 import { useTheme } from 'vuetify/lib/framework.mjs'
