@@ -11,18 +11,18 @@ export class PlayerService {
   constructor() {
     this.player = reactive(new Player())
     this.player.playerId = localStorage.getItem('userId') ?? ''
-    this.player.name = localStorage.getItem('userName') ?? 'Guest'
+    this.player.playerName = localStorage.getItem('userName') ?? 'Guest'
   }
 
   setupPlayerAsync = async () => {
     if (!this.player.playerId) {
       try {
-        const response = await Axios.post('/Player/CreatePlayer', this.player.name, {
+        const response = await Axios.post('/Player/CreatePlayer', this.player.playerName, {
           headers: { 'Content-Type': 'application/json' }
         })
-        this.player.playerId = response.data.playerId
+        this.player.playerId = response.data.playerName
         localStorage.setItem('userId', this.player.playerId)
-        localStorage.setItem('userName', this.player.name)
+        localStorage.setItem('userName', this.player.playerName)
         this.isOnline.value = true
       } catch (error) {
         this.isOnline.value = false
@@ -35,20 +35,20 @@ export class PlayerService {
   refreshPlayerFromServerAsync = async () => {
     try {
       const response = await Axios.get(`/Player?playerId=${this.player.playerId}`)
-      this.player.name = response.data.name
+      this.player.playerName = response.data.playerName
       this.player.gameCount = response.data.gameCount
       this.player.averageAttempts = response.data.averageAttempts
       this.player.averageSecondsPerGame = response.data.averageSecondsPerGame
-      localStorage.setItem('userName', this.player.name)
+      localStorage.setItem('userName', this.player.playerName)
     } catch (error) {
       this.isOnline.value = false
     }
   }
 
-  ChangeNameAsync = async (name: string) => {
+  ChangeNameAsync = async (playerName: string) => {
     if (!this.isOnline) return
-    this.player.name = name
-    localStorage.setItem('userName', name ?? 'Guest')
+    this.player.playerName = playerName
+    localStorage.setItem('userName', playerName ?? 'Guest')
     return Axios.post(`/Player/RenamePlayer`, this.player)
   }
 }

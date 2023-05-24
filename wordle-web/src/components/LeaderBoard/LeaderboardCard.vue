@@ -16,7 +16,7 @@
       </thead>
       <tbody>
         <tr v-for="player in players" :key="player.playerId">
-          <td>{{ player.name }}</td>
+          <td>{{ player.playerName }}</td>
           <td>{{ player.gameCount }}</td>
           <td>{{ player.averageAttempts }}</td>
           <td>{{ player.averageSecondsPerGame }}</td>
@@ -32,7 +32,7 @@ import Axios from 'axios'
 
 interface Player {
   playerId: number
-  name: string
+  playerName: string
   gameCount: number
   averageAttempts: number
   averageSecondsPerGame: number
