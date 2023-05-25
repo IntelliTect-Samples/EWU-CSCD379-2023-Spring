@@ -7,7 +7,7 @@
             SeedPlayers(context);
             SeedWords(context);
         }
- 
+
         public static void SeedWords(AppDbContext db)
         {
             if (!db.Words.Any())
@@ -27,7 +27,7 @@
             }
         }
 
-        public static void SeedPlayers (AppDbContext db)
+        public static void SeedPlayers(AppDbContext db)
         {
             if (!db.Players.Any())
             {
@@ -39,5 +39,23 @@
             }
         }
 
-   }
+        public static void SeedDateWords(AppDbContext db)
+        {
+            if (db.DateWords.Count() < 10)
+            {
+                db.Players.Add(new Player { Name = "Sam", AverageAttempts = 4.5, AverageSecondsPerGame = 62, GameCount = 25, PlayerId = Guid.NewGuid() });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-1), WordId = 46, Word = new Word { IsUsed = true, Text = "about" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-2), WordId = 46, Word = new Word { IsUsed = true, Text = "above" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-3), WordId = 46, Word = new Word { IsUsed = true, Text = "abuse" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-4), WordId = 46, Word = new Word { IsUsed = true, Text = "abuts" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-5), WordId = 46, Word = new Word { IsUsed = true, Text = "abyss" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-6), WordId = 46, Word = new Word { IsUsed = true, Text = "acids" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-7), WordId = 46, Word = new Word { IsUsed = true, Text = "acing" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-8), WordId = 46, Word = new Word { IsUsed = true, Text = "acorn" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-9), WordId = 46, Word = new Word { IsUsed = true, Text = "acrid" } });
+                db.DateWords.Add(new DateWord { Date = DateTime.Now.AddDays(-10), WordId = 46, Word = new Word { IsUsed = true, Text = "adapt" } });
+                db.SaveChanges();
+            }
+        }
+    }
 }

@@ -47,4 +47,4 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
         }
     }
-}    
+}
