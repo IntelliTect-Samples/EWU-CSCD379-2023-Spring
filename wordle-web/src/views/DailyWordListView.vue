@@ -9,7 +9,9 @@
       rounded
     >
       <v-card-title class="titleText">Word Of The Day Games!</v-card-title>
-      <v-card-subtitle class="subText">Red means you've already played, Green means you haven't</v-card-subtitle>
+      <v-card-subtitle class="subText"
+        >Red means you've already played, Green means you haven't</v-card-subtitle
+      >
       <v-card-text>
         <v-row justify="center">
           <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
@@ -56,14 +58,14 @@ export default {
     })
 
     function hasPlayerPlayed(playerGuid: string, gamestat: DateWord): boolean {
-    const playerList = gamestat.previousPlayers
-    playerList.forEach((p) => {
-      if (playerGuid == p.playerId) {
-        return false
-      }
-    })
-    return true
-  }
+      const playerList = gamestat.previousPlayers
+      playerList.forEach((p) => {
+        if (playerGuid == p.playerId) {
+          return false
+        }
+      })
+      return true
+    }
 
     return {
       gameStats,

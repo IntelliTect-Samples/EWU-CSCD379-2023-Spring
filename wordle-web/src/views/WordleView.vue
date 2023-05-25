@@ -73,7 +73,7 @@ const msg = ref('Wordle Mind Bender')
 
 const wordOfTheDayFlag = ref(false)
 const listOfPlayers = ref()
-const dateWord : Ref<DateWord> = ref({} as DateWord)
+const dateWord: Ref<DateWord> = ref({} as DateWord)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -116,7 +116,7 @@ function newGame() {
     msg.value = 'Wordle Mind Bender'
   }
   Axios.get(apiPath)
-  .then((response) => {
+    .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)
       setTimeout(() => {
@@ -181,10 +181,9 @@ function sendGameResult() {
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
   lastGameResult.value = gameResult
-  
+
   console.log(listOfPlayers)
-  
-  
+
   if (wordOfTheDayFlag.value) {
     const dailyResult = new DateWord()
     dailyResult.playerId = playerService.player.playerId
@@ -194,7 +193,9 @@ function sendGameResult() {
     dailyResult.date = dateWord.value.date
     console.log(dailyResult)
     showScoreDialog.value = true
-    Axios.post(`/DateWord/AddDailyGameResult?playerId=${dailyResult.playerId}&dateWordId=${dailyResult.dateWordId}&seconds=${dailyResult.seconds}&attempts=${dailyResult.attempts}`).then((response) => {
+    Axios.post(
+      `/DateWord/AddDailyGameResult?playerId=${dailyResult.playerId}&dateWordId=${dailyResult.dateWordId}&seconds=${dailyResult.seconds}&attempts=${dailyResult.attempts}`
+    ).then((response) => {
       console.log(response.data)
     })
     wordOfTheDayFlag.value = false
