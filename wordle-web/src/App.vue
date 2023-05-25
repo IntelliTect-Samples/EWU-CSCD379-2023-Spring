@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="background-img">
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
@@ -58,6 +58,16 @@
     </v-main>
   </v-app>
 </template>
+
+<style scoped> 
+  .background-img {
+    background-image: url('./assets/pexels-fwstudio-164005.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+</style>
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
