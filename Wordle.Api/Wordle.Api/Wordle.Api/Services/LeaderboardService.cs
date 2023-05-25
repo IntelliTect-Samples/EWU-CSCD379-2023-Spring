@@ -88,7 +88,7 @@ namespace Wordle.Api.Services
         }
         public async Task<DailyCompletions> AddDailyCompletion(string name, string word) 
         {
-            DateWord dateWord = _db.DateWords.Where(w => w.Word.Text == word).FirstOrDefault();
+            DateWord? dateWord = _db.DateWords.Where(w => w.Word.Text == word).FirstOrDefault();
             DailyCompletions daily = new();
             if (dateWord != null)
             {

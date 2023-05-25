@@ -12,7 +12,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("*");
+                          policy.WithOrigins("*", 
+                              "https://white-desert-0370f231e.3.azurestaticapps.net");
                       });
 });
 
