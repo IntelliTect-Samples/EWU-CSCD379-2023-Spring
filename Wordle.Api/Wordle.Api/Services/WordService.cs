@@ -121,7 +121,7 @@ namespace Wordle.Api.Services
             }
         }
 
-        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, int? playerId = null)
         {
             if (daysBack < 1 || daysBack > 100) daysBack = 10;
 

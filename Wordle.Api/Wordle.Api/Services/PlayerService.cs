@@ -56,7 +56,7 @@ namespace Wordle.Api.Services
         }
 
         
-        public async Task<Player?> GetAsync(Guid playerId)
+        public async Task<Player?> GetAsync(int playerId)
         {
             return await _db.Players
                 .Where(p => p.PlayerId == playerId)
@@ -68,14 +68,14 @@ namespace Wordle.Api.Services
             Player player = new()
             {
                 Name = name,
-                PlayerId = Guid.NewGuid()
+                //PlayerId = Guid.NewGuid()
             };
             _db.Players.Add(player);
             await _db.SaveChangesAsync();
             return player;
         }
 
-        public async Task<Player> UpdateAsync(Guid playerId, string name)
+        public async Task<Player> UpdateAsync(int playerId, string name)
         {
             var player = await _db.Players.FindAsync(playerId);
             if (player is not null)
@@ -88,8 +88,19 @@ namespace Wordle.Api.Services
         }
         
 
-        public async Task<Plays> AddGameResult(PlaysDto dto)
+        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSecounds, string WordPlayed, DateTime? WordOfTheDayDate)
         {
+            Player played = await _db.Players.FirstOrDefaultAsync(p => p.Name == Name);
+            PlaysDto dto = new()
+            {
+                PlayerId = played.PlayerId,
+                WasGameWon = WasGameWon,
+                Attempts = Attempts,
+                TimeInSeconds = TimeInSecounds,
+                WordPlayed = WordPlayed,
+                WordOfTheDayDate = WordOfTheDayDate
+            };
+
             var player = await _db.Players.FindAsync(dto.PlayerId);
             var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
             if (player is not null && word != null)

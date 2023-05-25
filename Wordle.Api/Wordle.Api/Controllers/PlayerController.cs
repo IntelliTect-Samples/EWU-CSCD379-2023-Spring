@@ -31,9 +31,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddGameResult")]
-        public async Task<Plays> AddGameResult(PlaysDto dto)
+        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSecounds, string WordPlayed, DateTime? WordOfTheDayDate)
         {
-            return await _playerService.AddGameResult(dto);
+            return await _playerService.AddGameResult(Name, WasGameWon, Attempts, TimeInSecounds, WordPlayed, WordOfTheDayDate);
         }
     }
 }
