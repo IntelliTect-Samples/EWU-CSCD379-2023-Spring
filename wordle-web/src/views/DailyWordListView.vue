@@ -63,7 +63,6 @@ export default {
         if (playerGuid == playerList[i].playerId) {
           return false
         }
-        
       }
       return true
     }
