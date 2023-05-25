@@ -20,9 +20,9 @@ public class WordService
         var count = await _db.Words.CountAsync(word => word.IsCommon);
         var index = new Random().Next(count);
         var word = await _db.Words
-            .Where(word => word.IsCommon)
-            .Skip(index)
-            .FirstAsync();
+          .Where(word => word.IsCommon)
+          .Skip(index)
+          .FirstAsync();
         return word;
     }
 
@@ -33,11 +33,11 @@ public class WordService
         totalCount -= count.Value;
         int index = new Random().Next(totalCount);
         var words = await _db.Words
-            .Where(word => word.IsCommon)
-            .Skip(index)
-            .Take(count.Value)
-            .OrderByDescending(w => w.Text)
-            .ToListAsync();
+          .Where(word => word.IsCommon)
+          .Skip(index)
+          .Take(count.Value)
+          .OrderByDescending(w => w.Text)
+          .ToListAsync();
         return words;
     }
 
@@ -73,8 +73,8 @@ public class WordService
         }
 
         var todaysWord = await _db.DateWords
-            .Include(f => f.Word)
-            .FirstOrDefaultAsync(f => f.Date == date);
+          .Include(f => f.Word)
+          .FirstOrDefaultAsync(f => f.Date == date);
 
         if (todaysWord != null)
         {
@@ -85,8 +85,8 @@ public class WordService
             lock (_WordOfTheDayLock)
             {
                 var todaysLatestWord = _db.DateWords
-                    .Include(f => f.Word)
-                    .FirstOrDefault(f => f.Date == date.Value);
+                  .Include(f => f.Word)
+                  .FirstOrDefault(f => f.Date == date.Value);
 
                 if (todaysLatestWord != null)
                 {
@@ -109,8 +109,8 @@ public class WordService
                     if (e.Message.Contains("duplicate"))
                     {
                         return _db.DateWords
-                            .Include(f => f.Word)
-                            .First(f => f.Date == date.Value);
+                          .Include(f => f.Word)
+                          .First(f => f.Date == date.Value);
                     }
                 }
                 return dateWord;
@@ -118,8 +118,7 @@ public class WordService
         }
     }
 
-    public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStatsAsync
-        (DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+    public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStatsAsync(DateTime? date = null, int daysBack = 10, Guid? playerId = null)
     {
         if (daysBack < 1 || daysBack > 100) daysBack = 10;
         // Make sure we get the most recent day in the farthest timezone
@@ -128,45 +127,45 @@ public class WordService
 
         // Get the data using the child collection of PlayerGames
         var result = await _db.DateWords
-            .Include(f => f.PlayerGames)
-            .Where(f => f.Date <= startDate && f.Date > endDate)
-            .OrderByDescending(f => f.Date)
-            .Select(f => new WordOfTheDayStatsDto
-            {
-                Date = f.Date,
-                AverageDurationInSeconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
-                AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
-                NumberOfPlays = f.PlayerGames.Count(),
-                HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
-            })
-            .ToListAsync();
+          .Include(f => f.PlayerGames)
+          .Where(f => f.Date <= startDate && f.Date > endDate)
+          .OrderByDescending(f => f.Date)
+          .Select(f => new WordOfTheDayStatsDto
+          {
+              Date = f.Date,
+              AverageDurationInSeconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
+              AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
+              NumberOfPlays = f.PlayerGames.Count(),
+              HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
+          })
+          .ToListAsync();
 
-        // Another way to do this using GroupBy
-        // This algorithm doesn't handle days without PlayerGames. 
+        //Another way to do this using GroupBy
+        //This algorithm doesn't handle days without PlayerGames. 
         // This would need to have the stats inserted into the collection after the fact.
-        //var result = await _db.PlayerGames
-        //    .Include(f => f.DateWord)
-        //    .Where(f => f.DateWord != null &&
-        //        f.DateWord.Date <= startDate &&
-        //        f.DateWord.Date >= endDate)
-        //    .GroupBy(f => f.DateWord)
-        //    .Where(f => f.Key != null)
-        //    .Select(g => new WordOfTheDayStatsDto
-        //    {
-        //        Date = g.Key!.Date,
-        //        AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
-        //        AverageAttempts = g.Average(f => f.Attempts),
-        //        NumberOfPlays = g.Count(),
-        //        HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
+        var result2 = await _db.PlayerGames
+          .Include(f => f.DateWord)
+          .Where(f => f.DateWord != null &&
+            f.DateWord.Date <= startDate &&
+            f.DateWord.Date >= endDate)
+          .GroupBy(f => f.DateWord)
+          .Where(f => f.Key != null)
+          .Select(g => new WordOfTheDayStatsDto
+          {
+              Date = g.Key!.Date,
+              AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
+              AverageAttempts = g.Average(f => f.Attempts),
+              NumberOfPlays = g.Count(),
+              HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
 
-        //    })
-        //    .ToListAsync();
+          })
+          .ToListAsync();
 
         // If we don't have enough entries, then we need to add the days.
         if (result.Count != daysBack)
         {
             // We need to add the extra days
-            for(int i = 0; i > (daysBack+1)*-1; i-- )
+            for (int i = 0; i > (daysBack + 1) * -1; i--)
             {
                 // Use the timezone that is the worst possible one
                 await this.GetWordOfTheDayAsync(TimeSpan.FromHours(12), startDate.AddDays(i));

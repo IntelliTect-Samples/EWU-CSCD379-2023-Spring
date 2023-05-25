@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="transparent-background">
     <v-card-title>
       <v-row>
         <v-col cols="auto">
@@ -142,6 +142,10 @@ function wordClick(letter: string) {
 .v-list-item {
   padding: 0;
   min-height: 22px !important;
+}
+
+.transparent-background {
+  opacity: 0.7;
 }
 </style>
 ```

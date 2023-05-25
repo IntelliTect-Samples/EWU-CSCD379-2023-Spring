@@ -43,3 +43,23 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+span.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-color: red;
+  transform: scale(1.1);
+}
+
+div.v-theme--dark span.bg {
+  background: url('https://cdn.pixabay.com/photo/2016/03/26/13/09/organic-1280537_1280.jpg')
+    no-repeat center center;
+}
+div.v-theme--light span.bg {
+  background: url('https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=1800&t=st=1685051587~exp=1685052187~hmac=9cf1a6e2ff2972d0368e9d627e31be987250d82dee79485dd42dd15e66ff7d84')
+    no-repeat center center;
+}
