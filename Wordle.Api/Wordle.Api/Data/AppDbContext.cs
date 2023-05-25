@@ -18,11 +18,6 @@ namespace Wordle.Api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder
-                .Entity<DateWord>()
-                .HasOne(e => e.Word)
-                .WithMany(f => f.DateWords)
-                .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder
                 .Entity<DateWord>()

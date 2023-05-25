@@ -53,7 +53,7 @@ public class PlayerService
         var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
 
 
-        if (player is not null && word != null)
+        if (player is not null && word is not null)
         {
             if (dto.WasGameWon)
             {
@@ -63,7 +63,9 @@ public class PlayerService
             }
             // See if this was a word of the day
             var dateWord = await _db.DateWords
-                .FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && f.Date == dto.WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
+                .FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && 
+                    f.Date == dto.WordOfTheDayDate.Value.Date && 
+                    f.WordId == word.WordId);
             // Add a PlayerGame
             PlayerGame playerGame = new()
             {
