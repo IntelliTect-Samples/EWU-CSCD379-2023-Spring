@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - Assignment-4
-     paths:
+    paths:
       - Wordle.Api/**
   workflow_dispatch:
 
