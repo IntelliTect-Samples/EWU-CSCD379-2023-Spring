@@ -46,3 +46,13 @@ function playButtonSound() {
   audio.play()
 }
 </script>
+
+<style scoped>
+.v-btn {
+  font-size: 1.2rem;
+}
+.letter-small {
+  min-width: 20px;
+  padding: 0;
+}
+</style>
