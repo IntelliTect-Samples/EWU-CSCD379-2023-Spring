@@ -98,7 +98,7 @@ function newGame() {
   }
   Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data)
+      game.restartGame(response.data.word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
