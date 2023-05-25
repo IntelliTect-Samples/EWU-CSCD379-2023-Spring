@@ -1,4 +1,5 @@
-﻿using Wordle.Api.Data;
+﻿
+using Wordle.Api.Data;
 
 namespace Wordle.Api.Dtos
 {
@@ -20,7 +21,7 @@ namespace Wordle.Api.Dtos
         public double? AverageAttempts { get; set; }
         public int? AverageSecondsPerGame { get; set; }
 
-        
+
     }
 
     public class CreatePlayerDto
