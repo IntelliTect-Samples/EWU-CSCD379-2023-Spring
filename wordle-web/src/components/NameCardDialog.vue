@@ -30,7 +30,7 @@ import { ref } from 'vue'
 const props = defineProps<{
   playerName: string
 }>()
-var dialog = ref(true)
+var dialog = ref(localStorage.getItem('name') === 'Guest')
 var name = ''
 
 const emits = defineEmits<{

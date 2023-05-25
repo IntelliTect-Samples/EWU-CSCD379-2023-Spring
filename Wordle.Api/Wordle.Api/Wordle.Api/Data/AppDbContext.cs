@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 using System.Numerics;
 using System.Reflection.Metadata;
 
@@ -15,6 +16,7 @@ namespace Wordle.Api.Data
         public DbSet<Player> Players => Set<Player>();
 
         public DbSet<DateWord> DateWords => Set<DateWord>();
+        public DbSet<DailyCompletions> DailyCompletions => Set<DailyCompletions>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +30,10 @@ namespace Wordle.Api.Data
                 .Entity<DateWord>()
                 .HasIndex(e => e.Date)
                 .IsUnique();
+            modelBuilder
+                .Entity<DailyCompletions>()
+                .HasKey(m => new { m.DateWordId, m.PlayerName});
+
         }
     }
 }

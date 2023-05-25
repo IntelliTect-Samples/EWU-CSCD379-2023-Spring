@@ -9,6 +9,7 @@ namespace Wordle.Api.Data
         public Word Word { get; set; } = null!;
         public int Plays { get; set; } = 0;
         public double AverageAttempts { get; set; } = 0;
+        public double AverageSeconds { get; set; } = 0;
 
     }
 }

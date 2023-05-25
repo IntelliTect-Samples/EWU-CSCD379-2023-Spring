@@ -14,7 +14,7 @@
       <v-col cols="auto"> </v-col>
     </v-row>
   </v-container>
-
+  <h2>{{ timer }}</h2>
   <h3>{{ game.secretWord }}</h3>
 
   <v-container id="list">
@@ -41,6 +41,8 @@ const titleRef = ref('Wordle')
 const guess = ref('')
 const game = reactive(new WordleGame())
 const route = useRoute()
+const timer = ref(0)
+let tracker = setInterval(myTimer, 1000)
 
 console.log(game.secretWord)
 onMounted(async () => {
@@ -73,6 +75,12 @@ function newGame() {
       game.restartGame(WordsService.getRandomWord())
       console.log(game.secretWord)
     })
+  clearInterval(tracker)
+  tracker = setInterval(myTimer, 1000)
+}
+
+function myTimer() {
+  timer.value = timer.value + 1
 }
 function autoComplete(fill: string) {
   while (game.guess.text !== '') {
@@ -83,7 +91,10 @@ function autoComplete(fill: string) {
   }
 }
 function checkGuess() {
-  game.submitGuess(route.path)
+  if (game.submitGuess(route.path, timer.value)) {
+    console.log(timer.value)
+    clearInterval(tracker)
+  }
   guess.value = ''
 }
 function addChar(letter: Letter) {
@@ -105,7 +116,7 @@ function keyPress(event: KeyboardEvent) {
 }
 
 function testApi() {
-  game.postPlayerToApi('Dan', 4)
+  game.postPlayerToApi('Dan', 4, 20)
 }
 function setName(name: string) {
   game.setPlayerName(name)

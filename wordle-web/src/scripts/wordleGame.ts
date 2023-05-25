@@ -23,7 +23,7 @@ export class WordleGame {
   status = WordleGameStatus.Active
   guess!: Word
   numberOfGuesses = 6
-  currentPlayer = 'Guest'
+  currentPlayer = localStorage.getItem('name') || 'Guest'
   amountOfGuesses = 0
 
   // // check length of guess
@@ -44,14 +44,16 @@ export class WordleGame {
     this.status = WordleGameStatus.Active
   }
 
-  submitGuess(route: string) {
+  submitGuess(route: string, seconds: number): boolean {
     // put logic to win here.
     this.amountOfGuesses++
     if (this.guess.check(this.secretWord)) {
       if (route === '/wordoftheday') {
-        this.postScoreToDaily()
+        this.postScoreToDaily(seconds)
+        return true
       } else {
-        this.postPlayerToApi(this.currentPlayer, this.amountOfGuesses)
+        this.postPlayerToApi(this.currentPlayer, this.amountOfGuesses, seconds)
+        return true
       }
     }
 
@@ -65,20 +67,24 @@ export class WordleGame {
     const index = this.guesses.indexOf(this.guess)
     if (index < this.guesses.length - 1) {
       this.guess = this.guesses[index + 1]
+      return false
     } else {
       // The game is over
+      return true
     }
   }
 
   setPlayerName(name: string) {
     if (name != '' || name != null) {
+      localStorage.setItem('name', name)
       this.currentPlayer = name
     } else {
+      localStorage.setItem('name', 'Guest')
       this.currentPlayer = 'Guest'
     }
   }
 
-  postPlayerToApi(name: string, attempts: number) {
+  postPlayerToApi(name: string, attempts: number, seconds: number) {
     Axios.post(
       '/leaderboard?name='.concat(name, '&attempts=', attempts.toString()),
       name.concat(',', attempts.toString(), ',', attempts.toString())
@@ -90,10 +96,23 @@ export class WordleGame {
         console.log(error)
       })
   }
-  postScoreToDaily() {
+  postScoreToDaily(seconds: number) {
+    console.log(seconds.toString())
     Axios.post(
-      '/leaderboard/daily?word=' + this.secretWord + '&attempts=' + this.amountOfGuesses.toString()
+      '/leaderboard/daily?word=' +
+        this.secretWord +
+        '&attempts=' +
+        this.amountOfGuesses.toString() +
+        '&seconds' +
+        seconds.toString()
     )
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
+    Axios.post('/Leaderboard/completion?name=' + this.currentPlayer + '&word=' + this.secretWord)
       .then(function (response) {
         console.log(response)
       })

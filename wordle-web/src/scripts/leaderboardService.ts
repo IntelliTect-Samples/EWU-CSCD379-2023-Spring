@@ -7,7 +7,7 @@ export abstract class LeaderboardService {
     return result.data
   }
   static async getDailyLeaderboard(): Promise<string[]> {
-    const result = await Axios.get('/leaderboard/daily')
+    const result = await Axios.get('/leaderboard/daily?name=' + localStorage.getItem('name'))
     console.log(result.data)
     return result.data
   }

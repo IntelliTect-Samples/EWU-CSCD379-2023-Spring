@@ -27,14 +27,18 @@
         <tr>
           <th class="text-center">Date</th>
           <th class="text-center">Avg. Attempts</th>
+          <th class="text-center">Avg. Seconds</th>
           <th class="text-center">Games Played</th>
+          <th class="text-center">{{ name }} Has Played?</th>
         </tr>
       </thead>
       <tbody>
         <tr class="text-center" v-for="item in daily" :key="item">
           <td>{{ item.split(',')[0] }}</td>
           <td>{{ item.split(',')[1] }}</td>
+          <td>{{ item.split(',')[4] }}</td>
           <td>{{ item.split(',')[2] }}</td>
+          <td>{{ item.split(',')[5] }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -46,6 +50,7 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 import { LeaderboardService } from '../scripts/leaderboardService'
 import { onMounted, ref } from 'vue'
 const theme = useTheme()
+const name = ref(localStorage.getItem('name'))
 const result = ref(['', ''])
 const daily = ref(['', ''])
 onMounted(async () => {

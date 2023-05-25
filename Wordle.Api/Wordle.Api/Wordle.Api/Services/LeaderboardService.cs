@@ -53,33 +53,55 @@ namespace Wordle.Api.Services
             return player;
         }
 
-        public async Task<string[]> GetLastTenDays()
+        public async Task<string[]> GetLastTenDays(string name)
         {
             var days = await _db.DateWords
                 .OrderByDescending(d => d.DateWordId)
                 .Take(10)
                 .ToArrayAsync();
+            var completions = await _db.DailyCompletions
+                .Where(c => c.PlayerName == name)
+                .Select(c => c.DateWordId)
+                .ToArrayAsync();
             string[] dayStr = new string[days.Length];
             int count = 0;
             foreach (var day in days) 
             {
-                dayStr[count] = $"{day.Date.ToString().Split(' ')[0]},{day.AverageAttempts},{day.Plays},{day.DateWordId}";
+                dayStr[count] = $"{day.Date.ToString().Split(' ')[0]},{day.AverageAttempts},{day.Plays},{day.DateWordId},{day.AverageSeconds},{completions.Contains(day.DateWordId)}";
                 count++;
             }
             return dayStr;
         }
 
-        public async Task<DateWord?> UpdateDateWord(string word, int attempts)
+        public async Task<DateWord?> UpdateDateWord(string word, int attempts, int seconds)
         {
             DateWord? dateWord = await _db.DateWords
                 .FirstOrDefaultAsync(d => d.Word.Text == word);
             if (dateWord != null) {
                 dateWord.AverageAttempts = ((dateWord.AverageAttempts * dateWord.Plays) + attempts) / (dateWord.Plays + 1);
+                dateWord.AverageSeconds = ((dateWord.AverageSeconds * dateWord.Plays) + seconds) / (dateWord.Plays + 1);
                 dateWord.Plays++;
             }
 
             await _db.SaveChangesAsync();
             return dateWord;
+        }
+        public async Task<DailyCompletions> AddDailyCompletion(string name, string word) 
+        {
+            DateWord dateWord = _db.DateWords.Where(w => w.Word.Text == word).FirstOrDefault();
+            DailyCompletions daily = new();
+            if (dateWord != null)
+            {
+                daily = new()
+                {
+                    DateWordId = dateWord.DateWordId,
+                    PlayerName = name,
+                };
+                _db.DailyCompletions.Add(daily);
+            }
+            await _db.SaveChangesAsync();
+            return daily;
+
         }
     }
 }
