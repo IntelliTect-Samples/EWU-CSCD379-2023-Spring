@@ -60,7 +60,7 @@
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main style="v-main">
       <RouterView />
     </v-main>
   </v-app>
@@ -100,3 +100,12 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 </script>
+
+<style scoped>
+.v-main {
+  background-image: url('https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fabstract-black-hexagon-background-design_24529-2111.jpg&tbnid=BquwQZLv3Cb5IM&vet=12ahUKEwitws6FtZH_AhX0AzQIHdhfCFAQMygNegUIARCcAg..i&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Fpremium-vector%2Fabstract-black-hexagon-background-design_23514637.htm&docid=TAmEauIJvi6VRM&w=626&h=352&q=black%20hexagon%20background&ved=2ahUKEwitws6FtZH_AhX0AzQIHdhfCFAQMygNegUIARCcAg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+</style>
