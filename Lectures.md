@@ -163,6 +163,15 @@
 - EF multiple table queries (Getting Word of the Day stats)
 - Using GroupBy, Sort
 - Questions from the homework
+- Lots of other stuff pertaining to homework
+
+### Lecture 16, 5/25
+- Database rollback and Migration consolidate
+- Full page images with themes
+- CSS deep dive
+- Navigation when query changes
+- v-model
+- 
 
 ### Next Topics
 - CSS animations using transition
