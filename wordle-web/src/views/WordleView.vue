@@ -65,6 +65,7 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+let date = new Date()
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -83,10 +84,11 @@ onUnmounted(() => {
 })
 
 function newGame() {
+  date = new Date()
   overlay.value = true
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
-    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    apiPath = `word/wordoftheday?offsetInHours=${date.getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
@@ -154,6 +156,7 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
+  gameResult.wordOfTheDayDate = date
 
   console.log(gameResult)
 
