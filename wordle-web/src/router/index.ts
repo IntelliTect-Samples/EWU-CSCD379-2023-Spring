@@ -5,12 +5,18 @@ import LeaderboardView from '../views/LeaderboardView.vue'
 import DailyView from '../views/DailyView.vue'
 import InstructionView from '../views/InstructionView.vue'
 import PreviousView from '../views/PreviousView.vue'
+import IndexView from '../views/IndexView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'index',
+      component: IndexView
+    },
+    {
+      path: '/game',
       name: 'wordle',
       component: WordleView
     },

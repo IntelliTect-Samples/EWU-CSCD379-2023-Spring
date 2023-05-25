@@ -71,6 +71,16 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 
+Axios.get('word')
+  .then((response) => {
+    word.value = response.data
+    game.restartGame(word.value)
+    overlay.value = false
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
 const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
