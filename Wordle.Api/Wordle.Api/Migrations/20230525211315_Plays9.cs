@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Plays2 : Migration
+    public partial class Plays9 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,8 +17,7 @@ namespace Wordle.Api.Migrations
                 {
                     PlaysId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PlayerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlayerId1 = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false),
                     WordId = table.Column<int>(type: "int", nullable: false),
                     DateWordId = table.Column<int>(type: "int", nullable: true),
                     Attempts = table.Column<int>(type: "int", nullable: false),
@@ -35,8 +34,8 @@ namespace Wordle.Api.Migrations
                         principalTable: "DateWords",
                         principalColumn: "DateWordId");
                     table.ForeignKey(
-                        name: "FK_Plays_Players_PlayerId1",
-                        column: x => x.PlayerId1,
+                        name: "FK_Plays_Players_PlayerId",
+                        column: x => x.PlayerId,
                         principalTable: "Players",
                         principalColumn: "PlayerId",
                         onDelete: ReferentialAction.Cascade);
@@ -54,9 +53,9 @@ namespace Wordle.Api.Migrations
                 column: "DateWordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Plays_PlayerId1",
+                name: "IX_Plays_PlayerId",
                 table: "Plays",
-                column: "PlayerId1");
+                column: "PlayerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Plays_WordId",
