@@ -26,6 +26,7 @@ export class PlayerService {
         this.isOnline.value = true
       } catch (error) {
         this.isOnline.value = false
+        console.log("one")
       }
     } else if (!this.isLoaded) {
       await this.refreshPlayerFromServerAsync()

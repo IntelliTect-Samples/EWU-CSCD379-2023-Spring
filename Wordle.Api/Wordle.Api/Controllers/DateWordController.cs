@@ -16,14 +16,14 @@ namespace Wordle.Api.Controllers;
         }
 
     [HttpPost("AddDailyGameResult")]
-    public async Task<ActionResult<GameResultDto>> AddDailyGameResultAsync(GameResultDto dto)
+    public async Task<DateWord?> AddDailyGameResultAsync(string PlayerId, int DateWordId, int Seconds, int Attempts )
     {
-        var added = await _DateWordService.AddDailyGameResultAsync(dto);
+        var added = await _DateWordService.AddDailyGameResultAsync( PlayerId, DateWordId, Seconds, Attempts);
         if (added is not null)
         {
-            return dto;
+            return added;
         }
-        return BadRequest();
+        return null;
     }
 
     [HttpGet("GetLastTenWords")]
@@ -32,16 +32,16 @@ namespace Wordle.Api.Controllers;
         return await _DateWordService.GetLastTenWords();
     }
     [HttpGet]
-    public async Task<IList<Player>> ReturnListOfPlayersForWordOfTheDay(double offsetInHours, DateTime? date = null)
+    public async Task<DateWord?> GetDateWord(double offsetInHours, DateTime? date = null)
     {
-        var ret = await _DateWordService.ReturnListOfPlayersForWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
+        var ret = await _DateWordService.GetDateWordAsync(TimeSpan.FromHours(offsetInHours), date);
         if (ret is not null)
         {
             return ret;
         }
         else
         {
-            return (IList<Player>)BadRequest();
+            return null;
         }
     }
 }

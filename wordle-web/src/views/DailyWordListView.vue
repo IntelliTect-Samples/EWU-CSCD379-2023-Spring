@@ -8,21 +8,22 @@
       min-width="25%"
       rounded
     >
-      <v-card-title class="titleText">Word Of The Day Games! (Dummy Data)</v-card-title>
+      <v-card-title class="titleText">Word Of The Day Games!</v-card-title>
+      <v-card-subtitle class="subText">Red means you've already played, Green means you haven't</v-card-subtitle>
       <v-card-text>
         <v-row justify="center">
           <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
             <v-btn
               height="100%"
-              :to="`/wordOfTheDay/${stats.date}`"
+              :to="`/wordOfTheDay`"
               outlined
-              :color="isDatePlayed(stats.date) ? 'green' : 'red'"
+              :color="hasPlayerPlayed(playerGuid, stats) ? 'green' : 'red'"
             >
               <span class="bodyText"
                 >{{ stats.date }}
                 <div class="stats">
-                  <div>Avg Guesses: {{ stats.avgGuesses }}</div>
-                  <div>Avg Seconds per Game: {{ stats.avgSeconds }}</div>
+                  <div>Avg Guesses: {{ stats.totalAttempts / stats.totalGames }}</div>
+                  <div>Avg Seconds per Game: {{ stats.totalSeconds / stats.totalGames }}</div>
                   <div>Total Games: {{ stats.totalGames }}</div>
                 </div>
               </span>
@@ -35,27 +36,39 @@
 </template>
 
 <script lang="ts">
+import Axios from 'axios'
+import type { PlayerService } from '@/scripts/playerService'
+import { Services } from '@/scripts/services'
+import { inject, onMounted, ref } from 'vue'
+import type { DateWord } from '@/scripts/dateWord'
+
 export default {
-  data() {
+  setup() {
+    const playerService = inject(Services.PlayerService) as PlayerService
+    const gameStats = ref<DateWord[]>([])
+    const playerGuid: string = playerService.player.playerId
+
+    onMounted(() => {
+      Axios.get('/dateword/getlasttenwords').then((response) => {
+        gameStats.value = response.data as DateWord[]
+        console.log(response)
+      })
+    })
+
+    function hasPlayerPlayed(playerGuid: string, gamestat: DateWord): boolean {
+    const playerList = gamestat.previousPlayers
+    playerList.forEach((p) => {
+      if (playerGuid == p.playerId) {
+        return false
+      }
+    })
+    return true
+  }
+
     return {
-      playedDates: ['2023-05-02', '2023-05-05', '2023-05-07', '2023-05-09'],
-      gameStats: [
-        { date: '2023-05-01', avgGuesses: 3.5, avgSeconds: 120, totalGames: 2 },
-        { date: '2023-05-02', avgGuesses: 4, avgSeconds: 90, totalGames: 5 },
-        { date: '2023-05-03', avgGuesses: 3.8, avgSeconds: 100, totalGames: 3 },
-        { date: '2023-05-04', avgGuesses: 3.2, avgSeconds: 150, totalGames: 1 },
-        { date: '2023-05-05', avgGuesses: 4.5, avgSeconds: 80, totalGames: 4 },
-        { date: '2023-05-06', avgGuesses: 3.9, avgSeconds: 110, totalGames: 2 },
-        { date: '2023-05-07', avgGuesses: 3.7, avgSeconds: 95, totalGames: 3 },
-        { date: '2023-05-08', avgGuesses: 4.2, avgSeconds: 105, totalGames: 2 },
-        { date: '2023-05-09', avgGuesses: 4.1, avgSeconds: 100, totalGames: 4 },
-        { date: '2023-05-10', avgGuesses: 3.6, avgSeconds: 125, totalGames: 1 }
-      ]
-    }
-  },
-  methods: {
-    isDatePlayed(date: string): boolean {
-      return this.playedDates.includes(date)
+      gameStats,
+      playerGuid,
+      hasPlayerPlayed
     }
   }
 }
