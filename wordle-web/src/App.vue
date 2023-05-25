@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <span class="bg"></span>
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
@@ -95,8 +96,3 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 </script>
-
-<!-- <style> -->
-/* .v-main { background-color: #ac141452; } */
-
-<!-- </style> -->
