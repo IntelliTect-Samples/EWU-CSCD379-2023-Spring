@@ -7,6 +7,5 @@
         public int Attempts { get; set; }
         public int DurationInSeconds { get; set; }
         public required string WordPlayed { get; set; }
-        public DateTime? WordOfTheDayDate { get; set; }
     }
 }

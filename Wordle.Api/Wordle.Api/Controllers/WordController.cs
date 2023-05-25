@@ -20,37 +20,31 @@ namespace Wordle.Api.Controllers
         [HttpGet]
         public async Task<string> Get()
         {
-            return (await _wordService.GetRandomWordAsync()).Text;
+            return (await _wordService.GetRandomWord()).Text;
         }
 
         [HttpGet("GetManyWords")]
         public async Task<IEnumerable<Word>> GetManyWords(int? count)
         {
-            return await _wordService.GetSeveralWordsAsync(count);
+            return await _wordService.GetSeveralWords(count);
         }
 
         [HttpPost]
         public async Task<Word> AddWord(string newWord, bool isCommon)
         {
-            return await _wordService.AddWordAsync(newWord, isCommon);
+            return await _wordService.AddWord(newWord, isCommon);
         }
 
         [HttpPost("AddWordFromBody")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
-            return await _wordService.AddWordAsync(word.Text, word.IsCommon);
+            return await _wordService.AddWord(word.Text, word.IsCommon);
         }
 
         [HttpGet("WordOfTheDay")]
-        public async Task<WordOfTheDayDto> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
+        public async Task<string> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
         {
-            return new WordOfTheDayDto(await _wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(offsetInHours), date));
-        }
-
-        [HttpGet("WordOfTheDayStats")]
-        public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
-        {
-            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
+            return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
         }
     }
-}
+}    

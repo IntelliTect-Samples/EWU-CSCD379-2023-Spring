@@ -14,7 +14,6 @@ namespace Wordle.Api.Data
         public DbSet<Word> Words => Set<Word>();
         public DbSet<Player> Players => Set<Player>();
         public DbSet<DateWord> DateWords => Set<DateWord>();
-        public DbSet<PlayerGame> PlayerGames => Set<PlayerGame>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,7 +27,6 @@ namespace Wordle.Api.Data
                 .Entity<DateWord>()
                 .HasIndex(f => f.Date)
                 .IsUnique();
-
         }
     }
 }
