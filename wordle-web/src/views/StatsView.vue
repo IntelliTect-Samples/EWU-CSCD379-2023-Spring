@@ -3,7 +3,7 @@
     <v-card color="yellow-lighten-1" style="border: 1px solid red">
       <v-card-title>Statistics</v-card-title>
     </v-card>
-    <v-card v-for="play in plays">
+    <v-card v-for="play in plays" :key="play.date.toString">
       <v-card color="cyan" style="border: 3px solid red">
         <v-card-title>Date: {{ play.date }}</v-card-title>
       </v-card>
@@ -23,16 +23,15 @@
 </template>
 
 <script setup lang="ts">
+import type { PlayerService } from '@/scripts/playerService'
+import { Services } from '@/scripts/services'
 import type { WordOfTheDayStats } from '@/scripts/wordOfTheDayStats'
 import Axios from 'axios'
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 const plays = ref<WordOfTheDayStats[]>([])
+const playerService = inject(Services.PlayerService) as PlayerService
 
-const props = defineProps<{
-  playerId: string
-}>()
-
-Axios.get('/Play/GetLastTenDates?playerId=' + props.playerId).then((response) => {
+Axios.get('/Play/GetLastTenDates?playerId=' + playerService.player.playerId).then((response) => {
   for (let stat of response.data as WordOfTheDayStats[]) {
     stat.date = new Date(stat.date)
   }

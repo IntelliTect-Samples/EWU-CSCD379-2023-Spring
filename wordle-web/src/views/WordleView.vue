@@ -67,6 +67,7 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -77,8 +78,14 @@ const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
   // Start a new game
-  await newGame()
+  newGame()
   window.addEventListener('keyup', keyUp)
+  watch(
+    () => route.params,
+    () => {
+      newGame()
+    }
+  )
 })
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
@@ -88,18 +95,26 @@ function newGame() {
   overlay.value = true
   let apiPath = 'word'
   if (route.path == '/wordoftheday') {
-    apiPath = `/Word/WordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    apiPath = `/word/WordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
   }
   Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data)
+      let word = ''
+      if (route.path == '/wordoftheday') {
+        word = response.data.word
+        wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        word = response.data
+        wordOfTheDayDate.value = null
+      }
+      game.restartGame(word)
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 2000)
     })
     .catch((error) => {
       console.log(error)
@@ -156,7 +171,7 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
-
+  gameResult.wordOfTheDayDate = wordOfTheDayDate.value
   console.log(gameResult)
 
   lastGameResult.value = gameResult
