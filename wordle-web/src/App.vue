@@ -59,14 +59,14 @@
   </v-app>
 </template>
 
-<style scoped> 
-  .background-img {
-    background-image: url('./assets/pexels-fwstudio-164005.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-  }
+<style scoped>
+.background-img {
+  background-image: url('./assets/pexels-fwstudio-164005.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
 </style>
 
 <script setup lang="ts">
