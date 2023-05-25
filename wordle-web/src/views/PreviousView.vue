@@ -1,11 +1,14 @@
 <template>
   <v-card>
     <v-card-title>Daily Words</v-card-title>
-    <v-row dense v-for="(day, i) in previous" :key="i">
+    <!--<v-row dense v-for="(day, i) in previous" :key="i">
       <v-col>
         <v-btn>{{ day }}</v-btn>
       </v-col>
-    </v-row>
+    </v-row>-->
+    <v-card-text>
+      {{ previous }}
+    </v-card-text>
   </v-card>
 </template>
 
