@@ -1,53 +1,55 @@
 <template>
   <v-app>
-    <v-app-bar :elevation="3">
-      <template v-slot>
-        <v-app-bar-title>
-          <RouterLink to="/">
-            <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
-            Wordle
-          </RouterLink>
-        </v-app-bar-title>
-        <v-spacer></v-spacer>
+    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg">
+      <v-app-bar color="yellow" :elevation="3">
+        <template v-slot>
+          <v-app-bar-title>
+            <RouterLink to="/">
+              <v-icon class="mdi mdi-cellphone-settings" color="blue"></v-icon>
+              Wordle
+            </RouterLink>
+          </v-app-bar-title>
+          <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
+          <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
-        <ActiveUser></ActiveUser>
+          <ActiveUser></ActiveUser>
 
-        <v-menu>
-          <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
-          </template>
+          <v-menu>
+            <template v-slot:activator="{ props }">
+              <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+            </template>
 
-          <v-list width="200">
-            <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'about' }"> About </RouterLink>
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-      </template>
-    </v-app-bar>
+            <v-list width="200">
+              <v-list-item>
+                <v-list-item-title>
+                  <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
+                </v-list-item-title>
+              </v-list-item>
+              <v-list-item>
+                <v-list-item-title>
+                  <RouterLink :to="{ name: 'instructions' }"> Instructions </RouterLink>
+                </v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </template>
+      </v-app-bar>
 
-    <v-main>
-      <RouterView />
-    </v-main>
+      <v-main>
+        <RouterView />
+      </v-main>
+    </v-parallax>
   </v-app>
 </template>
 

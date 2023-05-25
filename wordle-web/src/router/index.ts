@@ -1,20 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import WordleView from '../views/WordleView.vue'
-import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
+import LandingView from '../views/LandingView.vue'
+import InstructionView from '../views/InstructionView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'wordle',
-      component: WordleView
+      name: 'Landing',
+      component: LandingView
     },
     {
-      path: '/about',
-      name: 'about',
-      component: AboutView
+      path: '/instructions',
+      name: 'instructions',
+      component: InstructionView
+    },
+    {
+      path: '/wordle',
+      name: 'wordle',
+      component: WordleView
     },
     {
       path: '/leaderboard',
