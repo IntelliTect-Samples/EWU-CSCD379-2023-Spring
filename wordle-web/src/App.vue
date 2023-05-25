@@ -103,8 +103,6 @@ function setDarkTheme() {
 </script>
 
 <!-- <style> -->
-  /* .v-main {
-    background-color: #ac141452;
-  } */
-  
+/* .v-main { background-color: #ac141452; } */
+
 <!-- </style> -->
