@@ -94,7 +94,8 @@ watch(
   () => route.query.date,
   () => {
     newGame()
-  });
+  }
+)
 
 function newGame() {
   overlay.value = true
@@ -104,12 +105,12 @@ function newGame() {
     let dateWordPath = `DateWord?offsetInHours=${theDate.getTimezoneOffset() / -60}`
     apiPath = `word/wordOfTheDay?offsetInHours=${theDate.getTimezoneOffset() / -60}`
     if (route.query.date) {
-      console.log("date query = "+route.query.date)
+      console.log('date query = ' + route.query.date)
       apiPath += `&date=${route.query.date}`
       dateWordPath += `&date=${route.query.date}`
     }
     wordOfTheDayFlag.value = true
-    msg.value = 'Wordle Of The Day for '+ theDate.toLocaleDateString()
+    msg.value = 'Wordle Of The Day for ' + theDate.toLocaleDateString()
     Axios.get(dateWordPath).then((response) => {
       dateWord.value = response.data
       console.log(response.data)
