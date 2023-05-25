@@ -69,7 +69,7 @@ namespace Wordle.Api.Services
         {
             if (date is null)
             {
-                date = DateTime.UtcNow;
+                date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
             }
 
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
@@ -126,16 +126,16 @@ namespace Wordle.Api.Services
             var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
 
             var result = await _db.DateWords
-                .Include(f => f.PlayerGame)
+                .Include(f => f.PlayerGames)
                 .Where(f => f.Date <= startDate && f.Date > endDate)
                 .OrderByDescending(f => f.Date)
                 .Select(f => new PlayerGameDto
                 {
                     Date = f.Date,
-                    Seconds = f.PlayerGame.Any() ? f.PlayerGame.Average(a => a.DurationInSeconds) : -1,
-                    Attempts = f.PlayerGame.Any() ? f.PlayerGame.Average(a => a.Attempts) : -1,
-                    NumberOfPlays = f.PlayerGame.Count(),
-                    HasPlayed = playerId.HasValue ? f.PlayerGame.Any(f => f.PlayerId == playerId.Value) : false
+                    Seconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
+                    Attempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
+                    NumberOfPlays = f.PlayerGames.Count(),
+                    HasPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
                 })
                 .ToListAsync();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wordle.Api.Data;
 
@@ -11,9 +12,11 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230525195754_collection")]
+    partial class collection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,7 +150,7 @@ namespace Wordle.Api.Migrations
             modelBuilder.Entity("Wordle.Api.Data.PlayerGame", b =>
                 {
                     b.HasOne("Wordle.Api.Data.DateWord", "DateWord")
-                        .WithMany("PlayerGames")
+                        .WithMany("PlayerGame")
                         .HasForeignKey("DateWordId");
 
                     b.HasOne("Wordle.Api.Data.Player", "Player")
@@ -171,7 +174,7 @@ namespace Wordle.Api.Migrations
 
             modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
                 {
-                    b.Navigation("PlayerGames");
+                    b.Navigation("PlayerGame");
                 });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>

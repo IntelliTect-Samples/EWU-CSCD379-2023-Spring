@@ -5,7 +5,7 @@
       <v-card-text>
         <div v-for="(word, index) in wordStats" :key="word.date.getDay" class="border my-3">
           <div class="d-flex justify-center bg-secondary text-h6">
-            #{{ index + 1 }} - {{ word.date }}
+            #{{ index + 1 }} - {{ word.date.toString().split('T')[0] }}
           </div>
           <v-card-text class="d-flex flex-column align-center">
             <v-row dense>
@@ -14,9 +14,9 @@
               <v-col cols="6" class="text-end">Average Attempts -</v-col>
               <v-col cols="6">{{ word.attempts }}</v-col>
               <v-col cols="6" class="text-end">Average Attempts -</v-col>
-              <v-col cols="6">{{ word.averageSeconds }}</v-col>
+              <v-col cols="6">{{ word.numberOfPlays }}</v-col>
               <v-col cols="6" class="text-end">Average Duration -</v-col>
-              <v-col cols="6">{{ formatTime(word.averageSeconds) }}</v-col>
+              <v-col cols="6">{{ formatTime(word.seconds) }}</v-col>
               <v-col cols="6" class="text-end">Has Played? -</v-col>
               <v-col cols="6">{{ word.hasPlayed }}</v-col>
             </v-row>

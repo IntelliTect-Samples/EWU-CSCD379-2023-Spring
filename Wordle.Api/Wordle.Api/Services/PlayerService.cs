@@ -112,6 +112,7 @@ namespace Wordle.Api.Services
                 };
 
                 _db.PlayerGames.Add(game);
+
                 await _db.SaveChangesAsync();
 
                 return player;

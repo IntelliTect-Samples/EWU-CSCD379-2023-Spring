@@ -70,6 +70,7 @@ const overlay = ref(true)
 const showScoreDialog = ref(false)
 const lastGameResult: Ref<GameResult> = ref({} as GameResult)
 const route = useRoute()
+const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -99,6 +100,9 @@ function newGame() {
   Axios.get(apiPath)
     .then((response) => {
       game.restartGame(response.data.word)
+      if (route.path == '/wordoftheday') {
+        wordOfTheDayDate.value = new Date(response.data.date)
+      }
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
@@ -159,6 +163,7 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
+  gameResult.wordOfTheDayDate = wordOfTheDayDate.value
 
   console.log(gameResult)
 

@@ -1,6 +1,6 @@
 export interface WordStats {
   date: Date
-  averageSeconds: number
+  seconds: number
   attempts: number
   numberOfPlays: number
   hasPlayed: boolean

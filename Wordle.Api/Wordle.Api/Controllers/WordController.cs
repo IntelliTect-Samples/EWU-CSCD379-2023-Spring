@@ -50,7 +50,7 @@ namespace Wordle.Api.Controllers
         [HttpGet("WordOfTheDayStats")]
         public async Task<IEnumerable<PlayerGameDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
         {
-            return await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId);
+            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
         }
     }
 }    
