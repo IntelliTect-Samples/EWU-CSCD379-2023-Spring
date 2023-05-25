@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <span class="bg"></span>
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
@@ -20,48 +19,43 @@
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
 
-          <v-list width="200">
+          <v-list width="200px">
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'instructions' }"> How To Play </RouterLink>
+                <RouterLink to="/wordle">Play Random</RouterLink>
               </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink>
+                <RouterLink to="/wordoftheday">Play Daily</RouterLink>
               </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink>
+                <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>
-
             <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
-              </v-list-item-title>
+              <v-list-item-title
+                ><RouterLink to="/previouswordles">Previous Wordles</RouterLink></v-list-item-title
+              >
             </v-list-item>
-
             <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'statistics' }"> Statistics </RouterLink>
-              </v-list-item-title>
+              <v-list-item-title
+                ><RouterLink to="/howtoplay">How To Wordle</RouterLink></v-list-item-title
+              >
             </v-list-item>
-
             <v-list-item>
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'about' }"> About </RouterLink>
-              </v-list-item-title>
+              <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
       </template>
     </v-app-bar>
 
-    <v-main>
+    <v-main
+      :class="[theme.global.name.value === 'dark' ? 'darkThemeBackground' : 'lightThemeBackground']"
+    >
       <RouterView />
     </v-main>
   </v-app>
