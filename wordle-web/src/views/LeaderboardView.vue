@@ -1,7 +1,8 @@
 <template>
   <h1>LeaderBoard</h1>
-  <v-card>
+  
   <div>
+    <v-card>
     <v-carousel class="h-auto w-auto pb-13" show-arrows="hover">
       <v-carousel-item>
           <Leaderboard/>
@@ -11,8 +12,9 @@
           <PersonalStats/>
       </v-carousel-item>
     </v-carousel>
+    </v-card>
   </div>
-  </v-card>
+  
 </template>
 
 <script setup lang="ts">
