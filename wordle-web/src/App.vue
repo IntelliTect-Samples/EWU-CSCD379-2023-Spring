@@ -43,7 +43,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title
-                ><RouterLink to="/howtoplay">How To Wordle</RouterLink></v-list-item-title
+                ><RouterLink to="/instructions">How To Play</RouterLink></v-list-item-title
               >
             </v-list-item>
             <v-list-item>
