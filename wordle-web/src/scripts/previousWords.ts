@@ -1,8 +1,9 @@
 import Axios from 'axios'
+import { gameData } from '@/scripts/gameData'
 
-let previousWords: string[]
+let previousWords: Array<gameData>
 
-Axios.get('Word/PreviousWords')
+Axios.get('Word/GetPreviousGames')
   .then((response) => {
     previousWords = response.data
     console.log(previousWords)
