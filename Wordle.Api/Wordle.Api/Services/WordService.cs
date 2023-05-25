@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -64,7 +65,7 @@ namespace Wordle.Api.Services
             return word;
         }
 
-        public async Task<String> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
+        public async Task<DateWord> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {
             if (date is null)
             {
@@ -79,7 +80,7 @@ namespace Wordle.Api.Services
 
             if(todaysWord != null)
             {
-                return todaysWord.Word.Text;
+                return todaysWord;
             } else
             {
                 lock (_WordOfTheDayLock)
@@ -90,7 +91,7 @@ namespace Wordle.Api.Services
 
                     if (todaysLatestWord != null)
                     {
-                        return todaysLatestWord.Word.Text;
+                        return todaysLatestWord;
                     }
                     var word = GetRandomWord().Result;
 
@@ -110,13 +111,45 @@ namespace Wordle.Api.Services
                         {
                             return _db.DateWords
                                 .Include(f => f.Word)
-                                .First(f => f.Date == localDate)
-                                .Word.Text;
+                                .First(f => f.Date == localDate);
                         }
                     }
-                    return word.Text;
+                    return dateWord;
                 }
             }
+        }
+
+        public async Task<List<PlayerGameDto>> GetWordOfTheDayStatsAsync(DateTime? date = null, int daysBack = 10, Guid? playerId = null) 
+        {
+            if (daysBack < 1 || daysBack > 100) daysBack = 10;
+            var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
+            var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
+
+            var result = await _db.DateWords
+                .Include(f => f.PlayerGame)
+                .Where(f => f.Date <= startDate && f.Date > endDate)
+                .OrderByDescending(f => f.Date)
+                .Select(f => new PlayerGameDto
+                {
+                    Date = f.Date,
+                    Seconds = f.PlayerGame.Any() ? f.PlayerGame.Average(a => a.DurationInSeconds) : -1,
+                    Attempts = f.PlayerGame.Any() ? f.PlayerGame.Average(a => a.Attempts) : -1,
+                    NumberOfPlays = f.PlayerGame.Count(),
+                    HasPlayed = playerId.HasValue ? f.PlayerGame.Any(f => f.PlayerId == playerId.Value) : false
+                })
+                .ToListAsync();
+
+            if(result.Count != daysBack)
+            {
+                for(int i = 0; i > (daysBack+1)*-1; i--)
+                {
+                    await this.GetWordOfTheDay(TimeSpan.FromHours(12), startDate.AddDays(i));
+                }
+
+                result = await GetWordOfTheDayStatsAsync(date, daysBack);
+            }
+
+            return result;
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Wordle.Api.Data
 
         }
 
+        public DbSet<PlayerGame> PlayerGames => Set<PlayerGame>();
         public DbSet<Word> Words => Set<Word>();
         public DbSet<Player> Players => Set<Player>();
         public DbSet<DateWord> DateWords => Set<DateWord>();
@@ -19,9 +20,8 @@ namespace Wordle.Api.Data
         {
             modelBuilder
                 .Entity<DateWord>()
-                .HasOne(e => e.Word)
-                .WithMany(f => f.DateWords)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .HasIndex(f => f.Date)
+                .IsUnique();
         }
     }
 }

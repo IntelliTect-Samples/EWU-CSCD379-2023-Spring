@@ -84,15 +84,36 @@ namespace Wordle.Api.Services
         public async Task<Player?> AddGameResultAsync(GameResultDto dto)
         {
             var player = await _db.Players.FindAsync(dto.PlayerId);
-            if (player is not null)
+            var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
+
+            if (player is not null && word is not null)
             {
                 if (dto.WasGameWon)
                 {
                     player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
                     player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.DurationInSeconds) / (player.GameCount + 1);
                     player.GameCount++;
-                    await _db.SaveChangesAsync();
                 }
+
+                var dateWord = await _db.DateWords
+                    .FirstOrDefaultAsync( f => dto.WordOfTheDayDate.HasValue &&
+                    f.Date == dto.WordOfTheDayDate.Value.Date &&
+                    f.WordId == word.WordId);
+
+                PlayerGame game = new()
+                {
+                    Player = player,
+                    Word = word,
+                    Attempts = dto.Attempts,
+                    DurationInSeconds = dto.DurationInSeconds,
+                    WasGameWon = dto.WasGameWon,
+                    DateWord = dateWord,
+                    Date = DateTime.UtcNow
+                };
+
+                _db.PlayerGames.Add(game);
+                await _db.SaveChangesAsync();
+
                 return player;
             }
             throw new ArgumentException("Player Id not found");
