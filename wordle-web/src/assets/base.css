@@ -43,3 +43,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+span.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  transform: scale(1.1);
+}
+
+div.v-theme--dark span.bg {
+  background: url( 'https://img.freepik.com/free-vector/dark-gradient-hexagonal-background_52683-63120.jpg?w=2000&t=st=1685052358~exp=1685052958~hmac=1d323a334ddfb075aa67894e2085e57bc5224ccbf2f0999240f19c0293a52c27')
+   no-repeat center center;
+}
+div.v-theme--light span.bg {
+  background: url( 'https://img.freepik.com/free-vector/white-background-with-3d-hexagonal-pattern-design_1017-28443.jpg?w=2000&t=st=1685052847~exp=1685053447~hmac=309518211849a40f012866c1ab406f8c3d9b161e532befb66f1140f75e12a23e')
+   no-repeat center center;
+}
