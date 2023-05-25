@@ -90,23 +90,28 @@ onMounted(async () => {
 onUnmounted(() => {
   window.removeEventListener('keyup', keyUp)
 })
+watch(
+  () => route.query.date,
+  () => {
+    newGame()
+  });
 
 function newGame() {
   overlay.value = true
   let apiPath = 'word'
-  if (route.path == `/wordoftheday`) {
+  if (route.path.toLocaleLowerCase() == `/wordoftheday`) {
     const theDate = new Date()
     let dateWordPath = `DateWord?offsetInHours=${theDate.getTimezoneOffset() / -60}`
     apiPath = `word/wordOfTheDay?offsetInHours=${theDate.getTimezoneOffset() / -60}`
     if (route.query.date) {
+      console.log("date query = "+route.query.date)
       apiPath += `&date=${route.query.date}`
       dateWordPath += `&date=${route.query.date}`
     }
     wordOfTheDayFlag.value = true
-    msg.value = 'Wordle Of The Day'
+    msg.value = 'Wordle Of The Day for '+ theDate.toLocaleDateString()
     Axios.get(dateWordPath).then((response) => {
       dateWord.value = response.data
-      console.log(response)
       console.log(response.data)
       setTimeout(() => {
         overlay.value = false
