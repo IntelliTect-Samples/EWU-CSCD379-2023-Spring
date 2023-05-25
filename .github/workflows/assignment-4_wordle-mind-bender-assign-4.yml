@@ -55,7 +55,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'Wordle-Mind-Bender-Assign-4'
+          app-name: 'Wordle-Mind-Bender-Database'
           slot-name: 'Production'
           publish-profile: ${{ secrets.ASSIGNMENT4WEBAPI }}
           package: .
