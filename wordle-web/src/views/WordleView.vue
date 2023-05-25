@@ -13,7 +13,7 @@
 
   <GameBoard :game="game" />
 
-  <GameKeyboard :guessedLetters="game.guessedLetters" />
+  <GameKeyboard :guessedLetters="game.guessedLetters" @letter-click="addChar" />
 
   <v-row class="justify-center">
     <v-btn
