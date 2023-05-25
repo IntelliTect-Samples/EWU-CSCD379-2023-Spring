@@ -3,177 +3,196 @@ using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 
-namespace Wordle.Api.Services;
-
-public class WordService
+namespace Wordle.Api.Services
 {
-    private readonly AppDbContext _db;
-    private static readonly object _WordOfTheDayLock = new object();
-
-    public WordService(AppDbContext db)
+    public class WordService
     {
-        _db = db;
-    }
+        private readonly AppDbContext _db;
+        private static readonly object _WordOfTheDayLock = new object();
 
-    public async Task<Word> GetRandomWordAsync()
-    {
-        var count = await _db.Words.CountAsync(word => word.IsCommon);
-        var index = new Random().Next(count);
-        var word = await _db.Words
-            .Where(word => word.IsCommon)
-            .Skip(index)
-            .FirstAsync();
-        return word;
-    }
-
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
-    {
-        count ??= 10;
-        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-        totalCount -= count.Value;
-        int index = new Random().Next(totalCount);
-        var words = await _db.Words
-            .Where(word => word.IsCommon)
-            .Skip(index)
-            .Take(count.Value)
-            .OrderByDescending(w => w.Text)
-            .ToListAsync();
-        return words;
-    }
-
-    public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
-    {
-        if (newWord is null || newWord.Length != 5)
+        public WordService(AppDbContext db)
         {
-            throw new ArgumentException("Word must be 5 characters long");
+            _db = db;
         }
-        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
-        if (word != null)
+
+        public async Task<Word> GetRandomWord()
         {
-            word.IsCommon = isCommon;
+            var count = await _db.Words.CountAsync(word => word.IsCommon);
+            var index = new Random().Next(count);
+            var word = await _db.Words
+                .Where(word => word.IsCommon)
+                .Skip(index)
+                .FirstAsync();
+            return word;
         }
-        else
+
+        public async Task<IEnumerable<Word>> GetSeveralWords(int? count)
         {
-            word = new()
+            count ??= 10;
+            var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
+            totalCount -= count.Value;
+            int index = new Random().Next(totalCount);
+            var words = await _db.Words
+                .Where(word => word.IsCommon)
+                .Skip(index)
+                .Take(count.Value)
+                .OrderByDescending(w => w.Text)
+                .ToListAsync();
+            return words;
+        }
+
+        public async Task<Word> AddWord(string? newWord, bool isCommon)
+        {
+            if (newWord is null || newWord.Length != 5)
             {
-                Text = newWord,
-                IsCommon = isCommon
-            };
-            _db.Words.Add(word);
-        }
-        await _db.SaveChangesAsync();
-        return word;
-    }
-
-    public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
-    {
-        if (date is null)
-        {
-            date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
-        }
-
-        var todaysWord = await _db.DateWords
-            .Include(f => f.Word)
-            .FirstOrDefaultAsync(f => f.Date == date);
-
-        if (todaysWord != null)
-        {
-            return todaysWord;
-        }
-        else
-        {
-            lock (_WordOfTheDayLock)
+                throw new ArgumentException("Word must be 5 characters long");
+            }
+            var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
+            if (word != null)
             {
-                var todaysLatestWord = _db.DateWords
-                    .Include(f => f.Word)
-                    .FirstOrDefault(f => f.Date == date.Value);
-
-                if (todaysLatestWord != null)
+                word.IsCommon = isCommon;
+            }
+            else
+            {
+                word = new()
                 {
-                    return todaysLatestWord;
-                }
-                var word = GetRandomWordAsync().Result;
-
-                var dateWord = new DateWord
-                {
-                    Date = date.Value,
-                    Word = word
+                    Text = newWord,
+                    IsCommon = isCommon
                 };
-                _db.DateWords.Add(dateWord);
-                try
-                {
-                    _db.SaveChanges();
-                }
-                catch (SqlException e) // this is probably not the right error to catch
-                {
-                    if (e.Message.Contains("duplicate"))
-                    {
-                        return _db.DateWords
-                            .Include(f => f.Word)
-                            .First(f => f.Date == date.Value);
-                    }
-                }
-                return dateWord;
+                _db.Words.Add(word);
             }
+            await _db.SaveChangesAsync();
+            return word;
         }
-    }
 
-    public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStatsAsync
-        (DateTime? date = null, int daysBack = 10, Guid? playerId = null)
-    {
-        if (daysBack < 1 || daysBack > 100) daysBack = 10;
-        // Make sure we get the most recent day in the farthest timezone
-        var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
-        var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
-
-        // Get the data using the child collection of PlayerGames
-        var result = await _db.DateWords
-            .Include(f => f.PlayerGames)
-            .Where(f => f.Date <= startDate && f.Date > endDate)
-            .OrderByDescending(f => f.Date)
-            .Select(f => new WordOfTheDayStatsDto
-            {
-                Date = f.Date,
-                AverageDurationInSeconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
-                AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
-                NumberOfPlays = f.PlayerGames.Count(),
-                HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
-            })
-            .ToListAsync();
-
-        // Another way to do this using GroupBy
-        // This algorithm doesn't handle days without PlayerGames. 
-        // This would need to have the stats inserted into the collection after the fact.
-        //var result = await _db.PlayerGames
-        //    .Include(f => f.DateWord!.Word)
-        //    .Where(f => f.DateWord != null &&
-        //        f.DateWord.Date <= startDate &&
-        //        f.DateWord.Date >= endDate)
-        //    .GroupBy(f => f.DateWord)
-        //    .Where(f => f.Key != null)
-        //    .Select(g => new WordOfTheDayStatsDto
-        //    {
-        //        Date = g.Key!.Date,
-        //        AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
-        //        AverageAttempts = g.Average(f => f.Attempts),
-        //        NumberOfPlays = g.Sum(f => f.PlayerGameId),
-        //        HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
-
-        //    })
-        //    .ToListAsync();
-
-        // If we don't have enough entries, then we need to add the days.
-        if (result.Count != daysBack)
+        public async Task<IEnumerable<DayResultsDto>> GetLastTenDays(TimeSpan offset, Guid playerId, DateTime? date = null)
         {
-            // We need to add the extra days
-            for(int i = 0; i > (daysBack+1)*-1; i-- )
+
+            date = DateTime.UtcNow.AddHours(offset.TotalHours);//force date = now
+
+            var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);//local date
+
+
+            List<DayResultsDto> lastTenDays = new List<DayResultsDto>();//list of days to be returned
+
+            for (var i = 0; i < 10; i++)//for the last ten days
             {
-                // Use the timezone that is the worst possible one
-                await this.GetWordOfTheDayAsync(TimeSpan.FromHours(12), startDate.AddDays(i));
+                var localDate = localDateTime.Date.AddDays(-i);//day minus days to check backwards
+
+                //Was there a word on that day
+                var wordOfThatDay = await _db.DateWords
+                    .Include(f => f.Word)
+                    .FirstOrDefaultAsync(f => f.Date == localDate);//grab the first matching date
+
+                if (wordOfThatDay != null)
+                {//if there was a game played, get the results
+                    var dayPlays = await _db.Plays
+                        .Where(plays => plays.Date.Date == localDate.Date)
+                        .ToListAsync();
+
+                    var firstPlayed = dayPlays.FirstOrDefault(plays => plays.PlayerId == playerId);
+                    var didPlay = true;
+                    if (firstPlayed != null)
+                    {
+                        didPlay = true;
+                    }
+                    else
+                    {
+                        didPlay = false;
+                    }
+
+                    if (dayPlays.Count > 0)
+                    {
+                        var dayResults = new DayResultsDto()
+                        {//word exists and has plays
+                            DaysAgo = i,
+                            NumPlays = dayPlays.Count,
+                            AvgSeconds = (int)dayPlays.Average(plays => plays.Seconds),
+                            AvgAttempts = (int)dayPlays.Average(plays => plays.Attempts),
+                            Date = localDate.Date,
+                            DidPlay = didPlay
+                        };
+                        lastTenDays.Add(dayResults);
+                    }
+                    else
+                    {//word existed but nobody played it
+                        var dayResults = new DayResultsDto()
+                        {//defaults to 0 and false for all other data
+                            DaysAgo = i,
+                            Date = localDate.Date
+                        };
+                        lastTenDays.Add(dayResults);
+                    }
+
+                }
+                else
+                {//game was not played this day
+                    var dayResults = new DayResultsDto()
+                    {//defaults to 0 and false for all other data
+                        DaysAgo = i,
+                        Date = localDate.Date
+                    };
+                    lastTenDays.Add(dayResults);
+                }
             }
-// Go get the data again, hopefull this all works and we don't end up in a loop
-result = await GetWordOfTheDayStatsAsync(date, daysBack);
+            return lastTenDays;
         }
-        return result;
+
+
+        public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
+        {
+            if (date is null)
+            {
+                date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
+            }
+
+            var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
+            var localDate = localDateTime.Date;
+            var todaysWord = await _db.DateWords
+                .Include(f => f.Word)
+                .FirstOrDefaultAsync(f => f.Date == localDate);
+
+            if (todaysWord != null)
+            {
+                return todaysWord.Word.Text;
+            }
+            else
+            {
+                lock (_WordOfTheDayLock)
+                {
+                    var todaysLatestWord = _db.DateWords
+                        .Include(f => f.Word)
+                        .FirstOrDefault(f => f.Date == localDate);
+
+                    if (todaysLatestWord != null)
+                    {
+                        return todaysLatestWord.Word.Text;
+                    }
+                    var word = GetRandomWord().Result;
+
+                    var dateWord = new DateWord
+                    {
+                        Date = localDate,
+                        Word = word
+                    };
+                    _db.DateWords.Add(dateWord);
+                    try
+                    {
+                        _db.SaveChanges();
+                    }
+                    catch (SqlException e) // this is probably not the right error to catch
+                    {
+                        if (e.Message.Contains("duplicate"))
+                        {
+                            return _db.DateWords
+                                .Include(f => f.Word)
+                                .First(f => f.Date == localDate)
+                                .Word.Text;
+                        }
+                    }
+                    return word.Text;
+                }
+            }
+        }
     }
 }

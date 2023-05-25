@@ -23,161 +23,120 @@ namespace Wordle.Api.Migrations
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
-                {
-                    b.Property<int>("DateWordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("DateWordId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateWordId"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DateWordId"));
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                b.Property<DateTime>("Date")
+                    .HasColumnType("datetime2");
 
-                    b.Property<int>("WordId")
-                        .HasColumnType("int");
+                b.Property<int>("WordId")
+                    .HasColumnType("int");
 
-                    b.HasKey("DateWordId");
+                b.HasKey("DateWordId");
 
-                    b.HasIndex("Date")
-                        .IsUnique();
+                b.HasIndex("Date")
+                    .IsUnique();
 
-                    b.HasIndex("WordId");
+                b.HasIndex("WordId");
 
-                    b.ToTable("DateWords");
-                });
+                b.ToTable("DateWords");
+            });
 
             modelBuilder.Entity("Wordle.Api.Data.Player", b =>
-                {
-                    b.Property<Guid>("PlayerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            {
+                b.Property<Guid>("PlayerId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("AverageAttempts")
-                        .HasColumnType("float");
+                b.Property<double>("AverageAttempts")
+                    .HasColumnType("float");
 
-                    b.Property<int>("AverageSecondsPerGame")
-                        .HasColumnType("int");
+                b.Property<int>("AverageSecondsPerGame")
+                    .HasColumnType("int");
 
-                    b.Property<int>("GameCount")
-                        .HasColumnType("int");
+                b.Property<int>("GameCount")
+                    .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PlayerId");
+                b.HasKey("PlayerId");
 
-                    b.ToTable("Players");
-                });
+                b.ToTable("Players");
+            });
 
-            modelBuilder.Entity("Wordle.Api.Data.PlayerGame", b =>
-                {
-                    b.Property<int>("PlayerGameId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            modelBuilder.Entity("Wordle.Api.Data.Plays", b =>
+            {
+                b.Property<Guid>("PlayId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlayerGameId"));
+                b.Property<int>("Attempts")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Attempts")
-                        .HasColumnType("int");
+                b.Property<DateTime>("Date")
+                    .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                b.Property<int>("DateWordId")
+                    .HasColumnType("int");
 
-                    b.Property<int?>("DateWordId")
-                        .HasColumnType("int");
+                b.Property<Guid>("PlayerId")
+                    .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("DurationInSeconds")
-                        .HasColumnType("int");
+                b.Property<int>("Seconds")
+                    .HasColumnType("int");
 
-                    b.Property<Guid>("PlayerId")
-                        .HasColumnType("uniqueidentifier");
+                b.Property<int>("WordId")
+                    .HasColumnType("int");
 
-                    b.Property<bool>("WasGameWon")
-                        .HasColumnType("bit");
+                b.HasKey("PlayId");
 
-                    b.Property<int>("WordId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PlayerGameId");
-
-                    b.HasIndex("DateWordId");
-
-                    b.HasIndex("PlayerId");
-
-                    b.HasIndex("WordId");
-
-                    b.ToTable("PlayerGames");
-                });
+                b.ToTable("Plays");
+            });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>
-                {
-                    b.Property<int>("WordId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+            {
+                b.Property<int>("WordId")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WordId"));
 
-                    b.Property<bool>("IsCommon")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsCommon")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsUsed")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Text")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("WordId");
+                b.HasKey("WordId");
 
-                    b.ToTable("Words");
-                });
-
-            modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
-                {
-                    b.HasOne("Wordle.Api.Data.Word", "Word")
-                        .WithMany("DateWords")
-                        .HasForeignKey("WordId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
-                    b.Navigation("Word");
-                });
-
-            modelBuilder.Entity("Wordle.Api.Data.PlayerGame", b =>
-                {
-                    b.HasOne("Wordle.Api.Data.DateWord", "DateWord")
-                        .WithMany("PlayerGames")
-                        .HasForeignKey("DateWordId");
-
-                    b.HasOne("Wordle.Api.Data.Player", "Player")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Wordle.Api.Data.Word", "Word")
-                        .WithMany()
-                        .HasForeignKey("WordId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DateWord");
-
-                    b.Navigation("Player");
-
-                    b.Navigation("Word");
-                });
+                b.ToTable("Words");
+            });
 
             modelBuilder.Entity("Wordle.Api.Data.DateWord", b =>
-                {
-                    b.Navigation("PlayerGames");
-                });
+            {
+                b.HasOne("Wordle.Api.Data.Word", "Word")
+                    .WithMany("DateWords")
+                    .HasForeignKey("WordId")
+                    .OnDelete(DeleteBehavior.ClientCascade)
+                    .IsRequired();
+
+                b.Navigation("Word");
+            });
 
             modelBuilder.Entity("Wordle.Api.Data.Word", b =>
-                {
-                    b.Navigation("DateWords");
-                });
+            {
+                b.Navigation("DateWords");
+            });
 #pragma warning restore 612, 618
         }
     }

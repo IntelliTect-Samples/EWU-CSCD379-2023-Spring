@@ -8,5 +8,8 @@
         public int DurationInSeconds { get; set; }
         public required string WordPlayed { get; set; }
         public DateTime? WordOfTheDayDate { get; set; }
+
+        public required bool WasWordOfTheDay { get; set; }
+        public DateTime WordDate { get; set; } = DateTime.Now;
     }
 }
