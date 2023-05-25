@@ -38,7 +38,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title
-                ><RouterLink to="/statistics">Statistics</RouterLink></v-list-item-title
+                ><RouterLink to="/statistics">Daily Word Stats</RouterLink></v-list-item-title
               >
             </v-list-item>
             <v-list-item>
