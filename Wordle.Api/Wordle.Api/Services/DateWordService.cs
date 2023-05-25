@@ -44,6 +44,7 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<DateWord>> GetLastTenWords(int count = 10)
         {
             return await _db.DateWords
+                .Include(f => f.PreviousPlayers)
                 .OrderBy(f => f.Date)
                 .Take(count)
                 .ToListAsync();

@@ -1,4 +1,5 @@
-﻿using Wordle.Api.Data;
+﻿using System.Collections.Generic;
+using Wordle.Api.Data;
 
 namespace Wordle.Api.Dtos
 {
@@ -11,7 +12,7 @@ namespace Wordle.Api.Dtos
             TotalAttempts = dateWord.TotalAttempts;
             TotalSeconds = dateWord.TotalSeconds;
             TotalGames = dateWord.TotalGames;
-            PreviousPlayers = dateWord.PreviousPlayers;
+            PreviousPlayers = dateWord.PreviousPlayers.ToList<Player>();
         }
         public string PlayerId { get; set; } = null!;
         public int DateWordId { get; set; }
@@ -19,9 +20,9 @@ namespace Wordle.Api.Dtos
         public int TotalAttempts { get; set; } = 0;
         public int TotalSeconds { get; set; } = 0;
         public int TotalGames { get; set; } = 0;
+        public List<Player> PreviousPlayers { get; } 
         public int Attempts { get; set; } = 0;
         public int Seconds { get; set; } = 0;
-        public IList<Player> PreviousPlayers { get; set; }
 
         public double? AverageAttempts()
         {

@@ -17,7 +17,7 @@
           <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
             <v-btn
               height="100%"
-              :to="`/wordOfTheDay`"
+              :to="`/wordOfTheDay?date=${stats.date}`"
               outlined
               :color="hasPlayerPlayed(playerGuid, stats) ? 'green' : 'red'"
             >
@@ -59,11 +59,12 @@ export default {
 
     function hasPlayerPlayed(playerGuid: string, gamestat: DateWord): boolean {
       const playerList = gamestat.previousPlayers
-      playerList.forEach((p) => {
-        if (playerGuid == p.playerId) {
+      for (let i = 0; i < playerList.length; i++) {
+        if (playerGuid == playerList[i].playerId) {
           return false
         }
-      })
+        
+      }
       return true
     }
 
