@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -62,6 +63,43 @@ namespace Wordle.Api.Services
             }
             await _db.SaveChangesAsync();
             return word;
+        }
+        public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStatsAsync
+        (DateTime? date = null, int daysBack = 10, Guid? playerId = null)
+        {
+            if (daysBack < 1 || daysBack > 100) daysBack = 10;
+            // Make sure we get the most recent day in the farthest timezone
+            var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
+            var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
+
+            // Get the data using the child collection of PlayerGames
+            var result = await _db.DateWords
+                .Include(f => f.PlayerGames)
+                .Where(f => f.Date <= startDate && f.Date > endDate)
+                .OrderByDescending(f => f.Date)
+                .Select(f => new WordOfTheDayStatsDto
+                {
+                    Date = f.Date,
+                    AverageDurationInSeconds = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
+                    AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
+                    NumberOfPlays = f.PlayerGames.Count(),
+                    HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
+                })
+                .ToListAsync();
+
+            // If we don't have enough entries, then we need to add the days.
+            if (result.Count != daysBack)
+            {
+                // We need to add the extra days
+                for (int i = 0; i > (daysBack + 1) * -1; i--)
+                {
+                    // Use the timezone that is the worst possible one
+                    await this.GetWordOfTheDay(TimeSpan.FromHours(12), startDate.AddDays(i));
+                }
+                // Go get the data again, hopefull this all works and we don't end up in a loop
+                result = await GetWordOfTheDayStatsAsync(date, daysBack);
+            }
+            return result;
         }
 
         public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
