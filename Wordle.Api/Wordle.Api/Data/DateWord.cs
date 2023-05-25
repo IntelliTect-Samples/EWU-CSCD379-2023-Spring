@@ -11,6 +11,7 @@
         public int TotalGames { get; set; } = 0;
 
         public IList<Player> PreviousPlayers { get; set; } = new List<Player>();
+        public ICollection<PlayerGame> PlayerGames { get; } = null!;
     }
 }
 
