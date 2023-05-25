@@ -162,12 +162,13 @@
 ### Lecture 15. 5/23: 
 - EF multiple table queries (Getting Word of the Day stats)
 - Using GroupBy, Sort
+- Questions from the homework
+
+### Next Topics
 - CSS animations using transition
 - Creating revealing letters
 - API testing with service mocks and interfaces
 - Graceful error handling when API is missing
-
-### Next Topics
 - The problem of security and how to handle it
 - Identity in a web project (not just API)
 - Scaffolding EF
