@@ -53,7 +53,9 @@
       </template>
     </v-app-bar>
 
-    <v-main :class="[theme.global.name.value === 'dark' ? 'darkThemeBackground' : 'lightThemeBackground']">
+    <v-main
+      :class="[theme.global.name.value === 'dark' ? 'darkThemeBackground' : 'lightThemeBackground']"
+    >
       <RouterView />
     </v-main>
   </v-app>
@@ -96,11 +98,11 @@ function setDarkTheme() {
 
 <style>
 .darkThemeBackground {
-  background: url("@/assets/backgroundDark.png") no-repeat center center fixed !important;
+  background: url('@/assets/backgroundDark.png') no-repeat center center fixed !important;
   background-size: auto;
 }
-.lightThemeBackground{
-  background:url("@/assets/backgroundLight.jpg") no-repeat center center fixed !important;
+.lightThemeBackground {
+  background: url('@/assets/backgroundLight.jpg') no-repeat center center fixed !important;
   background-size: auto;
 }
 </style>
