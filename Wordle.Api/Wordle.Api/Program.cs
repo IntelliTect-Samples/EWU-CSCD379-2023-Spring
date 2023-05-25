@@ -10,15 +10,15 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowAllOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("*");
-                          policy.AllowAnyMethod();
-                          policy.AllowAnyHeader();
-                      });
+options.AddPolicy(name: MyAllowAllOrigins,
+                  policy =>
+                  {
+                      policy.WithOrigins("*");
+                      policy.AllowAnyMethod();
+                      policy.AllowAnyHeader();
+                  });
 });
 
 
@@ -29,7 +29,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection2");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);

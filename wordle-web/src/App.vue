@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <span class="bg"></span>
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
@@ -64,8 +65,6 @@ import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
-import router from './router'
-import { createRouterMatcher } from 'vue-router'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
@@ -96,3 +95,9 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 </script>
+
+<style>
+.slightlyTransparent {
+  opacity: .7;
+}
+</style>
