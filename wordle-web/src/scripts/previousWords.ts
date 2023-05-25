@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { gameData } from '@/scripts/gameData'
+import type { gameData } from '@/scripts/gameData'
 
 let previousWords: Array<gameData>
 
