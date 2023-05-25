@@ -11,27 +11,27 @@
         <br />
 
         <v-list-item>
-          <v-btn to="/" elevation="24">Home</v-btn>
+          <v-btn to="/" variant="outlined" elevation="24">Home</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/wordle" elevation="24">Free Play</v-btn>
+          <v-btn to="/wordle" variant="outlined" elevation="24">Free Play</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/wordle" elevation="24">Daily Word</v-btn>
+          <v-btn to="/wordoftheday" variant="outlined" elevation="24">Daily Word</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/about" elevation="24">About</v-btn>
+          <v-btn to="/about" variant="outlined" elevation="24">About</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/leaderboard" elevation="24">Leaderboard</v-btn>
+          <v-btn to="/leaderboard" variant="outlined" elevation="24">Leaderboard</v-btn>
         </v-list-item>
 
         <v-list-item>
-          <v-btn to="/instructions" elevation="24">How To Play</v-btn>
+          <v-btn to="/instructions" variant="outlined" elevation="24">How To Play</v-btn>
         </v-list-item>
       </v-list>
     </v-card>

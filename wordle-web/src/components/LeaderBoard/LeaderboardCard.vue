@@ -3,15 +3,16 @@
 --->
 
 <template>
-  <v-card-title class="display-1"> Top Ten Scores </v-card-title>
+  <v-card>
+  <v-card-title class="text-center"> Top Ten Scores </v-card-title>
   <v-card-item>
     <v-table>
       <thead>
         <tr>
           <th class="text-center">Username</th>
           <th class="text-center">Games Played</th>
-          <th class="text-center">Average Number of Guesses</th>
-          <th class="text-center">Average Time to Finish</th>
+          <th class="text-center">Average Guesses</th>
+          <th class="text-center">Average Time</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@
       </tbody>
     </v-table>
   </v-card-item>
+  </v-card>
 </template>
 
 <script setup lang="ts">

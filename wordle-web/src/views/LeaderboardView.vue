@@ -1,19 +1,18 @@
 <template>
   <h1>LeaderBoard</h1>
+  <v-card>
   <div>
-    <v-carousel class="h-auto w-auto pb-13">
+    <v-carousel class="h-auto w-auto pb-13" show-arrows="hover">
       <v-carousel-item>
-        <v-card class="px-16 text-center">
-          <Leaderboard />
-        </v-card>
+          <Leaderboard/>
       </v-carousel-item>
+
       <v-carousel-item>
-        <v-card class="px-16 text-center">
-          <PersonalStats />
-        </v-card>
+          <PersonalStats/>
       </v-carousel-item>
     </v-carousel>
   </div>
+  </v-card>
 </template>
 
 <script setup lang="ts">
