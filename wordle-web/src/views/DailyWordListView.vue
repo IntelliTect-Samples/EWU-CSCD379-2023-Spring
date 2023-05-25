@@ -35,6 +35,25 @@
 </template>
 
 <script lang="ts">
+import type { WordOfTheDayStats } from '@/scripts/WordOfTheDayStats'
+import Axios from 'axios'
+import { type Ref, ref } from 'vue'
+import type { PlayerService } from '@/scripts/playerService'
+import { mergeProps } from 'vue'
+
+const stats: Ref<Array<WordOfTheDayStats>> = ref([])
+
+function refreshStats() {
+  // Grab the stats via axios from /word/WordOfTheDayStats
+  Axios.get('/word/WordOfTheDayStats?playerId=' + props.playerId).then((response) => {
+    for (let stat of response.data as Array<WordOfTheDayStats>) {
+      stat.date = new Date(stat.date)
+    }
+    stats.value = response.data as Array<WordOfTheDayStats>
+    console.log(stats.value)
+  })
+}
+
 export default {
   data() {
     return {
