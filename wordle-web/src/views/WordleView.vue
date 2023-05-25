@@ -61,6 +61,7 @@ import ScoreDialog from '@/components/ScoreDialog.vue'
 import { watch } from 'vue'
 import { useRoute } from 'vue-router'
 import router from '@/router'
+import { DateWord } from '@/scripts/dateWord'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -72,6 +73,7 @@ const msg = ref('Wordle Mind Bender')
 
 const wordOfTheDayFlag = ref(false)
 const listOfPlayers = ref()
+const dateWord: Ref<DateWord> = ref({} as DateWord)
 
 // Add this to make testing work because useDisplay() throws an error when testing
 // Wrap useDisplay in a function so that it doesn't get called during testing.
@@ -92,9 +94,10 @@ onUnmounted(() => {
 function newGame() {
   overlay.value = true
   let apiPath = 'word'
-  if (route.path == '/wordoftheday') {
-    let dateWordPath = 'DateWord'
-    apiPath = `word/wordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+  if (route.path == `/wordoftheday`) {
+    const theDate = new Date()
+    let dateWordPath = `DateWord?offsetInHours=${theDate.getTimezoneOffset() / -60}`
+    apiPath = `word/wordOfTheDay?offsetInHours=${theDate.getTimezoneOffset() / -60}`
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
       dateWordPath += `&date=${route.query.date}`
@@ -102,9 +105,9 @@ function newGame() {
     wordOfTheDayFlag.value = true
     msg.value = 'Wordle Of The Day'
     Axios.get(dateWordPath).then((response) => {
+      dateWord.value = response.data
       console.log(response)
-      listOfPlayers.value = response.data
-      console.log(game.secretWord)
+      console.log(response.data)
       setTimeout(() => {
         overlay.value = false
       }, 502)
@@ -177,33 +180,28 @@ function sendGameResult() {
   gameResult.durationInSeconds = Math.round(game.duration() / 1000)
   gameResult.wasGameWon = game.status == WordleGameStatus.Won
   gameResult.wordPlayed = game.secretWord
-
-  console.log(gameResult)
+  lastGameResult.value = gameResult
 
   console.log(listOfPlayers)
 
-  lastGameResult.value = gameResult
-  showScoreDialog.value = true
-
-  var flag = false
-
   if (wordOfTheDayFlag.value) {
-    // for (let i = 0; i < listOfPlayers.value.length; i++) {
-    //   const player = listOfPlayers[i];
-    //   if (player.playerId == gameResult.playerId){         this is not working
-    //     flag = true
-    //   }
-    // }
-    if (flag) {
-      Axios.post('/DateWord/AddDailyGameResult', gameResult).then((response) => {
-        console.log(response.data)
-      })
-      Axios.post('/Player/AddGameResult', gameResult).then((response) => {
-        console.log(response.data)
-      })
-    }
+    const dailyResult = new DateWord()
+    dailyResult.playerId = playerService.player.playerId
+    dailyResult.attempts = game.guesses.filter((f) => f.isFilled).length
+    dailyResult.seconds = Math.round(game.duration() / 1000)
+    dailyResult.dateWordId = dateWord.value.dateWordId
+    dailyResult.date = dateWord.value.date
+    console.log(dailyResult)
+    showScoreDialog.value = true
+    Axios.post(
+      `/DateWord/AddDailyGameResult?playerId=${dailyResult.playerId}&dateWordId=${dailyResult.dateWordId}&seconds=${dailyResult.seconds}&attempts=${dailyResult.attempts}`
+    ).then((response) => {
+      console.log(response.data)
+    })
+    wordOfTheDayFlag.value = false
   } else {
-    Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+    showScoreDialog.value = true
+    Axios.post(`/Player/AddGameResult`, gameResult).then((response) => {
       console.log(response.data)
     })
   }
