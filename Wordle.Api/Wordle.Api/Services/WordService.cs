@@ -140,7 +140,7 @@ namespace Wordle.Api.Services
             var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
             var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
 
-            /*
+            
             var result = await _db.DateWords
                 .Include(f => f.Plays)
                 .Where(f => f.Date <= startDate && f.Date > endDate)
@@ -154,11 +154,11 @@ namespace Wordle.Api.Services
                     HasUserPlayed = playerId.HasValue ? f.Plays.Any(f => f.PlayerId == playerId.Value) : false
                 })
                 .ToListAsync();
-            */
-
+            
+            /*
             var result = await _db.Plays
                 .Include(f => f.DateWord)
-                .Where(f => f.DateWord != null && f.Date <= startDate && f.Date >= endDate)
+                .Where(f => f.DateWord != null && f.DateWord.Date <= startDate && f.DateWord.Date >= endDate)
                 .GroupBy(f => f.DateWord)
                 .Where(f => f.Key != null)
                 .Select(g => new WordOfTheDayStatsDto
@@ -170,7 +170,7 @@ namespace Wordle.Api.Services
                     HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
                 })
                 .ToListAsync();
-
+            */
             if (result.Count != daysBack)
             {
                 for (int i = 0; i > (daysBack + 1) * -1; i--)
