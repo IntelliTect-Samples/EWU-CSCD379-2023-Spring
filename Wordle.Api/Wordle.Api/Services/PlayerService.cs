@@ -105,7 +105,7 @@ namespace Wordle.Api.Services
 
             var player = await _db.Players.FindAsync(dto.PlayerId);
             */
-            var player = await _db.Players.FindAsync(Name);
+            var player = await _db.Players.FirstOrDefaultAsync(n => n.Name == Name);
             var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == WordPlayed);
             if (player is not null && word != null)
             {
