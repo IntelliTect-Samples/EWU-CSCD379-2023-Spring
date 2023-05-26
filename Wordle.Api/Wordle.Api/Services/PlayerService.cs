@@ -88,7 +88,7 @@ namespace Wordle.Api.Services
         }
         
 
-        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime WordOfTheDayDate)
+        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime? WordOfTheDayDate)
         {
             /*
             Player played = await _db.Players.FirstOrDefaultAsync(p => p.Name == Name);
@@ -116,7 +116,7 @@ namespace Wordle.Api.Services
                     player.GameCount++;
                 }
 
-                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.WordId == word.WordId);
+                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
 
                 Plays play = new()
                 {
