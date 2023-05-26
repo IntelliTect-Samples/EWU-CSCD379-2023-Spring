@@ -3,7 +3,7 @@
     <v-card>
       <div class="bg-primary text-h5 pa-3 text-center">Daily Words</div>
       <v-card-text>
-        <div v-for="(day, index) in dailywords" :key="day.date" class="border my-3">
+        <div v-for="(day, index) in dailywords" :key="index" class="border my-3">
           <div class="d-flex justify-center bg-secondary text-h6">
             #{{ index + 1 }} - {{ moment(day.date).format('MMMM DD, YYYY') }}
           </div>
