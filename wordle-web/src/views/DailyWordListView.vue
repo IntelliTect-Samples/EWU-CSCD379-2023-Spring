@@ -14,15 +14,15 @@
       >
       <v-card-text>
         <v-row justify="center">
-          <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
+          <v-col v-for="stats in gameStats" :key="stats.date.toLocaleDateString()" class="ma-2">
             <v-btn
+              @click="goTo(new Date(stats.date + `Z`).toLocaleDateString())"
               height="100%"
-              :to="`/wordOfTheDay?date=${stats.date}`"
               outlined
               :color="hasPlayerPlayed(playerGuid, stats) ? 'green' : 'red'"
             >
               <span class="bodyText"
-                >{{ stats.date }}
+                >{{ new Date(stats.date + `Z`).toLocaleDateString() }}
                 <div class="stats">
                   <div>Avg Guesses: {{ stats.totalAttempts / stats.totalGames }}</div>
                   <div>Avg Seconds per Game: {{ stats.totalSeconds / stats.totalGames }}</div>
@@ -43,6 +43,7 @@ import type { PlayerService } from '@/scripts/playerService'
 import { Services } from '@/scripts/services'
 import { inject, onMounted, ref } from 'vue'
 import type { DateWord } from '@/scripts/dateWord'
+import router from '@/router'
 
 export default {
   setup() {
@@ -67,10 +68,15 @@ export default {
       return true
     }
 
+    function goTo(date: string) {
+      router.push({ name: 'wordoftheday', query: { date: date } })
+    }
+
     return {
       gameStats,
       playerGuid,
-      hasPlayerPlayed
+      hasPlayerPlayed,
+      goTo
     }
   }
 }

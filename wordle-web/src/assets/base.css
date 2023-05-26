@@ -43,3 +43,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  transform: scale(1.1);
+}
+div.v-theme--light span.bg {
+  background: url('https://img.freepik.com/free-vector/network-mesh-wire-digital-technology-background_1017-27428.jpg?w=1380&t=st=1685052759~exp=1685053359~hmac=396a63246e361409a33fa1eef7d316ec403c849216d7fff160826890dec9e36b')
+    no-repeat center center;
+}
+
+div.v-theme--dark span.bg {
+  background: url('https://img.freepik.com/free-vector/futuristic-background-design_23-2148503793.jpg?w=996&t=st=1685052803~exp=1685053403~hmac=13e2df05ac4c92af7285a6ca659a2a1cc8a5debba171acfe798fc6da8aeec8e2')
+    no-repeat center center;
+}

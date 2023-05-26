@@ -14,7 +14,7 @@
         'ml-1 px-1': display.sm
       }"
     >
-      <LetterButton :letter="key" @click="letterClick(key)" />
+      <LetterButton class="slightlyTransparent" :letter="key" @click="letterClick(key)" />
     </v-col>
   </v-row>
 </template>

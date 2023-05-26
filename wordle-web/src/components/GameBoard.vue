@@ -6,7 +6,7 @@
     dense
   >
     <v-col v-for="(letter, colIndex) in word.letters" :key="`col-${colIndex}`" cols="auto">
-      <LetterResult :letter="letter" @click="letterClick(letter)" />
+      <LetterResult class="slightlyTransparent" :letter="letter" @click="letterClick(letter)" />
     </v-col>
   </v-row>
 </template>
