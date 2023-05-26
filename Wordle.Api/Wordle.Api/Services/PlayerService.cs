@@ -136,6 +136,5 @@ namespace Wordle.Api.Services
 
             throw new ArgumentException("Player Id or Word not found");
         }
-
     }
 }
