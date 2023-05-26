@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
+//using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -118,5 +119,14 @@ namespace Wordle.Api.Services
                 }
             }
         }
+
+        //public async Task<WordOfTheDayStatsDto> GetWordOfTheDayStatsAsync(Guid playerId)
+        //{
+        //    var startDate = DateTime.UtcNow.AddHours(-12).Date;
+        //    var endDate = startDate + TimeSpan.FromDays(-10);
+
+        //    var result = await _db.DateWords
+        //        .Include(games => games)
+        //}
     }
 }
