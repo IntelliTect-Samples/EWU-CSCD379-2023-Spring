@@ -4,6 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import HomeView from '../views/HomeView.vue'
 import LeaderBoardView from '../views/LeaderBoardView.vue'
 import HelpView from '../views/HelpView.vue'
+import WordleOfTheDay from '../views/WordleOfTheDay.vue'
 //
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/help',
       name: 'help',
       component: HelpView
+    },
+    {
+      path: '/wordOfTheDay',
+      name: 'wordOfTheDay',
+      component: WordleOfTheDay
     }
   ]
 })

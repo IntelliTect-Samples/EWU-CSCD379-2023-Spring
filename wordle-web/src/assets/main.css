@@ -7,8 +7,50 @@ a,
   transition: 0.4s;
 }
 
+.wurdleFont{
+  font-size: 1.5rem;
+  font-family: Roboto;
+  color: #00FF00;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
+}
+
+@media (max-width: 1080px) {
+  /* Adjust layout, font sizes, padding, etc. as needed for a 1080p maximum */
+  img {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  .container{
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .dialog{
+    max-width: 80%;
+    overflow:visible;
+  }
+
+
+
+}
+
+@media (max-width: 480px){
+  img{
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .dialog{
+    max-width: 80%;
+    overflow: hidden;
+  }
+  .container{
+    max-width: 100%;
+    overflow: hidden;
+  }
+
 }

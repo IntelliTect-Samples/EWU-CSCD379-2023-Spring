@@ -2,7 +2,7 @@
     <main class="d-flex align-center justify-center flex-wrap text-center mx-auto">
       <div class="mt-4">
         <h1>Leaderboard</h1>
-        <v-table hover striped class="text-no-wrap rounded" style="background: none">
+        <v-table hover striped class="text-no-wrap rounded dialog" style="background: none">
           <v-overlay
             style="overflow: hidden"
             :model-value="overlay"

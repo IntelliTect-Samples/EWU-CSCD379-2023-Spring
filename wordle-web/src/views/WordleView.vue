@@ -3,8 +3,9 @@
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
       <v-progress-circular color="primary" indeterminate size="64" />
     </v-overlay>
-
-    <h1 class="text-center">Timer: {{ timer }}</h1>
+    
+    <h1 class="wurdleFont">Wurdle play ground</h1>
+    <h1 class="wurdleFont">Timer: {{ timer }}</h1>
 
     <GameBoard :game="game" @letterClick="addChar" />
 

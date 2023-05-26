@@ -17,7 +17,7 @@
         <v-app-bar-title>
           <RouterLink to="/game">
             <v-icon icon="mdi-alpha-w-box" color="orange-darken-3"></v-icon>
-            Wurdle
+            <span class="wurdleFont">Wurdle</span>
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
@@ -49,7 +49,10 @@
 
           <v-list>
             <v-list-item>
-              <v-list-item-title><RouterLink to="/game">Game</RouterLink></v-list-item-title>
+              <v-list-item-title><RouterLink to="/game">Wurdle play ground</RouterLink></v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title><RouterLink to="/wordOfTheDay">Wurdle Of The Day</RouterLink></v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title><RouterLink to="/about">About</RouterLink></v-list-item-title>
