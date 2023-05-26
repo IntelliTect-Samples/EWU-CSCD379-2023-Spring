@@ -1,4 +1,5 @@
-# Deployed to: [red-sand-0fa51601e.3](https://red-sand-0fa51601e.3.azurestaticapps.net/)
+## Deployed to: [red-sand-0fa51601e.3](https://red-sand-0fa51601e.3.azurestaticapps.net/)
+## API: [wordlemindbender](https://wordlemindbender.azurewebsites.net/)
 
 ## Instructors ##
 [Grant Erickson](https://github.com/GrantErickson), [Meg Woodford](https://github.com/mmwoodfo), and [Mark Michaelis](https://github.com/MarkMichaelis)
