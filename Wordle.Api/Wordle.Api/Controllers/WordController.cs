@@ -49,11 +49,11 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetDailyWordStatistics")]
-        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(int? playerId = null)
+        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(string? name = null)
         {
             DateTime? date = null;
             int daysBack = 10;
-            return await _wordService.GetDailyWordStatistics(date, daysBack, playerId);
+            return await _wordService.GetDailyWordStatistics(date, daysBack, name);
         }
     }
 }    

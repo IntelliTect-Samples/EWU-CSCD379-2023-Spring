@@ -121,8 +121,20 @@ namespace Wordle.Api.Services
             }
         }
 
-        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, int? playerId = null)
+        public async Task<List<WordOfTheDayStatsDto>> GetDailyWordStatistics(DateTime? date = null, int daysBack = 10, string? name = null)
         {
+            Player? p = await _db.Players.FirstOrDefaultAsync(p => p.Name == name);
+            int? playerId;
+
+            if(p is null)
+            {
+                playerId = null;
+            }
+            else
+            {
+                playerId = p.PlayerId;
+            }
+
             if (daysBack < 1 || daysBack > 100) daysBack = 10;
 
             var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
