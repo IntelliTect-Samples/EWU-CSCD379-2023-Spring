@@ -14,9 +14,9 @@
       >
       <v-card-text>
         <v-row justify="center">
-          <v-col v-for="stats in gameStats" :key="stats.date" class="ma-2">
+          <v-col v-for="stats in gameStats" :key="stats.date.toLocaleDateString()" class="ma-2">
             <v-btn
-              @click="goTo(new Date(stats.date + `Z`))"
+              @click="goTo(new Date(stats.date + `Z`).toLocaleDateString())"
               height="100%"
               outlined
               :color="hasPlayerPlayed(playerGuid, stats) ? 'green' : 'red'"
@@ -68,8 +68,8 @@ export default {
       return true
     }
 
-    function goTo(date: Date) {
-      router.push({ name: 'wordoftheday', query: { date: date.toLocaleDateString() } })
+    function goTo(date: string) {
+      router.push({ name: 'wordoftheday', query: { date: date } })
     }
 
     return {
