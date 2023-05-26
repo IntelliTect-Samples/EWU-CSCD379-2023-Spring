@@ -11,6 +11,7 @@ import LetterButton from '@/components/LetterButton.vue'
 import { Letter } from '@/scripts/letter'
 import { computed } from 'vue'
 
+
 const props = defineProps<{
   guessedLetters: Letter[]
 }>()

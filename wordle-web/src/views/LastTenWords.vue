@@ -27,7 +27,7 @@
         <td>{{ item.averageSecondsPerGame === -1 ? 0 : item.averageSecondsPerGame }}</td>
         <td>{{ item.averageAttempts === -1 ? 0 : item.averageAttempts }}</td>
         <td>{{ item.numberOfPlays }}</td>
-        <td>{{ item.hasUserPlayed }}</td>
+        <td>{{ item.hasUserPlayed ? 'Yes' : 'No' }}</td>
       </tr>
     </tbody>
     </v-table>
