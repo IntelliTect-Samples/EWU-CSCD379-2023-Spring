@@ -36,8 +36,7 @@ span.bg {
 }
 
 div.v-theme--dark span.bg {
-  background: url('https://wallpaperaccess.com/full/3996769.jpg')
-    no-repeat center center;
+  background: url('https://wallpaperaccess.com/full/3996769.jpg') no-repeat center center;
 }
 
 div.v-theme--light span.bg {
@@ -46,11 +45,9 @@ div.v-theme--light span.bg {
 }
 
 div.v-theme--aqua span.bg {
-  background: url('https://cdn.wallpapersafari.com/84/92/dDWHj5.jpg')
-    no-repeat center;
+  background: url('https://cdn.wallpapersafari.com/84/92/dDWHj5.jpg') no-repeat center;
 }
 
 div.v-theme--cowboy span.bg {
-  background: url('https://wallpaperaccess.com/full/141067.jpg')
-    no-repeat center center;
+  background: url('https://wallpaperaccess.com/full/141067.jpg') no-repeat center center;
 }
