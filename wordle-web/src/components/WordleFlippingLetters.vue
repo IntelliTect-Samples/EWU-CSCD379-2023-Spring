@@ -11,7 +11,7 @@ import { onBeforeUnmount, reactive } from 'vue'
 import { onMounted } from 'vue'
 
 // Represents the letters
-class Letter {
+class LogoLetter {
   constructor(public letter: string) {}
   classList = ['square']
   get classes() {
@@ -20,12 +20,12 @@ class Letter {
 }
 
 const letters = reactive([
-  new Letter('A'),
-  new Letter('U'),
-  new Letter('T'),
-  new Letter('U'),
-  new Letter('M'),
-  new Letter('N')
+  new LogoLetter('W'),
+  new LogoLetter('O'),
+  new LogoLetter('R'),
+  new LogoLetter('D'),
+  new LogoLetter('L'),
+  new LogoLetter('E')
 ])
 
 onMounted(() => {
@@ -33,12 +33,12 @@ onMounted(() => {
     setTimeout(() => {
       letter.classList.push('square2')
       if (Math.random() > 0.03) {
-        letter.classList.push('orangered')
+        letter.classList.push('green')
       } else {
-        letter.classList.push('orange')
+        letter.classList.push('yellow')
         setTimeout(() => {
           letter.classList.pop()
-          letter.classList.push('orangered-switch')
+          letter.classList.push('green-switch')
         }, 1300)
       }
     }, index * 100)
@@ -101,16 +101,16 @@ div {
     border-radius 1s linear, opacity 1s linear, background-color 2s ease-out;
 }
 
-.orangered {
-  background-color: orangered;
+.green {
+  background-color: green;
 }
 
-.orange {
-  background-color: orange;
+.yellow {
+  background-color: yellow;
 }
 
-.orangered-switch {
-  background-color: orangered;
+.green-switch {
+  background-color: green;
   transition: background-color 0.2s ease-in-out;
   animation: pulse 0.4s ease-in-out;
 }

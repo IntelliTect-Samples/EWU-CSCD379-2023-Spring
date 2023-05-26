@@ -145,7 +145,7 @@ public class WordService
         // This algorithm doesn't handle days without PlayerGames. 
         // This would need to have the stats inserted into the collection after the fact.
         //var result = await _db.PlayerGames
-        //    .Include(f => f.DateWord!.Word)
+        //    .Include(f => f.DateWord)
         //    .Where(f => f.DateWord != null &&
         //        f.DateWord.Date <= startDate &&
         //        f.DateWord.Date >= endDate)
@@ -156,7 +156,7 @@ public class WordService
         //        Date = g.Key!.Date,
         //        AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
         //        AverageAttempts = g.Average(f => f.Attempts),
-        //        NumberOfPlays = g.Sum(f => f.PlayerGameId),
+        //        NumberOfPlays = g.Count(),
         //        HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
 
         //    })
@@ -171,8 +171,8 @@ public class WordService
                 // Use the timezone that is the worst possible one
                 await this.GetWordOfTheDayAsync(TimeSpan.FromHours(12), startDate.AddDays(i));
             }
-// Go get the data again, hopefull this all works and we don't end up in a loop
-result = await GetWordOfTheDayStatsAsync(date, daysBack);
+            // Go get the data again, hopefull this all works and we don't end up in a loop
+            result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
         return result;
     }
