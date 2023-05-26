@@ -46,7 +46,6 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Word.SeedWords(db);
     Player.SeedPlayers(db);
-    Plays.SeedPlays(db);
 }
 
 
