@@ -8,9 +8,10 @@
         <v-card-title>{{ play.date.toDateString() }}</v-card-title>
       </v-card>
       <v-list>
-        <v-list-item >
+        <v-list-item>
           <v-list-item-title :class="play.hasUserPlayed ? 'green-text' : 'red-text'"
-          >Games Played: {{ play.numberOfPlays }}</v-list-item-title>
+            >Games Played: {{ play.numberOfPlays }}</v-list-item-title
+          >
         </v-list-item>
         <v-list-item>
           <v-list-item-title :class="play.hasUserPlayed ? 'green-text' : 'red-text'"

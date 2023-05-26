@@ -3,7 +3,7 @@ import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import InstructionsViewVue from '@/views/InstructionsView.vue'
-//import DailyView from '@/views/DailyView.vue'
+import PracticeView from '@/views/PracticeView.vue'
 import StatsView from '@/views/StatsView.vue'
 
 const router = createRouter({
@@ -11,8 +11,8 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'wordle',
-      component: WordleView
+      name: 'word',
+      component: PracticeView
     },
     {
       path: '/about',

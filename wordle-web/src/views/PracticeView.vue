@@ -1,5 +1,5 @@
 <template>
-  <div class="text-h4 text-center" style="font-weight: 900">Daily Wordle</div>
+  <div class="text-h4 text-center" style="font-weight: 900">Practice Mode</div>
   <WordleComponent />
 </template>
 
