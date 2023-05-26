@@ -4,9 +4,10 @@
       <h1 class="text-h1 font-weight-bold mb-4">W.O.R.D.L.E</h1>
       <p class="subheading font-weight-bold">Check out all we have to offer in this bootleg copy of the classic NYTimes fan-favorite!</p>
       <div>
-        <v-btn variant="outlined" class="midbtn">How to Play</v-btn>
+        <v-btn to="/instruct" variant="outlined" class="midbtn">How to Play</v-btn>
         <v-btn to="/wordoftheday" variant="outlined" class="midbtn">Daily Wordle</v-btn>
         <v-btn variant="outlined" class="midbtn">Recent Wordles</v-btn>
+        <v-btn to="/wordle" variant="outlined" class="midbtn">Play Random</v-btn>
       </div>
     </div>
   </v-parallax>
@@ -18,6 +19,4 @@
     margin-right: 5px;
   }
 </style>
-<script lang="ts">
-
-</script>
+<script lang="ts"></script>
