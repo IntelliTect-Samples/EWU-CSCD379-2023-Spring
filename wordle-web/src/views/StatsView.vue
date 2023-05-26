@@ -8,17 +8,18 @@
         <v-card-title>{{ play.date.toDateString() }}</v-card-title>
       </v-card>
       <v-list>
-        <v-list-item>
-          <v-list-item-title>Games Played: {{ play.numberOfPlays }}</v-list-item-title>
+        <v-list-item >
+          <v-list-item-title :class="play.hasUserPlayed ? 'green-text' : 'red-text'"
+          >Games Played: {{ play.numberOfPlays }}</v-list-item-title>
         </v-list-item>
         <v-list-item>
-          <v-list-item-title
+          <v-list-item-title :class="play.hasUserPlayed ? 'green-text' : 'red-text'"
             >Average Attempts:
             {{ play.avgAttempts == -1 ? '' : Math.round(play.avgAttempts) }}</v-list-item-title
           >
         </v-list-item>
         <v-list-item>
-          <v-list-item-title
+          <v-list-item-title :class="play.hasUserPlayed ? 'green-text' : 'red-text'"
             >Average Time:
             {{ play.avgTime == -1 ? '' : Math.round(play.avgTime) + ' seconds' }}</v-list-item-title
           >
@@ -45,3 +46,13 @@ Axios.get('/Word/GetLastTenDates?playerId=' + playerService.player.playerId).the
   console.log(plays.value)
 })
 </script>
+
+<style scoped>
+.green-text {
+  color: rgb(0, 194, 0);
+}
+
+.red-text {
+  color: #f85c5c;
+}
+</style>
