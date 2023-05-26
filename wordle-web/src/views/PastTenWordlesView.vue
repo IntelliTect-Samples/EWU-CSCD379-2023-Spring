@@ -1,7 +1,7 @@
 <template>
     <v-container class="d-flex justify-center align-center">
       <v-card>
-        <div class="bg-primary text-h5 pa-3 text-center">Past Ten Days</div>
+        <div class="bg-primary text-h5 pa-3 text-center">Last Ten Daily Wordles</div>
         <v-card-text>
           <div v-for="dayGame in playedGames" :key="dayGame.daysAgo" class="border my-3">
             <div class="d-flex justify-center bg-secondary text-h6">

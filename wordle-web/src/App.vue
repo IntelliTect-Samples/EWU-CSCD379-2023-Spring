@@ -16,7 +16,7 @@
 
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+            <v-btn icon="mdi-menu" v-bind="props"></v-btn>
           </template>
 
           <v-list>
@@ -32,7 +32,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/pasttenwordles">Past Ten Wordles</RouterLink>
+                <RouterLink to="/pasttenwordles">Last Ten Wordles</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
