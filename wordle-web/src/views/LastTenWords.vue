@@ -49,36 +49,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import Axios from 'axios'
 
 var playerData = ref<PlayerData[]>([])
 const overlay = ref(true)
+const username = localStorage.getItem('username')
 
 interface PlayerData {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Assign-4
   date: string
   averageSecondsPerGame: number
   averageAttempts: number
   numberOfPlays: number
-<<<<<<< HEAD
-  hasUserPlayed?: boolean
-=======
-  date: string;
-  averageSecondsPerGame: number;
-  averageAttempts: number;
-  numberOfPlays: number;
-  hasUserPlayed: boolean;
->>>>>>> Assign-4
-=======
   hasUserPlayed: boolean
->>>>>>> Assign-4
 }
 
-Axios.get('Word/GetDailyWordStatistics')
+onMounted(() => {
+  const username = localStorage.getItem('username')
+  Axios.get('Word/GetDailyWordStatistics?name=' + username)
   .then((response) => {
     console.log(response.data)
     playerData.value = response.data
@@ -87,6 +75,8 @@ Axios.get('Word/GetDailyWordStatistics')
   .catch((error) => {
     console.log(error)
   })
+})
+
 
 
 
