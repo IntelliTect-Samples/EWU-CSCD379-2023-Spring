@@ -60,7 +60,7 @@ interface PlayerData {
   averageSecondsPerGame: number
   averageAttempts: number
   numberOfPlays: number
-  hasUserPlayed: boolean
+  hasUserPlayed?: boolean
 }
 
 Axios.get('Word/GetDailyWordStatistics')
