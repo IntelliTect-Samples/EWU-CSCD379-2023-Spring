@@ -31,27 +31,27 @@ function setImageTheme(themecolor: string){
 
 <style>
 .darkThemeBackground {
-  background: url('@/assets/dark-low-poly-grid-haikei.svg') no-repeat center center fixed !important;
+  background: url('@/assets/dark-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 .lightThemeBackground {
-  background: url('@/assets/light-low-poly-grid-haikei.svg') no-repeat center center fixed !important;
+  background: url('@/assets/light-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 .Protanopia_DeuteranopiaBackground {
-  background: url('@/assets/pro-dark-low-poly-grid-haikei.svg.svg') no-repeat center center fixed !important;
+  background: url('@/assets/pro-dark-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 .TritanopiaBackground{
-  background: url('@/assets/trdark-low-poly-grid-haikei.svg.svg') no-repeat center center fixed !important;
+  background: url('@/assets/tri-dark-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 .Protanopia_DeuteranopiaLightBackground {
-  background: url('@/assets/pro-light-low-poly-grid-haikei.svg.svg') no-repeat center center fixed !important;
+  background: url('@/assets/pro-light-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 .TritanopiaLightBackground{
-  background: url('@/assets/tri-light-low-poly-grid-haikei.svg.svg') no-repeat center center fixed !important;
+  background: url('@/assets/tri-light-low-poly.svg') no-repeat center center fixed !important;
   background-size: 100% 100%;
 }
 </style>
