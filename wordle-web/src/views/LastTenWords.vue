@@ -1,5 +1,5 @@
 <template>
-<v-card>
+<v-card @click="redirect">
     <v-card-title class="text-center"><strong>Last 10 Wordle of the day</strong></v-card-title>
     <v-table density="compact" >
         <thead>
@@ -49,8 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import Axios from 'axios'
+
+
 
 var playerData = ref<PlayerData[]>([])
 const overlay = ref(true)
@@ -73,6 +75,9 @@ interface PlayerData {
     console.log(error)
   })
 
+  function redirect() {
+    window.location.href = '/worldoftheday'
+  }
 
 
 
