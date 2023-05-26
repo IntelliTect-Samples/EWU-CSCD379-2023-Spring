@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="mx-4">
     <v-card-title>
       <h3>Wordle Helper</h3>
       <div v-if="game.solver.getLetterUsages().length > 0">
