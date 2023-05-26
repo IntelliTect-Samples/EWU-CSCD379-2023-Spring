@@ -8,7 +8,7 @@
       >Wordle of the Day
       <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
     </span>
-    <span v-else>Wordle Mind Bender</span>
+    <span v-else>Random Wordle</span>
   </div>
 
   <GameBoard :game="game" />

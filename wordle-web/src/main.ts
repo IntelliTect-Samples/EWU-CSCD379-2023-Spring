@@ -15,7 +15,7 @@ import Axios from 'axios'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-  Axios.defaults.baseURL = 'https://localhost:7053/'
+  Axios.defaults.baseURL = 'https://localhost:44329/'
 } else {
   Axios.defaults.baseURL = 'https://wordle2023.azurewebsites.net/'
 }
@@ -34,18 +34,12 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
-          correct: '#4CAF50',
-          misplaced: '#FFC107',
-          wrong: '#F44336',
+          primary: '#ff4d00',
+          secondary: '#006600',
+          correct: '#224d00',
+          misplaced: '#db6300',
+          wrong: '#4d0900',
           unknown: '#222222'
-        }
-      },
-      light: {
-        colors: {
-          correct: '#6CCF70',
-          misplaced: '#FFD137',
-          wrong: '#F46356',
-          unknown: '#eeeeee'
         }
       }
     }

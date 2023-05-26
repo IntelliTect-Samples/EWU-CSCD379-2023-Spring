@@ -29,8 +29,8 @@
               dense
             >
               <td>
-                <v-icon v-if="stat.hasUserPlayed" icon="mdi-check-decagram" color="green"></v-icon>
-                <v-icon v-else icon="mdi-decagram-outline" color="gray"></v-icon>
+                <v-icon v-if="stat.hasUserPlayed" icon="mdi-check-circle" color="orange"></v-icon>
+                <v-icon v-else icon="mdi-circle-outline" color="gray"></v-icon>
                 <span class="ml-2">{{ stat.date.getMonth() + 1 }}/{{ stat.date.getDate() }}</span>
               </td>
               <td class="text-center">{{ stat.numberOfPlays }}</td>

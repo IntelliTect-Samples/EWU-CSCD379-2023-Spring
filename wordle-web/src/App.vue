@@ -10,6 +10,7 @@
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
+        <v-btn icon="mdi-trophy-outline" to="/leaderboard"></v-btn>
 
         <ActiveUser></ActiveUser>
 
@@ -22,6 +23,11 @@
             <v-list-item>
               <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'instructions' }"> How to Play </RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>

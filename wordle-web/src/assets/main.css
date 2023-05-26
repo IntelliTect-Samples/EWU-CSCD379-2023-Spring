@@ -3,12 +3,13 @@
 a,
 .green {
   text-decoration: none;
-  color: rgb(224, 97, 0);
+  color: #ff4d00;
   transition: 0.4s;
 }
 
 @media (hover: hover) {
   a:hover {
-    background-color: hsla(15, 100%, 44%, 0.2);
+    background-color: #0066001c;
+    border-radius: 8px;
   }
 }
