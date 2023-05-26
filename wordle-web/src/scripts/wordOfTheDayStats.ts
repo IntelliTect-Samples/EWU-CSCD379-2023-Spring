@@ -1,7 +1,7 @@
 export interface WordOfTheDayStats {
   date: Date
-  averageTime: number
-  averageAttempts: number
+  avgTime: number
+  avgAttempts: number
   numberOfPlays: number
   hasUserPlayed: boolean
 }

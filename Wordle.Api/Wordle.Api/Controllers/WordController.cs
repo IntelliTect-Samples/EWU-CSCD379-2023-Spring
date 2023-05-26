@@ -46,5 +46,11 @@ namespace Wordle.Api.Controllers
         {
             return new WordOfTheDayDto(await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date));
         }
+
+        [HttpGet("GetLastTenDates")]
+        public async Task<List<WordOfTheDayStatsDto>> GetLastTenDates(DateTime? date = null, int days = 10, Guid? playerId = null)
+        {
+            return await _wordService.GetWordOfTheDayStats(date, days, playerId);
+        }
     }
 }    
