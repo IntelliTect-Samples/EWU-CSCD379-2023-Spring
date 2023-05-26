@@ -1,6 +1,6 @@
 <template>
   <v-dialog v-model="promptUsername" persistent>
-      <v-card class="mx-auto" min-width="30rem">
+      <v-card class="mx-auto justify-center dialog wurdleFont">
         <v-card-title>Enter Your Username</v-card-title>
         <v-card-text>
           <v-text-field v-model="username" maxlength="20" label="Username"/>
@@ -22,7 +22,7 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
         <v-btn-toggle class="me-2">
-        <v-btn class="text-h5" variant="plain" @click="promptUsername = true">
+        <v-btn class="wurdleFont mt-3" variant="plain" @click="promptUsername = true">
           {{ username }}
         </v-btn>
 
