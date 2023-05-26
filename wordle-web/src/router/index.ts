@@ -4,11 +4,13 @@ import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import InstructionsView from '../views/InstructionsView.vue'
 import StatisticsView from '../views/StatisticsView.vue'
+import LandingPageView from '../views/LandingPageView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/wordle',
       name: 'wordle',
       component: WordleView
     },
@@ -36,6 +38,11 @@ const router = createRouter({
       path: '/wordoftheday',
       name: 'wordOfTheDay',
       component: WordleView
+    },
+    {
+      path: '/',
+      name: 'landingpage',
+      component: LandingPageView
     }
   ]
 })

@@ -23,7 +23,7 @@
           <v-list width="200px">
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/">Play Random</RouterLink>
+                <RouterLink to="/wordle">Play Random</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
