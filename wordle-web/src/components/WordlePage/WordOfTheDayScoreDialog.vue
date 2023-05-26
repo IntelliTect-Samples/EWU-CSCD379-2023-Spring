@@ -1,7 +1,7 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="400">
     <v-card>
-      <div class="d-flex justify-center pa-2 bg-primary text-h6">
+      <div class="d-flex justify-center pa-2 text-h6">
         You {{ gameResult?.wasGameWon ? 'Won' : 'Lost' }} Word of the Day
       </div>
       <v-card-text class="align-center">
@@ -50,7 +50,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn @click="playRandom" variant="elevated" color="primary"> Play Random </v-btn>
+        <v-btn @click="playRandom" variant="outlined" elevation="16"> Free Play </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

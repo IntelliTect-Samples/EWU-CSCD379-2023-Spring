@@ -5,7 +5,7 @@
 <template>
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>
-      <div class="d-flex justify-center pa-2 bg-primary text-h6">
+      <div class="d-flex justify-center pa-2 text-h6">
         You {{ gameResult?.wasGameWon ? 'Win' : 'Lose' }}
       </div>
       <v-card-text class="d-flex flex-column align-center">
@@ -18,7 +18,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn @click="close" variant="elevated" color="primary"> Play Again </v-btn>
+        <v-btn @click="close" variant="outlined" elevation="16"> Play Again </v-btn>
+        <v-btn to="/leaderboard" variant="outlined" elevation="16"> Leaderboard </v-btn>
+        <v-spacer />
       </v-card-actions>
     </v-card>
   </v-dialog>
