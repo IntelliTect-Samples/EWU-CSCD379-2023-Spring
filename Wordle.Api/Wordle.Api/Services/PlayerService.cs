@@ -116,18 +116,10 @@ namespace Wordle.Api.Services
                     Date = DateTime.UtcNow
                 };
 
-                if (dateWord != null)
-                {
-                    dateWord.Plays.Append<Plays>(play);
-                }
-
                 if (play.Player.Name == "Guest")
                     play.WasGameWon = false;
 
                 _db.Plays.Add(play);
-                await _db.SaveChangesAsync();
-
-                _db.DateWords.Update(dateWord);
                 await _db.SaveChangesAsync();
 
                 return play;
