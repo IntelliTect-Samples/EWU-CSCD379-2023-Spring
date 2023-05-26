@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
@@ -47,10 +46,10 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetWordOfTheDay(TimeSpan.FromHours(offsetInHours), date);
         }
 
-        //[HttpGet("WordOfTheDayStats")]
-        //public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(Guid playerId)
-        //{
-        //    return (await _wordService.GetWordOfTheDayStatsAsync(playerId));
-        //}
+        [HttpGet("WordOfTheDayStats")]
+        public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(Guid playerId)
+        {
+            return await _wordService.GetWordOfTheDayStatsAsync(playerId);
+        }
     }
 }

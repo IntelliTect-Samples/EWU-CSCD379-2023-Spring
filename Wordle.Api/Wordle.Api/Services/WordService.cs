@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
-//using Wordle.Api.Dtos;
+using Wordle.Api.Dtos;
 
 namespace Wordle.Api.Services
 {
@@ -71,7 +71,7 @@ namespace Wordle.Api.Services
             {
                 date = DateTime.UtcNow;
             }
-            
+
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
             var localDate = localDateTime.Date;
             var todaysWord = await _db.DateWords
@@ -81,7 +81,8 @@ namespace Wordle.Api.Services
             if (todaysWord != null)
             {
                 return todaysWord.Word.Text;
-            } else
+            }
+            else
             {
                 lock (_WordOfTheDayLock)
                 {
@@ -105,7 +106,7 @@ namespace Wordle.Api.Services
                     {
                         _db.SaveChanges();
                     }
-                    catch(SqlException e) // this is probably not the right error to catch
+                    catch (SqlException e) // this is probably not the right error to catch
                     {
                         if (e.Message.Contains("duplicate"))
                         {
@@ -120,13 +121,24 @@ namespace Wordle.Api.Services
             }
         }
 
-        //public async Task<WordOfTheDayStatsDto> GetWordOfTheDayStatsAsync(Guid playerId)
-        //{
-        //    var startDate = DateTime.UtcNow.AddHours(-12).Date;
-        //    var endDate = startDate + TimeSpan.FromDays(-10);
+        public async Task<List<WordOfTheDayStatsDto>> GetWordOfTheDayStatsAsync(Guid playerId)
+        {
+            var startDate = DateTime.UtcNow.AddHours(-12).Date;
+            var endDate = startDate + TimeSpan.FromDays(-10);
 
-        //    var result = await _db.DateWords
-        //        .Include(games => games)
-        //}
+            return await _db.DateWords
+                .Include(dateWord => dateWord.PlayerGames)
+                .Where(datePlays => datePlays.Date <= startDate && datePlays.Date > endDate)
+                .Select(datePlays => new WordOfTheDayStatsDto
+                {
+                    Date = datePlays.Date,
+                    AverageSecondsPerGame = datePlays.PlayerGames.Any() ? datePlays.PlayerGames.Average(plays => plays.DurationInSeconds) : -1,
+                    AverageAttempts = datePlays.PlayerGames.Any() ? datePlays.PlayerGames.Average(plays => plays.Attempts) : -1,
+                    Plays = datePlays.PlayerGames.Count(),
+                    HasPlayed = datePlays.PlayerGames.Any(plays => plays.Player.PlayerId == playerId)
+                })
+                .OrderByDescending(datePlay => datePlay.Date)
+                .ToListAsync();
+        }
     }
 }
