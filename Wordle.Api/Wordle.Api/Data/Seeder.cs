@@ -7,7 +7,7 @@
             SeedPlayers(context);
             SeedWords(context);
         }
- 
+
         public static void SeedWords(AppDbContext db)
         {
             if (!db.Words.Any())
@@ -27,7 +27,7 @@
             }
         }
 
-        public static void SeedPlayers (AppDbContext db)
+        public static void SeedPlayers(AppDbContext db)
         {
             if (!db.Players.Any())
             {
@@ -39,5 +39,5 @@
             }
         }
 
-   }
+    }
 }

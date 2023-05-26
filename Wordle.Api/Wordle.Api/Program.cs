@@ -1,8 +1,5 @@
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel;
 using Wordle.Api.Data;
 using Wordle.Api.Services;
 
@@ -10,7 +7,7 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowAllOrigins,
                       policy =>
@@ -58,12 +55,10 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
     app.UseSwaggerUI();
 }
 
-// Add a redirect for the root URL
+// Add redirect for the root url
 var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://purple-rock-0b124a41e.3.azurestaticapps.net/";
-var options = new RewriteOptions()
-        .AddRedirect("^$", redirectRootUrl, 302);
-app.UseRewriter(options);
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://thankful-rock-0cffc221e.3.azurestaticapps.net/";
+var options = new RewriteOptions().AddRedirect("^$", redirectRootUrl, 302);
 
 app.UseHttpsRedirection();
 

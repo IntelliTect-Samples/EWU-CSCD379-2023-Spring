@@ -24,7 +24,6 @@ namespace Wordle.Api.Tests
             Assert.IsNotNull(word);
             Assert.AreEqual(5, word.Text.Length);
         }
-
         [TestMethod]
         public async Task GetWordOfTheDay()
         {
@@ -33,12 +32,14 @@ namespace Wordle.Api.Tests
             Seeder.Seed(context);
 
             var date = DateTime.UtcNow;
-            
+
             var word = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
-            
+
             var word2 = await service.GetWordOfTheDay(TimeSpan.FromHours(-8), date);
 
             Assert.AreEqual(word, word2);
         }
+
+
     }
 }
