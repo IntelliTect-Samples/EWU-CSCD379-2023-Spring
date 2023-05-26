@@ -99,14 +99,16 @@ function newGame() {
   }
   Axios.get(apiPath)
     .then((response) => {
-      game.restartGame(response.data.word)
       if (route.path == '/wordoftheday') {
+        game.restartGame(response.data.word)
         wordOfTheDayDate.value = new Date(response.data.date)
+      } else {
+        game.restartGame(response.data.word)
       }
       console.log(game.secretWord)
       setTimeout(() => {
         overlay.value = false
-      }, 502)
+      }, 500)
     })
     .catch((error) => {
       console.log(error)
@@ -168,9 +170,9 @@ function sendGameResult() {
   console.log(gameResult)
 
   lastGameResult.value = gameResult
-  showScoreDialog.value = true
 
   Axios.post('/Player/AddGameResult', gameResult).then((response) => {
+    showScoreDialog.value = true
     console.log(response.data)
   })
   // if (this.onGameEnd) {
