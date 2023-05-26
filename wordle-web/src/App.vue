@@ -1,5 +1,6 @@
 <template>
   <v-app class="justify-center">
+    <span class="bg"></span>
     <AppBar></AppBar>
     <br />
     <br />
