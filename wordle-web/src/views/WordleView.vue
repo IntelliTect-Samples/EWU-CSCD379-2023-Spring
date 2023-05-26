@@ -116,14 +116,14 @@ function startGame() {
   
   overlay.value = true
   let apiPath = 'word'
-  if (isWordOfTheDay.value === true) {
-    apiPath = `word/WordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60} `
-    if (route.query.date) {
+  if (isWordOfTheDay.value) {
+    apiPath = `word/wordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60} `
+    if(route.query.date){
       apiPath += `&date=${route.query.date}`
     }
     Axios.get(apiPath)
     .then((response) => {
-      todayword.value = response.data
+      todayword.value = [response.data]
       game.restartGame(todayword.value[0].word)
       console.log(game.secretWord)
       setTimeout(() => {
@@ -137,7 +137,7 @@ function startGame() {
       overlay.value = false
     })
   } else {
-    apiPath = 'word'
+  apiPath = 'word'
   
   Axios.get(apiPath)
     .then((response) => {
@@ -153,6 +153,7 @@ function startGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
+  
   }
 
   timer.value = 0
