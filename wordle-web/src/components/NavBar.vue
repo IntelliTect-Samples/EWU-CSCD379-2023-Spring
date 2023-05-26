@@ -84,6 +84,7 @@ import { useTheme } from 'vuetify/lib/framework.mjs'
 import { ref } from 'vue'
 import GameInstruction from './GameInstruction.vue'
 
+
 const theme = useTheme()
 const drawer = ref (false)
 const setting = ref (false)
@@ -112,3 +113,5 @@ function setTheme(themecolor: string){
 
   
 </script>
+
+

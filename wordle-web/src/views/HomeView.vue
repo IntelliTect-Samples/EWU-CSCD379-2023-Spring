@@ -6,8 +6,11 @@
       You can use the keyboard or the on-screen keyboard to enter your guesses. You can also click
       on the letters to add them to your guess. You can also click on the words in the list to
       select them.
-    </p>
-  </body>
+      </p>
+    </body>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+</script>
+
+

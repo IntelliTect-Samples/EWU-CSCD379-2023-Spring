@@ -26,10 +26,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import Axios from 'axios'
 
 
 const dummy = ref(["dummy", "dummy", "dummy", "dummy", "dummy", "dummy", "dummy", "dummy", "dummy", "dummy"])
+
+
 
 
 </script>
