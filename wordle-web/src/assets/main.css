@@ -39,10 +39,15 @@ a,
     overflow: hidden;
   }
   .dialog{
-    font-size: .7rem;
+    font-size: .6rem;
     max-width: 60vw;
     overflow:visible;
 
+  }
+  .wurdleFont{
+    font-size: 1.5rem;
+    font-family: Roboto;
+    color: #00FF00;
   }
 
 
@@ -55,7 +60,7 @@ a,
     overflow: hidden;
   }
   .dialog{
-    font-size: .7rem;
+    font-size: .6rem;
     max-width: 60vw;
     overflow: visible;
 
@@ -63,6 +68,11 @@ a,
   .container{
     max-width: 100%;
     overflow: hidden;
+  }
+  .wurdleFont{
+    font-size: 1.5rem;
+    font-family: Roboto;
+    color: #00FF00;
   }
   
 
