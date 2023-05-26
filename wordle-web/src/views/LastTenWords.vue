@@ -22,11 +22,7 @@
       </tr>
     </thead>
     <tbody>
-<<<<<<< HEAD
-      <tr v-for="item in playerData" :key="item">
-=======
       <tr v-for="item in playerData" :key="item.date">
->>>>>>> Assign-4
         <td>{{ item.date.split('T')[0] }}</td>
         <td>{{ item.averageSecondsPerGame === -1 ? 0 : item.averageSecondsPerGame }}</td>
         <td>{{ item.averageAttempts === -1 ? 0 : item.averageAttempts }}</td>
