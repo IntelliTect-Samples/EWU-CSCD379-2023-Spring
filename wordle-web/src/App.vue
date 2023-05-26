@@ -64,12 +64,17 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink to="/leaderboard">Leaderboard</RouterLink>
+                <RouterLink to="/wordoftheday">Daily Word</RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
                 <RouterLink to="/dailywords">Daily Stats</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>
           </v-list>
