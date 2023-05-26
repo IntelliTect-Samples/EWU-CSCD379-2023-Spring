@@ -6,8 +6,7 @@
   <div class="text-h4 text-center">
     <span v-if="isWordOfTheDay"
       > Wordle of the Day
-      <span v-if="wordOfTheDayDate"> - {{ wordOfTheDayDate.toLocaleDateString() }}</span>
-    </span>
+      </span>
     <span v-else>Wordle Redux</span>
   </div>
 
@@ -87,6 +86,14 @@ const wordOfTheDayDate = ref<Date | null>(null)
 const route = useRoute()
 const pat = ref<string>(route.path)
 
+var todayword = ref<todayWord[]>([])
+
+interface todayWord {
+  word: string
+  date: Date
+}
+
+
 
 console.log(game.secretWord)
 
@@ -109,12 +116,29 @@ function startGame() {
   
   overlay.value = true
   let apiPath = 'word'
-  if (isWordOfTheDay.value) {
-    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+  if (isWordOfTheDay.value === true) {
+    apiPath = `word/WordOfTheDay?offsetInHours=${new Date().getTimezoneOffset() / -60} `
     if (route.query.date) {
       apiPath += `&date=${route.query.date}`
     }
-  }
+    Axios.get(apiPath)
+    .then((response) => {
+      todayword.value = response.data
+      game.restartGame(todayword.value[0].word)
+      console.log(game.secretWord)
+      setTimeout(() => {
+        overlay.value = false
+      }, 502)
+    })
+    .catch((error) => {
+      console.log(error)
+      game.restartGame(WordsService.getRandomWord())
+      console.log(game.secretWord)
+      overlay.value = false
+    })
+  } else {
+    apiPath = 'word'
+  
   Axios.get(apiPath)
     .then((response) => {
       game.restartGame(response.data)
@@ -129,6 +153,7 @@ function startGame() {
       console.log(game.secretWord)
       overlay.value = false
     })
+  }
 
   timer.value = 0
   sec.value = 0
@@ -136,7 +161,7 @@ function startGame() {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
       if(wordOfTheDayDate.value){
-        Axios.post(`Player/AddGameResult?Name=${localStorage.getItem('username')}&WasGameWon=${true}&Attempts=${game.guessNum}&TimeInSecounds=${timer.value}&WordPlayed=${game.secretWord}&WordOfTheDayDate=${new Date().toLocaleDateString()}`)
+        Axios.post(`Player/AddGameResult?Name=${localStorage.getItem('username')}&WasGameWon=${true}&Attempts=${game.guessNum}&TimeInSecounds=${timer.value}&WordPlayed=${game.secretWord}&WordOfTheDayDate=${todayword.value[0].date}`)
         .then((response): void => {
           console.log(response.data)
       }) 
