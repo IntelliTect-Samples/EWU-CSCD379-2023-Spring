@@ -140,6 +140,7 @@ namespace Wordle.Api.Services
             var startDate = date.HasValue ? date.Value : DateTime.UtcNow.AddHours(-12).Date;
             var endDate = startDate + TimeSpan.FromDays(daysBack * -1);
 
+            /*
             var result = await _db.DateWords
                 .Include(f => f.Plays)
                 .Where(f => f.Date <= startDate && f.Date > endDate)
@@ -151,6 +152,22 @@ namespace Wordle.Api.Services
                     AverageAttempts = f.Plays.Any() ? f.Plays.Average(a => a.Attempts) : -1,
                     NumberOfPlays = f.Plays.Count(),
                     HasUserPlayed = playerId.HasValue ? f.Plays.Any(f => f.PlayerId == playerId.Value) : false
+                })
+                .ToListAsync();
+            */
+
+            var result = await _db.Plays
+                .Include(f => f.DateWord)
+                .Where(f => f.DateWord != null && f.DateWord.Date <= startDate && f.DateWord.Date >= endDate)
+                .GroupBy(f => f.DateWord)
+                .Where(f => f.Key != null)
+                .Select(g => new WordOfTheDayStatsDto
+                {
+                    Date = g.Key!.Date,
+                    AverageSecondsPerGame = g.Average(f => f.TimeInSeconds),
+                    AverageAttempts = g.Average(f => f.Attempts),
+                    NumberOfPlays = g.Count(),
+                    HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
                 })
                 .ToListAsync();
 
