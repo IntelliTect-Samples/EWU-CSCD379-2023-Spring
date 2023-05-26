@@ -8,6 +8,7 @@ a,
 }
 
 .dialog{
+  font-size: .75rem;
   max-width: 60vw;
   justify-content: center;
   justify-self: center;
@@ -38,6 +39,7 @@ a,
     overflow: hidden;
   }
   .dialog{
+    font-size: .7rem;
     max-width: 60vw;
     overflow:visible;
 
@@ -53,6 +55,7 @@ a,
     overflow: hidden;
   }
   .dialog{
+    font-size: .7rem;
     max-width: 60vw;
     overflow: visible;
 
