@@ -4,30 +4,28 @@
       <template v-slot>
         <v-app-bar-title>
           <RouterLink to="/">
-            <v-icon icon="mdi-leaf" color="orange-darken-3"></v-icon>
+            <v-icon icon="mdi-leaf" color="primary"></v-icon>
             Wordle
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
-
         <ActiveUser></ActiveUser>
 
         <v-menu>
           <template v-slot:activator="{ props }">
-            <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
+            <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
           </template>
 
           <v-list width="200">
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink>
+                <!-- <RouterLink :to="{ name: 'wordOfTheDay' }"> Play Word of the Day </RouterLink> -->
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink>
+                <!-- <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink> -->
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
@@ -52,7 +50,6 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
 import { reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
@@ -66,22 +63,4 @@ provide(Services.Display, display)
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
-
-const theme = useTheme()
-
-function switchTheme() {
-  if (theme.global.name.value === 'light') {
-    setDarkTheme()
-  } else {
-    setLightTheme()
-  }
-}
-
-function setLightTheme() {
-  theme.global.name.value = 'light'
-}
-
-function setDarkTheme() {
-  theme.global.name.value = 'dark'
-}
 </script>
