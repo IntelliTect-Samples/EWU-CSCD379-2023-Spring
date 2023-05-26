@@ -90,21 +90,8 @@ namespace Wordle.Api.Services
 
         public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime? WordOfTheDayDate)
         {
-            /*
-            Player played = await _db.Players.FirstOrDefaultAsync(p => p.Name == Name);
 
-            PlaysDto dto = new()
-            {
-                PlayerId = played.PlayerId,
-                WasGameWon = WasGameWon,
-                Attempts = Attempts,
-                TimeInSeconds = TimeInSeconds,
-                WordPlayed = WordPlayed,
-                WordOfTheDayDate = WordOfTheDayDate
-            };
 
-            var player = await _db.Players.FindAsync(dto.PlayerId);
-            */
             var player = await _db.Players.FirstOrDefaultAsync(n => n.Name == Name);
             var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == WordPlayed);
             if (player is not null && word != null)
@@ -117,7 +104,7 @@ namespace Wordle.Api.Services
                 }
 
                 var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
-
+                
                 Plays play = new()
                 {
                     Player = player,
@@ -129,10 +116,18 @@ namespace Wordle.Api.Services
                     Date = DateTime.UtcNow
                 };
 
+                if (dateWord != null)
+                {
+                    dateWord.Plays.Append<Plays>(play);
+                }
+
                 if (play.Player.Name == "Guest")
                     play.WasGameWon = false;
 
                 _db.Plays.Add(play);
+                await _db.SaveChangesAsync();
+
+                _db.DateWords.Update(dateWord);
                 await _db.SaveChangesAsync();
 
                 return play;
