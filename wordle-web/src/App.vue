@@ -10,8 +10,15 @@
 <script setup lang="ts">
 import Navbar from './components/NavBar.vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
+import { provide, reactive } from 'vue'
+import { Services } from './scripts/services'
+import { useDisplay } from 'vuetify'
+
 
 const theme = useTheme()
+
+const display = reactive(useDisplay())
+provide(Services.Display, display)
 
 function setImageTheme(themecolor: string){
   if(themecolor === "light" )
@@ -32,26 +39,26 @@ function setImageTheme(themecolor: string){
 <style>
 .darkThemeBackground {
   background: url('@/assets/dark-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .lightThemeBackground {
   background: url('@/assets/light-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .Protanopia_DeuteranopiaBackground {
   background: url('@/assets/pro-dark-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .TritanopiaBackground{
   background: url('@/assets/tri-dark-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .Protanopia_DeuteranopiaLightBackground {
   background: url('@/assets/pro-light-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 .TritanopiaLightBackground{
   background: url('@/assets/tri-light-low-poly.svg') no-repeat center center fixed !important;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 </style>

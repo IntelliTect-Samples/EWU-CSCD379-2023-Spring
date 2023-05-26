@@ -5,8 +5,8 @@
 
   <div class="text-h4 text-center">
     <span v-if="isWordOfTheDay"
-      > Word of the Day
-      <span v-if="wordOfTheDayDate"> <br />{{ wordOfTheDayDate.toLocaleDateString() }}</span>
+      > Wordle of the Day
+      <span v-if="wordOfTheDayDate"> - {{ wordOfTheDayDate.toLocaleDateString() }}</span>
     </span>
     <span v-else>Wordle Redux</span>
   </div>
@@ -29,6 +29,7 @@
       @click="checkGuess"
       @keyup.enter="checkGuess"
       color="primary"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status == WordleGameStatus.Active"
     >
       Check
@@ -37,6 +38,7 @@
       @click="startGame"
       @keyup.enter="checkGuess"
       color="secondary"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status !== WordleGameStatus.Active"
     >
       New Game
@@ -63,7 +65,14 @@ import Axios from 'axios'
 import setUsername from '@/components/SetUsername.vue'
 import {WordsService} from '@/scripts/wordsService'
 import { useRoute } from 'vue-router'
+import { inject } from 'vue'
+import { Services } from '@/scripts/services'
+import { useDisplay } from 'vuetify'
 
+
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 
 const guess = ref('')
 const game = reactive(new WordleGame())

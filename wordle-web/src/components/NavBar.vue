@@ -5,12 +5,14 @@
         ><v-icon>mdi-diamond-stone</v-icon> Wordle Redux</v-toolbar-title
       >
       <v-spacer></v-spacer>
-      <v-toolbar-items class="red--text">
+      <v-toolbar-items v-if="display.mdAndUp">
         <v-btn to="/">Home</v-btn>
         <v-btn to="/wordle">Wordle</v-btn>
         <v-btn to="/leaderboard">Leader Board</v-btn>
         <v-btn to="/about">About</v-btn>
-        <v-btn to="/worldoftheday">World of the Day</v-btn>
+        <v-btn to="/worldoftheday">Wordle of the Day</v-btn>
+      </v-toolbar-items>
+      <v-toolbar-items>
         <GameInstruction/>
         <v-app-bar-nav-icon @click="setTheme('default')" icon="mdi-theme-light-dark"> </v-app-bar-nav-icon>
         <v-app-bar-nav-icon @click.stop="setting = true" icon="mdi-cog"></v-app-bar-nav-icon>
@@ -83,6 +85,13 @@
 import { useTheme } from 'vuetify/lib/framework.mjs'
 import { ref } from 'vue'
 import GameInstruction from './GameInstruction.vue'
+import { inject, reactive } from 'vue'
+import { useDisplay } from 'vuetify'
+import { Services } from '@/scripts/services'
+
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
 
 
 const theme = useTheme()
