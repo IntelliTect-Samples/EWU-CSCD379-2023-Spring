@@ -158,7 +158,7 @@ namespace Wordle.Api.Services
 
             var result = await _db.Plays
                 .Include(f => f.DateWord)
-                .Where(f => f.DateWord != null && f.DateWord.Date <= startDate && f.DateWord.Date >= endDate)
+                .Where(f => f.DateWord != null && f.Date <= startDate && f.Date >= endDate)
                 .GroupBy(f => f.DateWord)
                 .Where(f => f.Key != null)
                 .Select(g => new WordOfTheDayStatsDto
