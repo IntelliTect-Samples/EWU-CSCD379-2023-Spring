@@ -35,7 +35,7 @@
           <v-list-item prepend-icon="mdi-star-box" to="/leaderboard">
             Leader Board
           </v-list-item>
-          <v-list-item prepend-icon="mdi-star-box" to="/lasttenwords">
+          <v-list-item prepend-icon="mdi-table-clock" to="/lasttenwords">
             Last 10 Wordle of the day
           </v-list-item>
           <v-list-item prepend-icon="mdi-cog" @click.stop="setting = true" @click="drawer = !drawer">
@@ -113,5 +113,6 @@ function setTheme(themecolor: string){
 
   
 </script>
+
 
 

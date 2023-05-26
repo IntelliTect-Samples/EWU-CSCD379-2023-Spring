@@ -78,6 +78,7 @@ const wordOfTheDayDate = ref<Date | null>(null)
 const route = useRoute()
 const pat = ref<string>(route.path)
 
+
 console.log(game.secretWord)
 
 onMounted(async () => {
@@ -125,14 +126,22 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
-      
-      Axios.post(`Player/AddPlayer?newName=${localStorage.getItem('username')}&playTime=${timer.value}&guesses=${game.guessNum}`)
-       .then((response): void => {
-        console.log(response.data)
+      if(wordOfTheDayDate.value){
+        Axios.post(`Player/AddGameResult?Name=${localStorage.getItem('username')}&WasGameWon=${true}&Attempts=${game.guessNum}&TimeInSecounds=${timer.value}&WordPlayed=${game.secretWord}&WordOfTheDayDate=${new Date().toLocaleDateString()}`)
+        .then((response): void => {
+          console.log(response.data)
       }) 
-        .catch((error) => {
-        console.log(error)
-      })
+          .catch((error) => {
+          console.log(error)
+      })}
+      else{
+        Axios.post(`Player/AddPlayer?newName=${localStorage.getItem('username')}&playTime=${timer.value}&guesses=${game.guessNum}`)
+        .then((response): void => {
+          console.log(response.data)
+        }) 
+          .catch((error) => {
+          console.log(error)
+        })}
     } else {
       timer.value += 1
       sec.value += 1
