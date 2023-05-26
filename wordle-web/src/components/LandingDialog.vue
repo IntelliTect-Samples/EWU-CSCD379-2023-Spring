@@ -9,7 +9,11 @@
       </v-card-text>
       <v-card-actions class="justify-center">
         <v-btn class="bg-primary" @click="dialog = false">Play</v-btn>
+      </v-card-actions>
+      <v-card-actions class="justify-center">
         <v-btn class="bg-primary" to="/tutorial">Instructions</v-btn>
+      </v-card-actions>
+      <v-card-actions class="justify-center">
         <v-btn class="bg-primary" to="/leaderboard">Leaderbaord!</v-btn>
       </v-card-actions>
     </v-card>
