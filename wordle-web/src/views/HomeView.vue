@@ -8,7 +8,7 @@
         </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn to="/wordle" rounded="xl" elevation="16">Free Play</v-btn>
+          <v-btn to="/wordle" variant="tonal" rounded="xl" elevation="6">Free Play</v-btn>
         </v-card-actions>
       </v-card-item>
 
@@ -16,7 +16,7 @@
         <v-card-text> Log on daily to play our word of the day in this game mode! </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn to="/wordoftheday" rounded="xl" elevation="16">Daily Word</v-btn>
+          <v-btn to="/wordoftheday" variant="tonal" rounded="xl" elevation="6">Daily Word</v-btn>
         </v-card-actions>
       </v-card-item>
 
@@ -24,7 +24,7 @@
         <v-card-text> View the current leaderboard or your personal stats here! </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn to="/leaderboard" rounded="xl" elevation="16">Leaderboard</v-btn>
+          <v-btn to="/leaderboard" variant="tonal" rounded="xl" elevation="6">Leaderboard</v-btn>
         </v-card-actions>
       </v-card-item>
 
@@ -34,7 +34,7 @@
         </v-card-text>
 
         <v-card-actions class="justify-center">
-          <v-btn to="/instructions" rounded="xl" elevation="16">How To Play</v-btn>
+          <v-btn to="/instructions" variant="tonal" rounded="xl" elevation="6">How To Play</v-btn>
         </v-card-actions>
       </v-card-item>
     </v-card>
