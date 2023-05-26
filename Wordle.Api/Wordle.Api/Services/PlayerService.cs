@@ -126,7 +126,7 @@ namespace Wordle.Api.Services
                     TimeInSeconds = TimeInSeconds,
                     WasGameWon = WasGameWon,
                     DateWord = dateWord,
-                    Date = DateTime.UtcNow
+                    Date = dateWord.Date
                 };
                 _db.Plays.Add(play);
                 await _db.SaveChangesAsync();
