@@ -13,7 +13,8 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("*", 
-                              "https://white-desert-0370f231e.3.azurestaticapps.net");
+                              "https://white-desert-0370f231e.3.azurestaticapps.net",
+                              "http://localhost:5173");
                       });
 });
 

@@ -103,7 +103,7 @@ export class WordleGame {
         this.secretWord +
         '&attempts=' +
         this.amountOfGuesses.toString() +
-        '&seconds' +
+        '&seconds=' +
         seconds.toString()
     )
       .then(function (response) {
