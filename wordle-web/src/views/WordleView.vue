@@ -103,7 +103,7 @@ function newGame() {
         game.restartGame(response.data.word)
         wordOfTheDayDate.value = new Date(response.data.date)
       } else {
-        game.restartGame(response.data.word)
+        game.restartGame(response.data)
       }
       console.log(game.secretWord)
       setTimeout(() => {
