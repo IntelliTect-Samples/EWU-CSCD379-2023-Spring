@@ -81,8 +81,8 @@ watch(
 )
 
 function playDay(date: Date) {
-  router.push({ name: 'wordOfTheDay', query: { date: date.toLocaleDateString() } })
   close()
+  router.push({ name: 'wordOfTheDay', query: { date: date.toLocaleDateString() } })
 }
 
 const stats: Ref<Array<WordOfTheDayStats>> = ref([])
