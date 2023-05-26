@@ -54,7 +54,6 @@ import Axios from 'axios'
 
 var playerData = ref<PlayerData[]>([])
 const overlay = ref(true)
-const username = localStorage.getItem('username')
 
 interface PlayerData {
   date: string
@@ -64,9 +63,7 @@ interface PlayerData {
   hasUserPlayed: boolean
 }
 
-onMounted(() => {
-  const username = localStorage.getItem('username')
-  Axios.get('Word/GetDailyWordStatistics?name=' + username)
+  Axios.get('Word/GetDailyWordStatistics?name=' + localStorage.getItem('username'))
   .then((response) => {
     console.log(response.data)
     playerData.value = response.data
@@ -75,7 +72,6 @@ onMounted(() => {
   .catch((error) => {
     console.log(error)
   })
-})
 
 
 
