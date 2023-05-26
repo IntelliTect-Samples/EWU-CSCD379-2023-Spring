@@ -88,39 +88,43 @@ namespace Wordle.Api.Services
         }
         
 
-        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSecounds, string WordPlayed, DateTime? WordOfTheDayDate)
+        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime? WordOfTheDayDate)
         {
+            /*
             Player played = await _db.Players.FirstOrDefaultAsync(p => p.Name == Name);
+
             PlaysDto dto = new()
             {
                 PlayerId = played.PlayerId,
                 WasGameWon = WasGameWon,
                 Attempts = Attempts,
-                TimeInSeconds = TimeInSecounds,
+                TimeInSeconds = TimeInSeconds,
                 WordPlayed = WordPlayed,
                 WordOfTheDayDate = WordOfTheDayDate
             };
 
             var player = await _db.Players.FindAsync(dto.PlayerId);
-            var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
+            */
+            var player = await _db.Players.FindAsync(Name);
+            var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == WordPlayed);
             if (player is not null && word != null)
             {
-                if (dto.WasGameWon)
+                if (WasGameWon)
                 {
-                    player.AverageAttempts = (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
-                    player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.TimeInSeconds) / (player.GameCount + 1);
+                    player.AverageAttempts = (player.GameCount * player.AverageAttempts + Attempts) / (player.GameCount + 1);
+                    player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + TimeInSeconds) / (player.GameCount + 1);
                     player.GameCount++;
                 }
 
-                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && f.Date == dto.WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
+                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
 
                 Plays play = new()
                 {
                     Player = player,
                     Word = word,
-                    Attempts = dto.Attempts,
-                    TimeInSeconds = dto.TimeInSeconds,
-                    WasGameWon = dto.WasGameWon,
+                    Attempts = Attempts,
+                    TimeInSeconds = TimeInSeconds,
+                    WasGameWon = WasGameWon,
                     DateWord = dateWord,
                     Date = DateTime.UtcNow
                 };
