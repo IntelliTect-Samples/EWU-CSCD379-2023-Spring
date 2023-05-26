@@ -67,6 +67,11 @@
                 <RouterLink to="/leaderboard">Leaderboard</RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink to="/dailywords">Daily Stats</RouterLink>
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
