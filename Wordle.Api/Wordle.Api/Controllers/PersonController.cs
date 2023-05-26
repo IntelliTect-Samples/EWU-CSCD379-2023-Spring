@@ -59,10 +59,10 @@ public class PlayerController : ControllerBase
     [HttpPost("AddGameResult")]
     public async Task<ActionResult<PlayerDto>> AddGameResultAsync(GameResultDto dto)
     {
-        var playerGame = await _PlayerService.AddGameResultAsync(dto);
-        if (playerGame is not null)
+        var player = await _PlayerService.AddGameResultAsync(dto);
+        if (player is not null)
         {
-            return new PlayerDto(playerGame.Player);
+            return new PlayerDto(player);
         }
         return BadRequest();
 

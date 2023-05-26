@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using System.Reflection.Metadata;
+using Wordle.Api.Migrations;
 
 namespace Wordle.Api.Data
 {
@@ -14,8 +15,7 @@ namespace Wordle.Api.Data
         public DbSet<Word> Words => Set<Word>();
         public DbSet<Player> Players => Set<Player>();
         public DbSet<DateWord> DateWords => Set<DateWord>();
-        public DbSet<PlayerGame> PlayerGames => Set<PlayerGame>();
-
+        public DbSet<Plays> Plays => Set<Plays>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
@@ -23,7 +23,6 @@ namespace Wordle.Api.Data
                 .HasOne(e => e.Word)
                 .WithMany(f => f.DateWords)
                 .OnDelete(DeleteBehavior.ClientCascade);
-
 
             modelBuilder
                 .Entity<DateWord>()
