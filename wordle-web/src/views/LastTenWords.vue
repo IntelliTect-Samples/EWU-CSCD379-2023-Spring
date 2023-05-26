@@ -56,11 +56,19 @@ var playerData = ref<PlayerData[]>([])
 const overlay = ref(true)
 
 interface PlayerData {
+<<<<<<< HEAD
   date: string
   averageSecondsPerGame: number
   averageAttempts: number
   numberOfPlays: number
   hasUserPlayed?: boolean
+=======
+  date: string;
+  averageSecondsPerGame: number;
+  averageAttempts: number;
+  numberOfPlays: number;
+  hasUserPlayed: boolean;
+>>>>>>> Assign-4
 }
 
 Axios.get('Word/GetDailyWordStatistics')
