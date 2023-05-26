@@ -22,12 +22,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in playerData" :key="item">
-        <td>{{ item.Date.split('T')[0] }}</td>
-        <td>{{ item.AverageSecondsPerGame === -1 ? 0 : item.AverageSecondsPerGame }}</td>
-        <td>{{ item.AverageAttempts === -1 ? 0 : item.AverageAttempts }}</td>
-        <td>{{ item.NumberOfPlays }}</td>
-        <td>{{ item.HasUserPlayed }}</td>
+      <tr v-for="item in playerData" :key="item.date">
+        <td>{{ item.date.split('T')[0] }}</td>
+        <td>{{ item.averageSecondsPerGame === -1 ? 0 : item.averageSecondsPerGame }}</td>
+        <td>{{ item.averageAttempts === -1 ? 0 : item.averageAttempts }}</td>
+        <td>{{ item.numberOfPlays }}</td>
+        <td>{{ item.hasUserPlayed }}</td>
       </tr>
     </tbody>
     </v-table>
@@ -52,32 +52,27 @@
 import { ref } from 'vue';
 import Axios from 'axios'
 
-interface WordOfTheDayStatsDto {
-  Date: string;
-  AverageSecondsPerGame: number;
-  AverageAttempts: number;
-  NumberOfPlays: number;
-  HasUserPlayed: boolean;
-}
+var playerData = ref<PlayerData[]>([])
+const overlay = ref(true)
 
-const playerData = ref<WordOfTheDayStatsDto[]>([]);
-const overlay = ref(true);
+interface PlayerData {
+  date: string
+  averageSecondsPerGame: number
+  averageAttempts: number
+  numberOfPlays: number
+  hasUserPlayed: boolean
+}
 
 Axios.get('Word/GetDailyWordStatistics')
   .then((response) => {
-    console.log(response.data);
-    playerData.value = response.data.map((item: WordOfTheDayStatsDto) => ({
-      date: item.Date,
-      averageSecondsPerGame: item.AverageSecondsPerGame,
-      averageAttempts: item.AverageAttempts,
-      numberOfPlays: item.NumberOfPlays,
-      hasUserPlayed: item.HasUserPlayed,
-    }));
-    overlay.value = false;
+    console.log(response.data)
+    playerData.value = response.data
+    overlay.value = false
   })
   .catch((error) => {
-    console.log(error);
-  });
+    console.log(error)
+  })
+
 
 
 </script>
