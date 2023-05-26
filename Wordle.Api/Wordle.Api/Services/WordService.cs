@@ -65,7 +65,7 @@ namespace Wordle.Api.Services
             return word;
         }
 
-        public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
+        public async Task<DateWord> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {
             if (date is null)
             {
@@ -80,7 +80,7 @@ namespace Wordle.Api.Services
 
             if (todaysWord != null)
             {
-                return todaysWord.Word.Text;
+                return todaysWord;
             }
             else
             {
@@ -92,7 +92,7 @@ namespace Wordle.Api.Services
 
                     if (todaysLatestWord != null)
                     {
-                        return todaysLatestWord.Word.Text;
+                        return todaysLatestWord;
                     }
                     Word word = GetRandomWord().Result;
 
@@ -112,11 +112,10 @@ namespace Wordle.Api.Services
                         {
                             return _db.DateWords
                                 .Include(f => f.Word)
-                                .First(f => f.Date == localDate)
-                                .Word.Text;
+                                .First(f => f.Date == date.Value);
                         }
                     }
-                    return word.Text;
+                    return dateWord;
                 }
             }
         }
