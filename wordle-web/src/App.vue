@@ -26,6 +26,11 @@
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
+              <v-list-item-title
+                ><RouterLink to="/previousWordles">Previous Wordles</RouterLink></v-list-item-title
+              >
+            </v-list-item>
+            <v-list-item>
               <v-list-item-title>
                 <RouterLink :to="{ name: 'wordle' }"> Play Random Word </RouterLink>
               </v-list-item-title>
