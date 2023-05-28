@@ -3,7 +3,7 @@
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
       <v-progress-circular color="primary" indeterminate size="64" />
     </v-overlay>
-    
+
     <h1 class="wurdleFont">Wurdle play ground</h1>
     <h1 class="wurdleFont">Timer: {{ timer }}</h1>
 
@@ -39,7 +39,9 @@
     <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Lost">
       Oh noo you lost...
     </div>
-    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">You did it! You Won!</div>
+    <div class="text-h4 text-center mt-10" v-if="game.status == WordleGameStatus.Won">
+      You did it! You Won!
+    </div>
   </main>
 </template>
 

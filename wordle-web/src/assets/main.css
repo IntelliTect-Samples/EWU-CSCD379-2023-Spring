@@ -7,18 +7,18 @@ a,
   transition: 0.4s;
 }
 
-.dialog{
-  font-size: .75rem;
+.dialog {
+  font-size: 0.75rem;
   max-width: 60vw;
   justify-content: center;
   justify-self: center;
-  overflow:visible;
+  overflow: visible;
 }
 
-.wurdleFont{
+.wurdleFont {
   font-size: 1.5rem;
   font-family: Roboto;
-  color: #00FF00;
+  color: #00ff00;
 }
 
 @media (hover: hover) {
@@ -34,46 +34,39 @@ a,
     height: auto;
     overflow: hidden;
   }
-  .container{
+  .container {
     max-width: 100%;
     overflow: hidden;
   }
-  .dialog{
-    font-size: .6rem;
+  .dialog {
+    font-size: 0.6rem;
     max-width: 60vw;
-    overflow:visible;
-
+    overflow: visible;
   }
-  .wurdleFont{
+  .wurdleFont {
     font-size: 1.5rem;
     font-family: Roboto;
-    color: #00FF00;
+    color: #00ff00;
   }
-
-
-
 }
 
-@media (max-width: 480px){
-  img{
+@media (max-width: 480px) {
+  img {
     max-width: 80%;
     overflow: hidden;
   }
-  .dialog{
-    font-size: .6rem;
+  .dialog {
+    font-size: 0.6rem;
     max-width: 60vw;
     overflow: visible;
-
   }
-  .container{
+  .container {
     max-width: 100%;
     overflow: hidden;
   }
-  .wurdleFont{
+  .wurdleFont {
     font-size: 1.5rem;
     font-family: Roboto;
-    color: #00FF00;
+    color: #00ff00;
   }
-  
-
 }

@@ -1,5 +1,4 @@
 <template>
-
   <v-row
     class="justify-center"
     v-for="(word, rowIndex) in game.guesses"
@@ -16,7 +15,6 @@
 import LetterResult from '@/components/LetterResult.vue'
 import type { Letter } from '@/scripts/letter'
 import type { WordleGame } from '@/scripts/wordleGame'
-
 
 defineProps<{
   game: WordleGame
