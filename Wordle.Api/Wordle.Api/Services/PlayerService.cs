@@ -104,7 +104,7 @@ namespace Wordle.Api.Services
                 }
 
                 //var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
-                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate.Date && f.WordId == word.WordId);
+                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate.AddDays(1) && f.WordId == word.WordId);
 
                 Plays play = new()
                 {
