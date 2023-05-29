@@ -104,7 +104,7 @@ namespace Wordle.Api.Services
                 }
 
                 //var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
-                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate && f.WordId == word.WordId);
+                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate.Date && f.WordId == word.WordId);
 
                 Plays play = new()
                 {
@@ -115,7 +115,7 @@ namespace Wordle.Api.Services
                     WasGameWon = WasGameWon,
                     DateWord = dateWord,
                     //Date = DateTime.UtcNow
-                    Date = WordOfTheDayDate
+                    Date = WordOfTheDayDate.Date
                 };
 
                 if (play.Player.Name == "Guest")
