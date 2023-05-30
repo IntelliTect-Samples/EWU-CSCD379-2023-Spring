@@ -161,7 +161,7 @@ function startGame() {
   let check = setInterval(() => {
     if(game.status == WordleGameStatus.Won || game.status == WordleGameStatus.Lost){
       clearInterval(check)
-      if(wordOfTheDayDate.value){
+      if(pat.value == '/worldoftheday'){
         Axios.post(`Player/AddGameResult?Name=${localStorage.getItem('username')}&WasGameWon=${true}&Attempts=${game.guessNum}&TimeInSecounds=${timer.value}&WordPlayed=${game.secretWord}&WordOfTheDayDate=${todayword.value[0].date}`)
         .then((response): void => {
           console.log(response.data)
