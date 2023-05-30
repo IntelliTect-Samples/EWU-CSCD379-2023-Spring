@@ -90,7 +90,7 @@ namespace Wordle.Api.Services
         }
         
 
-        public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime WordOfTheDayDate)
+        public async Task<Player?> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime WordOfTheDayDate)
         {
             await AddPlayer(Name, TimeInSeconds, Attempts);
             var player = await _db.Players.FirstOrDefaultAsync(n => n.Name == Name);
@@ -133,8 +133,10 @@ namespace Wordle.Api.Services
                     _db.Plays.Add(play);
                     await _db.SaveChangesAsync();
                     
-                    return play;
+                    //return play;
                 }
+
+            return player;
             throw new ArgumentException("Player Id or Word not found");
         }
     }
