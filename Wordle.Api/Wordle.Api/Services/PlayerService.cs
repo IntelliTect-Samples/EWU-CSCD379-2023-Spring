@@ -120,8 +120,8 @@ namespace Wordle.Api.Services
                         WasGameWon = WasGameWon,
                         DateWord = dateWord,
                         //DateWord = null,
-                        //Date = DateTime.UtcNow
-                        Date = WordOfTheDayDate
+                        Date = DateTime.UtcNow
+                        //Date = WordOfTheDayDate
                         //Date = trueDate
                     };
 
