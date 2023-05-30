@@ -15,15 +15,15 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowAllOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("*");
-                          policy.AllowAnyMethod();
-                          policy.AllowAnyHeader();
-                      });
+options.AddPolicy(name: MyAllowAllOrigins,
+                  policy =>
+                  {
+                      policy.WithOrigins("*");
+                      policy.AllowAnyMethod();
+                      policy.AllowAnyHeader();
+                  });
 });
 
 
@@ -32,7 +32,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(config =>
+builder.Services.AddSwaggerGen(
+    config =>
 {
     config.SwaggerDoc("v1", new OpenApiInfo { Title = "Wordle API", Version = "v1" });
     config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -57,7 +58,8 @@ builder.Services.AddSwaggerGen(config =>
             new List<string>()
         }
     });
-});
+}
+);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -73,7 +75,10 @@ builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<AppDbContext>();
 
 //JWT Token setup
-JwtConfiguration jwtConfiguration = builder.Configuration.GetSection("Jwt").Get<JwtConfiguration>() ?? throw new Exception("JWT configuration not specified");
+JwtConfiguration jwtConfiguration = builder.Configuration
+    .GetSection("Jwt").Get<JwtConfiguration>() ?? 
+    throw new Exception("JWT configuration not specified");
+
 builder.Services.AddSingleton(jwtConfiguration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -86,7 +91,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtConfiguration.Issuer,
             ValidAudience = jwtConfiguration.Audience,
-            
+
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
         };
     });
@@ -112,7 +117,7 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());        
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
 
 // Configure the HTTP request pipeline.

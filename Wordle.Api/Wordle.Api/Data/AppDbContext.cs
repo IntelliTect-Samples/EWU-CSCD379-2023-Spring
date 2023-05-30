@@ -9,7 +9,7 @@ namespace Wordle.Api.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-
+            
         }
 
         public DbSet<Word> Words => Set<Word>();

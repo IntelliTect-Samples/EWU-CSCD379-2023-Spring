@@ -49,7 +49,7 @@ public class TokenController : Controller
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("userId", user.Id.ToString()),
+                new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
             };
@@ -126,7 +126,7 @@ public class TokenController : Controller
     [Authorize(Policy=Policies.RandomAdmin)]
     public string TestRandomAdmin()
     {
-        return $"Authorized randomly as Random Admin with {User.Identities.First().Claims.First(c => c.Type == Claims.Random).Value}";
+        return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
     }
 
 }

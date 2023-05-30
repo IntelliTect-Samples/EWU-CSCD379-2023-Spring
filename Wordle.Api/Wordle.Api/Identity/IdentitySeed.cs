@@ -29,7 +29,7 @@ public static class IdentitySeed
     private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
     {
         // Seed Admin User
-        if (await userManager.FindByNameAsync("Admin@intellitect.com") == null)
+        if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
         {
             AppUser user = new AppUser
             {
