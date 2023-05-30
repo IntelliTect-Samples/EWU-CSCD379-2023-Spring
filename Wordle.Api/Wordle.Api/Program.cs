@@ -86,6 +86,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtConfiguration.Issuer,
             ValidAudience = jwtConfiguration.Audience,
+            
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
         };
     });
@@ -109,6 +110,9 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
+    await IdentitySeed.SeedAsync(
+        scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());        
 }
 
 // Configure the HTTP request pipeline.

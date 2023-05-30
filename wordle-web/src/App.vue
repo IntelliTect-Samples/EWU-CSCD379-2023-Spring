@@ -11,8 +11,9 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
-        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
+        <v-btn>{{ signInService.token.userName }}</v-btn>
 
+        <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
         <ActiveUser></ActiveUser>
 
         <v-menu>
@@ -60,6 +61,7 @@ import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
+import { SignInService } from './scripts/signInService'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
@@ -67,6 +69,8 @@ provide(Services.Display, display)
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
+const signInService = reactive(new SignInService())
+provide(Services.SignInService, signInService)
 
 const theme = useTheme()
 
@@ -85,4 +89,8 @@ function setLightTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
+
+setTimeout(() => {
+  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
+}, 1000)
 </script>

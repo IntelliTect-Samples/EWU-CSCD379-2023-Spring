@@ -20,9 +20,9 @@ public static class IdentitySeed
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
         }
-        if (!await roleManager.RoleExistsAsync(Roles.Grant))
+        if (!await roleManager.RoleExistsAsync(Roles.Special))
         {
-            await roleManager.CreateAsync(new IdentityRole(Roles.Grant));
+            await roleManager.CreateAsync(new IdentityRole(Roles.Special));
         }
     }
 
@@ -43,7 +43,7 @@ public static class IdentitySeed
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, Roles.Admin);
-                await userManager.AddToRoleAsync(user, Roles.Grant);
+                await userManager.AddToRoleAsync(user, Roles.Special);
             }
         }
     }
