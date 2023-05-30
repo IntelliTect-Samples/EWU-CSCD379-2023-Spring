@@ -74,9 +74,11 @@ namespace Wordle.Api.Services
 
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
             var localDate = localDateTime.Date;
+            var truelocalDate = localDate.AddDays(-1);
             var todaysWord = await _db.DateWords
                 .Include(f => f.Word)
-                .FirstOrDefaultAsync(f => f.Date == localDate);
+                //.FirstOrDefaultAsync(f => f.Date == localDate);
+                .FirstOrDefaultAsync(f => f.Date == truelocalDate);
 
             if (todaysWord != null)
             {
@@ -88,7 +90,8 @@ namespace Wordle.Api.Services
                 {
                     var todaysLatestWord = _db.DateWords
                         .Include(f => f.Word)
-                        .FirstOrDefault(f => f.Date == localDate);
+                        //.FirstOrDefault(f => f.Date == localDate);
+                        .FirstOrDefault(f => f.Date == truelocalDate);
 
                     if (todaysLatestWord != null)
                     {
@@ -98,7 +101,8 @@ namespace Wordle.Api.Services
 
                     var dateWord = new DateWord
                     {
-                        Date = localDate,
+                        //Date = localDate,
+                        Date = truelocalDate,
                         Word = word
                     };
                     _db.DateWords.Add(dateWord);

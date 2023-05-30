@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Controllers;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Wordle.Api.Services
 {
@@ -90,43 +92,49 @@ namespace Wordle.Api.Services
 
         public async Task<Plays> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime WordOfTheDayDate)
         {
-
-
+            await AddPlayer(Name, TimeInSeconds, Attempts);
             var player = await _db.Players.FirstOrDefaultAsync(n => n.Name == Name);
+
             var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == WordPlayed);
-            if (player is not null && word != null)
-            {
-                if (WasGameWon)
+
+                if (player is not null && word != null)
                 {
+                    /*
+                    if (WasGameWon)
+                    {
                     player.AverageAttempts = (player.GameCount * player.AverageAttempts + Attempts) / (player.GameCount + 1);
                     player.AverageSecondsPerGame = (int)(player.AverageSecondsPerGame * player.AverageAttempts + TimeInSeconds) / (player.GameCount + 1);
                     player.GameCount++;
+                    }
+                    */
+
+                    //var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
+                    var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate.Date && f.WordId == word.WordId);
+
+                    Plays play = new()
+                    {
+                        Player = player,
+                        Word = word,
+                        Attempts = Attempts,
+                        TimeInSeconds = TimeInSeconds,
+                        WasGameWon = WasGameWon,
+                        DateWord = dateWord,
+                        //DateWord = null,
+                        //Date = DateTime.UtcNow
+                        Date = WordOfTheDayDate
+                        //Date = trueDate
+                    };
+
+                    /*
+                    if (play.Player.Name == "Guest")
+                        play.WasGameWon = false;
+                    */
+
+                    _db.Plays.Add(play);
+                    await _db.SaveChangesAsync();
+                    
+                    return play;
                 }
-
-                //var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => WordOfTheDayDate.HasValue && f.Date == WordOfTheDayDate.Value.Date && f.WordId == word.WordId);
-                var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => f.Date == WordOfTheDayDate.Date && f.WordId == word.WordId);
-
-                Plays play = new()
-                {
-                    Player = player,
-                    Word = word,
-                    Attempts = Attempts,
-                    TimeInSeconds = TimeInSeconds,
-                    WasGameWon = WasGameWon,
-                    DateWord = dateWord,
-                    //Date = DateTime.UtcNow
-                    Date = WordOfTheDayDate
-                };
-
-                if (play.Player.Name == "Guest")
-                    play.WasGameWon = false;
-
-                _db.Plays.Add(play);
-                await _db.SaveChangesAsync();
-
-                return play;
-            }
-
             throw new ArgumentException("Player Id or Word not found");
         }
     }
