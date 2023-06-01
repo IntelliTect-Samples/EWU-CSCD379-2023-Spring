@@ -47,18 +47,16 @@ import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
 import $router from '../router/index'
 
-const input = ref("")
+const input = ref('')
 
-// We have a word interface 
+// We have a word interface
 interface Word {
   WordId: string
   Text: string
   IsCommon: string
 }
 
-
 let overlay = true
-
 
 let Words = reactive<{ value: Word[] }>({ value: [] })
 let currentPage = ref(1)
@@ -67,30 +65,25 @@ let totalPages = ref(15)
 function goBack() {
   // Your goBack logic here
   $router.go(-1)
-
 }
 
-function getInput(){
+function getInput() {
   fetchWords(1)
-
 }
 
 function fetchWords(page: number) {
   console.log('Fetch Words: ' + page)
-  Axios.get(`/Word/GetPageOfWords?page=${page}&filter=${input.value}`)
-    .then((response) => {
-      Words.value = response.data.map((word: any) => ({
+  Axios.get(`/Word/GetPageOfWords?page=${page}&filter=${input.value}`).then((response) => {
+    console.log(response.data),
+      (totalPages.value = response.data.Item1),
+      (Words.value = JSON.parse(response.data.Item2).map((word: any) => ({
         WordId: word.WordId,
         Text: word.Text,
         IsCommon: word.IsCommon
-      }))
-      console.log(Words)
-
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+      })))
+  })
 }
+
 watch(currentPage, (newVal) => {
   fetchWords(newVal)
 })
