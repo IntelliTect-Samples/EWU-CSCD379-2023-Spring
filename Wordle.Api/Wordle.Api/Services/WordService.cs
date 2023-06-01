@@ -84,12 +84,12 @@ namespace Wordle.Api.Services
                 // Goal: Return the list of words and a count
                 // list o' words
                 // count 
-                return JsonConvert.SerializeObject(words.Skip((page - 1) * 10).Take(10).ToList()); 
+                return JsonConvert.SerializeObject(( Math.Ceiling((double)words.Count()/10), JsonConvert.SerializeObject(words.Skip((page - 1) * 10).Take(10).ToList()))); 
             }
             IEnumerable<Word> filteredWords = words.AsEnumerable()
            .Where(w => Regex.IsMatch(w.Text, $"^{Regex.Escape(filter)}"));
 
-            return JsonConvert.SerializeObject(filteredWords.Skip((page - 1) * 10).Take(10).ToList());
+            return JsonConvert.SerializeObject((Math.Ceiling((double)(filteredWords.Count() / 10)), JsonConvert.SerializeObject(filteredWords.Skip((page - 1) * 10).Take(10).ToList())));
 
 
         }
