@@ -3,7 +3,9 @@
     <v-progress-circular color="primary" indeterminate size="64" />
   </v-overlay>
 
-  <div class="text-h4 text-center">Wordle Mind Bender</div>
+  <div style="padding: 20px 0px 20px 0px" class="text-h4 text-center">
+    {{ route.path == '/wordoftheday' ? 'Wordle of the Day' : 'Wordle Mind Bender' }}
+  </div>
 
   <GameBoard :game="game" @letterClick="addChar" />
 
@@ -14,7 +16,7 @@
       @click="checkGuess"
       @keyup.enter="checkGuess"
       color="primary"
-      size="x-large"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status == WordleGameStatus.Active"
     >
       Check
@@ -23,7 +25,7 @@
       @click="newGame"
       @keyup.enter="checkGuess"
       color="secondary"
-      size="x-large"
+      :size="display.xs ? 'small' : display.sm ? undefined : 'large'"
       v-if="game.status !== WordleGameStatus.Active"
     >
       New Game
@@ -41,56 +43,60 @@
     </v-col>
   </v-row>
 
-  <v-row class="justify-center mt-10">
-    <v-btn @click="addWord()" style="tonal" size="x-small">Add Word Test</v-btn>
-  </v-row>
-  <!-- <h2>{{ guess }}</h2> -->
-  <!-- <h3>{{ game.secretWord }}</h3> -->
+  <ScoreDialog v-model="showScoreDialog" :game-result="lastGameResult" />
 </template>
 
 <script setup lang="ts">
 import { WordleGame, WordleGameStatus } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted, onUnmounted, inject, type Ref } from 'vue'
 import type { Letter } from '@/scripts/letter'
 import Axios from 'axios'
 import GameBoard from '../components/GameBoard.vue'
 import GameKeyboard from '../components/GameKeyboard.vue'
 import WordleSolver from '../components/WordleSolver.vue'
 import { WordsService } from '@/scripts/wordsService'
+import { useDisplay } from 'vuetify'
+import { Player } from '@/scripts/player'
+import { Services } from '@/scripts/services'
+import type { PlayerService } from '@/scripts/playerService'
+import { GameResult } from '@/scripts/gameResult'
+import ScoreDialog from '@/components/ScoreDialog.vue'
+import { watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
 const overlay = ref(true)
+const showScoreDialog = ref(false)
+const lastGameResult: Ref<GameResult> = ref({} as GameResult)
+const route = useRoute()
 
-// Start a new game
-newGame()
+// Add this to make testing work because useDisplay() throws an error when testing
+// Wrap useDisplay in a function so that it doesn't get called during testing.
+const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
+  typeof useDisplay
+>
+const playerService = inject(Services.PlayerService) as PlayerService
 
 onMounted(async () => {
-  window.addEventListener('keyup', keyPress)
+  // Start a new game
+  await newGame()
+  window.addEventListener('keyup', keyUp)
 })
 onUnmounted(() => {
-  window.removeEventListener('keyup', keyPress)
+  window.removeEventListener('keyup', keyUp)
 })
-
-function addWord() {
-  overlay.value = true
-  Axios.post('word/AddWordFromBody', {
-    text: 'tests',
-    isCommon: true,
-    isUsed: false
-  })
-    .then((response) => {
-      overlay.value = false
-      console.log(response.data)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
 
 function newGame() {
   overlay.value = true
-  Axios.get('word')
+  let apiPath = 'word'
+  if (route.path == '/wordoftheday') {
+    apiPath = `word/wordoftheday?offsetInHours=${new Date().getTimezoneOffset() / -60}`
+    if (route.query.date) {
+      apiPath += `&date=${route.query.date}`
+    }
+  }
+  Axios.get(apiPath)
     .then((response) => {
       game.restartGame(response.data)
       console.log(game.secretWord)
@@ -111,6 +117,9 @@ function checkGuess(word?: string) {
     game.guess.set(word)
   }
   game.submitGuess()
+  if (game.status !== WordleGameStatus.Active) {
+    sendGameResult()
+  }
   guess.value = ''
 }
 
@@ -119,15 +128,48 @@ function addChar(letter: Letter) {
   guess.value += letter.char
 }
 
-function keyPress(event: KeyboardEvent) {
-  if (event.key === 'Enter') {
-    checkGuess()
-  } else if (event.key === 'Backspace') {
-    guess.value = guess.value.slice(0, -1)
-    game.guess.pop()
-  } else if (event.key.length === 1 && event.key !== ' ') {
-    guess.value += event.key.toLowerCase()
-    game.guess.push(event.key.toLowerCase())
+function keyUp(event: KeyboardEvent) {
+  if (
+    document.activeElement?.tagName !== 'INPUT' &&
+    document.activeElement?.tagName !== 'TEXTAREA'
+  ) {
+    if (event.key === 'Enter') {
+      checkGuess()
+    } else if (event.key === 'Backspace') {
+      guess.value = guess.value.slice(0, -1)
+      game.guess.pop()
+    } else if (event.key.length === 1 && event.key !== ' ') {
+      guess.value += event.key.toLowerCase()
+      game.guess.push(event.key.toLowerCase())
+    }
   }
+}
+
+// Watch showScoreDialog and when it changes to true, call newGame()
+watch(showScoreDialog, (value) => {
+  if (!value) {
+    newGame()
+  }
+})
+
+function sendGameResult() {
+  const gameResult = new GameResult()
+  gameResult.playerId = playerService.player.playerId
+  gameResult.attempts = game.guesses.filter((f) => f.isFilled).length
+  gameResult.durationInSeconds = Math.round(game.duration() / 1000)
+  gameResult.wasGameWon = game.status == WordleGameStatus.Won
+  gameResult.wordPlayed = game.secretWord
+
+  console.log(gameResult)
+
+  lastGameResult.value = gameResult
+  showScoreDialog.value = true
+
+  const apiPath =
+    route.path == '/wordoftheday' ? '/Player/AddDailyGameResult' : '/Player/AddGameResult'
+
+  Axios.post(apiPath, gameResult).then((response) => {
+    console.log(response.data)
+  })
 }
 </script>

@@ -2,25 +2,25 @@
   <v-card>
     <v-card-title>
       <h3>Wordle Helper</h3>
-      <div v-if="solver.getLetterUsages().length > 0">
+      <div v-if="game.solver.getLetterUsages().length > 0">
         <v-btn
           size="small"
-          class="mr-2"
-          v-for="(letter, index) in solver.getLetterUsages().summary().correctLetters"
+          class="mr-1 letter-large"
+          v-for="(letter, index) in game.solver.getLetterUsages().summary().correctLetters"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'gray'"
+          :color="letter == 'X' ? 'wrong' : letter !== '?' ? 'correct' : 'unknown'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
       </div>
     </v-card-title>
-    <v-card-subtitle v-if="solver.getLetterUsages().summary().wrongLetters.length > 0">
+    <v-card-subtitle v-if="game.solver.getLetterUsages().summary().wrongLetters.length > 0">
       <span> Wrong: </span>
-      {{ solver.getLetterUsages().summary().wrongLetters.sort().join(', ').toUpperCase() }}
+      {{ game.solver.getLetterUsages().summary().wrongLetters.sort().join(', ').toUpperCase() }}
     </v-card-subtitle>
     <v-list density="compact">
       <v-list-item
-        v-for="item in solver.getLetterUsages().summary().misplacedLetters"
+        v-for="item in game.solver.getLetterUsages().summary().misplacedLetters"
         :key="item.char"
       >
         <v-btn color="secondary" size="x-small" class="mr-2" style="font-size: 0.9em">
@@ -28,48 +28,66 @@
         </v-btn>
         <v-btn
           size="x-small"
-          class="mx-1"
+          class="mx-0 letter-small"
           v-for="(letter, index) in item.locations"
           :key="index"
-          :color="letter == 'X' ? 'red' : letter !== '?' ? 'green' : 'gray'"
+          :color="letter == 'X' ? 'wrong' : letter !== '?' ? 'correct' : 'unknown'"
         >
           {{ letter.toUpperCase() }}
         </v-btn>
-        {{ item.count }} {{ item.isMaxKnown ? '' : 'or more' }}
+        <span class="ml-2 text-caption">
+          {{ item.count }} {{ item.isMaxKnown ? '' : 'or more' }}
+        </span>
       </v-list-item>
     </v-list>
     <v-card-text>
       <div v-if="game.status === WordleGameStatus.Active">
-        valid words: {{ solver.availableWords().length }}
-        <span v-if="solver.availableWords().length < 50">
+        <div>valid words: {{ game.solver.availableWords.length }}</div>
+        <div v-if="game.solver.availableWords.length < 50">
           <v-btn
             size="x-small"
-            v-for="word in solver.availableWords()"
+            v-for="word in game.solver.availableWords"
             :key="word"
             class="mr-1"
+            color="unknown"
             @click="wordClick(word)"
           >
             {{ word }}
           </v-btn>
-        </span>
+        </div>
       </div>
     </v-card-text>
 
     <v-card-actions v-if="game.status === WordleGameStatus.Active">
       Next Guess:
-      <v-btn size="small" class="ml-1" @click="wordClick(solver.bestGuessOfValidWords())">
-        {{ solver.bestGuessOfValidWords() }}
+      <v-btn
+        size="small"
+        class="ml-1"
+        @click="wordClick(game.solver.bestGuessOfValidWords)"
+        color="green-darken-2"
+        elevation="4"
+        variant="tonal"
+      >
+        {{ game.solver.bestGuessOfValidWords }}
+      </v-btn>
+      <v-btn
+        size="small"
+        class="ml-1"
+        @click="wordClick(game.solver.bestGuessOfInvalidWords)"
+        color="yellow-darken-2"
+        elevation="4"
+        variant="tonal"
+      >
+        {{ game.solver.bestGuessOfInvalidWords }}
       </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import { WordleGameStatus, type WordleGame } from '@/scripts/wordleGame'
-import { WordleSolver } from '@/scripts/wordleSolver'
-import { reactive } from 'vue'
+import { WordleGameStatus, WordleGame } from '@/scripts/wordleGame'
 
-const props = defineProps<{
+defineProps<{
   game: WordleGame
 }>()
 
@@ -80,6 +98,22 @@ const emits = defineEmits<{
 function wordClick(letter: string) {
   emits('wordClick', letter)
 }
-
-const solver = reactive<WordleSolver>(new WordleSolver(props.game))
 </script>
+
+<style scoped>
+.letter-large {
+  min-width: 28px;
+  width: 28px;
+}
+.letter-small {
+  padding-left: 0;
+  padding-right: 0;
+  min-width: 20px;
+}
+
+.v-list-item {
+  padding: 0;
+  min-height: 22px !important;
+}
+</style>
+```

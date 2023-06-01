@@ -17,7 +17,7 @@ import Axios from 'axios'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'wordle2023.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://wordlefd2023.azurewebsites.net/'
 }
 
 const vuetify = createVuetify({
@@ -36,14 +36,16 @@ const vuetify = createVuetify({
         colors: {
           correct: '#4CAF50',
           misplaced: '#FFC107',
-          wrong: '#F44336'
+          wrong: '#F44336',
+          unknown: '#222222'
         }
       },
-      inverse: {
+      light: {
         colors: {
-          correct: '#F44336',
-          misplaced: '#FFC107',
-          wrong: '#4CAF50'
+          correct: '#6CCF70',
+          misplaced: '#FFD137',
+          wrong: '#F46356',
+          unknown: '#eeeeee'
         }
       }
     }

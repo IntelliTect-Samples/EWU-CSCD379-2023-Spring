@@ -7,9 +7,17 @@ import { Letter, LetterStatus } from '@/scripts/letter'
 describe('LetterButton', () => {
   it('renders properly', () => {
     const letter = new Letter('a')
-    const wrapper = mount(LetterButton, { props: { letter } })
+
+    const wrapper = mount(LetterButton, {
+      props: { letter },
+      global: {
+        provide: {
+          display: { sm: false, xs: false } // override for useDisplay
+        }
+      }
+    })
     expect(wrapper.text()).toContain('A')
-    expect(wrapper.attributes('color')).toBe('darkgrey')
+    expect(wrapper.attributes('color')).toBe('unknown')
   })
 
   it('renders properly with passed params', () => {
