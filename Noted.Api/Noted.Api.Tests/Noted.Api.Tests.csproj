@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Wordle.Api\Wordle.Api.csproj" />
+    <ProjectReference Include="..\Noted.Api\Noted.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>
