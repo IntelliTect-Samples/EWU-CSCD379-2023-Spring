@@ -66,8 +66,9 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetPageOfWords")]
-        public async Task<string> GetPageOfWords(int page) {
-            return await _wordService.GetPageOfWords(page); 
+        public async Task<string> GetPageOfWords(int page, string filter = "") {
+            return await _wordService.GetPageOfWords(page, filter); 
         }
+
     }
 }    

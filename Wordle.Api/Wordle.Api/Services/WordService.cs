@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Wordle.Api.Data;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Wordle.Api.Services
 {
@@ -18,6 +21,7 @@ namespace Wordle.Api.Services
             double AvgAttempts, 
             double AvgSeconds
             );
+       
 
         public WordService(AppDbContext db)
         {
@@ -71,14 +75,21 @@ namespace Wordle.Api.Services
             return JsonConvert.SerializeObject(wordOfDayTenDays); 
         }
 
-        public async Task<string> GetPageOfWords(int page)
+        public async Task<string> GetPageOfWords(int page, string filter)
         {
             IQueryable<Word> words = _db.Words;
-            List<Word> displayedWords =  await words.Where(w => w.WordId > page * 10 && w.WordId < (page + 1) * 10).ToListAsync();
+         
+            if (filter == "" || filter.IsNullOrEmpty())
+            {
+                // Goal: Return the list of words and a count
+                // list o' words
+                // count 
+                return JsonConvert.SerializeObject(words.Skip((page - 1) * 10).Take(10).ToList()); 
+            }
+            IEnumerable<Word> filteredWords = words.AsEnumerable()
+           .Where(w => Regex.IsMatch(w.Text, $"^{Regex.Escape(filter)}"));
 
-            return JsonConvert.SerializeObject(displayedWords); 
-
-            
+            return JsonConvert.SerializeObject(filteredWords.Skip((page - 1) * 10).Take(10).ToList());
 
 
         }

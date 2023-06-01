@@ -2,9 +2,10 @@
   <v-card>
     <main>Dictionary</main>
   </v-card>
-
   <v-table>
     <thead>
+      <v-text-field v-model="input" label="Label" @keyup="getInput()" variant="solo"></v-text-field>
+      <!--change color of feild, add clear button-->
       <tr>
         <th class="text-left">ID</th>
         <th class="text-left">Word</th>
@@ -46,6 +47,7 @@ import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
 import $router from '../router/index'
 
+const input = ref("")
 
 // We have a word interface 
 interface Word {
@@ -68,9 +70,14 @@ function goBack() {
 
 }
 
+function getInput(){
+  fetchWords(1)
+
+}
+
 function fetchWords(page: number) {
   console.log('Fetch Words: ' + page)
-  Axios.get(`/Word/GetPageOfWords?page=${page}`)
+  Axios.get(`/Word/GetPageOfWords?page=${page}&filter=${input.value}`)
     .then((response) => {
       Words.value = response.data.map((word: any) => ({
         WordId: word.WordId,
@@ -79,7 +86,6 @@ function fetchWords(page: number) {
       }))
       console.log(Words)
 
-      overlay = false
     })
     .catch((error) => {
       console.log(error)
