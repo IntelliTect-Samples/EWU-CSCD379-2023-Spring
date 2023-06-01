@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import WordleView from '../views/wordleView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import InstructionsView from '../views/InstructionsView.vue'
+import EditorView from '../views/EditorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/instructions',
       name: 'instructions',
       component: InstructionsView
+    },
+    {
+      path: '/editor',
+      name: 'editor',
+      component: EditorView
     }
   ]
 })

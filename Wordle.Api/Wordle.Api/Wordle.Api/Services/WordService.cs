@@ -1,5 +1,6 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Services
@@ -23,9 +24,9 @@ namespace Wordle.Api.Services
         public async Task<string> GetWordOfTheDay(TimeSpan offset, DateTime? date = null)
         {
 
-            if(date is null)
-            { 
-                date = DateTime.UtcNow; 
+            if (date is null)
+            {
+                date = DateTime.UtcNow;
             }
             var localDateTime = new DateTimeOffset(date.Value.Ticks, offset);
             var localDate = localDateTime.Date;
@@ -75,6 +76,81 @@ namespace Wordle.Api.Services
                     return word.Text;
                 }
             }
+        }
+
+        public async Task<string[]> GetAllWords() 
+        {
+            var words = await _db.Words.OrderBy(word => word.Text).ToArrayAsync();
+
+            var wordArray = new string[words.Length];
+            var count = 0;
+
+            foreach (var word in words) 
+            {
+                wordArray[count] = $"{words[count].Text}";
+                count++;
+            }
+
+            return wordArray;
+        }
+        public async Task<string[]> GetAllIsCommon()
+        {
+            var words = await _db.Words.OrderBy(word => word.Text).ToArrayAsync();
+
+            var wordArray = new string[words.Length];
+            var count = 0;
+
+            foreach (var word in words)
+            {
+                wordArray[count] = $"{words[count].IsCommon}";
+                count++;
+            }
+
+            return wordArray;
+        }
+
+        public async Task<Word> AddWord(string newWord, bool isCommon) 
+        {
+            string text = newWord.ToLower();
+            Word? word = await _db.Words.FirstOrDefaultAsync(word => word.Text == text);
+
+            if (word == null) 
+            {
+                word = new()
+                {
+                    Text = text,
+                    IsCommon = isCommon
+                };
+                _db.Words.Add(word);
+            }
+            await _db.SaveChangesAsync();
+            return word;
+        }
+
+        public async Task<Word?> UpdateWord(string newWord, bool isCommon) 
+        {
+            string text = newWord.ToLower();
+            Word? word = await _db.Words.FirstOrDefaultAsync(word => word.Text == text);
+
+            if (word != null && isCommon != word.IsCommon) 
+            { 
+                word.IsCommon= isCommon;
+            }
+            await _db.SaveChangesAsync();
+            return word;
+        }
+
+        public async Task<Word?> DeleteWord(string newWord)
+        {
+            string text = newWord.ToLower();
+            Word? word = await _db.Words.FirstOrDefaultAsync(word => word.Text == text);
+
+            if (word != null) 
+            { 
+                _db.Words.Remove(word); 
+            }
+            await _db.SaveChangesAsync();
+            return word;
         }
     }
 }
