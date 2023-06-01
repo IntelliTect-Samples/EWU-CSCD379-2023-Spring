@@ -42,6 +42,17 @@
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
+                Sign Out
+              </v-list-item-title>
+              <v-list-item-title
+                v-if="!signInService.isSignedIn"
+                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
+              >
+                Sign In
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -55,22 +66,18 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
-import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
-import { SignInService } from './scripts/signInService'
+import type { SignInService } from './scripts/signInService'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
-const playerService = new PlayerService()
-playerService.setupPlayerAsync()
-provide(Services.PlayerService, playerService)
-const signInService = reactive(new SignInService())
-provide(Services.SignInService, signInService)
+
+const signInService = inject(Services.SignInService) as SignInService
 
 const theme = useTheme()
 

@@ -19,6 +19,9 @@ export class SignInService {
   private _rawToken: string | null = null
   private _token: WordleToken = new WordleToken()
   private _isSignedIn: boolean = false
+  private static _instance = new SignInService()
+
+  private constructor() {}
 
   public async signIn(username: string, password: string) {
     Axios.post('Token/GetToken', {
@@ -37,6 +40,9 @@ export class SignInService {
       .catch((err) => {
         console.log(`Login failed: ${err}`)
         this.signOut()
+      })
+      .finally(() => {
+        console.log(`User Signed In: ${this.isSignedIn}`)
       })
   }
 
@@ -64,5 +70,9 @@ export class SignInService {
 
   public get token(): WordleToken {
     return this._token
+  }
+
+  public static get instance(): SignInService {
+    return SignInService._instance
   }
 }
