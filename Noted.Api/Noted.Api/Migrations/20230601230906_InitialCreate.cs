@@ -16,7 +16,8 @@ namespace Noted.Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    data = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     deleted = table.Column<bool>(type: "bit", nullable: false)
                 },

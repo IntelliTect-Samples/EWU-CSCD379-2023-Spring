@@ -12,7 +12,7 @@ using Noted.Api.Data;
 namespace Noted.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230601222722_InitialCreate")]
+    [Migration("20230601230906_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -31,10 +31,14 @@ namespace Noted.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("data")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

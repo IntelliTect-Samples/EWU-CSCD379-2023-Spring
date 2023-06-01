@@ -10,5 +10,25 @@ namespace Noted.Api.Services
         {
             _db = db;
         }
+
+        public IEnumerable<Note> GetNotes() 
+        {
+            return _db.Notes.ToList();
+        }
+
+        public Note AddNote(Note note)
+        {
+            if(note == null)
+            {
+                throw new ArgumentNullException(nameof(note));
+            }
+            if(note.Title == "")
+            {
+                note.Title = "Note";
+            }
+            _db.Notes.Add(note);
+            _db.SaveChanges();
+            return note;    
+        }
     }
 }
