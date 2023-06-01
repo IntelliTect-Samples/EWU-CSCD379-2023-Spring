@@ -74,6 +74,7 @@ import ScoreDialog from '@/components/ScoreDialog.vue'
 import WordOfTheDayScoreDialog from '@/components/WordOfTheDayScoreDialog.vue'
 import { watch } from 'vue'
 import WordleFlippingLetters from '@/components/WordleFlippingLetters.vue'
+import type { SignInService } from '@/scripts/signInService'
 
 const guess = ref('')
 const game = reactive(new WordleGame())
@@ -84,7 +85,7 @@ const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 const props = defineProps<{
   isWordOfTheDay: boolean
-  wordOfTheDayDate: string | null
+  wordOfTheDayDate?: string | null
 }>()
 
 watch(
@@ -100,10 +101,10 @@ const display = inject(Services.Display, () => reactive(useDisplay())) as unknow
   typeof useDisplay
 >
 const playerService = inject(Services.PlayerService) as PlayerService
+const signInService = inject(Services.SignInService) as SignInService
 
 onMounted(async () => {
   // Start a new game
-  console.log('Mounted')
   await newGame()
   window.addEventListener('keyup', keyUp)
 })
@@ -118,6 +119,13 @@ watch(showScoreDialog, (value) => {
     newGame()
   }
 })
+
+watch(
+  () => signInService.token,
+  (value) => {
+    console.log(`Signed in user: ${value.userName}`)
+  }
+)
 
 function newGame() {
   console.log('New Game ' + props.wordOfTheDayDate)
