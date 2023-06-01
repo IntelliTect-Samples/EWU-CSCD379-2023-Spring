@@ -44,18 +44,28 @@
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
+import $router from '../router/index'
+
+
+// We have a word interface 
 interface Word {
   WordId: string
   Text: string
   IsCommon: string
 }
+
+
 let overlay = true
+
+
 let Words = reactive<{ value: Word[] }>({ value: [] })
 let currentPage = ref(1)
 let totalPages = ref(15)
 
 function goBack() {
   // Your goBack logic here
+  $router.go(-1)
+
 }
 
 function fetchWords(page: number) {
@@ -79,5 +89,5 @@ watch(currentPage, (newVal) => {
   fetchWords(newVal)
 })
 
-fetchWords(0)
+fetchWords(1)
 </script>
