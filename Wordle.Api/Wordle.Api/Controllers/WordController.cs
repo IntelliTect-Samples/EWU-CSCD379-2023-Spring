@@ -51,5 +51,23 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.AddWord(word.Text, word.IsCommon);
         }
+
+        [HttpPost("DropWord")]
+        public async Task<bool> DropWord(string word) {
+            return await _wordService.DropWord(word); 
+        
+        }
+
+        [HttpPost("FlipIsCommon")]
+        public async Task<bool> FlipIsCommon(string word)
+        {
+            return await _wordService.FlipIsCommon(word);
+
+        }
+
+        [HttpGet("GetPageOfWords")]
+        public async Task<string> GetPageOfWords(int page) {
+            return await _wordService.GetPageOfWords(page); 
+        }
     }
 }    

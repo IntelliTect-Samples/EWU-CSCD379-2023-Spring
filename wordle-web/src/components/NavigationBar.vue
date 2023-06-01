@@ -40,6 +40,9 @@
               <router-link to="/description"
                 ><v-list-item-title>How To Play</v-list-item-title></router-link
               >
+              <router-link to="/index"
+                ><v-list-item-title>Dictionary</v-list-item-title></router-link
+              >
             </v-list>
           </v-menu>
         </template>

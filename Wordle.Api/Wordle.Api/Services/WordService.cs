@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using Wordle.Api.Data;
 
@@ -70,6 +71,40 @@ namespace Wordle.Api.Services
             return JsonConvert.SerializeObject(wordOfDayTenDays); 
         }
 
+        public async Task<string> GetPageOfWords(int page)
+        {
+            IQueryable<Word> words = _db.Words;
+            List<Word> displayedWords =  await words.Where(w => w.WordId > page * 10 && w.WordId < (page + 1) * 10).ToListAsync();
+
+            return JsonConvert.SerializeObject(displayedWords); 
+
+            
+
+
+        }
+
+            public async Task<bool> DropWord(string word) {
+            IQueryable<Word> words = _db.Words; 
+            // Get word id 
+            if (!words.Any()) { return false; }
+            Word w = (await words.Where(w => w.Text.Equals(word)).FirstAsync());
+            // Drop it 
+            _db.Words.Remove(w);
+            //save db
+            await _db.SaveChangesAsync();
+            return true; 
+        }
+
+        public async Task<bool> FlipIsCommon(string word) { 
+            IQueryable<Word> words = _db.Words;
+            if (!words.Any()) { return false;}
+            Word w = (await words.Where(w => w.Text.Equals(word)).FirstAsync());
+            w.IsCommon = !w.IsCommon;
+            await _db.SaveChangesAsync();
+            return true; 
+        }
+            
+
         public async Task<string> GetWordOfDay(DateTime date) {
             // Get the current date
             DateTime currentDate = date;
@@ -131,9 +166,11 @@ namespace Wordle.Api.Services
             {
                 throw new ArgumentException("Word must be 5 characters long");
             }
+
             var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
             if (word != null)
             {
+                //if it exists already, dont add it
                 word.IsCommon = isCommon;
             }
             else
