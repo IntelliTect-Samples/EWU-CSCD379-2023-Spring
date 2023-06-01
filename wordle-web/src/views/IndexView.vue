@@ -4,25 +4,23 @@
   </v-card>
 
   <v-table>
-      <thead>
-        <tr>
-          <th class="text-left">ID</th>
-          <th class="text-left">Word</th>
-          <th class="text-left">IsCommon</th>
-          <th class="text-left">Remove</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(word) in Words.value" :key="word.WordId">
-  
-          <td>{{ word.WordId }}</td>
-          <td>{{ word.Text }}</td>
-          <td>{{ word.IsCommon }}</td>
-          <td>Remove Button</td>
-        </tr>
-      </tbody>
-    </v-table>
+    <thead>
+      <tr>
+        <th class="text-left">ID</th>
+        <th class="text-left">Word</th>
+        <th class="text-left">IsCommon</th>
+        <th class="text-left">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="word in Words.value" :key="word.WordId">
+        <td>{{ word.WordId }}</td>
+        <td>{{ word.Text }}</td>
+        <td>{{ word.IsCommon }}</td>
+        <td>Remove Button</td>
+      </tr>
+    </tbody>
+  </v-table>
   <div class="text-center">
     <v-container>
       <v-row justify="center">
@@ -46,14 +44,13 @@
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
-interface Word{
-  WordId: string;
-  Text: string; 
-  IsCommon: string; 
-
+interface Word {
+  WordId: string
+  Text: string
+  IsCommon: string
 }
 let overlay = true
-let Words = reactive<{ value: Word[] }>({ value: [] });
+let Words = reactive<{ value: Word[] }>({ value: [] })
 let currentPage = ref(1)
 let totalPages = ref(15)
 
@@ -68,7 +65,7 @@ function fetchWords(page: number) {
       Words.value = response.data.map((word: any) => ({
         WordId: word.WordId,
         Text: word.Text,
-        IsCommon: word.IsCommon,
+        IsCommon: word.IsCommon
       }))
       console.log(Words)
 
@@ -79,7 +76,7 @@ function fetchWords(page: number) {
     })
 }
 watch(currentPage, (newVal) => {
-  fetchWords(newVal); 
+  fetchWords(newVal)
 })
 
 fetchWords(0)
