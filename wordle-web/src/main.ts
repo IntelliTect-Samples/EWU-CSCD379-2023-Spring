@@ -58,8 +58,11 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App)
+
+// Create basic services
 const signInService = reactive(SignInService.instance)
 app.provide(Services.SignInService, signInService)
+
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 app.provide(Services.PlayerService, playerService)

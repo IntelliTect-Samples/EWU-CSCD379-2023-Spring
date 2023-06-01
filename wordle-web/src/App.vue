@@ -11,7 +11,10 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
-        <v-btn>{{ signInService.token.userName }}</v-btn>
+        <v-btn>
+          <span v-if="!signInService.isSignedIn">Not signed in</span>
+          <span v-else>{{ signInService.token.userName }}</span>
+        </v-btn>
 
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
         <ActiveUser></ActiveUser>
@@ -37,7 +40,7 @@
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item>
+            <v-list-item v-if="signInService.isSignedIn">
               <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
@@ -98,6 +101,7 @@ function setDarkTheme() {
 }
 
 setTimeout(() => {
+  // This is terrible, nasty, and should be removed.
   signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
 }, 1000)
 </script>

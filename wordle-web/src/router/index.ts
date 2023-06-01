@@ -21,7 +21,6 @@ const router = createRouter({
       component: AboutView,
       beforeEnter: (to, from, next) => {
         //return SignInService.instance._isSignedIn
-        debugger
         if (SignInService.instance.isSignedIn) next()
         else next({ name: 'wordle' })
       }
