@@ -3,7 +3,7 @@
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title style="flex: auto">
-          <RouterLink to="/"> Project </RouterLink>
+          <RouterLink to="/"> Noted </RouterLink>
         </v-app-bar-title>
         <v-spacer />
 
