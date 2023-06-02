@@ -33,6 +33,11 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
+                <RouterLink :to="{ name: 'wordEditor' }"> Word Editor </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
             </v-list-item>
