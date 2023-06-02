@@ -176,6 +176,20 @@
 - The problem of security and how to handle it
 - ASP.NET Identity Intro
 
+## Week 9
+### Lecture 17. 5/30: 
+- ASP.NET Identity
+- Setup up EF Identity in an existing project
+- JWT creation and verification
+- Authorization attributes for roles and policies
+- Setup of Swaqgger to take a bearer token
+
+### Lecture 18. 6/1: 
+- Front end bearer tokens
+- Auth Service
+- Route Guarding
+
+
 ### Next Topics
 - Identity in a web project (not just API)
 - Scaffolding EF
@@ -192,18 +206,14 @@
 - API testing with service mocks and interfaces
 - Graceful error handling when API is missing
 
-## Week 9
-### Lecture 17. 5/30: 
-
-
-### Lecture 18. 6/1: 
-
 
 ## Week 10 
 ### Lecture 19. 6/6: 
 
 
 ### Lecture 20. 6/8: 
+- Work on Final project
+- Work on Assignment 4
 
 Other Topics
   - Vuetify

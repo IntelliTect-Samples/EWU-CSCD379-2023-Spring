@@ -28,6 +28,7 @@ This class will build on CSCD-371. It will be very difficult if you have not tak
 * [npm](https://docs.npmjs.com/)
 * [Axios](https://axios-http.com/docs/intro) (Calling APIs)
 * Interesting reading about creating a front-end framework: https://18alan.space/posts/how-hard-is-it-to-build-a-frontend-framework.html#reactivity
+* [Responsiveness and Media Queries](https://engineering.kablamo.com.au/posts/2023/media-queries-and-responsive-design/)
 
 ### Back End
 * [.NET](https://dotnet.microsoft.com/en-us/)
