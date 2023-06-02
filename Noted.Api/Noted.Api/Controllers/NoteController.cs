@@ -26,5 +26,11 @@ namespace Noted.Api.Controllers
         {
             _noteService.AddNote(note);
         }
+
+        [HttpPut("Update")]
+        public void UpdateNote([FromBody] NoteDto note)
+        {
+            _noteService.UpdateNote(note);
+        }
     }
 }
