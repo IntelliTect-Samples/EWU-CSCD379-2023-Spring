@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Noted.Api.Data;
+using Noted.Api.Dtos;
 using Noted.Api.Services;
 
 namespace Noted.Api.Controllers
@@ -21,9 +22,9 @@ namespace Noted.Api.Controllers
         }
 
         [HttpPost("Add")]
-        public Note AddNote([FromBody] Note note)
+        public void AddNote([FromBody] NoteDto note)
         {
-            return _noteService.AddNote(note);
+            _noteService.AddNote(note);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Noted.Api.Data;
+using Noted.Api.Dtos;
 
 namespace Noted.Api.Services
 {
@@ -16,19 +17,24 @@ namespace Noted.Api.Services
             return _db.Notes.ToList();
         }
 
-        public Note AddNote(Note note)
+        public void AddNote(NoteDto note)
         {
             if(note == null)
             {
                 throw new ArgumentNullException(nameof(note));
             }
+            var newNote = new Note();
+            
             if(note.Title == "")
             {
                 note.Title = "Note";
             }
-            _db.Notes.Add(note);
-            _db.SaveChanges();
-            return note;    
+            newNote.Title = note.Title;
+            newNote.Content = note.Content;
+            newNote.deleted = false;
+            
+            _db.Notes.Add(newNote);
+            _db.SaveChanges();   
         }
     }
 }

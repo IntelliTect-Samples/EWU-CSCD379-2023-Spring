@@ -23,7 +23,7 @@
               style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
             ></v-textarea>
             <div style="display: flex; justify-content: right">
-              <v-btn>Save</v-btn>
+              <v-btn @click="saveNote()">Save</v-btn>
             </div>
           </div>
         </v-card>
@@ -58,24 +58,26 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 
+const currentNote = ref<INote>({ title: '', content: '', date: '' })
+const notes = ref<INote[]>()
+
 interface INote {
-  id: number
+  id?: number
   title: string
   content: string
   date: string
 }
 
 const updateNote = (text: any) => {
-  console.log(text)
-  notes.value = text
+  currentNote.value.content = text
 }
 
-const notes = ref<INote[]>([])
-
 Axios.get('/Note/Get').then((result) => {
-  console.log(result.data)
   notes.value = result.data as INote[]
 })
 
-Axios.post('/Note/Add', notes[0])
+const saveNote = () => {
+  console.log(currentNote.value)
+  Axios.post('/Note/Add', currentNote.value).then(() => console.log('after'))
+}
 </script>
