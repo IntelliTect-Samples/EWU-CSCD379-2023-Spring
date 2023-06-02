@@ -51,8 +51,7 @@ public class PlayerController : ControllerBase
         {
             return BadRequest();
         }
-        var result =
-            await _playerService.UpdateAsync(player.PlayerId.Value, player.PlayerName.Trim());
+        var result = await _playerService.UpdateAsync(player.PlayerId.Value, player.PlayerName.Trim());
         return new PlayerDto(result);
     }
 

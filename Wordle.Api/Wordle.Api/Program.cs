@@ -46,10 +46,8 @@ builder.Services.AddSwaggerGen(
                 Scheme = "Bearer"
             });
         config.AddSecurityRequirement(new OpenApiSecurityRequirement {
-            { new OpenApiSecurityScheme {
-                 Reference =
-                     new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
-             },
+            { new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme,
+                                                                             Id = "Bearer" } },
               new List<string>() }
         });
     });
@@ -66,9 +64,8 @@ builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfi
     .AddEntityFrameworkStores<AppDbContext>();
 
 // JWT Token setup
-JwtConfiguration jwtConfiguration =
-    builder.Configuration.GetSection("Jwt").Get<JwtConfiguration>() ??
-    throw new Exception("JWT configuration not specified");
+JwtConfiguration jwtConfiguration = builder.Configuration.GetSection("Jwt").Get<JwtConfiguration>() ??
+                                    throw new Exception("JWT configuration not specified");
 
 builder.Services.AddSingleton(jwtConfiguration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -82,18 +79,15 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                           ValidIssuer = jwtConfiguration.Issuer,
                           ValidAudience = jwtConfiguration.Audience,
 
-                          IssuerSigningKey = new SymmetricSecurityKey(
-                              Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
+                          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
                       };
                   });
 
 // Add Policies
 builder.Services.AddAuthorization(options =>
                                   {
-                                      options.AddPolicy(Policies.RandomAdmin,
-                                                        Policies.RandomAdminPolicy);
-                                      options.AddPolicy("IsGrantPolicy",
-                                                        policy => policy.RequireRole("Grant"));
+                                      options.AddPolicy(Policies.RandomAdmin, Policies.RandomAdminPolicy);
+                                      options.AddPolicy("IsGrantPolicy", policy => policy.RequireRole("Grant"));
                                   });
 
 // Actually build the app so we can configure the pipeline next
@@ -106,9 +100,8 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
-    await IdentitySeed.SeedAsync(
-        scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+    await IdentitySeed.SeedAsync(scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
+                                 scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
 
 // Configure the HTTP request pipeline.

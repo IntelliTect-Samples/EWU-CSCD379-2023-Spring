@@ -24,8 +24,7 @@ public class WordController : ControllerBase
     [HttpGet("WordOfTheDay")]
     public async Task<WordOfTheDayDto> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
     {
-        return new WordOfTheDayDto(
-            await _wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(offsetInHours), date));
+        return new WordOfTheDayDto(await _wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(offsetInHours), date));
     }
 
     [HttpGet("WordOfTheDayStats")]

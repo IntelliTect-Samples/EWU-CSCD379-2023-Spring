@@ -5,8 +5,7 @@ namespace Wordle.Api.Identity;
 
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager,
-                                       RoleManager<IdentityRole> roleManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         // Seed Roles
         await SeedRolesAsync(roleManager);

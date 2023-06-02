@@ -15,10 +15,7 @@ public class PlayerService
 
     public async Task<IEnumerable<Player>> GetTopPlayersAsync(int count = 10)
     {
-        return await _db.Players.Where(p => p.GameCount > 0)
-            .OrderBy(f => f.AverageAttempts)
-            .Take(count)
-            .ToListAsync();
+        return await _db.Players.Where(p => p.GameCount > 0).OrderBy(f => f.AverageAttempts).Take(count).ToListAsync();
     }
 
     public async Task<Player?> GetAsync(Guid playerId)
@@ -47,18 +44,16 @@ public class PlayerService
             if (dto.WasGameWon)
             {
                 player.AverageAttempts =
-                    (player.GameCount * player.AverageAttempts + dto.Attempts) /
-                    (player.GameCount + 1);
+                    (player.GameCount * player.AverageAttempts + dto.Attempts) / (player.GameCount + 1);
                 player.AverageSecondsPerGame =
-                    (int)(player.AverageSecondsPerGame * player.AverageAttempts +
-                          dto.DurationInSeconds) /
+                    (int)(player.AverageSecondsPerGame * player.AverageAttempts + dto.DurationInSeconds) /
                     (player.GameCount + 1);
                 player.GameCount++;
             }
             // See if this was a word of the day
-            var dateWord = await _db.DateWords.FirstOrDefaultAsync(
-                f => dto.WordOfTheDayDate.HasValue && f.Date == dto.WordOfTheDayDate.Value.Date &&
-                     f.WordId == word.WordId);
+            var dateWord = await _db.DateWords.FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue &&
+                                                                        f.Date == dto.WordOfTheDayDate.Value.Date &&
+                                                                        f.WordId == word.WordId);
             // Add a PlayerGame
             PlayerGame playerGame = new() { Player = player,
                                             Word = word,

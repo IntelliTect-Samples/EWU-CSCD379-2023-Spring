@@ -11,8 +11,7 @@ public static class Policies
         policy.RequireRole(Roles.Admin);
         policy.RequireAssertion(context =>
                                 {
-                                    var random = context.User.Claims.FirstOrDefault(
-                                        c => c.Type == Claims.Random);
+                                    var random = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Random);
                                     if (Double.TryParse(random?.Value, out double result))
                                     {
                                         return result > 0.5;

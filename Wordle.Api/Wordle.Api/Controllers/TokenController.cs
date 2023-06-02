@@ -19,9 +19,7 @@ public class TokenController : Controller
     public UserManager<AppUser> _userManager;
     public JwtConfiguration _jwtConfiguration;
 
-    public TokenController(AppDbContext context,
-                           UserManager<AppUser> userManager,
-                           JwtConfiguration jwtConfiguration)
+    public TokenController(AppDbContext context, UserManager<AppUser> userManager, JwtConfiguration jwtConfiguration)
     {
         _context = context;
         _userManager = userManager;
@@ -50,8 +48,7 @@ public class TokenController : Controller
         bool results = await _userManager.CheckPasswordAsync(user, userCredentials.Password);
         if (results)
         {
-            var securityKey =
-                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Secret));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.Secret));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha512);
 
             var claims = new List<Claim> {
@@ -59,9 +56,8 @@ public class TokenController : Controller
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(
-                    Claims.UserName,
-                    user.UserName!.ToString().Substring(0, user.UserName.ToString().IndexOf("@"))),
+                new Claim(Claims.UserName,
+                          user.UserName!.ToString().Substring(0, user.UserName.ToString().IndexOf("@"))),
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -69,12 +65,11 @@ public class TokenController : Controller
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
-            var token = new JwtSecurityToken(
-                issuer: _jwtConfiguration.Issuer,
-                audience: _jwtConfiguration.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(_jwtConfiguration.ExpirationInMinutes),
-                signingCredentials: credentials);
+            var token = new JwtSecurityToken(issuer: _jwtConfiguration.Issuer,
+                                             audience: _jwtConfiguration.Audience,
+                                             claims: claims,
+                                             expires: DateTime.Now.AddMinutes(_jwtConfiguration.ExpirationInMinutes),
+                                             signingCredentials: credentials);
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
             return Ok(new { token = jwtToken });
         }
@@ -96,9 +91,7 @@ public class TokenController : Controller
         {
             return BadRequest("Name is required");
         }
-        var user = new AppUser { UserName = createUser.Username,
-                                 Email = createUser.Username,
-                                 Name = createUser.Name };
+        var user = new AppUser { UserName = createUser.Username, Email = createUser.Username, Name = createUser.Name };
         var result = await _userManager.CreateAsync(user, createUser.Password);
         if (result.Succeeded)
         {

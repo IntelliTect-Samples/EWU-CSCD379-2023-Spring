@@ -30,8 +30,7 @@ public class WordService
             date = DateTime.UtcNow.AddHours(offset.TotalHours).Date;
         }
 
-        var todaysWord =
-            await _db.DateWords.Include(f => f.Word).FirstOrDefaultAsync(f => f.Date == date);
+        var todaysWord = await _db.DateWords.Include(f => f.Word).FirstOrDefaultAsync(f => f.Date == date);
 
         if (todaysWord != null)
         {
@@ -41,8 +40,7 @@ public class WordService
         {
             lock (s_wordOfTheDayLock)
             {
-                var todaysLatestWord =
-                    _db.DateWords.Include(f => f.Word).FirstOrDefault(f => f.Date == date.Value);
+                var todaysLatestWord = _db.DateWords.Include(f => f.Word).FirstOrDefault(f => f.Date == date.Value);
 
                 if (todaysLatestWord != null)
                 {
@@ -87,34 +85,28 @@ public class WordService
                     Date = f.Date,
                     AverageDurationInSeconds =
                         f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.DurationInSeconds) : -1,
-                    AverageAttempts =
-                        f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
+                    AverageAttempts = f.PlayerGames.Any() ? f.PlayerGames.Average(a => a.Attempts) : -1,
                     NumberOfPlays = f.PlayerGames.Count(),
-                    HasUserPlayed = playerId.HasValue
-                                        ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value)
-                                        : false
+                    HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
                 })
                 .ToListAsync();
 
         // Another way to do this using GroupBy
         // This algorithm doesn't handle days without PlayerGames.
         // This would need to have the stats inserted into the collection after the fact.
-        var result2 =
-            await _db.PlayerGames.Include(f => f.DateWord)
-                .Where(f => f.DateWord != null && f.DateWord.Date <= startDate &&
-                            f.DateWord.Date >= endDate)
-                .GroupBy(f => f.DateWord)
-                .Where(f => f.Key != null)
-                .Select(g => new WordOfTheDayStatsDto {
-                    Date = g.Key!.Date,
-                    AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
-                    AverageAttempts = g.Average(f => f.Attempts),
-                    NumberOfPlays = g.Count(),
-                    HasUserPlayed =
-                        playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
+        var result2 = await _db.PlayerGames.Include(f => f.DateWord)
+                          .Where(f => f.DateWord != null && f.DateWord.Date <= startDate && f.DateWord.Date >= endDate)
+                          .GroupBy(f => f.DateWord)
+                          .Where(f => f.Key != null)
+                          .Select(g => new WordOfTheDayStatsDto {
+                              Date = g.Key!.Date,
+                              AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
+                              AverageAttempts = g.Average(f => f.Attempts),
+                              NumberOfPlays = g.Count(),
+                              HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
 
-                })
-                .ToListAsync();
+                          })
+                          .ToListAsync();
 
         // If we don't have enough entries, then we need to add the days.
         if (result.Count != daysBack)

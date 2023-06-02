@@ -10,32 +10,26 @@ namespace Wordle.Api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DateWords_Words_WordId",
-                table: "DateWords");
+            migrationBuilder.DropForeignKey(name: "FK_DateWords_Words_WordId", table: "DateWords");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_DateWords_Words_WordId",
-                table: "DateWords",
-                column: "WordId",
-                principalTable: "Words",
-                principalColumn: "WordId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.AddForeignKey(name: "FK_DateWords_Words_WordId",
+                                           table: "DateWords",
+                                           column: "WordId",
+                                           principalTable: "Words",
+                                           principalColumn: "WordId",
+                                           onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DateWords_Words_WordId",
-                table: "DateWords");
+            migrationBuilder.DropForeignKey(name: "FK_DateWords_Words_WordId", table: "DateWords");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_DateWords_Words_WordId",
-                table: "DateWords",
-                column: "WordId",
-                principalTable: "Words",
-                principalColumn: "WordId");
+            migrationBuilder.AddForeignKey(name: "FK_DateWords_Words_WordId",
+                                           table: "DateWords",
+                                           column: "WordId",
+                                           principalTable: "Words",
+                                           principalColumn: "WordId");
         }
     }
 }
