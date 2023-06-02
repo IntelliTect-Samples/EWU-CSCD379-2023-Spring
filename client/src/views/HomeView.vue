@@ -3,7 +3,7 @@
     ><v-card
       ><v-card-title>Notes:</v-card-title
       ><v-list v-for="note in notes" :key="note.id"
-        ><v-list-item>{{ note.title }}</v-list-item></v-list
+        ><v-list-item :to="'/note-editor/' + note.id">{{ note.title }}</v-list-item></v-list
       ></v-card
     ></v-container
   ><v-btn to="/note-editor">Select</v-btn>

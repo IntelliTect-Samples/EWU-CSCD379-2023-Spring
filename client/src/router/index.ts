@@ -11,9 +11,10 @@ const router = createRouter({
       component: HomeViewVue
     },
     {
-      path: '/note-editor',
+      path: '/note-editor/:id?',
       name: 'NodeEditor',
-      component: NoteEditorVue
+      component: NoteEditorVue,
+      props: true
     }
   ]
 })
