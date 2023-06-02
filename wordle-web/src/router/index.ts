@@ -3,7 +3,7 @@ import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '@/views/LeaderboardView.vue'
 import WordOfTheDayView from '@/views/WordOfTheDayView.vue'
-import WordlistView from '@/views/WordlistView.vue'
+import WordEditorView from '@/views/WordEditorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,7 +31,7 @@ const router = createRouter({
     {
       path: '/wordeditor',
       name: 'wordEditor',
-      component: WordlistView
+      component: WordEditorView
     }
   ]
 })

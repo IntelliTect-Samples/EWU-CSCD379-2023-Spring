@@ -1,14 +1,21 @@
 <template>
-  <v-row v-for="word in words" :key="word" class="border my-3">
+  <v-row v-for="word in words" :key="word.text" class="border my-3">
     <v-col cols="6" class="text-end">{{ word.text }}</v-col>
     <v-col cols="6" class="text-end"><v-checkbox v-bind="word.isCommon" /></v-col>
   </v-row>
 </template>
 
-<script>
-import listWord from '@/scripts/wordlist'
+<script setup lang="ts">
+import Axios from 'axios'
 
-words: listWord[] = [new listWord("alpha", true), new listWord("bravo", false), new listWord('charlie', true), new listWord('delta', true)];
+import { ListWord } from '@/scripts/listWord'
+
+const words = [
+  new ListWord('alpha', true),
+  new ListWord('bravo', false),
+  new ListWord('charlie', true),
+  new ListWord('delta', true)
+]
 /*axios.get('GetManyWords', {
   params: {
     Count: 45
