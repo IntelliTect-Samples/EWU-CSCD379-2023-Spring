@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.ComponentModel;
+using System.Text;
 using Wordle.Api.Data;
+using Wordle.Api.Identity;
 using Wordle.Api.Services;
 using Wordle.Api.Data;
 using Wordle.Api.Identity;
@@ -17,15 +20,15 @@ var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
-    builder.Services.AddCors(options =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowAllOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("*");
-                          policy.AllowAnyMethod();
-                          policy.AllowAnyHeader();
-                      });
+options.AddPolicy(name: MyAllowAllOrigins,
+                  policy =>
+                  {
+                      policy.WithOrigins("*");
+                      policy.AllowAnyMethod();
+                      policy.AllowAnyHeader();
+                  });
 });
 
 
