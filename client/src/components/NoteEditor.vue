@@ -17,8 +17,12 @@
           "
         >
           <div>
+            <v-text-field
+              @input="editNoteTitle($event.target.value)"
+              variant="underlined"
+            ></v-text-field>
             <v-textarea
-              @input="editNote($event.target.value)"
+              @input="editNoteContent($event.target.value)"
               variant="outlined"
               style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
             ></v-textarea>
@@ -39,7 +43,11 @@ import { ref } from 'vue'
 
 const currentNote = ref<INote>({ title: '', content: '', date: '' })
 
-const editNote = (text: string) => {
+const editNoteTitle = (text: string) => {
+  currentNote.value.title = text
+}
+
+const editNoteContent = (text: string) => {
   currentNote.value.content = text
 }
 
