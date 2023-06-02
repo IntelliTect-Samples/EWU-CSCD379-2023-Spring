@@ -38,7 +38,7 @@ function setupWatches() {
   watch(
     () => props.word.isScored,
     () => {
-      console.log('Is Scored Changed')
+      //console.log('Is Scored Changed')
       props.word.letters.forEach((letter, index) => {
         setTimeout(() => {
           letters[index].char = letter.char
@@ -51,7 +51,7 @@ function setupWatches() {
 
   // When the letters change make sure we update them
   watch(props.word.letters, () => {
-    console.log('List changed')
+    //console.log('List changed')
     props.word.letters.forEach((letter, index) => {
       letters[index].char = letter.char
     })

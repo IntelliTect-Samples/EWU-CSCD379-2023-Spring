@@ -1,4 +1,5 @@
 import { Letter, LetterStatus } from './letter'
+import { WordsService } from './services/wordsService'
 
 export class Word {
   public letters = Array<Letter>()
@@ -71,9 +72,9 @@ export class Word {
   }
 
   checkWord(secretWord: string): boolean {
-    //console.log(this.text)
+    // console.log(this.text)
     // check if the letters are valid
-    //const results = new Word()
+    // const results = new Word()
     const guessChars = this.letters.map((l) => l.char)
     const secretChars = secretWord.split('')
     let isCorrect = true
@@ -82,11 +83,11 @@ export class Word {
         this.letters[i].status = LetterStatus.Correct
         guessChars[i] = '_'
         secretChars[i] = '_'
-        //console.log(`Letter ${i} is correct`)
+        // console.log(`Letter ${i} is correct`)
       } else {
         isCorrect = false
         this.letters[i].status = LetterStatus.Wrong
-        //console.log(`Letter ${i} is incorrect`)
+        // console.log(`Letter ${i} is incorrect`)
       }
     }
 
@@ -97,7 +98,7 @@ export class Word {
             this.letters[i].status = LetterStatus.Misplaced
             guessChars[i] = '_'
             secretChars[j] = '_'
-            //console.log(`Letter ${i} is misplaced`)
+            // console.log(`Letter ${i} is misplaced`)
             break
           }
         }

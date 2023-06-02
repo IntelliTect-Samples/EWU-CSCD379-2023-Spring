@@ -42,7 +42,7 @@ public class PlayerService
         // Find the Word
         var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == dto.WordPlayed);
 
-        if (player is not null && word != null)
+        if (player is not null && word is not null)
         {
             if (dto.WasGameWon)
             {

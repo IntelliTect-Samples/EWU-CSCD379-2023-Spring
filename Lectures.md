@@ -162,13 +162,21 @@
 ### Lecture 15. 5/23: 
 - EF multiple table queries (Getting Word of the Day stats)
 - Using GroupBy, Sort
+- Questions from the homework
+- Lots of other stuff pertaining to homework
+
+### Lecture 16, 5/25
+- Database rollback and Migration consolidate
+- Full page images with themes
+- CSS deep dive
+- Navigation when query changes
+- v-model
 - CSS animations using transition
 - Creating revealing letters
-- API testing with service mocks and interfaces
-- Graceful error handling when API is missing
+- The problem of security and how to handle it
+- ASP.NET Identity Intro
 
 ### Next Topics
-- The problem of security and how to handle it
 - Identity in a web project (not just API)
 - Scaffolding EF
 - Adding Identity to the API
@@ -181,6 +189,8 @@
 - Remembering login
 - Refreshing the token
 - Authorizing specific API calls
+- API testing with service mocks and interfaces
+- Graceful error handling when API is missing
 
 ## Week 9
 ### Lecture 17. 5/30: 
