@@ -21,7 +21,7 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 }
 
 const app = createApp(App)
-const themeInUse = localStorage.getItem('theme') || 'aqua'
+const themeInUse = localStorage.getItem('theme') || 'dark'
 const vuetify = createVuetify({
   components,
   directives,
