@@ -16,10 +16,16 @@
             width: fit-content;
           "
         >
-          <v-textarea
-            variant="outlined"
-            style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
-          ></v-textarea>
+          <div>
+            <v-textarea
+              @input="updateNote($event.target.value)"
+              variant="outlined"
+              style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
+            ></v-textarea>
+            <div style="display: flex; justify-content: right">
+              <v-btn>Save</v-btn>
+            </div>
+          </div>
         </v-card>
         <v-layout>
           <v-navigation-drawer expand-on-hover rail>
@@ -44,9 +50,17 @@
             </v-list>
           </v-navigation-drawer>
         </v-layout>
-        <div style="display: flex; flex: 1"></div>
       </v-col> </v-row
   ></v-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const notes = ref('')
+
+const updateNote = (text: any) => {
+  console.log(text)
+  notes.value = text
+}
+</script>
