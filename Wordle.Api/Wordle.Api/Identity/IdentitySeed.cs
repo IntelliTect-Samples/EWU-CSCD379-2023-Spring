@@ -2,9 +2,11 @@
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
+
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager,
+                                       RoleManager<IdentityRole> roleManager)
     {
         // Seed Roles
         await SeedRolesAsync(roleManager);
@@ -31,8 +33,7 @@ public static class IdentitySeed
         // Seed Admin User
         if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
         {
-            AppUser user = new AppUser
-            {
+            AppUser user = new AppUser {
                 UserName = "Admin@intellitect.com",
                 Email = "Admin@intellitect.com",
                 Name = "Admin",

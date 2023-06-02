@@ -1,4 +1,5 @@
 ﻿namespace Wordle.Api.Identity;
+
 public class Claims
 {
     public const string UserId = "userId";

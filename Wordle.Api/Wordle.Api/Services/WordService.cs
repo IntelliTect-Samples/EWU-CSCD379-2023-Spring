@@ -56,7 +56,7 @@ public class WordService
                 {
                     _db.SaveChanges();
                 }
-                catch (SqlException e)  // this is probably not the right error to catch
+                catch (SqlException e) // this is probably not the right error to catch
                 {
                     if (e.Message.Contains("duplicate"))
                     {
@@ -99,23 +99,22 @@ public class WordService
         // Another way to do this using GroupBy
         // This algorithm doesn't handle days without PlayerGames.
         // This would need to have the stats inserted into the collection after the fact.
-        var result2 = await _db.PlayerGames
-          .Include(f => f.DateWord)
-          .Where(f => f.DateWord != null &&
-            f.DateWord.Date <= startDate &&
-            f.DateWord.Date >= endDate)
-          .GroupBy(f => f.DateWord)
-          .Where(f => f.Key != null)
-          .Select(g => new WordOfTheDayStatsDto
-          {
-              Date = g.Key!.Date,
-              AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
-              AverageAttempts = g.Average(f => f.Attempts),
-              NumberOfPlays = g.Count(),
-              HasUserPlayed = playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
+        var result2 =
+            await _db.PlayerGames.Include(f => f.DateWord)
+                .Where(f => f.DateWord != null && f.DateWord.Date <= startDate &&
+                            f.DateWord.Date >= endDate)
+                .GroupBy(f => f.DateWord)
+                .Where(f => f.Key != null)
+                .Select(g => new WordOfTheDayStatsDto {
+                    Date = g.Key!.Date,
+                    AverageDurationInSeconds = g.Average(f => f.DurationInSeconds),
+                    AverageAttempts = g.Average(f => f.Attempts),
+                    NumberOfPlays = g.Count(),
+                    HasUserPlayed =
+                        playerId.HasValue ? g.Any(f => f.PlayerId == playerId.Value) : false
 
-          })
-          .ToListAsync();
+                })
+                .ToListAsync();
 
         // If we don't have enough entries, then we need to add the days.
         if (result.Count != daysBack)

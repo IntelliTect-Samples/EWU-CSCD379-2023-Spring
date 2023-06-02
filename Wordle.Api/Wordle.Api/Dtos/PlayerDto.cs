@@ -11,8 +11,7 @@ public class PlayerDto
     public int? AverageSecondsPerGame { get; set; }
 
     public PlayerDto()
-    {
-    }
+    { }
 
     public PlayerDto(Player player)
     {

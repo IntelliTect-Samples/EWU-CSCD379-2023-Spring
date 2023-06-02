@@ -6,9 +6,7 @@ namespace Wordle.Api.Data;
 public class AppDbContext : IdentityDbContext<AppUser>
 {
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-        
-    }
+    { }
 
     public DbSet<Word> Words => Set<Word>();
     public DbSet<Player> Players => Set<Player>();
@@ -19,11 +17,6 @@ public class AppDbContext : IdentityDbContext<AppUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder
-            .Entity<DateWord>()
-            .HasIndex(f => f.Date)
-            .IsUnique();
-       
+        modelBuilder.Entity<DateWord>().HasIndex(f => f.Date).IsUnique();
     }
 }
-
