@@ -12,7 +12,7 @@ using Noted.Api.Data;
 namespace Noted.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230602010427_InitialCreate")]
+    [Migration("20230602021745_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -36,7 +36,6 @@ namespace Noted.Api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Created")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")

@@ -6,7 +6,7 @@
         ><v-list-item :to="'/note-editor/' + note.id">{{ note.title }}</v-list-item></v-list
       ></v-card
     ></v-container
-  ><v-btn to="/note-editor">Select</v-btn>
+  ><v-btn to="/note-editor">Create Note</v-btn>
 </template>
 
 <script setup lang="ts">
