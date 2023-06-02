@@ -32,7 +32,7 @@ namespace Wordle.Api.Services
             string word = await GetWordOfDay(date); 
             // Take a word as input and return the following: # of games that have been played
             int wordId = _db.Words.Where((w) => w.Text.Equals(word)).First().WordId;
-            IQueryable<User> user = _db.Users.Where(u => u.Name.Equals(userName));
+            IQueryable<AppUser> user = _db.Users.Where(u => u.Name.Equals(userName));
             bool userExists = user.Any();
             
             IQueryable<Play> play = _db.Plays.Where(p => wordId == p.WordId);
