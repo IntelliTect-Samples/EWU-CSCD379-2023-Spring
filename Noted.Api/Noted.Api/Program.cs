@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Noted.Api.Data;
+using Noted.Api.Services;
 using System.ComponentModel;
-using Wordle.Api.Data;
-using Wordle.Api.Services;
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
@@ -34,8 +34,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
 });
-builder.Services.AddScoped<WordService>();
-builder.Services.AddScoped<PlayerService>();
+builder.Services.AddScoped<NoteService>();
 
 // Actually build the app so we can configure the pipeline next
 var app = builder.Build();
@@ -47,8 +46,6 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-    Seeder.SeedWords(db);
-    Seeder.SeedPlayers(db);
 }
 
 // Configure the HTTP request pipeline.
