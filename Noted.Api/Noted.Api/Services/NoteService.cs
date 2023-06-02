@@ -59,7 +59,25 @@ namespace Noted.Api.Services
             storedNote.Content = note.Content;
             
             _db.SaveChanges();
-            
+        }
+
+        public void DeleteNote(NoteDto note)
+        {
+            if(note == null)
+            {
+                throw new ArgumentNullException(nameof(note));
+            }
+
+            var storedNote = _db.Notes.Select(n => n).Where(n => n.Id == note.Id).First();
+
+            if (storedNote == null)
+            {
+                throw new Exception("Id not found");
+            }
+
+            storedNote.deleted = true;
+
+            _db.SaveChanges();
         }
     }
 }

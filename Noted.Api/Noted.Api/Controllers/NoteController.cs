@@ -32,5 +32,11 @@ namespace Noted.Api.Controllers
         {
             _noteService.UpdateNote(note);
         }
+
+        [HttpDelete("Delete")]
+        public void DeleteNote([FromBody] NoteDto note)
+        {
+            _noteService.DeleteNote(note);
+        }
     }
 }
