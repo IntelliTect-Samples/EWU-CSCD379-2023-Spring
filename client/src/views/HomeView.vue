@@ -49,4 +49,23 @@
   ></v-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Axios from 'axios'
+import { ref } from 'vue'
+
+interface INote {
+  id: number
+  title: string
+  content: string
+  date: string
+}
+
+const notes = ref<INote[]>([])
+
+Axios.get('/Note/Get').then((result) => {
+  console.log(result.data)
+  notes.value = result.data as INote[]
+})
+
+Axios.post('/Note/Add', notes[0])
+</script>
