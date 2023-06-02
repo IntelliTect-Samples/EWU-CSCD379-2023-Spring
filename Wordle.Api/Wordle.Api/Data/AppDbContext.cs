@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<DateWord>().HasIndex(f => f.Date).IsUnique();
     }
 }
