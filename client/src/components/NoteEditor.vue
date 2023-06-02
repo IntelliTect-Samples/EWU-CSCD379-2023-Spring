@@ -23,7 +23,7 @@
               style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
             ></v-textarea>
             <div style="display: flex; justify-content: right">
-              <v-btn @click="saveNote()">Save</v-btn>
+              <v-btn @click="handleSave()">Save</v-btn>
             </div>
           </div>
         </v-card>
@@ -61,16 +61,20 @@ import { ref } from 'vue'
 
 const currentNote = ref<INote>({ title: '', content: '', date: '' })
 
-const editNote = (text: any) => {
+const editNote = (text: string) => {
   currentNote.value.content = text
 }
 
-const saveNote = () => {
+const createNote = () => {
   console.log(currentNote.value)
-  Axios.post('/Note/Add', currentNote.value).then(() => console.log('after'))
+  Axios.post('/Note/Add', currentNote.value)
 }
 
 const updateNote = () => {
-  Axios.put('/Note/Update', currentNote.value).then(() => console.log('after'))
+  Axios.put('/Note/Update', currentNote.value)
+}
+
+const handleSave = () => {
+  currentNote.value.id ? updateNote() : createNote()
 }
 </script>
