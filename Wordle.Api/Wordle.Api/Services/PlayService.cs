@@ -27,12 +27,12 @@ namespace Wordle.Api.Services
             }
 
             // If the player doesn't exist, add player to DB
-            User? newUser = await _db.Users.FirstOrDefaultAsync(user => user.Name == name);
+            AppUser? newUser = await _db.Users.FirstOrDefaultAsync(user => user.Name == name);
             // If the player does not exist
             if (newUser == null)
             {
 
-                newUser = new User() { Name = name }; 
+                newUser = new AppUser() { Name = name }; 
                 _db.Users.Add(newUser);
             }
             await _db.SaveChangesAsync();
@@ -62,10 +62,10 @@ namespace Wordle.Api.Services
             List<PlayerStatistics> playerStatistics = new List<PlayerStatistics>();
 
             // Retrieve all users from the database
-            List<User> users = await _db.Users.ToListAsync();
+            List<AppUser> users = await _db.Users.ToListAsync();
 
             // Iterate over the users and retrieve their associated plays
-            foreach (User user in users)
+            foreach (AppUser user in users)
             {
                 int id = user.UserId;
                 string userName = user.Name;
