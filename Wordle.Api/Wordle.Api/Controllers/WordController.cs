@@ -30,7 +30,7 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetSeveralWords(count);
         }
 
-        [HttpPost]
+        [HttpPost("AddWord")]
         public async Task<Word> AddWord(string newWord, bool isCommon)
         {
             return await _wordService.AddWord(newWord, isCommon);
@@ -55,5 +55,18 @@ namespace Wordle.Api.Controllers
             int daysBack = 10;
             return await _wordService.GetDailyWordStatistics(date, daysBack, name);
         }
+
+        [HttpPost("RemoveWord")]
+        public async Task<Word> RemoveWord(string? removeWord)
+        {
+            return await _wordService.RemoveWord(removeWord);
+        }
+
+        [HttpGet("WordList")]
+        public async Task<IEnumerable<Word>> WordList()
+        {
+            return await _wordService.WordList();
+        }
+
     }
 }    

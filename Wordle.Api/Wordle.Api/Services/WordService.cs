@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using static Azure.Core.HttpHeader;
 
 namespace Wordle.Api.Services
 {
@@ -184,6 +185,33 @@ namespace Wordle.Api.Services
                 result = await GetDailyWordStatistics(date, daysBack);
             }
             return result;
+        }
+
+        public async Task<Word> RemoveWord(string? removeWord)
+        {
+            if (removeWord is null || removeWord.Length != 5)
+            {
+                throw new ArgumentException("Word must be 5 characters long");
+            }
+            var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == removeWord);
+
+            if(word == null)
+            {
+                throw new ArgumentException("Word must be in the Word List");
+            }
+            
+            _db.Words.Remove(word);
+            
+            await _db.SaveChangesAsync();
+            return word;
+        }
+
+        public async Task<IEnumerable<Word>> WordList()
+        {
+            var words = await _db.Words
+                .OrderByDescending(w => w.Text)
+                .ToListAsync();
+            return words;
         }
     }
 }
