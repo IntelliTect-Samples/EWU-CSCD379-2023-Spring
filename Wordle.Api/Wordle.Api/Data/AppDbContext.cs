@@ -21,8 +21,8 @@ namespace Wordle.Api.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder
-                .Entity<DateWord>()
-                .HasIndex(f => f.Date)
+                .Entity<Word>()
+                .HasIndex(f => f.WordId)
                 .IsUnique();
 
         }

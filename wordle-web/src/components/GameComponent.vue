@@ -62,6 +62,8 @@ import type { Letter } from '@/scripts/letter'
 import HintDialog from '../components/HintDialog.vue'
 import Axios from 'axios'
 import { useRoute } from 'vue-router'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
 
 localStorage.startTime = Date.now()
 

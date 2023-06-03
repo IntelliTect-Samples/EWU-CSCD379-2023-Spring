@@ -5,7 +5,7 @@
   <v-table>
     <thead>
       <v-text-field v-model="input" label="Label" @keyup="getInput()" variant="solo"></v-text-field>
-      <WordEditor/>
+      <WordEditor />
       <!--change color of feild, add clear button-->
       <tr>
         <th class="text-left">ID</th>
