@@ -54,10 +54,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="router.push('/login')">
                 Sign In
               </v-list-item-title>
             </v-list-item>
@@ -74,12 +71,14 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
+import { RouterLink } from 'vue-router'
+import router from './router'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
