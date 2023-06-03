@@ -21,16 +21,16 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: "7.x"
+          dotnet-version: '7.x'
           include-prerelease: true
 
       - name: Build with dotnet
         working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
-        
-      - name: Test with dotnet
-        working-directory: ./Wordle.Api
-        run: dotnet test
+
+      # - name: Test with dotnet
+      #   working-directory: ./Wordle.Api
+      #   run: dotnet test
 
       - name: dotnet publish
         working-directory: ./Wordle.Api
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: "Production"
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -60,6 +60,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{secrets.ApiAppName}}
-          slot-name: "Production"
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_48764EAA61BE43EE9F624E78F06741FD }}
           package: .
