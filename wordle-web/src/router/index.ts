@@ -4,6 +4,7 @@ import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '@/views/LeaderboardView.vue'
 import WordOfTheDayView from '@/views/WordOfTheDayView.vue'
 import WordEditorView from '../views/WordEditorView.vue'
+import LoginView from '../views/LoginView.vue'
 import { SignInService } from '@/scripts/signInService'
 
 const router = createRouter({
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/wordeditor',
       name: 'wordEditor',
       component: WordEditorView
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginView
     }
   ]
 })
