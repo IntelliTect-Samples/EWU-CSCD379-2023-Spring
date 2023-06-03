@@ -209,7 +209,7 @@ namespace Wordle.Api.Services
         public async Task<IEnumerable<Word>> WordList()
         {
             var words = await _db.Words
-                .OrderByDescending(w => w.Text)
+                .OrderBy(w => w.Text)
                 .ToListAsync();
             return words;
         }
