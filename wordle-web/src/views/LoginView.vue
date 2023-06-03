@@ -6,7 +6,7 @@
       <v-text-field label="Email:" @input="updateEmail($event.target.value)"></v-text-field>
       <v-text-field label="Password:" @input="updatePassword($event.target.value)"></v-text-field>
       <div style="display: flex; justify-content: right; margin: 0.6em">
-        <v-btn @click="signInService.signIn(email, password)">Login</v-btn>
+        <v-btn @click="signInService.signIn(email, password)" to="/">Login</v-btn>
       </div>
     </v-card>
   </v-container>
