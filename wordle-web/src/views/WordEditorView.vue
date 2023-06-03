@@ -8,8 +8,9 @@
       </v-col>
       <v-col cols="12" style="display: flex; justify-content: center">
         <v-card
-          style="padding: 10px; display: flex; flex-direction: column; height: 600px; width: 500px"
+          style="padding: 10px; display: flex; flex-direction: column; height: 1500px; width: 500px"
         >
+          <WordList />
           <DeleteWord />
           <AddWord />
           <CommonWord />
@@ -22,4 +23,5 @@
 import DeleteWord from '../components/DeleteWord.vue'
 import AddWord from '../components/AddWord.vue'
 import CommonWord from '../components/CommonWord.vue'
+import WordList from '../components/WordList.vue'
 </script>

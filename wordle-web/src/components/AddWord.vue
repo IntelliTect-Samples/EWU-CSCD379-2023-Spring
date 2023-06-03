@@ -1,7 +1,7 @@
 <template>
-  <v-card height="200px">
+  <h5 class="text-h5">Add Word</h5>
+  <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
-      Add Word:
       <v-text-field
         @input="editText($event.target.value)"
         :messages="added ? [`Word has been added`] : []"

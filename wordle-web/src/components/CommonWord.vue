@@ -1,7 +1,7 @@
 <template>
-  <v-card height="200px">
+  <h5 class="text-h5">Change Common Word</h5>
+  <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
-      Change Common Word:
       <v-text-field
         @input="editText($event.target.value)"
         :messages="swapped ? [`Word ${message} common`] : []"
@@ -13,7 +13,7 @@
     <v-card-actions>
       <v-checkbox label="Common Word" @click="isCommon = !isCommon"></v-checkbox>
       <v-spacer />
-      <v-btn @click="changeToCommon()" :disabled="!textInput">Change Common Word</v-btn>
+      <v-btn @click="changeToCommon()" :disabled="!textInput">Change</v-btn>
     </v-card-actions>
   </v-card>
 </template>
