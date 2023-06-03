@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import Navbar from './components/NavBar.vue'
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { provide, reactive } from 'vue'
+import { inject, provide, reactive } from 'vue'
 import { Services } from './scripts/services'
 import { useDisplay } from 'vuetify'
 
