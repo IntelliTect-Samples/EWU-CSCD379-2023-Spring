@@ -1,12 +1,21 @@
 <template>
-  <v-card class="w-75">
-    <v-row class="border my-3">
-      <v-col>Word</v-col>
-      <v-col>Is Common</v-col>
+  <v-card class="mx-8 my-auto">
+    <v-row class="ma-3">
+      <v-col>
+        <v-text-field label="Search" />
+      </v-col>
     </v-row>
-    <v-row v-for="word in words" :key="word.text" class="border my-3">
-      <v-col >{{ word.text }}</v-col>
-      <v-col><v-checkbox v-model="word.isCommon"/></v-col>
+    <v-row class="border ma-3">
+      <v-col class="text-h6">Word</v-col>
+      <v-col class="text-h6">Is Common</v-col>
+      <v-col>
+        <v-btn color="green">Add Word</v-btn>
+      </v-col>
+    </v-row>
+    <v-row dense v-for="word in words" :key="word.text" class="border ma-3">
+      <v-col>{{ word.text }}</v-col>
+      <v-col><v-checkbox v-model="word.isCommon" /></v-col>
+      <v-col><v-btn color="red">Delete</v-btn></v-col>
     </v-row>
   </v-card>
 </template>

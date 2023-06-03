@@ -39,7 +39,7 @@ const router = createRouter({
     {
       path: '/wordeditor',
       name: 'wordEditor',
-      component: WordEditorView,
+      component: WordEditorView
     }
   ]
 })
