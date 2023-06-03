@@ -65,7 +65,7 @@ public class WordService
         return word;
     }
 
- /*   public async Task<Word> DeleteWordAsync(string wordForDelete)
+    public async Task<Word> DeleteWordAsync(string wordForDelete)
     {
         if (wordForDelete is null || wordForDelete.Length != 5)
         {
@@ -84,7 +84,7 @@ public class WordService
 
         await _db.SaveChangesAsync();
         return word;
-    }*/
+    }
 
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
