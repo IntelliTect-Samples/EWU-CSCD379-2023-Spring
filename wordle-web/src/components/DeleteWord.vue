@@ -10,7 +10,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn @click="deleteWord()">Delete Word</v-btn>
+      <v-btn @click="deleteWord()" :disabled="textInput === undefined">Delete Word</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -18,13 +18,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const input = ref<string>()
+const textInput = ref<string>()
 
 const editText = (text: string) => {
-  input.value = text
+  textInput.value = text
 }
 
 const deleteWord = () => {
-  console.log(input.value)
+  console.log(textInput.value)
 }
 </script>
