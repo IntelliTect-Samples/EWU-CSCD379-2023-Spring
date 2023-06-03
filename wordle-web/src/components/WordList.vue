@@ -13,7 +13,7 @@ import { ref } from 'vue'
 
 const words = ref<IWord[]>([])
 
-export interface IWord {
+interface IWord {
   id?: number
   text: string
   isCommon: string
