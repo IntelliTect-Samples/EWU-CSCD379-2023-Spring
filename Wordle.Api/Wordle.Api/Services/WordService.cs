@@ -77,9 +77,12 @@ public class WordService
         {
             _db.Words.Remove(word);
         }
+        else
+        {
+            throw new ArgumentException("word doesnt exist");
+        }
 
         await _db.SaveChangesAsync();
-
         return word;
     }
 
