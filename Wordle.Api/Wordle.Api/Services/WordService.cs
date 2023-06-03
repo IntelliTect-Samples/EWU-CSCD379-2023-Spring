@@ -65,6 +65,27 @@ public class WordService
         return word;
     }
 
+    public async Task<Word> DeleteWordAsync(string wordForDelete)
+    {
+        if (wordForDelete is null || wordForDelete.Length != 5)
+        {
+            throw new ArgumentException("Word must be 5 characters long");
+        }
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == wordForDelete);
+
+        if (word != null)
+        {
+            _db.Words.Remove(word);
+        }
+        else
+        {
+            throw new ArgumentException("word doesnt exist");
+        }
+
+        await _db.SaveChangesAsync();
+        return word;
+    }
+
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
         if (date is null)
