@@ -1,9 +1,11 @@
 <template>
-  <v-card height="200px">
+  <h5 class="text-h5">Add Word</h5>
+  <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
-      Add Word:
       <v-text-field
         @input="editText($event.target.value)"
+        :messages="added ? [`Word has been added`] : []"
+        :errorMessages="addedError ? ['Error adding word'] : []"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
@@ -20,6 +22,8 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 
+const added = ref<boolean>(false)
+const addedError = ref<boolean>(false)
 const textInput = ref<string>()
 let isCommon = false
 
@@ -28,9 +32,15 @@ const editText = (text: string) => {
 }
 
 const addWord = () => {
-  console.log(textInput.value, isCommon)
+  addedError.value = false
+  added.value = false
   Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon}`)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err))
+    .then((res) => {
+      added.value = true
+    })
+    .catch((err) => {
+      addedError.value = true
+      console.log(err)
+    })
 }
 </script>

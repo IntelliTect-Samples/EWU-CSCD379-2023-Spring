@@ -1,7 +1,7 @@
 <template>
-  <v-card height="200px">
+  <h5 class="text-h5">Delete Word</h5>
+  <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
-      Delete Word:
       <v-text-field
         :messages="deleted ? [`Word has been deleted`] : []"
         :errorMessages="deleteError ? ['Error deleting word'] : []"

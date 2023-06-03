@@ -1,9 +1,11 @@
 <template>
-  <v-card height="200px">
+  <h5 class="text-h5">Change Common Word</h5>
+  <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
-      Change Common Word:
       <v-text-field
         @input="editText($event.target.value)"
+        :messages="swapped ? [`Word ${message} common`] : []"
+        :errorMessages="swappedError ? [`Could not be ${message} common`] : []"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
@@ -11,7 +13,7 @@
     <v-card-actions>
       <v-checkbox label="Common Word" @click="isCommon = !isCommon"></v-checkbox>
       <v-spacer />
-      <v-btn @click="changeToCommon()" :disabled="!textInput">Change Common Word</v-btn>
+      <v-btn @click="changeToCommon()" :disabled="!textInput">Change</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -20,20 +22,30 @@
 import { ref } from 'vue'
 import Axios from 'axios'
 
+const swapped = ref<boolean>(false)
+const swappedError = ref<boolean>(false)
 const textInput = ref<string>()
-let isCommon = false
+let isCommon = ref<boolean>(false)
+
+let message = ''
 
 const editText = (text: string) => {
   textInput.value = text
 }
 
 const changeToCommon = () => {
-  console.log(textInput.value, isCommon)
-  const postArgs = {
-    newWord: textInput.value,
-    isCommon: isCommon
-  }
-  console.log(postArgs)
-  Axios.post('/Word', postArgs)
+  console.log(textInput.value, isCommon.value)
+  swappedError.value = false
+  swapped.value = false
+  Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon.value}`)
+    .then((res) => {
+      message = isCommon.value === true ? 'added to' : 'removed from'
+      swapped.value = true
+    })
+    .catch((err) => {
+      message = isCommon.value === true ? 'added to' : 'removed from'
+      swappedError.value = true
+      console.log(err)
+    })
 }
 </script>
