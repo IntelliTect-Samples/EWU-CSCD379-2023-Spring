@@ -22,8 +22,9 @@
 
 <v-form ref="form">
   <v-text-field
-    v-model="name"
+    v-model="input"
     :counter="10"
+    :rules="wordRules"
     label="Name"
     required
   ></v-text-field>
@@ -64,43 +65,34 @@
 </template>
 
 <script lang="ts">
-// Goals of the word editor page: 
-// 1) Be a dialog that pops up when the user clicks a button on the Dictionary Page
-// 2) Have a text box where the user types in the relevant word
-// 3) 3 Buttons
-  // a) Remove
-  // b) Add
-  // c) Flip Is Common Flag
-  import { ref } from 'vue'
+import { ref } from 'vue'
 
-    export default {
-    data: () => ({
+export default {
+  data() {
+    return {
       dialog: false,
-
+      input: '',
       valid: true,
-      name: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
+      wordRules: [
+        (v : string) => !!v || 'Word is required',
+        (v : string) =>  ! /[^\p{L}]/u.test(v) || 'Word must only contain letters',
+        (v : string) => (v && v.length === 5) || 'Word must be 5 characters',
       ],
-      checkbox: false,
-    }),
-
-    methods: {
-      async removeWord () {
-        console.log("Remove Word")
-      },
-      addWord () {
-        console.log("Add Word")
-      },
-      flipIsCommon () {
-        console.log("Flip is common")
-      },
+    }
+  },
+  methods: {
+    validate() {
+      return this.input.length === 5
     },
+    removeWord() {
+      console.log('Remove Word: ' + this.input)
+    },
+    addWord() {
+      console.log('Add Word: ' + this.input)
+    },
+    flipIsCommon() {
+      console.log('Flip is common: ' + this.input)
+    }
   }
-  
-
+}
 </script>
