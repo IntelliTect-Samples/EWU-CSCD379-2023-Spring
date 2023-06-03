@@ -4,6 +4,7 @@
     <v-card-text>
       <v-text-field
         @input="editText($event.target.value)"
+        placeholder="enter word to add to word list..."
         :messages="added ? [`Word has been added`] : []"
         :errorMessages="addedError ? ['Error adding word'] : []"
         variant="outlined"
