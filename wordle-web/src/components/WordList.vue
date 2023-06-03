@@ -10,14 +10,19 @@
       </template>
 
       <v-list width="60px">
-        <v-list-item @click="setDisplayCount(10)"> 10 </v-list-item>
-        <v-list-item @click="setDisplayCount(25)"> 25 </v-list-item>
-        <v-list-item @click="setDisplayCount(50)"> 50 </v-list-item>
-        <v-list-item @click="setDisplayCount(100)"> 100 </v-list-item>
+        <v-list-item @click="setDisplayCount(10, textInput)"> 10 </v-list-item>
+        <v-list-item @click="setDisplayCount(25, textInput)"> 25 </v-list-item>
+        <v-list-item @click="setDisplayCount(50, textInput)"> 50 </v-list-item>
+        <v-list-item @click="setDisplayCount(100, textInput)"> 100 </v-list-item>
       </v-list>
     </v-menu>
   </div>
   <v-card variant="outlined" style="margin-bottom: 20px">
+    <v-text-field
+      placeholder="search..."
+      maxlength="5"
+      @input="setDisplayCount(wordDisplayCount, $event.target.value)"
+    />
     <v-list v-for="word in words" :key="word.id"
       ><v-list-item>{{ word.text }}</v-list-item></v-list
     >
@@ -30,15 +35,19 @@ import { ref } from 'vue'
 
 const words = ref<IWord[]>([])
 const wordDisplayCount = ref<number>(10)
+const textInput = ref<string>('a')
 
-const setDisplayCount = (value: number) => {
-  wordDisplayCount.value = value
-  Axios.get(`/Word/GetManyWords?count=${wordDisplayCount.value}`).then((result) => {
+const setDisplayCount = (wordsPerPage: number, text: string) => {
+  wordDisplayCount.value = wordsPerPage
+  textInput.value = text
+  Axios.get(
+    `/Word/GetManyWords?count=${wordDisplayCount.value}&wordSegment=${textInput.value}`
+  ).then((result) => {
     words.value = result.data as IWord[]
     console.log(result)
   })
 }
-setDisplayCount(wordDisplayCount.value)
+setDisplayCount(wordDisplayCount.value, textInput.value)
 
 interface IWord {
   id?: number
