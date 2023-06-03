@@ -8,13 +8,7 @@
       </v-col>
       <v-col cols="12" style="display: flex; justify-content: center">
         <v-card
-          style="
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            height: 600px;
-            width: fit-content;
-          "
+          style="padding: 10px; display: flex; flex-direction: column; height: 600px; width: 500px"
         >
           <DeleteWord />
           <AddWord />
