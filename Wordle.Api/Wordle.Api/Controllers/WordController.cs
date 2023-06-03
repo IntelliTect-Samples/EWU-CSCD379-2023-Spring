@@ -52,5 +52,11 @@ namespace Wordle.Api.Controllers
         {
             return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
         }
+
+        [HttpGet("SearchForWord")]
+        public async Task<List<Word>> GetSearchWordsAndPaginate(string search = "", int pageNumber = 1, int entriesPerPage = 10)
+        {
+            return await _wordService.GetSearchWordsAndPaginate(search, pageNumber, entriesPerPage);
+        }
     }
 }    
