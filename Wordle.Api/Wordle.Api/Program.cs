@@ -97,10 +97,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });
 
 //Add Policies
-builder.Services.AddAuthorization(options =>                                                 //change this
+builder.Services.AddAuthorization(options =>                                                 
 {
     options.AddPolicy(Policies.RandomAdmin, Policies.RandomAdminPolicy);
     options.AddPolicy("IsGrantPolicy", policy => policy.RequireRole("Grant"));
+    options.AddPolicy(Policies.NewPolicyName, Policies.NewPolicy);          //will have to change names
 });
 
 // build app

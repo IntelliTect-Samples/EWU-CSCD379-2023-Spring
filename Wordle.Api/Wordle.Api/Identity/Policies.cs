@@ -4,6 +4,8 @@ namespace Wordle.Api.Identity;
 public static class Policies
 {
     public const string RandomAdmin = "RandomAdmin";
+    public const string NewPolicyName = "NewPolicy"; //change names
+
 
     public static void RandomAdminPolicy(AuthorizationPolicyBuilder policy)
     {
@@ -16,6 +18,22 @@ public static class Policies
                 return result > 0.5;
             }
             return false;
+        });
+    }
+
+    public static void NewPolicy(AuthorizationPolicyBuilder policy)
+    {
+        policy.RequireClaim(Claims.Policy); //change to the other thing
+        policy.RequireAssertion(context => 
+        {
+            DateTime currentDate = DateTime.Now;
+            int age = currentDate.Year - context.User.dateOfBirth.Year;
+
+            // Check if the user has already had their birthday this year
+            if (context.User.dateOfBirth.Date > currentDate.AddYears(-age))
+                age--;
+
+            return age > 21;
         });
     }
 }
