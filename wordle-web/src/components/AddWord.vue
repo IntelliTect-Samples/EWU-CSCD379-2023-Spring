@@ -29,7 +29,8 @@ const editText = (text: string) => {
 
 const addWord = () => {
   console.log(textInput.value, isCommon)
-  const postArgs = { newWord: textInput.value, isCommon: isCommon }
-  Axios.post('/Word', postArgs)
+  Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon}`)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
 }
 </script>
