@@ -5,7 +5,7 @@
       <v-text-field
         @input="editText($event.target.value)"
         variant="outlined"
-        style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
+        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
     </v-card-text>
     <v-card-actions>
