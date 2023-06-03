@@ -35,11 +35,11 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
 
-        [HttpDelete]
+    /*    [HttpDelete]
         public async Task<Word> DeleteWord(string word)
         {
             return await _wordService.DeleteWordAsync(word);
-        }
+        }*/
 
         [HttpPost("AddWordFromBody")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
