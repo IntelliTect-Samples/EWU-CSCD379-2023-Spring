@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, reactive } from 'vue'
 import App from './App.vue'
 import router from './router'
 import { mdi } from 'vuetify/iconsets/mdi'
@@ -13,6 +13,10 @@ import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
 import Axios from 'axios'
+
+import { Services } from './scripts/services'
+import { SignInService } from './scripts/signInService'
+import { PlayerService } from './scripts/playerService'
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -95,6 +99,14 @@ const vuetify = createVuetify({
   }
 })
 const app = createApp(App)
+
+// Create basic services
+const signInService = reactive(SignInService.instance)
+app.provide(Services.SignInService, signInService)
+
+const playerService = new PlayerService()
+playerService.setupPlayerAsync()
+app.provide(Services.PlayerService, playerService)
 
 app.use(vuetify)
 

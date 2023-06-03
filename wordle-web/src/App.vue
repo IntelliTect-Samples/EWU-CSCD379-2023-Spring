@@ -14,11 +14,15 @@ import { provide, reactive } from 'vue'
 import { Services } from './scripts/services'
 import { useDisplay } from 'vuetify'
 
+import ActiveUser from './components/ActiveUser.vue'
+import type { SignInService } from './scripts/signInService'
 
 const theme = useTheme()
 
 const display = reactive(useDisplay())
 provide(Services.Display, display)
+
+const signInService = inject(Services.SignInService) as SignInService
 
 function setImageTheme(themecolor: string){
   if(themecolor === "light" )
@@ -33,7 +37,13 @@ function setImageTheme(themecolor: string){
     return 'Protanopia_DeuteranopiaLightBackground'
   else if(themecolor === "TritanopiaLight")
     return 'TritanopiaLightBackground'
-    }  
+    }
+    
+setTimeout(() => {
+  // This is terrible, nasty, and should be removed.
+  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
+}, 1000)
+
 </script>
 
 <style>
