@@ -3,7 +3,7 @@
   <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
       <v-text-field
-        placeholder="insert word to delete..."
+        placeholder="enter word to delete from word list..."
         :messages="deleted ? [`Word has been deleted`] : []"
         :errorMessages="deleteError ? ['Error deleting word'] : []"
         @input="editText($event.target.value)"

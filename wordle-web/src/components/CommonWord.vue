@@ -4,7 +4,7 @@
     <v-card-text>
       <v-text-field
         @input="editText($event.target.value)"
-        placeholder="insert word to change..."
+        placeholder="enter word to change frequency in word list..."
         :messages="swapped ? [`Word ${message} common`] : []"
         :errorMessages="swappedError ? [`Could not be ${message} common`] : []"
         variant="outlined"
