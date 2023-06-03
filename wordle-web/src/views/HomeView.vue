@@ -20,6 +20,10 @@
     <br/>
     <h3>Learn more about us</h3>
     <v-btn @click="$router.push('/about')" color="primary">About</v-btn>
+    <br/>
+    <br/>
+    <h3>Want to add a word to our word bank?</h3>
+    <v-btn @click="$router.push('/wordeditor')" color="primary">Word Editor</v-btn>
 
 
 

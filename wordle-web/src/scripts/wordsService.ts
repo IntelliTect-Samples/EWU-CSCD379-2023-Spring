@@ -71,6 +71,10 @@ export abstract class WordsService {
 
     return valid
   }
+
+  static getAllWords(): string[] {
+    return this.#words
+  }
   // From: https://github.com/kashapov/react-testing-projects/blob/master/random-word-server/five-letter-words.json
 
   static readonly #words: string[] = [

@@ -6,6 +6,7 @@ import LastTenWords from '@/views/LastTenWords.vue'
 import { Services } from '@/scripts/services'
 import { inject } from 'vue'
 import { SignInService } from '@/scripts/signInService'
+import WordEditor from '@/views/WordEditor.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,12 @@ const router = createRouter({
       name: 'wordOfTheDay',
       component: WordleView
     },
+    {
+      path: '/wordeditor',
+      name: 'wordEditor',
+      component: WordEditor,
+    }
+    ,
     {
       path: '/about',
       name: 'about',
