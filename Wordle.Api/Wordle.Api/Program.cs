@@ -10,7 +10,7 @@ using Microsoft.OpenApi.Models;
 using System.ComponentModel;
 using System.Text;
 using Wordle.Api.Identity;
-
+using System.Security.Claims;
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
@@ -112,12 +112,13 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
     // Initialize some default players 
-    Word.SeedWords(db);
-    AppUser.SeedUsers(db);
-    Play.SeedPlays(db);
     await IdentitySeed.SeedAsync(
+        db,
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
         scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+    Word.SeedWords(db);
+    Play.SeedPlays(db);
+    
 }
 
 

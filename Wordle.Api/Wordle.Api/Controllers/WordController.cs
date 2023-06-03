@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
@@ -59,6 +60,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("FlipIsCommon")]
+        [Authorize]
         public async Task<bool> FlipIsCommon(string word)
         {
             return await _wordService.FlipIsCommon(word);
