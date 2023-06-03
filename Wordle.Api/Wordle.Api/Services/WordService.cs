@@ -67,10 +67,7 @@ public class WordService
 
     public async Task<Word> DeleteWordAsync(string wordForDelete)
     {
-        if (wordForDelete is null || wordForDelete.Length != 5)
-        {
-            throw new ArgumentException("Word must be 5 characters long");
-        }
+       
         var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == wordForDelete);
 
         if (word != null)

@@ -3,6 +3,8 @@
     <v-card-text>
       Delete Word:
       <v-text-field
+        :messages="deleted ? [`Word: ${input} has been deleted`] : []"
+        :errorMessages="deleteError ? ['Error deleting word'] : []"
         @input="editText($event.target.value)"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; width: 500px"
@@ -16,15 +18,27 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { ref } from 'vue'
 
 const input = ref<string>()
+const deleted = ref<boolean>(false)
+const deleteError = ref<boolean>(false)
 
 const editText = (text: string) => {
   input.value = text
 }
 
 const deleteWord = () => {
-  console.log(input.value)
+  deleteError.value = false
+  axios
+    .delete(`/Word/Delete?word=${input.value}`)
+    .then((res) => {
+      deleted.value = true
+    })
+    .catch((err) => {
+      deleteError.value = true
+      console.log(err)
+    })
 }
 </script>

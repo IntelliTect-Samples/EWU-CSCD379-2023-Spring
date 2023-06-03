@@ -35,7 +35,7 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
 
-        [HttpDelete]
+        [HttpDelete("Delete")]
         public async Task<Word> DeleteWord(string word)
         {
             // deletes word
