@@ -6,6 +6,7 @@
         placeholder="enter word to delete from word list..."
         :messages="deleted ? [`Word has been deleted`] : []"
         :errorMessages="deleteError ? ['Error deleting word'] : []"
+        maxlength="5"
         @input="editText($event.target.value)"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
@@ -13,7 +14,11 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn @click="deleteWord()" :disabled="textInput === undefined">Delete Word</v-btn>
+      <v-btn
+        @click="deleteWord()"
+        :disabled="!textInput || !isAlphabetical.test(textInput) || textInput.length !== 5"
+        >Delete Word</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
@@ -22,6 +27,7 @@
 import axios from 'axios'
 import { ref } from 'vue'
 
+const isAlphabetical = /^[A-Za-z]+$/
 const deleted = ref<boolean>(false)
 const deleteError = ref<boolean>(false)
 const textInput = ref<string>()

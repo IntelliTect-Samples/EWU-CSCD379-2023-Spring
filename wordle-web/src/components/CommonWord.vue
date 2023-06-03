@@ -7,6 +7,7 @@
         placeholder="enter word to change frequency in word list..."
         :messages="swapped ? [`Word ${message} common`] : []"
         :errorMessages="swappedError ? [`Could not be ${message} common`] : []"
+        maxlength="5"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
@@ -14,7 +15,11 @@
     <v-card-actions>
       <v-checkbox label="Common Word" @click="isCommon = !isCommon"></v-checkbox>
       <v-spacer />
-      <v-btn @click="changeToCommon()" :disabled="!textInput">Change</v-btn>
+      <v-btn
+        @click="changeToCommon()"
+        :disabled="!textInput || !isAlphabetical.test(textInput) || textInput.length !== 5"
+        >Change</v-btn
+      >
     </v-card-actions>
   </v-card>
 </template>
@@ -23,6 +28,7 @@
 import { ref } from 'vue'
 import Axios from 'axios'
 
+const isAlphabetical = /^[A-Za-z]+$/
 const swapped = ref<boolean>(false)
 const swappedError = ref<boolean>(false)
 const textInput = ref<string>()
