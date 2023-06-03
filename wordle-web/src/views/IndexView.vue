@@ -5,6 +5,7 @@
   <v-table>
     <thead>
       <v-text-field v-model="input" label="Label" @keyup="getInput()" variant="solo"></v-text-field>
+      <WordEditor />
       <!--change color of feild, add clear button-->
       <tr>
         <th class="text-left">ID</th>
@@ -45,6 +46,7 @@
 <script setup lang="ts">
 import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
+import WordEditor from '../components/WordEditor.vue'
 import $router from '../router/index'
 
 const input = ref('')
