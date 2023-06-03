@@ -9,6 +9,16 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import NavigationBar from './components/NavigationBar.vue'
+import { Services } from './scripts/services'
+import { SignInService } from './scripts/signInService'
+import { reactive, provide } from 'vue'
+
+const signInService = reactive(new SignInService())
+provide(Services.SignInService, signInService)
+
+setTimeout(() => {
+  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
+}, 1000)
 </script>
 
 <style scoped>
