@@ -45,11 +45,18 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
-        [HttpPost("DeleteWordFromText")]
+        [HttpPost("DeleteWordFromBody")]
         [Authorize(Policy = Policies.MasterOfTheUniverse)]
-        public async Task<Word> DeleteWord(string targetWord)
+        public async Task<Word> DeleteWord([FromBody] WordDto word)
         {
-            return await _wordService.DeleteWordAsync(targetWord);
+            return await _wordService.DeleteWordAsync(word.Text);
+        }
+
+        [HttpPost("SetIsCommon")]
+        [Authorize]
+        public async Task<Word> SetIsCommon([FromBody] WordDto word)
+        {
+            return await _wordService.SetIsCommonAsync(word.Text, word.IsCommon);
         }
 
         [HttpPost("AddWordFromBody")]

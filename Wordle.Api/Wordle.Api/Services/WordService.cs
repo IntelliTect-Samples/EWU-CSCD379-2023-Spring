@@ -81,6 +81,22 @@ public class WordService
         return word;
     }
 
+    public async Task<Word> SetIsCommonAsync(string? targetWord, bool isCommon)
+    {
+        if (string.IsNullOrEmpty(targetWord) || targetWord.Length != 5)
+        {
+            throw new ArgumentException("Word must be 5 characters long");
+        }
+
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == targetWord);
+        if(word != null)
+        {
+            word.IsCommon = isCommon;
+        }
+        await _db.SaveChangesAsync();
+        return word;
+
+    }
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
         if (date is null)
