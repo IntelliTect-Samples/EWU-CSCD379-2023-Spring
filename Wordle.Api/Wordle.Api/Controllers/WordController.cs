@@ -23,10 +23,11 @@ namespace Wordle.Api.Controllers
             return (await _wordService.GetRandomWordAsync()).Text;
         }
 
+
         [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int? count)
+        public async Task<IEnumerable<Word>> GetManyWords(int? count, string? wordSegment)
         {
-            return await _wordService.GetSeveralWordsAsync(count);
+            return await _wordService.GetSeveralWordsAsync(count, wordSegment);
         }
 
         [HttpPost]

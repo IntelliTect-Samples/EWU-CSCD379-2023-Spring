@@ -26,16 +26,15 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
+    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count, string? wordSegment)
     {
         count ??= 10;
+        wordSegment ??= "";
         var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
         totalCount -= count.Value;
         int index = new Random().Next(totalCount);
         var words = await _db.Words
-          .Where(word => word.IsCommon)
-          .Skip(index)
-          .Take(count.Value)
+          .Where(word => word.Text.StartsWith(wordSegment))
           .OrderByDescending(w => w.Text)
           .ToListAsync();
         return words;
