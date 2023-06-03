@@ -5,7 +5,7 @@
       <v-text-field
         @input="editText($event.target.value)"
         :messages="swapped ? [`Word ${message} common`] : []"
-        :errorMessages="swapped ? [`Could not be ${message} common`] : []"
+        :errorMessages="swappedError ? [`Could not be ${message} common`] : []"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
@@ -25,22 +25,25 @@ import Axios from 'axios'
 const swapped = ref<boolean>(false)
 const swappedError = ref<boolean>(false)
 const textInput = ref<string>()
-let isCommon = false
+let isCommon = ref<boolean>(false)
 
-const message = isCommon ? 'removed from' : 'added to'
+let message = ''
 
 const editText = (text: string) => {
   textInput.value = text
 }
 
 const changeToCommon = () => {
+  console.log(textInput.value, isCommon.value)
   swappedError.value = false
   swapped.value = false
-  Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon}`)
+  Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon.value}`)
     .then((res) => {
+      message = isCommon.value === true ? 'added to' : 'removed from'
       swapped.value = true
     })
     .catch((err) => {
+      message = isCommon.value === true ? 'added to' : 'removed from'
       swappedError.value = true
       console.log(err)
     })
