@@ -4,6 +4,8 @@
       Change Common Word:
       <v-text-field
         @input="editText($event.target.value)"
+        :messages="swapped ? [`Word ${message} common`] : []"
+        :errorMessages="swapped ? [`Could not be ${message} common`] : []"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
@@ -20,20 +22,27 @@
 import { ref } from 'vue'
 import Axios from 'axios'
 
+const swapped = ref<boolean>(false)
+const swappedError = ref<boolean>(false)
 const textInput = ref<string>()
 let isCommon = false
+
+const message = isCommon ? 'removed from' : 'added to'
 
 const editText = (text: string) => {
   textInput.value = text
 }
 
 const changeToCommon = () => {
-  console.log(textInput.value, isCommon)
-  const postArgs = {
-    newWord: textInput.value,
-    isCommon: isCommon
-  }
-  console.log(postArgs)
-  Axios.post('/Word', postArgs)
+  swappedError.value = false
+  swapped.value = false
+  Axios.post(`/Word?newWord=${textInput.value}&isCommon=${isCommon}`)
+    .then((res) => {
+      swapped.value = true
+    })
+    .catch((err) => {
+      swappedError.value = true
+      console.log(err)
+    })
 }
 </script>
