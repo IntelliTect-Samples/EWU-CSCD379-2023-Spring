@@ -5,7 +5,7 @@
   <v-table>
     <thead>
       <v-text-field v-model="input" label="Label" @keyup="getInput()" variant="solo"></v-text-field>
-      <WordEditor />
+      <WordEditor @refresh="fetchWords()"/>
       <!--change color of feild, add clear button-->
       <tr>
         <th class="text-left">ID</th>
@@ -70,12 +70,13 @@ function goBack() {
 }
 
 function getInput() {
-  fetchWords(1)
+  fetchWords()
 }
 
-function fetchWords(page: number) {
-  console.log('Fetch Words: ' + page)
-  Axios.get(`/Word/GetPageOfWords?page=${page}&filter=${input.value}`).then((response) => {
+
+function fetchWords() {
+
+  Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then((response) => {
     console.log(response.data),
       (totalPages.value = response.data.Item1),
       (Words.value = JSON.parse(response.data.Item2).map((word: any) => ({
@@ -87,8 +88,9 @@ function fetchWords(page: number) {
 }
 
 watch(currentPage, (newVal) => {
-  fetchWords(newVal)
+  currentPage.value = newVal; 
+  fetchWords()
 })
 
-fetchWords(1)
+fetchWords()
 </script>

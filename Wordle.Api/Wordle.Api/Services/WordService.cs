@@ -95,10 +95,11 @@ namespace Wordle.Api.Services
         }
 
             public async Task<bool> DropWord(string word) {
-            IQueryable<Word> words = _db.Words; 
+            IQueryable<Word> words = _db.Words;
             // Get word id 
-            if (!words.Any()) { return false; }
-            Word w = (await words.Where(w => w.Text.Equals(word)).FirstAsync());
+            IQueryable<Word> subset = words.Where(w => w.Text.Equals(word)); 
+            if (!subset.Any()) { return false; }
+            Word w = await subset.FirstAsync();
             // Drop it 
             _db.Words.Remove(w);
             //save db

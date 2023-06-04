@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -52,7 +53,8 @@ public class TokenController : Controller
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
+                new Claim(Claims.UserName, user.UserName!.ToString()),
+                new Claim(Claims.MasterOfTheUniverse, user.MasterOfTheUniverse.ToString())
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -88,11 +90,24 @@ public class TokenController : Controller
         {
             return BadRequest("Name is required");
         }
+        if (string.IsNullOrEmpty(createUser.Year))
+        {
+            return BadRequest("Year is required");
+        }
+        if (string.IsNullOrEmpty(createUser.Month))
+        {
+            return BadRequest("Month is required");
+        }
+        if (string.IsNullOrEmpty(createUser.Day))
+        {
+            return BadRequest("Day is required");
+        }
         var user = new AppUser
         {
             UserName = createUser.Username,
             Email = createUser.Username,
-            Name = createUser.Name
+            Name = createUser.Name,
+            DateOfBirth = new DateTime(int.Parse(createUser.Year), int.Parse(createUser.Month), int.Parse(createUser.Day))
         };
         var result = await _userManager.CreateAsync(user, createUser.Password);
         if (result.Succeeded)
