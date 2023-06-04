@@ -1,6 +1,19 @@
 <template>
   <v-app>
     <span class="bg"></span>
+    <v-dialog v-model="signInDialog" persistent>
+      <v-card class="w-25">
+        <v-card-title>Sign In</v-card-title>
+        <v-card-text>
+          <v-text-field label="Email" v-model="signInEmail" />
+          <v-text-field label="Password" v-model="signInPassword" />
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="green" @click="signIn">Sign In</v-btn>
+          <v-btn color="grey" @click="signInDialog = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <v-app-bar :elevation="3">
       <template v-slot>
         <v-app-bar-title>
@@ -49,10 +62,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="signInDialog = true">
                 Sign In
               </v-list-item-title>
             </v-list-item>
@@ -69,7 +79,7 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
@@ -83,6 +93,15 @@ provide(Services.Display, display)
 const signInService = inject(Services.SignInService) as SignInService
 
 const theme = useTheme()
+
+const signInDialog = ref(false)
+const signInEmail = ref('')
+const signInPassword = ref('')
+
+function signIn() {
+  signInService.signIn(signInEmail.value, signInPassword.value)
+  signInDialog.value = false
+}
 
 function switchTheme() {
   if (theme.global.name.value === 'light') {

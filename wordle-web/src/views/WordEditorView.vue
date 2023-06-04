@@ -1,30 +1,30 @@
 <template>
   <v-dialog v-model="delDialog" persistent>
     <v-card class="w-50 v-flex">
-      <v-row dense>
-        <v-col> Do you want to delete {{ delWord }}? </v-col>
-      </v-row>
-      <v-row dense>
-        <v-col>
-          <v-btn color="red" @click="deleteWord">Delete</v-btn>
-        </v-col>
-        <v-col>
-          <v-btn color="grey" @click="delDialog = false">Cancel</v-btn>
-        </v-col>
-      </v-row>
+      <v-card-text>Do you want to delete {{ delWord }}?</v-card-text>
+      <v-card-actions>
+        <v-btn color="red" @click="deleteWord">Delete</v-btn>
+        <v-btn color="grey" @click="delDialog = false">Cancel</v-btn>
+      </v-card-actions>
     </v-card>
   </v-dialog>
   <v-dialog v-model="addDialog" persistent>
     <v-card class="w-50">
-      <v-text-field label="Word" v-model="addWordText" />
-      <v-checkbox label="Is Common" v-bind="addWordIsCommon" />
-      <v-btn color="green" @click="addWord">Add</v-btn>
-      <v-btn color="grey" @click="addDialog = false">Cancel</v-btn>
+      <v-card-text>
+        <v-text-field label="Word" v-model="addWordText" />
+        <v-checkbox label="Is Common" v-bind="addWordIsCommon" />
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="green" @click="addWord">Add</v-btn>
+        <v-btn color="grey" @click="addDialog = false">Cancel</v-btn>
+      </v-card-actions>
     </v-card>
     <v-dialog v-model="duplicateDialog">
       <v-card class="w-25">
         <v-card-text>{{ addWordText }} already exists</v-card-text>
-        <v-btn color="gray" @click="duplicateDialog = false">Ok</v-btn>
+        <v-card-actions>
+          <v-btn color="gray" @click="duplicateDialog = false">Ok</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-dialog>
