@@ -166,7 +166,8 @@ function addWord(word : string, isCommon : boolean) {
 const newWordRules = [
   (v: string) => !!v || "New word is required",
   (v: string) => /^[A-Za-z]+$/.test(v) || "New word must contain only letters",
-  (v: string) => (v && v.length === 5) || "New word must have exactly 5 letters"
+  (v: string) => (v && v.length === 5) || "New word must have exactly 5 letters",
+  (v: string) => !countitem.value.some(item => item.text === v) || "Word already exists in the list"
 ]
 
 watch(newword, (value) => {
