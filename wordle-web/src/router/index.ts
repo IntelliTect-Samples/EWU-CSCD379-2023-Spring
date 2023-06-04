@@ -55,6 +55,11 @@ const router = createRouter({
       path: '/index',
       name: 'index',
       component: IndexView
+    },
+    {
+      path: '/signIn',
+      name: 'signIn',
+      component: () => import('../views/SignView.vue')
     }
   ]
 })

@@ -45,6 +45,7 @@
               <router-link to="/index"
                 ><v-list-item-title>Dictionary</v-list-item-title></router-link
               >
+              <router-link to="/signIn"><v-list-item-title>signIn</v-list-item-title></router-link>
             </v-list>
           </v-menu>
         </template>
