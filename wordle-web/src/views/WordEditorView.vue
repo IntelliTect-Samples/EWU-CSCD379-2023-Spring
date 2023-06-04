@@ -2,7 +2,10 @@
   <v-table>
     <thead>
       <tr class="align-center">
-        <th class="text-left" colspan="5"><v-text-field label="Search"></v-text-field></th>
+        <!-- I want to bind the searchField to the v-text-field -->
+        <th class="text-left" colspan="5">
+          <v-text-field v-model="searchField" label="Search"></v-text-field>
+        </th>
       </tr>
     </thead>
     <thead>
@@ -18,13 +21,12 @@
       <tr v-for="(word, index) in wordList" :key="word.wordId">
         <td class="text-center">{{ index + 1 }}</td>
         <td class="text-center">{{ word.text }}</td>
-
-        <td class="align-center"><v-checkbox :model-value="word.isCommon"></v-checkbox></td>
-
-        <td>
-          <v-btn variant="outlined"> Save </v-btn>
+        <td class="align-center">
+          <!-- Toggle disable vs not disabled once the policy is implemented. -->
+          <v-checkbox :model-value="word.isCommon"></v-checkbox>
         </td>
-
+        <!-- Toggle the ability to edit and delete words once claims are implemented -->
+        <td><v-btn variant="outlined"> Save </v-btn></td>
         <td class="align-center"><v-btn variant="outlined"> Delete </v-btn></td>
       </tr>
       <tr>
@@ -57,14 +59,17 @@ import { watch } from 'vue'
 
 const wordList = ref<WordEntry[]>([])
 let entriesPerPage = ref(10)
+let searchField = ref('')
 
 watch(entriesPerPage, getWords)
+watch(searchField, getWords)
 
 getWords()
 
 function getWords() {
-  Axios.get(`/Word/SearchForWord?entriesPerPage=${entriesPerPage.value}`).then((result) => {
-    console.log(result.data)
+  Axios.get(
+    `/Word/SearchForWord?search=${searchField.value}&entriesPerPage=${entriesPerPage.value}`
+  ).then((result) => {
     wordList.value = result.data as WordEntry[]
   })
 }

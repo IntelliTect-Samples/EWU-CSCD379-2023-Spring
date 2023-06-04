@@ -158,6 +158,17 @@ public class WordService
     public async Task<List<Word>> GetSearchWordsAndPaginate(string search, int pageNumber, int entriesPerPage)
     {
         pageNumber--;
+
+        if (search != "")
+        {
+            return await _db.Words
+            .Skip(pageNumber * entriesPerPage)
+            .Where(entry => entry.Text.StartsWith(search))
+            .Take(entriesPerPage)
+            .OrderBy(entry => entry.Text)
+            .ToListAsync();
+        }
+
         return await _db.Words
             .Skip(pageNumber * entriesPerPage)
             .Take(entriesPerPage)
