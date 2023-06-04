@@ -23,7 +23,7 @@ public static class Policies
 
     public static void NewPolicy(AuthorizationPolicyBuilder policy)
     {
-        policy.RequireClaim(Claims.Policy); //change to the other thing
+        policy.RequireClaim(Claims.Policy); //change to the other thing //might have to change seed users so that we add a claim to one
         policy.RequireAssertion(context => 
         {
             DateTime currentDate = DateTime.Now;
