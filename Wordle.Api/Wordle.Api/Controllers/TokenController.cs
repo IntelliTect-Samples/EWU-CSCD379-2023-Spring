@@ -133,10 +133,10 @@ public class TokenController : Controller
     }
 
     [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles = "RulerOfTheUniverse,Meg")] // is an or operation
+    [Authorize(Policy = "NewPolicy")]
     public string TestRulerOfTheUniverseOrMeg()
     {
-        return "Authorized as Ruler of the Universe or Meg";
+        return "Authorized as Ruler of the Universe and over 21";
     }
 
 }
