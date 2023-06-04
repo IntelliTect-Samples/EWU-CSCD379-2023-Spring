@@ -54,7 +54,8 @@ public class TokenController : Controller
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName!.ToString()),
-                new Claim(Claims.MasterOfTheUniverse, user.MasterOfTheUniverse.ToString())
+                new Claim(Claims.MasterOfTheUniverse, user.MasterOfTheUniverse.ToString()),
+                new Claim(Claims.Dob, user.DateOfBirth.ToString())
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)

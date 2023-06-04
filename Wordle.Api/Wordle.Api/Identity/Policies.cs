@@ -23,14 +23,15 @@ public static class Policies
 
     public static void NewPolicy(AuthorizationPolicyBuilder policy)
     {
-        policy.RequireClaim(Claims.Policy); //change to the other thing //might have to change seed users so that we add a claim to one
+        policy.RequireClaim(Claims.MasterOfTheUniverse); 
         policy.RequireAssertion(context => 
         {
             DateTime currentDate = DateTime.Now;
-            int age = currentDate.Year - context.User.dateOfBirth.Year;
+            var DOB = DateTime.Parse(context.User.Claims.FirstOrDefault(c => c.Type == Claims.Dob)!.Value);
+            int age = currentDate.Year - DOB.Year;
 
             // Check if the user has already had their birthday this year
-            if (context.User.dateOfBirth.Date > currentDate.AddYears(-age))
+            if (DOB.Date > currentDate.AddYears(-age))
                 age--;
 
             return age > 21;
