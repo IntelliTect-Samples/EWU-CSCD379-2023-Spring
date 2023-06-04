@@ -1,7 +1,5 @@
 import { describe, it, expect } from 'vitest'
 import { WordleGame } from '../wordleGame'
-import { WordsService } from '../wordsService'
-import { GuessingStrategy, WordlePlayer } from '../wordlePlayer'
 
 // TODO: make this test better
 describe('Solve Simple', () => {

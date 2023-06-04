@@ -2,7 +2,7 @@
   <v-table>
     <thead>
       <tr class="align-center">
-        <th class="text-left" colspan="3">
+        <th class="text-left" colspan="2">
           <v-text-field
             v-model="searchField"
             variant="outlined"
@@ -28,7 +28,6 @@
         <th class="text-center">Index</th>
         <th class="text-center">Word</th>
         <th class="text-center">Well Known?</th>
-        <th class="text-center">Save</th>
         <th class="text-center">Delete</th>
       </tr>
     </thead>
@@ -42,21 +41,15 @@
             v-model="word.isCommon"
             @click="changeFlag(word.wordId, word.isCommon)"
           ></v-checkbox>
-          <!-- <v-checkbox
-            value="word.isCommon"
-            @click="changeFlag(word.wordId, !word.isCommon)"
-            hide-details
-          ></v-checkbox> -->
         </td>
-        <!-- Toggle the ability to edit and delete words once claims are implemented -->
-        <td><v-btn variant="outlined"> Save </v-btn></td>
+        <!-- Toggle the ability to change the flag and delete words once claims are implemented -->
         <td class="align-center">
           <v-btn variant="outlined" @click="deleteWord(word)"> Delete </v-btn>
         </td>
       </tr>
       <tr>
         <td class="text-left">Words Per Page</td>
-        <td class="text-center" colspan="2">
+        <td class="text-center" colspan="1">
           <v-select
             density="compact"
             hide-details

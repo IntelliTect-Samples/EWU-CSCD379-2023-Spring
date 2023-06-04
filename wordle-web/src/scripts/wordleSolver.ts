@@ -159,7 +159,7 @@ export class WordleSolver {
 
     const usages = this.getLetterUsages()
     //Remove letters that are already guessed
-    for (const [letter, count] of letterCounts) {
+    for (const [letter] of letterCounts) {
       if (usages.filter((u) => u.char == letter).length > 0) {
         letterCounts.delete(letter)
       }
