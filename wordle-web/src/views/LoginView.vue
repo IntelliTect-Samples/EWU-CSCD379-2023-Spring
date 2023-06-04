@@ -4,7 +4,11 @@
       <v-card-title>Login</v-card-title>
       <v-card-item>
         <v-text-field label="Email:" @input="updateEmail($event.target.value)"></v-text-field>
-        <v-text-field label="Password:" @input="updatePassword($event.target.value)"></v-text-field>
+        <v-text-field
+          type="password"
+          label="Password:"
+          @input="updatePassword($event.target.value)"
+        ></v-text-field>
       </v-card-item>
       <v-card-actions style="display: flex; justify-content: right">
         <v-btn @click="signInService.signIn(email, password)" to="/">Login</v-btn>
