@@ -20,7 +20,7 @@ import { PlayerService } from './scripts/playerService'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'https://wordle2023.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://wordle-assignment5-app.azurewebsites.net/'
 }
 
 // Provide the useDisplay to other components so that it can be used in testing.
@@ -58,8 +58,11 @@ const vuetify = createVuetify({
 })
 
 const app = createApp(App)
+
+// Create basic services
 const signInService = reactive(SignInService.instance)
 app.provide(Services.SignInService, signInService)
+
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 app.provide(Services.PlayerService, playerService)

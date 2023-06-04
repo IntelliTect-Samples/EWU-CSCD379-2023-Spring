@@ -11,7 +11,10 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
-        <v-btn>{{ signInService.token.userName }}</v-btn>
+        <v-btn>
+          <span v-if="!signInService.isSignedIn">Not signed in</span>
+          <span v-else>{{ signInService.token.userName }}</span>
+        </v-btn>
 
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
         <ActiveUser></ActiveUser>
@@ -39,6 +42,11 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
+                <RouterLink :to="{ name: 'wordEditor' }"> Word Editor </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="signInService.isSignedIn">
+              <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
@@ -46,10 +54,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="router.push('/login')">
                 Sign In
               </v-list-item-title>
             </v-list-item>
@@ -66,12 +71,14 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
+import { RouterLink } from 'vue-router'
+import router from './router'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
@@ -98,6 +105,7 @@ function setDarkTheme() {
 }
 
 setTimeout(() => {
+  // This is terrible, nasty, and should be removed.
   signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
 }, 1000)
 </script>
