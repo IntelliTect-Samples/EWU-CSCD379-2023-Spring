@@ -17,7 +17,7 @@ const signInService = reactive(new SignInService())
 provide(Services.SignInService, signInService)
 /*
 setTimeout(() => {
-  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
+  signInService.signIn('AdminIntellitect.com', 'P@ssw0rd123')
 }, 1000)
 */
 </script>

@@ -16,10 +16,10 @@
             label="Name"
             required
           ></v-text-field>
-          <v-row class="d-flex flex-wrap bg-surface-variant">
-          <p>Is Common: </p>
-          <input type="checkbox"  v-model="toggle" true-value="yes" false-value="no">
-          </v-row>
+          <div class="text-center">
+          <p class="d-inline mr-2">Is Common: </p>
+          <input type="checkbox"  v-model="isCommon" true-value=true false-value=false>
+          </div>
 
           <div class="d-flex flex-column">
             <v-btn color="success" class="mt-4" block @click="addWordAndRefresh" >Add</v-btn>
@@ -52,7 +52,7 @@ export default {
     return {
       dialog: false,
       input: '',
-      toggle: 'no',
+      isCommon: false,
       valid: true,
       wordRules: [
         (v: string) => !!v || 'Word is required',
@@ -102,20 +102,40 @@ export default {
         })
     },
 
+    addWord(){
+      console.log('Adding: ' + this.input)
+      return Axios.post('/Word/AddWordFromBody', {
+  text: this.input,
+  isCommon: this.isCommon,
+  isUsed: false
+})
+  .then((response) => {
+    console.log('Response:', response.data);
+    console.log('Did Word Successfully Get Added: ' + response.data);
+    return response.data;
+  })
+  .catch((error) => {
+    console.log('Axios Error:', error);
+    return false;
+  });
+
+    },
+
     addWordAndRefresh() {
-      Axios.get(`/Word/AddWord?word=${this.input}`).then((isAdded) => {
-        
-        if (isAdded) {
-          console.log('Refresh Dictionary - Word Editor');
-          this.$emit('refresh'); // Emit the event to trigger the parent action
-          this.closeDialog(); // Close the dialog after emitting the event
-        } else {
-          console.log('Type of IsRemoved: ' + typeof isAdded);
-          console.log('What is removed? ' + isAdded);
-        }
-      }).catch((error) => {
-        console.log('Error:', error);
-      });
+      this.addWord()
+        .then((isAdded) => {
+          if (isAdded) {
+            console.log('Refresh Dictionary - Word Editor')
+            this.$emit('refresh') // Emit the event to trigger the parent action
+            this.closeDialog() // Close the dialog after emitting the event
+          } else {
+            console.log('Type of IsRemoved: ' + typeof isAdded)
+            console.log('What is removed? ' + isAdded)
+          }
+        })
+        .catch((error) => {
+          console.log('Error:', error)
+        })
 
     },
 
