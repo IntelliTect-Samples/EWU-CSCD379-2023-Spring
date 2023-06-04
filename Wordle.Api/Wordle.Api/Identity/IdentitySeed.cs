@@ -52,6 +52,7 @@ public static class IdentitySeed
             };
 
             IdentityResult result = userManager.CreateAsync(user, "Qwerty#3").Result;
+            //I was going to use qwerty as the least secure password, but I wasn't allowed to
 
         }
     }
