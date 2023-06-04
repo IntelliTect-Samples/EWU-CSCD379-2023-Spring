@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Identity;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -29,16 +31,32 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetSeveralWordsAsync(count);
         }
 
-        [HttpPost]
-        public async Task<Word> AddWord(string newWord, bool isCommon)
+        [HttpGet("GetAllWords")]
+        public async Task<IEnumerable<Word>> GetAllWords()
         {
-            return await _wordService.AddWordAsync(newWord, isCommon);
+            return await _wordService.GetAllWordsAsync();
         }
+
+        [HttpPost("AddWord")]
+        [Authorize(Roles = "RulerOfTheUniverse")]
+        public async Task<Word> AddWord(string newWord, bool isCommon)
+            => await _wordService.AddWordAsync(newWord, isCommon);
+
+        [HttpPost("DeleteWord")]
+        [Authorize(Roles = "RulerOfTheUniverse")]
+        public async Task<bool> DeleteWord(string word)
+            => await _wordService.DeleteWordAsync(word);
 
         [HttpPost("AddWordFromBody")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
             return await _wordService.AddWordAsync(word.Text, word.IsCommon);
+        }
+
+        [HttpPost("ChangeIsCommon")]
+        public async Task ChangeIsCommon(string word)
+        {
+            await _wordService.ChangeIsCommonAsync(word);
         }
 
         [HttpGet("WordOfTheDay")]
