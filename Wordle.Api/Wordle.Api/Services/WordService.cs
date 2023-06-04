@@ -23,20 +23,6 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
-    {
-        count ??= 10;
-        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-        totalCount -= count.Value;
-        int index = new Random().Next(totalCount);
-        var words = await _db.Words.Where(word => word.IsCommon)
-                        .Skip(index)
-                        .Take(count.Value)
-                        .OrderByDescending(w => w.Text)
-                        .ToListAsync();
-        return words;
-    }
-
     public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
     {
         if (newWord is null || newWord.Length != 5)
