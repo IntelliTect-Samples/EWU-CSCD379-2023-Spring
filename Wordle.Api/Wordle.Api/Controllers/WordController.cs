@@ -58,5 +58,18 @@ namespace Wordle.Api.Controllers
         {
             return await _wordService.GetSearchWordsAndPaginate(search, pageNumber, entriesPerPage);
         }
+
+        [HttpDelete("DeleteWord")]
+        public async Task<bool> DeleteWord(int wordId)
+        {
+            return await _wordService.DeleteAsync(wordId);
+        }
+
+        [HttpPut("ChangeFlag")]
+        public async Task<bool> UpdateCommonWordFlag(int wordId, bool isCommon)
+        {
+            return await _wordService.UpdateCommonWordFlag(wordId, isCommon);
+        }
+
     }
 }    

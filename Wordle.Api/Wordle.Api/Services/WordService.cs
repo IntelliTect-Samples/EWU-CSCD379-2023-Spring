@@ -175,4 +175,36 @@ public class WordService
             .OrderBy(entry => entry.Text)
             .ToListAsync();
     }
+
+    public async Task<bool> DeleteAsync(int wordId)
+    {
+        var word = await _db.Words.FirstOrDefaultAsync(entry => entry.WordId == wordId);
+        if (word == null)
+        {
+            return false;
+        }
+        else
+        {
+            _db.Words.Remove(word);
+            await _db.SaveChangesAsync();
+        }
+
+        return true;
+    }
+
+    public async Task<bool> UpdateCommonWordFlag(int wordId, bool isCommon)
+    {
+        var word = await _db.Words.FirstOrDefaultAsync(entry => entry.WordId == wordId);
+        if (word != null)
+        {
+            word.IsCommon = isCommon;
+            await _db.SaveChangesAsync();
+            return true;
+        }
+        else
+        {
+            return false;
+            throw new ArgumentException("Word was not found.");
+        }
+    }
 }

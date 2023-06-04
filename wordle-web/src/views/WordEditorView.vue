@@ -2,10 +2,25 @@
   <v-table>
     <thead>
       <tr class="align-center">
-        <!-- I want to bind the searchField to the v-text-field -->
-        <th class="text-left" colspan="5">
-          <v-text-field v-model="searchField" variant="outlined" label="Search"></v-text-field>
+        <th class="text-left" colspan="3">
+          <v-text-field
+            v-model="searchField"
+            variant="outlined"
+            label="Search"
+            density="compact"
+            hide-details
+          ></v-text-field>
         </th>
+        <th>
+          <v-text-field
+            v-model="newWord"
+            variant="outlined"
+            label="New Word"
+            density="compact"
+            hide-details
+          ></v-text-field>
+        </th>
+        <th><v-btn @click="addWord(newWord)"> Add Word </v-btn></th>
       </tr>
     </thead>
     <thead>
@@ -23,19 +38,31 @@
         <td class="text-center">{{ word.text }}</td>
         <td class="align-center">
           <!-- Toggle disable vs not disabled once the policy is implemented. -->
-          <v-checkbox :model-value="word.isCommon"></v-checkbox>
+          <v-checkbox
+            v-model="word.isCommon"
+            @click="changeFlag(word.wordId, word.isCommon)"
+          ></v-checkbox>
+          <!-- <v-checkbox
+            value="word.isCommon"
+            @click="changeFlag(word.wordId, !word.isCommon)"
+            hide-details
+          ></v-checkbox> -->
         </td>
         <!-- Toggle the ability to edit and delete words once claims are implemented -->
         <td><v-btn variant="outlined"> Save </v-btn></td>
-        <td class="align-center"><v-btn variant="outlined"> Delete </v-btn></td>
+        <td class="align-center">
+          <v-btn variant="outlined" @click="deleteWord(word)"> Delete </v-btn>
+        </td>
       </tr>
       <tr>
         <td class="text-left">Words Per Page</td>
         <td class="text-center" colspan="2">
           <v-select
+            density="compact"
+            hide-details
+            variant="outlined"
             v-model="entriesPerPage"
             :items="[10, 25, 50, 100]"
-            label="Words per page"
           ></v-select>
         </td>
         <td><v-btn variant="outlined" @click="decreasePageNumber()"> Prev </v-btn></td>
@@ -63,6 +90,7 @@ const wordList = ref<WordEntry[]>([])
 let searchField = ref('')
 let pageNumber = ref(1)
 let entriesPerPage = ref(10)
+let newWord = ref('')
 
 watch(searchField, getWords)
 watch(entriesPerPage, getWords)
@@ -78,6 +106,12 @@ function decreasePageNumber() {
   getWords()
 }
 
+function deleteWord(word: WordEntry) {
+  Axios.delete(`/Word/DeleteWord?wordId=${word.wordId}`).then(() => {
+    getWords()
+  })
+}
+
 getWords()
 
 function getWords() {
@@ -85,6 +119,19 @@ function getWords() {
     `/Word/SearchForWord?search=${searchField.value}&pageNumber=${pageNumber.value}&entriesPerPage=${entriesPerPage.value}`
   ).then((result) => {
     wordList.value = result.data as WordEntry[]
+  })
+}
+// Need to guard this endpoint with a policy.
+function addWord(word: string) {
+  Axios.post(`/Word/?newWord=${word}&isCommon=true`).then(() => {
+    newWord.value = ''
+    getWords()
+  })
+}
+
+function changeFlag(wordId: number, isCommon: boolean) {
+  Axios.put(`/Word/ChangeFlag?wordId=${wordId}&isCommon=${!isCommon}`).then(() => {
+    getWords()
   })
 }
 </script>
