@@ -18,4 +18,16 @@ public static class Policies
             return false;
         });
     }
+    public const string MasterAndAge = "MasterAndAgePolicy";
+
+    public static void MasterAndAgePolicy(AuthorizationPolicyBuilder policy)
+    {
+        policy.RequireClaim(Claims.MasterOfTheUniverse);
+        {
+            DateTime temp;
+            DateTime now = DateTime.UtcNow;
+            var userAge = 
+        }
+
+    }
 }

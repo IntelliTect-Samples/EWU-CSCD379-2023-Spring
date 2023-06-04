@@ -52,6 +52,8 @@ public class TokenController : Controller
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
+                new Claim(Claims.MasterOfTheUniverse, user.MasterOfTheUniverse.ToString()),
+                new Claim(Claims.Age, user.BDay.ToString())
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -87,11 +89,24 @@ public class TokenController : Controller
         {
             return BadRequest("Name is required");
         }
+        if (string.IsNullOrEmpty(createUser.Year))
+        {
+            return BadRequest("Year is required");
+        }
+        if (string.IsNullOrEmpty(createUser.Month))
+        {
+            return BadRequest("Month is required");
+        }
+        if (string.IsNullOrEmpty(createUser.Day))
+        {
+            return BadRequest("Day is required");
+        }
         var user = new AppUser
         {
             UserName = createUser.Username,
             Email = createUser.Username,
-            Name = createUser.Name
+            Name = createUser.Name,
+            BDay = new DateTime(int.Parse(createUser.Year), int.Parse(createUser.Month), int.Parse(createUser.Day))
         };
         var result = await _userManager.CreateAsync(user, createUser.Password);
         if (result.Succeeded)
@@ -116,10 +131,10 @@ public class TokenController : Controller
     }
 
     [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles="RulerOfTheUniverse,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
+    [Authorize(Policy = "MasterAndAgePolicy")]
+    public string TestRulerOfTheUniverseAnd21()
     {
-        return "Authorized as Ruler of the Universe or Meg";
+        return "User is Ruler of the Universe and over 21";
     }
 
     [HttpGet("testrandomadmin")]

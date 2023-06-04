@@ -38,6 +38,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddWordFromBody")]
+        [Authorize(Policy = "MasterAndAgePolicy")]
         public async Task<Response<Word>> AddWordFromBody([FromBody] WordDto word)
         {
             return await _wordService.AddWordAsync(word.Text, word.IsCommon);
@@ -62,6 +63,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpDelete("DeleteWord")]
+        [Authorize(Policy = "MasterAndAgePolicy")]
         public async Task<bool> DeleteWord(int wordId)
         {
             return await _wordService.DeleteWord(wordId);
