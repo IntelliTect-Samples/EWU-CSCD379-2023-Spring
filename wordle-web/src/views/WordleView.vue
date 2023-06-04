@@ -68,12 +68,11 @@ import { inject } from 'vue'
 import { Services } from '@/scripts/services'
 import { useDisplay } from 'vuetify'
 import type { SignInService } from '@/scripts/signInService'
-import type { PlayerService } from '@/scripts/playerService'
+
 
 const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
-const playerService = inject(Services.PlayerService) as PlayerService
 const signInService = inject(Services.SignInService) as SignInService
 
 const guess = ref('')

@@ -20,48 +20,56 @@ export class SignInService {
   private _token: WordleToken = new WordleToken()
   private _isSignedIn: boolean = false
   private static _instance = new SignInService()
+  private _tokenLocalStorageKey = 'token'
 
-  private constructor() {}
+  private constructor() {
+    this.setToken(localStorage.getItem(this._tokenLocalStorageKey))
+  }
 
-  public async signIn(username: string, password: string) {
-    Axios.post('Token/GetToken', {
-      username: username,
-      password: password
-    })
-      .then((result) => {
-        this.setToken(result.data.token)
-        console.log(this.token)
-        console.log(this.token.roles)
-        Axios.get('Token/TestAdmin').then((result) => {
-          console.log(result)
-        })
-        this._isSignedIn = true
+  public async signInAsync(username: string, password: string): Promise<boolean> {
+    try {
+      const result = await Axios.post('Token/GetToken', {
+        username: username,
+        password: password
       })
-      .catch((err) => {
-        console.log(`Login failed: ${err}`)
-        this.signOut()
-      })
-      .finally(() => {
-        console.log(`User Signed In: ${this.isSignedIn}`)
-      })
+      this.setToken(result.data.token)
+      // Axios.get('Token/TestAdmin').then((result) => {
+      //   console.log(result)
+      // })
+      this._isSignedIn = true
+      return true
+    } catch (err) {
+      console.log(`Login failed: ${err}`)
+      this.signOut()
+      return false
+    }
   }
 
   public signOut() {
-    this._token = new WordleToken()
-    this._isSignedIn = false
-    this._rawToken = ''
+    this.setToken(null)
   }
 
   public get isSignedIn() {
     return this._isSignedIn
   }
 
-  private setToken(token: string) {
-    this._rawToken = token
-    Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
-    const parts = token.split('.')
-    const payload = JSON.parse(window.atob(parts[1]))
-    this._token = Object.assign(new WordleToken(), payload)
+  private setToken(token: string | null) {
+    if (!token) {
+      // Clear the token
+      this._token = new WordleToken()
+      this._isSignedIn = false
+      this._rawToken = ''
+      localStorage.setItem(this._tokenLocalStorageKey, '')
+    } else {
+      // Set the token
+      this._rawToken = token
+      localStorage.setItem(this._tokenLocalStorageKey, this._rawToken)
+      this._isSignedIn = true
+      Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+      const parts = token.split('.')
+      const payload = JSON.parse(window.atob(parts[1]))
+      this._token = Object.assign(new WordleToken(), payload)
+    }
   }
 
   public get rawToken(): string | null {

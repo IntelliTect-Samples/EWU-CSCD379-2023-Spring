@@ -16,7 +16,7 @@ import Axios from 'axios'
 
 import { Services } from './scripts/services'
 import { SignInService } from './scripts/signInService'
-import { PlayerService } from './scripts/playerService'
+
 
 //Check if the app is running on localhost
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -103,10 +103,6 @@ const app = createApp(App)
 // Create basic services
 const signInService = reactive(SignInService.instance)
 app.provide(Services.SignInService, signInService)
-
-const playerService = new PlayerService()
-playerService.setupPlayerAsync()
-app.provide(Services.PlayerService, playerService)
 
 app.use(vuetify)
 

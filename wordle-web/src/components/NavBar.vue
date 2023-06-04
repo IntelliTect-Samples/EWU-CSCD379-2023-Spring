@@ -49,6 +49,17 @@
           <v-list-item prepend-icon="mdi-information" to="/about">
             About 
           </v-list-item>
+          <v-list-item prepend-icon="mdi-account-cancel" @click="showSignInDialog = true">
+            Sign In
+          </v-list-item>
+          <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
+            Sign Out
+          </v-list-item-title>
+          <v-list-item v-if="signInService.isSignedIn">
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'about' }"> About </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>
@@ -82,6 +93,8 @@
     </v-card>
   </v-dialog>
 
+  <SignInDialog v-model="showSignInDialog"> </SignInDialog>
+
 </template>
 
 <script setup lang="ts">
@@ -91,15 +104,21 @@ import GameInstruction from './GameInstruction.vue'
 import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { Services } from '@/scripts/services'
+import SignInDialog from './SignInDialog.vue'
+import type { SignInService } from '@/scripts/signInService'
 
 const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
   typeof useDisplay
 >
 
+const signInService = inject(Services.SignInService) as SignInService
 
+
+const showSignInDialog = ref(false)
 const theme = useTheme()
 const drawer = ref (false)
 const setting = ref (false)
+
 
 function setTheme(themecolor: string){
   if(themecolor === "light" )
