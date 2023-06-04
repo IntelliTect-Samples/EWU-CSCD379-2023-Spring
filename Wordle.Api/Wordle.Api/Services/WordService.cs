@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 
@@ -41,6 +42,11 @@ public class WordService
         return words;
     }
 
+    public async Task<IEnumerable<Word>> GetAllWordsAsync()
+    {
+        return await _db.Words.OrderBy(w => w.Text).ToListAsync();
+    }
+
     public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
     {
         if (newWord is null || newWord.Length != 5)
@@ -63,6 +69,21 @@ public class WordService
         }
         await _db.SaveChangesAsync();
         return word;
+    }
+
+    public async Task<bool> DeleteWordAsync(string word)
+    {
+        if (word.IsNullOrEmpty())
+            throw new ArgumentNullException(nameof(word));
+
+        Word? foundWord = await _db.Words.FindAsync((Word w) => w.Text == word);
+        if (foundWord is not null)
+        {
+            _db.Words.Remove(foundWord);
+            _db.SaveChanges();
+            return true;
+        }
+        return false;
     }
 
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
