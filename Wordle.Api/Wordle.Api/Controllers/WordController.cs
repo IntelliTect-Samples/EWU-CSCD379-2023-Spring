@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
 
@@ -19,6 +20,24 @@ public class WordController : ControllerBase
     public async Task<string> Get()
     {
         return (await _wordService.GetRandomWordAsync()).Text;
+    }
+
+    [HttpGet("GetManyWords")]
+    public async Task<IEnumerable<Word>> GetManyWords(int? count)
+    {
+        return await _wordService.GetSeveralWordsAsync(count);
+    }
+
+    [HttpPost]
+    public async Task<Word> AddWord(string newWord, bool isCommon)
+    {
+        return await _wordService.AddWordAsync(newWord, isCommon);
+    }
+
+    [HttpPost("AddWordFromBody")]
+    public async Task<Word> AddWordFromBody([FromBody] WordDto word)
+    {
+        return await _wordService.AddWordAsync(word.Text, word.IsCommon);
     }
 
     [HttpGet("WordOfTheDay")]

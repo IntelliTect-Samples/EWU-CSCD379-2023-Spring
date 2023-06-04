@@ -15,9 +15,9 @@ namespace Wordle.Api.Controllers;
 [ApiController]
 public class TokenController : Controller
 {
-    public AppDbContext _context;
-    public UserManager<AppUser> _userManager;
-    public JwtConfiguration _jwtConfiguration;
+    private AppDbContext _context;
+    private UserManager<AppUser> _userManager;
+    private JwtConfiguration _jwtConfiguration;
 
     public TokenController(AppDbContext context, UserManager<AppUser> userManager, JwtConfiguration jwtConfiguration)
     {
@@ -57,7 +57,7 @@ public class TokenController : Controller
                 new Claim(Claims.UserId, user.Id.ToString()),
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName,
-                          user.UserName!.ToString().Substring(0, user.UserName.ToString().IndexOf("@"))),
+                          user.UserName!.ToString().Substring(0, user.UserName.ToString().IndexOf("@")))
             };
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
@@ -100,28 +100,28 @@ public class TokenController : Controller
         return BadRequest(result.Errors);
     }
 
-    [HttpGet("test")]
+    [HttpGet("Test")]
     [Authorize]
     public string Test()
     {
         return "something";
     }
 
-    [HttpGet("testadmin")]
+    [HttpGet("TestAdmin")]
     [Authorize(Roles = Roles.Admin)]
     public string TestAdmin()
     {
         return "Authorized as Admin";
     }
 
-    [HttpGet("testruleroftheuniverse")]
+    [HttpGet("TestRulerOfTheUniverse")]
     [Authorize(Roles = "RulerOfTheUniverse,Meg")]
     public string TestRulerOfTheUniverseOrMeg()
     {
         return "Authorized as Ruler of the Universe or Meg";
     }
 
-    [HttpGet("testrandomadmin")]
+    [HttpGet("TestRandomAdmin")]
     [Authorize(Policy = Policies.RandomAdmin)]
     public string TestRandomAdmin()
     {
