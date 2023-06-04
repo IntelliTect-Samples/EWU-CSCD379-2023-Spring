@@ -41,6 +41,15 @@
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
+                Sign-out
+              </v-list-item-title>
+
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="signIn">
+                Sign-in
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -54,19 +63,24 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
-import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
+import { inject } from 'vue'
+import type { SignInService } from './scripts/signInService'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
-const playerService = new PlayerService()
-playerService.setupPlayerAsync()
-provide(Services.PlayerService, playerService)
+
+// const playerService = new PlayerService()
+// playerService.setupPlayerAsync()
+// provide(Services.PlayerService, playerService)
+
+const signInService = inject(Services.SignInService) as SignInService
+const showSignIn = ref(false)
 
 const theme = useTheme()
 
@@ -85,4 +99,12 @@ function setLightTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
+
+function signIn() {
+  showSignIn.value = true
+}
+
+setTimeout(() => {
+  signInService.signInAsync('admin@wordle.com', 'P@ssw0rd123')
+}, 1000)
 </script>
