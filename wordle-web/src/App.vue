@@ -105,6 +105,6 @@ function signIn() {
 }
 
 setTimeout(() => {
-  signInService.signInAsync('admin@wordle.com', 'P@ssw0rd123')
+  signInService.signInAsync('Admin@wordle.com', 'P@ssw0rd123')
 }, 1000)
 </script>
