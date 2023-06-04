@@ -52,5 +52,23 @@ namespace Wordle.Api.Controllers
         {
             return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
         }
+
+        [HttpGet("WordList")]
+        public async Task<IEnumerable<Word>> GetWordList(int pageNumber = 1, int pageLength = 20, string? searchString = null)
+        {
+            return await _wordService.GetWordList(pageNumber, pageLength, searchString);
+        }
+
+        [HttpGet("DeleteWord")]
+        public async Task<bool> DeleteWord(int wordId)
+        {
+            return await _wordService.DeleteWord(wordId);
+        }
+
+        [HttpGet("ChangeCommonFlag")]
+        public async Task<Word?> ChangeCommonFlag(int wordId, bool value)
+        {
+            return await _wordService.ChangeCommonFlag(wordId, value);
+        }
     }
 }    

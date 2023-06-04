@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 
@@ -174,5 +175,39 @@ public class WordService
             result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
         return result;
+    }
+
+    public async Task<IEnumerable<Word>> GetWordList(int pageNumber, int pageLength, string? searchString)
+    {
+        IQueryable<Word> result = string.IsNullOrEmpty(searchString) ? _db.Words : _db.Words.Where(w => w.Text.Contains(searchString));
+        return await result.OrderBy(w => w.Text).Skip((pageNumber-1)*pageLength).Take(pageLength).ToListAsync();
+    }
+
+    public async Task<Word?> FindWord(int wordId)
+    {
+        return await _db.Words.FindAsync(wordId);
+    }
+
+    public async Task<bool> DeleteWord(int wordId)
+    {
+        Word? word = await FindWord(wordId);
+        if (word is not null)
+        {
+            _db.Words.Remove(word);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+        else return false;
+    }
+
+    public async Task<Word?> ChangeCommonFlag(int wordId, bool value)
+    {
+        Word? word = await FindWord(wordId);
+        if (word is not null)
+        {
+            word.IsCommon = value;
+            await _db.SaveChangesAsync();
+        }
+        return word;
     }
 }
