@@ -1,4 +1,2 @@
-<template>
-    //
-</template>
+<template>//</template>
 <style></style>
