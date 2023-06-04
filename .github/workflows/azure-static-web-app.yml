@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - Assignment-4
+      - Assignment-5
     paths: 
       - wordle-web/**
   pull_request:
