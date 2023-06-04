@@ -23,18 +23,26 @@ public static class Policies
 
     public static void NewPolicy(AuthorizationPolicyBuilder policy)
     {
+        
         policy.RequireClaim(Claims.MasterOfTheUniverse); 
         policy.RequireAssertion(context => 
         {
             DateTime currentDate = DateTime.Now;
-            var DOB = DateTime.Parse(context.User.Claims.FirstOrDefault(c => c.Type == Claims.Dob)!.Value);
-            int age = currentDate.Year - DOB.Year;
+            DateTime DOB; 
+            var dobClaim = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Dob);
+            if (dobClaim != null && DateTime.TryParse(dobClaim.Value, out var dobValue))
+            {
+                DOB = dobValue;
 
-            // Check if the user has already had their birthday this year
-            if (DOB.Date > currentDate.AddYears(-age))
-                age--;
+                int age = currentDate.Year - DOB.Year;
 
-            return age > 21;
+                // Check if the user has already had their birthday this year
+                if (DOB.Date > currentDate.AddYears(-age))
+                    age--;
+
+                return age > 21;
+            }
+            return false; 
         });
     }
 }

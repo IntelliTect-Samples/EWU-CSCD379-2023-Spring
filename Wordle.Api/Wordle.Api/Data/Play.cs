@@ -33,11 +33,6 @@ namespace Wordle.Api.Data
                     wordOptions.Add(DateToWord(DateTime.Now.AddDays(i), words));
                 }
 
-
-               
-
-
-
                 Random r = new(); 
                 
                 for (int i = 0; i < numPlays; i++) {

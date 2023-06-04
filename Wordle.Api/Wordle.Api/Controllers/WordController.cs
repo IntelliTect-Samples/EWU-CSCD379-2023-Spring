@@ -48,12 +48,14 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddWordFromBody")]
+        //    [Authorize(Policy = "NewPolicy")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
             return await _wordService.AddWord(word.Text, word.IsCommon);
         }
 
         [HttpPost("DropWord")]
+        [Authorize(Policy = "NewPolicy")]
         public async Task<bool> DropWord(string word) {
             return await _wordService.DropWord(word); 
         
