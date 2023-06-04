@@ -53,6 +53,12 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWordAsync(word.Text, word.IsCommon);
         }
 
+        [HttpPost("ChangeIsCommon")]
+        public async Task ChangeIsCommon(string word)
+        {
+            await _wordService.ChangeIsCommonAsync(word);
+        }
+
         [HttpGet("WordOfTheDay")]
         public async Task<WordOfTheDayDto> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
         {

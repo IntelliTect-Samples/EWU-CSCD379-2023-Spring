@@ -86,6 +86,19 @@ public class WordService
         return false;
     }
 
+    public async Task ChangeIsCommonAsync(string word)
+    {
+        if (word.IsNullOrEmpty())
+            throw new ArgumentNullException(nameof(word));
+
+        Word? foundWord = await _db.Words.FindAsync((Word w) => w.Text == word);
+        if (foundWord is not null)
+        {
+            foundWord.IsCommon = !foundWord.IsCommon;
+            _db.SaveChanges();
+        }
+    }
+
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
         if (date is null)
