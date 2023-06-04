@@ -75,8 +75,6 @@ function getInput() {
 
 
 function fetchWords() {
-  console.log("Fetching Words! :)")
-
   Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then((response) => {
     console.log(response.data),
       (totalPages.value = response.data.Item1),

@@ -5,9 +5,7 @@
     <v-dialog v-model="dialog" width="auto">
       <v-card>
         <v-card-text>Word Editor</v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" block @click="closeDialog">Close Dialog</v-btn>
-        </v-card-actions>
+        
       </v-card>
       <v-sheet width="300" class="mx-auto">
         <v-form ref="form">
@@ -18,9 +16,13 @@
             label="Name"
             required
           ></v-text-field>
+          <v-row class="d-flex flex-wrap bg-surface-variant">
+          <p>Is Common: </p>
+          <input type="checkbox"  v-model="toggle" true-value="yes" false-value="no">
+          </v-row>
 
           <div class="d-flex flex-column">
-            <v-btn color="success" class="mt-4" block @click="addWord">Add</v-btn>
+            <v-btn color="success" class="mt-4" block @click="addWordAndRefresh" >Add</v-btn>
 
             <v-btn color="error" class="mt-4" block @click="flipIsCommon">
               Flip Is Common Value
@@ -31,7 +33,11 @@
             </v-btn>
           </div>
         </v-form>
+        <v-card-actions>
+          <v-btn color="primary" block @click="closeDialog">Close Dialog</v-btn>
+        </v-card-actions>
       </v-sheet>
+      
     </v-dialog>
   </div>
 </template>
@@ -46,6 +52,7 @@ export default {
     return {
       dialog: false,
       input: '',
+      toggle: 'no',
       valid: true,
       wordRules: [
         (v: string) => !!v || 'Word is required',
@@ -93,10 +100,21 @@ export default {
       });
     },
 
-    addWord() {
-      Axios.get(`/Word/AddWord?word=${this.input}`).then((response) => {
-        console.log(response.data);
+    addWordAndRefresh() {
+      Axios.get(`/Word/AddWord?word=${this.input}`).then((isAdded) => {
+        
+        if (isAdded) {
+          console.log('Refresh Dictionary - Word Editor');
+          this.$emit('refresh'); // Emit the event to trigger the parent action
+          this.closeDialog(); // Close the dialog after emitting the event
+        } else {
+          console.log('Type of IsRemoved: ' + typeof isAdded);
+          console.log('What is removed? ' + isAdded);
+        }
+      }).catch((error) => {
+        console.log('Error:', error);
       });
+
     },
 
     flipIsCommon() {
