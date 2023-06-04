@@ -23,16 +23,24 @@ namespace Wordle.Api.Controllers
             return (await _wordService.GetRandomWordAsync()).Text;
         }
 
+
         [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int? count)
+        public async Task<IEnumerable<Word>> GetManyWords(int count, string? wordSegment)
         {
-            return await _wordService.GetSeveralWordsAsync(count);
+            return await _wordService.GetSeveralWordsAsync(count, wordSegment);
         }
 
         [HttpPost]
         public async Task<Word> AddWord(string newWord, bool isCommon)
         {
             return await _wordService.AddWordAsync(newWord, isCommon);
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<Word> DeleteWord(string word)
+        {
+            // deletes word
+            return await _wordService.DeleteWordAsync(word);
         }
 
         [HttpPost("AddWordFromBody")]
@@ -50,7 +58,7 @@ namespace Wordle.Api.Controllers
         [HttpGet("WordOfTheDayStats")]
         public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
         {
-            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
+            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
         }
     }
-}    
+}
