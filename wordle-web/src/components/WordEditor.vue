@@ -5,7 +5,6 @@
     <v-dialog v-model="dialog" width="auto">
       <v-card>
         <v-card-text>Word Editor</v-card-text>
-        
       </v-card>
       <v-sheet width="300" class="mx-auto">
         <v-form ref="form">
@@ -17,12 +16,12 @@
             required
           ></v-text-field>
           <div class="text-center">
-          <p class="d-inline mr-2">Is Common: </p>
-          <input type="checkbox"  v-model="isCommon" true-value=true false-value=false>
+            <p class="d-inline mr-2">Is Common:</p>
+            <input type="checkbox" v-model="isCommon" true-value="true" false-value="false" />
           </div>
 
           <div class="d-flex flex-column">
-            <v-btn color="success" class="mt-4" block @click="addWordAndRefresh" >Add</v-btn>
+            <v-btn color="success" class="mt-4" block @click="addWordAndRefresh">Add</v-btn>
 
             <v-btn color="error" class="mt-4" block @click="flipIsCommon">
               Flip Is Common Value
@@ -37,7 +36,6 @@
           <v-btn color="primary" block @click="closeDialog">Close Dialog</v-btn>
         </v-card-actions>
       </v-sheet>
-      
     </v-dialog>
   </div>
 </template>
@@ -102,23 +100,22 @@ export default {
         })
     },
 
-    addWord(){
+    addWord() {
       console.log('Adding: ' + this.input)
       return Axios.post('/Word/AddWordFromBody', {
-  text: this.input,
-  isCommon: this.isCommon,
-  isUsed: false
-})
-  .then((response) => {
-    console.log('Response:', response.data);
-    console.log('Did Word Successfully Get Added: ' + response.data);
-    return response.data;
-  })
-  .catch((error) => {
-    console.log('Axios Error:', error);
-    return false;
-  });
-
+        text: this.input,
+        isCommon: this.isCommon,
+        isUsed: false
+      })
+        .then((response) => {
+          console.log('Response:', response.data)
+          console.log('Did Word Successfully Get Added: ' + response.data)
+          return response.data
+        })
+        .catch((error) => {
+          console.log('Axios Error:', error)
+          return false
+        })
     },
 
     addWordAndRefresh() {
@@ -136,7 +133,6 @@ export default {
         .catch((error) => {
           console.log('Error:', error)
         })
-
     },
 
     flipIsCommon() {
