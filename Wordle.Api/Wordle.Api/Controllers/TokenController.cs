@@ -15,9 +15,9 @@ namespace Wordle.Api.Controllers;
 [ApiController]
 public class TokenController : Controller
 {
-    private AppDbContext _context;
-    private UserManager<AppUser> _userManager;
-    private JwtConfiguration _jwtConfiguration;
+    private readonly AppDbContext _context;
+    private readonly UserManager<AppUser> _userManager;
+    private readonly JwtConfiguration _jwtConfiguration;
 
     public TokenController(AppDbContext context, UserManager<AppUser> userManager, JwtConfiguration jwtConfiguration)
     {
