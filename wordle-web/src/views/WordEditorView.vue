@@ -16,11 +16,17 @@
   </v-dialog>
   <v-dialog v-model="addDialog" persistent>
     <v-card class="w-50">
-      <v-text-field label="Word" v-model="addWordText"/>
-      <v-checkbox label="Is Common" v-bind="addWordIsCommon"/>
+      <v-text-field label="Word" v-model="addWordText" />
+      <v-checkbox label="Is Common" v-bind="addWordIsCommon" />
       <v-btn color="green" @click="addWord">Add</v-btn>
       <v-btn color="grey" @click="addDialog = false">Cancel</v-btn>
     </v-card>
+    <v-dialog v-model="duplicateDialog">
+      <v-card class="w-25">
+        <v-card-text>{{ addWordText }} already exists</v-card-text>
+        <v-btn color="gray" @click="duplicateDialog = false">Ok</v-btn>
+      </v-card>
+    </v-dialog>
   </v-dialog>
   <v-card class="mx-8 my-auto">
     <v-row class="ma-3">
@@ -28,14 +34,14 @@
         <v-text-field label="Search" />
       </v-col>
       <v-col>
-        <v-select :items="pages" label="Page"/>
+        <v-select :items="pages" label="Page" />
       </v-col>
     </v-row>
     <v-row class="border ma-3">
       <v-col class="text-h6">Word</v-col>
       <v-col class="text-h6">Is Common</v-col>
       <v-col>
-        <v-btn color="green" :disabled="!motu" @click="addDialog=true">Add Word</v-btn>
+        <v-btn color="green" :disabled="!motu" @click="addDialog = true">Add Word</v-btn>
       </v-col>
     </v-row>
     <v-row dense v-for="word in words" :key="word.text" class="border ma-3">
@@ -67,6 +73,7 @@ const delDialog = ref(false)
 const addWordText = ref('')
 const addWordIsCommon = ref(false)
 const addDialog = ref(false)
+const duplicateDialog = ref(false)
 
 Axios.get('word/GetManyWords', {
   params: {
@@ -79,7 +86,7 @@ Axios.get('word/GetManyWords', {
 
 const pages = Array<number>()
 
-for(let i = 1; i<= 130; i++) {
+for (let i = 1; i <= 130; i++) {
   pages.push(i)
 }
 
@@ -93,13 +100,24 @@ function deleteWord() {
 }
 
 function addWord() {
-  Axios.post('word', {
-    Text: addWordText.value,
-    IsCommon: addWordIsCommon.value
-  })
+  var contains = false
+  for (let i = 0; i < words.value.length; i++) {
+    if (words.value[i].text == addWordText.value) {
+      contains = true
+      break
+    }
+  }
+  if (contains) {
+    duplicateDialog.value = true
+  } else {
+    Axios.post('word', {
+      Text: addWordText.value,
+      IsCommon: addWordIsCommon.value
+    })
 
-  addWordText.value = ''
-  addWordIsCommon.value = false
-  addDialog.value = false
+    addWordText.value = ''
+    addWordIsCommon.value = false
+    addDialog.value = false
+  }
 }
 </script>
