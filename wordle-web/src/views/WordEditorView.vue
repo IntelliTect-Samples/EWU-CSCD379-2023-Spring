@@ -31,10 +31,15 @@
   <v-card class="mx-8 my-auto">
     <v-row class="ma-3">
       <v-col>
-        <v-text-field label="Search" />
+        <v-text-field label="Search" v-model="searchPattern" @update:model-value="setViewList" />
       </v-col>
       <v-col>
-        <v-select :items="pages" label="Page" />
+        <v-select
+          :items="pages"
+          v-model="currentPage"
+          label="Page"
+          @update:model-value="setViewList"
+        />
       </v-col>
     </v-row>
     <v-row class="border ma-3">
@@ -44,9 +49,9 @@
         <v-btn color="green" :disabled="!motu" @click="addDialog = true">Add Word</v-btn>
       </v-col>
     </v-row>
-    <v-row dense v-for="word in words" :key="word.text" class="border ma-3">
+    <v-row dense v-for="word in viewList" :key="word.text" class="border ma-3">
       <v-col>{{ word.text }}</v-col>
-      <v-col><v-checkbox v-model="word.isCommon" /></v-col>
+      <v-col><v-checkbox v-model="word.isCommon" @change="commonWord(word)" /></v-col>
       <v-col><v-btn color="red" :disabled="!motu" @click="deleteDialog(word)">Delete</v-btn></v-col>
     </v-row>
   </v-card>
@@ -75,20 +80,18 @@ const addWordIsCommon = ref(false)
 const addDialog = ref(false)
 const duplicateDialog = ref(false)
 
-Axios.get('word/GetManyWords', {
-  params: {
-    Count: 45
-  }
-}).then((result) => {
+const pages = ref(Array<number>())
+const currentPage = ref(1)
+const searchPattern = ref('')
+const searchList = ref(Array<ListWord>())
+const viewList = ref(Array<ListWord>())
+
+Axios.get('word/GetAllWords').then((result) => {
   console.log(result.data)
   words.value = result.data as ListWord[]
 })
 
-const pages = Array<number>()
-
-for (let i = 1; i <= 130; i++) {
-  pages.push(i)
-}
+setViewList()
 
 function deleteDialog(word: ListWord) {
   delWord.value = word.text
@@ -96,6 +99,15 @@ function deleteDialog(word: ListWord) {
 }
 
 function deleteWord() {
+  Axios.post('word/DeleteWord', {
+    Text: delWord.value
+  })
+  for (let i = 0; i < words.value.length; i++) {
+    if (words.value[i].text == delWord.value) {
+      words.value.splice(i, 1)
+      break
+    }
+  }
   delDialog.value = false
 }
 
@@ -110,14 +122,47 @@ function addWord() {
   if (contains) {
     duplicateDialog.value = true
   } else {
-    Axios.post('word', {
+    Axios.post('word/AddWord', {
       Text: addWordText.value,
       IsCommon: addWordIsCommon.value
     })
+
+    var added = false
+
+    for (let i = 0; i < words.value.length; i++) {
+      if (words.value[i].text > addWordText.value) {
+        words.value.splice(i, 0, new ListWord(addWordText.value, addWordIsCommon.value))
+        added = true
+        break
+      }
+    }
+
+    if (!added) {
+      words.value.push(new ListWord(addWordText.value, addWordIsCommon.value))
+    }
 
     addWordText.value = ''
     addWordIsCommon.value = false
     addDialog.value = false
   }
+}
+
+function commonWord(word: ListWord) {
+  Axios.post('word/ChangeIsCommon', {
+    Text: word.text
+  })
+}
+
+function setViewList() {
+  searchList.value = Array<ListWord>()
+  for (let i = 0; i < words.value.length; i++) {
+    if (words.value[i].text.includes(searchPattern.value)) {
+      searchList.value.push(words.value[i])
+    }
+  }
+  pages.value = Array<number>(Math.ceil(searchList.value.length / 100))
+    .fill(0)
+    .map((i) => i + 1)
+  viewList.value = searchList.value.slice((currentPage.value - 1) * 100, currentPage.value * 100)
 }
 </script>
