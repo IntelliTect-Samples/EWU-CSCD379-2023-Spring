@@ -40,5 +40,19 @@ public static class IdentitySeed
                 await userManager.AddToRoleAsync(user, Roles.Admin);
             }
         }
+        if (await userManager.FindByEmailAsync("NormalUser@normal.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "NormalUser@normal.com",
+                Email = "NormalUser@normal.com",
+                Name = "NormalUser",
+                MasterOfTheUniverse = false,
+                Birthday = DateTime.Now.AddYears(-40)
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "Qwerty#3").Result;
+
+        }
     }
 }

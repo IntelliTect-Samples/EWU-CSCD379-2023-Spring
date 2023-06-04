@@ -6,7 +6,7 @@
       </v-text-field>
       <v-row>
         <v-col class="d-flex flex-left">
-          <v-btn v-if="value.length == 5 && words.length == 0" @click="addWord()"
+          <v-btn v-if="value.length == 5 && words.length == 0 && signInService.token.masterOfTheUniverse == 'True'" @click="addWord()"
             >Add Word: {{ value }}</v-btn
           >
         </v-col>
@@ -24,7 +24,7 @@
               <v-col v-else col="3">
                 <v-btn @click="setCommon(word.text, !word.isCommon)">{{ word.isCommon }}</v-btn>
               </v-col>
-              <v-col v-if="signInService.token.masterOfTheUniverse" cols="3">
+              <v-col v-if="signInService.token.masterOfTheUniverse == 'True'" cols="3">
                 <v-btn @click="deleteWord(word.text)">Delete</v-btn>
               </v-col>
             </v-row>
