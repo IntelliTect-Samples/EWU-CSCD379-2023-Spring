@@ -59,6 +59,7 @@ public class TokenController:Controller
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
+
             var token = new JwtSecurityToken(
                 issuer: _jwtConfig.Issuer,
                 audience: _jwtConfig.Audience,
