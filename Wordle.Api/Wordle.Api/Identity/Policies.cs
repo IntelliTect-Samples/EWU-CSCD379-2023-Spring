@@ -23,11 +23,23 @@ public static class Policies
     public static void MasterAndAgePolicy(AuthorizationPolicyBuilder policy)
     {
         policy.RequireClaim(Claims.MasterOfTheUniverse);
+        policy.RequireAssertion(context =>
         {
-            DateTime temp;
-            DateTime now = DateTime.UtcNow;
-            var userAge = 
-        }
-
+            var userDateOfBirth = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Age);
+            DateTime now = DateTime.Today;
+            if (userDateOfBirth != null && DateTime.TryParse(userDateOfBirth.Value, out DateTime res))
+            {
+                int age = now.Year - res.Year;
+                if (res.Date > now.AddYears(-age))
+                {
+                    age = age -1;
+                }
+                if (age >= 21)
+                {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 }
