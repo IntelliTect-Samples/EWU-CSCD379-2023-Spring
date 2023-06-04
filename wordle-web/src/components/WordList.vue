@@ -35,7 +35,7 @@ import { ref } from 'vue'
 
 const words = ref<IWord[]>([])
 const wordDisplayCount = ref<number>(10)
-const textInput = ref<string>('a')
+const textInput = ref<string>('')
 
 const setDisplayCount = (wordsPerPage: number, text: string) => {
   wordDisplayCount.value = wordsPerPage
