@@ -51,7 +51,7 @@ import type { SignInService } from '@/scripts/signInService'
 const signInService = inject(Services.SignInService) as SignInService
 const words = ref<WordDto[]>([])
 const value = ref('')
-const count = ref(10)//default return 10 words
+const count = ref(10) //default return 10 words
 
 search()
 
