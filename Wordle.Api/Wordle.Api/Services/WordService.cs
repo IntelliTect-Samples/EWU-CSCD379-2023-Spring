@@ -175,4 +175,49 @@ public class WordService
         }
         return result;
     }
+
+    /// <summary>
+    /// Get a list of words with search and paging.
+    /// </summary>
+    /// <param name="pageNumber"></param>
+    /// <param name="pageSize"></param>
+    /// <param name="search"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<Word>> GetWords(int pageNumber = 1, int pageSize = 10, string? search = null)
+    {
+        IQueryable<Word> result = _db.Words;
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            result = result.Where(w => w.Text.Contains(search));
+        }
+        return await result
+          .OrderBy(w => w.Text)
+          .Skip((pageNumber - 1) * pageSize)
+          .Take(pageSize)
+          .ToListAsync();
+    }
+
+    public async Task<bool> DeleteWord(int wordId)
+    {
+        var word = await _db.Words.FindAsync(wordId);
+        if (word!= null)
+        {
+            _db.Words.Remove(word);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<Word?> ChangeIsCommon(int wordId, bool value)
+    {
+        var word = await _db.Words.FindAsync(wordId);
+        if (word != null)
+        {
+            word.IsCommon = value;
+            await _db.SaveChangesAsync();
+            return word;
+        }
+        return null;
+    }
 }
