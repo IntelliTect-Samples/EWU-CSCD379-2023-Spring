@@ -1,6 +1,5 @@
 export class WordDto {
-    text: string = ''
-    isCommon: boolean = false
-    isUsed: boolean = false
-  }
-  
+  text: string = ''
+  isCommon: boolean = false
+  isUsed: boolean = false
+}

@@ -10,11 +10,8 @@
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
-        
-        <v-btn>
-          <span v-if="!signInService.isSignedIn">Not signed in</span>
-          <span v-else>{{ signInService.token.userName }}</span>
-        </v-btn>
+
+        <AppUser></AppUser>
 
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
@@ -51,6 +48,11 @@
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item v-if="signInService.isSignedIn">
+              <v-list-item-title>
+                <v-btn @click="signInService.signOut()">Sign Out</v-btn>
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -71,6 +73,7 @@ import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
+import AppUser from './components/AppUser.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
