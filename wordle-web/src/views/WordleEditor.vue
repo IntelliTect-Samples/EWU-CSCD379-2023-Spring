@@ -6,7 +6,13 @@
       </v-text-field>
       <v-row>
         <v-col class="d-flex flex-left">
-          <v-btn v-if="value.length == 5 && words.length == 0 && signInService.token.masterOfTheUniverse == 'True'" @click="addWord()"
+          <v-btn
+            v-if="
+              value.length == 5 &&
+              words.length == 0 &&
+              signInService.token.masterOfTheUniverse == 'True'
+            "
+            @click="addWord()"
             >Add Word: {{ value }}</v-btn
           >
         </v-col>
