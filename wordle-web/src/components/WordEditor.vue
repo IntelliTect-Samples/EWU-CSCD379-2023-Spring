@@ -27,7 +27,9 @@
                 Flip Is Common Value
               </v-btn>
 
-              <v-btn color="warning" class="mt-4" block @click="removeAndRefresh"> Remove Word </v-btn>
+              <v-btn color="warning" class="mt-4" block @click="removeAndRefresh">
+                Remove Word
+              </v-btn>
             </div>
           </v-form>
         </v-sheet>
@@ -37,8 +39,8 @@
 </template>
 
 <script lang="ts">
-import { defineEmits, ref } from 'vue';
-import Axios from 'axios';
+import { defineEmits, ref } from 'vue'
+import Axios from 'axios'
 
 export default {
   emits: ['refreshDictionary'],
@@ -50,39 +52,39 @@ export default {
       wordRules: [
         (v: string) => !!v || 'Word is required',
         (v: string) => !/[^\p{L}]/u.test(v) || 'Word must only contain letters',
-        (v: string) => (v && v.length === 5) || 'Word must be 5 characters',
-      ],
-    };
+        (v: string) => (v && v.length === 5) || 'Word must be 5 characters'
+      ]
+    }
   },
   methods: {
     removeWord(): Promise<string> {
       return Axios.get(`/Word/DropWord?word=${this.input}`)
         .then((response) => {
-          console.log("Did Word Successfully Get Removed: " + response.data);
-          return response.data;
+          console.log('Did Word Successfully Get Removed: ' + response.data)
+          return response.data
         })
         .catch(() => {
-          console.log("Axios Error :(");
-          return "false";
-        });
+          console.log('Axios Error :(')
+          return 'false'
+        })
     },
     removeAndRefresh() {
       this.removeWord().then((isRemoved: string) => {
-        if (isRemoved === "true") {
-          this.$emit("refreshDictionary");
+        if (isRemoved === 'true') {
+          this.$emit('refreshDictionary')
         }
-      });
+      })
     },
     addWord() {
       Axios.get(`/Word/AddWord?word=${this.input}`).then((response) => {
-        console.log(response.data);
-      });
+        console.log(response.data)
+      })
     },
     flipIsCommon() {
       Axios.get(`/Word/FlipIsCommon?word=${this.input}`).then((response) => {
-        console.log(response.data);
-      });
-    },
-  },
-};
+        console.log(response.data)
+      })
+    }
+  }
+}
 </script>
