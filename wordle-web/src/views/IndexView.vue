@@ -5,7 +5,7 @@
   <v-table>
     <thead>
       <v-text-field v-model="input" label="Label" @keyup="getInput()" variant="solo"></v-text-field>
-      <WordEditor @refresh="fetchWords()"/>
+      <WordEditor @refresh="fetchWords"/>
       <!--change color of feild, add clear button-->
       <tr>
         <th class="text-left">ID</th>
@@ -75,6 +75,7 @@ function getInput() {
 
 
 function fetchWords() {
+  console.log("Fetching Words! :)")
 
   Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then((response) => {
     console.log(response.data),

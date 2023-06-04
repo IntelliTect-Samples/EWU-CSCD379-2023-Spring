@@ -1,47 +1,47 @@
 <template>
   <div class="text-center">
-    <v-btn color="primary">
-      Edit Dictionary
+    <v-btn color="primary" @click="openDialog">Edit Dictionary</v-btn>
 
-      <v-dialog v-model="dialog" activator="parent" width="auto">
-        <v-card>
-          <v-card-text> Word Editor </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary" block @click="dialog = false">Close Dialog</v-btn>
-          </v-card-actions>
-        </v-card>
-        <v-sheet width="300" class="mx-auto">
-          <v-form ref="form">
-            <v-text-field
-              v-model="input"
-              :counter="10"
-              :rules="wordRules"
-              label="Name"
-              required
-            ></v-text-field>
+    <v-dialog v-model="dialog" width="auto">
+      <v-card>
+        <v-card-text>Word Editor</v-card-text>
+        <v-card-actions>
+          <v-btn color="primary" block @click="closeDialog">Close Dialog</v-btn>
+        </v-card-actions>
+      </v-card>
+      <v-sheet width="300" class="mx-auto">
+        <v-form ref="form">
+          <v-text-field
+            v-model="input"
+            :counter="10"
+            :rules="wordRules"
+            label="Name"
+            required
+          ></v-text-field>
 
-            <div class="d-flex flex-column">
-              <v-btn color="success" class="mt-4" block @click="addWord"> Add </v-btn>
+          <div class="d-flex flex-column">
+            <v-btn color="success" class="mt-4" block @click="addWord">Add</v-btn>
 
-              <v-btn color="error" class="mt-4" block @click="flipIsCommon">
-                Flip Is Common Value
-              </v-btn>
+            <v-btn color="error" class="mt-4" block @click="flipIsCommon">
+              Flip Is Common Value
+            </v-btn>
 
-              <v-btn color="warning" class="mt-4" block @click="removeAndRefresh"> Remove Word </v-btn>
-            </div>
-          </v-form>
-        </v-sheet>
-      </v-dialog>
-    </v-btn>
+            <v-btn color="warning" class="mt-4" block @click="removeAndRefresh">
+              Remove Word
+            </v-btn>
+          </div>
+        </v-form>
+      </v-sheet>
+    </v-dialog>
   </div>
 </template>
 
 <script lang="ts">
-import { defineEmits, ref } from 'vue';
 import Axios from 'axios';
 
 export default {
-  emits: ['refreshDictionary'],
+  emits: ['refresh'], // Specify the emitted event name
+
   data() {
     return {
       dialog: false,
@@ -54,30 +54,51 @@ export default {
       ],
     };
   },
+
   methods: {
-    removeWord(): Promise<string> {
-      return Axios.get(`/Word/DropWord?word=${this.input}`)
+    openDialog() {
+      this.dialog = true;
+    },
+
+    closeDialog() {
+      this.dialog = false;
+    },
+
+    removeWord() {
+      console.log('Removing: ' + this.input);
+      return Axios.post(`/Word/DropWord?word=${this.input}`, { word: this.input })
         .then((response) => {
-          console.log("Did Word Successfully Get Removed: " + response.data);
+          console.log('Response:', response.data);
+          console.log('Did Word Successfully Get Removed: ' + response.data);
           return response.data;
         })
-        .catch(() => {
-          console.log("Axios Error :(");
-          return "false";
+        .catch((error) => {
+          console.log('Axios Error:', error);
+          return false;
         });
     },
+
     removeAndRefresh() {
-      this.removeWord().then((isRemoved: string) => {
-        if (isRemoved === "true") {
-          this.$emit("refreshDictionary");
+      this.removeWord().then((isRemoved) => {
+        if (isRemoved || (typeof isRemoved === 'string' && isRemoved.trim() === 'true')) {
+          console.log('Refresh Dictionary - Word Editor');
+          this.$emit('refresh'); // Emit the event to trigger the parent action
+          this.closeDialog(); // Close the dialog after emitting the event
+        } else {
+          console.log('Type of IsRemoved: ' + typeof isRemoved);
+          console.log('What is removed? ' + isRemoved);
         }
+      }).catch((error) => {
+        console.log('Error:', error);
       });
     },
+
     addWord() {
       Axios.get(`/Word/AddWord?word=${this.input}`).then((response) => {
         console.log(response.data);
       });
     },
+
     flipIsCommon() {
       Axios.get(`/Word/FlipIsCommon?word=${this.input}`).then((response) => {
         console.log(response.data);
