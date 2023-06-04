@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import WordleGame from '@/components/WordleGame.vue'
+import WordleGame from '../components/WordleGame.vue'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
