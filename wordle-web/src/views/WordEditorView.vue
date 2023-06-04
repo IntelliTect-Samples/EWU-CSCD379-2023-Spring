@@ -4,7 +4,7 @@
       <tr class="align-center">
         <!-- I want to bind the searchField to the v-text-field -->
         <th class="text-left" colspan="5">
-          <v-text-field v-model="searchField" label="Search"></v-text-field>
+          <v-text-field v-model="searchField" variant="outlined" label="Search"></v-text-field>
         </th>
       </tr>
     </thead>
@@ -30,7 +30,7 @@
         <td class="align-center"><v-btn variant="outlined"> Delete </v-btn></td>
       </tr>
       <tr>
-        <td class="text-center" colspan="2">Words per page:</td>
+        <td class="text-left">Words Per Page</td>
         <td class="text-center" colspan="2">
           <v-select
             v-model="entriesPerPage"
@@ -38,6 +38,8 @@
             label="Words per page"
           ></v-select>
         </td>
+        <td><v-btn variant="outlined" @click="decreasePageNumber()"> Prev </v-btn></td>
+        <td><v-btn variant="outlined" @click="increasePageNumber()"> Next </v-btn></td>
       </tr>
     </tbody>
   </v-table>
@@ -58,17 +60,29 @@ import type { WordEntry } from '../scripts/wordEntry'
 import { watch } from 'vue'
 
 const wordList = ref<WordEntry[]>([])
-let entriesPerPage = ref(10)
 let searchField = ref('')
+let pageNumber = ref(1)
+let entriesPerPage = ref(10)
 
-watch(entriesPerPage, getWords)
 watch(searchField, getWords)
+watch(entriesPerPage, getWords)
+
+function increasePageNumber() {
+  pageNumber.value++
+  getWords()
+}
+
+function decreasePageNumber() {
+  if (pageNumber.value == 1) return
+  pageNumber.value--
+  getWords()
+}
 
 getWords()
 
 function getWords() {
   Axios.get(
-    `/Word/SearchForWord?search=${searchField.value}&entriesPerPage=${entriesPerPage.value}`
+    `/Word/SearchForWord?search=${searchField.value}&pageNumber=${pageNumber.value}&entriesPerPage=${entriesPerPage.value}`
   ).then((result) => {
     wordList.value = result.data as WordEntry[]
   })

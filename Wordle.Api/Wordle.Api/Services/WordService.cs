@@ -162,8 +162,8 @@ public class WordService
         if (search != "")
         {
             return await _db.Words
-            .Skip(pageNumber * entriesPerPage)
             .Where(entry => entry.Text.StartsWith(search))
+            .Skip(pageNumber * entriesPerPage)
             .Take(entriesPerPage)
             .OrderBy(entry => entry.Text)
             .ToListAsync();
