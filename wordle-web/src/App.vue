@@ -43,7 +43,7 @@
             </v-list-item>
             <v-list-item>
               <v-list-item-title>
-                <RouterLink :to="{ name: 'wordleeditor' }"> Editor </RouterLink>
+                <RouterLink :to="{ name: 'wordleEditor' }"> Editor </RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
