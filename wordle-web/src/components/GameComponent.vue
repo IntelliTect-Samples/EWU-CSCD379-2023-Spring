@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
-import { ref, type Ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, type Ref, reactive, onMounted, onUnmounted, inject, watch } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
 import KeyBoard from '../components/KeyBoard.vue'
 import type { Letter } from '@/scripts/letter'
@@ -64,6 +64,17 @@ import Axios from 'axios'
 import { useRoute } from 'vue-router'
 import type { SignInService } from '@/scripts/signInService'
 import { Services } from '@/scripts/services'
+
+//-----sign in stuff
+const signInService = inject(Services.SignInService) as SignInService
+
+watch(
+  () => signInService.token,
+  (value) => {
+    console.log(`Signed in user: ${value.userName}`)
+  }
+)
+//-------------
 
 localStorage.startTime = Date.now()
 
