@@ -12,6 +12,8 @@ namespace Wordle.Api.Data
         public double AverageAttempts { get; set; }
         public int TotalSecondsPlayed { get; set; }
         public int AverageSecondsPerGame { get; set; }
+        public DateTime? birthday { get; set; }
+        public bool MasterOfTheUniverse { get; set; }
 
         public static void SeedPlayers(AppDbContext db)
         {
@@ -28,7 +30,8 @@ namespace Wordle.Api.Data
                         TotalAttempts = int.Parse(parts[2]),
                         AverageAttempts = double.Parse(parts[3]),
                         TotalSecondsPlayed = int.Parse(parts[4]),
-                        AverageSecondsPerGame = int.Parse(parts[5])
+                        AverageSecondsPerGame = int.Parse(parts[5]),
+                        MasterOfTheUniverse = false
                     };
                     db.Players.Add(player);
                 }

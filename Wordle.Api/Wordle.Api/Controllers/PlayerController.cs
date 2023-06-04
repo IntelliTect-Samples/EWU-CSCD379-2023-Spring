@@ -25,15 +25,21 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddPlayer")]
-        public async Task<Player> AddPlayer(string newName, int playTime, int guesses)
+        public async Task<Player> AddPlayer(string newName, int playTime, int guesses, DateTime? birthday, bool? MasterOfTheUniverse)
         {
-            return await _playerService.AddPlayer(newName, playTime, guesses);
+            return await _playerService.AddPlayer(newName, playTime, guesses, birthday, MasterOfTheUniverse);
         }
 
         [HttpPost("AddGameResult")]
         public async Task<Player?> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSecounds, string WordPlayed, DateTime WordOfTheDayDate)
         {
              return await _playerService.AddGameResult(Name, WasGameWon, Attempts, TimeInSecounds, WordPlayed, WordOfTheDayDate);
+        }
+
+        [HttpGet("GetPlayer")]
+        public async Task<Player> GetPlayer(String Name)
+        {
+            return await _playerService.GetPlayer(Name);
         }
     }
 }

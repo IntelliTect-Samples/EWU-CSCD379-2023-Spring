@@ -28,7 +28,7 @@ namespace Wordle.Api.Services
 
         }
         
-        public async Task<Player> AddPlayer(string Name, int TotalSecondsPlayed, int TotalAttempts)
+        public async Task<Player> AddPlayer(string Name, int TotalSecondsPlayed, int TotalAttempts, DateTime? birthday, bool? MasterOfTheUniverse)
         {
             if(Name == null) { throw new ArgumentException("Name can't be null"); }
             var player = await _db.Players.FirstOrDefaultAsync(p =>  p.Name == Name);
@@ -39,18 +39,40 @@ namespace Wordle.Api.Services
                 player.AverageAttempts = player.TotalAttempts / player.GameCount;
                 player.TotalSecondsPlayed += TotalSecondsPlayed;
                 player.AverageSecondsPerGame = player.TotalSecondsPlayed / player.GameCount;
+                player.birthday = birthday;
+                if(MasterOfTheUniverse.HasValue)
+                    player.MasterOfTheUniverse = MasterOfTheUniverse.Value;
             }
             else
             {
-                player = new()
+                if (MasterOfTheUniverse.HasValue)
                 {
-                    Name = Name,
-                    GameCount = 1,
-                    TotalAttempts = TotalAttempts,
-                    AverageAttempts = TotalAttempts,
-                    TotalSecondsPlayed = TotalSecondsPlayed,
-                    AverageSecondsPerGame = TotalSecondsPlayed,
-                };
+                    player = new()
+                    {
+                        Name = Name,
+                        GameCount = 1,
+                        TotalAttempts = TotalAttempts,
+                        AverageAttempts = TotalAttempts,
+                        TotalSecondsPlayed = TotalSecondsPlayed,
+                        AverageSecondsPerGame = TotalSecondsPlayed,
+                        birthday = birthday,
+                        MasterOfTheUniverse = MasterOfTheUniverse.Value
+                    };
+                }
+                else
+                {
+                    player = new()
+                    {
+                        Name = Name,
+                        GameCount = 1,
+                        TotalAttempts = TotalAttempts,
+                        AverageAttempts = TotalAttempts,
+                        TotalSecondsPlayed = TotalSecondsPlayed,
+                        AverageSecondsPerGame = TotalSecondsPlayed,
+                        birthday = birthday,
+                        MasterOfTheUniverse = false
+                    };
+                }
                 _db.Players.Add(player);
             }
             await _db.SaveChangesAsync();
@@ -92,7 +114,7 @@ namespace Wordle.Api.Services
 
         public async Task<Player?> AddGameResult(string Name, bool WasGameWon, int Attempts, int TimeInSeconds, string WordPlayed, DateTime WordOfTheDayDate)
         {
-            await AddPlayer(Name, TimeInSeconds, Attempts);
+            await AddPlayer(Name, TimeInSeconds, Attempts, null, null);
             var player = await _db.Players.FirstOrDefaultAsync(n => n.Name == Name);
 
             var word = await _db.Words.FirstOrDefaultAsync(f => f.Text == WordPlayed);
@@ -138,6 +160,17 @@ namespace Wordle.Api.Services
 
             return player;
             throw new ArgumentException("Player Id or Word not found");
+        }
+
+        public async Task<Player> GetPlayer(String Name)
+        {
+            if (Name == null) { throw new ArgumentException("Name can't be null"); }
+            var player = await _db.Players.FirstOrDefaultAsync(p => p.Name == Name);
+            if(player != null)
+            {
+                return player;
+            }
+            else { throw new ArgumentException("Name must be in the database"); }
         }
     }
 }
