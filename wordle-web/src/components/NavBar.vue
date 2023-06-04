@@ -40,6 +40,9 @@
           <v-list-item prepend-icon="mdi-table-clock" to="/lasttenwords">
             Last 10 Wordle of the day
           </v-list-item>
+          <v-list-item prepend-icon="mdi-playlist-edit" to="/wordeditor">
+            Word Editor
+          </v-list-item>
           <v-list-item prepend-icon="mdi-cog" @click.stop="setting = true" @click="drawer = !drawer">
             Setting
           </v-list-item>

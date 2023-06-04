@@ -47,7 +47,7 @@
                 </v-card-text>
             <v-card-actions class="d-flex justify-center">
                 <v-btn color="error" text @click="editofword = false">Close</v-btn>
-                <v-btn color="primary" text @click="editWord(selectedWord?.text ?? '', selectedOption === 'yes'); editofword = false">Save</v-btn>
+                <v-btn color="primary" text @click="editWord(selectedWord?.text ?? '', selectedOption === 'yes'), editofword = false">Save</v-btn>
             </v-card-actions>
             </v-card>
         </v-dialog>
@@ -65,11 +65,7 @@
                 </v-card-text>
             <v-card-actions class="d-flex justify-center">
                 <v-btn color="error" text @click="addnewword = false">Close</v-btn>
-                <v-btn 
-                color="primary" 
-                text 
-                @click="addnewword = false; addWord(newword, selectedOption === 'yes')"
-                :disabled="!isWordValid"
+                <v-btn color="primary" text @click="addnewword = false, addWord(newword, selectedOption === 'yes')" :disabled="!isWordValid"
                 >Save</v-btn>
             </v-card-actions>
             </v-card>
@@ -89,9 +85,9 @@ import Axios from 'axios'
   
 const page = ref(1)
 const perPage = ref(60)
-const countitem = ref<countitem[]>([])
+const countitem = ref<WordData[]>([])
 const search = ref('')
-const selectedWord = ref<countitem | null>(null)
+const selectedWord = ref<WordData | null>(null)
 const dialogVisible = ref(false)
 const editofword = ref(false)
 const overlay = ref(true)
@@ -101,7 +97,7 @@ const newword = ref("")
 const isWordValid = ref(false);
 
   
-interface countitem {
+interface WordData {
     wordId: number;
     text: string;
     isCommon: boolean;
@@ -127,7 +123,7 @@ const filteredItems = countitem.value.filter((item) => item.text.includes(search
 return filteredItems.slice(startIndex, endIndex)
 })
   
-function openDialog(item: countitem) {
+function openDialog(item: WordData) {
     selectedWord.value = item
     dialogVisible.value = true
 }
