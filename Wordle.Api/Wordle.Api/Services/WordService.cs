@@ -26,17 +26,16 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
+    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int count, string? wordSegment)
     {
-        count ??= 10;
-        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-        totalCount -= count.Value;
-        int index = new Random().Next(totalCount);
+        if (count == 0)
+        {
+            count = 10;
+        }
+        wordSegment ??= "";
         var words = await _db.Words
-          .Where(word => word.IsCommon)
-          .Skip(index)
-          .Take(count.Value)
-          .OrderByDescending(w => w.Text)
+          .Where(word => word.Text.StartsWith(wordSegment))
+          .OrderBy(w => w.Text).Take(count)
           .ToListAsync();
         return words;
     }
@@ -61,6 +60,24 @@ public class WordService
             };
             _db.Words.Add(word);
         }
+        await _db.SaveChangesAsync();
+        return word;
+    }
+
+    public async Task<Word> DeleteWordAsync(string wordForDelete)
+    {
+
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == wordForDelete);
+
+        if (word != null)
+        {
+            _db.Words.Remove(word);
+        }
+        else
+        {
+            throw new ArgumentException("word doesnt exist");
+        }
+
         await _db.SaveChangesAsync();
         return word;
     }

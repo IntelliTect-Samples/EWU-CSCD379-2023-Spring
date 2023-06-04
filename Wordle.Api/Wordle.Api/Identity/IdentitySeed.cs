@@ -1,5 +1,4 @@
-﻿using System.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
