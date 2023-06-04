@@ -34,7 +34,7 @@ public class WordService
         wordSegment ??= "";
         var words = await _db.Words
           .Where(word => word.Text.StartsWith(wordSegment))
-          .OrderByDescending(w => w.Text).Take(count)
+          .OrderBy(w => w.Text).Take(count)
           .ToListAsync();
         return words;
     }
