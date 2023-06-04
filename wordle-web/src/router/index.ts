@@ -3,6 +3,7 @@ import WordleView from '../views/WordleView.vue'
 import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '@/views/LeaderboardView.vue'
 import WordOfTheDayView from '@/views/WordOfTheDayView.vue'
+import WordEditorView from '@/views/WordEditorView.vue'
 import { Services } from '@/scripts/services'
 import { inject } from 'vue'
 import { SignInService } from '@/scripts/signInService'
@@ -34,6 +35,11 @@ const router = createRouter({
       path: '/wordoftheday',
       name: 'wordOfTheDay',
       component: WordOfTheDayView
+    },
+    {
+      path: '/wordeditor',
+      name: 'wordEditor',
+      component: WordEditorView
     }
   ]
 })
