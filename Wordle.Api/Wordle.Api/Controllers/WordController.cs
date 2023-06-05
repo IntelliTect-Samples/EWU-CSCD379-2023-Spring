@@ -62,7 +62,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("FlipIsCommon")]
-        [Authorize]
+        //[Authorize]
         public async Task<bool> FlipIsCommon(string word)
         {
             return await _wordService.FlipIsCommon(word);

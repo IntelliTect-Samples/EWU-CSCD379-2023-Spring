@@ -15,8 +15,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="word in Words.value" :key="word.WordId">
-        <td>{{ word.WordId }}</td>
+      <tr v-for="(word, index) in Words.value" :key="word.WordId">
+        <td>{{ (currentPage - 1) * 10 + (index + 1) }}</td>
         <td>{{ word.Text }}</td>
         <td>{{ word.IsCommon }}</td>
         <td>Remove Button</td>
