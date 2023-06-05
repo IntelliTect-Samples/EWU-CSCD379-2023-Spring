@@ -77,7 +77,7 @@ public class TokenController : Controller
     [HttpPost("CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody]CreateUser createUser)
     {
-        if (string.IsNullOrEmpty(createUser.Username))
+        if (string.IsNullOrEmpty(createUser.Username) || !createUser.Username.Contains('@'))
         {
             return BadRequest("Username is required");
         }

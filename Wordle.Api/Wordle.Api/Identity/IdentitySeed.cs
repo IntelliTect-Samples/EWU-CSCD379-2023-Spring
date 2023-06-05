@@ -24,6 +24,10 @@ public static class IdentitySeed
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Special));
         }
+        if (!await roleManager.RoleExistsAsync(Roles.MasterOfTheUniverse))
+        {
+            await roleManager.CreateAsync(new IdentityRole(Roles.MasterOfTheUniverse));
+        }
     }
 
     private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
@@ -37,7 +41,7 @@ public static class IdentitySeed
                 Email = "Admin@intellitect.com",
                 Name = "Admin",
                 BDay = new DateTime(1772, 10, 22),
-                MasterOfTheUniverse = true
+                MasterOfTheUniverse = "MOTU"
             };
 
             IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
