@@ -45,6 +45,11 @@
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'editor' }"> Word Editor </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>

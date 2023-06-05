@@ -5,6 +5,7 @@ import AboutView from '../views/AboutView.vue'
 import LeaderboardView from '@/views/LeaderboardView.vue'
 import WordOfTheDayView from '@/views/WordOfTheDayView.vue'
 import InstructView from '../views/InstructView.vue'
+import EditorView from '../views/EditorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/instruct',
       name: 'instructions',
       component: InstructView
+    },
+    {
+      path: '/editor',
+      name: 'editor',
+      component: EditorView
     }
   ]
 })
