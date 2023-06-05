@@ -56,7 +56,7 @@
               </v-list-item-title>
               <v-list-item-title
                 v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
+                @click="$router.push('/login')"
               >
                 Sign In
               </v-list-item-title>
