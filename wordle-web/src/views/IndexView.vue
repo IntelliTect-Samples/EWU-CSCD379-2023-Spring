@@ -40,8 +40,6 @@
     </v-container>
   </div>
 
-  
-
   <v-btn density="compact" @click="goBack">Back</v-btn>
 </template>
 
@@ -50,8 +48,6 @@ import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
 import WordEditor from '../components/WordEditor.vue'
 import $router from '../router/index'
-
-
 
 const input = ref('')
 
