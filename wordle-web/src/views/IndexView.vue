@@ -74,15 +74,17 @@ function getInput() {
 }
 
 function fetchWords() {
-  Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then((response) => {
-    console.log(response.data),
-      (totalPages.value = response.data.Item1),
-      (Words.value = JSON.parse(response.data.Item2).map((word: any) => ({
-        WordId: word.WordId,
-        Text: word.Text,
-        IsCommon: word.IsCommon
-      })))
-  })
+  Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then(
+    (response) => {
+      console.log(response.data),
+        (totalPages.value = response.data.Item1),
+        (Words.value = JSON.parse(response.data.Item2).map((word: any) => ({
+          WordId: word.WordId,
+          Text: word.Text,
+          IsCommon: word.IsCommon
+        })))
+    }
+  )
 }
 
 watch(currentPage, (newVal) => {
