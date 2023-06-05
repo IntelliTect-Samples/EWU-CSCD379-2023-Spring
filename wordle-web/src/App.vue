@@ -40,9 +40,14 @@
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'wordEditor' }"> Word List Editor </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
             <v-list-item v-if="signInService.isSignedIn">
               <v-list-item-title>
-                <RouterLink :to="{ name: 'about' }"> Word Editor </RouterLink>
+                <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
