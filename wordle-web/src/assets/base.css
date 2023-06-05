@@ -56,10 +56,14 @@ span.bg {
 }
 
 div.v-theme--dark span.bg {
-  background: url('https://w0.peakpx.com/wallpaper/454/323/HD-wallpaper-blue-hour-tree-black-minimal-minimalism-morning-nature-night.jpg')
-    no-repeat center center;
+  background: url('../assets/wickedbackground-darkmode.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 div.v-theme--light span.bg {
-  background: url('https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=1800&t=st=1685051587~exp=1685052187~hmac=9cf1a6e2ff2972d0368e9d627e31be987250d82dee79485dd42dd15e66ff7d84')
-    no-repeat center center;
+  background: url('../assets/wickedbackground-lightmode.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }

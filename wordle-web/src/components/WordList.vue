@@ -17,7 +17,7 @@
         </v-list>
       </v-menu>
     </div>
-    <v-card variant="outlined" style="margin-bottom: 20px">
+    <v-card variant="tonal" style="margin-bottom: 20px">
       <v-text-field
         placeholder="search..."
         maxlength="5"

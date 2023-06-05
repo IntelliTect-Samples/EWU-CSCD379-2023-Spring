@@ -39,6 +39,8 @@ const vuetify = createVuetify({
     themes: {
       dark: {
         colors: {
+          primary: '#272727',
+          secondary: '#444444',
           correct: '#4CAF50',
           misplaced: '#FFC107',
           wrong: '#F44336',
@@ -47,6 +49,8 @@ const vuetify = createVuetify({
       },
       light: {
         colors: {
+          primary: '#272727',
+          secondary: '#444444',
           correct: '#6CCF70',
           misplaced: '#FFD137',
           wrong: '#F46356',
