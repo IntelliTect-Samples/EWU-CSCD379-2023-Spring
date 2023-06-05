@@ -78,7 +78,6 @@ function getInput() {
 }
 
 function fetchWords() {
-  overlay.value = true
   Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then(
     (response) => {
       console.log(response.data),
@@ -90,7 +89,6 @@ function fetchWords() {
         })))
     }
   )
-  overlay.value = false
 }
 
 watch(currentPage, (newVal) => {
