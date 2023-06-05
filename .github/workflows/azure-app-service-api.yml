@@ -6,7 +6,7 @@ name: Wordle 2023 API CI/CD
 on:
   push:
     branches:
-      - main
+      - assignment5
     paths: 
       - Wordle.Api/**
   workflow_dispatch:
@@ -61,5 +61,5 @@ jobs:
         with:
           app-name: ${{secrets.ApiAppName}}
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_API }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3E11374F38C44179B4C4B5A29B15CD9A }}
           package: .
