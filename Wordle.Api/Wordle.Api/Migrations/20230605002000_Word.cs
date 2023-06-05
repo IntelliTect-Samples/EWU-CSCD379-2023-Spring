@@ -31,7 +31,9 @@ namespace Wordle.Api.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BDay = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GameCount = table.Column<int>(type: "int", nullable: false),
+                    MasterOfTheUniverse = table.Column<bool>(type: "bit", nullable: false),
                     AverageAttempts = table.Column<double>(type: "float", nullable: false),
                     AverageSecondsPerGame = table.Column<int>(type: "int", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

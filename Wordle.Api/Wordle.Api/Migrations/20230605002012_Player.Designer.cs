@@ -12,7 +12,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230604220206_Player")]
+    [Migration("20230605002012_Player")]
     partial class Player
     {
         /// <inheritdoc />
@@ -172,6 +172,9 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("AverageSecondsPerGame")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("BDay")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -191,6 +194,9 @@ namespace Wordle.Api.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<bool>("MasterOfTheUniverse")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
