@@ -50,7 +50,7 @@
                 <RouterLink :to="{ name: 'editor' }"> Word Editor </RouterLink>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item>
+            <!-- <v-list-item>
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
@@ -60,7 +60,7 @@
               >
                 Sign In
               </v-list-item-title>
-            </v-list-item>
+            </v-list-item> -->
           </v-list>
         </v-menu>
       </template>
