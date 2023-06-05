@@ -21,9 +21,15 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer />
-        <v-btn v-if="!signup" @click="signUpMode" variant="elevated" color="success"> Sign Up </v-btn>
-        <v-btn v-if="signup" @click="signUpAsync" variant="elevated" color="success"> Confirm </v-btn>
-        <v-btn v-if="!signup" @click="signInAsync" variant="elevated" color="success"> Sign In </v-btn>
+        <v-btn v-if="!signup" @click="signUpMode" variant="elevated" color="success">
+          Sign Up
+        </v-btn>
+        <v-btn v-if="signup" @click="signUpAsync" variant="elevated" color="success">
+          Confirm
+        </v-btn>
+        <v-btn v-if="!signup" @click="signInAsync" variant="elevated" color="success">
+          Sign In
+        </v-btn>
         <v-btn v-if="!signup" @click="close" variant="elevated" color="primary"> Cancel </v-btn>
       </v-card-actions>
     </v-card>
@@ -84,19 +90,20 @@ function calculateAge(birthday: string) {
   let bday = new Date(Date.parse(birthday))
   let currentDate = new Date()
 
-  age.value = currentDate.getFullYear() - bday.getFullYear() 
+  age.value = currentDate.getFullYear() - bday.getFullYear()
   year.value = bday.getFullYear().toString()
   console.log(year.value)
-  month.value = (bday.getMonth()  + 1).toString()
+  month.value = (bday.getMonth() + 1).toString()
   console.log(month.value)
   day.value = bday.getDate().toString()
   console.log(day.value)
-  
-  if (currentDate.getMonth() < bday.getMonth() || 
-      (currentDate.getMonth() === bday.getMonth() && currentDate.getDate() < bday.getDate())) {
-        age.value--;
-      }
 
+  if (
+    currentDate.getMonth() < bday.getMonth() ||
+    (currentDate.getMonth() === bday.getMonth() && currentDate.getDate() < bday.getDate())
+  ) {
+    age.value--
+  }
 }
 
 async function signInAsync() {
@@ -109,7 +116,16 @@ async function signInAsync() {
 
 async function signUpAsync() {
   calculateAge(bday.value)
-  if (await signInService.signUpAsync(username.value, password.value, name.value, year.value, month.value, day.value)) {
+  if (
+    await signInService.signUpAsync(
+      username.value,
+      password.value,
+      name.value,
+      year.value,
+      month.value,
+      day.value
+    )
+  ) {
     close()
   } else {
     alert('Invalid user name or password')

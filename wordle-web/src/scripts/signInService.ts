@@ -45,7 +45,14 @@ export class SignInService {
     }
   }
 
-  public async signUpAsync(username: string, password: string, name: string, year: string, month: string, day: string): Promise<boolean> {
+  public async signUpAsync(
+    username: string,
+    password: string,
+    name: string,
+    year: string,
+    month: string,
+    day: string
+  ): Promise<boolean> {
     try {
       const result = await Axios.post('Token/CreateUser', {
         username: username,
