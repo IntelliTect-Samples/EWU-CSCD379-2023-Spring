@@ -40,6 +40,10 @@
     </v-container>
   </div>
 
+  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
+
   <v-btn density="compact" @click="goBack">Back</v-btn>
 </template>
 
@@ -48,6 +52,8 @@ import Axios from 'axios'
 import { ref, watch, reactive } from 'vue'
 import WordEditor from '../components/WordEditor.vue'
 import $router from '../router/index'
+
+const overlay = ref(false)
 
 const input = ref('')
 
@@ -58,7 +64,6 @@ interface Word {
   IsCommon: string
 }
 
-let overlay = true
 
 let Words = reactive<{ value: Word[] }>({ value: [] })
 let currentPage = ref(1)
@@ -74,6 +79,7 @@ function getInput() {
 }
 
 function fetchWords() {
+  overlay.value = true
   Axios.get(`/Word/GetPageOfWords?page=${currentPage.value}&filter=${input.value}`).then(
     (response) => {
       console.log(response.data),
@@ -85,6 +91,8 @@ function fetchWords() {
         })))
     }
   )
+  overlay.value = false
+
 }
 
 watch(currentPage, (newVal) => {

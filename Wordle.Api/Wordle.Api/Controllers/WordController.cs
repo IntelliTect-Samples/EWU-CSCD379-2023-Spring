@@ -48,7 +48,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("AddWordFromBody")]
-        //    [Authorize(Policy = "NewPolicy")]
+        [Authorize(Policy = "NewPolicy")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
             return await _wordService.AddWord(word.Text, word.IsCommon);
@@ -62,7 +62,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost("FlipIsCommon")]
-        //[Authorize]
+        [Authorize]
         public async Task<bool> FlipIsCommon(string word)
         {
             return await _wordService.FlipIsCommon(word);

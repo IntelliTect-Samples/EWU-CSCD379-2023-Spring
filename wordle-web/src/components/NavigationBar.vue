@@ -13,7 +13,7 @@
         </template>
         <v-spacer></v-spacer>
 
-        <v-btn>{{ signInService.token.userName }}</v-btn>
+        <router-link to="/signIn">{{ signInService.token.userName }}</router-link>
 
         <v-btn>
           <SettingsDialogVue />
@@ -45,7 +45,7 @@
               <router-link to="/index"
                 ><v-list-item-title>Dictionary</v-list-item-title></router-link
               >
-              <router-link to="/signIn"><v-list-item-title>signIn</v-list-item-title></router-link>
+              <router-link to="/signIn"><v-list-item-title>sign In</v-list-item-title></router-link>
             </v-list>
           </v-menu>
         </template>

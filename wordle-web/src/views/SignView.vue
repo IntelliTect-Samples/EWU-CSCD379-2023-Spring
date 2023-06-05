@@ -16,27 +16,47 @@
               ></v-text-field>
               <v-btn type="submit" color="primary" block class="mt-4"> Sign In </v-btn>
             </v-form>
+            <v-card>
+              <v-card-title>Default Accounts</v-card-title>
+              <p>UserName: AdminIntellitect.com</p>
+              <p>PassWord: P@ssw0rd123</p>
+              <p>--Has admin and special roles.</p>
+              <p>----</p>
+              <p>UserName: matt.com</p>
+              <p>PassWord: P@ssw0rd123</p>
+              <p>--Has admin and special roles.</p>
+              <p>----</p>
+              <p>UserName: meg.com</p>
+              <p>PassWord: P@ssw0rd1234</p>
+              <p>--Has admin and special roles, and a claim of MasterOfTheUniverse.</p>
+              <p>----</p>
+              <p>UserName: FrostyTheSnowman.com</p>
+              <p>PassWord: P@ssw0rd12345</p>
+              <p>--Has admin and special roles, and a claim of MasterOfTheUniverse, also is the only one old enough to add or remove words.</p>
+            </v-card>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
+    
   </v-container>
+ 
 </template>
 
 <script setup lang="ts">
-import { defineComponent, inject, ref, toRef, watch } from 'vue'
-import { Services } from '@/scripts/services'
-import type { SignInService } from '@/scripts/signInService'
+import { inject, ref, watch } from 'vue'
+import { Services } from '../scripts/services'
+import type { SignInService } from '../scripts/signInService'
 
 const username = ref('')
 const password = ref('')
+const signInService = inject(Services.SignInService) as SignInService
 
 function signIn() {
   // Handle sign in logic here
   console.log('Signing in...')
 
   //-----sign in stuff
-  const signInService = inject(Services.SignInService) as SignInService
   signInService.signIn(username.value, password.value)
 
   watch(

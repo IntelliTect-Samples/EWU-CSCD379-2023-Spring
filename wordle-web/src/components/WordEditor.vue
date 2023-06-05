@@ -23,7 +23,7 @@
           <div class="d-flex flex-column">
             <v-btn color="success" class="mt-4" block @click="addWordAndRefresh">Add</v-btn>
 
-            <v-btn color="error" class="mt-4" block @click="flipIsCommon">
+            <v-btn color="error" class="mt-4" block @click="flipWordAndRefresh">
               Flip Is Common Value
             </v-btn>
 
@@ -38,6 +38,9 @@
       </v-sheet>
     </v-dialog>
   </div>
+  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
+    <v-progress-circular color="primary" indeterminate size="64" />
+  </v-overlay>
 </template>
 
 <script lang="ts">
@@ -134,11 +137,38 @@ export default {
           console.log('Error:', error)
         })
     },
+    flipWord() {
+      console.log('Flipping: ' + this.input)
+      return Axios.post(`/Word/FlipIsCommon?word=${this.input}`, { word: this.input })
+        .then((response) => {
+          return response.data
+        })
+        .catch((error) => {
+          console.log('Axios Error:', error)
+          if(error.response.status == 401){
+            console.log("Not Signed In")
+          }
+          return false
+        })
+    },
 
-    flipIsCommon() {
-      Axios.get(`/Word/FlipIsCommon?word=${this.input}`).then((response) => {
-        console.log(response.data)
-      })
+    flipWordAndRefresh() {
+      this.flipWord()
+        .then((isFlipped) => {
+          if (isFlipped) {
+            console.log('Refresh Dictionary - Word Editor')
+            this.$emit('refresh') // Emit the event to trigger the parent action
+            this.closeDialog() // Close the dialog after emitting the event
+          } else {
+            console.log('Type of IsFlipped: ' + typeof isFlipped)
+            console.log('What is flipped ' + isFlipped)
+          }
+        })
+        .catch((error) => {
+          console.log('Error:', error)
+
+         
+        })
     }
   }
 }

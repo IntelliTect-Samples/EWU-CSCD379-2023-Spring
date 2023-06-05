@@ -15,11 +15,7 @@ import { reactive, provide } from 'vue'
 
 const signInService = reactive(new SignInService())
 provide(Services.SignInService, signInService)
-/*
-setTimeout(() => {
-  signInService.signIn('AdminIntellitect.com', 'P@ssw0rd123')
-}, 1000)
-*/
+
 </script>
 
 <style scoped>
