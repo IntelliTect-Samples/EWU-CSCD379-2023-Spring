@@ -143,8 +143,15 @@ public class WordService
         return result;
     }
 
-    public async Task<List<string>> GetWordList()
+    public async Task<List<Word>> GetWordList(int pageNumber, string? searchWord)
     {
-        return await _db.Words.Select(word => word.Text).ToListAsync();
+        if (string.IsNullOrEmpty(searchWord))
+        {
+            return await _db.Words.Select(word => word).Skip(10 * pageNumber).Take(10).ToListAsync();
+        }
+        else 
+        {
+            return await _db.Words.Select(word => word).Where(word => word.Text.Contains(searchWord)).Skip(10 * pageNumber).Take(10).ToListAsync();
+        }
     }
 }

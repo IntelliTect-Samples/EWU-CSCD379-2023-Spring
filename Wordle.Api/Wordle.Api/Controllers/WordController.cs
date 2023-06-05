@@ -43,8 +43,8 @@ public class WordController : ControllerBase
     }
 
     [HttpGet("WordList")]
-    public async Task<List<string>> GetWordList()
+    public async Task<List<Word>> GetWordList(int pageNumber, string? searchWord)
     {
-        return await _wordService.GetWordList();
+        return await _wordService.GetWordList(pageNumber, searchWord);
     }
 }

@@ -12,6 +12,9 @@ public static class IdentitySeed
 
         // Seed Admin User
         await SeedAdminUserAsync(userManager);
+
+        // Seed Masters Of The Universe
+        await SeedMasterOfUniverseAsync(userManager);
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -24,6 +27,10 @@ public static class IdentitySeed
         if (!await roleManager.RoleExistsAsync(Roles.Special))
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Special));
+        }
+        if (!await roleManager.RoleExistsAsync(Roles.MasterOfTheUniverse))
+        {
+            await roleManager.CreateAsync(new IdentityRole(Roles.MasterOfTheUniverse));
         }
     }
 
@@ -44,6 +51,49 @@ public static class IdentitySeed
             {
                 await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
+            }
+        }
+    }
+
+    private static async Task SeedMasterOfUniverseAsync(UserManager<AppUser> userManager)
+    {
+        // Seed Nolan MasterOfTheUniverse
+        if (await userManager.FindByEmailAsync("nposey@intellitect.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "nposey@intellitect.com",
+                Email = "nposey@intellitect.com",
+                Name = "Nolan",
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
+                await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
+            }
+        }
+
+        // Seed Hunter MasterOfTheUniverse
+        if (await userManager.FindByEmailAsync("hthompson@intellitect.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "hthompson@intellitect.com",
+                Email = "hthompson@intellitect.com",
+                Name = "Hunter",
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
+                await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
             }
         }
     }
