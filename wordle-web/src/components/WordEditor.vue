@@ -38,13 +38,12 @@
       </v-sheet>
     </v-dialog>
   </div>
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
+  
 </template>
 
 <script lang="ts">
 import Axios from 'axios'
+
 
 export default {
   emits: ['refresh'], // Specify the emitted event name
@@ -145,8 +144,8 @@ export default {
         })
         .catch((error) => {
           console.log('Axios Error:', error)
-          if (error.response.status == 401) {
-            console.log('Not Signed In')
+          if(error.response.status == 401){
+            console.log("Not Signed In")
           }
           return false
         })
@@ -166,6 +165,8 @@ export default {
         })
         .catch((error) => {
           console.log('Error:', error)
+
+         
         })
     }
   }
