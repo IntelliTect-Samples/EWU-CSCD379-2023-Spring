@@ -33,6 +33,10 @@
         <v-list-item>
           <v-btn to="/instructions" variant="outlined" elevation="24">How To Play</v-btn>
         </v-list-item>
+
+        <v-list-item>
+          <v-btn to="/wordeditor" variant="outlined" elevation="24">Word Editor</v-btn>
+        </v-list-item>
       </v-list>
     </v-card>
   </v-navigation-drawer>
