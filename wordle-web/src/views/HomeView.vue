@@ -11,7 +11,7 @@
         class="subheading font-weight-bold"
         style="background-color: #1d1d1db0; padding: 0px 10px; border-radius: 15px"
       >
-        Check out all we have to offer in this bootleg copy of the classic NYTimes fan-favorite!
+        Check out all we have to offer in this bootleg copy of the classic NY Times fan-favorite!
       </p>
       <div>
         <v-btn to="/instruct" variant="outlined" class="midbtn" style="background-color: #1d1d1d5e"
