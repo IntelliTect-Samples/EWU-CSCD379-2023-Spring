@@ -60,8 +60,7 @@ public static class IdentitySeed
         // Seed Nolan MasterOfTheUniverse
         if (await userManager.FindByEmailAsync("nposey@intellitect.com") == null)
         {
-            AppUser user = new AppUser
-            {
+            AppUser user = new AppUser {
                 UserName = "nposey@intellitect.com",
                 Email = "nposey@intellitect.com",
                 Name = "Nolan",
@@ -80,8 +79,7 @@ public static class IdentitySeed
         // Seed Hunter MasterOfTheUniverse
         if (await userManager.FindByEmailAsync("hthompson@intellitect.com") == null)
         {
-            AppUser user = new AppUser
-            {
+            AppUser user = new AppUser {
                 UserName = "hthompson@intellitect.com",
                 Email = "hthompson@intellitect.com",
                 Name = "Hunter",

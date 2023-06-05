@@ -137,10 +137,17 @@ public class WordService
                 // Use the timezone that is the worst possible one
                 await this.GetWordOfTheDayAsync(TimeSpan.FromHours(12), startDate.AddDays(i));
             }
+
             // Go get the data again, hopefully this all works and we don't end up in a loop
             result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
+
         return result;
+    }
+
+    public async Task<List<string>> GetValidWordList()
+    {
+        return await _db.Words.Select(word => word.Text).ToListAsync();
     }
 
     public async Task<List<Word>> GetWordList(int pageNumber, string? searchWord)
@@ -149,9 +156,11 @@ public class WordService
         {
             return await _db.Words.Select(word => word).Skip(10 * pageNumber).Take(10).ToListAsync();
         }
-        else 
-        {
-            return await _db.Words.Select(word => word).Where(word => word.Text.Contains(searchWord)).Skip(10 * pageNumber).Take(10).ToListAsync();
-        }
+
+        return await _db.Words.Select(word => word)
+            .Where(word => word.Text.Contains(searchWord))
+            .Skip(10 * pageNumber)
+            .Take(10)
+            .ToListAsync();
     }
 }

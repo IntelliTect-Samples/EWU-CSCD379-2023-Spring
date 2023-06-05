@@ -46,16 +46,12 @@ public class PlayerServiceTests : DatabaseTestBase
         var guid = (await playerService.CreateAsync("Tester")).PlayerId;
         var wordOfTheDay = await wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(-7));
 
-
-        GameResultDto dto = new()
-        {
-            PlayerId = guid,
-            WordPlayed = wordOfTheDay.Word.Text,
-            WasGameWon = true,
-            Attempts = 3,
-            DurationInSeconds = 10,
-            WordOfTheDayDate = wordOfTheDay.Date
-        };
+        GameResultDto dto = new() { PlayerId = guid,
+                                    WordPlayed = wordOfTheDay.Word.Text,
+                                    WasGameWon = true,
+                                    Attempts = 3,
+                                    DurationInSeconds = 10,
+                                    WordOfTheDayDate = wordOfTheDay.Date };
 
         var playerGame = await playerService.AddGameResultAsync(dto);
         Assert.IsNotNull(playerGame.DateWord);

@@ -45,7 +45,7 @@ export class WordleGame {
     this.endTime = null
     this.guesses.splice(0)
 
-    await WordsService.getWordListFromApi()
+    await WordsService.getValidWordListFromApi()
 
     // Create a word for each guess.
     for (let i = 0; i < numberOfGuesses; i++) {

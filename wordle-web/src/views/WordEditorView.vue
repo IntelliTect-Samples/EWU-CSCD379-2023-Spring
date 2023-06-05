@@ -42,18 +42,18 @@ const words = ref<WordHelper[]>([])
 let page = 0
 let searchWord = ref<string>('')
 
-Axios.get('word/wordlist?pageNumber=0').then((response) => {
+Axios.get('Word/WordList?pageNumber=0').then((response) => {
   words.value = response.data as WordHelper[]
 })
 
 function nextPage() {
   page++
   if (searchWord.value === '') {
-    Axios.get('word/wordlist?pageNumber=' + page).then((response) => {
+    Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
       words.value = response.data as WordHelper[]
     })
   } else {
-    Axios.get('word/wordlist?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+    Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
       (response) => {
         words.value = response.data as WordHelper[]
       }
@@ -65,11 +65,11 @@ function previousPage() {
   if (page > 0) {
     page--
     if (searchWord.value === '') {
-      Axios.get('word/wordlist?pageNumber=' + page).then((response) => {
+      Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
         words.value = response.data as WordHelper[]
       })
     } else {
-      Axios.get('word/wordlist?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+      Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
         (response) => {
           words.value = response.data as WordHelper[]
         }
@@ -81,7 +81,7 @@ function previousPage() {
 function updateSearch() {
   console.log(searchWord.value)
   page = 0
-  Axios.get('word/wordlist?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+  Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
     (response) => {
       words.value = response.data as WordHelper[]
     }

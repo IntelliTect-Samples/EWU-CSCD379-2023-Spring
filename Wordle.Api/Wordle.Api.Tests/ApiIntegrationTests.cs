@@ -21,8 +21,7 @@ public class ApiIntegrationTests
         var response = await client.GetAsync("word");
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        Assert.AreEqual("text/plain; charset=utf-8",
-                        response.Content.Headers.ContentType?.ToString());
+        Assert.AreEqual("text/plain; charset=utf-8", response.Content.Headers.ContentType?.ToString());
 
         var json = await response.Content.ReadAsStringAsync();
         Assert.IsTrue(json.Length == 5);
@@ -35,8 +34,7 @@ public class ApiIntegrationTests
         var response = await client.GetAsync("Player/TopPlayers");
 
         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        Assert.AreEqual("application/json; charset=utf-8",
-                        response.Content.Headers.ContentType?.ToString());
+        Assert.AreEqual("application/json; charset=utf-8", response.Content.Headers.ContentType?.ToString());
 
         var json = await response.Content.ReadAsStringAsync();
         Assert.IsTrue(json.Contains("Susan"));

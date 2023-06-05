@@ -14,7 +14,7 @@ export abstract class WordsService {
     return response.data
   }
 
-  static async getWordListFromApi() {
+  static async getValidWordListFromApi() {
     Axios.get('Word/WordList')
       .then((response) => {
         setTimeout(() => {}, 100)
