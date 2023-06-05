@@ -9,7 +9,7 @@
         :errorMessages="addedError ? ['Cannot add word'] : []"
         maxlength="5"
         variant="outlined"
-        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
+        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 400px"
       />
     </v-card-text>
     <v-card-actions>
@@ -32,7 +32,7 @@
         maxlength="5"
         @input="editText($event.target.value)"
         variant="outlined"
-        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
+        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 400px"
       />
     </v-card-text>
     <v-card-actions>

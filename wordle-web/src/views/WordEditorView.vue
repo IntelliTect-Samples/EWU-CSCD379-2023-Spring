@@ -2,8 +2,8 @@
   <h1>Word Editor</h1>
   <v-card>
     <UpdateWordList />
-    <WordList />
     <WordFlag />
+    <WordList />
   </v-card>
 </template>
 
