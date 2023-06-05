@@ -73,7 +73,7 @@ public class TokenController : Controller
     }
 
     [HttpPost("CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody]CreateUser createUser)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUser createUser)
     {
         if (string.IsNullOrEmpty(createUser.Username))
         {
@@ -109,27 +109,26 @@ public class TokenController : Controller
     }
 
     [HttpGet("testadmin")]
-    [Authorize(Roles=Roles.Admin)]
+    [Authorize(Roles = Roles.Admin)]
     public string TestAdmin()
     {
         return "Authorized as Admin";
     }
 
     [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles="RulerOfTheUniverse,Meg")]
+    [Authorize(Roles = "RulerOfTheUniverse,Meg")]
     public string TestRulerOfTheUniverseOrMeg()
     {
         return "Authorized as Ruler of the Universe or Meg";
     }
 
     [HttpGet("testrandomadmin")]
-    [Authorize(Policy=Policies.RandomAdmin)]
+    [Authorize(Policy = Policies.RandomAdmin)]
     public string TestRandomAdmin()
     {
         return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
     }
 
 }
-
 
 

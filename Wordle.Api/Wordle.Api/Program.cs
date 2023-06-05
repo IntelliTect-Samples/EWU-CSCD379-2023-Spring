@@ -17,13 +17,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-options.AddPolicy(name: MyAllowAllOrigins,
-                  policy =>
-                  {
-                      policy.WithOrigins("*");
-                      policy.AllowAnyMethod();
-                      policy.AllowAnyHeader();
-                  });
+    options.AddPolicy(name: MyAllowAllOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("*");
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyHeader();
+                      });
 });
 
 
@@ -34,17 +34,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(
     config =>
-{
-    config.SwaggerDoc("v1", new OpenApiInfo { Title = "Wordle API", Version = "v1" });
-    config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.Http,
-        Scheme = "Bearer"
-    });
-    config.AddSecurityRequirement(new OpenApiSecurityRequirement
+        config.SwaggerDoc("v1", new OpenApiInfo { Title = "Wordle API", Version = "v1" });
+        config.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.Http,
+            Scheme = "Bearer"
+        });
+        config.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
             new OpenApiSecurityScheme
@@ -58,7 +58,7 @@ builder.Services.AddSwaggerGen(
             new List<string>()
         }
     });
-}
+    }
 );
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -76,7 +76,7 @@ builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfi
 
 //JWT Token setup
 JwtConfiguration jwtConfiguration = builder.Configuration
-    .GetSection("Jwt").Get<JwtConfiguration>() ?? 
+    .GetSection("Jwt").Get<JwtConfiguration>() ??
     throw new Exception("JWT configuration not specified");
 
 builder.Services.AddSingleton(jwtConfiguration);
