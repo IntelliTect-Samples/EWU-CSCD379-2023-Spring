@@ -12,7 +12,7 @@
     persistent
   >
     <v-card>
-      <div class="d-flex justify-center pa-2 bg-primary text-h6">Sign In</div>
+      <div class="d-flex justify-center pa-2 text-h6">Sign In</div>
       <v-card-text>
         <v-row>
           <v-col cols="12">
@@ -25,7 +25,7 @@
       </v-card-text>
       <v-card-actions class="justify-center">
         <v-btn @click="signInAsync" variant="elevated" color="success"> Sign In </v-btn>
-        <v-btn @click="close" variant="elevated" color="primary"> Cancel </v-btn>
+        <v-btn @click="close" variant="elevated" color="error"> Cancel </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

@@ -22,10 +22,10 @@ public class WordController : ControllerBase
         return (await _wordService.GetRandomWordAsync()).Text;
     }
 
-    [HttpPost]
-    public async Task<Word> AddWord(string newWord, bool isCommon)
+    [HttpPost("AddWord")]
+    public async Task<Word> AddWord(WordDto newWord)
     {
-        return await _wordService.AddWordAsync(newWord, isCommon);
+        return await _wordService.AddWordAsync(newWord.Text, newWord.IsCommon);
     }
 
     [HttpGet("WordOfTheDay")]
