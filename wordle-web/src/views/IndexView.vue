@@ -40,9 +40,7 @@
     </v-container>
   </div>
 
-  <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
-    <v-progress-circular color="primary" indeterminate size="64" />
-  </v-overlay>
+  
 
   <v-btn density="compact" @click="goBack">Back</v-btn>
 </template>
@@ -53,7 +51,7 @@ import { ref, watch, reactive } from 'vue'
 import WordEditor from '../components/WordEditor.vue'
 import $router from '../router/index'
 
-const overlay = ref(false)
+
 
 const input = ref('')
 
