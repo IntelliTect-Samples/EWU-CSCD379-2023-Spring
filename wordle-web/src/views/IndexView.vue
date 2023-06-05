@@ -64,7 +64,6 @@ interface Word {
   IsCommon: string
 }
 
-
 let Words = reactive<{ value: Word[] }>({ value: [] })
 let currentPage = ref(1)
 let totalPages = ref(15)
@@ -92,7 +91,6 @@ function fetchWords() {
     }
   )
   overlay.value = false
-
 }
 
 watch(currentPage, (newVal) => {

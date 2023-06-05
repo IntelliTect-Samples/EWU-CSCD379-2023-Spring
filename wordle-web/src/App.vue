@@ -15,7 +15,6 @@ import { reactive, provide } from 'vue'
 
 const signInService = reactive(new SignInService())
 provide(Services.SignInService, signInService)
-
 </script>
 
 <style scoped>

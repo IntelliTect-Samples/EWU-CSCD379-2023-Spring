@@ -32,15 +32,16 @@
               <p>----</p>
               <p>UserName: FrostyTheSnowman.com</p>
               <p>PassWord: P@ssw0rd12345</p>
-              <p>--Has admin and special roles, and a claim of MasterOfTheUniverse, also is the only one old enough to add or remove words.</p>
+              <p>
+                --Has admin and special roles, and a claim of MasterOfTheUniverse, also is the only
+                one old enough to add or remove words.
+              </p>
             </v-card>
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
-    
   </v-container>
- 
 </template>
 
 <script setup lang="ts">
