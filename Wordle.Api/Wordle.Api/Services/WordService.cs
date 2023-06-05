@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 
@@ -179,7 +178,7 @@ public class WordService
 
     public async Task<IEnumerable<Word>> GetWordList(int pageNumber, int pageLength, string? searchString)
     {
-        IQueryable<Word> result = string.IsNullOrEmpty(searchString) ? _db.Words : _db.Words.Where(w => w.Text.Contains(searchString));
+        IQueryable<Word> result = string.IsNullOrEmpty(searchString) ? _db.Words : _db.Words.Where(w => w.Text.StartsWith(searchString));
         return await result.OrderBy(w => w.Text).Skip((pageNumber-1)*pageLength).Take(pageLength).ToListAsync();
     }
 
