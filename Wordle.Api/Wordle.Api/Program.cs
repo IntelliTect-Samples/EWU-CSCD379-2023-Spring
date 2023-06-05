@@ -11,6 +11,8 @@ using Wordle.Api.Data;
 using Wordle.Api.Identity;
 using Wordle.Api.Services;
 
+// Testing for deployment
+
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
