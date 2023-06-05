@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
@@ -51,6 +52,25 @@ namespace Wordle.Api.Controllers
         public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
         {
             return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
+        }
+
+        [HttpGet("GetWordlList")]
+        public async Task<IEnumerable<Word>> GetWordList(int pageNumber = 1, int pageSize = 10, string? search = null)
+        {
+            return await _wordService.GetWords(pageNumber, pageSize, search);
+        }
+
+        [HttpDelete]
+        public async Task<bool> DeleteWord(int wordId)
+        {
+            return await _wordService.DeleteWord(wordId);
+        }
+
+        [Authorize]
+        [HttpPost("UpdateWord")]
+        public async Task<Word?> UpdateWord([FromBody] Word word)
+        {
+            return await _wordService.UpdateWord(word.WordId, word.Text, word.IsCommon, word.IsUsed);
         }
     }
 }    
