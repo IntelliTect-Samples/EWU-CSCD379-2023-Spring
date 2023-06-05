@@ -6,7 +6,7 @@ name: Wordle 2023 API CI/CD
 on:
   push:
     branches:
-      - assignment5
+      - main
     paths: 
       - Wordle.Api/**
   workflow_dispatch:
