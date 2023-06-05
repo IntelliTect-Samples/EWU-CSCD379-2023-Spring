@@ -4,7 +4,7 @@
     {
         public static void Seed(AppDbContext context)
         {
-            //SeedPlayers(context);
+            SeedPlayers(context);
             SeedWords(context);
         }
  
@@ -27,7 +27,7 @@
             }
         }
 
-        /*public static void SeedPlayers (AppDbContext db)
+        public static void SeedPlayers (AppDbContext db)
         {
             if (!db.Players.Any())
             {
@@ -37,7 +37,7 @@
                 db.Players.Add(new Player { Name = "Susan", AverageAttempts = 2.7, AverageSecondsPerGame = 70, GameCount = 23, PlayerId = Guid.NewGuid() });
                 db.SaveChanges();
             }
-        }*/
+        }
 
    }
 }
