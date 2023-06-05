@@ -45,6 +45,30 @@ export class SignInService {
     }
   }
 
+  public async signUpAsync(
+    username: string,
+    password: string,
+    name: string,
+    year: string,
+    month: string,
+    day: string
+  ): Promise<boolean> {
+    try {
+      const result = await Axios.post('Token/CreateUser', {
+        username: username,
+        password: password,
+        name: name,
+        year: year,
+        month: month,
+        day: day
+      })
+      return true
+    } catch (err) {
+      console.log(`SignUp failed: ${err}`)
+      return false
+    }
+  }
+
   public signOut() {
     this.setToken(null)
   }
