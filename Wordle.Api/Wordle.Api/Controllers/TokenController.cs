@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -131,17 +131,27 @@ public class TokenController : Controller
         return "something";
     }
 
-    [HttpGet("testAdmin")]
+    [HttpGet("testadmin")]
     [Authorize(Roles = Roles.Admin)]
     public string TestAdmin()
     {
         return "You are Admin";
     }
 
-    [HttpGet("testmasterpolicy")]
-    [Authorize(Policy = Policies.MasterOfTheUniverse)]
-    public string TestMasterOfTheUniverse()
+    [HttpGet("testruleroftheuniverse")]
+    [Authorize(Roles = "RulerOfTheUniverse,Meg")]
+    public string TestRulerOfTheUniverseOrMeg()
     {
         return "Authorized as MASTER OF THE UNIVERSE";
     }
+
+    [HttpGet("testrandomadmin")]
+    [Authorize(Policy = Policies.RandomAdmin)]
+    public string TestRandomAdmin()
+    {
+        return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
+    }
+
 }
+
+
