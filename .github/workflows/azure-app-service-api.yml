@@ -28,6 +28,9 @@ jobs:
         working-directory: ./Wordle.Api
         run: dotnet build --configuration Release
         
+      - name: Test with dotnet
+        working-directory: ./Wordle.Api
+        run: dotnet test
 
       - name: dotnet publish
         working-directory: ./Wordle.Api
