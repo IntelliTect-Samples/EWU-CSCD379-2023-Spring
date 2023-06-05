@@ -54,10 +54,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="$router.push('/login')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="$router.push('/login')">
                 Sign In
               </v-list-item-title>
             </v-list-item>
