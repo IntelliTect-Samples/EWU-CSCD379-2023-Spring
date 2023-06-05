@@ -29,10 +29,16 @@
           to="/about"
         ></v-list-item>
         <v-list-item
-          prepend-icon="mdi-question"
+          prepend-icon="mdi-chat-question"
           title="Instructions"
           value="instructions"
           to="/instructions"
+        ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-pencil"
+          title="Editor"
+          value="editor"
+          to="/editor"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
