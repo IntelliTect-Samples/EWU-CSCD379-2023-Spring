@@ -76,7 +76,7 @@ public class WordService
 
         var todaysWord = await _db.DateWords
           .Include(f => f.Word)
-          .FirstOrDefaultAsync(f => f.Date == date);
+          .FirstOrDefaultAsync(f => f.Date == date.Value.Date);
 
         if (todaysWord != null)
         {
@@ -98,7 +98,7 @@ public class WordService
 
                 var dateWord = new DateWord
                 {
-                    Date = date.Value,
+                    Date = date.Value.Date,
                     Word = word
                 };
                 _db.DateWords.Add(dateWord);

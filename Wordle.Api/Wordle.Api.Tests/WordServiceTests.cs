@@ -104,7 +104,7 @@ namespace Wordle.Api.Tests
 
 
             // Check the stats
-            var stats = await wordService.GetWordOfTheDayStatsAsync();
+            var stats = await wordService.GetWordOfTheDayStatsAsync(wordOfTheDay1.Date);
             Assert.AreEqual(10, stats.Count());
             Assert.AreEqual(2, stats[0].NumberOfPlays);
             Assert.AreEqual(1, stats[1].NumberOfPlays);
