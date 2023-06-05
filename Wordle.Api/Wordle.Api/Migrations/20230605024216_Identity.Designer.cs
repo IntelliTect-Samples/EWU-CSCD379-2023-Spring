@@ -12,7 +12,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230605022000_Identity")]
+    [Migration("20230605024216_Identity")]
     partial class Identity
     {
         /// <inheritdoc />
@@ -195,8 +195,9 @@ namespace Wordle.Api.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<bool>("MasterOfTheUniverse")
-                        .HasColumnType("bit");
+                    b.Property<string>("MasterOfTheUniverse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

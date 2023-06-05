@@ -41,7 +41,7 @@ public static class IdentitySeed
                 Email = "Admin@intellitect.com",
                 Name = "Admin",
                 BDay = new DateTime(1772, 10, 22),
-                MasterOfTheUniverse = true
+                MasterOfTheUniverse = "MOTU"
             };
 
             IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
