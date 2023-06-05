@@ -24,7 +24,6 @@ import { nextTick } from 'vue'
 import { watch } from 'vue'
 import { inject } from 'vue'
 import { ref } from 'vue'
-// hi
 const playerService = inject(Services.PlayerService) as PlayerService
 let newName = playerService.player.name
 
