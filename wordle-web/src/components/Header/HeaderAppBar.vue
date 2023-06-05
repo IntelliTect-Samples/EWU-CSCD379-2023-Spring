@@ -3,9 +3,9 @@
 --->
 
 <template>
-  <v-app-bar id="toolbar">
+  <v-app-bar class="py-1 px-6 toolbar">
     <v-toolbar-title>
-      <div @click="router.push('/')" id="toolbar-title">
+      <div @click="router.push('/')" class="toolbar-title">
         <v-icon icon="mdi-book-open-page-variant" />
         The Good Word
       </div>
@@ -15,10 +15,13 @@
       <v-icon size="large">{{ isPaused ? 'mdi-volume-high' : 'mdi-volume-mute' }}</v-icon>
     </v-btn>
 
-    <v-btn icon="mdi-align-vertical-bottom" to="/leaderboard"></v-btn>
-    <ActiveUser />
-    <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
+    <SignInDialog />
 
+    <v-btn icon="mdi-align-vertical-bottom" to="/leaderboard"></v-btn>
+
+    <ActiveUser />
+
+    <v-btn icon="mdi-cog" @click.stop="settings = !settings"></v-btn>
     <v-app-bar-nav-icon @click.stop="menu = !menu"></v-app-bar-nav-icon>
   </v-app-bar>
 
@@ -33,6 +36,7 @@ import nightInKyoto from '@/assets/music/nightInKyoto.mp3'
 import SettingsCard from '@/components/Header/SettingsCard.vue'
 import MenuDrawer from '@/components/Header/MenuDrawer.vue'
 import ActiveUser from '@/components/Header/ActiveUser.vue'
+import SignInDialog from '@/components/Header/SignInDialog.vue'
 
 let menu = ref(false)
 let settings = ref(false)
@@ -74,16 +78,14 @@ function toggleMusic() {
 </script>
 
 <style scoped>
-#toolbar {
-  width: 100%;
-  padding: 6px 24px;
+.toolbar {
   font-size: 26px;
   font-weight: bold;
   border-bottom: 1px solid #656464;
   min-height: 65px;
 }
 
-#toolbar-title {
+.toolbar-title {
   cursor: pointer;
   width: 180px;
 }

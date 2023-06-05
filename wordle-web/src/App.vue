@@ -23,6 +23,7 @@ import AppBar from '@/components/Header/HeaderAppBar.vue'
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
+
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)

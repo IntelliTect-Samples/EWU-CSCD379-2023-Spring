@@ -6,6 +6,7 @@
   <v-btn @click="toggleDialog = true">
     {{ playerService.player.playerName }}
   </v-btn>
+
   <!-- TODO: Figure out why why do ':model-value="toggleDialog" @update:model-value="close"' over 'v-model="toggleDialog"' -->
   <v-dialog
     :model-value="toggleDialog"
