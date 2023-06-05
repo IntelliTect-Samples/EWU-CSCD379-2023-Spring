@@ -1,5 +1,5 @@
 <template>
-    <v-card width="400px">
+    <v-card>
         <v-card-item>
             <v-table>
 
@@ -13,6 +13,9 @@
                     <tr v-for="word in words" :key="word.wordID">
                         <td class="text-center">{{ word.text }}</td>
                         <td class="text-center">{{ word.isCommon ? 'Yes' : 'No' }}</td>
+                        <td> <v-btn>Add</v-btn> </td>
+                        <td> <v-btn>Remove</v-btn> </td>
+                        <td> <v-btn>Edit Is Common</v-btn> </td>
                     </tr>
                 </tbody>
 
