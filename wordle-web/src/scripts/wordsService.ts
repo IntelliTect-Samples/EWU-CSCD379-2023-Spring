@@ -12,12 +12,12 @@ export abstract class WordsService {
   static allWords(): Array<string> {
     return this.#words
   }
-  
+
   static returnWords(size: number, page: number): Array<string> {
     const words = []
-    const start = (page * size) + 1
+    const start = page * size + 1
     const end = (page + 1) * size
-    for(let i = start; i < end; i++){
+    for (let i = start; i < end; i++) {
       words.push(this.#words[i])
     }
     return words
