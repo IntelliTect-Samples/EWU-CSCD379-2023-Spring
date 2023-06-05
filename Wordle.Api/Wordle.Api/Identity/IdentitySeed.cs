@@ -24,6 +24,10 @@ public static class IdentitySeed
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Special));
         }
+        if (!await roleManager.RoleExistsAsync(Roles.MasterOfTheUniverse))
+        {
+            await roleManager.CreateAsync(new IdentityRole(Roles.MasterOfTheUniverse));
+        }
     }
 
     private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
