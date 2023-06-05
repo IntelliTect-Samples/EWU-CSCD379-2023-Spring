@@ -35,8 +35,8 @@ const router = createRouter({
       component: WordOfTheDayView
     },
     {
-      path: '/WordEditorView',
-      name: 'WordEditorView',
+      path: '/wordeditor',
+      name: 'wordEditor',
       component: WordEditorView.vue
     }
   ]
