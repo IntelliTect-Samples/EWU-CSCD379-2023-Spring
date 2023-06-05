@@ -6,7 +6,7 @@ export class WordListOptions {
 
 export class WordListItem {
   wordId: number = 0
-  test: string = ''
+  text: string = ''
   isCommon: boolean = false
   isUsed: boolean = false
 }

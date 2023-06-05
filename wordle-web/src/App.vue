@@ -14,6 +14,8 @@
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
         <ActiveUser></ActiveUser>
+        <SignInCard v-if="!signInService.isSignedIn"></SignInCard>
+        <v-btn v-if="signInService.isSignedIn" @click="signInService.signOut()">Sign-Out</v-btn>
 
         <v-menu>
           <template v-slot:activator="{ props }">
@@ -39,6 +41,11 @@
             <v-list-item>
               <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'wordEditor' }"> Word Editor </RouterLink>
               </v-list-item-title>
             </v-list-item>
             <v-list-item>
@@ -70,6 +77,7 @@ import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import { inject } from 'vue'
 import type { SignInService } from './scripts/signInService'
+import SignInCard from './components/SignInCard.vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
@@ -104,7 +112,7 @@ function signIn() {
   showSignIn.value = true
 }
 
-setTimeout(() => {
-  signInService.signInAsync('Admin@wordle.com', 'P@ssw0rd123')
-}, 1000)
+// setTimeout(() => {
+//   signInService.signInAsync('Admin@wordle.com', 'P@ssw0rd123')
+// }, 1000)
 </script>
