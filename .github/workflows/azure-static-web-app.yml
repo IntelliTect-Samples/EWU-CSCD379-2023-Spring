@@ -3,10 +3,13 @@ name: Wordle 2023 Static Site CI/CD
 on:
   workflow_dispatch:
   push:
+    branches:
+      - assignment5
     paths: 
       - wordle-web/**
   pull_request:
     types: [opened, synchronize, reopened]
+    branches: assignment5
 
 jobs:
   build_and_deploy_job:
