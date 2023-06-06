@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Models;
 
 namespace Wordle.Api.Services;
 
@@ -41,16 +43,16 @@ public class WordService
         return words;
     }
 
-    public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
+    public async Task<Response<Word>> AddWordAsync(string? newWord, bool isCommon)
     {
         if (newWord is null || newWord.Length != 5)
         {
-            throw new ArgumentException("Word must be 5 characters long");
+            return new Response<Word>("Word must be 5 characters long");
         }
         var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
         if (word != null)
         {
-            word.IsCommon = isCommon;
+            return new Response<Word>("Word already exists");
         }
         else
         {
@@ -62,7 +64,7 @@ public class WordService
             _db.Words.Add(word);
         }
         await _db.SaveChangesAsync();
-        return word;
+        return new Response<Word>(word);
     }
 
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
@@ -74,7 +76,7 @@ public class WordService
 
         var todaysWord = await _db.DateWords
           .Include(f => f.Word)
-          .FirstOrDefaultAsync(f => f.Date == date);
+          .FirstOrDefaultAsync(f => f.Date == date.Value.Date);
 
         if (todaysWord != null)
         {
@@ -96,7 +98,7 @@ public class WordService
 
                 var dateWord = new DateWord
                 {
-                    Date = date.Value,
+                    Date = date.Value.Date,
                     Word = word
                 };
                 _db.DateWords.Add(dateWord);
@@ -174,5 +176,65 @@ public class WordService
             result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
         return result;
+    }
+
+    /// <summary>
+    /// Get a list of words with search and paging.
+    /// </summary>
+    /// <param name="pageNumber"></param>
+    /// <param name="pageSize"></param>
+    /// <param name="search"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<Word>> GetWords(int pageNumber = 1, int pageSize = 10, string? search = null)
+    {
+        IQueryable<Word> result = _db.Words;
+        if (!string.IsNullOrWhiteSpace(search))
+        {
+            result = result.Where(w => w.Text.Contains(search));
+        }
+        return await result
+          .OrderBy(w => w.Text)
+          .Skip((pageNumber - 1) * pageSize)
+          .Take(pageSize)
+          .ToListAsync();
+    }
+
+    public async Task<bool> DeleteWord(int wordId)
+    {
+        var word = await _db.Words.FindAsync(wordId);
+        if (word!= null)
+        {
+            _db.Words.Remove(word);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<Word?> UpdateWord(int wordId, string? text, bool isCommon, bool isUsed)
+    {
+        var word = await _db.Words.FindAsync(wordId);
+        if (word != null)
+        {
+            word.IsCommon = isCommon;
+            word.IsUsed = isUsed;
+            // Make sure the word is not empty and has a length of 5.
+            if (!string.IsNullOrEmpty(text) && text.Length == 5)
+            {
+                // Make sure the word isn't the current word.
+                if (word.Text != text)
+                {
+                    // Make sure this word doesn't exist anywhere else in the list.
+                    if (_db.Words.Count(f=>f.Text == text) == 0)
+                    {
+                        // If all that is true, then change it.
+                        word.Text = text;
+                    }
+                }
+            }
+            await _db.SaveChangesAsync();
+            return word;
+        }
+        return null;
     }
 }
