@@ -79,8 +79,7 @@ const deleteError = ref<boolean>(false)
 const deleteWord = () => {
   deleteError.value = false
   deleted.value = false
-  Axios
-    .delete(`/Word/Delete?word=${textInput.value}`)
+  Axios.delete(`/Word/Delete?word=${textInput.value}`)
     .then((res) => {
       deleted.value = true
     })
