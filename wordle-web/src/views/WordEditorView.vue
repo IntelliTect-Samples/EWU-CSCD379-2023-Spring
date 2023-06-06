@@ -178,7 +178,6 @@ function addWord() {
         newWord.isCommon = common
         Axios.post('/Word/AddWord', newWord).then( () => {
             addWordText.value = ''
-            addWordDialog.value = false
             addWordIsCommon.value = ''
             if (searchWord.value === '') {
                 Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
@@ -192,6 +191,7 @@ function addWord() {
             }
         })
     }
+    addWordDialog.value = false
 }
 
 function openRemoveWord(wordText: string) {
