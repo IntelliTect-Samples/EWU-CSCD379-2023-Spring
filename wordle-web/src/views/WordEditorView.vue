@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-item>
-      <v-table>
+      <v-table >
         <thead>
           <tr>
             <th class="text-center">Word</th>
@@ -12,19 +12,19 @@
           <tr v-for="word in words" :key="word.wordID">
             <td class="text-center">{{ word.text }}</td>
             <td class="text-center">{{ word.isCommon ? 'Yes' : 'No' }}</td>
-            <td><v-btn color="success">Edit Is Common</v-btn></td>
-            <td><v-btn v-if="signInService.token.roles.includes('MasterOfTheUniverse')" color="error">Remove</v-btn></td>
+            <td><v-btn @click="openEditIsCommon(word.text, word.isCommon)" color="success">Edit Is Common</v-btn></td>
+            <td><v-btn v-if="signInService.token.roles.includes('MasterOfTheUniverse')" @click="openRemoveWord(word.text)" color="error">Remove</v-btn></td>
           </tr>
         </tbody>
       </v-table>
     </v-card-item>
 
     <v-card-item>
-      <v-text-field v-model="searchWord" label="Search" @update:model-value="updateSearch()" />
+        <v-text-field v-model="searchWord" label="Search" @update:model-value="updateSearch()" />
     </v-card-item>
 
     <v-card-item class="justify-center" v-if="signInService.token.roles.includes('MasterOfTheUniverse')">
-            <v-btn @click="addWordDialog = !addWordDialog" color="primary">Add Word</v-btn>
+        <v-btn @click="addWordDialog = !addWordDialog" color="primary">Add Word</v-btn>
     </v-card-item>
 
     <v-card-actions>
@@ -45,7 +45,7 @@
             <v-select
                 v-model="addWordIsCommon"
                 label="Is Common"
-                :items="['false', 'true']"
+                :items="['No', 'Yes']"
             >
             </v-select>
         </v-card-item>
@@ -53,6 +53,43 @@
         <v-card-actions>
             <v-btn @click="addWord()">Submit</v-btn>
             <v-btn @click="addWordDialog = !addWordDialog">Close</v-btn>
+        </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <v-dialog v-model="editIsCommonDialog" class="align-center justify-center" max-width="400px" persistent>
+    <v-card >
+        <v-card-item>
+            <v-card-text>
+                Word: {{ editIsCommonWord.text }}   -   Is Common: {{ editIsCommonWord.isCommon ? 'Yes' : 'No' }}
+            </v-card-text>
+        </v-card-item>
+
+        <v-card-item>
+            <v-select
+                v-model="addWordIsCommon"
+                label="Is Common"
+                :items="['No', 'Yes']"
+            >
+            </v-select>
+        </v-card-item>
+
+        <v-card-actions>
+            <v-btn @click="submitEditIsCommon()">Submit</v-btn>
+            <v-btn @click="editIsCommonDialog = !editIsCommonDialog">Close</v-btn>
+        </v-card-actions>
+    </v-card>
+  </v-dialog>
+
+  <v-dialog v-model="removeWordDialog" class="align-center justify-center" max-width="400px" persistent>
+    <v-card>
+        <v-card-item>
+            <v-card-text>Are you sure you want to remove {{ wordToRemove.text }}?</v-card-text>
+        </v-card-item>
+
+        <v-card-actions>
+            <v-btn @click="submitRemoveWord()" class="bg-error">Yes, I'm sure</v-btn>
+            <v-btn @click="removeWordDialog = !removeWordDialog">Cancel</v-btn>
         </v-card-actions>
     </v-card>
   </v-dialog>
@@ -70,25 +107,32 @@ const signInService = inject(Services.SignInService) as SignInService
 const words = ref<WordHelper[]>([])
 let page = 0
 let searchWord = ref<string>('')
+
 let addWordDialog = ref<boolean>(false)
 let addWordText = ref<string>('')
 let addWordIsCommon = ref<string>('')
+
+let editIsCommonDialog = ref<boolean>(false)
+let editIsCommonWord = ref<WordHelper>(new WordHelper())
+
+let wordToRemove = ref<WordHelper>(new WordHelper())
+let removeWordDialog = ref<boolean>(false)
 
 Axios.get('Word/WordList?pageNumber=0').then((response) => {
   words.value = response.data as WordHelper[]
 })
 
 function nextPage() {
-  page++
-  if (searchWord.value === '') {
-    Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
-      words.value = response.data as WordHelper[]
-    })
-  } else {
-    Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
-      (response) => {
+    page++
+    if (searchWord.value === '') {
+        Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
         words.value = response.data as WordHelper[]
-      }
+        })
+    } else {
+        Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+        (response) => {
+            words.value = response.data as WordHelper[]
+        }
     )
   }
 }
@@ -124,7 +168,7 @@ function addWord() {
     let text = addWordText.value.toLowerCase()
     let common = false
 
-    if(addWordIsCommon.value === 'true') {
+    if(addWordIsCommon.value === 'Yes') {
         common = true
     }
 
@@ -136,15 +180,68 @@ function addWord() {
             addWordText.value = ''
             addWordDialog.value = false
             addWordIsCommon.value = ''
+            if (searchWord.value === '') {
+                Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
+                    words.value = response.data as WordHelper[]
+                })
+            } else {
+                Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+                    (response) => {
+                        words.value = response.data as WordHelper[]
+                    })
+            }
         })
     }
 }
 
-function removeWord() {
-    
+function openRemoveWord(wordText: string) {
+    wordToRemove.value.text = wordText
+    removeWordDialog.value = !removeWordDialog.value
 }
 
-function editIsCommon() {
-    
+function submitRemoveWord(){
+    Axios.post('/Word/RemoveWord', wordToRemove.value).then( () => {
+        removeWordDialog.value = !removeWordDialog.value
+        if (searchWord.value === '') {
+        Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
+            words.value = response.data as WordHelper[]
+        })
+        } else {
+            Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+                (response) => {
+                    words.value = response.data as WordHelper[]
+                })
+        }
+    })
+}
+
+function openEditIsCommon(wordText: string, isCommon: boolean) {
+    editIsCommonWord.value.text = wordText
+    editIsCommonWord.value.isCommon = isCommon
+    editIsCommonDialog.value = !editIsCommonDialog.value
+}
+
+function submitEditIsCommon() {
+    if(addWordIsCommon.value === 'Yes') {
+        editIsCommonWord.value.isCommon = true
+    } else {
+        editIsCommonWord.value.isCommon = false
+    }
+
+    Axios.post('/Word/AddWord', editIsCommonWord.value).then( () => {
+        editIsCommonWord.value.text = ''
+        editIsCommonWord.value.isCommon = false
+        editIsCommonDialog.value = !editIsCommonDialog.value
+        if (searchWord.value === '') {
+        Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
+            words.value = response.data as WordHelper[]
+        })
+        } else {
+            Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+                (response) => {
+                    words.value = response.data as WordHelper[]
+                })
+        }
+    })
 }
 </script>

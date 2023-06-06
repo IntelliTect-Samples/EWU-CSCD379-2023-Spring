@@ -161,6 +161,12 @@ public class WordService
             .Where(word => word.Text.Contains(searchWord))
             .Skip(10 * pageNumber)
             .Take(10)
+            .OrderBy(word => word.Text)
             .ToListAsync();
+    }
+
+    public async Task<int> RemoveWordFromListAsync(WordDto word) 
+    {
+        return await _db.Words.Select(w => w).Where(w => w.Text == word.Text).ExecuteDeleteAsync();
     }
 }

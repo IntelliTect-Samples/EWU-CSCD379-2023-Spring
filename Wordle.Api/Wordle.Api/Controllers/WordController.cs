@@ -53,4 +53,10 @@ public class WordController : ControllerBase
     {
         return await _wordService.GetWordList(pageNumber, searchWord);
     }
+
+    [HttpPost("RemoveWord")]
+    public async Task<int> RemoveWordFromList(WordDto word) 
+    {
+        return await _wordService.RemoveWordFromListAsync(word);
+    }
 }
