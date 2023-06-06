@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
 using Wordle.Api.Services;
-
 namespace Wordle.Api.Controllers
 {
     [Route("[controller]")]
@@ -11,22 +10,21 @@ namespace Wordle.Api.Controllers
     public class WordController : ControllerBase
     {
         private readonly WordService _wordService;
-
         public WordController(WordService wordService)
         {
             _wordService = wordService;
         }
-
         [HttpGet]
         public async Task<string> Get()
         {
             return (await _wordService.GetRandomWordAsync()).Text;
         }
 
+
         [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int? count)
+        public async Task<IEnumerable<Word>> GetManyWords(int count, string? wordSegment)
         {
-            return await _wordService.GetSeveralWordsAsync(count);
+            return await _wordService.GetSeveralWordsAsync(count, wordSegment);
         }
 
         [HttpPost]
@@ -35,22 +33,27 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
 
+        [HttpDelete("Delete")]
+        public async Task<Word> DeleteWord(string word)
+        {
+            // deletes word
+            return await _wordService.DeleteWordAsync(word);
+        }
+
         [HttpPost("AddWordFromBody")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
             return await _wordService.AddWordAsync(word.Text, word.IsCommon);
         }
-
         [HttpGet("WordOfTheDay")]
         public async Task<WordOfTheDayDto> GetWordOfTheDay(double offsetInHours, DateTime? date = null)
         {
             return new WordOfTheDayDto(await _wordService.GetWordOfTheDayAsync(TimeSpan.FromHours(offsetInHours), date));
         }
-
         [HttpGet("WordOfTheDayStats")]
         public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
         {
-            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
+            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
         }
     }
-}    
+}
