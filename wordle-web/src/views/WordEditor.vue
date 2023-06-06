@@ -91,9 +91,10 @@ function refreshList() {
   })
     .then((response) => {
       list.length = 0
-      response.data.forEach((item: WordListItem) => {
+      response.data.list.forEach((item: WordListItem) => {
         list.push(item)
       })
+      options.pageNumber = response.data.pageNumber
     })
     .catch((error) => {
       console.log(error)

@@ -43,6 +43,29 @@ namespace Wordle.Api.Tests
         }
 
         [TestMethod]
+        public async Task GetWordList()
+        {
+            using var context = new AppDbContext(Options);
+            var service = new WordService(context);
+            Seeder.Seed(context);
+
+            var result = await service.GetWords(1, 10, "aa");
+            Assert.AreEqual(10, result.List.Count());
+            Assert.AreEqual(35, result.TotalCount);
+
+            result = await service.GetWords(4, 10, "aa");
+            Assert.AreEqual(5, result.List.Count());
+            
+            result = await service.GetWords(2, 20, "aa");
+            Assert.AreEqual(15, result.List.Count());
+
+            result = await service.GetWords(5, 10, "aa");
+            Assert.AreEqual(5, result.List.Count());
+
+
+        }
+
+        [TestMethod]
         public async Task WordOfTheDayStats()
         {
             using var context = new AppDbContext(Options);

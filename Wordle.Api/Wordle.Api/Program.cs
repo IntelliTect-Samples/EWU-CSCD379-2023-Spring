@@ -101,6 +101,7 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(Policies.RandomAdmin, Policies.RandomAdminPolicy);
     options.AddPolicy("IsGrantPolicy", policy => policy.RequireRole("Grant"));
+    options.AddPolicy(Policies.EditWord, Policies.EditWordPolicy);
 });
 
 // Actually build the app so we can configure the pipeline next
@@ -117,7 +118,8 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(),
+        scope.ServiceProvider.GetRequiredService<AppDbContext>());
 }
 
 // Configure the HTTP request pipeline.

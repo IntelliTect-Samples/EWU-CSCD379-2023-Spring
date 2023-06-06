@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Identity;
 using Wordle.Api.Models;
 using Wordle.Api.Services;
 
@@ -37,6 +38,8 @@ namespace Wordle.Api.Controllers
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
 
+
+        [Authorize(Policy = Policies.EditWord)]
         [HttpPost("AddWordFromBody")]
         public async Task<Response<Word>> AddWordFromBody([FromBody] WordDto word)
         {
@@ -56,11 +59,12 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("GetWordList")]
-        public async Task<IEnumerable<Word>> GetWordList(int pageNumber = 1, int pageSize = 10, string? search = null)
+        public async Task<ListResult<IEnumerable<Word>>> GetWordList(int pageNumber = 1, int pageSize = 10, string? search = null)
         {
             return await _wordService.GetWords(pageNumber, pageSize, search);
         }
 
+        [Authorize(Policy = Policies.EditWord)]
         [HttpDelete("DeleteWord")]
         public async Task<bool> DeleteWord(int wordId)
         {

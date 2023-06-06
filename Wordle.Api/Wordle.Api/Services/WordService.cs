@@ -1,8 +1,10 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Identity;
 using Wordle.Api.Models;
 
 namespace Wordle.Api.Services;
@@ -185,24 +187,32 @@ public class WordService
     /// <param name="pageSize"></param>
     /// <param name="search"></param>
     /// <returns></returns>
-    public async Task<IEnumerable<Word>> GetWords(int pageNumber = 1, int pageSize = 10, string? search = null)
+    public async Task<ListResult<IEnumerable<Word>>> GetWords(int pageNumber = 1, int pageSize = 10, string? search = null)
     {
-        IQueryable<Word> result = _db.Words;
+        IQueryable<Word> query = _db.Words;
         if (!string.IsNullOrWhiteSpace(search))
         {
-            result = result.Where(w => w.Text.Contains(search));
+            query = query.Where(w => w.Text.Contains(search));
         }
-        return await result
+        var count = await query.CountAsync();
+        // return the last full page
+        var totalPages = (int)Math.Ceiling((double)count / pageSize);
+        if (pageNumber > totalPages) pageNumber = totalPages;
+        if (pageNumber < 1) pageNumber = 1;
+        var list = await query
           .OrderBy(w => w.Text)
           .Skip((pageNumber - 1) * pageSize)
           .Take(pageSize)
           .ToListAsync();
+
+        var result = new ListResult<IEnumerable<Word>>(list, count, pageNumber);
+        return result;
     }
 
     public async Task<bool> DeleteWord(int wordId)
     {
         var word = await _db.Words.FindAsync(wordId);
-        if (word!= null)
+        if (word != null)
         {
             _db.Words.Remove(word);
             await _db.SaveChangesAsync();
@@ -225,7 +235,7 @@ public class WordService
                 if (word.Text != text)
                 {
                     // Make sure this word doesn't exist anywhere else in the list.
-                    if (_db.Words.Count(f=>f.Text == text) == 0)
+                    if (_db.Words.Count(f => f.Text == text) == 0)
                     {
                         // If all that is true, then change it.
                         word.Text = text;
