@@ -2,26 +2,33 @@
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
-
 public static class IdentitySeed
 {
     public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
+        // Seed Roles
         await SeedRolesAsync(roleManager);
 
-        await SeedAdminAsync(userManager);
+        // Seed Admin User
+        await SeedAdminUserAsync(userManager);
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
     {
+        // Seed Roles
         if (!await roleManager.RoleExistsAsync(Roles.Admin))
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
         }
+        if (!await roleManager.RoleExistsAsync(Roles.Special))
+        {
+            await roleManager.CreateAsync(new IdentityRole(Roles.Special));
+        }
     }
 
-    private static async Task SeedAdminAsync(UserManager<AppUser> userManager)
+    private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
     {
+        // Seed Admin User
         if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
         {
             AppUser user = new AppUser
@@ -29,30 +36,15 @@ public static class IdentitySeed
                 UserName = "Admin@intellitect.com",
                 Email = "Admin@intellitect.com",
                 Name = "Admin",
-                MasterOfTheUniverse = true,
-                Birthday = DateTime.MinValue.AddYears(1)
             };
 
-            IdentityResult result = userManager.CreateAsync(user, "BesTPa$$WorD3V3er!").Result;
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
 
             if (result.Succeeded)
             {
                 await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
             }
-        }
-        if (await userManager.FindByEmailAsync("NotAdmin@intellitect.com") == null)
-        {
-            AppUser user = new AppUser
-            {
-                UserName = "NotAdmin@intellitect.com",
-                Email = "NotAdmin@intellitect.com",
-                Name = "NotAdmin",
-                MasterOfTheUniverse = false,
-                Birthday = DateTime.Now.AddYears(-40)
-            };
-
-            IdentityResult result = userManager.CreateAsync(user, "Password123!").Result;
-
         }
     }
 }
