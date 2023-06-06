@@ -26,13 +26,13 @@
   <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
       <v-text-field
-        placeholder="delete a word from the word list..."
-        :messages="deleted ? [`Word deleted`] : []"
-        :errorMessages="deleteError ? ['Cannot delete word'] : []"
+        placeholder="enter word to delete from word list..."
+        :messages="deleted ? [`Word has been deleted`] : []"
+        :errorMessages="deleteError ? ['Error deleting word'] : []"
         maxlength="5"
         @input="editText($event.target.value)"
         variant="outlined"
-        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 400px"
+        style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
       />
     </v-card-text>
     <v-card-actions>
@@ -79,7 +79,8 @@ const deleteError = ref<boolean>(false)
 const deleteWord = () => {
   deleteError.value = false
   deleted.value = false
-  Axios.delete(`/Word/Delete?word=${textInput.value}`)
+  Axios
+    .delete(`/Word/Delete?word=${textInput.value}`)
     .then((res) => {
       deleted.value = true
     })
