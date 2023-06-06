@@ -23,7 +23,7 @@
           <v-btn @click="prevPage()">Previous Page</v-btn>
         </v-col>
         <v-col class="d-flex flex-right">
-          <div>Page: {{ page }} </div>
+          <div>Page: {{ page }}</div>
         </v-col>
         <v-col class="d-flex flex-right">
           <v-btn @click="nextPage()">Next Page</v-btn>
@@ -75,19 +75,19 @@ async function search() {
   })
 }
 
-async function searchLive(){
+async function searchLive() {
   page.value = 1
   search()
 }
 
-async function nextPage(){
+async function nextPage() {
   page.value = page.value + 1
   search()
 }
 
-async function prevPage(){
+async function prevPage() {
   page.value = page.value - 1
-  if(page.value <= 0){
+  if (page.value <= 0) {
     page.value = 1
   }
   search()
