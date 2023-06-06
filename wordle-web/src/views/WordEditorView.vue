@@ -51,8 +51,9 @@
         </v-card-item>
 
         <v-card-actions>
-            <v-btn @click="addWord()">Submit</v-btn>
-            <v-btn @click="addWordDialog = !addWordDialog">Close</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn class="bg-success" @click="addWord()" >Submit</v-btn>
+            <v-btn @click="addWordDialog = !addWordDialog" variant="outlined">Close</v-btn>
         </v-card-actions>
     </v-card>
   </v-dialog>
@@ -75,8 +76,9 @@
         </v-card-item>
 
         <v-card-actions>
-            <v-btn @click="submitEditIsCommon()">Submit</v-btn>
-            <v-btn @click="editIsCommonDialog = !editIsCommonDialog">Close</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn class="bg-success" @click="submitEditIsCommon()" >Submit</v-btn>
+            <v-btn @click="editIsCommonDialog = !editIsCommonDialog" variant="outlined">Close</v-btn>
         </v-card-actions>
     </v-card>
   </v-dialog>
@@ -88,8 +90,10 @@
         </v-card-item>
 
         <v-card-actions>
+            <v-spacer></v-spacer>
             <v-btn @click="submitRemoveWord()" class="bg-error">Yes, I'm sure</v-btn>
-            <v-btn @click="removeWordDialog = !removeWordDialog">Cancel</v-btn>
+            <v-btn @click="removeWordDialog = !removeWordDialog" variant="outlined">Cancel</v-btn>
+            <v-spacer></v-spacer>
         </v-card-actions>
     </v-card>
   </v-dialog>
