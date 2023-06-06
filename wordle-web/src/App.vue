@@ -23,7 +23,6 @@
           <template v-slot:activator="{ props }">
             <v-btn icon="mdi-hamburger" v-bind="props"></v-btn>
           </template>
-
           <v-list width="200">
             <v-list-item>
               <v-list-item-title>
@@ -40,6 +39,11 @@
                 <RouterLink :to="{ name: 'leaderboard' }"> Leaderboard </RouterLink>
               </v-list-item-title>
             </v-list-item>
+            <v-list-item>
+              <v-list-item-title>
+                <RouterLink :to="{ name: 'wordEditor' }"> Word Tools/Edit </RouterLink>
+              </v-list-item-title>
+            </v-list-item>
             <v-list-item v-if="signInService.isSignedIn">
               <v-list-item-title>
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
@@ -49,10 +53,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="router.push('/login')">
                 Sign In
               </v-list-item-title>
             </v-list-item>
@@ -60,7 +61,6 @@
         </v-menu>
       </template>
     </v-app-bar>
-
     <v-main>
       <RouterView />
     </v-main>
@@ -69,21 +69,19 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
-
+import { RouterLink } from 'vue-router'
+import router from './router'
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
-
 const signInService = inject(Services.SignInService) as SignInService
-
 const theme = useTheme()
-
 function switchTheme() {
   if (theme.global.name.value === 'light') {
     setDarkTheme()
@@ -91,15 +89,12 @@ function switchTheme() {
     setLightTheme()
   }
 }
-
 function setLightTheme() {
   theme.global.name.value = 'light'
 }
-
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
-
 setTimeout(() => {
   // This is terrible, nasty, and should be removed.
   signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
