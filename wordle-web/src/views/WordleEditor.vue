@@ -2,7 +2,7 @@
   <v-container class="d-flex justify-center align-center">
     <v-card style="width: 75%">
       <div class="bg-primary text-h5 pa-3 text-center">Wordle Editor</div>
-      <v-text-field label="Wordle" type="text" v-model="value" @input="search" maxlength="20">
+      <v-text-field label="Wordle" type="text" v-model="value" @input="searchLive" maxlength="5">
       </v-text-field>
       <v-row>
         <v-col class="d-flex flex-left">
@@ -18,6 +18,15 @@
         </v-col>
         <v-col class="d-flex flex-right">
           <v-btn @click="changeCount()">Words Shown: {{ count }}</v-btn>
+        </v-col>
+        <v-col class="d-flex flex-right">
+          <v-btn @click="prevPage()">Previous Page</v-btn>
+        </v-col>
+        <v-col class="d-flex flex-right">
+          <div>Page: {{ page }} </div>
+        </v-col>
+        <v-col class="d-flex flex-right">
+          <v-btn @click="nextPage()">Next Page</v-btn>
         </v-col>
       </v-row>
       <v-card-text>
@@ -52,16 +61,36 @@ const signInService = inject(Services.SignInService) as SignInService
 const words = ref<WordDto[]>([])
 const value = ref('')
 const count = ref(10) //default return 10 words
+const page = ref(1)
 
 search()
 
 async function search() {
   console.log(value.value)
-  let apiPath = `word/paginatedWords?count=${count.value}&start=${value.value}`
+  console.log(page.value)
+  let apiPath = `word/paginatedWords?page=${page.value}&count=${count.value}&start=${value.value}`
   Axios.get(apiPath).then((result) => {
     console.log(result.data)
     words.value = result.data as WordDto[]
   })
+}
+
+async function searchLive(){
+  page.value = 1
+  search()
+}
+
+async function nextPage(){
+  page.value = page.value + 1
+  search()
+}
+
+async function prevPage(){
+  page.value = page.value - 1
+  if(page.value <= 0){
+    page.value = 1
+  }
+  search()
 }
 
 function changeCount() {
@@ -74,6 +103,8 @@ function changeCount() {
   } else {
     count.value = 10
   }
+
+  page.value = 1
 
   search()
 }
