@@ -4,13 +4,14 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Identity;
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, AppDbContext _db)
     {
         // Seed Roles
         await SeedRolesAsync(roleManager);
 
         // Seed Admin User
         await SeedAdminUserAsync(userManager);
+        await UpdateBirthdates(_db);
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -20,6 +21,13 @@ public static class IdentitySeed
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
         }
+
+        var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+        if (roleManager.GetClaimsAsync(role).Any())
+        {
+            roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
+        }
+
         if (!await roleManager.RoleExistsAsync(Roles.Special))
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Special));
@@ -46,5 +54,14 @@ public static class IdentitySeed
                 await userManager.AddToRoleAsync(user, Roles.Special);
             }
         }
+    }
+
+    private static async Task UpdateBirthdates(AppDbContext _db)
+    {
+        foreach(var user in _db.Users.Where(f => !f.BirthDate.HasValue))
+        {
+            user.BirthDate = new DateTime(1980. 1, 1).AddDays((new Random()).Next(5000) - 1000);
+        }
+        await _db.SaveChanges();
     }
 }

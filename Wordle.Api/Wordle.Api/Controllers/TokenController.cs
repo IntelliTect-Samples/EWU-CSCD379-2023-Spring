@@ -53,10 +53,24 @@ public class TokenController : Controller
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
             };
+
+            if(user.BirthDate.HasValue)
+            {
+                claims.Add(new Claim(Claims.Age, Math.Floor((DateTime.UtcNow - user.BirthDate.Value).TotalDays / 365).ToString()));
+                claims.Add(new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")));
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
             {
+                
                 claims.Add(new Claim(ClaimTypes.Role, role));
+                var iRole = _roleManager.Roles.First(f => f.Name == role);
+                foreach(var claim in await _roleManager.GetClaimsAsync(iRole))
+                {
+                    if(claim?.Subject?.Name != null)
+                        claims.Add.(new Claim(claim.Subjext.Name, ""));
+                }
             }
 
             var token = new JwtSecurityToken(

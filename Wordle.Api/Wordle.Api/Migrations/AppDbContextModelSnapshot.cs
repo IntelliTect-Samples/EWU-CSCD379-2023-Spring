@@ -271,9 +271,6 @@ namespace Wordle.Api.Migrations
                     b.Property<int>("GameCount")
                         .HasColumnType("int");
 
-                    b.Property<bool>("MasterOfTheUniverse")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -283,9 +280,6 @@ namespace Wordle.Api.Migrations
 
                     b.Property<int>("TotalSecondsPlayed")
                         .HasColumnType("int");
-
-                    b.Property<DateTime?>("birthday")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("PlayerId");
 
