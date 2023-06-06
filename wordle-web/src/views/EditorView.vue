@@ -9,17 +9,10 @@
             <v-text-field label="Search"></v-text-field>
           </v-col>
           <v-col cols="12" lg="3">
-            <v-select
-              label="Page Size"
-              :items="[10, 25, 50, 100]"
-              variant="outlined"
-            ></v-select
+            <v-select label="Page Size" :items="[10, 25, 50, 100]" variant="outlined"></v-select
           ></v-col>
           <v-col cols="12" lg="3"
-            ><v-text-field
-              label="Page No."
-              type="number"
-            ></v-text-field
+            ><v-text-field label="Page No." type="number"></v-text-field
           ></v-col>
         </v-row>
 
