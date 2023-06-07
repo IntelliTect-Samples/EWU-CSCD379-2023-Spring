@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using System.ComponentModel;
 
 namespace Wordle.Api.Identity;
 public static class Policies
@@ -22,7 +23,7 @@ public static class Policies
 
     public static void EditWordPolicy(AuthorizationPolicyBuilder policy)
     {
-        policy.RequireRole(Claims.MotU);
+        policy.RequireClaim(Claims.MotU);
         policy.RequireAssertion(context =>
         {
             var ageString = context.User.Claims.FirstOrDefault(f => f.Type == Claims.Age);

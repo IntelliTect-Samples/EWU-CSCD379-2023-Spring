@@ -189,7 +189,6 @@ namespace Wordle.Api.Services
             return result;
         }
 
-        [Authorize(Policy = Policies.RandomAdmin)]
         public async Task<Word> RemoveWord(string? removeWord)
         {
             if (removeWord is null || removeWord.Length != 5)

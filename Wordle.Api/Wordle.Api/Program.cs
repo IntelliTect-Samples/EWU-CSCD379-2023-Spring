@@ -115,7 +115,8 @@ using (var scope = app.Services.CreateScope())
     Player.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(),
+        scope.ServiceProvider.GetRequiredService<AppDbContext>());
 }
 
 

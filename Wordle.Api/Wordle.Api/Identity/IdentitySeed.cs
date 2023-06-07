@@ -1,17 +1,19 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, AppDbContext _db)
+    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, AppDbContext db)
     {
         // Seed Roles
         await SeedRolesAsync(roleManager);
 
         // Seed Admin User
         await SeedAdminUserAsync(userManager);
-        await UpdateBirthdates(_db);
+
+        await UpdateBirthdates(db);
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -21,13 +23,11 @@ public static class IdentitySeed
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
         }
-
         var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
-        if (roleManager.GetClaimsAsync(role).Any())
+        if (!(await roleManager.GetClaimsAsync(role)).Any())
         {
-            roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
+            await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
         }
-
         if (!await roleManager.RoleExistsAsync(Roles.Special))
         {
             await roleManager.CreateAsync(new IdentityRole(Roles.Special));
@@ -56,12 +56,12 @@ public static class IdentitySeed
         }
     }
 
-    private static async Task UpdateBirthdates(AppDbContext _db)
+    private static async Task UpdateBirthdates(AppDbContext db)
     {
-        foreach(var user in _db.Users.Where(f => !f.BirthDate.HasValue))
+        foreach (var user in db.Users.Where(f => !f.BirthDate.HasValue))
         {
-            user.BirthDate = new DateTime(1980. 1, 1).AddDays((new Random()).Next(5000) - 1000);
+            user.BirthDate = (new DateTime(1980, 1, 1)).AddDays((new Random()).Next(5000) - 1000);
         }
-        await _db.SaveChanges();
+        await db.SaveChangesAsync();
     }
 }

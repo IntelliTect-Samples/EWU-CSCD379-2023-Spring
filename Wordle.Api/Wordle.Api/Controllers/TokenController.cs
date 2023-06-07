@@ -17,11 +17,13 @@ public class TokenController : Controller
     public AppDbContext _context;
     public UserManager<AppUser> _userManager;
     public JwtConfiguration _jwtConfiguration;
-    public TokenController(AppDbContext context, UserManager<AppUser> userManager, JwtConfiguration jwtConfiguration)
+    public RoleManager<IdentityRole> _roleManager;
+    public TokenController(AppDbContext context, UserManager<AppUser> userManager, JwtConfiguration jwtConfiguration, RoleManager<IdentityRole> roleManager)
     {
         _context = context;
         _userManager = userManager;
         _jwtConfiguration = jwtConfiguration;
+        _roleManager = roleManager;
     }
     [HttpPost("GetToken")]
     public async Task<IActionResult> GetToken([FromBody] UserCredentials userCredentials)
@@ -53,23 +55,22 @@ public class TokenController : Controller
                 new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
                 new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
             };
-
-            if(user.BirthDate.HasValue)
+            if (user.BirthDate.HasValue)
             {
                 claims.Add(new Claim(Claims.Age, Math.Floor((DateTime.UtcNow - user.BirthDate.Value).TotalDays / 365).ToString()));
                 claims.Add(new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")));
             }
-
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
             {
-                
                 claims.Add(new Claim(ClaimTypes.Role, role));
                 var iRole = _roleManager.Roles.First(f => f.Name == role);
-                foreach(var claim in await _roleManager.GetClaimsAsync(iRole))
+                foreach (var claim in await _roleManager.GetClaimsAsync(iRole))
                 {
-                    if(claim?.Subject?.Name != null)
-                        claims.Add.(new Claim(claim.Subjext.Name, ""));
+                    if (claim?.Type != null && claim?.Value != null)
+                    {
+                        claims.Add(new Claim(claim.Type, claim.Value));
+                    }
                 }
             }
 
