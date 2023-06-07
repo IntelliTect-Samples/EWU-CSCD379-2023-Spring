@@ -54,6 +54,61 @@ public static class IdentitySeed
                 await userManager.AddToRoleAsync(user, Roles.Special);
             }
         }
+
+        if (await userManager.FindByEmailAsync("meg.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "meg.com",
+                Email = "meg.com",
+                Name = "Meg",
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
+            }
+        }
+
+        if (await userManager.FindByEmailAsync("matt.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "matt.com",
+                Email = "matt.com",
+                Name = "Matt",
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
+            }
+        }
+
+        if (await userManager.FindByEmailAsync("FrostyTheSnowman.com") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "FrostyTheSnowman.com",
+                Email = "FrostyTheSnowman.com",
+                Name = "FrostyTheSnowman",
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.Admin);
+                await userManager.AddToRoleAsync(user, Roles.Special);
+            }
+        }
+
     }
 
     private static async Task UpdateBirthdates(AppDbContext db)
