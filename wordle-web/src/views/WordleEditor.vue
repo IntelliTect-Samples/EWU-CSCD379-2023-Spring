@@ -15,9 +15,7 @@
             @click="addWord()"
             >Add Word: {{ value }}</v-btn
           >
-          <v-btn v-else @click="showError()">
-            Add Word: {{ value }}
-          </v-btn>
+          <v-btn v-else @click="showError()"> Add Word: {{ value }} </v-btn>
         </v-col>
         <v-col class="d-flex flex-right">
           <v-btn @click="changeCount()">Words Shown: {{ count }}</v-btn>
@@ -53,9 +51,7 @@
   </v-container>
   <v-dialog :model-value="displayError" @update:model-value="close" persistent>
     <v-card>
-      <v-card-title>
-        Error:
-      </v-card-title>
+      <v-card-title> Error: </v-card-title>
       <v-card-text>
         {{ err }}
       </v-card-text>
@@ -86,7 +82,7 @@ function close() {
 }
 
 function showError() {
-  if(value.value.length != 5){
+  if (value.value.length != 5) {
     err.value = `Word is ${value.value.length} letters long, it must be 5 letters long.`
   } else {
     err.value = `The word ${value.value} already exists, adding it will do nothing.`
@@ -100,9 +96,9 @@ async function search() {
   let apiPath = `word/paginatedWords?page=${page.value}&count=${count.value}&start=${value.value}`
   Axios.get(apiPath).then((result) => {
     console.log(result.data)
-    if(result.data.length != 0){
+    if (result.data.length != 0) {
       words.value = result.data as WordDto[]
-    }else{
+    } else {
       page.value = page.value - 1
     }
   })
