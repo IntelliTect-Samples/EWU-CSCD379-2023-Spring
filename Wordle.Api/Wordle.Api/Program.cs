@@ -11,18 +11,17 @@ using Wordle.Api.Data;
 using Wordle.Api.Identity;
 using Wordle.Api.Services;
 
-var MyAllowAllOrigins = "_myAllowAllOrigins";
+//var MyAllowAllOrigins = "_myAllowAllOrigins";
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-options.AddPolicy(name: MyAllowAllOrigins,
-                  policy =>
+options.AddDefaultPolicy(builder =>
                   {
-                      policy.WithOrigins("*");
-                      policy.AllowAnyMethod();
-                      policy.AllowAnyHeader();
+                      builder.AllowAnyOrigin()
+                             .AllowAnyMethod()
+                             .AllowAnyHeader();
                   });
 });
 
@@ -136,7 +135,7 @@ app.UseRewriter(options);
 
 app.UseHttpsRedirection();
 
-app.UseCors(MyAllowAllOrigins);
+app.UseCors();
 
 // Add Google site verification.
 app.MapGet("/google5b827f426094db3f.html", () => "google-site-verification: google5b827f426094db3f.html");
