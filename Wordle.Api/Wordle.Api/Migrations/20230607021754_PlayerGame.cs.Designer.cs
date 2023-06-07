@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230607014345_AddIsUsed.Designer.cs")]
-    partial class AddIsUsedDesignercs
+    [Migration("20230607021754_PlayerGame.cs")]
+    partial class PlayerGamecs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

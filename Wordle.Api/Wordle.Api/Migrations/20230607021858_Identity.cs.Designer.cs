@@ -12,7 +12,7 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230607014830_Identity.cs")]
+    [Migration("20230607021858_Identity.cs")]
     partial class Identitycs
     {
         /// <inheritdoc />
