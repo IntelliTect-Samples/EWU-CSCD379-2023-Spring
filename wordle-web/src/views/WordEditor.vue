@@ -71,7 +71,10 @@
             </v-card>
     
         </v-dialog>
-
+        <v-btn color="primary" text @click="testadmin">testadmin</v-btn>
+        <v-btn color="primary" text @click="testruleroftheuniverse">testruleroftheuniverse</v-btn>
+        <v-btn color="primary" text @click="testrandomadmin">testrandomadmin</v-btn>
+        <v-btn color="primary" text @click="test">test</v-btn>
     </div>
   
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
@@ -173,6 +176,45 @@ const newWordRules = [
 watch(newword, (value) => {
   isWordValid.value = newWordRules.every(rule => rule(value) === true);
 })
+
+function testadmin() {
+    Axios.get('Token/testadmin')
+    .then((response): void => {
+          console.log(response.data)
+      }) 
+          .catch((error) => {
+          console.log(error)
+      })
+}
+
+function test() {
+    Axios.get('Token/test')
+    .then((response): void => {
+          console.log(response.data)
+      }) 
+          .catch((error) => {
+          console.log(error)
+      })
+}
+
+function testruleroftheuniverse() {
+    Axios.get('Token/testruleroftheuniverse')
+    .then((response): void => {
+          console.log(response.data)
+      }) 
+          .catch((error) => {
+          console.log(error)
+      })
+}
+function testrandomadmin() {
+    Axios.get('Token/testrandomadmin')
+    .then((response): void => {
+          console.log(response.data)
+      }) 
+          .catch((error) => {
+          console.log(error)
+      })
+}
 
 
 fetchData()

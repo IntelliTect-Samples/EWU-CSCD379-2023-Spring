@@ -46,20 +46,15 @@
           <v-list-item prepend-icon="mdi-cog" @click.stop="setting = true" @click="drawer = !drawer">
             Setting
           </v-list-item>
-          <v-list-item prepend-icon="mdi-information" to="/about">
-            About 
-          </v-list-item>
-          <v-list-item prepend-icon="mdi-account-cancel" @click="showSignInDialog = true">
+          <v-list-item v-if="!signInService.isSignedIn" prepend-icon="mdi-account-cancel" @click="showSignInDialog = true">
             Sign In
           </v-list-item>
-          <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
+          <v-list-item prepend-icon="mdi-account-check" v-if="signInService.isSignedIn" @click="signInService.signOut()">
             Sign Out
-          </v-list-item-title>
-          <v-list-item v-if="signInService.isSignedIn">
-              <v-list-item-title>
-                <RouterLink :to="{ name: 'about' }"> About </RouterLink>
-              </v-list-item-title>
-            </v-list-item>
+          </v-list-item>
+          <v-list-item prepend-icon="mdi-information" to="/about" v-if="signInService.isSignedIn">
+            About 
+          </v-list-item>
         </v-list-item-content>
       </v-list-item>
     </v-navigation-drawer>

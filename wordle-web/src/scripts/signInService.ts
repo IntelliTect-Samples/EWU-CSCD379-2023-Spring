@@ -33,9 +33,6 @@ export class SignInService {
         password: password
       })
       this.setToken(result.data.token)
-      // Axios.get('Token/TestAdmin').then((result) => {
-      //   console.log(result)
-      // })
       this._isSignedIn = true
       return true
     } catch (err) {

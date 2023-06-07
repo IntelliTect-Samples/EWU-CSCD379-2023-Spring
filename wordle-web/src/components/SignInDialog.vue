@@ -17,6 +17,23 @@
           <v-btn @click="signInAsync" variant="elevated" color="success"> Sign In </v-btn>
           <v-btn @click="close" variant="elevated" color="primary"> Cancel </v-btn>
         </v-card-actions>
+        <p>-------------------------------------</p>
+        <p><strong>Admin@intellitect.com</strong></p>
+        <p><strong>P@ssw0rd123</strong></p>
+        <p>Has admin and special roles.</p>
+        <p>-------------------------------------</p>
+        <p><strong>matt.com</strong></p>
+        <p><strong>P@ssw0rd123</strong></p>
+        <p>Has admin and special roles.</p>
+        <p>-------------------------------------</p>
+        <p><strong>meg.com</strong></p>
+        <p><strong>P@ssw0rd123</strong></p>
+        <p>Has admin and special roles, and a claim of MasterOfTheUniverse.</p>
+        <p>-------------------------------------</p>
+        <p><strong>FrostyTheSnowman.com</strong></p>
+        <p><strong>P@ssw0rd123</strong></p>
+        <p>Has admin and special roles, and a claim of MasterOfTheUniverse, also is old enough to add or remove words.</p>
+        <p>-------------------------------------</p>
       </v-card>
     </v-dialog>
   </template>
@@ -24,8 +41,7 @@
   <script lang="ts" setup>
   import { Services } from '@/scripts/services'
   import type { SignInService } from '@/scripts/signInService'
-  import { watch } from 'vue'
-  import { inject, ref } from 'vue'
+  import { inject, ref, watch } from 'vue'
   
   const signInService = inject(Services.SignInService) as SignInService
   
