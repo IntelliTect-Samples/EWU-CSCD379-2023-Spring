@@ -15,7 +15,9 @@
             @click="addWord()"
             >Add Word: {{ value }}</v-btn
           >
-          <v-btn v-else @click="showError()"> Add Word: {{ value }} </v-btn>
+          <v-btn v-else-if="signInService.token.masterOfTheUniverse == 'True'" @click="showError()">
+            Add Word: {{ value }}
+          </v-btn>
         </v-col>
         <v-col class="d-flex flex-right">
           <v-btn @click="changeCount()">Words Shown: {{ count }}</v-btn>
