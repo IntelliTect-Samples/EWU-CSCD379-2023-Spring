@@ -3,10 +3,14 @@
     {{ playerService.player.name }}
   </v-btn>
   <v-dialog :model-value="showDialog" @update:model-value="close" persistent>
-    <v-card>
+    <v-card class="mx-auto" width="600px">
       <v-card-text>
-        Set or change your username:
+        Username:
         <v-text-field ref="$input" v-model="newName" @keyup.enter="confirm" />
+      </v-card-text>
+      <v-card-text>
+        Password:
+        <v-text-field />
       </v-card-text>
       <v-card-actions>
         <v-spacer> </v-spacer>
@@ -42,7 +46,7 @@ watch(showDialog, (value) => {
 
 const confirm = async () => {
   await playerService.ChangeNameAsync(newName)
-  close()
+  showDialog.value = false
 }
 const close = () => {
   showDialog.value = false
