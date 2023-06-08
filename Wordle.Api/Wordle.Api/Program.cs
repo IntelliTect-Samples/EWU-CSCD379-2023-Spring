@@ -118,6 +118,7 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
+        db,
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
         scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
