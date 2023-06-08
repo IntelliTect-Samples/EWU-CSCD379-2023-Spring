@@ -32,6 +32,8 @@
         <v-col cols="12" md="4">
           <v-text-field v-model="options.text" label="Search" />
         </v-col>
+      </v-row>
+      <v-row class="d-flex justify-center">
         <v-col cols="12" md="2">
           <v-btn @click="addWord" color="grey">
             <v-icon>mdi-plus</v-icon>
@@ -55,6 +57,15 @@
       <v-btn color="primary" class="ma-5" @click="options.pageNumber++">
         <v-icon>mdi-arrow-right</v-icon>
       </v-btn>
+    </v-card-item>
+    <v-card-item>
+      <v-card-title color="black"> Page Size - </v-card-title>
+      <v-btn-toggle variant="outlined" v-model="options.pageSize">
+        <v-btn icon="mdi-format-align-left" value="10">10</v-btn>
+        <v-btn icon="mdi-format-align-center" value="20">20</v-btn>
+        <v-btn icon="mdi-format-align-right" value="50">50</v-btn>
+        <v-btn icon="mdi-format-align-justify" value="100">100</v-btn>
+      </v-btn-toggle>
     </v-card-item>
   </v-card>
 </template>

@@ -66,7 +66,6 @@ namespace Wordle.Api.Controllers
             return await _wordService.DeleteWord(wordId);
         }
 
-        [Authorize]
         [HttpPost("UpdateWord")]
         public async Task<Word?> UpdateWord([FromBody] Word word)
         {
