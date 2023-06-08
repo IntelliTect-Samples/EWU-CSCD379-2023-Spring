@@ -50,7 +50,24 @@ namespace Wordle.Api.Controllers
         [HttpGet("WordOfTheDayStats")]
         public async Task<IEnumerable<WordOfTheDayStatsDto>> GetWordOfTheDayStats(DateTime? date = null, int days = 10, Guid? playerId = null)
         {
-            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
+            return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId));
+        }
+        [HttpGet("GetWordList")]
+        public async Task<IEnumerable<Word>> GetWordList(int pageNumber = 1, int pageSize = 10, string? search = null)
+        {
+            return await _wordService.GetWords(pageNumber, pageSize, search);
+        }
+
+        [HttpPost("DeleteWord")]
+        public async Task<bool> DeleteWord(int wordId)
+        {
+            return await _wordService.DeleteWord(wordId);
+        }
+
+        [HttpPost("ChangeIsCommon")]
+        public async Task<Word?> ChangeIsCommon(int wordId, bool value)
+        {
+            return await _wordService.ChangeIsCommon(wordId, value);
         }
     }
 }    
