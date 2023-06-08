@@ -9,7 +9,7 @@ namespace Wordle.Api.Dtos
             Word = dateWord.Word.Text;
             Date = dateWord.Date;
         }
-        
+
         public string Word { get; set; }
         public DateTime Date { get; set; }
     }

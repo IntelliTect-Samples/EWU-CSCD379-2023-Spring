@@ -10,4 +10,3 @@
         public ICollection<PlayerGame> PlayerGames { get; } = null!;
     }
 }
-

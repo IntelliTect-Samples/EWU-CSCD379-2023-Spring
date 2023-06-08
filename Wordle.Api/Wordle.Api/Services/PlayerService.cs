@@ -63,8 +63,8 @@ public class PlayerService
             }
             // See if this was a word of the day
             var dateWord = await _db.DateWords
-                .FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue && 
-                    f.Date == dto.WordOfTheDayDate.Value.Date && 
+                .FirstOrDefaultAsync(f => dto.WordOfTheDayDate.HasValue &&
+                    f.Date == dto.WordOfTheDayDate.Value.Date &&
                     f.WordId == word.WordId);
             // Add a PlayerGame
             PlayerGame playerGame = new()
@@ -97,4 +97,3 @@ public class PlayerService
         throw new ArgumentException("Player Id not found");
     }
 }
-

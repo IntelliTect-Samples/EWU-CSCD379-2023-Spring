@@ -26,16 +26,17 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int count, string? wordSegment)
+    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
     {
-        if (count == 0)
-        {
-            count = 10;
-        }
-        wordSegment ??= "";
+        count ??= 10;
+        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
+        totalCount -= count.Value;
+        int index = new Random().Next(totalCount);
         var words = await _db.Words
-          .Where(word => word.Text.StartsWith(wordSegment))
-          .OrderBy(w => w.Text).Take(count)
+          .Where(word => word.IsCommon)
+          .Skip(index)
+          .Take(count.Value)
+          .OrderByDescending(w => w.Text)
           .ToListAsync();
         return words;
     }
@@ -60,24 +61,6 @@ public class WordService
             };
             _db.Words.Add(word);
         }
-        await _db.SaveChangesAsync();
-        return word;
-    }
-
-    public async Task<Word> DeleteWordAsync(string wordForDelete)
-    {
-
-        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == wordForDelete);
-
-        if (word != null)
-        {
-            _db.Words.Remove(word);
-        }
-        else
-        {
-            throw new ArgumentException("word doesnt exist");
-        }
-
         await _db.SaveChangesAsync();
         return word;
     }
@@ -156,10 +139,6 @@ public class WordService
               HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
           })
           .ToListAsync();
-
-        //Another way to do this using GroupBy
-        //This algorithm doesn't handle days without PlayerGames. 
-        // This would need to have the stats inserted into the collection after the fact.
         var result2 = await _db.PlayerGames
           .Include(f => f.DateWord)
           .Where(f => f.DateWord != null &&

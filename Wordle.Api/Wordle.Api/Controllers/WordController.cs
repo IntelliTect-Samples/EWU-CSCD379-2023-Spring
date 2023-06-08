@@ -23,24 +23,16 @@ namespace Wordle.Api.Controllers
             return (await _wordService.GetRandomWordAsync()).Text;
         }
 
-
         [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int count, string? wordSegment)
+        public async Task<IEnumerable<Word>> GetManyWords(int? count)
         {
-            return await _wordService.GetSeveralWordsAsync(count, wordSegment);
+            return await _wordService.GetSeveralWordsAsync(count);
         }
 
         [HttpPost]
         public async Task<Word> AddWord(string newWord, bool isCommon)
         {
             return await _wordService.AddWordAsync(newWord, isCommon);
-        }
-
-        [HttpDelete("Delete")]
-        public async Task<Word> DeleteWord(string word)
-        {
-            // deletes word
-            return await _wordService.DeleteWordAsync(word);
         }
 
         [HttpPost("AddWordFromBody")]
