@@ -5,14 +5,26 @@ import LeaderboardView from '@/views/LeaderboardView.vue'
 import WordOfTheDayView from '@/views/WordOfTheDayView.vue'
 import WordEditor from '@/views/WordEditor.vue'
 import { SignInService } from '@/scripts/signInService'
+import LandingView from '@/views/LandingView.vue'
+import InstructionView from '@/views/InstructionView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/wordle',
       name: 'wordle',
       component: WordleView
+    },
+    {
+      path: '/',
+      name: 'Landing',
+      component: LandingView
+    },
+    {
+      path: '/instructions',
+      name: 'instructions',
+      component: InstructionView
     },
     {
       path: '/about',
