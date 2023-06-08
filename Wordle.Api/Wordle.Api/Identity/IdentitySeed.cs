@@ -71,7 +71,7 @@ public static class IdentitySeed
             {
                 //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
-                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Special);
                 await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
             }
         }
@@ -92,7 +92,7 @@ public static class IdentitySeed
             {
                 //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
-                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Special);
                 await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "false"));
             }
         }
@@ -113,7 +113,7 @@ public static class IdentitySeed
             {
                 //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
-                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Special);
                 await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
             }
         }
