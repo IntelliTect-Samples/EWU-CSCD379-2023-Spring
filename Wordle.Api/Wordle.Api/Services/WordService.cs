@@ -37,7 +37,11 @@ public class WordService
           .Where(word => word.Text.StartsWith(wordSegment))
           .OrderBy(w => w.Text).Take(count)
           .ToListAsync();
+
+        words.Add(new Word { Text = wordSegment });
+
         return words;
+
     }
 
     public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
