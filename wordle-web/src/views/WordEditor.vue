@@ -17,7 +17,7 @@
                 <v-text-field v-model="search" label="Search for word"></v-text-field>
             </v-col>
             <v-col cols="2">
-                <v-btn color="primary" text @click="addnewword = true">Add new word</v-btn>
+                <v-btn v-if="admin || ruleroftheuniverse" color="primary" text @click="addnewword = true">Add new word</v-btn>
             </v-col>
         </v-row>
   
@@ -28,8 +28,8 @@
                     <v-list-item-title>{{ selectedWord?.text }}</v-list-item-title>
                 </v-list-item>
                 <v-card-actions class="d-flex justify-center">
-                    <v-btn color="primary" text @click="editofword = true">Edit</v-btn>
-                    <v-btn color="error" text @click="deleteWord(selectedWord?.text ?? '')">Delete</v-btn>
+                    <v-btn v-if="signInService.isSignedIn" color="primary" text @click="editofword = true">Edit</v-btn>
+                    <v-btn v-if="admin || ruleroftheuniverse" color="error" text @click="deleteWord(selectedWord?.text ?? '')">Delete</v-btn>
                     <v-btn color="primary" text @click="dialogVisible = false">Close</v-btn>
                 </v-card-actions>
             </v-card>
@@ -56,7 +56,7 @@
             <v-card>
                 <v-card-title> Add new word: </v-card-title>
                 <v-card-text>
-                    <v-text-field v-model="newword" label="New word" :rules="newWordRules"></v-text-field>
+                    <v-text-field v-model="newword" label="New word" :rules="newWordRules" ></v-text-field>
                     <p> Are <strong>{{ newword }} </strong> a common word?</p>
                     <v-radio-group v-model="selectedOption">
                     <v-radio label="Yes" value="yes" color="green"></v-radio>
@@ -73,8 +73,6 @@
         </v-dialog>
         <v-btn color="primary" text @click="testadmin">testadmin</v-btn>
         <v-btn color="primary" text @click="testruleroftheuniverse">testruleroftheuniverse</v-btn>
-        <v-btn color="primary" text @click="testrandomadmin">testrandomadmin</v-btn>
-        <v-btn color="primary" text @click="test">test</v-btn>
     </div>
   
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
@@ -83,8 +81,13 @@
 </template>
   
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, inject, onMounted } from 'vue';
 import Axios from 'axios'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
+
+const signInService = inject(Services.SignInService) as SignInService
+
   
 const page = ref(1)
 const perPage = ref(60)
@@ -99,6 +102,13 @@ const addnewword = ref(false)
 const newword = ref("")
 const isWordValid = ref(false);
 
+const admin = ref(false)
+const ruleroftheuniverse = ref(false)
+
+onMounted(() => {
+    testadmin()
+    testruleroftheuniverse()
+})
   
 interface WordData {
     wordId: number;
@@ -181,16 +191,7 @@ function testadmin() {
     Axios.get('Token/testadmin')
     .then((response): void => {
           console.log(response.data)
-      }) 
-          .catch((error) => {
-          console.log(error)
-      })
-}
-
-function test() {
-    Axios.get('Token/test')
-    .then((response): void => {
-          console.log(response.data)
+          admin.value = true
       }) 
           .catch((error) => {
           console.log(error)
@@ -201,20 +202,13 @@ function testruleroftheuniverse() {
     Axios.get('Token/testruleroftheuniverse')
     .then((response): void => {
           console.log(response.data)
+          ruleroftheuniverse.value = true
       }) 
           .catch((error) => {
           console.log(error)
       })
 }
-function testrandomadmin() {
-    Axios.get('Token/testrandomadmin')
-    .then((response): void => {
-          console.log(response.data)
-      }) 
-          .catch((error) => {
-          console.log(error)
-      })
-}
+
 
 
 fetchData()

@@ -34,16 +34,19 @@ export class SignInService {
       })
       this.setToken(result.data.token)
       this._isSignedIn = true
+      window.location.reload()
       return true
     } catch (err) {
       console.log(`Login failed: ${err}`)
       this.signOut()
       return false
     }
+    
   }
 
   public signOut() {
     this.setToken(null)
+    window.location.reload()
   }
 
   public get isSignedIn() {
