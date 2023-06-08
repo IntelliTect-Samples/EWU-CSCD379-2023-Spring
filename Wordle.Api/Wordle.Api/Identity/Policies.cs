@@ -5,15 +5,19 @@ public static class Policies
 {
     public const string RandomAdmin = "RandomAdmin";
 
-    public static void RandomAdminPolicy(AuthorizationPolicyBuilder policy)
+     public static void EditWordPolicy(AuthorizationPolicyBuilder policy)
     {
-        policy.RequireRole(Roles.Admin);
+        policy.RequireClaim(Claims.MotU);
         policy.RequireAssertion(context =>
         {
-            var random = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Random);
-            if (Double.TryParse(random?.Value, out double result))
+            var ageString = context.User.Claims.FirstOrDefault(f => f.Type == Claims.Age);
+            if (ageString != null)
             {
-                return result > 0.5;
+                int age;
+                if (int.TryParse(ageString.Value, out age))
+                {
+                    return age >= 21;
+                }
             }
             return false;
         });

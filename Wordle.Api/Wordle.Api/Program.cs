@@ -99,7 +99,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 //Add Policies
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Policies.RandomAdmin, Policies.RandomAdminPolicy);
+    options.AddPolicy(Policies.RandomAdmin, Policies.EditWordPolicy);
     options.AddPolicy("IsGrantPolicy", policy => policy.RequireRole("Grant"));
 });
 
