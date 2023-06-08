@@ -11,7 +11,7 @@ public static class IdentitySeed
         await SeedRolesAsync(roleManager);
 
         // Seed Admin User
-        await SeedAdminUserAsync(userManager);
+        await SeedAdminUserAsync(userManager, roleManager);
 
         await UpdateBirthdates(db);
     }
@@ -34,7 +34,7 @@ public static class IdentitySeed
         }
     }
 
-    private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
+    private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
         // Seed Admin User
         if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
@@ -62,14 +62,17 @@ public static class IdentitySeed
                 UserName = "meg.com",
                 Email = "meg.com",
                 Name = "Meg",
+                BirthDate = (new DateTime(1990, 1, 1))
             };
 
             IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Roles.Admin);
+                //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
             }
         }
 
@@ -86,8 +89,10 @@ public static class IdentitySeed
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Roles.Admin);
+                //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "false"));
             }
         }
 
@@ -98,14 +103,17 @@ public static class IdentitySeed
                 UserName = "FrostyTheSnowman.com",
                 Email = "FrostyTheSnowman.com",
                 Name = "FrostyTheSnowman",
+                BirthDate = (new DateTime(2022, 1, 1))
             };
 
             IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Roles.Admin);
+                //await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
+                var role = roleManager.Roles.First(f => f.Name == Roles.Admin);
+                await roleManager.AddClaimAsync(role, new System.Security.Claims.Claim(Claims.MotU, "true"));
             }
         }
 
