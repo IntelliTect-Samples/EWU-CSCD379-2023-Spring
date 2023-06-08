@@ -158,7 +158,7 @@ public class WordService
         }
 
         return await _db.Words.Select(word => word)
-            .Where(word => word.Text.Contains(searchWord))
+            .Where(word => word.Text.StartsWith(searchWord))
             .Skip(10 * pageNumber)
             .Take(10)
             .OrderBy(word => word.Text)

@@ -184,6 +184,7 @@ function checkGuess() {
 // }
 
 function getValidGuesses() {
+  console.log(guess.value)
   validGuesses = WordsService.validWords(guess.value)
 }
 

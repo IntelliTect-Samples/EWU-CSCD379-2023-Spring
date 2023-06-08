@@ -15,7 +15,7 @@ export abstract class WordsService {
   }
 
   static async getValidWordListFromApi() {
-    Axios.get('Word/WordList')
+    Axios.get('Word/ValidWordList')
       .then((response) => {
         setTimeout(() => {}, 100)
         this.words = response.data
@@ -27,6 +27,7 @@ export abstract class WordsService {
   }
 
   static isValidWord(word: string): boolean {
+    console.log(this.words.includes(word))
     return this.words.includes(word)
   }
 
