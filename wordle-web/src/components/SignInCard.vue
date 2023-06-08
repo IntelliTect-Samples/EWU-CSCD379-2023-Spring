@@ -33,5 +33,7 @@ const password = ref('')
 
 function signIn(user: string, pass: string) {
   signInService.signInAsync(user, pass)
+  console.log(signInService.isSignedIn)
+  console.log(signInService.token)
 }
 </script>

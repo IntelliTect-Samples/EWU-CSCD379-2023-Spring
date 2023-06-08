@@ -32,6 +32,7 @@ export class SignInService {
         username: userName,
         password: password
       })
+      console.log(result.data.token)
       this.setToken(result.data.token)
       this._isSignedIn = true
       return true
@@ -52,7 +53,7 @@ export class SignInService {
       this._rawToken = token
       localStorage.setItem(this._tokenLocalStorageKey, this._rawToken)
       this._isSignedIn = true
-      Axios.defaults.headers.common['Authorization'] = 'Bearer ${token}'
+      Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
       const parts = token.split('.')
       const payload = JSON.parse(window.atob(parts[1]))
       this._token = Object.assign(new WordleToken(), payload)
