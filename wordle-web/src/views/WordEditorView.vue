@@ -147,6 +147,7 @@ Axios.get('Word/WordList?pageNumber=0').then((response) => {
 })
 
 function nextPage() {
+if(words.value.length == 10){
   page++
   if (searchWord.value === '') {
     Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
@@ -159,6 +160,7 @@ function nextPage() {
       }
     )
   }
+}
 }
 
 function previousPage() {
