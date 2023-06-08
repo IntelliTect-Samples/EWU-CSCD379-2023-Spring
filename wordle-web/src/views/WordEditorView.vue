@@ -9,23 +9,21 @@
       <v-list>
         <v-list-item v-for="word in paginatedWords" :key="word.wordId">
           <v-card>
-            <v-list-item-content>
-              <v-list-item-title>{{ word.text }}</v-list-item-title>
-              <v-card>
-                <v-list-item-subtitle>{{
-                  word.isCommon ? 'common' : 'uncommon'
-                }}</v-list-item-subtitle>
-                <v-btn
-                  ripple
-                  @click="changeCommonFlag(word.wordId, !word.isCommon)"
-                  :disabled="!permissions"
-                  >Change Common</v-btn
-                >
-                <v-btn ripple @click="deleteWord(word.wordId)" :disabled="!permissions"
-                  >Delete Word</v-btn
-                >
-              </v-card>
-            </v-list-item-content>
+            <v-list-item-title>{{ word.text }}</v-list-item-title>
+            <v-card>
+              <v-list-item-subtitle>{{
+                word.isCommon ? 'common' : 'uncommon'
+              }}</v-list-item-subtitle>
+              <v-btn
+                ripple
+                @click="changeCommonFlag(word.wordId, !word.isCommon)"
+                :disabled="!permissions"
+                >Change Common</v-btn
+              >
+              <v-btn ripple @click="deleteWord(word.wordId)" :disabled="!permissions"
+                >Delete Word</v-btn
+              >
+            </v-card>
           </v-card>
         </v-list-item>
       </v-list>

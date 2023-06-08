@@ -75,7 +75,7 @@ public class TokenController : Controller
     public bool CanCreateDelete()
     {
         DateTime date = DateTime.UtcNow;
-        var birthday = User.Claims.First(c => c.Type == Claims.Birthday);
+        var birthday = User.Claims.FirstOrDefault(c => c.Type == Claims.Birthday);
         bool validDate = DateTime.TryParse(birthday?.Value, out DateTime result);
         int age = (new DateTime(1, 1, 1) + (date - result)).Year - 1;
         return validDate && age >= 21 && User.IsInRole("MasterOfTheUniverse");
