@@ -17,7 +17,7 @@
                 <v-text-field v-model="search" label="Search for word"></v-text-field>
             </v-col>
             <v-col cols="2">
-                <v-btn v-if="admin || ruleroftheuniverse" color="primary" text @click="addnewword = true">Add new word</v-btn>
+                <v-btn v-if="admin || (ruleroftheuniverse && age)" color="primary" text @click="addnewword = true">Add new word</v-btn>
             </v-col>
         </v-row>
   
@@ -29,7 +29,7 @@
                 </v-list-item>
                 <v-card-actions class="d-flex justify-center">
                     <v-btn v-if="signInService.isSignedIn" color="primary" text @click="editofword = true">Edit</v-btn>
-                    <v-btn v-if="admin || ruleroftheuniverse" color="error" text @click="deleteWord(selectedWord?.text ?? '')">Delete</v-btn>
+                    <v-btn v-if="admin || (ruleroftheuniverse && age) " color="error" text @click="deleteWord(selectedWord?.text ?? '')">Delete</v-btn>
                     <v-btn color="primary" text @click="dialogVisible = false">Close</v-btn>
                 </v-card-actions>
             </v-card>
@@ -71,8 +71,6 @@
             </v-card>
     
         </v-dialog>
-        <v-btn color="primary" text @click="testadmin">testadmin</v-btn>
-        <v-btn color="primary" text @click="testruleroftheuniverse">testruleroftheuniverse</v-btn>
     </div>
   
     <v-overlay :model-value="overlay" class="align-center justify-center" persistent>
@@ -104,10 +102,12 @@ const isWordValid = ref(false);
 
 const admin = ref(false)
 const ruleroftheuniverse = ref(false)
+const age = ref(false)
 
 onMounted(() => {
     testadmin()
     testruleroftheuniverse()
+    testage()
 })
   
 interface WordData {
@@ -202,13 +202,23 @@ function testruleroftheuniverse() {
     Axios.get('Token/testruleroftheuniverse')
     .then((response): void => {
           console.log(response.data)
-          ruleroftheuniverse.value = true
+          ruleroftheuniverse.value = response.data
       }) 
           .catch((error) => {
           console.log(error)
       })
 }
 
+function testage() {
+    Axios.get('Token/testage')
+    .then((response): void => {
+          console.log(response.data)
+          age.value = response.data
+      }) 
+          .catch((error) => {
+          console.log(error)
+      })
+}
 
 
 fetchData()
