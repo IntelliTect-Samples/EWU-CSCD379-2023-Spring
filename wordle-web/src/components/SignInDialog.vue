@@ -15,7 +15,7 @@
             <v-text-field v-model="name" label="Name"> </v-text-field>
           </v-col>
           <v-col cols="12" v-if="signup">
-            <v-text-field v-model="bday" label="Birthday (DD/MM/YYYY)"> </v-text-field>
+            <v-text-field v-model="bday" label="Birthday (MM/DD/YYYY)"> </v-text-field>
           </v-col>
         </v-row>
       </v-card-text>
