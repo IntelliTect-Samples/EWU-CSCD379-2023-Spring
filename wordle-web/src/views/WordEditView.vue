@@ -6,13 +6,7 @@
         <v-list density="compact">
           <v-list-subheader>Word</v-list-subheader>
 
-          <v-list-item
-            v-for="(item, i) in list"
-            :key="i"
-            :value="item"
-            active-color="primary"
-            disabled
-          >
+          <v-list-item v-for="(item, i) in list" :key="i" :value="item" active-color="primary">
             <template v-slot:prepend>
               <v-icon color="red" @click="deleteWord(list[i].wordId)">mdi-delete</v-icon>
             </template>
@@ -20,8 +14,16 @@
             <div class="d-flex space-evenly-between flex-row">
               <h2 class="pr-15 pl-5 pt-5" v-text="item.text"></h2>
 
-              <v-checkbox v-model="item.isCommon" label="Is Word Common"></v-checkbox>
-              <v-checkbox v-model="item.isUsed" label="Is Word Used"></v-checkbox>
+              <v-checkbox
+                @click="updateWord(item)"
+                v-model="item.isCommon"
+                label="Is Word Common"
+              ></v-checkbox>
+              <v-checkbox
+                @click="updateWord(item)"
+                v-model="item.isUsed"
+                label="Is Word Used"
+              ></v-checkbox>
             </div>
           </v-list-item>
         </v-list>
@@ -38,20 +40,38 @@
         </v-col>
       </v-row>
     </v-card-text>
+
+    <v-card-item class="d-flex justify-center">
+      <v-btn
+        color="primary"
+        class="ma-5"
+        @click="options.pageNumber > 1 ? options.pageNumber-- : (options.pageNumber = 1)"
+      >
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-btn>
+      <v-btn color="primary" class="ma-5" disabled>
+        {{ options.pageNumber }}
+      </v-btn>
+      <v-btn color="primary" class="ma-5" @click="options.pageNumber++">
+        <v-icon>mdi-arrow-right</v-icon>
+      </v-btn>
+    </v-card-item>
   </v-card>
 </template>
 
 <script setup lang="ts">
 import Axios from 'axios'
-import { inject, reactive } from 'vue'
+// import { inject, reactive } from 'vue'
+import { reactive } from 'vue'
 import { WordListOptions, WordListItem } from '@/scripts/wordEdit'
 import { watch } from 'vue'
-import type { SignInService } from '@/scripts/signInService'
-import { Services } from '@/scripts/services'
+// import type { SignInService } from '@/scripts/signInService'
+// import { Services } from '@/scripts/services'
 
 const options = reactive(new WordListOptions())
 const list = reactive(new Array<WordListItem>())
-const signInService = inject(Services.SignInService) as SignInService
+// const signInService = inject(Services.SignInService) as SignInService
+var oldString = ''
 
 watch(options, () => {
   refreshList()
@@ -60,13 +80,15 @@ watch(options, () => {
 refreshList()
 
 function refreshList() {
+  if (options.text != oldString) options.pageNumber = 1
+  oldString = options.text
   console.log(options.text)
   Axios.get('word/GetWordleList', {
-    params: { 
+    params: {
       pageNumber: options.pageNumber,
       pageSize: options.pageSize,
       search: options.text
-     }
+    }
   })
     .then((response) => {
       console.log(options)
