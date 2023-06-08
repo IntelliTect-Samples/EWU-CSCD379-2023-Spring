@@ -10,18 +10,24 @@
       </template>
 
       <v-list width="60px">
-        <v-list-item @click="setDisplayCount(10, textInput)"> 10 </v-list-item>
-        <v-list-item @click="setDisplayCount(25, textInput)"> 25 </v-list-item>
-        <v-list-item @click="setDisplayCount(50, textInput)"> 50 </v-list-item>
-        <v-list-item @click="setDisplayCount(100, textInput)"> 100 </v-list-item>
+        <v-list-item @click="setDisplayCount(10, textInput, pageNumber)"> 10 </v-list-item>
+        <v-list-item @click="setDisplayCount(25, textInput, pageNumber)"> 25 </v-list-item>
+        <v-list-item @click="setDisplayCount(50, textInput, pageNumber)"> 50 </v-list-item>
+        <v-list-item @click="setDisplayCount(100, textInput, pageNumber)"> 100 </v-list-item>
       </v-list>
     </v-menu>
   </div>
+  <v-divider />
+  <v-pagination
+    @prev="setDisplayCount(wordDisplayCount, textInput, (pageNumber -= 1))"
+    @next="setDisplayCount(wordDisplayCount, textInput, (pageNumber += 1))"
+    :length="pageCount"
+  />
   <v-card variant="outlined" style="margin-bottom: 20px">
     <v-text-field
       placeholder="search..."
       maxlength="5"
-      @input="setDisplayCount(wordDisplayCount, $event.target.value)"
+      @input="setDisplayCount(wordDisplayCount, $event.target.value, pageNumber)"
     />
     <v-list v-for="word in words" :key="word.id"
       ><v-list-item>{{ word.text }}</v-list-item></v-list
@@ -33,23 +39,33 @@
 import Axios from 'axios'
 import { ref } from 'vue'
 
-const words = ref<IWord[]>([])
+const words = ref<Word[]>([])
 const wordDisplayCount = ref<number>(10)
 const textInput = ref<string>('')
+const pageNumber = ref<number>(1)
+const pageCount = ref<number>()
 
-const setDisplayCount = (wordsPerPage: number, text: string) => {
+const setDisplayCount = (wordsPerPage: number, text: string, page: number) => {
   wordDisplayCount.value = wordsPerPage
   textInput.value = text
+  pageNumber.value = page
   Axios.get(
-    `/Word/GetManyWords?count=${wordDisplayCount.value}&wordSegment=${textInput.value}`
+    `/Word/GetManyWords?count=${wordDisplayCount.value}&wordSegment=${textInput.value}&pageNumber=${pageNumber.value}`
   ).then((result) => {
-    words.value = result.data as IWord[]
+    const data = result.data as WordDto
+    words.value = data.words
+    pageCount.value = data.pageCount
     console.log(result)
   })
 }
-setDisplayCount(wordDisplayCount.value, textInput.value)
+setDisplayCount(wordDisplayCount.value, textInput.value, pageNumber.value)
 
-interface IWord {
+type WordDto = {
+  pageCount: number
+  words: Word[]
+}
+
+type Word = {
   id?: number
   text: string
   isCommon: string
