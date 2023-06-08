@@ -20,21 +20,21 @@
         <p>-------------------------------------</p>
         <p><strong>Admin@intellitect.com</strong></p>
         <p><strong>P@ssw0rd123</strong></p>
-        <p>Has admin and special roles.</p>
+        <p>admin role</p>
         <p>-------------------------------------</p>
-        <p><strong>matt.com</strong></p>
+        <p><strong>meg@intellitect.com</strong></p>
         <p><strong>P@ssw0rd123</strong></p>
-        <p>Has admin and special roles.</p>
+        <p>MasterOfTheUniverse and over 21</p>
         <p>-------------------------------------</p>
-        <p><strong>meg.com</strong></p>
+        <p><strong>matt@intellitect.com</strong></p>
         <p><strong>P@ssw0rd123</strong></p>
-        <p>Has admin and special roles, and a claim of MasterOfTheUniverse.</p>
+        <p>not MasterOfTheUniverse but is over 21</p>
         <p>-------------------------------------</p>
-        <p><strong>FrostyTheSnowman.com</strong></p>
+        <p><strong>FrostyTheSnowman@intellitect.com</strong></p>
         <p><strong>P@ssw0rd123</strong></p>
-        <p>Has admin and special roles, and a claim of MasterOfTheUniverse, also is old enough to add or remove words.</p>
+        <p>MasterOfTheUniverse but not over 21</p>
         <p>-------------------------------------</p>
-      </v-card>
+      </v-card> 
     </v-dialog>
   </template>
   
