@@ -2,11 +2,13 @@
 {
     public class CreateUser : UserCredentials
     {
-        public CreateUser(string username, string password, string name) : base(username, password)
+        public CreateUser(string username, string password, string name, DateTime birthday) : base(username, password)
         {
             Name = name;
+            Birthday = birthday;
         }
 
         public string Name { get; set; }
+        public DateTime Birthday { get; set; }
     }
 }

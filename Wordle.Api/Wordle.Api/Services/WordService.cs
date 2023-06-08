@@ -65,6 +65,38 @@ public class WordService
         return word;
     }
 
+    public async Task<Word> DeleteWordAsync(string? targetWord)
+    {
+        if (string.IsNullOrEmpty(targetWord) || targetWord.Length != 5)
+        {
+            throw new ArgumentException("Word must be 5 characters long");
+        }
+
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == targetWord);
+        if (word != null)
+        {
+            _db.Words.Remove(word);
+        }
+        await _db.SaveChangesAsync();
+        return word;
+    }
+
+    public async Task<Word> SetIsCommonAsync(string? targetWord, bool isCommon)
+    {
+        if (string.IsNullOrEmpty(targetWord) || targetWord.Length != 5)
+        {
+            throw new ArgumentException("Word must be 5 characters long");
+        }
+
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == targetWord);
+        if (word != null)
+        {
+            word.IsCommon = isCommon;
+        }
+        await _db.SaveChangesAsync();
+        return word;
+
+    }
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
         if (date is null)
@@ -139,6 +171,8 @@ public class WordService
               HasUserPlayed = playerId.HasValue ? f.PlayerGames.Any(f => f.PlayerId == playerId.Value) : false
           })
           .ToListAsync();
+
+       
         var result2 = await _db.PlayerGames
           .Include(f => f.DateWord)
           .Where(f => f.DateWord != null &&
@@ -170,5 +204,23 @@ public class WordService
             result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
         return result;
+    }
+
+    public async Task<IEnumerable<Word>> GetPaginatedWordsAsync(int page = 1, int count = 10, string start = "")
+    {
+        if (page < 1) page = 1;
+        if (count < 1 || count > 100) count = 10;
+        page--;
+        var index = page * count;
+
+        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
+        totalCount -= count;
+        var words = await _db.Words
+          .Where(w => w.Text.StartsWith(start))
+          .OrderBy(w => w.Text)
+          .Skip(index)
+          .Take(count)
+          .ToListAsync();
+        return words;
     }
 }
