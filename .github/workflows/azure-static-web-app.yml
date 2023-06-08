@@ -36,7 +36,7 @@ jobs:
         working-directory: ./wordle-web
      
       - name: Deploy
-        if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        if: ((github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch' )
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:

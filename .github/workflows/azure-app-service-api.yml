@@ -5,15 +5,15 @@ name: Wordle 2023 API CI/CD
 
 on:
   push:
-    branches:
-      - main
     paths: 
       - Wordle.Api/**
   workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -45,6 +45,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    if: ((github.event_name == 'push' && github.ref == 'refs/heads/master') || github.event_name == 'workflow_dispatch' )
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
