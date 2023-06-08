@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230607021831_AllowCascadeDelete.cs")]
-    partial class AllowCascadeDeletecs
+    [Migration("20230608231718_update")]
+    partial class update
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
