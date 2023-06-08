@@ -20,7 +20,7 @@ import { PlayerService } from './scripts/playerService'
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
   Axios.defaults.baseURL = 'https://localhost:7053/'
 } else {
-  Axios.defaults.baseURL = 'https://wordle-assignment5-app.azurewebsites.net/'
+  Axios.defaults.baseURL = 'https://wordle-assignment5-app.azurewebsites.net'
 }
 
 // Provide the useDisplay to other components so that it can be used in testing.
