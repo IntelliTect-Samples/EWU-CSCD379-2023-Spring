@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class PlayerUpdate : Migration
+    public partial class SeedUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -34,6 +34,7 @@ namespace Wordle.Api.Migrations
                     GameCount = table.Column<int>(type: "int", nullable: false),
                     AverageAttempts = table.Column<double>(type: "float", nullable: false),
                     AverageSecondsPerGame = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

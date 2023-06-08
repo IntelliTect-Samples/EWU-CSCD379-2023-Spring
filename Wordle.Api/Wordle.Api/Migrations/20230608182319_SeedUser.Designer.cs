@@ -12,8 +12,8 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230606223618_PlayerUpdate")]
-    partial class PlayerUpdate
+    [Migration("20230608182319_SeedUser")]
+    partial class SeedUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -171,6 +171,9 @@ namespace Wordle.Api.Migrations
 
                     b.Property<int>("AverageSecondsPerGame")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

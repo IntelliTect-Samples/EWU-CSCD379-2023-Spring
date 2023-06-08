@@ -83,6 +83,7 @@ public static class IdentitySeed
                 UserName = "matt.com",
                 Email = "matt.com",
                 Name = "Matt",
+                BirthDate= (new DateTime(1980, 1, 1))
             };
 
             IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
