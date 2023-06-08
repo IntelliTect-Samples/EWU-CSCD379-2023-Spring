@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
@@ -6,13 +7,11 @@ public static class IdentitySeed
 {
     public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        // Seed Roles
         await SeedRolesAsync(roleManager);
-
-        // Seed Admin User
-        await SeedAdminUserAsync(userManager);
+        await SeedWordEditorAsync(userManager);
     }
 
+    // TO DO: remove admin b/c not using
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
     {
         // Seed Roles
@@ -22,23 +21,28 @@ public static class IdentitySeed
         }
     }
 
-    private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
+    private static async Task SeedWordEditorAsync(UserManager<AppUser> userManager)
     {
-        // Seed Admin User
-        if (await userManager.FindByNameAsync("Admin@intellitect.com") == null)
+        // Seed user that can edit words
+        if (await userManager.FindByNameAsync("Vera Testing") == null)
         {
             AppUser user = new()
             {
-                UserName = "Admin@intellitect.com",
-                Email = "Admin@intellitect.com",
-                Name = "Admin",
+                UserName = "CoolBeans",
+                Name = "Vera Testing",
+                BirthDate = new DateTime(2001, 10, 29)
             };
 
-            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd").Result;
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Roles.Admin);
+                var ClaimsList = new List<Claim>()
+                {
+                    new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")),
+                    new Claim(Claims.MasterOfTheUniverse, true.ToString())
+                };
+                await userManager.AddClaimsAsync(user, ClaimsList);
             }
         }
     }

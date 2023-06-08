@@ -2,7 +2,8 @@
 {
     public class Claims
     {
-        public const string MasterOfTheUniverse = "MasterOfTheUniverse";
-        public const string Birthday = "Birthday";
+        public const string MasterOfTheUniverse = "masterOfTheUniverse";
+        public const string Birthdate = "birthdate";
+        public const string Age = "age";
     }
 }

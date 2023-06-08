@@ -52,6 +52,13 @@ public class TokenController : Controller
                 new Claim("UserId", user.Id.ToString()),
                 new Claim(Claims.MasterOfTheUniverse, "MasterOfTheUniverse"),
             };
+
+            if (user.BirthDate.HasValue)
+            {
+                claims.Add(new Claim(Claims.Age, Math.Floor((DateTime.UtcNow - user.BirthDate.Value).TotalDays / 365).ToString()));
+                claims.Add(new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")));
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
             foreach (var role in roles)
             {
@@ -105,6 +112,13 @@ public class TokenController : Controller
     public string TestAdmin()
     {
         return "Authorized as Admin";
+    }
+
+    [HttpGet("TestEditWord")]
+    [Authorize(Policy = Policies.EditWord)]
+    public string TestEditWord()
+    {
+        return $"Authorized to edit words ${string.Join(", ", User.Claims.ToList())}";
     }
 
 }

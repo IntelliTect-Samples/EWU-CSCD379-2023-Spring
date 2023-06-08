@@ -91,7 +91,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // Add Policies
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Policies.MasterOfTheUniverse, Policies.IsMasterOfTheUniverse);
+    options.AddPolicy(Policies.EditWord, Policies.EditWordPolicy);
 });
 
 // Actually build the app so we can configure the pipeline next
@@ -106,6 +106,9 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
+    await IdentitySeed.SeedAsync(
+       scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
+       scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
 
 // Configure the HTTP request pipeline.

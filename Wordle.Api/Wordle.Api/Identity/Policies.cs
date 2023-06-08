@@ -3,13 +3,23 @@
 namespace Wordle.Api.Identity;
 public static class Policies
 {
-    public const string MasterOfTheUniverse = "MasterOfTheUniverse";
+    public const string EditWord = "EditWord";
 
-    public static void IsMasterOfTheUniverse(AuthorizationPolicyBuilder policy)
+    public static void EditWordPolicy(AuthorizationPolicyBuilder policy)
     {
+        policy.RequireClaim(Claims.MasterOfTheUniverse);
         policy.RequireAssertion(context =>
         {
-            return context.User.Claims.Any(c => c.Type == Claims.MasterOfTheUniverse);
+            var ageString = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Age);
+            if (ageString != null)
+            {
+                int age;
+                if (int.TryParse(ageString.Value, out age))
+                {
+                    return age >= 21;
+                }
+            }
+            return false;
         });
     }
 }
