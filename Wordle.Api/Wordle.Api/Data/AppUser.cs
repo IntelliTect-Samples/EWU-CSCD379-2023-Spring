@@ -8,4 +8,6 @@ public class AppUser : IdentityUser
     public int GameCount { get; set; }
     public double AverageAttempts { get; set; }
     public int AverageSecondsPerGame { get; set; }
+    public Boolean MasterOfTheUniverse { get; set; } = false;
+    public required DateTime Birthday { get; set; }
 }

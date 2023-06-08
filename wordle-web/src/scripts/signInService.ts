@@ -1,9 +1,11 @@
 import Axios from 'axios'
+import { Word } from './word'
 
 class WordleToken {
-  random: string = ''
   userId: string = ''
   userName: string = ''
+  masterOfTheUniverse: string = ''
+  birthday: string = ''
   aud: string = ''
   exp: number = 0
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': string[] = []
@@ -31,7 +33,7 @@ export class SignInService {
       .then((result) => {
         this.setToken(result.data.token)
         console.log(this.token)
-        console.log(this.token.roles)
+        console.log(this._token.roles)
         Axios.get('Token/TestAdmin').then((result) => {
           console.log(result)
         })
