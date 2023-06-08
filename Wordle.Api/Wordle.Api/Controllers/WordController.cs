@@ -39,7 +39,6 @@ namespace Wordle.Api.Controllers
         [HttpDelete("Delete")]
         public async Task<Word> DeleteWord(string word)
         {
-            // deletes word
             return await _wordService.DeleteWordAsync(word);
         }
 
