@@ -108,27 +108,19 @@ public class TokenController : Controller
         return "something";
     }
 
-    [HttpGet("testadmin")]
-    [Authorize(Roles=Roles.Admin)]
+    [HttpGet("testAdmin")]
+    [Authorize(Roles = Roles.Admin)]
     public string TestAdmin()
     {
-        return "Authorized as Admin";
+        return "You are Admin";
     }
 
-    [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles="RulerOfTheUniverse,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
+    [HttpGet("testmasterpolicy")]
+    [Authorize(Policy = Policies.MasterOfTheUniverse)]
+    public string TestMasterOfTheUniverse()
     {
-        return "Authorized as Ruler of the Universe or Meg";
+        return "Authorized as MASTER OF THE UNIVERSE";
     }
-
-    [HttpGet("testrandomadmin")]
-    [Authorize(Policy=Policies.RandomAdmin)]
-    public string TestRandomAdmin()
-    {
-        return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
-    }
-
 }
 
 
