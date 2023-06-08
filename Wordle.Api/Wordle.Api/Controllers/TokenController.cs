@@ -131,10 +131,19 @@ public class TokenController : Controller
     }
 
     [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles = "RulerOfTheUniverse,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
+    //[Authorize(Roles = "RulerOfTheUniverse,Meg")]
+    public bool TestRulerOfTheUniverseOrMeg()
     {
-        return "Authorized as Ruler of the Universe or Meg";
+        var master = User.Claims.FirstOrDefault(f => f.Type == Claims.MotU);
+        if(master != null)
+        {
+            bool claim;
+            if(bool.TryParse(master.Value, out claim))
+            {
+                return claim;
+            }
+        }
+        return false;
     }
 
     [HttpGet("testrandomadmin")]
@@ -142,6 +151,22 @@ public class TokenController : Controller
     public string TestRandomAdmin()
     {
         return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
+    }
+
+    [HttpGet("testage")]
+    //[Authorize(Roles = "Age")]
+    public bool TestAge()
+    {
+        var ageString = User.Claims.FirstOrDefault(f => f.Type == Claims.Age);
+        if (ageString != null)
+        {
+            int age;
+            if (int.TryParse(ageString.Value, out age))
+            {
+                return age >= 21;
+            }
+        }
+        return false;
     }
 
 }
