@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Models;
 
 namespace Wordle.Api.Services;
 
@@ -41,16 +43,16 @@ public class WordService
         return words;
     }
 
-    public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
+    public async Task<Response<Word>> AddWordAsync(string? newWord, bool isCommon)
     {
         if (newWord is null || newWord.Length != 5)
         {
-            throw new ArgumentException("Word must be 5 characters long");
+            return new Response<Word>("Word must be 5 characters long");
         }
         var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == newWord);
         if (word != null)
         {
-            word.IsCommon = isCommon;
+            return new Response<Word>("Word already exists");
         }
         else
         {
@@ -62,7 +64,7 @@ public class WordService
             _db.Words.Add(word);
         }
         await _db.SaveChangesAsync();
-        return word;
+        return new Response<Word>(word);
     }
 
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
@@ -201,12 +203,27 @@ public class WordService
         return false;
     }
 
-    public async Task<Word?> ChangeIsCommon(int wordId, bool value)
+    public async Task<Word?> UpdateWord(int wordId, string? text, bool isCommon, bool isUsed)
     {
         var word = await _db.Words.FindAsync(wordId);
         if (word != null)
         {
-            word.IsCommon = value;
+            word.IsCommon = isCommon;
+            word.IsUsed = isUsed;
+            // Make sure the word is not empty and has a length of 5.
+            if (!string.IsNullOrEmpty(text) && text.Length == 5)
+            {
+                // Make sure the word isn't the current word.
+                if (word.Text != text)
+                {
+                    // Make sure this word doesn't exist anywhere else in the list.
+                    if (_db.Words.Count(f=>f.Text == text) == 0)
+                    {
+                        // If all that is true, then change it.
+                        word.Text = text;
+                    }
+                }
+            }
             await _db.SaveChangesAsync();
             return word;
         }

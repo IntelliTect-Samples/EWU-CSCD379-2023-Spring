@@ -12,7 +12,7 @@
         <v-spacer></v-spacer>
 
         <v-btn>
-          <span v-if="!signInService.isSignedIn">Not signed in</span>
+          <span v-if="!signInService.isSignedIn" @click="signIn">Not signed in</span>
           <span v-else>{{ signInService.token.userName }}</span>
         </v-btn>
 
@@ -54,10 +54,7 @@
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
-              <v-list-item-title
-                v-if="!signInService.isSignedIn"
-                @click="signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')"
-              >
+              <v-list-item-title v-if="!signInService.isSignedIn" @click="signIn">
                 Sign In
               </v-list-item-title>
             </v-list-item>
@@ -67,6 +64,7 @@
     </v-app-bar>
 
     <v-main>
+      <SignInDialog v-model="showSignInDialog"> </SignInDialog>
       <RouterView />
     </v-main>
   </v-app>
@@ -74,18 +72,21 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
+import SignInDialog from './components/SignInDialog.vue'
+import { watch } from 'vue'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
 
 const signInService = inject(Services.SignInService) as SignInService
+const showSignInDialog = ref(false)
 
 const theme = useTheme()
 
@@ -105,8 +106,7 @@ function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
 
-setTimeout(() => {
-  // This is terrible, nasty, and should be removed.
-  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
-}, 1000)
+function signIn() {
+  showSignInDialog.value = true
+}
 </script>
