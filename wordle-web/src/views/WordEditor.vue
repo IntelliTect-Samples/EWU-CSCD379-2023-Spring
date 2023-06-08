@@ -73,7 +73,6 @@ import { WordListOptions, WordListItem } from '@/scripts/wordEdit'
 import { watch } from 'vue'
 import type { SignInService } from '@/scripts/signInService'
 import { Services } from '@/scripts/services'
-import type { Word } from '@/scripts/word'
 
 const options = reactive(new WordListOptions())
 const list = reactive(new Array<WordListItem>())

@@ -1,4 +1,3 @@
-import Axios from 'axios'
 
 export abstract class WordsService {
   static getRandomWord(): string {

@@ -37,6 +37,7 @@ export class SignInService {
       //   console.log(result)
       // })
       this._isSignedIn = true
+      console.log(result)
       return true
     } catch (err) {
       console.log(`Login failed: ${err}`)

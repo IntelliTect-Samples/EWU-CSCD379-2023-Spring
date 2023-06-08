@@ -161,6 +161,7 @@ export class WordleSolver {
     //Remove letters that are already guessed
     for (const [letter, count] of letterCounts) {
       if (usages.filter((u) => u.char == letter).length > 0) {
+        console.log(count)
         letterCounts.delete(letter)
       }
     }

@@ -65,7 +65,7 @@ public static class IdentitySeed
                 UserName = "over21@test",
                 Email = "over21@test",
                 Name = "over21",
-                BDay = new DateTime(1990, 10, 22),
+                BDay = new DateTime(1990, 10, 21),
                 MasterOfTheUniverse = "MOTU"
             };
 
