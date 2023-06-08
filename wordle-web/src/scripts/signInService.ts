@@ -63,6 +63,7 @@ export class SignInService {
         month: month,
         day: day
       })
+      console.log(result)
       return true
     } catch (err) {
       console.log(`SignUp failed: ${err}`)
