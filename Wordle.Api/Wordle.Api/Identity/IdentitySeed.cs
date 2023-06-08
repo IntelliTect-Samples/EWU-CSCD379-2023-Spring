@@ -55,12 +55,12 @@ public static class IdentitySeed
             }
         }
 
-        if (await userManager.FindByEmailAsync("meg.com") == null)
+        if (await userManager.FindByEmailAsync("meg@intellitect.com") == null)
         {
             AppUser user = new AppUser
             {
-                UserName = "meg.com",
-                Email = "meg.com",
+                UserName = "meg@intellitect.com",
+                Email = "meg@intellitect.com",
                 Name = "Meg",
                 BirthDate = (new DateTime(1990, 1, 1))
             };
@@ -76,12 +76,12 @@ public static class IdentitySeed
             }
         }
 
-        if (await userManager.FindByEmailAsync("matt.com") == null)
+        if (await userManager.FindByEmailAsync("matt@intellitect.com") == null)
         {
             AppUser user = new AppUser
             {
-                UserName = "matt.com",
-                Email = "matt.com",
+                UserName = "matt@intellitect.com",
+                Email = "matt@intellitect.com",
                 Name = "Matt",
                 BirthDate= (new DateTime(1980, 1, 1))
             };
@@ -97,12 +97,12 @@ public static class IdentitySeed
             }
         }
 
-        if (await userManager.FindByEmailAsync("FrostyTheSnowman.com") == null)
+        if (await userManager.FindByEmailAsync("FrostyTheSnowman@intellitect.com") == null)
         {
             AppUser user = new AppUser
             {
-                UserName = "FrostyTheSnowman.com",
-                Email = "FrostyTheSnowman.com",
+                UserName = "FrostyTheSnowman@intellitect.com",
+                Email = "FrostyTheSnowman@intellitect.com",
                 Name = "FrostyTheSnowman",
                 BirthDate = (new DateTime(2022, 1, 1))
             };
