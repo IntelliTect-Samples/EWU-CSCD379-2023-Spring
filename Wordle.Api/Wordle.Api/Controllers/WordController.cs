@@ -54,7 +54,7 @@ namespace Wordle.Api.Controllers
             return (await _wordService.GetWordOfTheDayStatsAsync(date, days, playerId ));
         }
 
-        [HttpGet("GetWordlList")]
+        [HttpGet("GetWordleList")]
         public async Task<IEnumerable<Word>> GetWordList(int pageNumber = 1, int pageSize = 10, string? search = null)
         {
             return await _wordService.GetWords(pageNumber, pageSize, search);

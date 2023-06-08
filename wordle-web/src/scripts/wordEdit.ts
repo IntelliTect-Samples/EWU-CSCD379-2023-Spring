@@ -1,7 +1,7 @@
 export class WordListOptions {
   pageSize: number = 10
-  pageNumber: number = 0
-  search: string = ''
+  pageNumber: number = 1
+  text: string = ''
 }
 
 export class WordListItem {

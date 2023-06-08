@@ -28,7 +28,7 @@
       </v-table>
       <v-row class="d-flex justify-center">
         <v-col cols="12" md="4">
-          <v-text-field v-model="options.search" label="Search" />
+          <v-text-field v-model="options.text" label="Search" />
         </v-col>
         <v-col cols="12" md="2">
           <v-btn @click="addWord" color="grey">
@@ -60,9 +60,13 @@ watch(options, () => {
 refreshList()
 
 function refreshList() {
-  console.log(options.search)
-  Axios.get('word/GetWordlList', {
-    params: { options }
+  console.log(options.text)
+  Axios.get('word/GetWordleList', {
+    params: { 
+      pageNumber: options.pageNumber,
+      pageSize: options.pageSize,
+      search: options.text
+     }
   })
     .then((response) => {
       console.log(options)
@@ -118,7 +122,7 @@ function addWord() {
     .then((response) => {
       console.log(response.data)
       if (response.data.wasSuccessful) {
-        options.search = text
+        options.text = text
         options.pageNumber = 1
         refreshList()
       } else {
