@@ -110,3 +110,12 @@ function signIn() {
   showSignInDialog.value = true
 }
 </script>
+
+<style scoped>
+.v-main {
+  background-image: url('https://cdnb.artstation.com/p/assets/images/images/043/163/227/original/augustin-cart-gif-lofi-final.gif?1636484521');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+</style>
