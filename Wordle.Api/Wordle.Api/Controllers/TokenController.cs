@@ -71,10 +71,13 @@ public class TokenController : Controller
         return Unauthorized("The username or password is incorrect");
     }
 
-    [HttpPost("TestMasterUniverse")]
-    [Authorize(Policy=Policies.CanCreateDeleteWords)]
-    public string TestMasterUniverse()
+    [HttpGet("CanCreateDelete")]
+    public bool CanCreateDelete()
     {
-        return User.IsInRole("MasterOfTheUniverse").ToString();
+        DateTime date = DateTime.UtcNow;
+        var birthday = User.Claims.First(c => c.Type == Claims.Birthday);
+        bool validDate = DateTime.TryParse(birthday?.Value, out DateTime result);
+        int age = (new DateTime(1, 1, 1) + (date - result)).Year - 1;
+        return validDate && age >= 21 && User.IsInRole("MasterOfTheUniverse");
     }
 }

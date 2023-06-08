@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Identity;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -60,12 +62,14 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpGet("DeleteWord")]
+        [Authorize(Policy = Policies.CanCreateDeleteWords)]
         public async Task<bool> DeleteWord(int wordId)
         {
             return await _wordService.DeleteWord(wordId);
         }
 
         [HttpGet("ChangeCommonFlag")]
+        [Authorize(Policy = Policies.CanCreateDeleteWords)]
         public async Task<Word?> ChangeCommonFlag(int wordId, bool value)
         {
             return await _wordService.ChangeCommonFlag(wordId, value);

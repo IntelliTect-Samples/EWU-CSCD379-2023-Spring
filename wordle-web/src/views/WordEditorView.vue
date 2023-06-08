@@ -15,8 +15,15 @@
                 <v-list-item-subtitle>{{
                   word.isCommon ? 'common' : 'uncommon'
                 }}</v-list-item-subtitle>
-                <v-btn ripple>change</v-btn>
-                <v-btn @click="deleteWord(word.wordId)">delete word</v-btn>
+                <v-btn
+                  ripple
+                  @click="changeCommonFlag(word.wordId, !word.isCommon)"
+                  :disabled="!permissions"
+                  >Change Common</v-btn
+                >
+                <v-btn ripple @click="deleteWord(word.wordId)" :disabled="!permissions"
+                  >Delete Word</v-btn
+                >
               </v-card>
             </v-list-item-content>
           </v-card>
@@ -71,9 +78,11 @@ const newWord = ref<Word>({
   isCommon: false,
   isUsed: true
 })
+const permissions = ref(false)
 
 onMounted(() => {
   getWords(1)
+  permissions.value = canCreateDelete()
 })
 
 watch(searchString, (newValue) => {
@@ -161,5 +170,29 @@ function deleteWord(wordId: number) {
 function handlePagination(page: number) {
   currentPage.value = page
   getWords(page)
+}
+
+function changeCommonFlag(wordId: number, value: boolean) {
+  Axios.get('/Word/ChangeCommonFlag', {
+    params: {
+      wordId: wordId,
+      value: value
+    }
+  })
+    .then((response) => {
+      getWords(currentPage.value)
+      console.log(response.data)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
+function canCreateDelete(): boolean {
+  let result = false
+  Axios.get('/Token/CanCreateDelete').then((response) => {
+    result = response.data
+  })
+  return result
 }
 </script>

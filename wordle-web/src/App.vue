@@ -59,12 +59,13 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
+import type { SignInService } from './scripts/signInService'
 
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())

@@ -10,7 +10,7 @@
       </v-card-text>
       <v-card-text>
         Password:
-        <v-text-field />
+        <v-text-field ref="$input" v-model="password" />
       </v-card-text>
       <v-card-actions>
         <v-spacer> </v-spacer>
@@ -24,13 +24,16 @@
 <script lang="ts" setup>
 import type { PlayerService } from '@/scripts/playerService'
 import { Services } from '@/scripts/services'
+import type { SignInService } from '@/scripts/signInService'
 import { nextTick } from 'vue'
 import { watch } from 'vue'
 import { inject } from 'vue'
 import { ref } from 'vue'
 
+const signInService = inject(Services.SignInService) as SignInService
 const playerService = inject(Services.PlayerService) as PlayerService
 let newName = playerService.player.name
+let password = ''
 
 const showDialog = ref(false)
 const $input = ref<HTMLInputElement>()
@@ -46,6 +49,8 @@ watch(showDialog, (value) => {
 
 const confirm = async () => {
   await playerService.ChangeNameAsync(newName)
+  if (await signInService.signInAsync(newName, password)) close()
+  else alert('Invalid username or password')
   showDialog.value = false
 }
 const close = () => {
