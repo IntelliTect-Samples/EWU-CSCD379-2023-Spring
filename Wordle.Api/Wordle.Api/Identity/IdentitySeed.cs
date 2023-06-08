@@ -11,6 +11,8 @@ public static class IdentitySeed
 
         // Seed Admin User
         await SeedAdminUserAsync(userManager);
+
+        await SeedTestUserAsync(userManager);
     }
 
     private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
@@ -50,6 +52,49 @@ public static class IdentitySeed
             {
                 await userManager.AddToRoleAsync(user, Roles.Admin);
                 await userManager.AddToRoleAsync(user, Roles.Special);
+                await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
+            }
+        }
+    }
+    private static async Task SeedTestUserAsync(UserManager<AppUser> userManager)
+    {
+        if (await userManager.FindByEmailAsync("over21@test") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "over21@test",
+                Email = "over21@test",
+                Name = "over21",
+                BDay = new DateTime(1900, 10, 22),
+                MasterOfTheUniverse = "MOTU"
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "Tester.123").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
+
+            }
+        }
+
+        if (await userManager.FindByEmailAsync("under21@test") == null)
+        {
+            AppUser user = new AppUser
+            {
+                UserName = "under21@test",
+                Email = "under21@test",
+                Name = "under21",
+                BDay = new DateTime(2015, 10, 22),
+                MasterOfTheUniverse = "MOTU"
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "Tester.321").Result;
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, Roles.MasterOfTheUniverse);
+
             }
         }
     }
