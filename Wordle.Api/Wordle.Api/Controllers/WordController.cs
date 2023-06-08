@@ -25,9 +25,9 @@ namespace Wordle.Api.Controllers
 
 
         [HttpGet("GetManyWords")]
-        public async Task<IEnumerable<Word>> GetManyWords(int count, string? wordSegment)
+        public async Task<SeveralWordsDto> GetManyWords(int count, string? wordSegment, int pageNumber)
         {
-            return await _wordService.GetSeveralWordsAsync(count, wordSegment);
+            return await _wordService.GetSeveralWordsAsync(count, wordSegment, pageNumber);
         }
 
         [HttpPost]

@@ -26,17 +26,22 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int count, string? wordSegment)
+    public async Task<SeveralWordsDto> GetSeveralWordsAsync(int wordsPerPage, string? wordSegment, int pageNumber)
     {
-        if (count == 0) {
-            count = 10;
+        if (wordsPerPage == 0) {
+            wordsPerPage = 10;
         } 
+        var upperBound = wordsPerPage * pageNumber;
         wordSegment ??= "";
         var words = await _db.Words
           .Where(word => word.Text.StartsWith(wordSegment))
-          .OrderBy(w => w.Text).Take(count)
+          .OrderBy(w => w.Text).Skip(upperBound - wordsPerPage).Take(wordsPerPage)
           .ToListAsync();
-        return words;
+        var pageCount = (_db.Words.Where(word => word.Text.StartsWith(wordSegment)).Count() + wordsPerPage - 1) / wordsPerPage;
+        var output = new SeveralWordsDto();
+        output.Words= words;
+        output.pageCount = pageCount;
+        return output;
     }
 
     public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
