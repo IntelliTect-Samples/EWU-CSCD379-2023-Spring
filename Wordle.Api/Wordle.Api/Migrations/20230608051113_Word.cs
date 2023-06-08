@@ -5,7 +5,7 @@
 namespace Wordle.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Wordcs : Migration
+    public partial class Word : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
