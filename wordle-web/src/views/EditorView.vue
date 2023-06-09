@@ -43,7 +43,7 @@
                 <v-icon v-if="!word.isCommon">mdi-alpha-x</v-icon>
               </td>
               <td>
-                <v-icon color="red" >mdi-delete</v-icon>
+                <v-icon color="red">mdi-delete</v-icon>
                 <!-- @click="deleteWord(word.wordId)" -->
               </td>
             </tr>
