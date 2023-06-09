@@ -26,32 +26,28 @@
         </v-row>
 
         <v-table density="compact">
-        <thead>
-          <tr>
-            <th class="text-left">Word</th>
-            <th class="text-left">Is Common</th>
-            <th class="text-left">Is Used</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="word in words" :key="word.wordId">
-            <td>{{ word.text }}</td>
-            <td>
-              <v-checkbox
-                v-model="word.isCommon"
-              />
-              <v-icon v-if="word.isCommon" color="green"
-                >mdi-check</v-icon
-              >
-              <v-icon v-if="!word.isCommon">mdi-alpha-x</v-icon>
-            </td>
-            <td>
-              <v-icon color="red" @click="deleteWord(word.wordId)">mdi-delete</v-icon>
-            </td>
-          </tr>
-        </tbody>
-      </v-table>
+          <thead>
+            <tr>
+              <th class="text-left">Word</th>
+              <th class="text-left">Is Common</th>
+              <th class="text-left">Is Used</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="word in words" :key="word.wordId">
+              <td>{{ word.text }}</td>
+              <td>
+                <v-checkbox v-model="word.isCommon" />
+                <v-icon v-if="word.isCommon" color="green">mdi-check</v-icon>
+                <v-icon v-if="!word.isCommon">mdi-alpha-x</v-icon>
+              </td>
+              <td>
+                <v-icon color="red" @click="deleteWord(word.wordId)">mdi-delete</v-icon>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
       </v-card>
     </div>
   </v-parallax>
@@ -65,12 +61,12 @@ export default {
   data() {
     return {
       words: new Array<WordListItem>(),
-      options: reactive(new WordListOptions()),
+      options: reactive(new WordListOptions())
     }
   },
   watch: {
     options() {
-      console.log("something")
+      console.log('something')
       Axios.get('word/GetWordList', {
         params: this.options
       })
