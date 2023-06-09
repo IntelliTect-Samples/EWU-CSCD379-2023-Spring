@@ -93,7 +93,6 @@ import { watch } from 'vue'
 import type { SignInService } from '@/scripts/signInService'
 import { Services } from '@/scripts/services'
 
-const alert = ref(false)
 const errorInfo = ref('')
 const options = reactive(new WordListOptions())
 const list = reactive(new Array<WordListItem>())
@@ -126,7 +125,6 @@ function refreshList() {
       })
     })
     .catch((error) => {
-      alert.value = true
       errorInfo.value = error
       console.log(error)
     })
@@ -143,7 +141,6 @@ function deleteWord(id: number) {
       refreshList()
     })
     .catch((error) => {
-      alert.value = true
       errorInfo.value = error
       console.log(error)
     })
@@ -157,7 +154,6 @@ function updateWord(word: WordListItem) {
       refreshList()
     })
     .catch((error) => {
-      alert.value = true
       errorInfo.value = error
       console.log(error)
     })
@@ -185,7 +181,6 @@ function addWord() {
       }
     })
     .catch((error) => {
-      alert.value = true
       errorInfo.value = error
       console.log(error)
       alert('Could not add word. An error occurred.')
