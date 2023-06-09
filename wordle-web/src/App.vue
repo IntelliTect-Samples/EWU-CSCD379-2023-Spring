@@ -10,7 +10,6 @@
           </RouterLink>
         </v-app-bar-title>
         <v-spacer></v-spacer>
-        You are logged in as:
         <ActiveUser />
 
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>

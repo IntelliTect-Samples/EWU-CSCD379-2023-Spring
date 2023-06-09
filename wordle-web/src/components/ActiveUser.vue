@@ -1,7 +1,5 @@
 <template>
-  <v-btn @click="showDialog = true">
-    {{ newName }}
-  </v-btn>
+  <v-btn @click="showDialog = true"> Login </v-btn>
   <v-dialog :model-value="showDialog" @update:model-value="close">
     <v-card class="mx-auto" width="600px">
       <v-card-text>
@@ -40,6 +38,7 @@ const confirm = async () => {
   if (await signInService.signInAsync(newName.value, password.value)) close()
   else alert('Invalid username or password')
   showDialog.value = false
+  location.reload()
 }
 const close = () => {
   showDialog.value = false
