@@ -33,7 +33,6 @@ const password = ref('')
 
 const showDialog = ref(false)
 
-
 const confirm = async () => {
   if (await signInService.signInAsync(newName.value, password.value)) close()
   else alert('Invalid username or password')
