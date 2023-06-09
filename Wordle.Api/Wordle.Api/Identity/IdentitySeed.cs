@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Wordle.Api.Identity
@@ -19,7 +21,7 @@ namespace Wordle.Api.Identity
 
         private static async Task SeedUsersAsync(UserManager<AppUser> userManager)
         {
-            if(await userManager.Users.AnyAsync())
+            if(!await userManager.Users.AnyAsync())
             {
                 AppUser plainUser = new()
                 {
