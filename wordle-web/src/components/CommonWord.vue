@@ -3,7 +3,7 @@
     <v-card height="200px" variant="tonal">
       <v-card-text>
         <v-text-field
-          placeholder="Word thats too common"
+          placeholder="Word frequency to be changed"
           maxlength="5"
           @input="editText($event.target.value)"
           :messages="swap ? [`Word ${message} common words`] : []"
