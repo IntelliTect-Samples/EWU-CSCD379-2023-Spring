@@ -2,7 +2,7 @@
   <v-dialog :model-value="modelValue" @update:model-value="close" :max-width="300">
     <v-card>
       <div class="d-flex justify-center pa-2 bg-primary text-h6">
-        You {{ gameResult?.wasGameWon ? 'Win' : 'Loose' }}
+        You {{ gameResult?.wasGameWon ? 'Win' : 'Lose' }}
       </div>
       <v-card-text class="d-flex flex-column align-center">
         <v-row dense>

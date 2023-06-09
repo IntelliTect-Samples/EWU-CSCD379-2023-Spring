@@ -1,8 +1,11 @@
 import { Letter, LetterStatus } from './letter'
+import { WordsService } from './wordsService'
 
 export class Word {
   public letters = Array<Letter>()
   public isScored = false
+  public key =
+    Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
   constructor(word?: string | null, numberOfLetters: number = 5) {
     if (word) {
@@ -32,6 +35,10 @@ export class Word {
   // See if every letter is filled
   get isFilled() {
     return this.letters.every((l) => l.char !== '')
+  }
+
+  get isValidWord() {
+    return this.isFilled && WordsService.isValidWord(this.text)
   }
 
   // Clear the guess
