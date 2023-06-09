@@ -86,7 +86,7 @@ import ActiveUser from './components/ActiveUser.vue'
 import type { SignInService } from './scripts/signInService'
 import SignInDialog from './components/SignInDialog.vue'
 import { watch } from 'vue'
-
+//Updating for API
 // Provide the useDisplay to other components so that it can be used in testing.
 const display = reactive(useDisplay())
 provide(Services.Display, display)
