@@ -67,7 +67,6 @@ builder.Services.AddScoped<PlayerService>();
 
 // Identity Services
 builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
 // JWT Token setup
@@ -107,8 +106,7 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedWords(db);
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
-       scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-       scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+       scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>());
 }
 
 // Configure the HTTP request pipeline.

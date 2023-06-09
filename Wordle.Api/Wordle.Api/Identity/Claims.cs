@@ -5,5 +5,6 @@
         public const string MasterOfTheUniverse = "masterOfTheUniverse";
         public const string Birthdate = "birthdate";
         public const string Age = "age";
+        public const string UserName = "userName";
     }
 }

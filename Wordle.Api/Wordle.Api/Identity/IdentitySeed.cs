@@ -5,20 +5,9 @@ using Wordle.Api.Data;
 namespace Wordle.Api.Identity;
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager)
     {
-        await SeedRolesAsync(roleManager);
         await SeedWordEditorAsync(userManager);
-    }
-
-    // TO DO: remove admin b/c not using
-    private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
-    {
-        // Seed Roles
-        if (!await roleManager.RoleExistsAsync(Roles.Admin))
-        {
-            await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
-        }
     }
 
     private static async Task SeedWordEditorAsync(UserManager<AppUser> userManager)

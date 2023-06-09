@@ -50,6 +50,7 @@ public class TokenController : Controller
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("UserId", user.Id.ToString()),
+                new Claim(Claims.UserName, user.UserName!.ToString()),
                 new Claim(Claims.MasterOfTheUniverse, "MasterOfTheUniverse"),
             };
 
@@ -57,12 +58,6 @@ public class TokenController : Controller
             {
                 claims.Add(new Claim(Claims.Age, Math.Floor((DateTime.UtcNow - user.BirthDate.Value).TotalDays / 365).ToString()));
                 claims.Add(new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")));
-            }
-
-            var roles = await _userManager.GetRolesAsync(user);
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
             }
 
             var token = new JwtSecurityToken(
@@ -107,12 +102,6 @@ public class TokenController : Controller
         return BadRequest(result.Errors);
     }
 
-    [HttpGet("testadmin")]
-    [Authorize(Roles = Roles.Admin)]
-    public string TestAdmin()
-    {
-        return "Authorized as Admin";
-    }
 
     [HttpGet("TestEditWord")]
     [Authorize(Policy = Policies.EditWord)]

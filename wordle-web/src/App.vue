@@ -11,6 +11,10 @@
         </v-app-bar-title>
         <v-spacer></v-spacer>
 
+        <v-btn>
+          <span v-if="!signInService.isSignedIn">Not signed in</span>
+          <span v-else>{{ signInService.token.userName }}</span>
+        </v-btn>
         <v-btn icon="mdi-brightness-7" @click="switchTheme"></v-btn>
 
         <ActiveUser></ActiveUser>
@@ -59,10 +63,11 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { PlayerService } from './scripts/playerService'
+import type { SignInService } from './scripts/signInService'
 import { Services } from './scripts/services'
 import ActiveUser from './components/ActiveUser.vue'
 
@@ -72,6 +77,8 @@ provide(Services.Display, display)
 const playerService = new PlayerService()
 playerService.setupPlayerAsync()
 provide(Services.PlayerService, playerService)
+
+const signInService = inject(Services.SignInService) as SignInService
 
 const theme = useTheme()
 
@@ -90,4 +97,8 @@ function setLightTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
+
+setTimeout(() => {
+  signInService.signInAsync('CoolBeans', 'P@ssw0rd')
+}, 1000)
 </script>
