@@ -17,6 +17,9 @@
         <v-btn @click="confirm">OK</v-btn>
         <v-btn @click="close">Cancel</v-btn>
       </v-card-actions>
+      Here you go Meg<br />
+      MotU: He-Man Password: an0thErP@s$word123<br />
+      Regular user: Joe123 Password: s3curEp@ssw0rd123
     </v-card>
   </v-dialog>
 </template>
