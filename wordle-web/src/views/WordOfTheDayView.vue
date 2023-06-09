@@ -10,6 +10,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const date = computed(() => {
-  return route.query.date as string
+  let date = route.query.date as string
+  return date ?? null
 })
 </script>

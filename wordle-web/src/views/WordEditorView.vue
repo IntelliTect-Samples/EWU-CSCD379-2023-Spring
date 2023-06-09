@@ -1,5 +1,5 @@
 <template>
-  <v-table>
+  <v-table class="text-no-wrap justify-center mx-10 mt-10 rounded-lg elevation-2">
     <thead>
       <tr class="align-center">
         <th class="text-left" colspan="2">
@@ -27,8 +27,8 @@
       <tr class="align-center">
         <th class="text-center">Index</th>
         <th class="text-center">Word</th>
-        <th class="text-center">Well Known?</th>
-        <th class="text-center">Delete</th>
+        <th class="text-left">Well Known?</th>
+        <th class="text-left">Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -36,13 +36,11 @@
         <td class="text-center">{{ index + 1 }}</td>
         <td class="text-center">{{ word.text }}</td>
         <td class="align-center">
-          <!-- Toggle disable vs not disabled once the policy is implemented. -->
           <v-checkbox
             v-model="word.isCommon"
             @click="changeFlag(word.wordId, word.isCommon)"
           ></v-checkbox>
         </td>
-        <!-- Toggle the ability to change the flag and delete words once claims are implemented -->
         <td class="align-center">
           <v-btn variant="outlined" @click="deleteWord(word)"> Delete </v-btn>
         </td>
@@ -64,14 +62,6 @@
     </tbody>
   </v-table>
 </template>
-
-<!-- How can I make content centered? -->
-<!-- 
- <td style="display: flex; justify-content: center; align-items: center">
-          <v-btn variant="outlined"> Save </v-btn>
-        </td> -->
-
-<!-- class="d-flex  text-center align-center justify-center " -->
 
 <script lang="ts" setup>
 import Axios from 'axios'

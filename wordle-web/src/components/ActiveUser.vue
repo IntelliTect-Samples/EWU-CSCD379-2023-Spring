@@ -30,7 +30,7 @@
       </v-card-text>
       <v-card-actions class="ml-3 mb-3">
         <v-btn @click="signOut" v-if="signInService.isSignedIn" class="mt-3">Sign Out</v-btn>
-        <v-btn @click="signIn" v-else>Sign In</v-btn>
+        <v-btn @click="signIn" v-else @keyup.enter="signIn">Sign In</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
