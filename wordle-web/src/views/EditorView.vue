@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <h1 class="text-center">WORD EDITOR PAGE</h1>
+    <LoginPopout />
   </v-container>
 
   <v-container>
@@ -63,6 +64,7 @@
 
 <script setup lang="ts">
 import { EditorService } from '@/scripts/editorService'
+import LoginPopout from '@/components/LoginPopout.vue'
 import Axios from 'axios'
 import { onMounted, ref } from 'vue'
 
@@ -79,13 +81,19 @@ const deleteError = ref('')
 const remove = ref('')
 
 onMounted(async () => {
+  localStorage.clear()
+  console.log(localStorage.getItem('age'))
   allWords.value = await EditorService.getAllWords()
   allIsCommon.value = await EditorService.getAllIsCommon()
 })
 
 async function addWord() {
   let newWord = add.value.toLocaleLowerCase()
-  if (newWord.length != 5) {
+  if (localStorage.getItem('user') === null) {
+    addError.value = 'You need to be logged in.'
+  } else if (localStorage.getItem('age') == 'under') {
+    addError.value = 'You are not old enough. Use a different account.'
+  } else if (newWord.length != 5) {
     addError.value = 'Word length must be 5 characters.'
   } else if (allWords.value.includes(newWord)) {
     addError.value = 'Word already exists.'
@@ -105,7 +113,9 @@ async function addWord() {
 
 async function updateWord() {
   let newWord = update.value.toLocaleLowerCase()
-  if (newWord.length != 5) {
+  if (localStorage.getItem('user') === null) {
+    updateError.value = 'You need to be logged in.'
+  } else if (newWord.length != 5) {
     updateError.value = 'Word length must be 5 characters.'
   } else if (!allWords.value.includes(newWord)) {
     updateError.value = 'Word does not exist.'
@@ -125,7 +135,11 @@ async function updateWord() {
 
 async function removeWord() {
   let newWord = remove.value.toLocaleLowerCase()
-  if (newWord.length != 5) {
+  if (localStorage.getItem('user') === null) {
+    addError.value = 'You need to be logged in.'
+  } else if (localStorage.getItem('age') == 'under') {
+    addError.value = 'You are not old enough. Use a different account.'
+  } else if (newWord.length != 5) {
     deleteError.value = 'Word length must be 5 characters.'
   } else if (!allWords.value.includes(newWord)) {
     deleteError.value = 'Word does not exist.'

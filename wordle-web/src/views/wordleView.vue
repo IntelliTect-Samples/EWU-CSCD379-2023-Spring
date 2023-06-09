@@ -9,6 +9,7 @@
     <KeyBoard @letterClick="addChar" :guessedLetters="game.guessedLetters" />
     <v-row class="justify-center">
       <v-col cols="auto">
+        <input />
         <v-btn @click="checkGuess" @keyup.enter="checkGuess"> Check </v-btn>
       </v-col>
       <v-col cols="auto"> </v-col>
