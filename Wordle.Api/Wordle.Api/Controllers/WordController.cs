@@ -31,12 +31,14 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetSeveralWordsAsync(count);
         }
 
+        [Authorize(Policy = Policies.AgeReq)]
         [HttpPost]
         public async Task<Word> AddWord(string newWord, bool isCommon)
         {
             return await _wordService.AddWordAsync(newWord, isCommon);
         }
 
+        [Authorize(Policy = Policies.AgeReq)]
         [HttpPost("AddWordFromBody")]
         public async Task<Word> AddWordFromBody([FromBody] WordDto word)
         {
@@ -61,13 +63,14 @@ namespace Wordle.Api.Controllers
             return await _wordService.GetWords(pageNumber, pageSize, search);
         }
 
+        [Authorize(Policy = Policies.AgeReq)]
         [HttpDelete]
         public async Task<bool> DeleteWord(int wordId)
         {
             return await _wordService.DeleteWord(wordId);
         }
 
-        [Authorize(Policy = Policies.AgeReq)]
+        [Authorize]
         [HttpPost("UpdateWord")]
         public async Task<Word?> UpdateWord([FromBody] Word word)
         {

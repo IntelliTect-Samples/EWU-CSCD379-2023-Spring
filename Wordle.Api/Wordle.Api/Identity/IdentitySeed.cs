@@ -50,24 +50,6 @@ public static class IdentitySeed
                 await userManager.AddToRoleAsync(user, Roles.Special);
             }
         }
-
-        if (await userManager.FindByEmailAsync("Random@wordle.com") == null)
-        {
-            AppUser user = new AppUser
-            {
-                UserName = "Random@wordle.com",
-                Email = "Random@wordle.com",
-                Name = "Bob"
-            };
-
-            IdentityResult result = userManager.CreateAsync(user, "Password").Result;
-
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, Roles.Special);
-            }
-        }
-
     }
 
     public static async Task SeedRandomUserAsynnc(UserManager<AppUser> userManager)
