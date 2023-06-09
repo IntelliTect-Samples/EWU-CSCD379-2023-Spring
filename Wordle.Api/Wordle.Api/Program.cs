@@ -129,7 +129,7 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
 
 // Add a redirect for the root URL
 var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://purple-rock-0b124a41e.3.azurestaticapps.net/";
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://http://white-flower-0e3bf9b1e.3.azurestaticapps.net/";
 var options = new RewriteOptions()
         .AddRedirect("^$", redirectRootUrl, 302);
 app.UseRewriter(options);
