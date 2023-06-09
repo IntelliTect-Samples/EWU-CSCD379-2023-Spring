@@ -78,20 +78,9 @@ namespace Wordle.Api.Services
             }
         }
 
-        public async Task<string[]> GetAllWords() 
+        public async Task<List<Word>> GetAllWords() 
         {
-            var words = await _db.Words.OrderBy(word => word.Text).ToArrayAsync();
-
-            var wordArray = new string[words.Length];
-            var count = 0;
-
-            foreach (var word in words) 
-            {
-                wordArray[count] = $"{words[count].Text}";
-                count++;
-            }
-
-            return wordArray;
+            return await _db.Words.OrderBy(word => word.Text).ToListAsync();
         }
         public async Task<string[]> GetAllIsCommon()
         {
