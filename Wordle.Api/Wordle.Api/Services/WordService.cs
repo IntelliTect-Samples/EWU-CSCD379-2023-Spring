@@ -26,19 +26,23 @@ public class WordService
         return word;
     }
 
-    public async Task<IEnumerable<Word>> GetSeveralWordsAsync(int? count)
+    public async Task<SeveralWordsDto> GetSeveralWordsAsync(int wordsPerPage, string? wordSegment, int pageNumber)
     {
-        count ??= 10;
-        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-        totalCount -= count.Value;
-        int index = new Random().Next(totalCount);
+        if (wordsPerPage == 0)
+        {
+            wordsPerPage = 10;
+        }
+        var upperBound = wordsPerPage * pageNumber;
+        wordSegment ??= "";
         var words = await _db.Words
-          .Where(word => word.IsCommon)
-          .Skip(index)
-          .Take(count.Value)
-          .OrderByDescending(w => w.Text)
+          .Where(word => word.Text.StartsWith(wordSegment))
+          .OrderBy(w => w.Text).Skip(upperBound - wordsPerPage).Take(wordsPerPage)
           .ToListAsync();
-        return words;
+        var pageCount = (_db.Words.Where(word => word.Text.StartsWith(wordSegment)).Count() + wordsPerPage - 1) / wordsPerPage;
+        var output = new SeveralWordsDto();
+        output.Words = words;
+        output.pageCount = pageCount;
+        return output;
     }
 
     public async Task<Word> AddWordAsync(string? newWord, bool isCommon)
@@ -65,38 +69,24 @@ public class WordService
         return word;
     }
 
-    public async Task<Word> DeleteWordAsync(string? targetWord)
+    public async Task<Word> DeleteWordAsync(string wordForDelete)
     {
-        if (string.IsNullOrEmpty(targetWord) || targetWord.Length != 5)
-        {
-            throw new ArgumentException("Word must be 5 characters long");
-        }
 
-        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == targetWord);
+        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == wordForDelete);
+
         if (word != null)
         {
             _db.Words.Remove(word);
         }
+        else
+        {
+            throw new ArgumentException("word doesnt exist");
+        }
+
         await _db.SaveChangesAsync();
         return word;
     }
 
-    public async Task<Word> SetIsCommonAsync(string? targetWord, bool isCommon)
-    {
-        if (string.IsNullOrEmpty(targetWord) || targetWord.Length != 5)
-        {
-            throw new ArgumentException("Word must be 5 characters long");
-        }
-
-        var word = await _db.Words.FirstOrDefaultAsync(w => w.Text == targetWord);
-        if (word != null)
-        {
-            word.IsCommon = isCommon;
-        }
-        await _db.SaveChangesAsync();
-        return word;
-
-    }
     public async Task<DateWord> GetWordOfTheDayAsync(TimeSpan offset, DateTime? date = null)
     {
         if (date is null)
@@ -172,7 +162,9 @@ public class WordService
           })
           .ToListAsync();
 
-       
+        //Another way to do this using GroupBy
+        //This algorithm doesn't handle days without PlayerGames. 
+        // This would need to have the stats inserted into the collection after the fact.
         var result2 = await _db.PlayerGames
           .Include(f => f.DateWord)
           .Where(f => f.DateWord != null &&
@@ -204,23 +196,5 @@ public class WordService
             result = await GetWordOfTheDayStatsAsync(date, daysBack);
         }
         return result;
-    }
-
-    public async Task<IEnumerable<Word>> GetPaginatedWordsAsync(int page = 1, int count = 10, string start = "")
-    {
-        if (page < 1) page = 1;
-        if (count < 1 || count > 100) count = 10;
-        page--;
-        var index = page * count;
-
-        var totalCount = await _db.Words.CountAsync(word => word.IsCommon);
-        totalCount -= count;
-        var words = await _db.Words
-          .Where(w => w.Text.StartsWith(start))
-          .OrderBy(w => w.Text)
-          .Skip(index)
-          .Take(count)
-          .ToListAsync();
-        return words;
     }
 }

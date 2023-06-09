@@ -1,16 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.ComponentModel;
-using Wordle.Api.Data;
-using Wordle.Api.Services;
-//for auth
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using System.ComponentModel;
 using System.Text;
+using Wordle.Api.Data;
 using Wordle.Api.Identity;
+using Wordle.Api.Services;
 
 var MyAllowAllOrigins = "_myAllowAllOrigins";
 
@@ -46,19 +45,19 @@ builder.Services.AddSwaggerGen(
             Scheme = "Bearer"
         });
         config.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
         {
+            new OpenApiSecurityScheme
             {
-                new OpenApiSecurityScheme
+                Reference = new OpenApiReference
                 {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                new List<string>()
-            }
-        });
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new List<string>()
+        }
+    });
     }
 );
 
@@ -70,12 +69,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<WordService>();
 builder.Services.AddScoped<PlayerService>();
 
-//new for auth
-
+//Identity Services
 builder.Services.AddIdentityCore<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>();
 
+//JWT Token setup
 JwtConfiguration jwtConfiguration = builder.Configuration
     .GetSection("Jwt").Get<JwtConfiguration>() ??
     throw new Exception("JWT configuration not specified");
@@ -97,9 +96,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+//Add Policies
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Policies.MasterOfTheUniverse, Policies.MasterOfTheUniversePolicy);
+    options.AddPolicy(Policies.RandomAdmin, Policies.EditWordPolicy);
+    options.AddPolicy("IsGrantPolicy", policy => policy.RequireRole("Grant"));
 });
 
 // Actually build the app so we can configure the pipeline next
@@ -116,8 +117,7 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>()
-    );
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
 }
 
 // Configure the HTTP request pipeline.
@@ -129,7 +129,7 @@ if (app.Environment.IsDevelopment() || app.Configuration.GetValue<bool>("UseSwag
 
 // Add a redirect for the root URL
 var redirectRootUrl = app.Configuration.GetValue<string>("RedirectRootUrl", "");
-if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://victorious-bay-0650cb41e.3.azurestaticapps.net/";
+if (string.IsNullOrEmpty(redirectRootUrl)) redirectRootUrl = "https://purple-rock-0b124a41e.3.azurestaticapps.net/";
 var options = new RewriteOptions()
         .AddRedirect("^$", redirectRootUrl, 302);
 app.UseRewriter(options);

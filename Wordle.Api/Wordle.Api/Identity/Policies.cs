@@ -1,33 +1,25 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 
 namespace Wordle.Api.Identity;
-
 public static class Policies
 {
-    public const string MasterOfTheUniverse = "MasterOfTheUniverse";
-    public static void MasterOfTheUniversePolicy(AuthorizationPolicyBuilder policy)
+    public const string RandomAdmin = "RandomAdmin";
+
+    public static void EditWordPolicy(AuthorizationPolicyBuilder policy)
     {
+        policy.RequireClaim(Claims.MotU);
         policy.RequireAssertion(context =>
         {
-            var master = context.User.Claims.FirstOrDefault(c => c.Type == Claims.MasterOfTheUniverse);
-            var birthday = context.User.Claims.FirstOrDefault(c => c.Type == Claims.DateOfBirth);
-            if (master != null && birthday != null && Boolean.Parse(master.Value))
+            var ageString = context.User.Claims.FirstOrDefault(f => f.Type == Claims.Age);
+            if (ageString != null)
             {
-                var birthdayDate = DateTime.Parse(birthday.Value).Date;
-                var age = DateTime.Today.Subtract(birthdayDate);
-                if (age.TotalDays >= 7670)//21 year in days
+                int age;
+                if (int.TryParse(ageString.Value, out age))
                 {
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    return age >= 21;
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         });
     }
 }
