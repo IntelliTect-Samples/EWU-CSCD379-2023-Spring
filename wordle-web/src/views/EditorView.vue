@@ -6,60 +6,85 @@
 
         <v-row>
           <v-col cols="12" lg="6">
-            <v-text-field label="Search"></v-text-field>
+            <v-text-field v-model="options.search" label="Search"></v-text-field>
           </v-col>
           <v-col cols="12" lg="3">
-            <v-select label="Page Size" :items="[10, 25, 50, 100]" variant="outlined"></v-select
+            <v-select
+              v-model="options.pageSize"
+              label="Page Size"
+              :items="[10, 25, 50, 100]"
+              variant="outlined"
+            ></v-select
           ></v-col>
           <v-col cols="12" lg="3"
-            ><v-text-field label="Page No." type="number"></v-text-field
+            ><v-text-field
+              v-model="options.pageNumber"
+              label="Page No."
+              type="number"
+            ></v-text-field
           ></v-col>
         </v-row>
 
         <v-table density="compact">
-          <thead>
-            <tr>
-              <th>Word</th>
-              <th>Is Common</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- <tr v-for="word in list" :key="word.wordId">
-              <td>{{ word.text }}</td>
-              <td>
-                <v-checkbox
-                  v-model="word.isCommon"
-                  @change="updateWord(word)"
-                />
-                <v-icon v-if="word.isCommon" color="green"
-                  >mdi-check</v-icon
-                >
-                <v-icon v-if="!word.isCommon">mdi-alpha-x</v-icon>
-              </td>
-              <td>
-                <v-icon color="red" @click="deleteWord(word.wordId)">mdi-delete</v-icon>
-              </td>
-            </tr> -->
-          </tbody>
-        </v-table>
+        <thead>
+          <tr>
+            <th class="text-left">Word</th>
+            <th class="text-left">Is Common</th>
+            <th class="text-left">Is Used</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="word in words" :key="word.wordId">
+            <td>{{ word.text }}</td>
+            <td>
+              <v-checkbox
+                v-model="word.isCommon"
+              />
+              <v-icon v-if="word.isCommon" color="green"
+                >mdi-check</v-icon
+              >
+              <v-icon v-if="!word.isCommon">mdi-alpha-x</v-icon>
+            </td>
+            <td>
+              <v-icon color="red" @click="deleteWord(word.wordId)">mdi-delete</v-icon>
+            </td>
+          </tr>
+        </tbody>
+      </v-table>
       </v-card>
     </div>
   </v-parallax>
 </template>
-<!-- <script lang="ts">
-import { reactive, watch } from 'vue'
-import { WLItem, WLOptions } from '../scripts/wordEditor'
+<script lang="ts">
+import Axios from 'axios'
+import { WordListOptions, WordListItem } from '@/scripts/wordEditorStuff'
+import { reactive } from 'vue'
 
-const options = reactive(new WLOptions())
-const wordList = reactive(new Array<WLItem>())
-
-watch(options, () => {
-  refreshList()
-})
-refreshList()
-
-function refreshList() {
-  console.log('A')
+export default {
+  data() {
+    return {
+      words: new Array<WordListItem>(),
+      options: reactive(new WordListOptions()),
+    }
+  },
+  watch: {
+    options() {
+      console.log("something")
+      Axios.get('word/GetWordList', {
+        params: this.options
+      })
+        .then((response) => {
+          this.words.length = 0
+          response.data.list.forEach((item: WordListItem) => {
+            this.words.push(item)
+          })
+          this.options.pageNumber = response.data.pageNumber
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 }
-</script> -->
+</script>
