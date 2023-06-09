@@ -78,9 +78,9 @@ const newWord = ref<Word>({
 })
 const permissions = ref(false)
 
-onMounted(() => {
+onMounted(async () => {
   getWords(1)
-  permissions.value = canCreateDelete()
+  permissions.value = await canCreateDelete()
 })
 
 watch(searchString, (newValue) => {
