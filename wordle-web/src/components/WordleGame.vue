@@ -84,7 +84,7 @@ const wordOfTheDayDate: Ref<Date | null> = ref(null)
 
 const props = defineProps<{
   isWordOfTheDay: boolean
-  wordOfTheDayDate: string | undefined
+  wordOfTheDayDate: string | null
 }>()
 
 watch(
