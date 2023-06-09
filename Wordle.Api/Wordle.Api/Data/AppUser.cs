@@ -8,4 +8,7 @@ public class AppUser : IdentityUser
     public double AverageAttempts { get; set; }
     public int AverageSecondsPerGame { get; set; }
 
+    public DateTime? BirthDate { get; set; }
+
+
 }

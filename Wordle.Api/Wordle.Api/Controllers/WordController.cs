@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wordle.Api.Data;
 using Wordle.Api.Dtos;
+using Wordle.Api.Identity;
 using Wordle.Api.Services;
 
 namespace Wordle.Api.Controllers
@@ -66,7 +67,7 @@ namespace Wordle.Api.Controllers
             return await _wordService.DeleteWord(wordId);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = Policies.AgeReq)]
         [HttpPost("UpdateWord")]
         public async Task<Word?> UpdateWord([FromBody] Word word)
         {

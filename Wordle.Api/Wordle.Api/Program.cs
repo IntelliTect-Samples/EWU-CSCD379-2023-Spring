@@ -98,6 +98,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy(Policies.RandomAdmin, Policies.RandomAdminPolicy);
+    options.AddPolicy(Policies.AgeReq, Policies.AgeReqPolicy);
+    options.AddPolicy(Policies.MoTUReq, Policies.MoTUReqPolicy);
     options.AddPolicy("Universe", policy => policy.RequireRole("RulerOfTheUniverse"));
 });
 
@@ -115,7 +117,8 @@ using (var scope = app.Services.CreateScope())
     Seeder.SeedPlayers(db);
     await IdentitySeed.SeedAsync(
         scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>(),
-        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>());
+        scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>(),
+        scope.ServiceProvider.GetRequiredService<AppDbContext>());
 }
 
 // Configure the HTTP request pipeline.

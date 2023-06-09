@@ -6,26 +6,40 @@
         <v-list density="compact">
           <v-list-subheader>Word</v-list-subheader>
 
-          <v-list-item v-for="(item, i) in list" :key="i" :value="item" active-color="primary">
+          <v-card-item v-for="(item, i) in list" :key="i" :value="item" active-color="primary">
             <template v-slot:prepend>
               <v-icon color="red" @click="deleteWord(list[i].wordId)">mdi-delete</v-icon>
             </template>
 
-            <div class="d-flex space-evenly-between flex-row">
+            <div class="d-flex space-evenly-between flex-row" v-if="!signInService.isSignedIn">
               <h2 class="pr-15 pl-5 pt-5" v-text="item.text"></h2>
-
               <v-checkbox
-                @click="updateWord(item)"
                 v-model="item.isCommon"
+                @click="updateWord(item)"
+                label="Is Word Common"
+                disabled
+              ></v-checkbox>
+              <v-checkbox
+                v-model="item.isUsed"
+                @click="updateWord(item)"
+                label="Is Word Used"
+                disabled
+              ></v-checkbox>
+            </div>
+            <div class="d-flex space-evenly-between flex-row" v-if="signInService.isSignedIn">
+              <h2 class="pr-15 pl-5 pt-5" v-text="item.text"></h2>
+              <v-checkbox
+                v-model="item.isCommon"
+                @click="updateWord(item)"
                 label="Is Word Common"
               ></v-checkbox>
               <v-checkbox
-                @click="updateWord(item)"
                 v-model="item.isUsed"
+                @click="updateWord(item)"
                 label="Is Word Used"
               ></v-checkbox>
             </div>
-          </v-list-item>
+          </v-card-item>
         </v-list>
       </v-table>
       <v-row class="d-flex justify-center">
@@ -72,16 +86,16 @@
 
 <script setup lang="ts">
 import Axios from 'axios'
-// import { inject, reactive } from 'vue'
-import { reactive } from 'vue'
+import { inject, reactive } from 'vue'
+// import { reactive } from 'vue'
 import { WordListOptions, WordListItem } from '@/scripts/wordEdit'
 import { watch } from 'vue'
-// import type { SignInService } from '@/scripts/signInService'
-// import { Services } from '@/scripts/services'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
 
 const options = reactive(new WordListOptions())
 const list = reactive(new Array<WordListItem>())
-// const signInService = inject(Services.SignInService) as SignInService
+const signInService = inject(Services.SignInService) as SignInService
 var oldString = ''
 
 watch(options, () => {
