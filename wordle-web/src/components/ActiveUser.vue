@@ -1,16 +1,16 @@
 <template>
   <v-btn @click="showDialog = true">
-    {{ playerService.player.name }}
+    {{ newName }}
   </v-btn>
-  <v-dialog :model-value="showDialog" @update:model-value="close" persistent>
+  <v-dialog :model-value="showDialog" @update:model-value="close">
     <v-card class="mx-auto" width="600px">
       <v-card-text>
         Username:
-        <v-text-field ref="$input" v-model="newName" @keyup.enter="confirm" />
+        <v-text-field v-model="newName" />
       </v-card-text>
       <v-card-text>
         Password:
-        <v-text-field ref="$input" v-model="password" />
+        <v-text-field v-model="password" />
       </v-card-text>
       <v-card-actions>
         <v-spacer> </v-spacer>
@@ -22,34 +22,20 @@
 </template>
 
 <script lang="ts" setup>
-import type { PlayerService } from '@/scripts/playerService'
 import { Services } from '@/scripts/services'
 import type { SignInService } from '@/scripts/signInService'
-import { nextTick } from 'vue'
-import { watch } from 'vue'
 import { inject } from 'vue'
 import { ref } from 'vue'
 
 const signInService = inject(Services.SignInService) as SignInService
-const playerService = inject(Services.PlayerService) as PlayerService
-let newName = playerService.player.name
-let password = ''
+const newName = ref('')
+const password = ref('')
 
 const showDialog = ref(false)
-const $input = ref<HTMLInputElement>()
 
-watch(showDialog, (value) => {
-  if (value) {
-    nextTick(() => {
-      $input.value!.focus()
-      $input.value!.select()
-    })
-  }
-})
 
 const confirm = async () => {
-  await playerService.ChangeNameAsync(newName)
-  if (await signInService.signInAsync(newName, password)) close()
+  if (await signInService.signInAsync(newName.value, password.value)) close()
   else alert('Invalid username or password')
   showDialog.value = false
 }

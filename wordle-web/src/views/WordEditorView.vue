@@ -186,11 +186,13 @@ function changeCommonFlag(wordId: number, value: boolean) {
     })
 }
 
-function canCreateDelete(): boolean {
-  let result = false
-  Axios.get('/Token/CanCreateDelete').then((response) => {
-    result = response.data
-  })
-  return result
+async function canCreateDelete(): Promise<boolean> {
+  try {
+    const response = await Axios.get('/Token/CanCreateDelete');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }
 </script>
