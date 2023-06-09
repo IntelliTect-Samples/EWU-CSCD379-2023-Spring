@@ -31,9 +31,6 @@ export class SignInService {
         password: password
       })
       this.setToken(result.data.token)
-      //   Axios.get('Token/TestEditWord').then((result) => {
-      //     console.log(result)
-      //   })
       this._isSignedIn = true
       return true
     } catch (err) {
@@ -68,6 +65,14 @@ export class SignInService {
       const payload = JSON.parse(window.atob(parts[1]))
       this._token = Object.assign(new WordleToken(), payload)
     }
+  }
+
+  public canEditWords() {
+    const ageNumber = parseInt(this._token.age)
+    if (ageNumber >= 21 && this._token.masterOfTheUniverse) {
+      return true
+    }
+    return false
   }
 
   public get rawToken(): string | null {

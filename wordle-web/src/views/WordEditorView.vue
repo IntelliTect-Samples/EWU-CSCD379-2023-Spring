@@ -13,6 +13,7 @@
         </th>
         <th>
           <v-text-field
+            v-if="signInService.canEditWords()"
             v-model="newWord"
             variant="outlined"
             label="New Word"
@@ -20,7 +21,9 @@
             hide-details
           ></v-text-field>
         </th>
-        <th><v-btn @click="addWord(newWord)"> Add Word </v-btn></th>
+        <th>
+          <v-btn v-if="signInService.canEditWords()" @click="addWord(newWord)"> Add Word </v-btn>
+        </th>
       </tr>
     </thead>
     <thead>
@@ -38,13 +41,20 @@
         <td class="align-center">
           <!-- Toggle disable vs not disabled once the policy is implemented. -->
           <v-checkbox
+            :disabled="!signInService.isSignedIn"
             v-model="word.isCommon"
             @click="changeFlag(word.wordId, word.isCommon)"
           ></v-checkbox>
         </td>
         <!-- Toggle the ability to change the flag and delete words once claims are implemented -->
         <td class="align-center">
-          <v-btn variant="outlined" @click="deleteWord(word)"> Delete </v-btn>
+          <v-btn
+            :disabled="!signInService.canEditWords()"
+            variant="outlined"
+            @click="deleteWord(word)"
+          >
+            Delete
+          </v-btn>
         </td>
       </tr>
       <tr>
@@ -75,9 +85,13 @@
 
 <script lang="ts" setup>
 import Axios from 'axios'
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import type { WordEntry } from '../scripts/wordEntry'
 import { watch } from 'vue'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
+
+const signInService = inject(Services.SignInService) as SignInService
 
 const wordList = ref<WordEntry[]>([])
 let searchField = ref('')
