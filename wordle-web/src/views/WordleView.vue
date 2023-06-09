@@ -1,5 +1,5 @@
 <template>
-  <WordleGame :isWordOfTheDay="false"></WordleGame>
+  <WordleGame :isWordOfTheDay="false" :wordOfTheDayDate="null"></WordleGame>
 </template>
 
 <script setup lang="ts">
