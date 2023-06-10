@@ -147,20 +147,20 @@ Axios.get('Word/WordList?pageNumber=0').then((response) => {
 })
 
 function nextPage() {
-if(words.value.length == 10){
-  page++
-  if (searchWord.value === '') {
-    Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
-      words.value = response.data as WordHelper[]
-    })
-  } else {
-    Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
-      (response) => {
+  if (words.value.length == 10) {
+    page++
+    if (searchWord.value === '') {
+      Axios.get('Word/WordList?pageNumber=' + page).then((response) => {
         words.value = response.data as WordHelper[]
-      }
-    )
+      })
+    } else {
+      Axios.get('Word/WordList?pageNumber=' + page + '&searchWord=' + searchWord.value).then(
+        (response) => {
+          words.value = response.data as WordHelper[]
+        }
+      )
+    }
   }
-}
 }
 
 function previousPage() {
