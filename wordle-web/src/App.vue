@@ -49,14 +49,14 @@
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
-         <v-list-item>
+            <v-list-item>
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
               <v-list-item-title v-if="!signInService.isSignedIn" @click="router.push('/login')">
                 Sign In
-            </v-list-item-title>
-          </v-list-item>
+              </v-list-item-title>
+            </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import {inject, reactive } from 'vue'
+import { inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'

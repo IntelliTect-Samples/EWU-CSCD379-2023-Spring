@@ -3,12 +3,8 @@
     <v-card style="width: 500px">
       <v-card-title>Login</v-card-title>
       <v-card-item>
-        <v-text-field ref="$input" label="User Name" v-model="username" ></v-text-field>
-        <v-text-field
-          v-model="password"
-          type="password"
-          label="Password:"
-        ></v-text-field>
+        <v-text-field ref="$input" label="User Name" v-model="username"></v-text-field>
+        <v-text-field v-model="password" type="password" label="Password:"></v-text-field>
       </v-card-item>
       <v-card-actions style="display: flex; justify-content: right">
         <v-btn @click="signOut" v-if="signInService.isSignedIn" class="mt-3">Sign Out</v-btn>
@@ -23,11 +19,8 @@ import type { SignInService } from '@/scripts/signInService'
 import { reactive } from 'vue'
 import { inject } from 'vue'
 import { ref } from 'vue'
-import { useDisplay } from 'vuetify/lib/framework.mjs'
+
 const signInService = inject(Services.SignInService) as SignInService
-const display = inject(Services.Display, () => reactive(useDisplay())) as unknown as ReturnType<
-  typeof useDisplay
->
 // refs for storing the username and password
 const username = ref('')
 const password = ref('')

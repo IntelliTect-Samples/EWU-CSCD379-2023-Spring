@@ -4,7 +4,6 @@
     <v-card-text>
       <v-text-field
         v-if="signInService.isSignedIn"
-        const signInService = inject(Services.SignInService) as SignInService
         @input="editText($event.target.value)"
         placeholder="enter word to change frequency in word list..."
         :messages="swapped ? [`Word ${message} common`] : []"
@@ -27,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { inject,ref } from 'vue'
+import { inject, ref } from 'vue'
 import Axios from 'axios'
 import type { SignInService } from '@/scripts/signInService'
 import { Services } from '@/scripts/services'

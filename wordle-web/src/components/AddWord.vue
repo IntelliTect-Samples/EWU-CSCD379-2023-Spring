@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import Axios from 'axios'
-import { inject,ref } from 'vue'
+import { inject, ref } from 'vue'
 import type { SignInService } from '@/scripts/signInService'
 import { Services } from '@/scripts/services'
 

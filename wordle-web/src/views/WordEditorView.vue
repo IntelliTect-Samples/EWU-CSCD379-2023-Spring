@@ -7,7 +7,7 @@
         </div>
       </v-col>
       <v-col cols="20" style="display: flex; justify-content: center">
-        <v-card style=" padding: 10px; display: flex; flex-direction: column; width: 1000px">
+        <v-card style="padding: 10px; display: flex; flex-direction: column; width: 1000px">
           <DeleteWord />
           <AddWord />
           <CommonWord />
