@@ -3,6 +3,7 @@
   <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
       <v-text-field
+        v-if="signInService.canEditWords()"
         @input="editText($event.target.value)"
         placeholder="enter word to add to word list..."
         :messages="added ? [`Word has been added`] : []"
@@ -10,6 +11,7 @@
         maxlength="5"
         variant="outlined"
         style="display: flex; flex-direction: column; flex-grow: 1; max-width: 500px"
+        hide-details
       />
     </v-card-text>
     <v-card-actions>
@@ -26,7 +28,11 @@
 
 <script setup lang="ts">
 import Axios from 'axios'
-import { ref } from 'vue'
+import { inject,ref } from 'vue'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
+
+const signInService = inject(Services.SignInService) as SignInService
 const isAlphabetical = /^[A-Za-z]+$/
 const added = ref<boolean>(false)
 const addedError = ref<boolean>(false)
