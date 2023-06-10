@@ -1,49 +1,59 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using Wordle.Api.Data;
 
 namespace Wordle.Api.Identity;
 public static class IdentitySeed
 {
-    public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+    public static async Task SeedAsync(UserManager<AppUser> userManager)
     {
-        // Seed Roles
-        await SeedRolesAsync(roleManager);
-
-        // Seed Admin User
-        await SeedAdminUserAsync(userManager);
+        await SeedWordEditorAsync(userManager);
     }
 
-    private static async Task SeedRolesAsync(RoleManager<IdentityRole> roleManager)
+    private static async Task SeedWordEditorAsync(UserManager<AppUser> userManager)
     {
-        // Seed Roles
-        if (!await roleManager.RoleExistsAsync(Roles.Admin))
+        // Seed user that can edit words
+        if (await userManager.FindByNameAsync("Can Edit Word") == null)
         {
-            await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
-        }
-        if (!await roleManager.RoleExistsAsync(Roles.Special))
-        {
-            await roleManager.CreateAsync(new IdentityRole(Roles.Special));
-        }
-    }
-
-    private static async Task SeedAdminUserAsync(UserManager<AppUser> userManager)
-    {
-        // Seed Admin User
-        if (await userManager.FindByEmailAsync("Admin@intellitect.com") == null)
-        {
-            AppUser user = new AppUser
+            AppUser user = new()
             {
-                UserName = "Admin@intellitect.com",
-                Email = "Admin@intellitect.com",
-                Name = "Admin",
+                UserName = "MasterUser",
+                Name = "Can Edit Word",
+                BirthDate = new DateTime(1995, 6, 12)
             };
 
-            IdentityResult result = userManager.CreateAsync(user, "P@ssw0rd123").Result;
+            IdentityResult result = userManager.CreateAsync(user, "Password321!").Result;
 
             if (result.Succeeded)
             {
-                await userManager.AddToRoleAsync(user, Roles.Admin);
-                await userManager.AddToRoleAsync(user, Roles.Special);
+                var ClaimsList = new List<Claim>()
+                {
+                    new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")),
+                    new Claim(Claims.MasterOfTheUniverse, true.ToString())
+                };
+                await userManager.AddClaimsAsync(user, ClaimsList);
+            }
+        }
+
+        // Seed user that cannot edit words
+        if (await userManager.FindByNameAsync("Cannot Edit Word") == null)
+        {
+            AppUser user = new()
+            {
+                UserName = "joe",
+                Name = "Cannot Edit Word",
+                BirthDate = new DateTime(2015, 6, 10)
+            };
+
+            IdentityResult result = userManager.CreateAsync(user, "Password321!").Result;
+
+            if (result.Succeeded)
+            {
+                var ClaimsList = new List<Claim>()
+                {
+                    new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")),
+                };
+                await userManager.AddClaimsAsync(user, ClaimsList);
             }
         }
     }

@@ -6,8 +6,8 @@
           <h3 class="text-h3">Word Tools</h3>
         </div>
       </v-col>
-      <v-col cols="12" style="display: flex; justify-content: center">
-        <v-card style="padding: 10px; display: flex; flex-direction: column; width: 500px">
+      <v-col cols="20" style="display: flex; justify-content: center">
+        <v-card style=" padding: 10px; display: flex; flex-direction: column; width: 1000px">
           <DeleteWord />
           <AddWord />
           <CommonWord />

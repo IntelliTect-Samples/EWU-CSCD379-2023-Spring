@@ -49,14 +49,15 @@ public class TokenController : Controller
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(Claims.UserId, user.Id.ToString()),
-                new Claim(Claims.Random, (new Random()).NextDouble().ToString()),
-                new Claim(Claims.UserName, user.UserName!.ToString().Substring(0,user.UserName.ToString().IndexOf("@"))),
+                new Claim("UserId", user.Id.ToString()),
+                new Claim(Claims.UserName, user.UserName!.ToString()),
+                new Claim(Claims.MasterOfTheUniverse, "MasterOfTheUniverse"),
             };
-            var roles = await _userManager.GetRolesAsync(user);
-            foreach (var role in roles)
+
+            if (user.BirthDate.HasValue)
             {
-                claims.Add(new Claim(ClaimTypes.Role, role));
+                claims.Add(new Claim(Claims.Age, Math.Floor((DateTime.UtcNow - user.BirthDate.Value).TotalDays / 365).ToString()));
+                claims.Add(new Claim(Claims.Birthdate, user.BirthDate.Value.ToString("MM/dd/yyyy")));
             }
 
             var token = new JwtSecurityToken(
@@ -73,7 +74,7 @@ public class TokenController : Controller
     }
 
     [HttpPost("CreateUser")]
-    public async Task<IActionResult> CreateUser([FromBody]CreateUser createUser)
+    public async Task<IActionResult> CreateUser([FromBody] CreateUser createUser)
     {
         if (string.IsNullOrEmpty(createUser.Username))
         {
@@ -101,35 +102,12 @@ public class TokenController : Controller
         return BadRequest(result.Errors);
     }
 
-    [HttpGet("test")]
-    [Authorize]
-    public string Test()
-    {
-        return "something";
-    }
 
-    [HttpGet("testadmin")]
-    [Authorize(Roles=Roles.Admin)]
-    public string TestAdmin()
+    [HttpGet("TestEditWord")]
+    [Authorize(Policy = Policies.EditWord)]
+    public string TestEditWord()
     {
-        return "Authorized as Admin";
-    }
-
-    [HttpGet("testruleroftheuniverse")]
-    [Authorize(Roles="RulerOfTheUniverse,Meg")]
-    public string TestRulerOfTheUniverseOrMeg()
-    {
-        return "Authorized as Ruler of the Universe or Meg";
-    }
-
-    [HttpGet("testrandomadmin")]
-    [Authorize(Policy=Policies.RandomAdmin)]
-    public string TestRandomAdmin()
-    {
-        return $"Authorized randomly as Random Admin with {User.Claims.First(c => c.Type == Claims.Random).Value}";
+        return $"Authorized to edit words ${string.Join(", ", User.Claims.ToList())}";
     }
 
 }
-
-
-

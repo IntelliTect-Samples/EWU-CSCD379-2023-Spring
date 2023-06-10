@@ -3,17 +3,21 @@
 namespace Wordle.Api.Identity;
 public static class Policies
 {
-    public const string RandomAdmin = "RandomAdmin";
+    public const string EditWord = "EditWord";
 
-    public static void RandomAdminPolicy(AuthorizationPolicyBuilder policy)
+    public static void EditWordPolicy(AuthorizationPolicyBuilder policy)
     {
-        policy.RequireRole(Roles.Admin);
+        policy.RequireClaim(Claims.MasterOfTheUniverse);
         policy.RequireAssertion(context =>
         {
-            var random = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Random);
-            if (Double.TryParse(random?.Value, out double result))
+            var ageString = context.User.Claims.FirstOrDefault(c => c.Type == Claims.Age);
+            if (ageString != null)
             {
-                return result > 0.5;
+                int age;
+                if (int.TryParse(ageString.Value, out age))
+                {
+                    return age >= 21;
+                }
             }
             return false;
         });

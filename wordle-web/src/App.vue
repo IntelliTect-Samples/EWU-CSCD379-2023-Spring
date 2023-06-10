@@ -49,14 +49,14 @@
                 <RouterLink :to="{ name: 'about' }"> About </RouterLink>
               </v-list-item-title>
             </v-list-item>
-            <v-list-item>
+         <v-list-item>
               <v-list-item-title v-if="signInService.isSignedIn" @click="signInService.signOut()">
                 Sign Out
               </v-list-item-title>
               <v-list-item-title v-if="!signInService.isSignedIn" @click="router.push('/login')">
                 Sign In
-              </v-list-item-title>
-            </v-list-item>
+            </v-list-item-title>
+          </v-list-item>
           </v-list>
         </v-menu>
       </template>
@@ -69,18 +69,22 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify/lib/framework.mjs'
-import { inject, reactive, ref } from 'vue'
+import {inject, reactive } from 'vue'
 import { useDisplay } from 'vuetify'
 import { provide } from 'vue'
 import { Services } from './scripts/services'
+import { PlayerService } from './scripts/playerService'
 import ActiveUser from './components/ActiveUser.vue'
-import type { SignInService } from './scripts/signInService'
 import { RouterLink } from 'vue-router'
+import type { SignInService } from '@/scripts/signInService'
 import router from './router'
-// Provide the useDisplay to other components so that it can be used in testing.
+
+const signInService = inject(Services.SignInService) as SignInService
 const display = reactive(useDisplay())
 provide(Services.Display, display)
-const signInService = inject(Services.SignInService) as SignInService
+const playerService = new PlayerService()
+playerService.setupPlayerAsync()
+provide(Services.PlayerService, playerService)
 const theme = useTheme()
 function switchTheme() {
   if (theme.global.name.value === 'light') {
@@ -95,8 +99,4 @@ function setLightTheme() {
 function setDarkTheme() {
   theme.global.name.value = 'dark'
 }
-setTimeout(() => {
-  // This is terrible, nasty, and should be removed.
-  signInService.signIn('admin@intellitect.com', 'P@ssw0rd123')
-}, 1000)
 </script>

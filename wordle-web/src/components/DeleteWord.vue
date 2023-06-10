@@ -3,6 +3,7 @@
   <v-card height="200px" variant="outlined" style="margin-bottom: 20px">
     <v-card-text>
       <v-text-field
+        v-if="signInService.canEditWords()"
         placeholder="enter word to delete from word list..."
         :messages="deleted ? [`Word has been deleted`] : []"
         :errorMessages="deleteError ? ['Error deleting word'] : []"
@@ -25,7 +26,12 @@
 
 <script setup lang="ts">
 import axios from 'axios'
-import { ref } from 'vue'
+import { inject,ref } from 'vue'
+import type { SignInService } from '@/scripts/signInService'
+import { Services } from '@/scripts/services'
+
+const signInService = inject(Services.SignInService) as SignInService
+
 const isAlphabetical = /^[A-Za-z]+$/
 const deleted = ref<boolean>(false)
 const deleteError = ref<boolean>(false)
