@@ -1,18 +1,21 @@
 <template>
-  <v-card class="mx-auto mt-12" max-width="844">
-    <v-img src="https://i.makeagif.com/media/2-08-2016/LUwPC9.gif" max-width="320"></v-img>
-    <v-card-title> Meg is super cool and awesome and likes cats and and </v-card-title>
+  <v-card class="mx-auto mt-12 text-center" max-width="844">
+    <v-img src="https://i.redd.it/vevgp409dqw81.gif" max-height="320"></v-img>
+    <v-card-title> What is Will it Kill?</v-card-title>
 
     <v-card-text>
-      This site is a group project for a class, duplicating the Wordle Project in Vue.
+      Will it Kill is an online game wherein people try to guess if a fighting game clip will result
+      in someone dying or not, often with the person being hit taking an unexpected amount of
+      damage.
     </v-card-text>
     <v-card-actions>
       <v-container>
-        <v-btn variant="outlined" @click="goBack">Go Back</v-btn>
+        <v-btn variant="outlined" @click="goBack">To Home</v-btn>
       </v-container>
     </v-card-actions>
   </v-card>
 
+  <v-card-text> </v-card-text>
   <WeatherDialog v-model="isOpen" :weather="currentWeather!"></WeatherDialog>
 
   <v-card v-for="item in weatherData" :key="item.date" @click="setCurrentWeather(item)">

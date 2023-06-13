@@ -3,7 +3,7 @@
     <v-app-bar class="custom-app-bar" color="primary" density="compact">
       <template v-slot:prepend>
         <RouterLink to="/">
-          <h1 class="titleClass">Wordle Web</h1>
+          <h1 class="titleClass">Will It Kill?</h1>
         </RouterLink>
         <RouterLink to="/">
           <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
