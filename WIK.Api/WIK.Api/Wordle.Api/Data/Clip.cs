@@ -13,8 +13,7 @@ namespace Wordle.Api.Data
         public bool Kills { get; set; }
         public int Correct { get; set; } = 0;
         public int Incorrect { get; set; } = 0;
+        public int Reports { get; set; } = 0;
 
     }
-
-    
 }
