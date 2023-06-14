@@ -20,6 +20,7 @@
       <v-col>
         <h3>{{ points }}</h3>
         <v-text-field class="px-8"></v-text-field>
+        <v-text-field label="Example" v-model="example" :rules="exampleRules"></v-text-field>
       </v-col>
       <v-btn @click="guessSide(1)" class="my-8">rightist</v-btn>
     </v-row>
@@ -53,7 +54,7 @@
   -->
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import { WordleGame } from '@/scripts/wordleGame'
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import GameBoard from '../components/GameBoard.vue'
@@ -74,6 +75,7 @@ const timer = ref(0)
 let sideGuess = 0
 let points = ref(0)
 let tracker = setInterval(myTimer, 1000)
+let value = 0
 
 function myTimer() {
   timer.value = timer.value + 1
@@ -92,12 +94,14 @@ function guessSide(side: number) {
   //enable submit button
 }
 function submit() {
+  // if betValue > points
+  // betValue = points
+  // easiest way i can think of to get around """cheating"""
   // if guessSide == correctSide
   // points += betValue
   // else
   // points -= betValue
 }
-
 onMounted(async () => {
   window.addEventListener('keyup', keyPress)
   await newGame()
