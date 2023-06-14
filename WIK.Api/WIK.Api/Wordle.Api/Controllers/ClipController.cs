@@ -21,7 +21,7 @@ namespace Wordle.Api.Controllers
         public async Task<string> Get()
         {
             Clip clip = await _clipService.GetRandomClip();
-            return $"{clip.ClipId},{clip.Url},{clip.StartTime},{clip.EndTime}";
+            return $"{clip.ClipId},{clip.Url},{clip.StartTime},{clip.EndTime},{clip.Kills}";
         }
 
         [HttpPost]

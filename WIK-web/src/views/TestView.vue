@@ -9,7 +9,7 @@
         id="player"
         width="100%"
         height="500"
-        src="https://www.youtube.com/embed/_nEOGOC9FPk?controls=0&rel=0&autoplay=1&enablejsapi=1"
+        src=''
       >
       </iframe>
       <!-- 
@@ -50,6 +50,24 @@ const timer = ref(0)
 let sideGuess = 0
 let points = ref(0)
 let tracker = setInterval(myTimer, 1000)
+let clipId = ''
+let clipUrl = ''
+let clipStart = ''
+let clipEnd = ''
+let willItKill = ''
+let clip = ref(clipUrl)
+onMounted(async () => {
+  Axios.get('/Clip')
+  .then((response) => {
+    console.log(response.data)
+    getClipInfo(response.data)
+  })
+  .catch((error) =>{
+    console.log(error.data)
+  })
+  
+  
+})
 
 function myTimer() {
   timer.value = timer.value + 1
@@ -69,5 +87,28 @@ function submit() {
   // points += betValue
   // else
   // points -= betValue
+}
+
+function getClipInfo(response : string){
+  var data = response.split(',')
+  clipId = data[0]
+  clipUrl = data[1]
+  clipStart = data[2]
+  clipEnd = data[3]
+  willItKill = data[4]
+
+  var clipParts = clipUrl.split('/watch?v=')
+  clipUrl = clipParts[0] + '/embed/' + clipParts[1] + '?controls=0&rel=0&autoplay=1&enablejsapi=1&start=' + clipStart
+  if(clipEnd !== '0'){
+    clipUrl = clipUrl + '&end=' + clipEnd
+  }
+
+  console.log(clipId)
+  console.log(clipUrl)
+  console.log(clipStart)
+  console.log(clipEnd)
+  console.log(willItKill)
+  var video = document.querySelector('iframe')
+  video?.setAttribute('src', clipUrl)
 }
 </script>
