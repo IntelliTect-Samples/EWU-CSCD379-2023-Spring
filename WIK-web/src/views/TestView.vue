@@ -1,7 +1,7 @@
 <template>
   <v-col class="px-16 py-10 my-10" align="center">
     <v-row>
-      <v-col> Clip name </v-col>
+      <v-col> Clip ID: {{ clipId }} </v-col>
       <v-col> Points: {{ points }} </v-col>
     </v-row>
     <v-container id="element" class="px-4 py-10 my-10" style="max-width: 1000px">
@@ -20,17 +20,21 @@
       -->
 
       <v-row class="px-16" style="max-width: 600px">
-        <v-btn @click="guessSide(-1)" class="my-8">leftist</v-btn>
+        <v-btn @click="guessSide(-1)" class="my-8">NO It Won't Kill</v-btn>
         <v-col>
-          <h3>{{ points }}</h3>
           <v-text-field class="px-8"></v-text-field>
-          <v-text-field label="Example"></v-text-field>
         </v-col>
-        <v-btn @click="guessSide(1)" class="my-8">rightist</v-btn>
+        <v-btn @click="guessSide(1)" class="my-8">YES It Will Kill</v-btn>
       </v-row>
+
       <v-row class="center px-16" style="max-width: 300px">
         <v-btn @click="submit">Test test test test</v-btn>
       </v-row>
+      <v-row class="center px-16" style="max-width: 300px">
+        <v-btn id="nextButton" v-if="showNext" @click="nextClip">Test test test test</v-btn>
+      </v-row>
+
+      <v-text-field label="Example"></v-text-field>
     </v-container>
   </v-col>
 </template>
@@ -48,7 +52,7 @@ const game = reactive(new WordleGame())
 const route = useRoute()
 const timer = ref(0)
 let sideGuess = 0
-let points = ref(0)
+let points = 100
 let tracker = setInterval(myTimer, 1000)
 let clipId = ''
 let clipUrl = ''
@@ -56,30 +60,40 @@ let clipStart = ''
 let clipEnd = ''
 let willItKill = ''
 let clip = ref(clipUrl)
+let videoId = '_nEOGOC9FPk'
+let videoURL =
+  'https://www.youtube.com/embed/_nEOGOC9FPk?end=15&controls=0&rel=0&autoplay=1&enablejsapi=1'
+let showNext = false
+
+var nextBtn = document.getElementById('nextButton')
+
 onMounted(async () => {
   Axios.get('/Clip')
-  .then((response) => {
-    console.log(response.data)
-    getClipInfo(response.data)
-  })
-  .catch((error) =>{
-    console.log(error.data)
-  })
-  
-  
+    .then((response) => {
+      console.log(response.data)
+      getClipInfo(response.data)
+    })
+    .catch((error) => {
+      console.log(error.data)
+    })
 })
 
 function myTimer() {
   timer.value = timer.value + 1
 }
 function guessSide(side: number) {
+  console.log(side)
   sideGuess = side
   //enable submit button
 }
 function submit() {
   var video = document.querySelector('iframe')
-  video?.contentWindow?.postMessage('{"event":"command", "func":"pauseVideo", "args":""}', '*')
-  console.log('click')
+
+  //set start time to current end time
+  //remove end time
+  //disable all buttons
+  video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
+
   // if betValue > points
   // betValue = points
   // easiest way i can think of to get around """cheating"""
@@ -87,9 +101,10 @@ function submit() {
   // points += betValue
   // else
   // points -= betValue
+  // if points <= 0, points = 100
 }
 
-function getClipInfo(response : string){
+function getClipInfo(response: string) {
   var data = response.split(',')
   clipId = data[0]
   clipUrl = data[1]
@@ -98,8 +113,13 @@ function getClipInfo(response : string){
   willItKill = data[4]
 
   var clipParts = clipUrl.split('/watch?v=')
-  clipUrl = clipParts[0] + '/embed/' + clipParts[1] + '?controls=0&rel=0&autoplay=1&enablejsapi=1&start=' + clipStart
-  if(clipEnd !== '0'){
+  clipUrl =
+    clipParts[0] +
+    '/embed/' +
+    clipParts[1] +
+    '?controls=0&rel=0&autoplay=1&enablejsapi=1&start=' +
+    clipStart
+  if (clipEnd !== '0') {
     clipUrl = clipUrl + '&end=' + clipEnd
   }
 
@@ -111,4 +131,5 @@ function getClipInfo(response : string){
   var video = document.querySelector('iframe')
   video?.setAttribute('src', clipUrl)
 }
+function nextClip() {}
 </script>
