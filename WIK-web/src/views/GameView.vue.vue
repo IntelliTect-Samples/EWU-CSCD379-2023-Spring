@@ -5,16 +5,10 @@
       <v-col> Points: {{ points }} </v-col>
     </v-row>
     <v-container class="px-4 py-10 my-10" style="max-width: 1000px">
-      <!--testing to try and get any to work-->
-      <video-embed src="https://www.youtube.com/watch?v=s4ObxcdXoFE"></video-embed>
-      <video-embed src="https://vimeo.com/370293725"></video-embed>
-      <video-embed src="https://dai.ly/x7n7y06"></video-embed>
-      <video-embed src="https://coub.com/embed/22eztb"></video-embed>
       <iframe
         width="100%"
         height="500"
         src="https://www.youtube.com/embed/_nEOGOC9FPk?controls=0&rel=0&autoplay=1"
-        allow="autoplay; modestbranding"
         allowfullscreen="true"
       ></iframe>
       <!-- 
