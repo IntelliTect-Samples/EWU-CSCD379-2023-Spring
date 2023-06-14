@@ -3,7 +3,8 @@
     <v-card style="width: 75%"
       ><v-card-title>INSTRUCTIONS</v-card-title
       ><v-card-text
-        >This is Will it Kill, a site based around simulating the online game.
+        >This is Will it Kill, a site based around simulating the online game. These are the
+        instructions for playing the game.
         <div style="margin: 15px">
           <v-card-text style="padding: 5px"
             >Once you begin playing (if you aren't logged in you'll be prompted), a screenshot of

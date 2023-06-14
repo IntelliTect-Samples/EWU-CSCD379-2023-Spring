@@ -3,14 +3,7 @@
     <v-app-bar class="custom-app-bar" color="primary" density="compact">
       <template v-slot:prepend>
         <RouterLink to="/">
-          <h1 class="titleClass">Will It Kill?</h1>
-        </RouterLink>
-        <RouterLink to="/">
-          <v-img
-            :width="60"
-            cover
-            src="https://static-cdn.jtvnw.net/jtv_user_pictures/sajam-profile_image-1d50da0d59b0363a-300x300.jpeg"
-          ></v-img>
+          <v-img :width="200" cover src="https://i.imgur.com/HSZpKhV.jpg"> </v-img>
         </RouterLink>
       </template>
 
@@ -24,7 +17,7 @@
       </template>
       <LoginPopout></LoginPopout>
     </v-app-bar>
-    
+
     <v-navigation-drawer v-model="drawer" temporary location="right">
       <v-list density="compact" nav>
         <v-list-item
@@ -58,7 +51,8 @@
 
 <script setup lang="ts">
 import SettingsTab from '@/components/SettingsPopout.vue'
+import { moduleExpression } from '@babel/types'
 import { ref } from 'vue'
-import LoginPopout from './LoginPopout.vue';
+import LoginPopout from './LoginPopout.vue'
 let drawer = ref(false)
 </script>
