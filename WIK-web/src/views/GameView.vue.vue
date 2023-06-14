@@ -6,12 +6,18 @@
       <video-embed src="https://vimeo.com/370293725"></video-embed>
       <video-embed src="https://dai.ly/x7n7y06"></video-embed>
       <video-embed src="https://coub.com/embed/22eztb"></video-embed>
+      <iframe
+        width="420"
+        height="420"
+        src="https://www.youtube.com/embed/DEGjCWxMnm4"
+        allowfullscreen="true"
+      ></iframe>
       <!-- 
-        Actual WIK clips (shockingly small amount)
+        Actual WIK clips 
+        https://www.youtube.com/watch?v=_nEOGOC9FPk // kill
+        https://www.youtube.com/watch?v=5G2A7WKsCRg // doesnt
+        https://www.youtube.com/watch?v=7XjUpd99s18 // faust wins if we wanna do WHO will it kill
         https://twitter.com/EVO/status/1419024349692973061
-        https://www.youtube.com/watch?v=DEGjCWxMnm4
-        https://www.youtube.com/watch?v=ko-6nHuBf8g
-        https://www.youtube.com/watch?v=ti3NGlVO7Bs
       -->
     </v-container>
 
@@ -65,7 +71,6 @@ import NameCardDialog from '@/components/NameCardDialog.vue'
 import { useRoute } from 'vue-router'
 import Axios from 'axios'
 import { WordsService } from '@/scripts/wordsService'
-import Embed from 'v-video-embed'
 
 const titleRef = ref('')
 const guess = ref('')

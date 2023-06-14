@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex; justify-content: center">
     <v-card style="width: 75%"
-      ><v-card-title>INSTRUCTIONS</v-card-title
+      ><v-card-title>INSTRUCTIONS </v-card-title
       ><v-card-text
         >This is Will it Kill, a site based around simulating the online game. These are the
         instructions for playing the game.
@@ -23,16 +23,17 @@
             The leaderboard will remember your all time max and automatically update each time you
             play.
           </v-card-text>
-          <v-card-text style="padding: 5px"> </v-card-text>
-
-          <v-card-text style="padding: 5px">
-            A tip: Try your best to vary letters used - using a letter that you already know is
-            green yields no additional information!
-          </v-card-text>
         </div>
       </v-card-text>
     </v-card>
   </div>
+
+  <i-frame
+    width="420"
+    height="420"
+    src="https://www.youtube.com/embed/2-g7H4BHfy4?start=661"
+    allowfullscreen="true"
+  ></i-frame>
 </template>
 
 <script setup lang="ts"></script>
