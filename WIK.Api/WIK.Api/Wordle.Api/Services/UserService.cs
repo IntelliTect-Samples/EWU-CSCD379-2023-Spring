@@ -13,7 +13,7 @@ namespace Wordle.Api.Services
             _db = db;
         }
 
-        public async Task<User> AddUser(string username, string password)
+        public async Task<User?> AddUser(string username, string password)
         {
             User? user = await _db.Users.FirstOrDefaultAsync(user => user.Username == username);
 
@@ -25,6 +25,10 @@ namespace Wordle.Api.Services
                     Password = password
                 };
                 _db.Users.Add(user);
+            }
+            else 
+            {
+                user = null;
             }
             await _db.SaveChangesAsync();
             return user;

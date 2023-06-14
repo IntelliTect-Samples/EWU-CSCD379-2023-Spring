@@ -46,15 +46,15 @@
 </template>
 
 <script setup lang="ts">
-import { useTheme } from 'vuetify/lib/framework.mjs'
-import { LeaderboardService } from '../scripts/leaderboardService'
-import { onMounted, ref } from 'vue'
-const theme = useTheme()
-const name = ref(localStorage.getItem('name'))
-const result = ref(['', ''])
-const daily = ref(['', ''])
-onMounted(async () => {
-  result.value = await LeaderboardService.getLeaderboardFromApi()
-  daily.value = await LeaderboardService.getDailyLeaderboard()
-})
+  import { useTheme } from 'vuetify/lib/framework.mjs'
+  import { LeaderboardService } from '../scripts/leaderboardService'
+  import { onMounted, ref } from 'vue'
+  const theme = useTheme()
+  const name = ref(localStorage.getItem('name'))
+  const result = ref(['', ''])
+  const daily = ref(['', ''])
+  onMounted(async () => {
+    result.value = await LeaderboardService.getLeaderboardFromApi()
+    daily.value = await LeaderboardService.getDailyLeaderboard()
+  })
 </script>

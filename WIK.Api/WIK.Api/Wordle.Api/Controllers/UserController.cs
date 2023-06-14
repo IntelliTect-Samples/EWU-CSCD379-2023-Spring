@@ -24,7 +24,7 @@ namespace Wordle.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<User> AddWord(string username, string password)
+        public async Task<User?> AddUser(string username, string password)
         {
             return await _userService.AddUser(username, password);
         }

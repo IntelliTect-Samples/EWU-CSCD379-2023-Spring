@@ -6,7 +6,11 @@
           <h1 class="titleClass">Will It Kill?</h1>
         </RouterLink>
         <RouterLink to="/">
-          <v-icon color="hsla(160, 100%, 37%, 1)" icon="mdi-alpha-w-box" size="large" />
+          <v-img
+            :width="60"
+            cover
+            src="https://static-cdn.jtvnw.net/jtv_user_pictures/sajam-profile_image-1d50da0d59b0363a-300x300.jpeg"
+          ></v-img>
         </RouterLink>
       </template>
 
@@ -18,8 +22,9 @@
       <template v-slot:append>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </template>
+      <LoginPopout></LoginPopout>
     </v-app-bar>
-
+    
     <v-navigation-drawer v-model="drawer" temporary location="right">
       <v-list density="compact" nav>
         <v-list-item
@@ -40,6 +45,12 @@
           value="editor"
           to="/editor"
         ></v-list-item>
+        <v-list-item
+          prepend-icon="mdi-account"
+          title="Profile"
+          value="profile"
+          to="/profile"
+        ></v-list-item>
       </v-list>
     </v-navigation-drawer>
   </v-layout>
@@ -48,6 +59,6 @@
 <script setup lang="ts">
 import SettingsTab from '@/components/SettingsPopout.vue'
 import { ref } from 'vue'
-
+import LoginPopout from './LoginPopout.vue';
 let drawer = ref(false)
 </script>
