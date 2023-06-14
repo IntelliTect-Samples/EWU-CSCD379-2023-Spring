@@ -34,7 +34,7 @@
         ></v-list-item>
         <v-list-item
           prepend-icon="mdi-pencil"
-          title="Editor"
+          title="Submit Clips"
           value="editor"
           to="/editor"
         ></v-list-item>

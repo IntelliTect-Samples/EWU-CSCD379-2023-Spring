@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import WIKGame from '../views/TestView.vue'
 import LeaderboardView from '../views/LeaderboardView.vue'
 import InstructionsView from '../views/InstructionsView.vue'
-import EditorView from '../views/EditorView.vue'
+import EditorView from '../views/ClipsView.vue'
 import ProfileView from '../views/ProfileView.vue'
 
 const router = createRouter({
