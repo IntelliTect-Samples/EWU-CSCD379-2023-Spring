@@ -1,5 +1,9 @@
 <template>
   <v-col class="px-16 py-10 my-10" align="center">
+    <v-row>
+      <v-col> Clip name </v-col>
+      <v-col> Points: {{ points }} </v-col>
+    </v-row>
     <v-container class="px-4 py-10 my-10" style="max-width: 1000px">
       <!--testing to try and get any to work-->
       <video-embed src="https://www.youtube.com/watch?v=s4ObxcdXoFE"></video-embed>
@@ -7,9 +11,10 @@
       <video-embed src="https://dai.ly/x7n7y06"></video-embed>
       <video-embed src="https://coub.com/embed/22eztb"></video-embed>
       <iframe
-        width="420"
-        height="420"
-        src="https://www.youtube.com/embed/DEGjCWxMnm4"
+        width="100%"
+        height="500"
+        src="https://www.youtube.com/embed/_nEOGOC9FPk?controls=0&rel=0&autoplay=1"
+        allow="autoplay; modestbranding"
         allowfullscreen="true"
       ></iframe>
       <!-- 
@@ -30,8 +35,9 @@
       </v-col>
       <v-btn @click="guessSide(1)" class="my-8">rightist</v-btn>
     </v-row>
+
     <v-row class="center px-16" style="max-width: 300px">
-      <v-btn @click="submit">Test test test test</v-btn>
+      <v-btn @click="submit">SubmitSubmit</v-btn>
     </v-row>
   </v-col>
   <!--
@@ -78,7 +84,7 @@ const game = reactive(new WordleGame())
 const route = useRoute()
 const timer = ref(0)
 let sideGuess = 0
-let points = ref(0)
+let points = 0
 let tracker = setInterval(myTimer, 1000)
 let value = 0
 
