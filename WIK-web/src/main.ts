@@ -55,7 +55,7 @@ const vuetify = createVuetify({
           misplaced: '#f1c78e',
           wrong: '#101010',
           primary: '#6a0001',
-          surface: '#0000000'
+          surface: '#000000'
         }
       },
       corn: {

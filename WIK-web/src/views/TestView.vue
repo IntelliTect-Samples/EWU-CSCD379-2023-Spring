@@ -13,26 +13,29 @@
           v-show="!showNext"
           @click="submit(-1)"
           class="mx-4 px-16"
-          >NO It Won't Kill</v-btn
+          >NO - It Won't Kill</v-btn
         >
         <v-btn
           style="min-width: 150px; min-height: 100px"
           v-show="!showNext"
           @click="submit(1)"
           class="mx-4 px-16"
-          >YES It Will Kill</v-btn
+          >YES - It Will Kill</v-btn
         >
-        <h2 v-show="showNext">{{ result }}</h2>
       </v-row>
 
-      <v-row class="justify-center px-16 py-4">
-        <v-btn
-          style="min-width: 200px; min-height: 150px"
-          id="nextButton"
-          v-show="showNext"
-          @click="nextClip"
-          >Next</v-btn
-        >
+      <v-row class="px-16 py-4 d-flex justify-center">
+        <div>
+          <h2 v-show="showNext">{{ result }}</h2>
+          <br />
+          <v-btn
+            style="min-width: 200px; min-height: 150px"
+            id="nextButton"
+            v-show="showNext"
+            @click="nextClip"
+            >Next</v-btn
+          >
+        </div>
       </v-row>
     </v-container>
   </v-col>
@@ -105,9 +108,20 @@ function submit(side: number) {
   var success = (willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)
 
   if (success) {
+    var res = "You're correct -"
+
+    if (side > 0) {
+      res += " That's a Kill!"
+    } else {
+      res += ' No Kill here!'
+    }
+
+    result.value = res
+
     streak.value += 1
     console.log(streak)
   } else {
+    result.value = 'Sorry, you guessed wrong.'
     streak.value = 0
   }
 
