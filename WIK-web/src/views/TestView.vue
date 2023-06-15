@@ -21,16 +21,10 @@
 </template>
 
 <script setup lang="ts">
-import { WordleGame } from '@/scripts/wordleGame'
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, onMounted} from 'vue'
 import Axios from 'axios'
-import { WordsService } from '@/scripts/wordsService'
 
 const clipId = ref('')
-const guess = ref('')
-const game = reactive(new WordleGame())
-const route = useRoute()
 const timer = ref(0)
 let showNext = ref(false)
 let streak = ref(0)
