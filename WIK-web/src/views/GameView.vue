@@ -1,5 +1,5 @@
 <template>
-  <v-col class="px-16 py-10 my-10" align="center">
+  <v-col class="px-16 py-5 my-5" align="center" style="max-height: 90%">
     <v-row>
       <v-col id="clipIdText">Clip ID: {{ clipId }} </v-col>
       <v-col id="streakText">Streak: {{ streak }} </v-col>
@@ -7,7 +7,7 @@
     <v-container id="element" class="px-4 py-10 my-10" style="max-width: 1000px">
       <iframe id="player" width="100%" height="500" src=""> </iframe>
 
-      <v-row class="py-4 my-8" style="max-width: 600px">
+      <v-row class="py-4 my-4" style="max-width: 600px">
         <v-btn
           style="min-width: 150px; min-height: 100px"
           v-show="!showNext"
@@ -29,7 +29,7 @@
           <h2 v-show="showNext">{{ result }}</h2>
           <br />
           <v-btn
-            style="min-width: 200px; min-height: 150px"
+            style="min-width: 200px; min-height: 125px"
             id="nextButton"
             v-show="showNext"
             @click="nextClip"
@@ -54,6 +54,7 @@ let clipStart = ''
 let clipEnd = ''
 let willItKill = ''
 let result = ref('')
+let pastMid = true
 
 onMounted(async () => {
   nextClip()
@@ -94,16 +95,15 @@ function getClipInfo(response: string) {
 
 function startGame() {
   var video = document.querySelector('iframe')
-
   video?.setAttribute('src', clipUrl)
-
   showNext.value = false
+  pastMid = false
+  playVideo()
 }
 
 function submit(side: number) {
-  var video = document.querySelector('iframe')
+  playVideo()
   showNext.value = true
-  video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
 
   var success = (willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)
 
@@ -128,8 +128,31 @@ function submit(side: number) {
   Axios.post('/User/UpdateUser?username=' + localStorage.getItem('username') + '&win=' + success)
 }
 
-let tracker = setInterval(myTimer, 1000)
+setInterval(myTimer, 1000)
 function myTimer() {
-  timer.value = timer.value + 1
+  if (timer.value == 1) {
+    playVideo()
+  }
+  if (timer.value > 3) {
+    console.log(timer.value)
+    pauseVideo()
+    timer.value = 0
+    pastMid = true
+  }
+  if (pastMid == false) {
+    console.log(timer.value)
+    playVideo()
+    timer.value += 1
+  }
+}
+
+function playVideo() {
+  var video = document.querySelector('iframe')
+  video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
+}
+
+function pauseVideo() {
+  var video = document.querySelector('iframe')
+  video?.contentWindow?.postMessage('{"event":"command", "func":"pauseVideo", "args":""}', '*')
 }
 </script>
