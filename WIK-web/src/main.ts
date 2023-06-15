@@ -30,7 +30,7 @@ const vuetify = createVuetify({
     }
   },
   theme: {
-    defaultTheme: 'dark',
+    defaultTheme: 'khorne',
     themes: {
       dark: {
         colors: {
@@ -54,7 +54,8 @@ const vuetify = createVuetify({
           correct: '#FFD700',
           misplaced: '#f1c78e',
           wrong: '#101010',
-          primary: '#6a0001'
+          primary: '#6a0001',
+          surface: '#0000000'
         }
       },
       corn: {

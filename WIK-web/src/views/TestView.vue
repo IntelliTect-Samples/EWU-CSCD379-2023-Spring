@@ -8,20 +8,38 @@
       <iframe id="player" width="100%" height="500" src=""> </iframe>
 
       <v-row class="py-4 my-8" style="max-width: 600px">
-        <v-btn v-show="!showNext" @click="submit(-1)" class="mx-4 px-16">NO It Won't Kill</v-btn>
-        <v-btn v-show="!showNext" @click="submit(1)" class="mx-4 px-16">YES It Will Kill</v-btn>
+        <v-btn
+          style="min-width: 150px; min-height: 100px"
+          v-show="!showNext"
+          @click="submit(-1)"
+          class="mx-4 px-16"
+          >NO It Won't Kill</v-btn
+        >
+        <v-btn
+          style="min-width: 150px; min-height: 100px"
+          v-show="!showNext"
+          @click="submit(1)"
+          class="mx-4 px-16"
+          >YES It Will Kill</v-btn
+        >
         <h2 v-show="showNext">{{ result }}</h2>
       </v-row>
 
-      <v-row class="center px-16 py-4" style="max-width: 300px">
-        <v-btn id="nextButton" v-show="showNext" @click="nextClip">Next Next Next Next</v-btn>
+      <v-row class="justify-center px-16 py-4">
+        <v-btn
+          style="min-width: 200px; min-height: 150px"
+          id="nextButton"
+          v-show="showNext"
+          @click="nextClip"
+          >Next</v-btn
+        >
       </v-row>
     </v-container>
   </v-col>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted} from 'vue'
+import { ref, onMounted } from 'vue'
 import Axios from 'axios'
 
 const clipId = ref('')
@@ -84,15 +102,16 @@ function submit(side: number) {
   showNext.value = true
   video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
 
-  if ((willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)) {
+  var success = (willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)
+
+  if (success) {
     streak.value += 1
     console.log(streak)
   } else {
     streak.value = 0
   }
 
-  ///User/UpdateUser?username=gamer&win=true
-  //you can get the username with localStorage.getItem('username'')
+  Axios.post('/User/UpdateUser?username=' + localStorage.getItem('username') + '&win=' + success)
 }
 
 let tracker = setInterval(myTimer, 1000)

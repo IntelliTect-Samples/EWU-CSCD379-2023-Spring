@@ -24,16 +24,21 @@
             play.
           </v-card-text>
         </div>
+
+        <div align="center">
+          Below is an clip from the show - mild language warning.
+          <iframe
+            style="justify-content: center; display: flex"
+            id="player"
+            width="60%"
+            height="320"
+            src="https://www.youtube.com/embed/2-g7H4BHfy4?start=1301&end=&1350autoplay=1"
+            allowfullscreen="true"
+          />
+        </div>
       </v-card-text>
     </v-card>
   </div>
-
-  <i-frame
-    width="420"
-    height="420"
-    src="https://www.youtube.com/embed/2-g7H4BHfy4?start=661"
-    allowfullscreen="true"
-  ></i-frame>
 </template>
 
 <script setup lang="ts"></script>
