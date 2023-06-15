@@ -1,13 +1,13 @@
 <template>
-  <v-row class="justify-center"><h1>Overall</h1></v-row>
+  <v-row class="justify-center"><h1>Most Games Played</h1></v-row>
   <v-container>
     <v-table :theme="theme.global.name.value">
       <thead>
         <tr>
           <th class="text-center">Rank</th>
           <th class="text-center">Name</th>
-          <th class="text-center">Avg. Attempts</th>
-          <th class="text-center">Games Played</th>
+          <th class="text-center">Wins</th>
+          <th class="text-center">Losses</th>
         </tr>
       </thead>
       <tbody>
@@ -20,25 +20,23 @@
       </tbody>
     </v-table>
   </v-container>
-  <v-row class="justify-center"><h1>Daily</h1></v-row>
+  <v-row class="justify-center"><h1>Most Viewed Clips</h1></v-row>
   <v-container>
     <v-table :theme="theme.global.name.value">
       <thead>
         <tr>
-          <th class="text-center">Date</th>
-          <th class="text-center">Avg. Attempts</th>
-          <th class="text-center">Avg. Seconds</th>
-          <th class="text-center">Games Played</th>
-          <th class="text-center">{{ name }} Has Played?</th>
+          <th class="text-center">Rank</th>
+          <th class="text-center">Url</th>
+          <th class="text-center">Correct Guesses</th>
+          <th class="text-center">Incorrect Guesses</th>
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" v-for="item in daily" :key="item">
+        <tr class="text-center" v-for="(item, j) in daily" :key="item">
+          <td>{{ j + 1 }}</td>
           <td>{{ item.split(',')[0] }}</td>
           <td>{{ item.split(',')[1] }}</td>
-          <td>{{ item.split(',')[4] }}</td>
           <td>{{ item.split(',')[2] }}</td>
-          <td>{{ item.split(',')[5] }}</td>
         </tr>
       </tbody>
     </v-table>
@@ -54,7 +52,7 @@
   const result = ref(['', ''])
   const daily = ref(['', ''])
   onMounted(async () => {
-    result.value = await LeaderboardService.getLeaderboardFromApi()
-    daily.value = await LeaderboardService.getDailyLeaderboard()
+    result.value = await LeaderboardService.getTopUsers()
+    daily.value = await LeaderboardService.getTopClips()
   })
 </script>

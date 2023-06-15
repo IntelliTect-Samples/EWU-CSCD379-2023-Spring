@@ -1,13 +1,13 @@
 import Axios from 'axios'
 
 export abstract class LeaderboardService {
-  static async getLeaderboardFromApi(): Promise<string[]> {
-    const result = await Axios.get('/leaderboard')
+  static async getTopUsers(): Promise<string[]> {
+    const result = await Axios.get('/User/TopUsers')
     console.log(result.data)
     return result.data
   }
-  static async getDailyLeaderboard(): Promise<string[]> {
-    const result = await Axios.get('/leaderboard/daily?name=' + localStorage.getItem('name'))
+  static async getTopClips(): Promise<string[]> {
+    const result = await Axios.get('/Clip/TopClips')
     console.log(result.data)
     return result.data
   }

@@ -49,5 +49,22 @@ namespace Wordle.Api.Services
             await _db.SaveChangesAsync();
             return user;
         }
+        public async Task<string[]> getTopUsers()
+        {
+            string[] strUsers = new string[10];
+            for (int i = 0; i < 10; i++)
+            {
+                strUsers[i] = " , , ";
+            }
+            var users = await _db.Users.OrderByDescending(c => c.Wins + c.Loses).Take(10).ToArrayAsync();
+            int count = 0;
+            foreach (var user in users)
+            { 
+                strUsers[count] = $"{user.Username},{user.Wins},{user.Loses}";
+                count++;
+            }
+
+            return strUsers;
+        }
     }
 }
