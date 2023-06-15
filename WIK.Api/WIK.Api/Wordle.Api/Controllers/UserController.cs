@@ -22,6 +22,11 @@ namespace Wordle.Api.Controllers
             User? user = await _userService.GetUser(username, password);
             return user == null ? "Invalid Username or Password" : $"{user.Username},{user.Wins},{user.Loses}";
         }
+        [HttpGet("TopUsers")]
+        public async Task<string[]> GetTopUsers()
+        {
+            return await _userService.getTopUsers();
+        }
 
         [HttpPost]
         public async Task<User?> AddUser(string username, string password)

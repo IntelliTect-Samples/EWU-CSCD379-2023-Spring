@@ -16,7 +16,7 @@ namespace Wordle.Api.Services
 
         public async Task<Clip> AddClip(string url, bool kills, int startTime = 0, int endTime = 0)
         {
-            Clip? clip  = await _db.Clips.FirstOrDefaultAsync(c => c.Url == url);
+            Clip? clip = await _db.Clips.FirstOrDefaultAsync(c => c.Url == url);
 
             if (clip == null)
             {
@@ -42,7 +42,7 @@ namespace Wordle.Api.Services
 
         public async Task<Clip?> UpdateClipScore(int clipid, bool correct)
         {
-            Clip? clip= await _db.Clips.FirstOrDefaultAsync(c => c.ClipId == clipid);
+            Clip? clip = await _db.Clips.FirstOrDefaultAsync(c => c.ClipId == clipid);
             if (clip != null)
             {
                 clip.Correct += correct ? 1 : 0;
@@ -51,7 +51,7 @@ namespace Wordle.Api.Services
             await _db.SaveChangesAsync();
             return clip;
         }
-        public async Task<Clip?> ReportClip(int clipid) 
+        public async Task<Clip?> ReportClip(int clipid)
         {
             Clip? clip = await _db.Clips.FirstOrDefaultAsync(c => c.ClipId == clipid);
             if (clip != null)
@@ -60,6 +60,23 @@ namespace Wordle.Api.Services
             }
             await _db.SaveChangesAsync();
             return clip;
+        }
+        public async Task<string[]> getTopClips()
+        {
+            string[] strClip = new string[10];
+            for (int i = 0; i < 10; i++)
+            {
+                strClip[i] = " , , ";
+            }
+            var clips = await _db.Clips.OrderByDescending(c => c.Correct+c.Incorrect).Take(10).ToArrayAsync();
+            int count = 0;
+            foreach ( var clip in clips) 
+            {
+                strClip[count] = $"{clip.Url},{clip.Correct},{clip.Incorrect}";
+                count++;
+            }
+
+            return strClip;
         }
     }
 }

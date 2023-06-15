@@ -23,6 +23,11 @@ namespace Wordle.Api.Controllers
             Clip clip = await _clipService.GetRandomClip();
             return $"{clip.ClipId},{clip.Url},{clip.StartTime},{clip.EndTime},{clip.Kills}";
         }
+        [HttpGet("TopClips")]
+        public async Task<string[]> GetTopClips() 
+        {
+            return await _clipService.getTopClips();
+        }
 
         [HttpPost]
         public async Task<Clip> AddClip(string url, bool kills, int startTime = 0, int endTime = 0)
