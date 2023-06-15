@@ -2,6 +2,12 @@
   <audio id="audioPlayer" autoplay>
     <source type="audio/mpeg" />
   </audio>
+  <audio id="audioPlayer1" autoplay>
+    <source type="audio/mpeg" />
+  </audio>
+  <audio id="audioPlayer2" autoplay>
+    <source type="audio/mpeg" />
+  </audio>
   <v-col class="px-16 py-5 my-5" align="center" style="max-height: 90%">
     <v-row>
       <v-col id="clipIdText">Clip ID: {{ clipId }} </v-col>
@@ -131,12 +137,29 @@ function submit(side: number) {
     console.log(streak)
   } else {
     result.value = 'Sorry, you guessed wrong.'
-    audioPlayer?.setAttribute('src', failSound)
+    qtimer.value = 0
     streak.value = 0
   }
 
   Axios.post('/User/UpdateUser?username=' + localStorage.getItem('username') + '&win=' + success)
   Axios.post('/Clip/UpdateClip?clipid=' + clipId.value + '&correct=' + success)
+}
+var qtimer = ref(3)
+setInterval(qPingTimer, 250)
+function qPingTimer() {
+  if (qtimer.value > 3) {
+  } else {
+    qtimer.value += 1
+    var audioPlayer
+    if (qtimer.value == 0) {
+      audioPlayer = document.getElementById('audioPlayer')
+    } else if (qtimer.value == 1) {
+      audioPlayer = document.getElementById('audioPlayer1')
+    } else if (qtimer.value == 2) {
+      audioPlayer = document.getElementById('audioPlayer2')
+    }
+    audioPlayer?.setAttribute('src', failSound)
+  }
 }
 
 setInterval(myTimer, 1000)
