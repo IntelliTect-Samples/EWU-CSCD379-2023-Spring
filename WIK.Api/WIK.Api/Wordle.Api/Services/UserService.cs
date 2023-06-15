@@ -25,12 +25,13 @@ namespace Wordle.Api.Services
                     Password = password
                 };
                 _db.Users.Add(user);
+                await _db.SaveChangesAsync();
             }
             else 
             {
                 user = null;
             }
-            await _db.SaveChangesAsync();
+            
             return user;
         }
         public async Task<User?> GetUser(string username, string password)
@@ -66,5 +67,10 @@ namespace Wordle.Api.Services
 
             return strUsers;
         }
+        public async Task<bool> checkUsername(string username) 
+        {
+            User? user = await _db.Users.FirstOrDefaultAsync(user => user.Username == username);
+            return user != null;
+        } 
     }
 }

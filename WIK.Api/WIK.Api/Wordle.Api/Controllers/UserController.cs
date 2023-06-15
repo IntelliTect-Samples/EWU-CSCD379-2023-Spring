@@ -27,6 +27,11 @@ namespace Wordle.Api.Controllers
         {
             return await _userService.getTopUsers();
         }
+        [HttpGet("CheckUsername")]
+        public async Task<bool> checkUsername(string username) 
+        {
+            return await _userService.checkUsername(username);
+        }
 
         [HttpPost]
         public async Task<User?> AddUser(string username, string password)

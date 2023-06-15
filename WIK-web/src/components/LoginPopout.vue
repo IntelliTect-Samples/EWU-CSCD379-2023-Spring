@@ -14,9 +14,9 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-item>
-        <v-card-title class="text-center">Login</v-card-title>
+        <v-card-title class="text-center">{{loginText}}</v-card-title>
 
-        <v-chip-group outlined class="justify-center ma-10 pa-10">
+        <v-chip-group v-show="login" outlined class="justify-center ma-10 pa-10">
           <v-card-title class="text-center">Please enter your information:</v-card-title>
           <v-text-field
             :disabled="logout"
@@ -32,9 +32,26 @@
           ></v-text-field>
           <v-card-title>{{ errorText }}</v-card-title>
         </v-chip-group>
+        <v-chip-group v-show="login" outlined class="justify-center ma-10 pa-10">
+          <v-card-title class="text-center">Create an Account</v-card-title>
+          <v-text-field
+            :disabled="logout"
+            label="User"
+            v-model="usernameNew"
+            variant="outlined"
+          ></v-text-field>
+          <v-text-field
+            :disabled="logout"
+            label="Password"
+            v-model="passwordNew"
+            variant="outlined"
+          ></v-text-field>
+          <v-card-title>{{ errorText2 }}</v-card-title>
+        </v-chip-group>
         <v-chip-group class="justify-center ma-10 pa-10">
           <v-chip v-model="login" size="small" @click="wordleLogin">Login</v-chip>
           <v-chip v-model="logout" size="small" @click="logoutUser">Logout</v-chip>
+          <v-chip v-show="login" size="small" @click="signUp">Sign Up</v-chip>
           <v-card-title class="text-center">{{ result }}</v-card-title>
         </v-chip-group>
       </v-card>
@@ -48,11 +65,15 @@ import { ref } from 'vue'
 
 const username = ref('')
 const password = ref('')
+const usernameNew = ref('')
+const passwordNew = ref('')
 const result = ref('')
 const errorText = ref('')
+const errorText2 = ref('')
 const open = ref(false)
 const login = ref(localStorage.getItem('username') === null)
 const logout = ref(localStorage.getItem('username') !== null)
+const loginText = ref(login.value ? 'Login' : localStorage.getItem('username'))
 
 function wordleLogin() {
   Axios.get('/User?username=' + username.value + '&password=' + password.value)
@@ -88,6 +109,31 @@ function logoutUser() {
   logout.value = false
   window.location.reload()
 }
+
+function signUp(){
+  Axios.get('/User/CheckUsername?username=' + usernameNew.value)
+  .then((response) => {
+    console.log(response.data)
+    if(!response.data){
+      Axios.post('/User?username='+usernameNew.value+'&password='+passwordNew.value)
+      .then((response) => {
+        console.log(response)
+        username.value = usernameNew.value
+        password.value = passwordNew.value
+        setLoginInfo()
+        open.value = false
+        login.value = false
+        logout.value = true
+        errorText.value = ''
+        window.location.reload()
+      })
+    }
+    else{
+      errorText2.value = "Username taken."
+    }
+  })
+}
+
 
 // if (username.value == 'Realuser') {
 //   result.value = 'Wrong password. Try "im20dude".'
