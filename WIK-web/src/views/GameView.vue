@@ -1,4 +1,7 @@
 <template>
+  <audio id="audioPlayer" autoplay>
+    <source type="audio/mpeg" />
+  </audio>
   <v-col class="px-16 py-5 my-5" align="center" style="max-height: 90%">
     <v-row>
       <v-col id="clipIdText">Clip ID: {{ clipId }} </v-col>
@@ -44,6 +47,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import Axios from 'axios'
+import goodSound from '@/assets/sound/good.mp3'
+import failSound from '@/assets/sound/fail.mp3'
 
 const clipId = ref('')
 const timer = ref(0)
@@ -70,6 +75,7 @@ function nextClip() {
     .catch((error) => {
       console.log(error.data)
     })
+  timer.value = 0
   showNext.value = false
 }
 
@@ -102,13 +108,16 @@ function startGame() {
 }
 
 function submit(side: number) {
+  var success = (willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)
+  var audioPlayer = document.getElementById('audioPlayer')
+
   playVideo()
   showNext.value = true
-
-  var success = (willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)
+  pastMid = true
 
   if (success) {
     var res = "You're correct -"
+    audioPlayer?.setAttribute('src', goodSound)
 
     if (side > 0) {
       res += " That's a Kill!"
@@ -122,6 +131,7 @@ function submit(side: number) {
     console.log(streak)
   } else {
     result.value = 'Sorry, you guessed wrong.'
+    audioPlayer?.setAttribute('src', failSound)
     streak.value = 0
   }
 
@@ -133,7 +143,7 @@ function myTimer() {
   if (timer.value == 1) {
     playVideo()
   }
-  if (timer.value > 3) {
+  if (timer.value > 2) {
     console.log(timer.value)
     pauseVideo()
     timer.value = 0
