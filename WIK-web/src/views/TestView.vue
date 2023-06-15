@@ -1,40 +1,25 @@
 <template>
   <v-col class="px-16 py-10 my-10" align="center">
     <v-row>
-      <v-col> Clip ID: {{ clipId }} </v-col>
-      <v-col> Points: {{ points }} </v-col>
+      <v-col id="clipIdText">Clip ID: {{ clipId }} </v-col>
+      <v-col id="pointText">Points: {{ points }} </v-col>
     </v-row>
     <v-container id="element" class="px-4 py-10 my-10" style="max-width: 1000px">
-      <iframe
-        id="player"
-        width="100%"
-        height="500"
-        src=''
-      >
-      </iframe>
-      <!-- 
-        Actual WIK clips 
-        https://www.youtube.com/watch?v=_nEOGOC9FPk // kill
-        https://www.youtube.com/watch?v=5G2A7WKsCRg // doesnt
-        https://www.youtube.com/watch?v=7XjUpd99s18 // faust wins if we wanna do WHO will it kill
-      -->
+      <iframe id="player" width="100%" height="500" src=""> </iframe>
 
       <v-row class="px-16" style="max-width: 600px">
-        <v-btn @click="guessSide(-1)" class="my-8">NO It Won't Kill</v-btn>
+        <v-btn v-show="!showNext" @click="submit(-1)" class="my-8">NO It Won't Kill</v-btn>
         <v-col>
           <v-text-field class="px-8"></v-text-field>
         </v-col>
-        <v-btn @click="guessSide(1)" class="my-8">YES It Will Kill</v-btn>
+        <v-btn v-show="!showNext" @click="submit(1)" class="my-8">YES It Will Kill</v-btn>
       </v-row>
 
       <v-row class="center px-16" style="max-width: 300px">
-        <v-btn @click="submit">Test test test test</v-btn>
-      </v-row>
-      <v-row class="center px-16" style="max-width: 300px">
-        <v-btn id="nextButton" v-if="showNext" @click="nextClip">Test test test test</v-btn>
+        <v-btn id="nextButton" v-show="showNext" @click="nextClip">Next Next Next Next</v-btn>
       </v-row>
 
-      <v-text-field label="Example"></v-text-field>
+      <!--<v-text-field label="Example"></v-text-field>-->
     </v-container>
   </v-col>
 </template>
@@ -51,7 +36,6 @@ const guess = ref('')
 const game = reactive(new WordleGame())
 const route = useRoute()
 const timer = ref(0)
-let sideGuess = 0
 let points = 100
 let tracker = setInterval(myTimer, 1000)
 let clipId = ''
@@ -60,48 +44,26 @@ let clipStart = ''
 let clipEnd = ''
 let willItKill = ''
 let clip = ref(clipUrl)
-let videoId = '_nEOGOC9FPk'
-let videoURL =
-  'https://www.youtube.com/embed/_nEOGOC9FPk?end=15&controls=0&rel=0&autoplay=1&enablejsapi=1'
 let showNext = false
 
 var nextBtn = document.getElementById('nextButton')
 
 onMounted(async () => {
+  nextClip()
+})
+
+function nextClip() {
   Axios.get('/Clip')
     .then((response) => {
       console.log(response.data)
       getClipInfo(response.data)
+      startGame()
     })
     .catch((error) => {
       console.log(error.data)
     })
-})
-
-function myTimer() {
-  timer.value = timer.value + 1
-}
-function guessSide(side: number) {
-  console.log(side)
-  sideGuess = side
-  //enable submit button
-}
-function submit() {
-  var video = document.querySelector('iframe')
-
-  //set start time to current end time
-  //remove end time
-  //disable all buttons
-  video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
-
-  // if betValue > points
-  // betValue = points
-  // easiest way i can think of to get around """cheating"""
-  // if guessSide == correctSide
-  // points += betValue
-  // else
-  // points -= betValue
-  // if points <= 0, points = 100
+  console.log('next no show')
+  showNext = false
 }
 
 function getClipInfo(response: string) {
@@ -122,14 +84,48 @@ function getClipInfo(response: string) {
   if (clipEnd !== '0') {
     clipUrl = clipUrl + '&end=' + clipEnd
   }
-
-  console.log(clipId)
-  console.log(clipUrl)
-  console.log(clipStart)
-  console.log(clipEnd)
-  console.log(willItKill)
-  var video = document.querySelector('iframe')
-  video?.setAttribute('src', clipUrl)
 }
-function nextClip() {}
+
+function startGame() {
+  var clipIdText = document.getElementById('clipIdText')
+  var pointText = document.getElementById('pointText')
+  var video = document.querySelector('iframe')
+
+  clipIdText?.setAttribute('value', 'Clip ID: Success!')
+  pointText?.setAttribute('value', 'Points: Success!')
+  video?.setAttribute('src', clipUrl)
+
+  console.log('start noshow')
+  showNext = false
+}
+
+function myTimer() {
+  timer.value = timer.value + 1
+}
+function submit(side: number) {
+  var video = document.querySelector('iframe')
+  //disable all buttons
+  let betValue = points
+
+  showNext = true
+  console.log('submit show')
+  console.log(showNext)
+  video?.contentWindow?.postMessage('{"event":"command", "func":"playVideo", "args":""}', '*')
+
+  if (betValue > points) {
+    betValue = points
+  }
+
+  if ((willItKill == 'True' && side > 0) || (willItKill == 'False' && side < 0)) {
+    points += betValue
+  } else {
+    points -= betValue
+    if (points <= 0) {
+      points = 100
+    }
+  }
+
+  ///User/UpdateUser?username=gamer&win=true
+  //you can get the username with localStorage.getItem('username'')
+}
 </script>
