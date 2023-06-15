@@ -136,6 +136,7 @@ function submit(side: number) {
   }
 
   Axios.post('/User/UpdateUser?username=' + localStorage.getItem('username') + '&win=' + success)
+  Axios.post('/Clip/UpdateClip?clipid=' + clipId.value + '&correct=' + success)
 }
 
 setInterval(myTimer, 1000)
